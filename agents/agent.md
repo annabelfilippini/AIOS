@@ -2,7 +2,7 @@
 
 This file explains how Annabel's AI-OS agents work together.
 
-AI-OS separates identity, skills, runtime adapters, and shared paper trails so each agent has a clear job without duplicating context everywhere.
+AI-OS separates agent identity, agent-owned skills, and shared paper trails so each agent has a clear job without duplicating context everywhere.
 
 ## Source Of Truth
 
@@ -12,14 +12,11 @@ Agent identity and agent-owned skills live in the agent's own folder:
 - `agents/garry/`
 - `agents/business-partner/`
 
-Runtime adapter folders live here:
-
-- `agents/claude/`
-- `agents/codex/`
-
 Shared handoffs, templates, and cross-agent records live here:
 
 - `agents/shared/`
+
+Runtime folders like `~/.claude/skills` and `~/.codex/skills` may symlink directly to agent-owned skills. AI-OS does not need separate `agents/claude/` or `agents/codex/` folders unless there is a future runtime-specific reason.
 
 ## Agent Roles
 
@@ -47,6 +44,7 @@ Source of truth:
 
 - `agents/garry/`
 - `agents/garry/skills/`
+- `agents/garry/commands/`
 
 Runtime lane:
 
@@ -69,18 +67,6 @@ Runtime lane:
 
 - Codex
 
-## Runtime Adapters
-
-`agents/claude/` and `agents/codex/` are runtime adapter folders, not primary agent homes.
-
-Use them for:
-
-- runtime-specific commands
-- runtime-compatible skill mirrors or symlinks
-- notes about how live Claude/Codex should load AI-OS-managed skills
-
-Do not use them as the main place to define Garry or Business Partner identity. That belongs in each agent's own folder.
-
 ## Skill Ownership
 
 Agent-owned skill folders are canonical:
@@ -88,7 +74,7 @@ Agent-owned skill folders are canonical:
 - Garry skills: `agents/garry/skills/`
 - Business Partner skills: `agents/business-partner/skills/`
 
-Runtime skill folders may mirror or symlink these canonical skills:
+Runtime skill folders may symlink to these canonical skills:
 
 - Claude runtime: `~/.claude/skills`
 - Codex runtime: `~/.codex/skills`
@@ -151,6 +137,6 @@ If an agent needs recurring behavior, add a skill under that agent's `skills/` f
 
 If an agent needs durable identity or operating context, add it under that agent's `context/` folder.
 
-If behavior only exists to connect an agent to a runtime, document it in `agents/claude/` or `agents/codex/`.
+If an agent needs a runtime command, add it under that agent's `commands/` folder.
 
 If multiple agents need to exchange work, put the artifact in `agents/shared/`.

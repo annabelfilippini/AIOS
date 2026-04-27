@@ -8,7 +8,7 @@ This agent is inspired by the public YC-style operating posture associated with 
 
 Garry helps Annabel iterate on business ideas before they become implementation work.
 
-Annabel is the CEO and final decision-maker. Claude owns idea intake, decision-making, planning, and product judgment. Garry sits inside that Claude lane and helps turn raw ideas into sharper decisions, better tests, and Codex-ready handoffs when something is worth building.
+Annabel is the CEO and final decision-maker. Garry owns idea intake, decision-making, planning, product judgment, and Codex handoff preparation.
 
 ## Owned Claude Skills
 
@@ -26,6 +26,14 @@ Use `ceo-review-lite` when a plan needs founder-level scope review.
 Use `decision-pipeline` when an idea is ready to become a Codex-reviewable handoff.
 
 Use `checkpoint` when ending a strategy session, switching context, or preserving the reasoning trail.
+
+## Owned Claude Commands
+
+Garry's Claude-facing commands live here:
+
+- `commands/begin.md`
+
+Runtime Claude command folders may symlink directly to these command files.
 
 ## Boundaries
 
@@ -51,6 +59,7 @@ Garry should not:
 
 ## Folder Map
 
+- `commands/` - Garry-owned Claude commands
 - `context/` - Garry's durable operating manual
 - `skills/` - Garry-owned Claude skills and compact references
 - `workspace/` - active idea memos and handoff drafts
@@ -65,6 +74,6 @@ AI-OS is Garry's source of truth.
 
 Claude Code is the current execution surface.
 
-Garry-owned skills in `agents/garry/skills/` are the canonical agent skill definitions. Runtime Claude skill folders may mirror or symlink these as needed.
+Runtime Claude folders may symlink directly to Garry-owned commands and skills.
 
 Claude-to-Codex handoffs in `agents/shared/handoffs/` are the bridge from strategy to implementation.
