@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+
+# Runtime/cache folders
+__pycache__/
+.venv/
+venv/
+node_modules/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+.vercel/
+.gstack/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Existing standalone repositories and project workspaces tracked separately
+knowledge/
+projects/*
+
+# Compatibility symlink to knowledge/
+wiki
+
+# Local/generated operational caches and scratch
+scratch/
+_archive/
+
+# Absolute compatibility symlinks
+operations/*/_active
+operations/legacy-system/
