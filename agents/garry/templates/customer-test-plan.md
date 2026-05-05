@@ -1,4 +1,4 @@
-# Customer Test Plan: <Idea>
+# Customer Test Plan: Idea
 
 ## Target Customer
 

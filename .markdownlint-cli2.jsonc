@@ -1,0 +1,14 @@
+{
+  "config": {
+    "MD013": false
+  },
+  "globs": [
+    "**/*.md"
+  ],
+  "ignores": [
+    "knowledge/**",
+    "projects/**",
+    "operations/memory/**",
+    "agents/garry/commands/**"
+  ]
+}

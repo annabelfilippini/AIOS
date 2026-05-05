@@ -1,4 +1,4 @@
-# Business Idea Memo: <Idea>
+# Business Idea Memo: Idea
 
 ## One-Sentence Idea
 

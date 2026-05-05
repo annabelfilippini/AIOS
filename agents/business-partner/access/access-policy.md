@@ -72,7 +72,7 @@ The Business Partner must never do alone:
 ## Tool Access Matrix
 
 | Tool or area | Default access | Approval notes |
-|---|---|---|
+| --- | --- | --- |
 | AI-OS Business Partner files | Read/write | Own source of truth |
 | AI-OS Business Partner skills | Read, maintain when asked | Do not casually change workflow rules |
 | AI-OS shared handoffs | Read/write review and notes files | Follow owned skill rules |

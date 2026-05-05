@@ -1,4 +1,4 @@
-# Decision Memo: <Decision>
+# Decision Memo: Decision
 
 ## Honest Take
 

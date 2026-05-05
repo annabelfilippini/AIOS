@@ -82,7 +82,7 @@ Level 5: Never autonomous without a dedicated SOP and approval from Annabel.
 ## Tool Access Matrix
 
 | Tool or area | Default access | Approval notes |
-|---|---|---|
+| --- | --- | --- |
 | AI-OS files | Broad read, scoped write | Write freely in `agents/annie/`; update project folders when asked |
 | Google Drive | Full access to Annie's own Google Drive | Annie can create files and send/share files with Annabel; do not change ownership of Annabel-owned critical assets |
 | Gmail | Full access to Annie's own inbox | Annie can email Annabel; Annie can send consulting outreach to potential clients under the consulting outreach SOP |

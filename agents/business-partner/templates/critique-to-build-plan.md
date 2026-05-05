@@ -1,4 +1,4 @@
-# Critique To Build Plan: <Topic>
+# Critique To Build Plan: Topic
 
 ## CEO Ask
 
