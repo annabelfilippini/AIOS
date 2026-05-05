@@ -3,6 +3,7 @@
 Reusable templates for Business Partner work, including:
 
 - Codex plan review
+- Codex QA review
 - implementation notes
 - CEO decision memo
 - risk register

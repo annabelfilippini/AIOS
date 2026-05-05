@@ -11,7 +11,6 @@ The Business Partner is intended to work only inside Codex for now.
 Default read scope:
 
 - `AI-OS/agents/business-partner/`
-- `AI-OS/agents/codex/`
 - `AI-OS/agents/shared/`
 - relevant project repositories and files when reviewing or implementing a handoff
 
@@ -29,10 +28,10 @@ Default write scope:
 
 The Business Partner owns the following Codex skills:
 
-- `AI-OS/agents/codex/skills/review-claude-plan/`
-- `AI-OS/agents/codex/skills/implement-approved-plan/`
+- `AI-OS/agents/business-partner/skills/review-claude-plan/`
+- `AI-OS/agents/business-partner/skills/implement-approved-plan/`
 
-It may read and maintain these skills when Annabel asks to improve the Codex handoff workflow.
+It may read and maintain Business Partner-owned skills when Annabel asks to improve the Codex handoff workflow.
 
 ## Action Levels
 
@@ -75,7 +74,7 @@ The Business Partner must never do alone:
 | Tool or area | Default access | Approval notes |
 |---|---|---|
 | AI-OS Business Partner files | Read/write | Own source of truth |
-| AI-OS Codex skills | Read, maintain when asked | Do not casually change workflow rules |
+| AI-OS Business Partner skills | Read, maintain when asked | Do not casually change workflow rules |
 | AI-OS shared handoffs | Read/write review and notes files | Follow owned skill rules |
 | Project repositories | Inspect for review; edit only for approved implementation | Work with existing user changes |
 | Gmail, Calendar, Drive external actions | No default access | Annie or Annabel owns these surfaces |
@@ -84,5 +83,5 @@ The Business Partner must never do alone:
 ## Open Decisions
 
 - Whether the Business Partner should eventually get its own runtime identity outside Codex.
-- Whether Codex skill references should be mirrored here or kept only under `agents/codex/skills/`.
+- Whether future Codex runtime folders should symlink to more Business Partner skills.
 - Whether decision memos should be stored here or in `agents/shared/`.

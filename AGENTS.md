@@ -2,12 +2,12 @@
 
 Universal operating rules for Codex and other coding agents in this AI-OS.
 
-## Read First
+## Read Only What Applies
 
-- `SOUL.md` - agent voice, values, taste, and standards.
-- `USER.md` - Annabel's working model, preferences, and current system.
-- `agents/annie/README.md` - Annie's life-wide assistant role, context, and boundaries.
-- Project-specific `AGENTS.md` or `CLAUDE.md` files when working inside a project.
+- Always read project-specific `AGENTS.md` or `CLAUDE.md` before broad searches.
+- Read `agents/agent.md` only when coordinating Annie, Garry, and Business Partner.
+- Read agent-specific READMEs only when that agent is involved.
+- Read `SOUL.md` or `USER.md` only when voice, preference, or personal context matters.
 
 ## Workspace Rules
 
@@ -15,43 +15,55 @@ Universal operating rules for Codex and other coding agents in this AI-OS.
 - Work inside `projects/<project>/` for project code.
 - Agent behavior source lives in `agents/`.
 - Annie's agent home lives in `agents/annie/`.
+- Garry's agent home and Claude-side skills live in `agents/garry/`.
+- Business Partner's agent home and Codex-side skills live in `agents/business-partner/`.
 - Shared handoffs live in `agents/shared/handoffs/`.
+- Shared QA reviews live in `agents/shared/qa/`.
 - Knowledge intake lives in `knowledge/raw/`.
 - Operational docs live in `operations/`.
 - `_system/` is legacy compatibility unless a tool still requires it.
 - `wiki` is a compatibility symlink to `knowledge`.
 - Project-specific instructions override root guidance when more specific.
-- Read targeted project docs before broad searches.
+- Prefer targeted project docs over broad AI-OS searches.
 
 ## Agent Roles
 
-- Claude owns idea intake, stress-testing, planning, decision memos, and handoffs.
-- Codex owns repository inspection, implementation, debugging, verification, and shipping.
-- Annie owns life-wide assistant work: inbox triage, calendar support, document organization, briefs, drafts, follow-ups, project context, and personal/business operations.
-- Codex should not blindly execute Claude plans. Review the handoff against the repo first.
-- Claude should not over-specify implementation details Codex should discover from files.
+- Garry/Claude owns idea intake, stress-testing, business idea design, planning, decision memos, and handoffs.
+- Business Partner/Codex owns repository inspection, QA review, implementation judgment, debugging, verification, and shipping.
+- Annie owns life-wide assistant work: inbox triage, calendar support, document organization, briefs, drafts, follow-ups, client communication drafts, outreach, project context, and personal/business operations.
+- Business Partner/Codex should not blindly execute Garry/Claude plans. Review the handoff against the repo first.
+- Garry/Claude should not over-specify implementation details Business Partner/Codex should discover from files.
 - Annie may read broadly across AI-OS when helping Annabel, but external actions, irreversible changes, spending, sending, scheduling, signing, sensitive systems, and account permissions require explicit approval unless a dedicated SOP says otherwise.
 
 ## Handoff Workflow
 
-1. Claude creates a plan with `decision-pipeline`.
+1. Garry/Claude creates a plan with `decision-pipeline`.
 2. The plan lands in `agents/shared/handoffs/active/`.
-3. Codex reviews it with `review-claude-plan`.
-4. Codex implements with `implement-approved-plan` only after review.
+3. Business Partner/Codex reviews it with `review-claude-plan`.
+4. Business Partner/Codex implements with `implement-approved-plan` only after review.
 5. Implementation notes stay next to the handoff.
+
+## Builder And QA Loop
+
+- Claude Code/Garry is the default build lane.
+- Codex/Business Partner is the default QA lane.
+- QA answers: "Is this change safe, correct, tested, and ready?"
+- Handoffs answer: "What should Codex inspect, approve, implement, or verify from Claude/Garry's plan?"
+- Use QA for existing code, branches, diffs, PRs, or concrete changes.
+- Use handoffs when intent, scope, and product judgment must survive across agents, sessions, or implementation phases.
+- Durable QA uses `agents/shared/templates/codex-qa-review.md` and lives in `agents/shared/qa/active/`.
+- Codex should not fix QA findings unless Annabel explicitly asks.
+
+## Warp Multi-Agent Use
+
+- Warp can be used as a shared cockpit for separate Claude Code and Codex sessions.
+- Prefer separate Warp tabs or panes for Claude Code and Codex instead of nesting Codex inside a Claude Code session.
+- Keep Claude Code as the maker tab and Codex as the reviewer tab unless Annabel intentionally swaps roles.
+- When using Warp, pass context between agents through branch names, git diffs, handoff files, selected code, review comments, and explicit findings lists.
 
 ## Annie Workflow
 
-Use `agents/annie/` as Annie's source of truth.
-
-- `agents/annie/inbox/` - raw requests, captures, and assistant tasks
-- `agents/annie/context/` - durable assistant context and operating manual
-- `agents/annie/workspace/` - drafts, briefs, notes, and reports in progress
-- `agents/annie/templates/` - reusable assistant templates
-- `agents/annie/sops/` - approved recurring workflows
-- `agents/annie/access/` - access policy and integration notes; no secrets
-
-AI-OS is Annie's source of truth. Google Workspace is Annie's external work identity and collaborative surface. OpenClaw, the VPS, or a local workstation may execute Annie workflows later, but runtime files are not the source of truth.
+Use `agents/annie/` as Annie's source of truth. Keep assistant details in Annie-specific docs, not this root startup file.
 
 ## Refinement Loop
 

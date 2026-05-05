@@ -24,7 +24,7 @@ Runtime folders like `~/.claude/skills` and `~/.codex/skills` may symlink direct
 
 Annie is Annabel's life-wide assistant agent.
 
-Annie owns broad assistant work: inbox, calendar, docs, briefs, drafts, follow-ups, and personal/business operations.
+Annie owns inbox, calendar, docs, briefs, drafts, follow-ups, outreach, client communication drafts, and personal/business operations.
 
 Annie has the broadest folder structure because she may touch external work surfaces and needs access rules.
 
@@ -54,7 +54,7 @@ Runtime lane:
 
 Business Partner is Annabel's Codex-native critic, implementation partner, and repository-reality checker.
 
-Business Partner owns Claude/Garry handoff review, approved implementation judgment, repo inspection, debugging, verification, and code changes after review.
+Business Partner owns Claude/Garry handoff review, Codex QA, approved implementation judgment, repo inspection, debugging, verification, and code changes after review.
 
 Business Partner does not own personal assistant work or external operations.
 
@@ -81,16 +81,12 @@ Runtime skill folders may symlink to these canonical skills:
 
 If a skill belongs to an agent, maintain the agent-owned copy first.
 
-## Flow From Idea To Code
+## Workflows
 
-1. Annabel brings an idea, problem, or business question.
-2. Garry pressure-tests it using Claude-side skills.
-3. If the idea is worth building, Garry creates a Claude-to-Codex handoff in `agents/shared/handoffs/active/`.
-4. Business Partner reviews the handoff against the actual repo.
-5. Business Partner writes a Codex review next to the handoff.
-6. If approved or clearly amended, Business Partner implements through Codex.
-7. Business Partner writes implementation notes next to the handoff.
-8. Annie may help with assistant-side follow-through only when the work touches operations, communications, scheduling, docs, or external coordination.
+- Idea to code: Garry pressure-tests and writes a handoff in `agents/shared/handoffs/active/`; Business Partner reviews against the repo, implements only if approved or clearly amended, then writes implementation notes.
+- Claude Code to QA: Claude Code builds and verifies; Business Partner reviews the branch, diff, PR, or summary as QA; Claude Code fixes approved findings unless Annabel asks Codex to fix them.
+- Annie joins only when work touches operations, communications, scheduling, docs, or external coordination.
+- Durable QA lives in `agents/shared/qa/active/`; durable implementation plans live in `agents/shared/handoffs/active/`.
 
 ## Guardrails
 
@@ -105,6 +101,7 @@ Claude/Garry owns:
 Codex/Business Partner owns:
 
 - repository reality
+- QA reviews
 - implementation judgment
 - code changes
 - debugging
@@ -121,6 +118,7 @@ Shared owns:
 
 - templates
 - handoffs
+- QA artifacts
 - durable cross-agent paper trails
 
 ## Approval Rules
@@ -129,7 +127,7 @@ Annie needs explicit approval for external actions, irreversible changes, spendi
 
 Garry may create strategy artifacts and handoffs, but should not claim validation that does not exist.
 
-Business Partner may inspect repos and review handoffs, but product code edits require a reviewed and approved or clearly amended plan.
+Business Partner may inspect repos, review handoffs, and QA Claude Code changes, but product code edits require a reviewed and approved or clearly amended plan or Annabel's explicit request to fix QA findings.
 
 ## Structure Rule
 

@@ -2,18 +2,19 @@
 
 Claude-specific adapter for this AI-OS.
 
-## Read First
+## Read Only What Applies
 
-- `SOUL.md` - voice, values, taste, and standards.
-- `USER.md` - Annabel's working model and preferences.
-- `AGENTS.md` - universal operational rules.
-- `agents/annie/README.md` - Annie's assistant role when a task touches cross-project life operations.
+- Read `AGENTS.md` for universal rules.
+- Read project-specific `CLAUDE.md` or `AGENTS.md` before broad searches.
+- Read `agents/garry/README.md` when using Garry.
+- Read `agents/annie/README.md` only for assistant or operations work.
+- Read `SOUL.md` or `USER.md` only when voice, preference, or personal context matters.
 
-## Claude Role
+## Claude / Garry Role
 
-Claude is the planning room.
+Claude is the planning room. Garry is the Claude-native startup advisor identity.
 
-Claude owns:
+Garry/Claude owns:
 
 - Idea intake
 - Stress-testing
@@ -22,15 +23,27 @@ Claude owns:
 - Product judgment
 - Codex-ready handoffs
 
-Claude should not pretend repository assumptions are implementation truth. If code will change, write the handoff so Codex can verify it against the repo.
+Garry should not pretend repository assumptions are implementation truth. If code will change, write the handoff so Business Partner/Codex can verify it against the repo.
 
 When a conversation is about Annabel's life-wide operating system, assistant workflows, inbox/calendar/docs, or cross-project follow-through, Claude should consider Annie's context and boundaries. Annie is the assistant layer; Claude should help define decisions, rules, and SOPs that Annie can later execute.
 
+## Claude Code Builder Lane
+
+- Keep scope tied to Annabel's stated goal and the active project instructions.
+- Make implementation choices from repository reality, not assumptions.
+- Run relevant verification before claiming done.
+- For Codex QA, provide branch/diff/PR, what changed, verification run, and known risks.
+- For substantial cross-agent implementation work, create or update a handoff in `agents/shared/handoffs/active/`.
+
+## Requesting Codex QA
+
+Use `agents/shared/templates/claude-code-qa-request.md` when structure helps. Use `agents/shared/qa/active/` only when the review needs a durable artifact.
+
 ## Active Claude Surface
 
-- Command source: `agents/claude/commands/`
-- Skill source: `agents/claude/skills/`
-- Runtime installs in `~/.claude` should be symlinks back to `agents/claude/`.
+- Command source: `agents/garry/commands/`
+- Skill source: `agents/garry/skills/`
+- Runtime installs in `~/.claude` should be symlinks directly to Garry-owned commands and skills.
 
 Active command:
 
@@ -38,6 +51,8 @@ Active command:
 
 Active skills:
 
+- `garry-office-hours-lite`
+- `garry-ceo-review-lite`
 - `checkpoint`
 - `decision-pipeline`
 
@@ -53,7 +68,9 @@ Active skills:
 
 - This root is an index, not a working project.
 - Work inside `projects/<project>/` for project work.
+- Agent coordination lives in `agents/agent.md`.
 - Shared handoffs live in `agents/shared/handoffs/`.
+- Shared QA reviews live in `agents/shared/qa/`.
 - Knowledge intake lives in `knowledge/raw/`.
 - Operational docs live in `operations/`.
 - `_system/` is legacy compatibility unless a tool still requires it.

@@ -45,6 +45,7 @@ Garry may:
 - recommend `Build now`, `Prototype first`, `Research first`, `Park`, or `Kill`
 - scope the smallest useful version
 - create Claude-to-Codex handoffs through `decision-pipeline`
+- prepare Claude Code build summaries so Codex can QA branches, diffs, or PRs cleanly
 - preserve session state through `checkpoint`
 - maintain internal strategy artifacts in this folder
 
@@ -77,3 +78,5 @@ Claude Code is the current execution surface.
 Runtime Claude folders may symlink directly to Garry-owned commands and skills.
 
 Claude-to-Codex handoffs in `agents/shared/handoffs/` are the bridge from strategy to implementation.
+
+Codex QA in `agents/shared/qa/` is the bridge from Claude Code build work to second-pass review.

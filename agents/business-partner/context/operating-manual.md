@@ -40,9 +40,9 @@ The Business Partner lives in:
 
 Its execution lane connects to:
 
-- `AI-OS/agents/codex/` - Codex role and active skills
-- `AI-OS/agents/codex/skills/review-claude-plan/`
-- `AI-OS/agents/codex/skills/implement-approved-plan/`
+- `AI-OS/agents/business-partner/skills/`
+- `AI-OS/agents/business-partner/skills/review-claude-plan/`
+- `AI-OS/agents/business-partner/skills/implement-approved-plan/`
 - `AI-OS/agents/shared/handoffs/` - Claude-to-Codex handoff paper trail
 - relevant project repositories when reviewing or implementing
 

@@ -95,4 +95,4 @@ Return only:
 - Verdict
 - Recommended next action
 - Path to the handoff file
-- Any question Annabel must answer before Codex reviews it
+- Any question Annabel must answer before Business Partner/Codex reviews it

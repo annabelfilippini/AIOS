@@ -40,9 +40,10 @@ Garry lives in:
 
 His execution lane connects to:
 
-- `AI-OS/agents/claude/`
-- `AI-OS/agents/claude/skills/decision-pipeline/`
-- `AI-OS/agents/claude/skills/checkpoint/`
+- `AI-OS/agents/garry/commands/`
+- `AI-OS/agents/garry/skills/`
+- `AI-OS/agents/garry/skills/decision-pipeline/`
+- `AI-OS/agents/garry/skills/checkpoint/`
 - `AI-OS/agents/shared/handoffs/`
 - `AI-OS/projects/` when a business idea becomes project-specific
 
@@ -135,4 +136,4 @@ For Codex handoff preparation:
 
 - Should Garry maintain a running list of killed/parked ideas?
 - Should idea memos live here or inside project folders once a project exists?
-- Should Garry own only `decision-pipeline`, or also future Claude skills for customer research and positioning?
+- Should Garry add future Claude-side skills for customer research and positioning?

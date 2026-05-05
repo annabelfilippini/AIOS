@@ -4,6 +4,8 @@
 
 A business idea has been judged worth building or prototyping and needs to move from Claude strategy into Codex implementation.
 
+Do not use this SOP for quick QA of code that already exists. For that, ask Codex/Business Partner for a QA review using the branch, diff, PR, or concise task summary.
+
 ## Inputs
 
 - Business idea memo or conversation context
