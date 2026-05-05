@@ -10,5 +10,6 @@ Core skills:
 - `adversarial-review-lite/` - failure-mode-first review
 - `investigate-lite/` - root-cause investigation before fixes
 - `guardrails-lite/` - scope, reversibility, and approval boundaries
+- `markdown-lint-operating-docs/` - practical Markdown linting for agent docs
 
 These are intentionally lighter than the full gstack skills. They keep the useful review and debugging patterns without importing deployment, team automation, or broad workflow machinery.
