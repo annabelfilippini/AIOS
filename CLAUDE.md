@@ -39,11 +39,24 @@ When a conversation is about Annabel's life-wide operating system, assistant wor
 
 Use `agents/shared/templates/claude-code-qa-request.md` when structure helps. Use `agents/shared/qa/active/` only when the review needs a durable artifact.
 
+## Compound Engineering
+
+After meaningful work, ask what should be easier next time. Capture only the
+smallest reusable improvement in the most specific place. See
+`operations/compound-engineering/README.md`.
+
 ## Active Claude Surface
 
 - Command source: `agents/garry/commands/`
 - Skill source: `agents/garry/skills/`
-- Runtime installs in `~/.claude` should be symlinks directly to Garry-owned commands and skills.
+- Shared skill source: `agents/shared/skills/`
+- Runtime installs in `~/.claude` should be symlinks to canonical AI-OS
+  commands and skills, not source-of-truth copies.
+
+Durable new skills should be created in AI-OS first:
+
+- Claude/Garry only: `agents/garry/skills/`
+- Shared with Codex: `agents/shared/skills/`
 
 Active command:
 

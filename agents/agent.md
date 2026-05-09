@@ -16,7 +16,9 @@ Shared handoffs, templates, and cross-agent records live here:
 
 - `agents/shared/`
 
-Runtime folders like `~/.claude/skills` and `~/.codex/skills` may symlink directly to agent-owned skills. AI-OS does not need separate `agents/claude/` or `agents/codex/` folders unless there is a future runtime-specific reason.
+Runtime folders like `~/.claude/skills` and `~/.codex/skills` should symlink
+or mirror canonical AI-OS skills. They are runtime adapters, not the source of
+truth.
 
 ## Agent Roles
 
@@ -73,6 +75,7 @@ Agent-owned skill folders are canonical:
 
 - Garry skills: `agents/garry/skills/`
 - Business Partner skills: `agents/business-partner/skills/`
+- Shared Claude/Codex skills: `agents/shared/skills/`
 
 Runtime skill folders may symlink to these canonical skills:
 
@@ -81,12 +84,16 @@ Runtime skill folders may symlink to these canonical skills:
 
 If a skill belongs to an agent, maintain the agent-owned copy first.
 
+If a skill is useful to both Claude and Codex, maintain it in
+`agents/shared/skills/` first and point each runtime to that copy.
+
 ## Workflows
 
 - Idea to code: Garry pressure-tests and writes a handoff in `agents/shared/handoffs/active/`; Business Partner reviews against the repo, implements only if approved or clearly amended, then writes implementation notes.
 - Claude Code to QA: Claude Code builds and verifies; Business Partner reviews the branch, diff, PR, or summary as QA; Claude Code fixes approved findings unless Annabel asks Codex to fix them.
 - Annie joins only when work touches operations, communications, scheduling, docs, or external coordination.
 - Durable QA lives in `agents/shared/qa/active/`; durable implementation plans live in `agents/shared/handoffs/active/`.
+- Compound engineering: after meaningful work, capture the smallest reusable improvement in the most specific place. See `operations/compound-engineering/README.md`.
 
 ## Guardrails
 
@@ -132,6 +139,9 @@ Business Partner may inspect repos, review handoffs, and QA Claude Code changes,
 ## Structure Rule
 
 If an agent needs recurring behavior, add a skill under that agent's `skills/` folder.
+
+If multiple runtimes need the same recurring behavior, add the skill under
+`agents/shared/skills/`.
 
 If an agent needs durable identity or operating context, add it under that agent's `context/` folder.
 

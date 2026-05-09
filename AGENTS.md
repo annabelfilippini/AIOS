@@ -17,6 +17,7 @@ Universal operating rules for Codex and other coding agents in this AI-OS.
 - Annie's agent home lives in `agents/annie/`.
 - Garry's agent home and Claude-side skills live in `agents/garry/`.
 - Business Partner's agent home and Codex-side skills live in `agents/business-partner/`.
+- Shared cross-runtime skills live in `agents/shared/skills/`.
 - Shared handoffs live in `agents/shared/handoffs/`.
 - Shared QA reviews live in `agents/shared/qa/`.
 - Knowledge intake lives in `knowledge/raw/`.
@@ -53,6 +54,27 @@ Universal operating rules for Codex and other coding agents in this AI-OS.
 - Use handoffs when intent, scope, and product judgment must survive across agents, sessions, or implementation phases.
 - Durable QA uses `agents/shared/templates/codex-qa-review.md` and lives in `agents/shared/qa/active/`.
 - Codex should not fix QA findings unless Annabel explicitly asks.
+
+## Compound Engineering
+
+After meaningful work, apply the compound-engineering loop:
+
+- Ask what should be easier, safer, or clearer next time.
+- Capture the smallest reusable improvement in the most specific place.
+- Prefer skills, templates, SOPs, project rules, lint/test config, checkpoints,
+  or refinement candidates over bloating startup files.
+- See `operations/compound-engineering/README.md`.
+
+## Skill Source Of Truth
+
+- Create durable skills inside AI-OS first, never directly in runtime folders.
+- Use `agents/shared/skills/` for skills shared by Claude and Codex.
+- Use `agents/garry/skills/` for Claude/Garry-only skills.
+- Use `agents/business-partner/skills/` for Codex/Business Partner-only skills.
+- Runtime folders like `~/.claude/skills` and `~/.codex/skills` should point
+  to canonical AI-OS skills, preferably with symlinks.
+- Run `operations/compound-engineering/check-runtime-skill-drift.sh` when a
+  runtime-only skill may have been created by accident.
 
 ## Warp Multi-Agent Use
 
