@@ -1,0 +1,359 @@
+#!/usr/bin/env python3
+"""
+flightscope — a reusable CLI scraper for flight routes + prices, in the
+skool-pp-cli mold. Built for a solo traveler (customer #1) deciding where to go
+next based on where flights actually reach and what they cost.
+
+Two data sources:
+  - flightconnections.com  -> which direct routes exist from an airport
+  - Google Flights         -> what a specific trip actually costs (via fast-flights)
+
+Plus a local kitesurf-spot catalog so route/price answers can be filtered to
+places that actually have wind.
+
+Design notes:
+  - Self-contained like skool-pp-cli: no MCP/agent required at runtime.
+  - Scraping deps (fast-flights) are imported lazily so `doctor`, `--help`,
+    `airports`, and `spots` work with zero install.
+  - `doctor` reports exactly what is and isn't ready.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+from datetime import date, datetime
+from pathlib import Path
+
+VERSION = "0.1.0"
+
+TOOL_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = TOOL_DIR / "data"
+KITE_SPOTS_FILE = DATA_DIR / "kite-spots.json"
+
+CONFIG_DIR = Path(os.environ.get("FLIGHTSCOPE_CONFIG_DIR", Path.home() / ".config" / "flightscope"))
+CONFIG_FILE = CONFIG_DIR / "config.toml"
+
+# Browser cookie export (mirrors skool-pp-cli's SKOOL_CURL_FILE) — only needed
+# if flightconnections starts gating requests behind Cloudflare.
+FC_CURL_FILE = os.environ.get("FLIGHTCONNECTIONS_CURL_FILE")
+
+
+# --------------------------------------------------------------------------- #
+# Output helpers
+# --------------------------------------------------------------------------- #
+
+def emit(payload, as_json: bool, human):
+    """Print JSON or a human-readable rendering."""
+    if as_json:
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+    else:
+        human(payload)
+
+
+def err(msg: str, code: int = 1):
+    print(f"flightscope: {msg}", file=sys.stderr)
+    sys.exit(code)
+
+
+# --------------------------------------------------------------------------- #
+# Local kite-spot catalog
+# --------------------------------------------------------------------------- #
+
+def load_spots() -> list[dict]:
+    if not KITE_SPOTS_FILE.exists():
+        err(f"kite-spots catalog missing at {KITE_SPOTS_FILE}")
+    data = json.loads(KITE_SPOTS_FILE.read_text())
+    return data.get("spots", [])
+
+
+def spot_airports() -> dict[str, list[str]]:
+    """Place name (lowercased) -> airport codes, derived from the catalog."""
+    out: dict[str, list[str]] = {}
+    for s in load_spots():
+        out[s["name"].lower()] = s["airports"]
+    return out
+
+
+def kiteable_now(spot: dict, when: date) -> bool:
+    return when.month in spot.get("wind_months", [])
+
+
+# --------------------------------------------------------------------------- #
+# Engine: Google Flights via fast-flights (lazy)
+# --------------------------------------------------------------------------- #
+
+def has_fast_flights() -> bool:
+    try:
+        import fast_flights  # noqa: F401
+        return True
+    except Exception:
+        return False
+
+
+def google_flights_price(origin, dest, depart, ret=None, adults=1, cabin="economy"):
+    """Return a structured price result from Google Flights via fast-flights."""
+    try:
+        from fast_flights import FlightData, Passengers, Result, get_flights
+    except Exception as e:
+        err(f"google-flights needs the 'fast-flights' package: pip install fast-flights ({e})", code=3)
+
+    flight_data = [FlightData(date=depart, from_airport=origin, to_airport=dest)]
+    trip = "one-way"
+    if ret:
+        flight_data.append(FlightData(date=ret, from_airport=dest, to_airport=origin))
+        trip = "round-trip"
+
+    result: "Result" = get_flights(
+        flight_data=flight_data,
+        trip=trip,
+        seat=cabin,
+        passengers=Passengers(adults=adults),
+        fetch_mode="fallback",
+    )
+
+    flights = []
+    for f in getattr(result, "flights", []) or []:
+        flights.append({
+            "airline": getattr(f, "name", None),
+            "departure": getattr(f, "departure", None),
+            "arrival": getattr(f, "arrival", None),
+            "duration": getattr(f, "duration", None),
+            "stops": getattr(f, "stops", None),
+            "price": getattr(f, "price", None),
+            "is_best": getattr(f, "is_best", None),
+        })
+    return {
+        "origin": origin,
+        "dest": dest,
+        "depart": depart,
+        "return": ret,
+        "trip": trip,
+        "current_price_level": getattr(result, "current_price", None),
+        "flights": flights,
+    }
+
+
+# --------------------------------------------------------------------------- #
+# Engine: flightconnections.com direct routes (swappable scraper)
+# --------------------------------------------------------------------------- #
+
+def flightconnections_routes(airport: str) -> dict:
+    """
+    Direct destinations from an airport.
+
+    NOTE: flightconnections.com renders routes client-side and is Cloudflare-
+    protected. The real fetch is finalized in batch 3 against the live site
+    (likely its internal route-data endpoint, with an optional cookie via
+    FLIGHTCONNECTIONS_CURL_FILE). Until then this returns a structured
+    'not-wired' result so the CLI surface is stable.
+    """
+    return {
+        "airport": airport.upper(),
+        "status": "not_wired",
+        "destinations": [],
+        "note": "Live flightconnections scraping is wired in batch 3 (see CONNECTION.md).",
+    }
+
+
+# --------------------------------------------------------------------------- #
+# Commands
+# --------------------------------------------------------------------------- #
+
+def cmd_version(args):
+    print(VERSION)
+
+
+def cmd_doctor(args):
+    checks = {
+        "python": sys.version.split()[0],
+        "fast_flights_installed": has_fast_flights(),
+        "kite_spots_catalog": KITE_SPOTS_FILE.exists(),
+        "kite_spot_count": len(load_spots()) if KITE_SPOTS_FILE.exists() else 0,
+        "config_file": CONFIG_FILE.exists(),
+        "flightconnections_cookie_set": bool(FC_CURL_FILE),
+        "flightconnections_cookie_path": FC_CURL_FILE,
+    }
+    ready = {
+        "spots": True,
+        "airports": True,
+        "price (google flights)": checks["fast_flights_installed"],
+        "routes (flightconnections)": False,  # finalized in batch 3
+    }
+    payload = {"checks": checks, "ready": ready}
+
+    def human(p):
+        print("flightscope doctor\n")
+        for k, v in p["checks"].items():
+            print(f"  {k:32} {v}")
+        print("\n  command readiness:")
+        for k, v in p["ready"].items():
+            print(f"    {'OK ' if v else 'TODO'}  {k}")
+        if not p["checks"]["fast_flights_installed"]:
+            print("\n  -> install price engine:  pip install fast-flights")
+
+    emit(payload, args.json, human)
+
+
+def cmd_airports(args):
+    query = args.place.lower().strip()
+    spots = load_spots()
+    matches = [s for s in spots if query in s["name"].lower() or query in s.get("region", "").lower()]
+    payload = {
+        "query": args.place,
+        "matches": [{"name": s["name"], "airports": s["airports"], "country": s["country"]} for s in matches],
+    }
+
+    def human(p):
+        if not p["matches"]:
+            print(f"No catalog match for '{p['query']}'. (Add it to data/kite-spots.json.)")
+            return
+        for m in p["matches"]:
+            print(f"  {m['name']} ({m['country']}): {', '.join(m['airports'])}")
+
+    emit(payload, args.json, human)
+
+
+def cmd_spots(args):
+    spots = load_spots()
+    when = _parse_when(args.when) if args.when else date.today()
+    region = args.region.lower() if args.region else None
+
+    rows = []
+    for s in spots:
+        if region and region not in s.get("region", "").lower():
+            continue
+        if args.wind and not kiteable_now(s, when):
+            continue
+        rows.append({
+            "name": s["name"],
+            "country": s["country"],
+            "region": s.get("region"),
+            "airports": s["airports"],
+            "kiteable_now": kiteable_now(s, when),
+            "wind_months": s.get("wind_months"),
+            "note": s.get("note"),
+        })
+
+    payload = {"as_of": when.isoformat(), "filter_wind": bool(args.wind), "spots": rows}
+
+    def human(p):
+        tag = " (kiteable this month)" if p["filter_wind"] else ""
+        print(f"Kite spots{tag} — as of {p['as_of']}:\n")
+        for r in p["spots"]:
+            flag = "🌬️ " if r["kiteable_now"] else "   "
+            print(f"  {flag}{r['name']} ({r['country']}) — {', '.join(r['airports'])}")
+            if r.get("note"):
+                print(f"        {r['note']}")
+
+    emit(payload, args.json, human)
+
+
+def cmd_routes(args):
+    payload = flightconnections_routes(args.airport)
+    def human(p):
+        print(f"Direct routes from {p['airport']}: status={p['status']}")
+        if p.get("note"):
+            print(f"  {p['note']}")
+        for d in p.get("destinations", []):
+            print(f"  -> {d}")
+    emit(payload, args.json, human)
+
+
+def cmd_price(args):
+    payload = google_flights_price(
+        args.origin.upper(), args.dest.upper(), args.depart,
+        ret=args.ret, adults=args.adults, cabin=args.cabin,
+    )
+
+    def human(p):
+        hdr = f"{p['origin']} -> {p['dest']}  {p['depart']}"
+        if p["return"]:
+            hdr += f"  (return {p['return']})"
+        print(hdr + f"   [{p['trip']}, price level: {p['current_price_level']}]\n")
+        if not p["flights"]:
+            print("  no flights returned")
+            return
+        for f in p["flights"][:10]:
+            best = "★" if f.get("is_best") else " "
+            print(f"  {best} {str(f.get('price')):>10}  {f.get('airline')}  "
+                  f"{f.get('stops')} stop(s)  {f.get('duration')}")
+
+    emit(payload, args.json, human)
+
+
+# --------------------------------------------------------------------------- #
+# Helpers / arg parsing
+# --------------------------------------------------------------------------- #
+
+def _parse_when(s: str) -> date:
+    try:
+        return datetime.strptime(s, "%Y-%m-%d").date()
+    except ValueError:
+        err(f"bad date '{s}', expected YYYY-MM-DD")
+
+
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(prog="flightscope", description=__doc__.strip().splitlines()[0])
+    p.add_argument("--version", action="store_true", help="print version and exit")
+    sub = p.add_subparsers(dest="command")
+
+    def add_json(sp):
+        sp.add_argument("--json", action="store_true", help="machine-readable JSON output")
+
+    sub.add_parser("version", help="print version")
+
+    sp = sub.add_parser("doctor", help="check environment and command readiness")
+    add_json(sp)
+
+    sp = sub.add_parser("airports", help="resolve a place to nearby airport codes")
+    sp.add_argument("place")
+    add_json(sp)
+
+    sp = sub.add_parser("spots", help="list kite spots (optionally only ones windy now)")
+    sp.add_argument("--region", help="filter by region substring")
+    sp.add_argument("--wind", action="store_true", help="only spots kiteable this/given month")
+    sp.add_argument("--when", help="date YYYY-MM-DD to evaluate wind season (default today)")
+    add_json(sp)
+
+    sp = sub.add_parser("routes", help="direct destinations from an airport (flightconnections)")
+    sp.add_argument("airport", help="IATA code, e.g. AGP")
+    add_json(sp)
+
+    sp = sub.add_parser("price", help="Google Flights price for a trip (needs fast-flights)")
+    sp.add_argument("origin", help="origin IATA code")
+    sp.add_argument("dest", help="destination IATA code")
+    sp.add_argument("--depart", required=True, help="YYYY-MM-DD")
+    sp.add_argument("--return", dest="ret", help="YYYY-MM-DD (omit for one-way)")
+    sp.add_argument("--adults", type=int, default=1)
+    sp.add_argument("--cabin", default="economy", choices=["economy", "premium-economy", "business", "first"])
+    add_json(sp)
+
+    return p
+
+
+def main(argv=None):
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    if args.version:
+        return cmd_version(args)
+
+    dispatch = {
+        "version": cmd_version,
+        "doctor": cmd_doctor,
+        "airports": cmd_airports,
+        "spots": cmd_spots,
+        "routes": cmd_routes,
+        "price": cmd_price,
+    }
+    if not args.command:
+        parser.print_help()
+        return
+    dispatch[args.command](args)
+
+
+if __name__ == "__main__":
+    main()
