@@ -2,6 +2,7 @@
   "_meta": {
     "purpose": "Seed catalog of kitesurf spots with nearest airports and wind season. Powers the wind+flight intersection in flightscope.",
     "season_codes": "Months are 1-12. wind_months = the reliably-kiteable window.",
+    "windguru_id": "Numeric windguru.cz spot id, coordinate-verified to the real kite spot. Powers live forecast wind ranking. Find new ids via the search_spots endpoint (see cli-connections/windguru).",
     "edit_freely": true
   },
   "spots": [
@@ -9,104 +10,242 @@
       "name": "Tarifa",
       "country": "ES",
       "region": "Andalusia",
-      "airports": ["GIB", "XRY", "AGP", "SVQ"],
-      "wind_months": [4, 5, 6, 7, 8, 9, 10],
+      "airports": [
+        "GIB",
+        "XRY",
+        "AGP",
+        "SVQ"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 113924,
       "note": "Home base. Levante (E) is strong/gusty, Poniente (W) is cleaner. No airport in Tarifa itself."
     },
     {
       "name": "Fuerteventura (Sotavento)",
       "country": "ES",
       "region": "Canary Islands",
-      "airports": ["FUE"],
-      "wind_months": [4, 5, 6, 7, 8, 9, 10],
+      "airports": [
+        "FUE"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 49329,
       "note": "Trade winds, huge lagoon at low tide. Best May-Sep."
     },
     {
       "name": "Lanzarote (Costa Teguise)",
       "country": "ES",
       "region": "Canary Islands",
-      "airports": ["ACE"],
-      "wind_months": [5, 6, 7, 8, 9],
+      "airports": [
+        "ACE"
+      ],
+      "wind_months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "windguru_id": 800467,
       "note": "Year-round-ish trades, strongest summer."
     },
     {
       "name": "Gran Canaria (Pozo Izquierdo)",
       "country": "ES",
       "region": "Canary Islands",
-      "airports": ["LPA"],
-      "wind_months": [5, 6, 7, 8, 9],
+      "airports": [
+        "LPA"
+      ],
+      "wind_months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "windguru_id": 123902,
       "note": "Very strong summer trades, advanced/expert."
     },
     {
       "name": "Leucate / La Franqui",
       "country": "FR",
       "region": "Occitanie",
-      "airports": ["PGF", "CCF"],
-      "wind_months": [3, 4, 5, 9, 10, 11],
+      "airports": [
+        "PGF",
+        "CCF"
+      ],
+      "wind_months": [
+        3,
+        4,
+        5,
+        9,
+        10,
+        11
+      ],
+      "windguru_id": 48582,
       "note": "Tramontane wind, best shoulder seasons."
     },
     {
       "name": "Sardinia (Porto Pollo)",
       "country": "IT",
       "region": "Sardinia",
-      "airports": ["OLB"],
-      "wind_months": [4, 5, 6, 7, 8, 9, 10],
+      "airports": [
+        "OLB"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 49162,
       "note": "Mistral funnels through the strait; reliable thermals."
     },
     {
       "name": "Sicily (Lo Stagnone, Marsala)",
       "country": "IT",
       "region": "Sicily",
-      "airports": ["TPS", "PMO"],
-      "wind_months": [4, 5, 6, 7, 8, 9],
+      "airports": [
+        "TPS",
+        "PMO"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "windguru_id": 1177450,
       "note": "Flat shallow lagoon, beginner-friendly, thermals."
     },
     {
       "name": "Rhodes (Prasonisi)",
       "country": "GR",
       "region": "Dodecanese",
-      "airports": ["RHO"],
-      "wind_months": [5, 6, 7, 8, 9],
+      "airports": [
+        "RHO"
+      ],
+      "wind_months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "windguru_id": 1335221,
       "note": "Meltemi (N) wind, very consistent in summer."
     },
     {
       "name": "Naxos / Paros",
       "country": "GR",
       "region": "Cyclades",
-      "airports": ["JNX", "PAS", "JTR"],
-      "wind_months": [6, 7, 8, 9],
+      "airports": [
+        "JNX",
+        "PAS",
+        "JTR"
+      ],
+      "wind_months": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "windguru_id": 36,
       "note": "Meltemi summer wind. Often via Santorini (JTR) or Athens."
     },
     {
       "name": "Lefkada (Vasiliki)",
       "country": "GR",
       "region": "Ionian",
-      "airports": ["PVK"],
-      "wind_months": [6, 7, 8, 9],
+      "airports": [
+        "PVK"
+      ],
+      "wind_months": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "windguru_id": 4448,
       "note": "Afternoon thermal 'Eric' wind, learner-friendly bay."
     },
     {
       "name": "Dakhla",
       "country": "MA",
       "region": "Western Sahara",
-      "airports": ["VIL"],
-      "wind_months": [3, 4, 5, 6, 7, 8, 9, 10],
+      "airports": [
+        "VIL"
+      ],
+      "wind_months": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 49317,
       "note": "Flat lagoon, near year-round wind. Best Apr-Sep."
     },
     {
       "name": "Essaouira",
       "country": "MA",
       "region": "Morocco Atlantic",
-      "airports": ["ESU", "RAK"],
-      "wind_months": [4, 5, 6, 7, 8, 9],
+      "airports": [
+        "ESU",
+        "RAK"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "windguru_id": 58432,
       "note": "Strong Alizé trade wind in summer."
     },
     {
       "name": "Sal",
       "country": "CV",
       "region": "Cape Verde",
-      "airports": ["SID"],
-      "wind_months": [11, 12, 1, 2, 3, 4, 5, 6],
+      "airports": [
+        "SID"
+      ],
+      "wind_months": [
+        11,
+        12,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "windguru_id": 206839,
       "note": "WINTER season spot. Good when Europe is cold."
     }
   ]

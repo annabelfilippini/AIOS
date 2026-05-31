@@ -1,0 +1,6 @@
+interface:
+  display_name: "Webflow Rebuild QA"
+  short_description: "QA editable Webflow rebuilds before client review"
+  default_prompt: "Use $webflow-rebuild-qa to verify this Webflow rebuild on staging and list blockers before live publish."
+policy:
+  allow_implicit_invocation: true

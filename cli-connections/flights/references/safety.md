@@ -25,6 +25,9 @@
 
 ## Dependencies
 
-- `fast-flights` (pip) is the only third-party runtime dependency, and it is in
-  the connector's `approval_required` list — install only with Annabel's OK.
-- Everything else is Python stdlib.
+- `fast-flights` (pip) is the price engine; installed 2026-05-24 with approval.
+  It is kept in the connector's `approval_required` list for re-provisioning.
+- `playwright` (pip) + Chromium back the default `local` fetch mode (both already
+  present on this machine). Without Playwright, `price`/`plan` fall back to
+  fast-flights' flakier hosted-browser mode.
+- The routes engine and everything else is Python stdlib (`urllib`).

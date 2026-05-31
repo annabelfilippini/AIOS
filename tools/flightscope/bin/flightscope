@@ -24,10 +24,17 @@ import argparse
 import json
 import os
 import sys
-from datetime import date, datetime
+import time
+import urllib.error
+import urllib.request
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
+
+
+class FlightscopeError(Exception):
+    """A recoverable engine failure (e.g. a flaky single price fetch)."""
 
 TOOL_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = TOOL_DIR / "data"
@@ -39,6 +46,13 @@ CONFIG_FILE = CONFIG_DIR / "config.toml"
 # Browser cookie export (mirrors skool-pp-cli's SKOOL_CURL_FILE) — only needed
 # if flightconnections starts gating requests behind Cloudflare.
 FC_CURL_FILE = os.environ.get("FLIGHTCONNECTIONS_CURL_FILE")
+
+FC_BASE = "https://www.flightconnections.com"
+FC_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36")
+# IATA -> internal flightconnections airport id, learned on demand and cached
+# outside the repo so we don't re-hit airports_url.php for the same code.
+FC_ID_CACHE = CONFIG_DIR / "fc-airport-ids.json"
 
 
 # --------------------------------------------------------------------------- #
@@ -93,26 +107,70 @@ def has_fast_flights() -> bool:
         return False
 
 
-def google_flights_price(origin, dest, depart, ret=None, adults=1, cabin="economy"):
-    """Return a structured price result from Google Flights via fast-flights."""
+def has_playwright() -> bool:
+    """Local headless-browser engine. fast-flights' 'local' fetch mode needs it."""
     try:
-        from fast_flights import FlightData, Passengers, Result, get_flights
+        import playwright  # noqa: F401
+        return True
+    except Exception:
+        return False
+
+
+def default_fetch_mode() -> str:
+    """
+    Prefer 'local' (a real local headless browser) when Playwright is present:
+    Google Flights serves a consent/language page to the plain HTTP path, which
+    the 'common'/'fallback' modes can't get past. 'fallback' relies on a flaky
+    third-party hosted browser. Use it only when no local Playwright exists.
+    """
+    return "local" if has_playwright() else "fallback"
+
+
+def google_flights_price(origin, dest, depart, ret=None, adults=1, cabin="economy",
+                         fetch_mode=None, currency="EUR", max_stops=None):
+    """Return a structured price result from Google Flights via fast-flights.
+
+    We call ``get_flights_from_filter`` rather than the public ``get_flights``
+    because only the former exposes ``currency`` (Google otherwise serves prices
+    in the geo-detected currency — pesos from a Mexican exit node, etc.) and lets
+    us push ``max_stops`` to the source so ``plan`` can ask for direct-only.
+    """
+    try:
+        from fast_flights import FlightData, Passengers
+        from fast_flights.core import get_flights_from_filter
+        from fast_flights.filter import TFSData
     except Exception as e:
         err(f"google-flights needs the 'fast-flights' package: pip install fast-flights ({e})", code=3)
 
+    mode = fetch_mode or default_fetch_mode()
     flight_data = [FlightData(date=depart, from_airport=origin, to_airport=dest)]
     trip = "one-way"
     if ret:
         flight_data.append(FlightData(date=ret, from_airport=dest, to_airport=origin))
         trip = "round-trip"
 
-    result: "Result" = get_flights(
+    tfs = TFSData.from_interface(
         flight_data=flight_data,
         trip=trip,
-        seat=cabin,
         passengers=Passengers(adults=adults),
-        fetch_mode="fallback",
+        seat=cabin,
+        max_stops=max_stops,
     )
+
+    # The local headless-browser fetch is occasionally flaky (Google is slow to
+    # render results); one retry clears most transient timeouts.
+    result = None
+    last_err = None
+    for attempt in range(2):
+        try:
+            result = get_flights_from_filter(tfs, currency=currency, mode=mode)
+            break
+        except Exception as e:  # noqa: BLE001 — engine raises bare exceptions
+            last_err = e
+            if attempt == 0:
+                time.sleep(3)
+    if result is None:
+        raise FlightscopeError(f"google-flights fetch failed ({mode} mode): {last_err}")
 
     flights = []
     for f in getattr(result, "flights", []) or []:
@@ -131,6 +189,8 @@ def google_flights_price(origin, dest, depart, ret=None, adults=1, cabin="econom
         "depart": depart,
         "return": ret,
         "trip": trip,
+        "fetch_mode": mode,
+        "currency": currency,
         "current_price_level": getattr(result, "current_price", None),
         "flights": flights,
     }
@@ -140,22 +200,282 @@ def google_flights_price(origin, dest, depart, ret=None, adults=1, cabin="econom
 # Engine: flightconnections.com direct routes (swappable scraper)
 # --------------------------------------------------------------------------- #
 
-def flightconnections_routes(airport: str) -> dict:
-    """
-    Direct destinations from an airport.
+def _fc_cookie() -> str | None:
+    """Optional cookie string from FLIGHTCONNECTIONS_CURL_FILE (kept outside repo).
 
-    NOTE: flightconnections.com renders routes client-side and is Cloudflare-
-    protected. The real fetch is finalized in batch 3 against the live site
-    (likely its internal route-data endpoint, with an optional cookie via
-    FLIGHTCONNECTIONS_CURL_FILE). Until then this returns a structured
-    'not-wired' result so the CLI surface is stable.
+    Plain requests work today, so this stays unused unless the site starts
+    gating. Accepts either a raw `Cookie: ...` line or a bare cookie string.
     """
+    if not FC_CURL_FILE:
+        return None
+    try:
+        text = Path(FC_CURL_FILE).read_text()
+    except OSError:
+        return None
+    for line in text.splitlines():
+        low = line.strip().lower()
+        if low.startswith("cookie:") or low.startswith("-h 'cookie:"):
+            return line.split(":", 1)[1].strip().strip("'\"")
+    return text.strip() or None
+
+
+def _fc_get(url: str) -> str:
+    headers = {"User-Agent": FC_UA, "Referer": FC_BASE + "/", "Accept": "application/json,*/*"}
+    cookie = _fc_cookie()
+    if cookie:
+        headers["Cookie"] = cookie
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return r.read().decode("utf-8")
+
+
+def _load_id_cache() -> dict:
+    if FC_ID_CACHE.exists():
+        try:
+            return json.loads(FC_ID_CACHE.read_text())
+        except (OSError, json.JSONDecodeError):
+            pass
+    return {}
+
+
+def _save_id_cache(cache: dict) -> None:
+    try:
+        FC_ID_CACHE.parent.mkdir(parents=True, exist_ok=True)
+        FC_ID_CACHE.write_text(json.dumps(cache, indent=2, sort_keys=True))
+    except OSError:
+        pass  # cache is a nicety, not load-bearing
+
+
+def fc_airport_id(iata: str, cache: dict):
+    """Resolve an IATA code to flightconnections' internal numeric airport id."""
+    iata = iata.upper()
+    if iata in cache:
+        return cache[iata]
+    try:
+        data = json.loads(_fc_get(f"{FC_BASE}/airports_url.php?lang=en&iata={iata.lower()}"))
+    except (urllib.error.URLError, json.JSONDecodeError):
+        return None
+    cid = data.get("c")
+    if isinstance(cid, int):
+        cache[iata] = cid
+    return cid
+
+
+def flightconnections_routes(airport: str) -> dict:
+    """Direct destinations from an airport, via flightconnections.com.
+
+    Resolves the IATA code to an internal id, then reads rt<id>.json whose
+    `pts` array is the list of directly-reachable destination airport ids.
+    """
+    iata = airport.upper()
+    cache = _load_id_cache()
+    origin_id = fc_airport_id(iata, cache)
+    if origin_id is None:
+        _save_id_cache(cache)
+        return {"airport": iata, "status": "unknown_airport", "destination_ids": [],
+                "note": "flightconnections did not resolve this IATA code."}
+    url = (f"{FC_BASE}/rt{origin_id}.json?v=1097&lang=en"
+           "&direction=from&flight_direction=from&flight_type=round")
+    try:
+        raw = json.loads(_fc_get(url))
+    except (urllib.error.URLError, json.JSONDecodeError) as e:
+        _save_id_cache(cache)
+        return {"airport": iata, "airport_id": origin_id, "status": "fetch_failed",
+                "destination_ids": [], "error": str(e)}
+    dest_ids = [p for p in raw.get("pts", []) if p != origin_id]
+    _save_id_cache(cache)
+    return {"airport": iata, "airport_id": origin_id, "status": "ok",
+            "destination_count": len(dest_ids), "destination_ids": dest_ids}
+
+
+def fc_kiteable_from(origin: str, when: date | None, only_wind: bool) -> dict:
+    """Which catalog kite spots are reachable by direct flight from `origin`.
+
+    Intersects the origin's direct-destination ids with the airport ids of the
+    local kite-spot catalog. With only_wind, keeps spots windy in `when`'s month.
+    """
+    routes = flightconnections_routes(origin)
+    if routes["status"] != "ok":
+        return {"origin": origin.upper(), "status": routes["status"],
+                "note": routes.get("note") or routes.get("error"), "spots": []}
+    dest_ids = set(routes["destination_ids"])
+    cache = _load_id_cache()
+    when = when or date.today()
+
+    origin_iata = routes["airport"]
+    rows = []
+    for s in load_spots():
+        if only_wind and not kiteable_now(s, when):
+            continue
+        # You're departing from this spot's own airport — you're already there.
+        if origin_iata in s["airports"]:
+            continue
+        reachable = []
+        for code in s["airports"]:
+            aid = fc_airport_id(code, cache)
+            if aid in dest_ids:
+                reachable.append(code)
+        if reachable:
+            rows.append({
+                "name": s["name"], "country": s["country"],
+                "airports_direct": reachable, "all_airports": s["airports"],
+                "kiteable_now": kiteable_now(s, when), "wind_months": s.get("wind_months"),
+                "windguru_id": s.get("windguru_id"),
+            })
+    _save_id_cache(cache)
+    return {"origin": routes["airport"], "origin_id": routes["airport_id"],
+            "status": "ok", "as_of": when.isoformat(), "filter_wind": only_wind,
+            "direct_destination_count": len(dest_ids), "spots": rows}
+
+
+# --------------------------------------------------------------------------- #
+# Engine: Windguru live wind forecast (swappable scraper)
+# --------------------------------------------------------------------------- #
+
+WG_BASE = "https://www.windguru.cz/int/iapi.php"
+WG_MODEL = 3  # GFS 13 km — free, global, ~16-day horizon (covers far-out dates)
+KITEABLE_MIN_KT = 12.0  # default lower bound for a "kiteable" hour (sustained)
+DAY_START, DAY_END = 9, 20  # local daytime window (hours) we judge wind over
+
+
+def _wg_get(url: str) -> dict:
+    headers = {"User-Agent": FC_UA, "Referer": "https://www.windguru.cz/",
+               "Accept": "application/json,*/*"}
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def windguru_search(term: str) -> list[dict]:
+    """Search windguru spots by name -> [{id_spot, spotname, country, ...}].
+
+    Used one-time to map a new catalog spot to its windguru id (see the windguru
+    connector); not on the hot path.
+    """
+    import urllib.parse
+    url = f"{WG_BASE}?q=search_spots&search={urllib.parse.quote(term)}"
+    try:
+        return _wg_get(url).get("spots", [])
+    except (urllib.error.URLError, json.JSONDecodeError):
+        return []
+
+
+def windguru_forecast(spot_id: int) -> dict:
+    """Live GFS forecast for a windguru spot id.
+
+    Returns the model init datetime plus a per-hour series of (utc, local, wind,
+    gust, dir) in knots/degrees. Local time is approximated from longitude
+    (offset = round(lon/15)) so the daytime filter is roughly right without a
+    timezone database. GFS reaches ~16 days, so far-out travel dates are covered
+    — but lead time is reported so callers don't treat a 10-day-out value as gospel.
+    """
+    url = f"{WG_BASE}?q=forecast&id_model={WG_MODEL}&id_spot={spot_id}"
+    try:
+        raw = _wg_get(url)
+    except (urllib.error.URLError, json.JSONDecodeError) as e:
+        return {"status": "fetch_failed", "spot_id": spot_id, "error": str(e)}
+    fc = raw.get("fcst") or {}
+    if not fc or "hours" not in fc:
+        return {"status": "no_forecast", "spot_id": spot_id}
+    init = datetime.strptime(fc["initdate"], "%Y-%m-%d %H:%M:%S")
+    lon = raw.get("lon") or 0
+    tz_off = round(lon / 15.0)  # crude but adequate UTC offset from longitude
+    hours = fc["hours"]
+    spd, gust, wdir = fc.get("WINDSPD", []), fc.get("GUST", []), fc.get("WINDDIR", [])
+    series = []
+    for i, h in enumerate(hours):
+        utc = init + timedelta(hours=h)
+        series.append({
+            "utc": utc,
+            "local": utc + timedelta(hours=tz_off),
+            "wind": spd[i] if i < len(spd) else None,
+            "gust": gust[i] if i < len(gust) else None,
+            "dir": wdir[i] if i < len(wdir) else None,
+        })
+    return {"status": "ok", "spot_id": spot_id, "lat": raw.get("lat"),
+            "lon": lon, "tz_off": tz_off, "model": fc.get("model_name"),
+            "init": init, "horizon_h": hours[-1] if hours else 0, "series": series}
+
+
+def _deg_to_compass(deg) -> str:
+    if deg is None:
+        return "?"
+    dirs = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+    return dirs[int((deg / 22.5) + 0.5) % 16]
+
+
+def wind_window(forecast: dict, when: date, days: int = 3,
+                min_kt: float = KITEABLE_MIN_KT) -> dict:
+    """Summarize forecast wind over a travel window starting at `when`.
+
+    Window = `days` calendar days from `when`, daytime (local) hours only.
+    `covered` says whether the forecast actually reaches the window, so callers
+    can fall back to wind_months for out-of-range dates instead of treating
+    'no data' as 'no wind' and wrongly dropping a spot.
+    """
+    if forecast.get("status") != "ok":
+        return {"status": forecast.get("status", "no_forecast"), "covered": False}
+    window_dates = [when + timedelta(days=d) for d in range(days)]
+    last_local = forecast["series"][-1]["local"].date() if forecast["series"] else None
+    covered = last_local is not None and last_local >= window_dates[0]
+    by_day: dict = {}
+    for pt in forecast["series"]:
+        ld = pt["local"].date()
+        if ld not in window_dates or pt["wind"] is None:
+            continue
+        if not (DAY_START <= pt["local"].hour < DAY_END):
+            continue
+        by_day.setdefault(ld, []).append(pt)
+
+    # GFS steps are hourly near-term but 3-hourly past ~7 days, so a raw point
+    # count isn't "hours". Measure the step spacing *inside this window* (not the
+    # whole series) and scale by it, so kiteable_hours means clock-hours whether
+    # the date is tomorrow or ten days out.
+    win_pts = sorted((p for pts in by_day.values() for p in pts), key=lambda p: p["utc"])
+    win_deltas = [round((win_pts[i + 1]["utc"] - win_pts[i]["utc"]).total_seconds() / 3600)
+                  for i in range(len(win_pts) - 1)]
+    win_deltas = [d for d in win_deltas if 0 < d <= 6]  # ignore the overnight gap
+    step_h = max(win_deltas, key=win_deltas.count) if win_deltas else 1  # modal spacing
+
+    days_out, all_winds, kiteable_days = [], [], 0
+    for d in window_dates:
+        pts = by_day.get(d, [])
+        if not pts:
+            days_out.append({"date": d.isoformat(), "covered": False})
+            continue
+        winds = [p["wind"] for p in pts]
+        peak_pt = max(pts, key=lambda p: p["wind"])
+        kite_hours = sum(1 for w in winds if w >= min_kt) * step_h
+        is_kite = kite_hours >= 3  # need a few kiteable daytime hours, not one gust
+        kiteable_days += 1 if is_kite else 0
+        all_winds.extend(winds)
+        days_out.append({
+            "date": d.isoformat(), "covered": True,
+            "mean_kt": round(sum(winds) / len(winds)), "peak_kt": round(max(winds)),
+            "kiteable_hours": kite_hours, "kiteable": is_kite,
+            "dir": _deg_to_compass(peak_pt["dir"]),
+            "dir_deg": round(peak_pt["dir"]) if peak_pt["dir"] is not None else None,
+        })
     return {
-        "airport": airport.upper(),
-        "status": "not_wired",
-        "destinations": [],
-        "note": "Live flightconnections scraping is wired in batch 3 (see CONNECTION.md).",
+        "status": "ok", "covered": covered,
+        "window_start": when.isoformat(), "days": days, "min_kt": min_kt,
+        "mean_kt": round(sum(all_winds) / len(all_winds)) if all_winds else None,
+        "peak_kt": round(max(all_winds)) if all_winds else None,
+        "kiteable_days": kiteable_days, "by_day": days_out,
+        "model": forecast.get("model"), "init": forecast["init"].isoformat(sep=" "),
+        "lead_days": (when - forecast["init"].date()).days,
+        "lat": forecast.get("lat"), "lon": forecast.get("lon"),
     }
+
+
+def resolve_wg_spot(query: str) -> dict | None:
+    """Find a catalog spot by name/region substring; return its windguru id."""
+    q = query.lower().strip()
+    for s in load_spots():
+        if (q in s["name"].lower() or q in s.get("region", "").lower()) and s.get("windguru_id"):
+            return {"name": s["name"], "windguru_id": s["windguru_id"], "source": "catalog"}
+    return None
 
 
 # --------------------------------------------------------------------------- #
@@ -170,8 +490,12 @@ def cmd_doctor(args):
     checks = {
         "python": sys.version.split()[0],
         "fast_flights_installed": has_fast_flights(),
+        "playwright_installed": has_playwright(),
+        "price_fetch_mode": default_fetch_mode() if has_fast_flights() else None,
         "kite_spots_catalog": KITE_SPOTS_FILE.exists(),
         "kite_spot_count": len(load_spots()) if KITE_SPOTS_FILE.exists() else 0,
+        "kite_spots_with_windguru_id": sum(
+            1 for s in load_spots() if s.get("windguru_id")) if KITE_SPOTS_FILE.exists() else 0,
         "config_file": CONFIG_FILE.exists(),
         "flightconnections_cookie_set": bool(FC_CURL_FILE),
         "flightconnections_cookie_path": FC_CURL_FILE,
@@ -180,7 +504,9 @@ def cmd_doctor(args):
         "spots": True,
         "airports": True,
         "price (google flights)": checks["fast_flights_installed"],
-        "routes (flightconnections)": False,  # finalized in batch 3
+        "routes (flightconnections)": True,
+        "wind (windguru)": checks["kite_spots_with_windguru_id"] > 0,
+        "plan (routes + price)": checks["fast_flights_installed"],
     }
     payload = {"checks": checks, "ready": ready}
 
@@ -252,27 +578,307 @@ def cmd_spots(args):
 
 
 def cmd_routes(args):
+    # --kiteable: intersect direct destinations with the windy-spot catalog.
+    if args.kiteable:
+        when = _parse_when(args.when) if args.when else date.today()
+        payload = fc_kiteable_from(args.airport, when, only_wind=not args.all_seasons)
+
+        def human(p):
+            if p["status"] != "ok":
+                print(f"routes {p['origin']}: {p['status']} — {p.get('note')}")
+                return
+            tag = "windy spots" if p["filter_wind"] else "spots"
+            print(f"Direct from {p['origin']} to catalog {tag} "
+                  f"(as of {p['as_of']}, {p['direct_destination_count']} direct dests):\n")
+            if not p["spots"]:
+                print("  none reachable direct")
+                return
+            for s in p["spots"]:
+                flag = "🌬️ " if s["kiteable_now"] else "   "
+                print(f"  {flag}{s['name']} ({s['country']}) — direct via {', '.join(s['airports_direct'])}")
+
+        emit(payload, args.json, human)
+        return
+
+    # --to A,B,C: reachability check for specific destination IATAs.
+    if args.to:
+        routes = flightconnections_routes(args.airport)
+        dests = [d.strip().upper() for d in args.to.split(",") if d.strip()]
+        cache = _load_id_cache()
+        dest_ids = set(routes.get("destination_ids", []))
+        checks = {d: (fc_airport_id(d, cache) in dest_ids) for d in dests}
+        _save_id_cache(cache)
+        payload = {"airport": routes["airport"], "status": routes["status"], "reachable": checks}
+
+        def human(p):
+            print(f"Direct from {p['airport']} (status={p['status']}):")
+            for d, ok in p["reachable"].items():
+                print(f"  {'DIRECT' if ok else '  no  '}  {d}")
+
+        emit(payload, args.json, human)
+        return
+
     payload = flightconnections_routes(args.airport)
+
     def human(p):
         print(f"Direct routes from {p['airport']}: status={p['status']}")
         if p.get("note"):
             print(f"  {p['note']}")
-        for d in p.get("destinations", []):
-            print(f"  -> {d}")
+        if p["status"] == "ok":
+            print(f"  {p['destination_count']} direct destinations "
+                  f"(ids only; use --kiteable or --to to interpret).")
+
     emit(payload, args.json, human)
 
 
+def _trim_wind(w: dict | None) -> dict | None:
+    """Light copy of a wind_window summary for embedding in a plan result."""
+    if not w:
+        return None
+    if w.get("status") != "ok":
+        return {"status": w.get("status"), "covered": False}
+    return {
+        "covered": w["covered"], "kiteable_days": w["kiteable_days"], "days": w["days"],
+        "mean_kt": w["mean_kt"], "peak_kt": w["peak_kt"], "min_kt": w["min_kt"],
+        "lead_days": w.get("lead_days"), "init": w.get("init"),
+        "by_day": [{"date": d["date"], "covered": d.get("covered", False),
+                    "kiteable": d.get("kiteable", False), "mean_kt": d.get("mean_kt"),
+                    "peak_kt": d.get("peak_kt"), "dir": d.get("dir")}
+                   for d in w["by_day"]],
+    }
+
+
+def cmd_plan(args):
+    """Chain catalog -> live wind filter -> direct routes -> price.
+
+    For each origin, find catalog spots reachable direct that are in-season, then:
+    live Windguru wind is a HARD FILTER (drop spots forecast below `--min-wind`
+    for the travel window — and skip pricing them) and the PRIMARY RANKING
+    (windiest first). Dates beyond the GFS forecast horizon, fetch failures, and
+    spots with no windguru id fall back to the season signal (wind_months) and
+    are flagged `season` — never dropped for missing live data. `--no-wind`
+    restores the old price-only behavior.
+    """
+    when = _parse_when(args.depart)
+    origins = [o.strip().upper() for o in args.origins.split(",") if o.strip()]
+    use_wind = not getattr(args, "no_wind", False)
+    days = getattr(args, "days", 3)
+    min_kt = getattr(args, "min_wind", KITEABLE_MIN_KT)
+
+    plan = {"depart": args.depart, "origins": origins,
+            "filter_wind": not args.all_seasons, "wind_ranking": use_wind,
+            "days": days, "min_kt": min_kt, "results": [], "wind_filtered": []}
+
+    wg_cache: dict = {}  # windguru_id -> wind_window summary (one fetch per spot)
+
+    def spot_wind(spot):
+        wid = spot.get("windguru_id")
+        if not wid:
+            return None
+        if wid not in wg_cache:
+            fc = windguru_forecast(wid)
+            wg_cache[wid] = wind_window(fc, when, days=days, min_kt=min_kt)
+        return wg_cache[wid]
+
+    def classify(spot):
+        """(keep, source, wind_summary, note) — the hard-filter decision."""
+        if not use_wind:
+            return True, "off", None, None
+        w = spot_wind(spot)
+        if w is None:
+            return True, "season", None, "no windguru id — season only"
+        if w.get("status") != "ok":
+            return True, "season", w, f"live wind unavailable ({w.get('status')}) — season only"
+        if not w.get("covered"):
+            return True, "season", w, "beyond forecast horizon — season only"
+        if w.get("kiteable_days", 0) >= 1:
+            return True, "live", w, None
+        return False, "live", w, f"forecast below {int(min_kt)}kt for the window"
+
+    dropped = set()       # spot names hard-filtered out by wind (price skipped)
+    seen = set()          # (origin, dest_airport) pairs already priced
+    for origin in origins:
+        reach = fc_kiteable_from(origin, when, only_wind=not args.all_seasons)
+        if reach["status"] != "ok":
+            plan["results"].append({"origin": origin, "status": reach["status"],
+                                    "note": reach.get("note")})
+            continue
+        for spot in reach["spots"]:
+            keep, source, wsum, note = classify(spot)
+            if not keep:
+                if spot["name"] not in dropped:
+                    dropped.add(spot["name"])
+                    plan["wind_filtered"].append({
+                        "spot": spot["name"], "reason": note,
+                        "mean_kt": wsum.get("mean_kt") if wsum else None,
+                        "kiteable_days": wsum.get("kiteable_days") if wsum else None,
+                    })
+                continue
+            for dest in spot["airports_direct"]:
+                if (origin, dest) in seen:
+                    continue
+                seen.add((origin, dest))
+                if len(seen) > 1:
+                    time.sleep(2)  # space out requests (be polite to the source)
+                try:
+                    priced = google_flights_price(origin, dest, args.depart,
+                                                  fetch_mode=getattr(args, "fetch_mode", None),
+                                                  currency=args.currency, max_stops=0)
+                except FlightscopeError as e:
+                    plan["results"].append({"origin": origin, "spot": spot["name"],
+                                            "dest": dest, "price_error": str(e)})
+                    continue
+                direct = [f for f in priced["flights"] if f.get("stops") == 0]
+                cheapest = min(direct, key=lambda f: _price_num(f.get("price")), default=None)
+                plan["results"].append({
+                    "origin": origin, "spot": spot["name"], "dest": dest,
+                    "kiteable_now": spot["kiteable_now"],
+                    "wind_source": source, "wind_note": note,
+                    "wind": _trim_wind(wsum),
+                    "cheapest_direct": cheapest,
+                    "direct_options": len(direct),
+                })
+
+    def fmt_row(r):
+        c = r["cheapest_direct"]
+        # Cap the name at the column width so long spots ("Gran Canaria (Pozo
+        # Izquierdo)") don't push the rest of the row out of alignment.
+        name = r["spot"] if len(r["spot"]) <= 22 else r["spot"][:21] + "…"
+        line = (f"  {str(c.get('price')):>8}  {name:<22} {r['origin']}->{r['dest']:<4} "
+                f"{(c.get('airline') or ''):<16} {c.get('duration') or ''}")
+        w = r.get("wind")
+        if r.get("wind_source") == "live" and w and w.get("covered"):
+            line += (f"   · {w['kiteable_days']}/{w['days']} kiteable, {w['mean_kt']}kt avg "
+                     f"peak {w['peak_kt']} (lead {w['lead_days']}d)")
+        elif r.get("wind_source") == "season":
+            line += "   · season"
+        return line
+
+    def human(p):
+        scope = "windy spots only" if p["filter_wind"] else "all spots"
+        rank = "live wind, windiest first" if p["wind_ranking"] else "cheapest first"
+        print(f"Plan — depart {p['depart']} from {', '.join(p['origins'])} "
+              f"({scope}; {rank}):\n")
+        rows = [r for r in p["results"] if r.get("cheapest_direct")]
+        if not rows:
+            print("  no direct, priced options found")
+
+        if p["wind_ranking"]:
+            live = [r for r in rows if r.get("wind_source") == "live"]
+            season = [r for r in rows if r.get("wind_source") != "live"]
+            live.sort(key=lambda r: (-(r["wind"]["kiteable_days"]),
+                                     -(r["wind"]["mean_kt"] or 0),
+                                     _price_num(r["cheapest_direct"].get("price"))))
+            season.sort(key=lambda r: _price_num(r["cheapest_direct"].get("price")))
+            for r in live:
+                print(fmt_row(r))
+            if season:
+                print("\n  season says windy — no live forecast for these dates yet:")
+                for r in season:
+                    print(fmt_row(r))
+        else:
+            rows.sort(key=lambda r: _price_num(r["cheapest_direct"].get("price")))
+            for r in rows:
+                print(fmt_row(r))
+
+        if p["wind_filtered"]:
+            print(f"\n  filtered out — forecast below {int(p['min_kt'])}kt for your window:")
+            for f in p["wind_filtered"]:
+                detail = ""
+                if f.get("mean_kt") is not None:
+                    detail = f" ({f['mean_kt']}kt avg, {f['kiteable_days']}/{p['days']} kiteable)"
+                print(f"    · {f['spot']}{detail}")
+
+        no_direct = [r for r in p["results"]
+                     if "cheapest_direct" in r and not r["cheapest_direct"]]
+        for r in no_direct:
+            print(f"  - {r['spot']} {r['origin']}->{r['dest']}: route exists but no direct flight on this date")
+        errored = [r for r in p["results"] if r.get("price_error") or
+                   (r.get("status") and r["status"] != "ok")]
+        for r in errored:
+            why = r.get("price_error") or f"{r['status']} ({r.get('note')})"
+            print(f"  ! {r.get('spot', r['origin'])} {r.get('dest', '')}: {why}")
+
+    emit(plan, args.json, human)
+
+
+def cmd_wind(args):
+    """Live windguru forecast for a catalog spot over a travel window."""
+    if args.id:
+        target = {"name": args.spot or f"windguru:{args.id}", "windguru_id": args.id}
+    else:
+        target = resolve_wg_spot(args.spot)
+        if not target:
+            hits = windguru_search(args.spot)[:5]
+            payload = {"status": "unknown_spot", "query": args.spot,
+                       "search_hits": [{"id": h["id_spot"], "name": h.get("spotname"),
+                                        "country": h.get("country")} for h in hits]}
+
+            def human(p):
+                print(f"No catalog spot matches '{p['query']}'.")
+                if p["search_hits"]:
+                    print("  windguru search hits (re-run with --id to force one):")
+                    for h in p["search_hits"]:
+                        print(f"    {h['id']:>8}  {h['name']} ({h['country']})")
+            emit(payload, args.json, human)
+            return
+
+    when = _parse_when(args.when) if args.when else date.today()
+    fc = windguru_forecast(target["windguru_id"])
+    summary = wind_window(fc, when, days=args.days, min_kt=args.min_wind)
+    summary["spot"] = target["name"]
+    summary["windguru_id"] = target["windguru_id"]
+
+    def human(p):
+        if p.get("status") != "ok":
+            print(f"wind {p['spot']}: {p.get('status')}")
+            return
+        print(f"{p['spot']} — windguru #{p['windguru_id']} ({p.get('model')})")
+        print(f"  init {p['init']} UTC · lead {p['lead_days']}d (longer lead = softer) · "
+              f"window {p['window_start']} +{p['days']}d, daytime {DAY_START}-{DAY_END}h local\n")
+        if not p["covered"]:
+            print("  ⚠ travel window is beyond the forecast horizon — no live data for these dates.\n")
+        for d in p["by_day"]:
+            if not d["covered"]:
+                print(f"     {d['date']}   (no forecast)")
+                continue
+            flag = "🌬️ " if d["kiteable"] else "   "
+            print(f"  {flag}{d['date']}  {d['mean_kt']:>2} kt avg · peak {d['peak_kt']:>2} {d['dir']:<3} · "
+                  f"{d['kiteable_hours']}h ≥{int(p['min_kt'])}kt")
+        if p["mean_kt"] is not None:
+            print(f"\n  → {p['kiteable_days']}/{p['days']} kiteable days · "
+                  f"window mean {p['mean_kt']} kt, peak {p['peak_kt']} kt")
+
+    emit(summary, args.json, human)
+
+
+def _price_num(price) -> float:
+    """Parse '€56' / '$120' / None into a sortable number (inf when unknown)."""
+    if not price:
+        return float("inf")
+    digits = "".join(c for c in str(price) if c.isdigit() or c == ".")
+    try:
+        return float(digits) if digits else float("inf")
+    except ValueError:
+        return float("inf")
+
+
 def cmd_price(args):
-    payload = google_flights_price(
-        args.origin.upper(), args.dest.upper(), args.depart,
-        ret=args.ret, adults=args.adults, cabin=args.cabin,
-    )
+    try:
+        payload = google_flights_price(
+            args.origin.upper(), args.dest.upper(), args.depart,
+            ret=args.ret, adults=args.adults, cabin=args.cabin,
+            fetch_mode=getattr(args, "fetch_mode", None),
+            currency=args.currency,
+        )
+    except FlightscopeError as e:
+        err(str(e), code=4)
 
     def human(p):
         hdr = f"{p['origin']} -> {p['dest']}  {p['depart']}"
         if p["return"]:
             hdr += f"  (return {p['return']})"
-        print(hdr + f"   [{p['trip']}, price level: {p['current_price_level']}]\n")
+        print(hdr + f"   [{p['trip']}, price level: {p['current_price_level']}, via: {p['fetch_mode']}]\n")
         if not p["flights"]:
             print("  no flights returned")
             return
@@ -320,6 +926,21 @@ def build_parser() -> argparse.ArgumentParser:
 
     sp = sub.add_parser("routes", help="direct destinations from an airport (flightconnections)")
     sp.add_argument("airport", help="IATA code, e.g. AGP")
+    sp.add_argument("--kiteable", action="store_true",
+                    help="only show catalog kite spots reachable direct from here")
+    sp.add_argument("--to", help="comma-separated IATA codes to check reachability for")
+    sp.add_argument("--when", help="date YYYY-MM-DD for wind season (with --kiteable)")
+    sp.add_argument("--all-seasons", action="store_true",
+                    help="with --kiteable, include spots not windy this month")
+    add_json(sp)
+
+    sp = sub.add_parser("wind", help="live windguru forecast for a catalog spot over a travel window")
+    sp.add_argument("spot", help="catalog spot name/region substring, e.g. 'Tarifa' (or use --id)")
+    sp.add_argument("--when", help="window start date YYYY-MM-DD (default today)")
+    sp.add_argument("--days", type=int, default=3, help="window length in days (default 3)")
+    sp.add_argument("--min-wind", dest="min_wind", type=float, default=KITEABLE_MIN_KT,
+                    help=f"kiteable sustained-wind threshold in knots (default {int(KITEABLE_MIN_KT)})")
+    sp.add_argument("--id", type=int, help="force a specific windguru spot id (bypass catalog)")
     add_json(sp)
 
     sp = sub.add_parser("price", help="Google Flights price for a trip (needs fast-flights)")
@@ -329,6 +950,27 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--return", dest="ret", help="YYYY-MM-DD (omit for one-way)")
     sp.add_argument("--adults", type=int, default=1)
     sp.add_argument("--cabin", default="economy", choices=["economy", "premium-economy", "business", "first"])
+    sp.add_argument("--currency", default="EUR", help="ISO currency code for prices (default EUR)")
+    sp.add_argument("--fetch-mode", dest="fetch_mode",
+                    choices=["common", "fallback", "force-fallback", "local"],
+                    help="override the fast-flights fetch engine (default: local if Playwright present)")
+    add_json(sp)
+
+    sp = sub.add_parser("plan", help="chain catalog -> live wind filter -> routes -> price")
+    sp.add_argument("origins", help="comma-separated origin IATA codes, e.g. AGP,SVQ")
+    sp.add_argument("--depart", required=True, help="YYYY-MM-DD")
+    sp.add_argument("--all-seasons", action="store_true",
+                    help="include spots not windy in the depart month")
+    sp.add_argument("--days", type=int, default=3, help="wind window length in days (default 3)")
+    sp.add_argument("--min-wind", dest="min_wind", type=float, default=KITEABLE_MIN_KT,
+                    help=f"hard-filter threshold in knots; drop spots forecast below it "
+                         f"(default {int(KITEABLE_MIN_KT)})")
+    sp.add_argument("--no-wind", dest="no_wind", action="store_true",
+                    help="skip live wind filter/ranking; price by season only (old behavior)")
+    sp.add_argument("--currency", default="EUR", help="ISO currency code for prices (default EUR)")
+    sp.add_argument("--fetch-mode", dest="fetch_mode",
+                    choices=["common", "fallback", "force-fallback", "local"],
+                    help="override the fast-flights fetch engine")
     add_json(sp)
 
     return p
@@ -347,7 +989,9 @@ def main(argv=None):
         "airports": cmd_airports,
         "spots": cmd_spots,
         "routes": cmd_routes,
+        "wind": cmd_wind,
         "price": cmd_price,
+        "plan": cmd_plan,
     }
     if not args.command:
         parser.print_help()

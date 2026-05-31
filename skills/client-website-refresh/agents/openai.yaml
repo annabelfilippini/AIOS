@@ -1,0 +1,6 @@
+interface:
+  display_name: "Client Website Refresh"
+  short_description: "Audit, redesign, Webflow, and proposal harness"
+  default_prompt: "Use $client-website-refresh to audit this client site, capture their dislikes, plan the redesign, QA the build, and prepare next steps."
+policy:
+  allow_implicit_invocation: true

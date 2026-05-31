@@ -1,0 +1,6 @@
+{
+  "_note": "Map friendly names to iMessage handles. Phone numbers in +E.164 (e.g. +14155550123) or email. Used by send.sh and read.py.",
+  "me": "+13038593694",
+  "mom": "+13038838855",
+  "oee": "+17207674510"
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Client Proposal PDF"
+  short_description: "Render concise branded proposal PDFs"
+  default_prompt: "Use $client-proposal-pdf to turn this client scope into a polished proposal PDF with rates, phases, and next steps."
+policy:
+  allow_implicit_invocation: true

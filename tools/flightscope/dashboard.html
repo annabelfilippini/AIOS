@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flightscope — kite travel decision board</title>
+<style>
+  :root {
+    --bg:#0e1726; --panel:#152033; --panel2:#1b2942; --ink:#e8eef7; --muted:#8497b3;
+    --line:#26344d; --good:#3ddc84; --ok:#ffd166; --bad:#ff6b6b; --accent:#4ea1ff;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  .wrap { max-width:1040px; margin:0 auto; padding:32px 20px 64px; }
+  header h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.4px; }
+  header h1 .dot { color:var(--accent); }
+  header p { color:var(--muted); margin:0 0 6px; max-width:640px; }
+  .q { display:inline-block; background:var(--panel2); border:1px solid var(--line);
+    border-radius:8px; padding:8px 12px; color:var(--ink); margin-top:10px; font-size:14px; }
+  h2 { font-size:13px; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted);
+    margin:36px 0 12px; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  table { width:100%; border-collapse:collapse; }
+  th,td { text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); background:var(--panel2); }
+  tr:last-child td { border-bottom:none; }
+  .price { font-size:22px; font-weight:700; color:var(--good); white-space:nowrap; }
+  .spot { font-weight:600; }
+  .route { color:var(--muted); font-weight:400; font-size:12.5px; }
+  .note { color:var(--muted); font-size:12px; }
+  .verdict { font-size:13px; }
+  .mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12.5px; }
+  .muted { color:var(--muted); }
+  .wind { display:flex; flex-direction:column; gap:2px; }
+  .wind .kd { font-weight:600; }
+  .wind.good .kd { color:var(--good); } .wind.ok .kd { color:var(--ok); } .wind.bad .kd { color:var(--bad); }
+  .wind .kt { font-size:12.5px; color:var(--muted); }
+  .spark { display:inline-flex; align-items:flex-end; gap:3px; height:34px; margin-top:4px; }
+  .bar { width:14px; background:var(--line); border-radius:3px 3px 0 0; display:inline-block; min-height:3px; }
+  .bar.g { background:var(--good); } .bar.b { background:var(--bad); opacity:.7; } .bar.n { background:var(--line); }
+  .rank { display:inline-block; min-width:18px; color:var(--accent); font-weight:700; font-size:13px; }
+  .filtered td { opacity:.5; }
+  .cut { color:var(--bad); font-weight:600; font-size:13px; }
+  .months { white-space:nowrap; }
+  .m { display:inline-block; width:16px; text-align:center; font-size:10px; color:var(--line);
+    border-radius:3px; }
+  .m.on { background:var(--accent); color:#06101f; font-weight:700; }
+  .grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .card h3 { margin:0 0 6px; font-size:14px; } .card p { margin:0; color:var(--muted); font-size:13px; }
+  .card .src { font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:.5px; }
+  .pipe { font-family:ui-monospace,monospace; font-size:12.5px; color:var(--muted); background:var(--panel2);
+    border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-top:8px; }
+  .pipe b { color:var(--accent); }
+  footer { color:var(--muted); font-size:12px; margin-top:24px; line-height:1.7; }
+  .legend { font-size:11.5px; color:var(--muted); margin:8px 2px 0; }
+  @media (max-width:720px) { .grid { grid-template-columns:1fr; } .m { width:13px; } }
+</style></head><body><div class="wrap">
+
+<header>
+  <h1>flightscope<span class="dot">.</span></h1>
+  <p>Personal kite-travel decision tool. It answers one question by joining three live sources:
+     where do direct flights actually reach, what do they cost, and is the wind any good when you land?</p>
+  <div class="q">🪁 Depart Tarifa (AGP / SVQ) · one-way · <b>3 June 2026</b> · where to?</div>
+</header>
+
+<h2>Decision board — reachable nonstop, ranked by live wind (windiest first)</h2>
+<div class="panel"><table>
+  <tr><th>#</th><th>Price</th><th>Spot · route</th><th>Live wind (3-day window from arrival)</th><th>Verdict</th></tr>
+  <tr>
+      <td><span class="rank">1</span></td>
+      <td class="price">€15</td>
+      <td class="spot">Essaouira<br><span class="route">AGP/SVQ → RAK</span></td>
+      <td><div class="wind good"><span class="kd">3/3 kiteable days</span><span class="kt">19 kt avg · peak 27 kt</span><span class="spark"><span class="bar g" style="height:77%" title="2026-06-03: 26kt avg, peak 27kt NNE"></span><span class="bar g" style="height:65%" title="2026-06-04: 20kt avg, peak 23kt N"></span><span class="bar g" style="height:37%" title="2026-06-05: 11kt avg, peak 13kt N"></span></span></div></td>
+      <td class="verdict">🥇 windiest <i>and</i> cheapest — but road transfer<br><span class="note">RAK = Marrakech, ~3h drive to spot</span></td>
+    </tr><tr>
+      <td><span class="rank">2</span></td>
+      <td class="price">€26</td>
+      <td class="spot">Gran Canaria<br><span class="route">AGP → LPA</span></td>
+      <td><div class="wind good"><span class="kd">3/3 kiteable days</span><span class="kt">18 kt avg · peak 21 kt</span><span class="spark"><span class="bar g" style="height:60%" title="2026-06-03: 20kt avg, peak 21kt NNE"></span><span class="bar g" style="height:51%" title="2026-06-04: 16kt avg, peak 18kt NNE"></span><span class="bar g" style="height:51%" title="2026-06-05: 16kt avg, peak 18kt N"></span></span></div></td>
+      <td class="verdict">✅ reliable wind + lands at the spot<br><span class="note">lands at the spot</span></td>
+    </tr><tr>
+      <td><span class="rank">3</span></td>
+      <td class="price">€24</td>
+      <td class="spot">Lanzarote<br><span class="route">SVQ → ACE</span></td>
+      <td><div class="wind good"><span class="kd">3/3 kiteable days</span><span class="kt">17 kt avg · peak 22 kt</span><span class="spark"><span class="bar g" style="height:62%" title="2026-06-03: 20kt avg, peak 22kt NNE"></span><span class="bar g" style="height:45%" title="2026-06-04: 15kt avg, peak 16kt NNE"></span><span class="bar g" style="height:48%" title="2026-06-05: 15kt avg, peak 17kt N"></span></span></div></td>
+      <td class="verdict">✅ reliable wind + lands at the spot<br><span class="note">lands at the spot</span></td>
+    </tr><tr>
+      <td><span class="rank">4</span></td>
+      <td class="price">€35</td>
+      <td class="spot">Fuerteventura<br><span class="route">SVQ → FUE</span></td>
+      <td><div class="wind good"><span class="kd">3/3 kiteable days</span><span class="kt">14 kt avg · peak 21 kt</span><span class="spark"><span class="bar g" style="height:60%" title="2026-06-03: 17kt avg, peak 21kt N"></span><span class="bar g" style="height:48%" title="2026-06-04: 13kt avg, peak 17kt N"></span><span class="bar g" style="height:40%" title="2026-06-05: 12kt avg, peak 14kt N"></span></span></div></td>
+      <td class="verdict">✅ reliable wind + lands at the spot<br><span class="note">lands at the spot</span></td>
+    </tr>
+    <tr class="filtered">
+      <td><span class="cut">✕</span></td>
+      <td class="price">€129</td>
+      <td class="spot">Sicily<br><span class="route">SVQ → TPS</span></td>
+      <td><div class="wind bad"><span class="kd">0/3 kiteable days</span><span class="kt">7 kt avg · peak 11 kt</span><span class="spark"><span class="bar b" style="height:31%" title="2026-06-03: 8kt avg, peak 11kt SSE"></span><span class="bar b" style="height:31%" title="2026-06-04: 7kt avg, peak 11kt S"></span><span class="bar b" style="height:22%" title="2026-06-05: 5kt avg, peak 8kt SSW"></span></span></div></td>
+      <td class="verdict"><span class="cut">⛔ hard-filtered out</span><br><span class="note">peaks 11 kt — never reaches the 12 kt bar this window</span></td>
+    </tr>
+</table></div>
+<div class="legend">Rows ordered by <b>live wind (windiest first)</b> — Batch B's new ranking; price shown but is no longer the sort key.
+  The <span class="cut">✕</span> row is <b>hard-filtered out</b>: anything forecast below 12 kt for the window is dropped (and skipped before the slow price scrape).
+  Dates beyond the ~16-day GFS horizon aren't dropped — they fall back to the season signal and get flagged. Bars = peak wind per day (green = kiteable ≥12 kt, taller = stronger).
+  Wind is live from Windguru GFS, init 2026-05-25 06:00 UTC, 9-day lead — directionally useful, not gospel that far out.
+  Prices from the 2026-05-24 Google Flights query (not re-run). No nonstop on 3 Jun: Lanzarote from Málaga (AGP→ACE), Sardinia (SVQ→OLB).</div>
+
+<h2>How it works — three sources, joined</h2>
+<div class="grid">
+  <div class="card"><div class="src">flightconnections.com</div><h3>Which routes exist</h3>
+    <p>Direct-destination map per airport via internal JSON. Cheap pre-filter — answers "is there a nonstop", not price.</p></div>
+  <div class="card"><div class="src">Google Flights</div><h3>What it costs</h3>
+    <p>Real price/airline/duration for an exact date via <span class="mono">fast-flights</span> + a local headless browser. Slow, so only the survivors get priced.</p></div>
+  <div class="card"><div class="src">windguru.cz</div><h3>Is the wind good</h3>
+    <p>Live GFS forecast (knots) per spot, ~16-day horizon. Hard-filters spots below 12 kt and ranks the rest. Now its own connector — <span class="mono">cli-connections/windguru/</span> (docs + scripts), stdlib-only, no key.</p></div>
+</div>
+<div class="pipe">plan = <b>flightconnections</b> routes ∩ <b>catalog</b> windy spots → price survivors via <b>Google Flights</b> (nonstop only) → rank by <b>Windguru</b> live wind, then price · never browser-scrape 169 dests, only ~8</div>
+
+<h2>Spot catalog — 13 spots, all mapped to live wind</h2>
+<div class="panel"><table>
+  <tr><th>Spot</th><th>Airports</th><th>Wind season</th><th>Windguru</th></tr>
+  <tr>
+      <td>Tarifa<br><span class="route">Andalusia · ES</span></td>
+      <td class="mono">GIB, XRY, AGP, SVQ</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m on">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m on">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#113924</td>
+    </tr><tr>
+      <td>Fuerteventura (Sotavento)<br><span class="route">Canary Islands · ES</span></td>
+      <td class="mono">FUE</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m on">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m on">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#49329</td>
+    </tr><tr>
+      <td>Lanzarote (Costa Teguise)<br><span class="route">Canary Islands · ES</span></td>
+      <td class="mono">ACE</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m ">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m ">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#800467</td>
+    </tr><tr>
+      <td>Gran Canaria (Pozo Izquierdo)<br><span class="route">Canary Islands · ES</span></td>
+      <td class="mono">LPA</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m ">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m ">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#123902</td>
+    </tr><tr>
+      <td>Leucate / La Franqui<br><span class="route">Occitanie · FR</span></td>
+      <td class="mono">PGF, CCF</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m on">M</span><span class="m on">A</span><span class="m on">M</span><span class="m ">J</span><span class="m ">J</span><span class="m ">A</span><span class="m on">S</span><span class="m on">O</span><span class="m on">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#48582</td>
+    </tr><tr>
+      <td>Sardinia (Porto Pollo)<br><span class="route">Sardinia · IT</span></td>
+      <td class="mono">OLB</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m on">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m on">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#49162</td>
+    </tr><tr>
+      <td>Sicily (Lo Stagnone, Marsala)<br><span class="route">Sicily · IT</span></td>
+      <td class="mono">TPS, PMO</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m on">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m ">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#1177450</td>
+    </tr><tr>
+      <td>Rhodes (Prasonisi)<br><span class="route">Dodecanese · GR</span></td>
+      <td class="mono">RHO</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m ">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m ">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#1335221</td>
+    </tr><tr>
+      <td>Naxos / Paros<br><span class="route">Cyclades · GR</span></td>
+      <td class="mono">JNX, PAS, JTR</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m ">A</span><span class="m ">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m ">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#36</td>
+    </tr><tr>
+      <td>Lefkada (Vasiliki)<br><span class="route">Ionian · GR</span></td>
+      <td class="mono">PVK</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m ">A</span><span class="m ">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m ">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#4448</td>
+    </tr><tr>
+      <td>Dakhla<br><span class="route">Western Sahara · MA</span></td>
+      <td class="mono">VIL</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m on">M</span><span class="m on">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m on">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#49317</td>
+    </tr><tr>
+      <td>Essaouira<br><span class="route">Morocco Atlantic · MA</span></td>
+      <td class="mono">ESU, RAK</td>
+      <td class="months"><span class="m ">J</span><span class="m ">F</span><span class="m ">M</span><span class="m on">A</span><span class="m on">M</span><span class="m on">J</span><span class="m on">J</span><span class="m on">A</span><span class="m on">S</span><span class="m ">O</span><span class="m ">N</span><span class="m ">D</span></td>
+      <td class="mono muted">#58432</td>
+    </tr><tr>
+      <td>Sal<br><span class="route">Cape Verde · CV</span></td>
+      <td class="mono">SID</td>
+      <td class="months"><span class="m on">J</span><span class="m on">F</span><span class="m on">M</span><span class="m on">A</span><span class="m on">M</span><span class="m on">J</span><span class="m ">J</span><span class="m ">A</span><span class="m ">S</span><span class="m ">O</span><span class="m on">N</span><span class="m on">D</span></td>
+      <td class="mono muted">#206839</td>
+    </tr>
+</table></div>
+<div class="legend">Wind season = months historically kiteable (highlighted). Windguru id is coordinate-verified to the real spot and powers the live forecast.</div>
+
+<footer>
+  Generated 2026-05-25 18:43 · flightscope v0.2.0 · <span class="mono">tools/flightscope/dashboard.html</span> · snapshot of current state, regenerate after changes.<br>
+  Status: Batch C done — Windguru is now its own connector (CONNECTION + references + scripts), the flights connector doc describes the live-wind <span class="mono">plan</span>, and long spot names are truncated in the <span class="mono">plan</span> table. Next: harden the Google price fetch timeouts; split catalog <span class="mono">airports</span> into nonstop vs drive-away.
+</footer>
+
+</div></body></html>
