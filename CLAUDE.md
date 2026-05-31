@@ -1,96 +1,102 @@
 # CLAUDE
 
-Claude-specific adapter for this AI-OS.
+Claude-specific router for this AI-OS.
 
 ## Read Only What Applies
 
-- Read `AGENTS.md` for universal rules.
+- Read `AGENTS.md` for universal AI-OS rules.
 - Read project-specific `CLAUDE.md` or `AGENTS.md` before broad searches.
-- Read `agents/garry/README.md` when using Garry.
-- Read `agents/annie/README.md` only for assistant or operations work.
-- Read `SOUL.md` or `USER.md` only when voice, preference, or personal context matters.
+- Read `agents/agent.md` when coordinating Annie, Garry, and Business Partner.
+- Read `agents/garry/README.md` when Annabel explicitly wants Garry or
+  strategy/planning work.
+- Read `agents/annie/README.md` when the request involves orchestration,
+  inbox/calendar/docs, follow-through, or personal/business operations.
+- Read `SOUL.md` or `USER.md` only when voice, preference, or personal context
+  matters.
 
 ## Claude / Garry Role
 
-Claude is the planning room. Garry is the Claude-native startup advisor identity.
+Claude is the planning room. Garry is the Claude-native strategy specialist.
+Annie is the default AI-OS front door and orchestrator.
 
-Garry/Claude owns:
+If Annabel has not explicitly chosen Garry, assume Annie should triage and
+coordinate the request. Garry remains the specialist Annie can route to for:
 
-- Idea intake
-- Stress-testing
-- Decision memos
-- Scope clarity
-- Product judgment
+- idea intake and critique
+- stress-testing
+- scope and decision memos
+- product judgment
 - Codex-ready handoffs
 
-Garry should not pretend repository assumptions are implementation truth. If code will change, write the handoff so Business Partner/Codex can verify it against the repo.
+Garry should not pretend repository assumptions are implementation truth. If
+code will change, write the handoff so Business Partner/Codex can verify it
+against the repo.
 
-When a conversation is about Annabel's life-wide operating system, assistant workflows, inbox/calendar/docs, or cross-project follow-through, Claude should consider Annie's context and boundaries. Annie is the assistant layer; Claude should help define decisions, rules, and SOPs that Annie can later execute.
+## Builder Lane
 
-## Claude Code Builder Lane
-
-- Keep scope tied to Annabel's stated goal and the active project instructions.
+- Keep scope tied to Annabel's stated goal and active project instructions.
 - Make implementation choices from repository reality, not assumptions.
 - Run relevant verification before claiming done.
-- For Codex QA, provide branch/diff/PR, what changed, verification run, and known risks.
-- For substantial cross-agent implementation work, create or update a handoff in `agents/shared/handoffs/active/`.
+- For Codex QA, provide branch/diff/PR, what changed, verification run, and
+  known risks.
+- For substantial cross-agent work, use `agents/shared/handoffs/active/`.
 
-## Requesting Codex QA
+## Source Of Truth
 
-Use `agents/shared/templates/claude-code-qa-request.md` when structure helps. Use `agents/shared/qa/active/` only when the review needs a durable artifact.
+- Agent coordination: `agents/agent.md`
+- Garry identity and commands: `agents/garry/`
+- Annie identity and SOPs: `agents/annie/`
+- Business Partner identity and SOPs: `agents/business-partner/`
+- Global skills for Claude and Codex: `skills/`
+- Global CLI/tool connections: `cli-connections/`
+- Cross-agent handoffs, QA, and templates: `agents/shared/`
+- Durable memory/checkpoints: `operations/memory/`
+- Knowledge vault: `knowledge/`
+- Active project work: `projects/<project>/`
 
-## Compound Engineering
-
-After meaningful work, ask what should be easier next time. Capture only the
-smallest reusable improvement in the most specific place. See
-`operations/compound-engineering/README.md`.
-
-## Active Claude Surface
-
-- Command source: `agents/garry/commands/`
-- Skill source: `agents/garry/skills/`
-- Shared skill source: `agents/shared/skills/`
-- Runtime installs in `~/.claude` should be symlinks to canonical AI-OS
-  commands and skills, not source-of-truth copies.
-
-Durable new skills should be created in AI-OS first:
-
-- Claude/Garry only: `agents/garry/skills/`
-- Shared with Codex: `agents/shared/skills/`
-
-Active command:
-
-- `begin`
-
-Active skills:
-
-- `garry-office-hours-lite`
-- `garry-ceo-review-lite`
-- `checkpoint`
-- `decision-pipeline`
-
-## Memory
-
-- Durable checkpoints go in `operations/memory/checkpoints/`.
-- Temporary notes go in `operations/memory/tmp/`.
-- System refinement candidates go in checkpoints or `operations/memory/refinement-candidates/`.
-- Sunday consolidation reviews memory, proposes core-file updates, and cleans stale notes.
-- Historical Life OS and Personal Canon materials are useful context, but old schedules, projects, infrastructure, and personal details should be treated as historical unless confirmed current.
+Runtime folders like `~/.claude/skills` and `~/.codex/skills` should point to
+top-level `skills/`. They are adapters, not source-of-truth copies.
 
 ## Workspace Rules
 
 - This root is an index, not a working project.
 - Work inside `projects/<project>/` for project work.
-- Agent coordination lives in `agents/agent.md`.
-- Shared handoffs live in `agents/shared/handoffs/`.
-- Shared QA reviews live in `agents/shared/qa/`.
-- Knowledge intake lives in `knowledge/raw/`.
-- Operational docs live in `operations/`.
-- `_system/` is legacy compatibility unless a tool still requires it.
+- Project-specific instructions override root guidance.
+- On session start or project switch, run
+  `node operations/memory/scripts/recall.mjs --cwd "$PWD" --query "<task>"`
+  and use the surfaced checkpoints/candidates before reading memory broadly.
 - `wiki` is a compatibility symlink to `knowledge`.
-- Project-specific instructions live in each project's `CLAUDE.md` or `AGENTS.md`.
-- Skills are global only when reused across projects; otherwise keep them in the project.
-- Large generated outputs belong in `scratch/` during active work and `_archive/generated/` after handoff.
+- Large generated outputs belong in `scratch/` during active work and
+  `_archive/generated/` after handoff.
 
-Before reading broadly, identify the target project and open only that project's instructions.
-Before clearing or ending a substantial session, save a short checkpoint when the work should be resumable later.
+Before reading broadly, identify the target project and open only that
+project's instructions.
+
+## Stack
+
+This is the stack reality at the AI-OS root level. Do NOT assume anything
+beyond what is listed here. Project folders should carry their own `## Stack`
+section overriding/extending this one.
+
+**Configured at the AI-OS / system level:**
+
+- Claude Code CLI (`~/.claude/`) with custom hooks, skills, and memory.
+- Codex CLI (`~/.codex/`) as a peer runtime adapter.
+- Git for all version control.
+- AI-OS memory and checkpoint system under `operations/memory/`.
+- MCP servers available in-session: Telegram, Playwright, Stitch, Firecrawl,
+  Google (Gmail/Calendar/Drive).
+
+**Skool content scraping:** use `skool-curl`, not generic web scraping.
+
+**Explicitly NOT configured at the root level** (do not assume; ask before
+introducing):
+
+- Dropbox, Supabase, Cloudflare, Claude Teams.
+- Any deploy/hosting target (Vercel, Netlify, etc.) — declared per-project.
+- Any analytics, billing, or CRM tool.
+
+**For project folders:** add a `## Stack` section to that project's
+`CLAUDE.md` listing the tools that ARE configured for that project, the
+deploy target if any, and an explicit "not assumed" line for tools that
+adjacent projects use but this one does not.

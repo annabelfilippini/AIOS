@@ -3,6 +3,8 @@
 Top-level mental model:
 
 - `agents/` - source of truth for Claude, Codex, Annie, and shared agent behavior.
+- `skills/` - canonical AI-OS skill library; current entries may symlink to legacy agent-owned folders during migration.
+- `cli-connections/` - canonical AI-OS CLI/tool connection library.
 - `knowledge/` - Obsidian/Git knowledge vault, especially raw notes and articles.
 - `projects/` - actual products, client work, and buildable repos.
 - `operations/` - automations, command center, memory, and legacy system wiring.

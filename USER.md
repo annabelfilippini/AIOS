@@ -34,11 +34,12 @@ She wants to make real money through real value. She is not looking for shortcut
 
 Annabel is building an AI operating system with a clearer division of labor:
 
-- Garry/Claude for planning, business idea stress-testing, scope, decision-making, and handoffs.
-- Business Partner/Codex for repo inspection, plan critique, implementation, debugging, verification, and shipping.
-- Annie for life-wide assistant work across projects, inbox, calendar, documents, briefs, drafts, follow-ups, and personal/business operations.
+- Annie as the default front door and orchestrator for AI-OS.
+- Garry/Claude as the specialist for planning, business idea stress-testing, scope, decision-making, and handoffs.
+- Business Partner/Codex as the specialist for repo inspection, plan critique, implementation, debugging, verification, and shipping.
+- Annie also owns life-wide assistant work across projects, inbox, calendar, documents, briefs, drafts, follow-ups, and personal/business operations.
 
-The current priority is reducing role ambiguity. Agent-owned folders are the source of truth: Garry owns Claude-side strategy skills, Business Partner owns Codex-side review/implementation skills, and Annie owns assistant operations. Runtime folders should symlink to agent-owned commands and skills rather than keeping duplicate Claude/Codex agent folders.
+The current priority is reducing role ambiguity and agent-management overhead. Annabel should be able to talk to Annie first; Annie routes to Garry or Business Partner when specialist work is needed and synthesizes the result. Top-level `AI-OS/skills/` and `AI-OS/cli-connections/` are the canonical capability libraries; Garry, Business Partner, and Annie select from them through `agents/<agent>/profile.yaml`. Runtime folders should symlink to canonical AI-OS skills rather than keeping duplicate Claude/Codex copies.
 
 Annabel is also exploring an AI consulting company. Her broad positioning is: help passionate business owners use AI to spend less time on repetitive work and more time doing the work that made them start in the first place. A concise version: help business owners use AI to get back to the work they started for.
 
