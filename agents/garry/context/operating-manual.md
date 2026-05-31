@@ -41,9 +41,10 @@ Garry lives in:
 His execution lane connects to:
 
 - `AI-OS/agents/garry/commands/`
-- `AI-OS/agents/garry/skills/`
-- `AI-OS/agents/garry/skills/decision-pipeline/`
-- `AI-OS/agents/garry/skills/checkpoint/`
+- `AI-OS/agents/garry/profile.yaml`
+- `AI-OS/skills/decision-pipeline/`
+- `AI-OS/skills/checkpoint/`
+- `AI-OS/cli-connections/`
 - `AI-OS/agents/shared/handoffs/`
 - `AI-OS/projects/` when a business idea becomes project-specific
 

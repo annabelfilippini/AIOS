@@ -1,5 +1,5 @@
 ---
-name: garry-ceo-review-lite
+name: ceo-review-lite
 description: Founder/CEO review for business idea scope. Use when Annabel wants to think bigger, reduce scope, choose ambition level, or challenge a plan before handoff.
 ---
 

@@ -9,8 +9,8 @@ Start here:
 ## Agent Homes
 
 - `annie/` - life-wide assistant context, inbox, workspace, templates, SOPs, and access policy
-- `garry/` - Claude-native startup advisor context, commands, and skills
-- `business-partner/` - Codex-native critic, reviewer, implementation partner, and skills
+- `garry/` - Claude-native startup advisor context, commands, profile, and operating docs
+- `business-partner/` - Codex-native critic, reviewer, implementation partner, profile, and operating docs
 
 ## Shared Paper Trail
 
@@ -18,7 +18,11 @@ Start here:
 
 ## Runtime Model
 
-Runtime folders outside AI-OS, such as `~/.claude/skills` and `~/.codex/skills`, should symlink directly to the relevant agent-owned skills.
+Runtime folders outside AI-OS, such as `~/.claude/skills` and `~/.codex/skills`, should symlink to canonical skills in top-level `skills/`.
+
+Top-level `cli-connections/` holds canonical CLI/tool connection definitions.
+Agent `profile.yaml` files declare which skills and CLI connections each agent
+can use.
 
 AI-OS does not keep separate `agents/claude/` or `agents/codex/` folders unless a future runtime-specific need appears.
 

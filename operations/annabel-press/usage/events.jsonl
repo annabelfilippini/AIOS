@@ -1,0 +1,33 @@
+
+{"timestamp":"2026-05-11T22:00:28.492Z","type":"cli","id":"skool-press","agent":"business-partner","note":"Created Skool Press CLI and ran a public Skool sync for Annabel Press.","source":"manual"}
+{"timestamp":"2026-05-12T14:14:40.570Z","type":"skill","id":"small-business-shopify-redesign","agent":"codex","note":"Cooldown cart/PDP QA re-review","source":"codex-session"}
+{"timestamp":"2026-05-12T14:26:39.613Z","type":"skill","id":"small-business-shopify-redesign","agent":"codex","note":"Created Annabel v3 unpublished Shopify draft","source":"codex-session"}
+{"timestamp":"2026-05-12T15:13:36.531Z","type":"skill","id":"small-business-shopify-redesign","agent":"business-partner","note":"Used for Cooldown Annabel v3 Shopify PDP add-to-cart fix.","source":"codex"}
+{"timestamp":"2026-05-12T21:44:43.036Z","type":"cli","id":"skool-press","agent":"business-partner","note":"Ran public-only Skool sync for Agency Audit Network partner sourcing.","source":"manual"}
+{"timestamp":"2026-05-12T21:44:43.036Z","type":"skill","id":"skool-intelligence-digest","agent":"business-partner","note":"Planned Skool agency partner sourcing workflow for Agency Audit Network.","source":"manual"}
+{"timestamp":"2026-05-15T21:09:39.012Z","type":"cli","id":"skool-pp-cli","agent":"business-partner","note":"setup-build-and-doctor-check","source":"codex-session"}
+{"timestamp":"2026-05-15T21:40:28.062Z","type":"cli","id":"skool-pp-cli","agent":"business-partner","note":"authenticated-curl-sync-21-communities","source":"codex-session"}
+{"timestamp":"2026-05-15T21:50:20.871Z","type":"cli","id":"skool-pp-cli","agent":"business-partner","note":"Queried local Skool KB for Mansel Scheffel posts/comments from 2026-05-15.","source":"user request"}
+{"timestamp":"2026-05-21T15:05:33.106Z","type":"skill","id":"skool-intelligence-digest","agent":"business-partner","note":"Checked Skool scraper status and ran public-only digest refresh.","source":"manual"}
+{"timestamp":"2026-05-21T15:05:33.112Z","type":"cli","id":"skool-pp-cli","agent":"business-partner","note":"Ran Skool CLI doctor to verify auth and connectivity.","source":"manual"}
+{"timestamp":"2026-05-21T15:05:33.113Z","type":"cli","id":"skool-press","agent":"business-partner","note":"Ran public-only Skool sync for configured communities.","source":"manual"}
+{"timestamp":"2026-05-21T15:15:51.676Z","type":"cli","id":"skool-pp-cli","agent":"business-partner","note":"Removed Skool Press wrapper references and attempted authenticated private sync for earlyaidopters and ainative.","source":"manual"}
+{"timestamp":"2026-05-22T07:57:39.195Z","type":"skill","id":"site-scraper-cli-builder","agent":"business-partner","note":"Created reusable builder skill for site-specific scraper CLI pattern.","source":"codex-session"}
+{"timestamp":"2026-05-22T07:57:39.225Z","type":"cli","id":"skool-pp-cli","agent":"business-partner","note":"Inspected Skool CLI agent-context, help, and source pattern to generalize scraper CLI skill.","source":"codex-session"}
+{"timestamp":"2026-05-22T08:32:08.364Z","type":"skill","id":"skool-intelligence-digest","agent":"codex","note":"Used Skool CLI local mirror and Mansel captured audit materials to assess Tally audit form section necessity.","source":"user request 2026-05-22"}
+{"timestamp":"2026-05-22T08:32:08.370Z","type":"cli","id":"skool-pp-cli","agent":"codex","note":"Ran doctor, communities/list attempt, kb stats, and kb sql against local ainative mirror for Mansel audit review.","source":"user request 2026-05-22"}
+{"timestamp":"2026-05-22T12:01:04.875Z","type":"skill","id":"checkpoint","agent":"codex","note":"Saved durable checkpoint for paid audit form, free audit preview, and About page polish session.","source":"user requested checkpoint 2026-05-22"}
+{"timestamp":"2026-05-22T12:33:03.444Z","type":"skill","id":"checkpoint","agent":"codex","note":"Saved free audit Tally preview checkpoint","source":"manual"}
+{"timestamp":"2026-05-24T18:56:12.211Z","type":"skill","id":"office-hours-lite","agent":"codex","note":"Used to shape authentic small-business AI refresh one-pager positioning from Annabel's Cooldown/Marta/dad examples.","source":"manual"}
+{"timestamp":"2026-05-25T16:08:36.182Z","type":"skill","id":"adversarial-review-lite","agent":"codex","note":"QA review of Creative Business Refresh founder-letter HTML before sending to potential clients.","source":"manual"}
+{"timestamp":"2026-05-25T16:40:29.332Z","type":"skill","id":"checkpoint","agent":"codex","note":"Saved session checkpoint for Creative Business Refresh founder-letter/sendable PDF work.","source":"manual"}
+{"timestamp":"2026-05-26T18:17:33.005Z","type":"skill","id":"checkpoint","agent":"codex","note":"Saved Vital Health proposal questions and Webflow transfer checkpoint","source":"Vital Health proposal session"}
+{"timestamp":"2026-05-26T18:24:43.105Z","type":"skill","id":"checkpoint","agent":"codex","note":"Saved paused checkpoint for Creative Business Refresh founder-letter hook decision.","source":"manual"}
+{"timestamp":"2026-05-26T18:39:39.456Z","type":"skill","id":"checkpoint","agent":"codex","note":"Saved Vital Health Webflow CLI connection checkpoint","source":"Vital Health Webflow CLI session"}
+{"timestamp":"2026-05-29T17:13:27.683Z","type":"cli","id":"windguru","agent":"codex","note":"Used live Windguru forecast via Flightscope to assess Leucate kite conditions for Europe trip planning","source":"manual"}
+{"timestamp":"2026-05-29T17:13:27.685Z","type":"cli","id":"flights","agent":"codex","note":"Used Flightscope route and price checks for Annabel's Europe trip planning from Tarifa","source":"manual"}
+{"timestamp":"2026-05-29T17:43:28.323Z","type":"cli","id":"windguru","agent":"codex","note":"Compared European Windguru forecasts for Annabel's June 5 kitesurf travel planning","source":"manual"}
+{"timestamp":"2026-05-31T08:31:39.111Z","type":"skill","id":"client-website-refresh","agent":"business-partner","note":"Tested website refresh harness on Revero initial audit and folded claims-matrix lesson back into the skill.","source":"manual"}
+{"timestamp":"2026-05-31T09:35:17.746Z","type":"skill","id":"client-website-refresh","agent":"codex","note":"Updated HTML preview quality gate after Revero preview looked too AI-generated","source":"manual"}
+{"timestamp":"2026-05-31T09:38:57.762Z","type":"skill","id":"client-website-refresh","agent":"codex","note":"Added preservation rules for original imagery and font stacks after Revero HTML preview changed too much","source":"manual"}
+{"timestamp":"2026-05-31T09:50:47.930Z","type":"skill","id":"client-website-refresh","agent":"codex","note":"Rebuilt Revero HTML preview using preservation guardrails for original images and Inter typography","source":"manual"}

@@ -38,6 +38,8 @@ Use this skill to redesign or clean up a Shopify site without creating live-site
 
 - Run targeted checks when full theme check is noisy.
 - Use store-domain previews for app-rendered features such as reviews, bundles, subscriptions, notify-me widgets, and embedded app blocks; localhost can mislead.
+- QA the actual purchase path on representative product pages: load the PDP, select required options, confirm the selected labels match the UI, add to cart, and confirm the intended variant lands in cart.
+- For products with only one valid option value, such as a single color, verify the storefront automatically selects it or otherwise lets the customer add to cart without a redundant manual choice.
 - Verify generated HTML or screenshots for the exact page when possible.
 - Push only changed files to the target draft.
 - Pull only changed files into `/private/tmp/...` and grep/read them to confirm remote state.

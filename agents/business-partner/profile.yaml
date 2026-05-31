@@ -1,0 +1,19 @@
+agent: business-partner
+skills:
+  - adversarial-review-lite
+  - client-website-refresh
+  - client-proposal-pdf
+  - guardrails-lite
+  - implement-approved-plan
+  - investigate-lite
+  - markdown-lint-operating-docs
+  - plan-eng-review-lite
+  - review-claude-plan
+  - site-scraper-cli-builder
+  - small-business-shopify-redesign
+  - webflow-rebuild-qa
+cli_connections:
+  - github
+  - skool-pp-cli
+  - shopify
+  - skills-sh

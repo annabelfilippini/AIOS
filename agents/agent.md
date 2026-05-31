@@ -2,15 +2,24 @@
 
 This file explains how Annabel's AI-OS agents work together.
 
-AI-OS separates agent identity, agent-owned skills, and shared paper trails so each agent has a clear job without duplicating context everywhere.
+AI-OS separates agent identity, canonical capabilities, and shared paper trails so each agent has a clear job without duplicating context everywhere.
 
 ## Source Of Truth
 
-Agent identity and agent-owned skills live in the agent's own folder:
+Agent identity and operating context live in the agent's own folder:
 
 - `agents/annie/`
 - `agents/garry/`
 - `agents/business-partner/`
+
+Canonical capabilities live at the AI-OS root:
+
+- `skills/`
+- `cli-connections/`
+
+Agent default capability routing lives in:
+
+- `agents/<agent>/profile.yaml`
 
 Shared handoffs, templates, and cross-agent records live here:
 
@@ -24,9 +33,13 @@ truth.
 
 ### Annie
 
-Annie is Annabel's life-wide assistant agent.
+Annie is Annabel's life-wide assistant agent and default AI-OS orchestrator.
 
-Annie owns inbox, calendar, docs, briefs, drafts, follow-ups, outreach, client communication drafts, and personal/business operations.
+Annie owns the front door: Annabel can talk to Annie by default, and Annie
+decides whether to handle the request directly, delegate to Garry, delegate to
+Business Partner, or coordinate both.
+
+Annie owns inbox, calendar, docs, briefs, drafts, follow-ups, outreach, client communication drafts, personal/business operations, triage, delegation, synthesis, and follow-through.
 
 Annie has the broadest folder structure because she may touch external work surfaces and needs access rules.
 
@@ -45,8 +58,8 @@ Garry does not implement code. Garry should not act as Annabel's assistant or in
 Source of truth:
 
 - `agents/garry/`
-- `agents/garry/skills/`
 - `agents/garry/commands/`
+- `agents/garry/profile.yaml`
 
 Runtime lane:
 
@@ -63,7 +76,7 @@ Business Partner does not own personal assistant work or external operations.
 Source of truth:
 
 - `agents/business-partner/`
-- `agents/business-partner/skills/`
+- `agents/business-partner/profile.yaml`
 
 Runtime lane:
 
@@ -71,27 +84,35 @@ Runtime lane:
 
 ## Skill Ownership
 
-Agent-owned skill folders are canonical:
+Top-level capability folders are canonical:
 
-- Garry skills: `agents/garry/skills/`
-- Business Partner skills: `agents/business-partner/skills/`
-- Shared Claude/Codex skills: `agents/shared/skills/`
+- Skills: `skills/`
+- CLI/tool connections: `cli-connections/`
 
-Runtime skill folders may symlink to these canonical skills:
+Agent profiles declare default/recommended access:
+
+- Garry: `agents/garry/profile.yaml`
+- Business Partner: `agents/business-partner/profile.yaml`
+- Annie: `agents/annie/profile.yaml`
+
+Runtime skill folders may symlink to canonical skills:
 
 - Claude runtime: `~/.claude/skills`
 - Codex runtime: `~/.codex/skills`
 
-If a skill belongs to an agent, maintain the agent-owned copy first.
+Legacy `agents/*/skills/` folders are not source of truth. Prefer adding or
+indexing durable capabilities through `skills/`, `cli-connections/`, and agent
+profile files.
 
-If a skill is useful to both Claude and Codex, maintain it in
-`agents/shared/skills/` first and point each runtime to that copy.
+Claude and Codex may both use global skills from top-level `skills/`. Agent
+profiles describe what an agent should reach for first; they are not intended
+to split skills by runtime.
 
 ## Workflows
 
-- Idea to code: Garry pressure-tests and writes a handoff in `agents/shared/handoffs/active/`; Business Partner reviews against the repo, implements only if approved or clearly amended, then writes implementation notes.
-- Claude Code to QA: Claude Code builds and verifies; Business Partner reviews the branch, diff, PR, or summary as QA; Claude Code fixes approved findings unless Annabel asks Codex to fix them.
-- Annie joins only when work touches operations, communications, scheduling, docs, or external coordination.
+- Annie-first request handling: Annabel talks to Annie by default; Annie triages, routes to Garry or Business Partner when needed, and returns one synthesized answer or next action.
+- Idea to code: Annie routes strategy to Garry; Garry pressure-tests and writes a handoff in `agents/shared/handoffs/active/`; Annie routes the handoff to Business Partner; Business Partner reviews against the repo, implements only if approved or clearly amended, then writes implementation notes; Annie summarizes the outcome for Annabel.
+- Claude Code to QA: Annie routes built work to Business Partner for QA; Business Partner reviews the branch, diff, PR, or summary; Claude Code fixes approved findings unless Annabel asks Codex to fix them.
 - Durable QA lives in `agents/shared/qa/active/`; durable implementation plans live in `agents/shared/handoffs/active/`.
 - Compound engineering: after meaningful work, capture the smallest reusable improvement in the most specific place. See `operations/compound-engineering/README.md`.
 
@@ -117,6 +138,9 @@ Codex/Business Partner owns:
 
 Annie owns:
 
+- front-door triage
+- specialist delegation
+- synthesis for Annabel
 - assistant work
 - external coordination
 - briefs, drafts, scheduling support, and operations
@@ -132,19 +156,22 @@ Shared owns:
 
 Annie needs explicit approval for external actions, irreversible changes, spending, scheduling, sending, sharing, or sensitive systems unless a dedicated SOP says otherwise.
 
+Annie may route work internally to Garry or Business Partner without approval.
+
 Garry may create strategy artifacts and handoffs, but should not claim validation that does not exist.
 
 Business Partner may inspect repos, review handoffs, and QA Claude Code changes, but product code edits require a reviewed and approved or clearly amended plan or Annabel's explicit request to fix QA findings.
 
 ## Structure Rule
 
-If an agent needs recurring behavior, add a skill under that agent's `skills/` folder.
+If an agent needs recurring behavior, add a skill under top-level `skills/` and list it in that agent's `profile.yaml`.
 
-If multiple runtimes need the same recurring behavior, add the skill under
-`agents/shared/skills/`.
+If an agent needs a CLI/tool connection, add it under top-level `cli-connections/` and list it in that agent's `profile.yaml`.
 
 If an agent needs durable identity or operating context, add it under that agent's `context/` folder.
 
 If an agent needs a runtime command, add it under that agent's `commands/` folder.
 
 If multiple agents need to exchange work, put the artifact in `agents/shared/`.
+
+If Annabel has not explicitly chosen an agent, route through Annie first.

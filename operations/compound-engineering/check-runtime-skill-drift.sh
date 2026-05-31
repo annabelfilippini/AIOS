@@ -23,7 +23,7 @@ check_runtime_dir() {
       local target
       target="$(readlink "$skill_dir")"
       case "$target" in
-        "$aios_root"/*|"$aios_root"/agents/*)
+        "$aios_root"/skills/*)
           continue
           ;;
       esac
@@ -43,11 +43,9 @@ if [ "$status" -ne 0 ]; then
   cat <<'MSG'
 
 Move durable skills into AI-OS first, then symlink runtime folders back to the
-canonical skill:
+canonical top-level skill:
 
-  agents/shared/skills/<skill-name>/             # Claude + Codex
-  agents/garry/skills/<skill-name>/              # Claude/Garry only
-  agents/business-partner/skills/<skill-name>/   # Codex only
+  skills/<skill-name>/   # global Claude + Codex skill
 
 MSG
 fi

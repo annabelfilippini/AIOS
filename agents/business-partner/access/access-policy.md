@@ -24,14 +24,16 @@ Default write scope:
 - handoff-adjacent Codex review and implementation notes files when using the owned skills
 - project repositories only when Annabel asks for implementation and the plan has been reviewed
 
-## Owned Skill Access
+## Capability Access
 
-The Business Partner owns the following Codex skills:
+The Business Partner can use the following canonical AI-OS skills through
+`AI-OS/agents/business-partner/profile.yaml`:
 
-- `AI-OS/agents/business-partner/skills/review-claude-plan/`
-- `AI-OS/agents/business-partner/skills/implement-approved-plan/`
+- `AI-OS/skills/review-claude-plan/`
+- `AI-OS/skills/implement-approved-plan/`
 
-It may read and maintain Business Partner-owned skills when Annabel asks to improve the Codex handoff workflow.
+It may read and maintain Business Partner-selected skills and CLI connections
+when Annabel asks to improve the Codex handoff workflow.
 
 ## Action Levels
 

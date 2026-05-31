@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Annabel Press</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="mark">A</span>
+          <span class="slash">/</span>
+          <span>Annabel Press</span>
+        </div>
+        <nav class="topnav" aria-label="Annabel Press sections">
+          <a href="#catalog">Catalog</a>
+          <a href="#detailPanel">Details</a>
+          <a href="../README.md">Docs</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">AI-OS Capability Library</p>
+          <h1>Annabel Press</h1>
+          <p>Reusable skills and CLI connections from your actual AI-OS. Browse the library, filter by agent profile, and open each capability like a card in your private command catalog.</p>
+        </div>
+        <div class="summary" aria-label="Capability summary">
+          <div>
+            <span id="skillCount">0</span>
+            <small>Skills</small>
+          </div>
+          <div>
+            <span id="cliCount">0</span>
+            <small>CLIs</small>
+          </div>
+          <div>
+            <span id="profileCount">0</span>
+            <small>Profiles</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" id="catalog">
+        <div class="catalog">
+          <div class="tabs" role="tablist" aria-label="Capability type">
+            <button class="tab active" id="skillsTab" type="button" data-mode="skills">Skills</button>
+            <button class="tab" id="cliTab" type="button" data-mode="cli">CLI Connections</button>
+          </div>
+
+          <label class="search">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Find a skill or CLI" />
+          </label>
+
+          <label class="filter">
+            <span>Profile</span>
+            <select id="profileFilter">
+              <option value="all">All profiles</option>
+            </select>
+          </label>
+
+          <div class="list-header">
+            <span id="listTitle">Skills</span>
+            <span id="resultCount">0</span>
+          </div>
+          <div class="capability-list" id="capabilityList" aria-live="polite"></div>
+        </div>
+
+        <section class="detail" id="detailPanel" aria-live="polite">
+          <div class="empty-state">
+            <h2>Select a capability</h2>
+            <p>Choose a skill or CLI connection to inspect its source, profile access, references, scripts, and safety model.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./data/capabilities.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,27 +1,27 @@
-# Shared Skills
+# Shared Skills Legacy Folder
 
-Shared skills are canonical AI-OS skills that more than one runtime can use.
+This folder is no longer the source of truth.
 
-Use this folder when both Claude/Garry and Codex/Business Partner should share
-the same workflow, examples, guardrails, or references.
+Global skills for both Claude and Codex live in top-level `skills/`.
 
 ## Rule
 
 AI-OS owns the source of truth.
 
-Runtime folders should point here instead of owning separate copies:
+Runtime folders should point to top-level `skills/` instead of owning separate
+copies:
 
 - `~/.claude/skills/<skill-name>`
 - `~/.codex/skills/<skill-name>`
 
 Prefer symlinks when the runtime supports them. If a runtime requires a copy,
-treat the AI-OS version as canonical and refresh the runtime copy from here.
+treat the top-level AI-OS version as canonical.
 
 ## Placement
 
-- Shared by Claude and Codex: `agents/shared/skills/<skill-name>/`
-- Claude/Garry only: `agents/garry/skills/<skill-name>/`
-- Codex/Business Partner only: `agents/business-partner/skills/<skill-name>/`
+- New skills: `skills/<skill-name>/`
+- New CLI/tool connections: `cli-connections/<connection-name>/`
+- Agent access: `agents/<agent>/profile.yaml`
 
 Do not create new durable skills directly in `~/.claude/skills` or
 `~/.codex/skills`.

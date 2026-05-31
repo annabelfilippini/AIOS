@@ -67,7 +67,17 @@ For every proposed implementation, ask:
 - Grep/read for the actual patch in the pulled files.
 - Open or fetch the preview URL when possible.
 - For app-rendered surfaces, verify on the store-domain preview, not only localhost.
+- Treat product option selection as a conversion-path QA item, not cosmetic polish:
+  - On representative PDPs, select size/color/options, click add to cart, and confirm the cart contains the intended variant.
+  - Include edge cases where one option group has only one valid value. A one-color product should auto-select that color or otherwise allow add-to-cart without a redundant manual click.
+  - Confirm selected option labels stay synchronized with the actual chosen inputs after app-injected swatches update.
 - Mention inherited full-theme-check failures separately from touched-file risks.
+- Run a separate Polish & Alignment QA pass before declaring a draft ready to publish. Functional QA can pass while these still bite:
+  - Site header: scan for duplicate icons (search, account, cart). Measure the vertical center of nav text vs. icon centers — text often sits 3-4 px low without an explicit flex baseline (`display: flex; align-items: center; line-height: 1`). Check edge padding is symmetric on left vs. right.
+  - Product card rows: check title min-height. If one title wraps to 2 lines and neighbors are 1 line, the price row breaks horizontal alignment across the grid. Fix with `min-height` or `-webkit-line-clamp: 2` with reserved height.
+  - Carousel/slider controls: arrows should align with card vertical center or the heading row, not float in dead space above.
+  - Collection pages: verify a visible `<h1>` exists for page identity and SEO. A breadcrumb is not a heading.
+  - 3rd-party popups (Mailchimp Forms, Pop Convert, Globo, etc.) render inside Shadow DOM and cannot be fixed with theme CSS. Measure the close button hit area; if it is below WCAG 24×24 (or below Apple HIG 44×44 for touch), the fix is in the **app dashboard**, not theme code. Route those items to admin/app work in the handoff.
 
 ## 7. Deliverable Rules
 

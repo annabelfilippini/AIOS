@@ -1,0 +1,11 @@
+agent: garry
+skills:
+  - checkpoint
+  - client-website-refresh
+  - client-proposal-pdf
+  - decision-pipeline
+  - office-hours-lite
+  - ceo-review-lite
+cli_connections:
+  - github
+  - skills-sh

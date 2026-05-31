@@ -44,8 +44,9 @@ when future context would otherwise be lost.
 ## Where To Put Improvements
 
 - Agent behavior: `agents/<agent>/context/` or `agents/agent.md`
-- Recurring workflow: `agents/<agent>/skills/`
-- Shared runtime skill: `agents/shared/skills/`
+- Recurring workflow skill: `skills/<skill-name>/`
+- CLI/tool connection: `cli-connections/<connection-name>/`
+- Agent capability access: `agents/<agent>/profile.yaml`
 - Agent-specific SOP: `agents/<agent>/sops/`
 - Cross-agent artifact: `agents/shared/`
 - Project rule: `projects/<project>/AGENTS.md` or `projects/<project>/CLAUDE.md`
@@ -58,13 +59,26 @@ Prefer the most specific location that future agents will naturally read.
 
 Create durable skills in AI-OS first:
 
-- Claude/Garry only: `agents/garry/skills/`
-- Codex/Business Partner only: `agents/business-partner/skills/`
-- Claude and Codex: `agents/shared/skills/`
+- Skills: `skills/<skill-name>/`
+- CLI/tool connections: `cli-connections/<connection-name>/`
+
+Declare which agents can use a skill or CLI connection in
+`agents/<agent>/profile.yaml`. Legacy `agents/*/skills/` folders may remain
+during migration, but new durable capabilities should route through the
+top-level capability libraries.
 
 Runtime folders such as `~/.claude/skills` and `~/.codex/skills` should point
 back to AI-OS. Use `check-runtime-skill-drift.sh` to catch accidental
 runtime-only skills.
+
+When a canonical skill or CLI connection is materially used, log the usage in
+Annabel Press:
+
+```bash
+operations/annabel-press/scripts/log-capability-use.mjs skill <skill-id> --agent <agent> --note "<short note>"
+```
+
+Do not log discovery, browsing, or mere availability.
 
 ## Approval Boundary
 

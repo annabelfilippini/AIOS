@@ -1,15 +1,17 @@
-# Business Partner Skills
+# Business Partner Skills Legacy Folder
 
-Business Partner owns Codex-native review, implementation, investigation, and guardrail skills.
+This folder is no longer the source of truth. Global skills for both Claude and
+Codex live in top-level `skills/`.
 
-Core skills:
+Former Business Partner-origin skills now live at:
 
-- `review-claude-plan/` - review Claude/Garry handoffs against repository reality
-- `implement-approved-plan/` - implement reviewed plans and write implementation notes
-- `plan-eng-review-lite/` - engineering review for risky or complex plans
-- `adversarial-review-lite/` - failure-mode-first review
-- `investigate-lite/` - root-cause investigation before fixes
-- `guardrails-lite/` - scope, reversibility, and approval boundaries
-- `markdown-lint-operating-docs/` - practical Markdown linting for agent docs
+- `skills/review-claude-plan/`
+- `skills/implement-approved-plan/`
+- `skills/plan-eng-review-lite/`
+- `skills/adversarial-review-lite/`
+- `skills/investigate-lite/`
+- `skills/guardrails-lite/`
+- `skills/markdown-lint-operating-docs/`
 
-These are intentionally lighter than the full gstack skills. They keep the useful review and debugging patterns without importing deployment, team automation, or broad workflow machinery.
+Do not add new durable skills here. Add them to top-level `skills/` and list
+default agent routing in `agents/business-partner/profile.yaml`.

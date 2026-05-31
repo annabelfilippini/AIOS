@@ -3,6 +3,7 @@
 This folder gathers system operations that are not agent behavior and not project work.
 
 - `automation/` - scheduled or recurring workflows.
+- `annabel-press/` - personalized dashboard/index for canonical skills, CLI connections, and agent profiles.
 - `compound-engineering/` - global loop for turning work into reusable system improvements.
 - `memory/` - session and continuity memory.
 - `legacy-system/` - compatibility links to older `_system` structure.

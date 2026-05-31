@@ -1,0 +1,25 @@
+agent: annie
+role: global-orchestrator
+skills:
+  - client-opportunity-map
+  - client-website-refresh
+  - client-proposal-pdf
+  - skool-intelligence-digest
+cli_connections:
+  - skool-pp-cli
+delegates:
+  - garry
+  - business-partner
+routes:
+  garry:
+    - business strategy
+    - idea critique
+    - website refresh scope and proposal strategy
+    - scope and decision-making
+    - Codex-ready handoffs
+  business-partner:
+    - repository inspection
+    - website refresh QA and Webflow rebuild checks
+    - implementation judgment
+    - debugging and verification
+    - QA and shipping support

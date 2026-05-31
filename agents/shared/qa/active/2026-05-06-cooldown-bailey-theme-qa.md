@@ -11,7 +11,9 @@
 
 Pass With Follow-Ups
 
-The Annabel Design draft covers the major website issues Bailey raised: PDP photos/layout polish, confusing color/size selections, visible reviews, product template consistency, announcement/bundle copy, header/menu cleanup, and the new run club/footer behavior. The remaining work is mostly Shopify admin/app/content cleanup rather than more theme code before Bailey sees the draft.
+The Annabel Design draft covers the major website issues Bailey raised: PDP photos/layout polish, visible reviews, product template consistency, announcement/bundle copy, header/menu cleanup, and the new run club/footer behavior. The original QA treated color/size selection as visually clarified, but later review found that was insufficient: PDP option QA must test the actual add-to-cart path, including single-value option groups.
+
+Latest re-review: the `Boulderthon Molly Short` purchase path was retested on the Annabel Design draft preview from PDP through Shopify checkout, plus a forced desktop smoke on theme `#180306575634`. The single visible `skyway` color auto-selected, `S / skyway` and `M / skyway` added as separate cart lines, per-line quantity/remove controls worked, mobile drawer scrolling kept line controls and checkout reachable, and the `Check out` CTA reached Shopify checkout.
 
 ## Scope Reviewed
 
@@ -66,6 +68,10 @@ The Annabel Design draft covers the major website issues Bailey raised: PDP phot
 - Theme Check:
   - Full `shopify theme check --path . --fail-level error --no-color` still exits nonzero.
   - Current failures remain the previously documented EComposer/generated/app issues and translation keys, plus known remote asset warnings.
+- Retrospective QA requirement added 2026-05-11:
+  - On representative PDPs, select size/color/options, click add to cart, and confirm the cart contains the intended variant.
+  - Include single-value option groups. If a product only has one color, that color should be auto-selected or the customer should otherwise be able to add to cart without manually clicking the only color swatch.
+  - Confirm selected option labels, actual checked inputs/variant ID, add-to-cart state, and cart contents stay in sync after app-injected swatches render.
 
 ## Findings
 
@@ -75,6 +81,7 @@ The Annabel Design draft covers the major website issues Bailey raised: PDP phot
 
 ### P2 - Should Fix
 
+- [x] PDP option purchase-path QA was too shallow. Re-tested on the store-domain Annabel Design preview by actually adding variants to cart, including the one-color Boulderthon Molly Short path where `skyway` auto-selects.
 - [ ] Easy Bundle Builder still needs admin/app configuration review. Theme-side copy and routing mitigations are present, but the bundle app itself previously showed bad variant/category state and redirected to an empty collection.
 - [ ] Product metafields need Shopify admin verification. The templates reference `custom.materials`, `custom.care_instructions`, and `custom.size_guide`, but Bailey/admin still needs to confirm definitions and fill missing values.
 - [ ] Men/mens collection state needs admin decision. Recent menu routing now exposes real mens routes; confirm collections are populated and not empty before live launch.
@@ -92,7 +99,7 @@ The Annabel Design draft covers the major website issues Bailey raised: PDP phot
 ## Bailey Notes Coverage
 
 - Product photos too small: Covered by PDP media/gallery polish using Katherine as the reference.
-- Color/size selection confusing: Covered by selected option labels, clearer size pills, muted unavailable states, and app markup cleanup.
+- Color/size selection confusing: Visually improved by selected option labels, clearer size pills, muted unavailable states, and app markup cleanup. Retrospective correction: this must not be marked fully covered until add-to-cart succeeds across representative variants and single-option edge cases.
 - Customers think items are sold out: Mostly covered visually; still needs live/manual testing across variants and app-generated unavailable states.
 - Reviews missing: Covered by Loox rating near price and dedicated full reviews section.
 - Agency-built code makes simple edits difficult: Partially covered through standardized product templates and Bailey editing handoff; remaining complexity exists in apps/generated files.
@@ -103,7 +110,7 @@ The Annabel Design draft covers the major website issues Bailey raised: PDP phot
 
 ## Missing Verification
 
-- Manual browser QA on the remote Annabel Design preview after today’s push:
+- Manual browser QA still needed on the remote Annabel Design preview for the broader Bailey pass:
   - homepage header
   - `/collections/all`
   - womens/mens category links
@@ -112,6 +119,14 @@ The Annabel Design draft covers the major website issues Bailey raised: PDP phot
   - `/pages/run-clubs`
   - footer links from bottom-of-page
   - `/pages/bundle-and-save`
+- Completed purchase-path browser QA:
+  - `/products/molly-short-copy` (`Boulderthon Molly Short`) on Annabel Design preview
+  - desktop smoke with `preview_theme_id=180306575634`
+  - single-color `skyway` auto-selection
+  - `S / skyway` and `M / skyway` as separate cart lines
+  - independent line quantity/remove controls
+  - desktop and 390px mobile cart drawer reachability
+  - cart `Check out` CTA reached Shopify checkout
 - Mobile visual QA is still needed across homepage, collection page, representative PDPs, cart, search, run clubs, and bundle page.
 - Shopify admin verification is still needed for metafields, product handles, image alt text, meta descriptions, duplicate pages, Easy Bundle Builder, and EComposer usage.
 

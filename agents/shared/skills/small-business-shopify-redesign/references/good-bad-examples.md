@@ -96,15 +96,40 @@ Bad:
 - Chasing generated EComposer translation keys during a focused redesign pass.
 - Calling a redesign complete when the owner still cannot manage app/admin surfaces.
 
+## Visual Polish QA
+
+Good:
+
+- Treat polish QA as a distinct verification pass after functional QA.
+- Measure the header: vertical center of nav text vs. icon centers, left edge padding vs. right edge padding, count duplicate icons (search, account, cart).
+- Sweep product card grids for inconsistent title wrapping that drops the price row out of alignment; use `min-height` or `-webkit-line-clamp: 2` with reserved space.
+- Audit carousel/slider arrow placement against the card row, not just the section bounds.
+- Confirm collection pages have a visible `<h1>` for page identity. A breadcrumb is not a heading.
+- For overlay/popup close buttons, measure the hit area. WCAG minimum is 24×24; Apple HIG recommends 44×44 for touch.
+- Inspect 3rd-party popups for Shadow DOM hosts (`#mcforms-...`, `#pop-convert-app`, Globo, etc.). If the close button is too small or misbehaving, the fix lives in the app dashboard, not theme code.
+- Take section-level screenshots at 1440 and 390; review them, do not just sample the DOM.
+
+Bad:
+
+- Declaring a draft ready to publish based on functional QA alone.
+- Sampling a single product card for layout; the issue is usually a cross-card alignment that only one of three cards exposes.
+- Trying to fix a Mailchimp/Pop Convert popup with theme CSS. The host is a Shadow DOM root and theme styles do not penetrate.
+- Listing a duplicate header icon as cosmetic; it confuses users and reads as broken IA.
+- Reporting a popup close button as "broken" when click handlers fire correctly. Distinguish "doesn't work" from "hit target is too small / animation lag masks the response."
+
 ## QA And Handoff
 
 Good:
 
 - Create a Bailey/client-facing checklist for admin tasks: metafields, SEO meta descriptions, image alt text, duplicate pages, redirects, product handles, menu links, bundle app state.
+- QA PDP option selection as a real add-to-cart flow, including single-value option groups. Example: if a product has only one color, that color should be auto-selected or the customer should otherwise be able to add the selected size to cart without manually clicking the only color swatch.
+- Verify app-injected swatches on the store-domain preview, then confirm selected option labels, variant ID, add-to-cart state, and cart contents agree.
 - State residual risk plainly.
 - Save checkpoints after important decisions, especially theme IDs and mistakes.
 
 Bad:
 
 - Reporting “fixed” without remote pullback verification.
+- Treating color/size selection as visually clarified without testing whether a customer can actually add a representative variant to cart.
+- Missing single-option edge cases, where custom swatch apps may still mark an only color as required even though there is no real choice for the customer.
 - Omitting known manual/admin work from the final summary.

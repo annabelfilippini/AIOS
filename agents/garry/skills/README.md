@@ -1,12 +1,14 @@
-# Garry Skills
+# Garry Skills Legacy Folder
 
-Garry owns Claude-native business idea design, troubleshooting, and handoff preparation skills.
+This folder is no longer the source of truth. Global skills for both Claude and
+Codex live in top-level `skills/`.
 
-Core skills:
+Former Garry-origin skills now live at:
 
-- `office-hours-lite/` - YC-style business idea pressure testing
-- `ceo-review-lite/` - founder-level scope and ambition review
-- `decision-pipeline/` - Codex-ready handoff creation
-- `checkpoint/` - strategy session continuity
+- `skills/office-hours-lite/`
+- `skills/ceo-review-lite/`
+- `skills/decision-pipeline/`
+- `skills/checkpoint/`
 
-These are intentionally lighter than the full gstack skills. They keep the high-value questions and decision patterns without importing the full stack, automation layer, or long prompt scaffolds.
+Do not add new durable skills here. Add them to top-level `skills/` and list
+default agent routing in `agents/garry/profile.yaml`.

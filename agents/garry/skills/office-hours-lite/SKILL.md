@@ -1,5 +1,5 @@
 ---
-name: garry-office-hours-lite
+name: office-hours-lite
 description: YC-style business idea office hours for Garry. Use when Annabel wants to brainstorm, validate, troubleshoot, or decide whether a business/product idea is worth pursuing.
 ---
 
