@@ -3,12 +3,16 @@
     "MD013": false
   },
   "globs": [
-    "**/*.md"
+    "*.md",
+    "agents/**/*.md",
+    "operations/**/*.md",
+    "skills/**/*.md"
   ],
   "ignores": [
     "knowledge/**",
     "projects/**",
     "operations/memory/**",
-    "agents/garry/commands/**"
+    "agents/**/commands/**",
+    "agents/**/skills/**"
   ]
 }
