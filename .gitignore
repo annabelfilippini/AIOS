@@ -31,6 +31,13 @@ wiki
 # Local/generated operational caches and scratch
 scratch/
 _archive/
+_inbox/
+.playwright-mcp/
+
+# Loose generated preview/QA images dropped at repo root
+/*.png
+/*.jpeg
+/*.jpg
 
 # Absolute compatibility symlinks
 operations/*/_active
