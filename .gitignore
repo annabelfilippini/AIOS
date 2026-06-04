@@ -33,6 +33,7 @@ scratch/
 _archive/
 _inbox/
 .playwright-mcp/
+operations/git-sync/*.log
 
 # Loose generated preview/QA images dropped at repo root
 /*.png
