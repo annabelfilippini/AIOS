@@ -1,6 +1,11 @@
 # CLAUDE
 
-Claude-specific router for this AI-OS.
+Claude-specific runtime adapter for this AI-OS.
+
+Claude is an execution surface, not an identity boundary. Annie, Garry, and
+Business Partner are AI-OS modes/personas that can be used from any capable LLM
+runtime. Skills and standards are global unless a tool is physically unavailable
+in the current runtime.
 
 ## Read Only What Applies
 
@@ -14,10 +19,11 @@ Claude-specific router for this AI-OS.
 - Read `SOUL.md` or `USER.md` only when voice, preference, or personal context
   matters.
 
-## Claude / Garry Role
+## Claude Runtime Role
 
-Claude is the planning room. Garry is the Claude-native strategy specialist.
-Annie is the default AI-OS front door and orchestrator.
+Claude is a strong planning and drafting runtime. Garry is not Claude-specific;
+Garry is the strategy/challenge mode that Claude may run when Annabel or Annie
+chooses it. Annie is the default AI-OS front door and orchestrator.
 
 If Annabel has not explicitly chosen Garry, assume Annie should triage and
 coordinate the request. Garry remains the specialist Annie can route to for:
@@ -80,10 +86,12 @@ section overriding/extending this one.
 
 **Configured at the AI-OS / system level:**
 
-- Claude Code CLI (`~/.claude/`) with custom hooks, skills, and memory.
+- Claude Code CLI (`~/.claude/`) as one runtime adapter.
 - Codex CLI (`~/.codex/`) as a peer runtime adapter.
 - Git for all version control.
 - AI-OS memory and checkpoint system under `operations/memory/`.
+- Shared AI-OS skills, standards, and CLI connections should be available to all
+  capable runtimes, not owned by Claude or Codex.
 - MCP servers available in-session: Telegram, Playwright, Stitch, Firecrawl,
   Google (Gmail/Calendar/Drive).
 

@@ -30,36 +30,52 @@ Universal operating rules for Codex and other coding agents in this AI-OS.
 - Project-specific instructions override root guidance when more specific.
 - Prefer targeted project docs over broad AI-OS searches.
 
-## Agent Roles
+## Engines, Modes, And Agent Roles
 
+- LLM runtimes are interchangeable engines. Claude, Codex, Hermes, ChatGPT,
+  local models, and future runtimes are execution surfaces, not identity
+  boundaries.
+- Skills, standards, templates, and CLI connections are global AI-OS
+  capabilities. They should be usable from any capable runtime unless a tool is
+  physically unavailable there.
+- Annie, Garry, and Business Partner are reusable operating modes/personas, not
+  Claude-only or Codex-only agents.
 - Annie is the default front door and orchestrator. Annabel should be able to talk to Annie first; Annie routes to Garry or Business Partner when specialist work is needed and synthesizes the result.
-- Garry/Claude owns idea intake, stress-testing, business idea design, planning, decision memos, and handoffs.
-- Business Partner/Codex owns repository inspection, QA review, implementation judgment, debugging, verification, and shipping.
+- Garry owns idea intake, stress-testing, business idea design, planning,
+  decision memos, and handoffs from any runtime.
+- Business Partner owns repository inspection, QA review, implementation
+  judgment, debugging, verification, and shipping from any runtime.
 - Annie owns life-wide assistant work: inbox triage, calendar support, document organization, briefs, drafts, follow-ups, client communication drafts, outreach, project context, personal/business operations, specialist delegation, and synthesis.
-- Business Partner/Codex should not blindly execute Garry/Claude plans. Review the handoff against the repo first.
-- Garry/Claude should not over-specify implementation details Business Partner/Codex should discover from files.
+- Business Partner should not blindly execute Garry plans. Review the handoff
+  against the repo first.
+- Garry should not over-specify implementation details Business Partner should
+  discover from files.
 - Annie may read broadly across AI-OS when helping Annabel, but external actions, irreversible changes, spending, sending, scheduling, signing, sensitive systems, and account permissions require explicit approval unless a dedicated SOP says otherwise.
 
 ## Handoff Workflow
 
 1. Annabel brings the request to Annie by default.
 2. Annie handles simple assistant/ops work directly or routes strategy to Garry.
-3. Garry/Claude creates a plan with `decision-pipeline` when strategy should become implementation.
+3. Garry creates a plan with `decision-pipeline` when strategy should become implementation.
 4. The plan lands in `agents/shared/handoffs/active/`.
-5. Annie routes the handoff to Business Partner/Codex for `review-claude-plan`.
-6. Business Partner/Codex implements with `implement-approved-plan` only after review.
+5. Annie routes the handoff to Business Partner for `review-claude-plan` or its successor review skill.
+6. Business Partner implements with `implement-approved-plan` only after review.
 7. Implementation notes stay next to the handoff, and Annie summarizes the outcome for Annabel.
 
 ## Builder And QA Loop
 
-- Claude Code/Garry is the default build lane.
-- Codex/Business Partner is the default QA lane.
+- Build and QA lanes are responsibilities, not fixed runtime identities.
+- Any capable LLM may operate in Garry mode or Business Partner mode if it has
+  the required repository/tool access and follows the relevant standards.
+- Garry is the strategy/challenge lane by default.
+- Business Partner is the QA/reality-check lane by default.
 - QA answers: "Is this change safe, correct, tested, and ready?"
-- Handoffs answer: "What should Codex inspect, approve, implement, or verify from Claude/Garry's plan?"
+- Handoffs answer: "What should Business Partner inspect, approve, implement, or verify from Garry's plan?"
 - Use QA for existing code, branches, diffs, PRs, or concrete changes.
 - Use handoffs when intent, scope, and product judgment must survive across agents, sessions, or implementation phases.
-- Durable QA uses `agents/shared/templates/codex-qa-review.md` and lives in `agents/shared/qa/active/`.
-- Codex should not fix QA findings unless Annabel explicitly asks.
+- Durable QA uses `agents/shared/templates/codex-qa-review.md` or its successor
+  runtime-neutral template and lives in `agents/shared/qa/active/`.
+- The reviewer should not fix QA findings unless Annabel explicitly asks.
 
 ## Compound Engineering
 
@@ -76,9 +92,9 @@ After meaningful work, apply the compound-engineering loop:
 - Create durable skills inside AI-OS first, never directly in runtime folders.
 - Use top-level `skills/` as the canonical AI-OS skills library.
 - Use top-level `cli-connections/` as the canonical AI-OS CLI/tool connection library.
-- Use `agents/<agent>/profile.yaml` to declare an agent's default/recommended
-  skills and CLI connections. Claude and Codex runtimes may both access global
-  top-level skills.
+- Use `agents/<agent>/profile.yaml` to declare a mode's default/recommended
+  skills and CLI connections. All capable runtimes may access global top-level
+  skills.
 - Legacy `agents/*/skills/` folders are not source of truth. Keep durable
   skills in top-level `skills/`; remove or archive legacy copies only during a
   dedicated cleanup pass.

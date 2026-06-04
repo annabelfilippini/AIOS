@@ -1,8 +1,23 @@
 # Agent Operating Contract
 
-This file explains how Annabel's AI-OS agents work together.
+This file explains how Annabel's AI-OS modes work together.
 
-AI-OS separates agent identity, canonical capabilities, and shared paper trails so each agent has a clear job without duplicating context everywhere.
+AI-OS separates runtime engines, reusable modes/personas, canonical
+capabilities, and shared paper trails so each mode has a clear job without
+duplicating context everywhere.
+
+## Runtime Model
+
+Claude, Codex, Hermes, ChatGPT, local models, and future LLMs are engines. They
+are execution surfaces, not agent identities.
+
+Annie, Garry, and Business Partner are reusable AI-OS modes/personas. Any
+capable runtime may operate in any mode if it has the required tool access and
+follows the mode's standards.
+
+Skills, standards, templates, and CLI connections are global AI-OS capabilities.
+Agent profiles describe what a mode should reach for first; they do not make a
+skill exclusive to that mode or runtime.
 
 ## Source Of Truth
 
