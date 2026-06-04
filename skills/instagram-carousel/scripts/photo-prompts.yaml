@@ -1,0 +1,78 @@
+# Photo prompts for health-brand-intro-carousel.
+# Each prompt is composed as: {subject_prompt} + {style_suffix}.
+# The style_suffix is interpolated from inputs.yaml `photos.*_phrase` fields.
+#
+# Hard rules NEVER edited: no faces, no readable text, no logos. These caught
+# every "weird AI face" and "fake brand text" issue across v1-v5 of the Vital
+# Health build.
+
+style_suffix_template: |
+  {mood_phrase}, {light_phrase}, {palette_phrase}, {hard_rules}
+
+slides:
+  1:
+    role: hero
+    filename: s1-hero.png
+    subject_prompt: |
+      A person from behind, framed from the shoulders down, standing at a tall sunlit
+      window holding a small ceramic mug of warm tea with both hands. Beyond the window,
+      out-of-focus green trees with soft morning light filtering through. The person
+      wears a relaxed neutral linen shirt. NO face visible, NO profile, framed from
+      behind only.
+
+  2:
+    role: why_origin
+    filename: s2-philosophy.png
+    subject_prompt: |
+      Vertical botanical still-life on a sunlit windowsill — three or four small
+      growing herb plants in simple terracotta or ceramic pots (rosemary, basil,
+      mint, thyme), one small amber-glass apothecary jar with no label sitting
+      beside them. Strong morning side light from the right, soft shadow falling
+      left. Composition leans right so the left half is restful negative space for
+      typography.
+
+  3:
+    role: first_visit
+    filename: s3-first-visit.png
+    subject_prompt: |
+      Top-down editorial still-life on warm cream linen — a small porcelain cup of
+      pale herbal tea (gentle steam just visible), a folded blank cream-paper note
+      card (no text), a brass fountain pen resting at an angle, a small sprig of
+      fresh rosemary or thyme. Soft warm window light from upper-left, long gentle
+      shadow extending toward lower right. Strong negative space in the upper-third
+      of the frame for headline overlay.
+
+  4:
+    role: diagnostics
+    filename: s4-diagnostics.png
+    subject_prompt: |
+      Editorial still-life on a piece of soft white marble — a small amber-glass
+      vial standing upright, a folded card with cream paper texture (no readable
+      text, no logo) leaning against the vial, several out-of-focus capsules
+      scattered in the foreground, a single fresh green leaf in the lower-right
+      corner. Low warm side light from the right, soft directional shadow.
+      Composition heavy in the right two-thirds of the frame so left half is
+      available for typography.
+
+  5:
+    role: pull_quote
+    filename: s5-plan.png
+    subject_prompt: |
+      Wide outdoor landscape photograph — a single adult person, age 50s or older,
+      walking along a dirt path through tall native wildflowers and grasses, facing
+      AWAY from the camera, framed from the waist down or further. Out-of-focus
+      city skyline or distant treeline in the background. Late-afternoon warm
+      golden light. Composition with negative space in the upper third for a pull
+      quote. The person wears a relaxed light shirt. NO face, walking away from
+      camera only.
+
+  6:
+    role: cta
+    filename: s6-signoff.png
+    subject_prompt: |
+      Top-down warm overhead photograph of two adult hands meeting across a
+      linen-draped wooden table, both hands resting relaxed, fingers slightly
+      interlaced or near each other. A small closed leather notebook off to one
+      side. Hands only, framed from the wrist down. Cream linen, soft morning
+      window light from upper-left, a hint of green plant shadow falling across
+      the upper edge of the frame.
