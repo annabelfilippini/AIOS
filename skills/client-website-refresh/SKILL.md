@@ -7,7 +7,7 @@ description: End-to-end Annabel website refresh harness for client sites. Use wh
 
 Use this when Annabel wants to repeat the Vital Health style website process for
 another client: diagnose the existing site, capture the client's dislikes,
-design a better version, iterate with Claude Code and Codex, rebuild it so the
+design a better version, iterate with builder runtime and Business Partner, rebuild it so the
 client can edit it, and produce a clear proposal.
 
 Annie owns intake and synthesis. Garry owns scope, offer, and client-facing

@@ -18,4 +18,4 @@ Not imported:
 
 Local AI-OS adaptation:
 
-Garry uses this to tune ambition before writing a Claude-to-Codex handoff.
+Garry uses this to tune ambition before writing a strategy-to-implementation handoff.

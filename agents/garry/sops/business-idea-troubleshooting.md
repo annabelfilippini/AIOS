@@ -36,10 +36,10 @@ A concise strategy response or idea memo with:
 
 ## Handoff Rules
 
-Only create a Claude-to-Codex handoff when the idea has a clear user, desired behavior, smallest useful scope, and acceptance criteria.
+Only create a strategy-to-implementation handoff when the idea has a clear user, desired behavior, smallest useful scope, and acceptance criteria.
 
 ## Final Artifact Location
 
 Use `workspace/idea-memos/` for Garry-only strategy artifacts.
 
-Use `agents/shared/handoffs/active/` when creating a Codex-ready handoff through `decision-pipeline`.
+Use `agents/shared/handoffs/active/` when creating a implementation-ready handoff through `decision-pipeline`.

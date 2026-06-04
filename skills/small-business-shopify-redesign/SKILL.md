@@ -1,6 +1,6 @@
 ---
 name: small-business-shopify-redesign
-description: Draft-only Shopify redesign workflow for small business sites. Use when Codex is asked to improve, redesign, QA, simplify, push, or document a Shopify theme for a small business, especially when there are multiple draft/live themes, app-generated code, owner-editability goals, product/page templates, metafields, theme previews, or requests to replicate lessons from the Cooldown redesign.
+description: Draft-only Shopify redesign workflow for small business sites. Use when Business Partner is asked to improve, redesign, QA, simplify, push, or document a Shopify theme for a small business, especially when there are multiple draft/live themes, app-generated code, owner-editability goals, product/page templates, metafields, theme previews, or requests to replicate lessons from the Cooldown redesign.
 ---
 
 # Small Business Shopify Redesign

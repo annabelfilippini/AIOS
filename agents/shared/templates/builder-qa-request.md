@@ -1,4 +1,4 @@
-# Claude Code QA Request
+# Builder Runtime QA Request
 
 ## Project
 
@@ -14,7 +14,7 @@
 
 ## Known Risks Or Uncertainty
 
-## What Codex Should Prioritize
+## What Business Partner Should Prioritize
 
 - Bugs or regressions
 - Missing tests

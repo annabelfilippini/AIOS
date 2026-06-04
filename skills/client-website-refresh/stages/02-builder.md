@@ -147,7 +147,7 @@ Your output is rejected if any of these is true:
 
 ## Anti-patterns from prior failures
 
-Codex's Revero mockup failed on these specifically. Do not repeat them:
+Business Partner's Revero mockup failed on these specifically. Do not repeat them:
 
 - 5-up trust strip ("Medical providers / Health coaching / Remote monitoring
   / Nutrition therapy / App-based care") when the source has no such strip.

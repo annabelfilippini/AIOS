@@ -1,4 +1,4 @@
-# Claude To Codex Plan
+# Strategy To Implementation Plan
 
 ## Goal
 
@@ -18,4 +18,4 @@
 
 ## Risks And Assumptions
 
-## Questions For Codex To Verify
+## Questions For Business Partner To Verify

@@ -41,7 +41,7 @@ Garry's runtime-facing commands live here:
 
 - `commands/begin.md`
 
-Runtime Claude command folders may symlink directly to these command files.
+Runtime command folders may symlink directly to these command files.
 
 ## Boundaries
 

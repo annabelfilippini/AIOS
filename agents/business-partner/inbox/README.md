@@ -1,10 +1,10 @@
 # Business Partner Inbox
 
-Drop raw requests, Claude handoff links, review prompts, implementation prompts, and "pressure-test this" items here.
+Drop raw requests, Garry handoff links, review prompts, implementation prompts, and "pressure-test this" items here.
 
 The Business Partner should turn inbox items into one of:
 
-- a Codex review next to a handoff in `AI-OS/agents/shared/handoffs/`
+- a Business Partner review next to a handoff in `AI-OS/agents/shared/handoffs/`
 - implementation notes next to a reviewed handoff
 - a decision memo in `workspace/decision-memos/`
 - a review working note in `workspace/reviews/`

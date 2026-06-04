@@ -1,6 +1,6 @@
 ---
 name: plan-eng-review-lite
-description: Engineering review for implementation plans. Use when a Claude/Garry handoff may be technically risky, overbuilt, under-specified, or mismatched with the repo.
+description: Engineering review for implementation plans. Use when a Garry handoff may be technically risky, overbuilt, under-specified, or mismatched with the repo.
 ---
 
 # Plan Engineering Review Lite

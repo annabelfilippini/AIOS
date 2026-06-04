@@ -1,6 +1,6 @@
 # AGENTS
 
-Universal operating rules for Codex and other coding agents in this AI-OS.
+Universal operating rules for coding agents and LLM runtimes in this AI-OS.
 
 ## Read Only What Applies
 
@@ -73,7 +73,7 @@ Universal operating rules for Codex and other coding agents in this AI-OS.
 - Handoffs answer: "What should Business Partner inspect, approve, implement, or verify from Garry's plan?"
 - Use QA for existing code, branches, diffs, PRs, or concrete changes.
 - Use handoffs when intent, scope, and product judgment must survive across agents, sessions, or implementation phases.
-- Durable QA uses `agents/shared/templates/codex-qa-review.md` or its successor
+- Durable QA uses `agents/shared/templates/qa-review.md` or its successor
   runtime-neutral template and lives in `agents/shared/qa/active/`.
 - The reviewer should not fix QA findings unless Annabel explicitly asks.
 
@@ -110,9 +110,9 @@ After meaningful work, apply the compound-engineering loop:
 
 ## Warp Multi-Agent Use
 
-- Warp can be used as a shared cockpit for separate Claude Code and Codex sessions.
-- Prefer separate Warp tabs or panes for Claude Code and Codex instead of nesting Codex inside a Claude Code session.
-- Keep Claude Code as the maker tab and Codex as the reviewer tab unless Annabel intentionally swaps roles.
+- Warp can be used as a shared cockpit for separate builder runtime and Business Partner sessions.
+- Prefer separate Warp tabs or panes for builder runtime and Business Partner instead of nesting Business Partner inside a builder runtime session.
+- Keep builder runtime as the maker tab and Business Partner as the reviewer tab unless Annabel intentionally swaps roles.
 - When using Warp, pass context between agents through branch names, git diffs, handoff files, selected code, review comments, and explicit findings lists.
 
 ## Annie Workflow

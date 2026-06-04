@@ -1,6 +1,6 @@
 ---
 name: implement-approved-plan
-description: Implement a Claude/Garry handoff only after Business Partner/Codex has reviewed it against the repo. Use when given an approved or amended handoff and asked to make code changes, run verification, and write implementation notes.
+description: Implement a Garry handoff only after Business Partner has reviewed it against the repo. Use when given an approved or amended handoff and asked to make code changes, run verification, and write implementation notes.
 ---
 
 # Implement Approved Plan
@@ -19,9 +19,9 @@ Handoff path, usually:
 
 `/Users/annabelfilippini/Documents/AI-OS/agents/shared/handoffs/active/<slug>.md`
 
-Matching Codex review:
+Matching Business Partner review:
 
-`<handoff-basename>.codex-review.md`
+`<handoff-basename>.business-partner-review.md`
 
 If the review file is missing, stop and run `review-claude-plan` first.
 
@@ -38,7 +38,7 @@ If the review file is missing, stop and run `review-claude-plan` first.
 
 ## Workflow
 
-1. Read the handoff and matching Codex review.
+1. Read the handoff and matching Business Partner review.
 2. Inspect current git status before editing.
 3. Re-read relevant project instructions.
 4. Implement the approved or adjusted scope.

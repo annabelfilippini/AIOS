@@ -9,8 +9,8 @@ Start here:
 ## Agent Homes
 
 - `annie/` - life-wide assistant context, inbox, workspace, templates, SOPs, and access policy
-- `garry/` - Claude-native startup advisor context, commands, profile, and operating docs
-- `business-partner/` - Codex-native critic, reviewer, implementation partner, profile, and operating docs
+- `garry/` - runtime-neutral startup mentor/challenger context, commands, profile, and operating docs
+- `business-partner/` - runtime-neutral critic, reviewer, implementation partner, profile, and operating docs
 
 ## Shared Paper Trail
 

@@ -1,6 +1,6 @@
 ---
 name: decision-pipeline
-description: Turn a business or product idea into a clear decision and Codex-ready handoff. Use after Garry has clarified the customer, pain, scope, and next move.
+description: Turn a business or product idea into a clear decision and implementation-ready handoff. Use after Garry has clarified the customer, pain, scope, and next move.
 argument-hint: "[idea or project]"
 context: fork
 allowed-tools:
@@ -13,11 +13,11 @@ allowed-tools:
 
 Garry owns intent, judgment, scope, and the decision record.
 
-Business Partner/Codex owns repository reality, implementation, verification, and code changes.
+Business Partner owns repository reality, implementation, verification, and code changes.
 
 ## Core Rule
 
-Do not over-specify implementation details that Codex should discover from the repo.
+Do not over-specify implementation details that Business Partner should discover from the repo.
 
 Mark assumptions clearly. Keep the handoff directional, buildable, and reviewable.
 
@@ -81,11 +81,11 @@ Tradeoff:
 
 ## Risks And Assumptions
 
-## Questions For Codex To Verify
+## Questions For Business Partner To Verify
 
-## Codex Handoff
+## Business Partner Handoff
 
-Codex should inspect the relevant repo/files before implementing. Treat this plan as directional, not binding. If the codebase suggests a smaller or safer path, amend the plan before coding.
+Business Partner should inspect the relevant repo/files before implementing. Treat this plan as directional, not binding. If the codebase suggests a smaller or safer path, amend the plan before coding.
 ```
 
 ## Response
@@ -95,4 +95,4 @@ Return only:
 - Verdict
 - Recommended next action
 - Path to the handoff file
-- Any question Annabel must answer before Business Partner/Codex reviews it
+- Any question Annabel must answer before Business Partner reviews it

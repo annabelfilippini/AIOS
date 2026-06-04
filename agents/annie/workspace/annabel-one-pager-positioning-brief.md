@@ -83,7 +83,7 @@ Best use on one-pager: meta-credibility and differentiation.
 What to say:
 
 - Built a personal AI operating system for projects, agents, memory, handoffs, inbox/calendar support, recurring workflows, and compound learning.
-- Uses Annie as the front door, Garry for strategy, and Business Partner/Codex for review, implementation, and verification.
+- Uses Annie as the front door, Garry for strategy, and Business Partner for review, implementation, and verification.
 
 Why it sells:
 

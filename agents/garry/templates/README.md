@@ -6,4 +6,4 @@ Reusable templates for Garry work, including:
 - trouble-shooting memo
 - customer test plan
 - positioning critique
-- Codex handoff prep
+- implementation handoff prep

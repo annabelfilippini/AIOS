@@ -1,4 +1,4 @@
-# Codex Plan Review
+# Business Partner Plan Review
 
 ## Verdict
 
@@ -12,4 +12,4 @@ Approved / Needs Changes / Blocked
 
 ## Verification Plan
 
-## Notes For Claude
+## Notes For Builder

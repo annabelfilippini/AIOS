@@ -1,8 +1,8 @@
-# SOP: Review Claude Handoff
+# SOP: Review Garry Handoff
 
 ## Trigger
 
-Annabel provides a Claude handoff or asks whether a Claude plan is safe to implement.
+Annabel provides a Garry handoff or asks whether a Garry plan is safe to implement.
 
 ## Inputs
 
@@ -17,12 +17,12 @@ Annabel provides a Claude handoff or asks whether a Claude plan is safe to imple
 3. Inspect the repo and project instructions.
 4. Compare the handoff against repository reality.
 5. Decide whether the verdict is `Approved`, `Needs Changes`, or `Blocked`.
-6. Write the review next to the handoff as `<handoff-basename>.codex-review.md`.
+6. Write the review next to the handoff as `<handoff-basename>.business-partner-review.md`.
 7. Keep the review concrete enough that implementation can start if approved.
 
 ## Output
 
-A Codex review file with:
+A Business Partner review file with:
 
 - Verdict
 - Codebase reality check
@@ -30,7 +30,7 @@ A Codex review file with:
 - Risks found
 - Adjusted implementation plan
 - Verification plan
-- Notes for Claude
+- Notes for Builder
 
 ## Approval Requirement
 

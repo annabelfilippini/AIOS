@@ -1,15 +1,15 @@
 ---
 name: review-claude-plan
-description: Review a Claude/Garry handoff against the actual repository before implementation. Use when given a handoff file and asked to assess feasibility, risks, scope, or implementation fit. Do not edit product code.
+description: Review a Garry handoff against the actual repository before implementation. Use when given a handoff file and asked to assess feasibility, risks, scope, or implementation fit. Do not edit product code.
 ---
 
-# Review Claude Plan
+# Review Garry Plan
 
-Use this skill before implementing a Claude/Garry handoff.
+Use this skill before implementing a Garry handoff.
 
-Garry/Claude owns intent, scope, and product judgment.
+Garry owns intent, scope, and product judgment.
 
-Business Partner/Codex owns repository reality, implementation judgment, and verification planning.
+Business Partner owns repository reality, implementation judgment, and verification planning.
 
 ## Core Rule
 
@@ -28,7 +28,7 @@ If no path is provided, list recent files in the active handoff folder and ask w
 ## Rules
 
 - Do not edit product code.
-- Do not rubber-stamp Claude or Garry.
+- Do not rubber-stamp Garry or any builder runtime.
 - Inspect the relevant repo/files before judging the plan.
 - Prefer existing codebase patterns over the handoff's guesses.
 - Keep the review concrete enough that implementation can start immediately if approved.
@@ -46,12 +46,12 @@ If no path is provided, list recent files in the active handoff folder and ask w
    - `Blocked`
 5. Write a review file next to the handoff:
 
-`<handoff-basename>.codex-review.md`
+`<handoff-basename>.business-partner-review.md`
 
 ## Review Structure
 
 ```markdown
-# Codex Plan Review: <Plan Name>
+# Business Partner Plan Review: <Plan Name>
 
 ## Verdict
 
@@ -67,7 +67,7 @@ Approved / Needs Changes / Blocked
 
 ## Verification Plan
 
-## Notes For Claude
+## Notes For Builder
 ```
 
 ## Response

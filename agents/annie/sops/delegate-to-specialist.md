@@ -32,7 +32,7 @@ Delegate to Garry when the work is:
 - customer, market, wedge, or positioning judgment
 - product scope
 - decision-making before implementation
-- Claude-to-Codex handoff preparation
+- strategy-to-implementation handoff preparation
 
 Delegate to Business Partner when the work is:
 

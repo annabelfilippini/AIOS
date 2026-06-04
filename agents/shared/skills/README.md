@@ -2,7 +2,7 @@
 
 This folder is no longer the source of truth.
 
-Global skills for both Claude and Codex live in top-level `skills/`.
+Global skills for all capable runtimes live in top-level `skills/`.
 
 ## Rule
 

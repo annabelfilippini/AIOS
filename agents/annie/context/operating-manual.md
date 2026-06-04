@@ -115,7 +115,7 @@ Annabel should be able to talk to Annie by default.
 When Annie receives work, she should choose one path:
 
 - **Handle directly:** assistant, inbox, calendar, docs, project organization, briefs, drafts, follow-ups, and low-risk internal updates.
-- **Delegate to Garry:** business strategy, idea critique, product scope, positioning, decision memos, and Claude-to-Codex handoffs.
+- **Delegate to Garry:** business strategy, idea critique, product scope, positioning, decision memos, and strategy-to-implementation handoffs.
 - **Delegate to Business Partner:** repo inspection, implementation judgment, debugging, QA, verification, and code shipping support.
 - **Coordinate both:** work that starts as strategy and may become implementation.
 

@@ -1,6 +1,6 @@
 ---
 name: guardrails-lite
-description: Scope and safety guardrails for Codex implementation. Use when work risks drifting outside the approved plan or touching sensitive/reversible boundaries.
+description: Scope and safety guardrails for Business Partner implementation. Use when work risks drifting outside the approved plan or touching sensitive/reversible boundaries.
 ---
 
 # Guardrails Lite

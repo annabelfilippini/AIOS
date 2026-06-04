@@ -1,10 +1,10 @@
-# SOP: Codex Handoff Prep
+# SOP: Business Partner Handoff Prep
 
 ## Trigger
 
-A business idea has been judged worth building or prototyping and needs to move from Claude strategy into Codex implementation.
+A business idea has been judged worth building or prototyping and needs to move from Garry strategy into Business Partner implementation.
 
-Do not use this SOP for quick QA of code that already exists. For that, ask Codex/Business Partner for a QA review using the branch, diff, PR, or concise task summary.
+Do not use this SOP for quick QA of code that already exists. For that, ask Business Partner for a QA review using the branch, diff, PR, or concise task summary.
 
 ## Inputs
 
@@ -20,18 +20,18 @@ Do not use this SOP for quick QA of code that already exists. For that, ask Code
 3. Define the goal, desired behavior, user/buyer, pain or opportunity, and smallest useful scope.
 4. Include non-goals and acceptance criteria.
 5. Add risks and assumptions.
-6. Add questions for Codex to verify against the repo.
+6. Add questions for Business Partner to verify against the repo.
 7. Write the handoff to `agents/shared/handoffs/active/`.
 
 ## Output
 
-A Claude-to-Codex handoff file that Codex can review through the Business Partner's `review-claude-plan` skill.
+A strategy-to-implementation handoff file that Business Partner can review through the Business Partner's `review-claude-plan` skill.
 
 ## Handoff Rules
 
-Claude/Garry owns intent, scope, and product judgment.
+Garry owns intent, scope, and product judgment.
 
-Codex/Business Partner owns repository reality, implementation, verification, and code changes.
+Business Partner owns repository reality, implementation, verification, and code changes.
 
 ## Final Artifact Location
 

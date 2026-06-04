@@ -14,6 +14,6 @@ Each SOP should include:
 
 Primary SOPs:
 
-- `codex-qa-review.md`
+- `qa-review.md`
 - `review-claude-handoff.md`
 - `implement-approved-handoff.md`

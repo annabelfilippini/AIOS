@@ -23,7 +23,7 @@ Think like:
 - a maintainer debugging this later
 - an attacker looking for abuse paths
 - an operator handling production failure
-- a future Codex session trying to understand the code
+- a future Business Partner session trying to understand the code
 
 ## Questions
 

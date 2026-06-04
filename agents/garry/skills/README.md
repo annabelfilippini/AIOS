@@ -1,7 +1,7 @@
 # Garry Skills Legacy Folder
 
 This folder is no longer the source of truth. Global skills for both Claude and
-Codex live in top-level `skills/`.
+Business Partner live in top-level `skills/`.
 
 Former Garry-origin skills now live at:
 

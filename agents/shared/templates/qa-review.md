@@ -1,4 +1,4 @@
-# Codex QA Review
+# QA Review
 
 ## Target
 
@@ -33,6 +33,6 @@ Pass / Pass With Follow-Ups / Needs Fixes / Blocked
 
 ## Risks Accepted
 
-## Suggested Fix Prompt For Claude Code
+## Suggested Fix Prompt For Builder Runtime
 
 ## Re-Review Notes

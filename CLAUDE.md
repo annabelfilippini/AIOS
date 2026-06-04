@@ -53,7 +53,7 @@ against the repo.
 - Garry identity and commands: `agents/garry/`
 - Annie identity and SOPs: `agents/annie/`
 - Business Partner identity and SOPs: `agents/business-partner/`
-- Global skills for Claude and Codex: `skills/`
+- Global skills for all capable runtimes: `skills/`
 - Global CLI/tool connections: `cli-connections/`
 - Cross-agent handoffs, QA, and templates: `agents/shared/`
 - Durable memory/checkpoints: `operations/memory/`
