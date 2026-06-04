@@ -19,11 +19,12 @@ const secretPatterns = [
 
 const warnings = [];
 const failures = [];
+const strict = process.env.MEMORY_STRICT === "1";
 
 for (const filePath of activeDirs.flatMap(listMarkdown)) {
   const text = fs.readFileSync(filePath, "utf8");
   const relativePath = path.relative(memoryRoot, filePath);
-  const lines = text.split(/\r?\n/);
+  const lines = text.replace(/(?:\r?\n)+$/, "").split(/\r?\n/);
 
   if (!text.startsWith("---\n")) {
     warnings.push(`${relativePath}: missing frontmatter`);
@@ -44,6 +45,11 @@ for (const filePath of activeDirs.flatMap(listMarkdown)) {
 if (warnings.length) {
   console.log("Memory safety warnings:");
   for (const warning of warnings) console.log(`- ${warning}`);
+}
+
+if (strict && warnings.length) {
+  console.error("Memory safety strict mode enabled (MEMORY_STRICT=1). Treating warnings as failures.");
+  process.exit(1);
 }
 
 if (failures.length) {

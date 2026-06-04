@@ -5,7 +5,18 @@ aios_root="${AIOS_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 cd "$aios_root"
 
 echo "== Markdown lint =="
-npx markdownlint-cli2
+require_markdown_lint="${AIOS_LINT_REQUIRE_MARKDOWN:-1}"
+if [ -x "$aios_root/node_modules/.bin/markdownlint-cli2" ]; then
+  "$aios_root/node_modules/.bin/markdownlint-cli2"
+else
+  if [ "$require_markdown_lint" = "1" ]; then
+    echo "FAIL: markdownlint-cli2 not installed locally but AIOS_LINT_REQUIRE_MARKDOWN=1."
+    echo "Install with: npm i -D markdownlint-cli2"
+    exit 1
+  fi
+  echo "SKIP: markdownlint-cli2 not installed locally (offline-safe mode)."
+  echo "Install with: npm i -D markdownlint-cli2"
+fi
 
 echo "== Whitespace check =="
 git diff --check
@@ -44,6 +55,6 @@ if [ -n "$credential_hits" ]; then
 fi
 
 echo "== Memory safety check =="
-node operations/memory/scripts/check-memory-safety.mjs
+MEMORY_STRICT="${MEMORY_STRICT:-1}" node operations/memory/scripts/check-memory-safety.mjs
 
 echo "AI-OS system lint passed."

@@ -1,0 +1,25 @@
+{
+  "name": "ai-os",
+  "version": "1.0.0",
+  "description": "Top-level mental model:",
+  "main": "index.js",
+  "scripts": {
+    "lint:md": "markdownlint-cli2",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annabelfilippini/AIOS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/annabelfilippini/AIOS/issues"
+  },
+  "homepage": "https://github.com/annabelfilippini/AIOS#readme",
+  "devDependencies": {
+    "markdownlint-cli2": "^0.22.1"
+  }
+}
