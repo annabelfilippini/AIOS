@@ -1,0 +1,14 @@
+[
+  {
+    "source": "yelp",
+    "url": "https://www.yelp.com/biz/mani-osteria-and-bar-ann-arbor",
+    "ok": true,
+    "chars": 9667
+  },
+  {
+    "source": "opentable",
+    "url": "https://www.opentable.com/r/mani-osteria-and-bar-ann-arbor",
+    "ok": false,
+    "note": "bot-wall suspected (len=139)"
+  }
+]

@@ -13,17 +13,31 @@ dist/
 build/
 .vercel/
 .gstack/
+logs/
+*.log
+coverage/
+.next/
+out/
+*.tsbuildinfo
+*.py[cod]
 
 # Secrets and local environment
 .env
 .env.*
 !.env.example
+!.env.*.example
 *.pem
 *.key
+*.p12
+*.pfx
+credentials.json
+auth.json
 
-# Existing standalone repositories and project workspaces tracked separately
+# Existing standalone repositories tracked/pushed separately
 knowledge/
-projects/*
+projects/annie-intake/
+projects/pickleball-portal/repo/
+projects/wayloft/
 
 # Compatibility symlink to knowledge/
 wiki
@@ -34,6 +48,7 @@ _archive/
 _inbox/
 .playwright-mcp/
 operations/git-sync/*.log
+operations/automation/
 
 # Loose generated preview/QA images dropped at repo root
 /*.png

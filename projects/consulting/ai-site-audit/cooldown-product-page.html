@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>katherine bra — cooldown running</title>
+  <meta name="description" content="Product page concept: Katherine Bra by Cooldown Running.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== COOLDOWN BRAND FONTS ===== */
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-regular.otf?v=1711998886') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-medium.otf?v=1711998886') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-bold.otf?v=1711998886') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-extra-bold.otf?v=1711998886') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-black.otf?v=1711998886') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'SpeziaMono';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/speziamono-regular.otf?v=1711998886') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'SpeziaMono';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/speziamono-bold.otf?v=1711998886') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Athletics', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1a1a2e;
+      background: #ffffff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===== ANNOTATION BAR ===== */
+    .annotation-bar {
+      background: #1a1a2e;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      padding: 6px 16px;
+      font-family: 'SpeziaMono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: lowercase;
+    }
+
+    .annotation-bar span {
+      color: #B292E7;
+      font-weight: 500;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-transform: lowercase;
+      color: #1a1a2e;
+    }
+
+    .nav-logo em {
+      font-style: normal;
+      color: #B292E7;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: lowercase;
+      color: #1a1a2e;
+      transition: color 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links a:hover {
+      color: #B292E7;
+    }
+
+    .nav-links .nav-cta {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .nav-links .nav-cta:hover {
+      background: #B292E7;
+    }
+
+    .nav-cart {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .nav-cart-count {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: #B292E7;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .mobile-menu span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a2e;
+      border-radius: 2px;
+    }
+
+    /* ===== BREADCRUMB ===== */
+    .breadcrumb {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 16px 48px;
+      font-size: 13px;
+      color: #8b8ba0;
+      font-family: 'SpeziaMono', monospace;
+      text-transform: lowercase;
+    }
+
+    .breadcrumb a {
+      color: #8b8ba0;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: #B292E7;
+    }
+
+    .breadcrumb .sep {
+      margin: 0 8px;
+      opacity: 0.5;
+    }
+
+    .breadcrumb .current {
+      color: #1a1a2e;
+    }
+
+    /* ===== PRODUCT SECTION ===== */
+    .product-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Gallery */
+    .gallery {
+      align-self: start;
+    }
+
+    .gallery-main {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f7f5fb;
+      margin-bottom: 12px;
+      cursor: zoom-in;
+    }
+
+    .gallery-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-main:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-thumbnails {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .gallery-thumbnails::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .gallery-thumbnails::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .gallery-thumbnails::-webkit-scrollbar-thumb {
+      background: #d0d0e0;
+      border-radius: 10px;
+    }
+
+    .gallery-thumb {
+      flex: 0 0 80px;
+      width: 80px;
+      height: 100px;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, opacity 0.2s;
+      background: #f7f5fb;
+    }
+
+    .gallery-thumb:hover {
+      border-color: #B292E7;
+    }
+
+    .gallery-thumb.active {
+      border-color: #B292E7;
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Product Info */
+    .product-info {
+      padding-top: 8px;
+    }
+
+    .product-tag {
+      display: inline-block;
+      background: #f0edf7;
+      color: #7c5cbf;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-family: 'SpeziaMono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: lowercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+
+    .product-name {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 800;
+      text-transform: lowercase;
+      letter-spacing: -1.2px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 12px;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+
+    .stars {
+      display: flex;
+      gap: 2px;
+    }
+
+    .star {
+      color: #f0c040;
+      font-size: 16px;
+    }
+
+    .star.empty {
+      color: #d0d0e0;
+    }
+
+    .rating-text {
+      font-size: 14px;
+      color: #8b8ba0;
+      font-weight: 500;
+    }
+
+    .rating-text strong {
+      color: #1a1a2e;
+    }
+
+    .rating-link {
+      font-size: 13px;
+      color: #B292E7;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Color Selector */
+    .selector-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: lowercase;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .selector-label span {
+      font-weight: 400;
+      color: #8b8ba0;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .color-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .color-swatch:hover {
+      transform: scale(1.1);
+    }
+
+    .color-swatch.active {
+      border-color: #1a1a2e;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1a1a2e;
+    }
+
+    .color-swatch .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 11px;
+      font-family: 'SpeziaMono', monospace;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .color-swatch:hover .tooltip {
+      opacity: 1;
+    }
+
+    /* Size Selector */
+    .size-selector {
+      margin-bottom: 24px;
+    }
+
+    .size-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .size-btn {
+      padding: 12px 20px;
+      border: 1.5px solid #d0d0e0;
+      border-radius: 10px;
+      background: #fff;
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #1a1a2e;
+      min-width: 52px;
+      text-align: center;
+    }
+
+    .size-btn:hover {
+      border-color: #B292E7;
+      background: #faf8ff;
+    }
+
+    .size-btn.active {
+      border-color: #1a1a2e;
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    /* Add to Bag */
+    .add-to-bag {
+      width: 100%;
+      padding: 18px 36px;
+      border-radius: 100px;
+      background: #B292E7;
+      color: #fff;
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: lowercase;
+      letter-spacing: 0.3px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 14px;
+    }
+
+    .add-to-bag:hover {
+      background: #9b7ad4;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(178, 146, 231, 0.35);
+    }
+
+    .add-to-bag:active {
+      transform: translateY(0);
+    }
+
+    /* Promo Banner */
+    .promo-banner {
+      background: linear-gradient(135deg, #f0edf7 0%, #e8e0f5 100%);
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(178, 146, 231, 0.2);
+    }
+
+    .promo-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .promo-text {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .promo-text strong {
+      font-weight: 700;
+      color: #7c5cbf;
+    }
+
+    /* Product Meta */
+    .product-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .product-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #8b8ba0;
+    }
+
+    .product-meta-item svg {
+      flex-shrink: 0;
+    }
+
+    /* Final Sale Badge */
+    .final-sale-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff3e6;
+      color: #c4700a;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'SpeziaMono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    /* ===== AI DESCRIPTION SECTION ===== */
+    .description-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 48px 80px;
+      border-top: 1px solid rgba(26, 26, 46, 0.06);
+    }
+
+    .ai-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #f0edf7 0%, #e8e0f5 100%);
+      color: #7c5cbf;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-family: 'SpeziaMono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: lowercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(178, 146, 231, 0.2);
+    }
+
+    .description-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .description-left h2 {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: clamp(26px, 3vw, 34px);
+      font-weight: 800;
+      text-transform: lowercase;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .description-left .intro {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 28px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #f0edf7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-family: 'SpeziaMono', monospace;
+      font-weight: 700;
+      color: #B292E7;
+    }
+
+    .feature-content h4 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: lowercase;
+      margin-bottom: 3px;
+      color: #1a1a2e;
+    }
+
+    .feature-content p {
+      font-size: 13px;
+      color: #8b8ba0;
+      line-height: 1.6;
+    }
+
+    /* Pairs Well With */
+    .pairs-section {
+      margin-top: 0;
+    }
+
+    .pairs-section h3 {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: lowercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 18px;
+    }
+
+    .pairs-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pair-card {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 14px;
+      background: #f7f5fb;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .pair-card:hover {
+      background: #f0edf7;
+      transform: translateX(4px);
+    }
+
+    .pair-card img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #e8e0f5;
+    }
+
+    .pair-info h4 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: lowercase;
+      margin-bottom: 2px;
+    }
+
+    .pair-info p {
+      font-size: 13px;
+      color: #8b8ba0;
+    }
+
+    .pair-info .pair-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: #7c5cbf;
+      margin-top: 4px;
+    }
+
+    /* Accordion */
+    .accordion {
+      border-top: 1px solid rgba(26, 26, 46, 0.08);
+      margin-top: 36px;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid rgba(26, 26, 46, 0.08);
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: lowercase;
+      color: #1a1a2e;
+      background: none;
+      border: none;
+      width: 100%;
+      font-family: 'Athletics', 'Inter', sans-serif;
+      text-align: left;
+    }
+
+    .accordion-header:hover {
+      color: #B292E7;
+    }
+
+    .accordion-icon {
+      font-size: 20px;
+      font-weight: 300;
+      transition: transform 0.3s;
+      color: #8b8ba0;
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .accordion-body.open {
+      max-height: 500px;
+    }
+
+    .accordion-content {
+      padding: 0 0 20px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #666;
+    }
+
+    .accordion-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .accordion-content ul li {
+      padding: 3px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .accordion-content ul li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #B292E7;
+      flex-shrink: 0;
+    }
+
+    /* Size Guide Table */
+    .size-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .size-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: #f0edf7;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      color: #7c5cbf;
+    }
+
+    .size-table th:first-child {
+      border-radius: 8px 0 0 8px;
+    }
+
+    .size-table th:last-child {
+      border-radius: 0 8px 8px 0;
+    }
+
+    .size-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+      color: #555;
+    }
+
+    /* ===== REVIEWS SECTION ===== */
+    .reviews-section {
+      background: #f9f7fd;
+      padding: 80px 48px;
+    }
+
+    .reviews-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .reviews-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .reviews-title-block h2 {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: clamp(28px, 3.5vw, 38px);
+      font-weight: 800;
+      text-transform: lowercase;
+      letter-spacing: -1.2px;
+      margin-bottom: 6px;
+    }
+
+    .reviews-subtitle {
+      font-size: 15px;
+      color: #8b8ba0;
+    }
+
+    /* Rating Summary */
+    .rating-summary {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      background: #fff;
+      padding: 28px 36px;
+      border-radius: 20px;
+      box-shadow: 0 2px 16px rgba(26, 26, 46, 0.06);
+    }
+
+    .rating-big {
+      text-align: center;
+    }
+
+    .rating-big .number {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+      color: #1a1a2e;
+      letter-spacing: -2px;
+    }
+
+    .rating-big .out-of {
+      font-size: 14px;
+      color: #8b8ba0;
+      margin-top: 4px;
+    }
+
+    .rating-big .stars-big {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .rating-big .stars-big .star {
+      font-size: 18px;
+    }
+
+    .rating-bars {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 200px;
+    }
+
+    .rating-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .rating-bar-label {
+      width: 50px;
+      text-align: right;
+      color: #8b8ba0;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .rating-bar-track {
+      flex: 1;
+      height: 8px;
+      background: #eae6f2;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .rating-bar-fill {
+      height: 100%;
+      background: #B292E7;
+      border-radius: 100px;
+      transition: width 0.6s ease;
+    }
+
+    .rating-bar-count {
+      width: 24px;
+      text-align: left;
+      font-size: 12px;
+      color: #8b8ba0;
+    }
+
+    /* Review Cards */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .review-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(26, 26, 46, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(26, 26, 46, 0.1);
+    }
+
+    .review-card:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .review-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reviewer-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B292E7, #CFD6F0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .reviewer-name {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: lowercase;
+    }
+
+    .verified-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #38a169;
+      font-family: 'SpeziaMono', monospace;
+    }
+
+    .verified-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38a169;
+    }
+
+    .review-date {
+      font-size: 12px;
+      color: #8b8ba0;
+      font-family: 'SpeziaMono', monospace;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 10px;
+    }
+
+    .review-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 14px;
+    }
+
+    .review-helpful {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #8b8ba0;
+      cursor: pointer;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      font-family: 'Athletics', 'Inter', sans-serif;
+      padding: 6px 12px;
+      border-radius: 100px;
+      background: #f7f5fb;
+    }
+
+    .review-helpful:hover {
+      color: #B292E7;
+      background: #f0edf7;
+    }
+
+    /* ===== YOU MIGHT ALSO LIKE ===== */
+    .also-like-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .also-like-section h2 {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: clamp(28px, 3.5vw, 36px);
+      font-weight: 800;
+      text-transform: lowercase;
+      letter-spacing: -1.2px;
+      margin-bottom: 32px;
+    }
+
+    .also-like-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: 1px solid rgba(26, 26, 46, 0.06);
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(26, 26, 46, 0.12);
+    }
+
+    .product-card-img {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #f7f5fb;
+    }
+
+    .product-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .product-card:hover .product-card-img img {
+      transform: scale(1.06);
+    }
+
+    .product-card-info {
+      padding: 16px 18px;
+    }
+
+    .product-card-info h4 {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: lowercase;
+      margin-bottom: 4px;
+    }
+
+    .product-card-info .card-price {
+      font-size: 15px;
+      font-weight: 700;
+      color: #7c5cbf;
+    }
+
+    .product-card-info .card-tag {
+      font-size: 11px;
+      color: #8b8ba0;
+      font-family: 'SpeziaMono', monospace;
+      text-transform: lowercase;
+      margin-top: 4px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #111122;
+      padding: 60px 48px 32px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: lowercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand h3 em {
+      font-style: normal;
+      color: #B292E7;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-social a:hover {
+      background: #B292E7;
+      color: #ffffff;
+    }
+
+    .footer-col h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.3);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul a {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.2s;
+      text-transform: lowercase;
+    }
+
+    .footer-col ul a:hover {
+      color: #B292E7;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .product-section {
+        gap: 40px;
+      }
+
+      .description-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .review-card:first-child {
+        grid-column: auto;
+      }
+
+      .also-like-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .rating-summary {
+        flex-direction: column;
+        gap: 20px;
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+
+      .breadcrumb {
+        padding: 12px 24px;
+      }
+
+      .product-section {
+        grid-template-columns: 1fr;
+        padding: 0 24px 40px;
+        gap: 28px;
+      }
+
+      .gallery {
+        position: static;
+      }
+
+      .gallery-main {
+        aspect-ratio: 1 / 1;
+      }
+
+      .product-name {
+        font-size: 28px;
+      }
+
+      .description-section {
+        padding: 40px 24px 60px;
+      }
+
+      .reviews-section {
+        padding: 60px 24px;
+      }
+
+      .reviews-header {
+        flex-direction: column;
+      }
+
+      .also-like-section {
+        padding: 60px 24px;
+      }
+
+      .also-like-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .footer {
+        padding: 48px 24px 24px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .also-like-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .rating-summary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOTATION BAR -->
+  <div class="annotation-bar">
+    product page concept by <span>annabel filippini</span> — april 2026
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">cool<em>down</em></a>
+    <ul class="nav-links">
+      <li><a href="#">shop</a></li>
+      <li><a href="#">run club</a></li>
+      <li><a href="#">our story</a></li>
+      <li><a href="#">cities</a></li>
+      <li>
+        <a href="#" class="nav-cart" aria-label="Cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="nav-cart-count">2</span>
+        </a>
+      </li>
+    </ul>
+    <button class="mobile-menu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="#">home</a>
+    <span class="sep">/</span>
+    <a href="#">shop</a>
+    <span class="sep">/</span>
+    <a href="#">bras</a>
+    <span class="sep">/</span>
+    <span class="current">katherine bra</span>
+  </div>
+
+  <!-- PRODUCT SECTION -->
+  <section class="product-section">
+    <!-- Gallery -->
+    <div class="gallery">
+      <div class="gallery-main" id="mainImage">
+        <img src="https://cooldownrunning.com/cdn/shop/files/15_5531720f-55d7-4d41-b829-68bd7371b9d1.png?v=1744654315&width=800" alt="Katherine Bra - Lavender Horizon" id="mainImg">
+      </div>
+      <div class="gallery-thumbnails">
+        <div class="gallery-thumb active" onclick="changeImage(this, 'https://cooldownrunning.com/cdn/shop/files/15_5531720f-55d7-4d41-b829-68bd7371b9d1.png?v=1744654315&width=800')">
+          <img src="https://cooldownrunning.com/cdn/shop/files/15_5531720f-55d7-4d41-b829-68bd7371b9d1.png?v=1744654315&width=200" alt="Front view">
+        </div>
+        <div class="gallery-thumb" onclick="changeImage(this, 'https://cooldownrunning.com/cdn/shop/files/16_3534ff6b-bc9c-44d3-b339-c54430db1ecd.png?v=1744654315&width=800')">
+          <img src="https://cooldownrunning.com/cdn/shop/files/16_3534ff6b-bc9c-44d3-b339-c54430db1ecd.png?v=1744654315&width=200" alt="Back view">
+        </div>
+        <div class="gallery-thumb" onclick="changeImage(this, 'https://cooldownrunning.com/cdn/shop/files/17_33c8be58-88a0-4e38-8f9d-ffc3a52d62c2.png?v=1744654315&width=800')">
+          <img src="https://cooldownrunning.com/cdn/shop/files/17_33c8be58-88a0-4e38-8f9d-ffc3a52d62c2.png?v=1744654315&width=200" alt="Detail view">
+        </div>
+        <div class="gallery-thumb" onclick="changeImage(this, 'https://cooldownrunning.com/cdn/shop/files/18_08c2c8f7-0ec0-4915-8ad7-9bc6ec43f61d.png?v=1744654315&width=800')">
+          <img src="https://cooldownrunning.com/cdn/shop/files/18_08c2c8f7-0ec0-4915-8ad7-9bc6ec43f61d.png?v=1744654315&width=200" alt="Close-up">
+        </div>
+        <div class="gallery-thumb" onclick="changeImage(this, 'https://cooldownrunning.com/cdn/shop/files/19_0645872f-8d39-4c43-b8a0-ce3540e7d438.png?v=1744654315&width=800')">
+          <img src="https://cooldownrunning.com/cdn/shop/files/19_0645872f-8d39-4c43-b8a0-ce3540e7d438.png?v=1744654315&width=200" alt="Lifestyle">
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info">
+      <span class="product-tag">new arrival</span>
+      <h1 class="product-name">katherine bra</h1>
+      <div class="product-price">$58</div>
+
+      <a href="#reviews" class="product-rating">
+        <div class="stars">
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+        </div>
+        <span class="rating-text"><strong>4.8</strong> / 5</span>
+        <span class="rating-link">47 reviews</span>
+      </a>
+
+      <!-- Color Selector -->
+      <div class="selector-label">color <span>— lavender horizon</span></div>
+      <div class="color-swatches">
+        <div class="color-swatch active" style="background: #c4b3e0;" onclick="selectColor(this, 'lavender horizon')">
+          <span class="tooltip">lavender horizon</span>
+        </div>
+        <div class="color-swatch" style="background: #2c4a3e;" onclick="selectColor(this, 'midnight green')">
+          <span class="tooltip">midnight green</span>
+        </div>
+        <div class="color-swatch" style="background: #1a1a2e;" onclick="selectColor(this, 'moon')">
+          <span class="tooltip">moon</span>
+        </div>
+        <div class="color-swatch" style="background: #e8c4b8;" onclick="selectColor(this, 'paradise')">
+          <span class="tooltip">paradise</span>
+        </div>
+        <div class="color-swatch" style="background: #87ceeb;" onclick="selectColor(this, 'skyway cloud')">
+          <span class="tooltip">skyway cloud</span>
+        </div>
+        <div class="color-swatch" style="background: #d4a44a;" onclick="selectColor(this, 'golden hour')">
+          <span class="tooltip">golden hour</span>
+        </div>
+      </div>
+
+      <!-- Size Selector -->
+      <div class="size-selector">
+        <div class="selector-label">size <span>— select</span></div>
+        <div class="size-buttons">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn active" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+          <button class="size-btn" onclick="selectSize(this)">XXL</button>
+        </div>
+      </div>
+
+      <!-- Add to Bag -->
+      <button class="add-to-bag" onclick="this.textContent = 'added!';">add to bag — $58</button>
+
+      <!-- Promo Banner -->
+      <div class="promo-banner">
+        <span class="promo-icon" style="font-size: 13px; font-family: 'SpeziaMono', monospace; font-weight: 700; color: #B292E7;">%</span>
+        <div class="promo-text">
+          <strong>buy 4+ items, get 20% off</strong><br>
+          mix & match across the entire collection. discount applied at checkout.
+        </div>
+      </div>
+
+      <!-- Final Sale -->
+      <div class="final-sale-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        final sale — no returns or exchanges
+      </div>
+
+      <!-- Product Meta -->
+      <div class="product-meta">
+        <div class="product-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b8ba0" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          made with recycled materials
+        </div>
+        <div class="product-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b8ba0" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          free shipping over $100
+        </div>
+      </div>
+
+      <!-- Why We Made This -->
+      <div class="why-section" style="margin-top: 32px; padding-top: 32px; border-top: 1px solid #e8e8f0;">
+        <h2 style="font-size: 22px; font-weight: 800; text-transform: lowercase; margin-bottom: 14px;">why we made this</h2>
+        <p class="intro">
+          we designed the katherine bra for runners who are tired of choosing between style and support. you know the feeling — you find a bra that holds up during speedwork, but it looks like something from a hospital catalog. or you find something cute and it's bouncing by mile two. the katherine fixes that. medium-high support that actually works for a-d cups, in colors you'll want to wear long after your cooldown.
+        </p>
+
+        <ul class="feature-list">
+          <li class="feature-item">
+            <div class="feature-icon">01</div>
+            <div class="feature-content">
+              <h4>medium-high support</h4>
+              <p>engineered for a-d cups with a wide, no-dig underband and adjustable racerback straps. stays locked in from first mile to last.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">02</div>
+            <div class="feature-content">
+              <h4>performance fabric</h4>
+              <p>moisture-wicking, 4-way stretch recycled nylon blend. dries twice as fast as cotton and moves with your body through every stride.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">03</div>
+            <div class="feature-content">
+              <h4>thoughtful design details</h4>
+              <p>removable padding for your preferred fit. smooth, bonded seams that won't chafe. flatlock stitching at every stress point.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">04</div>
+            <div class="feature-content">
+              <h4>made for your whole day</h4>
+              <p>running, hiit, strength training — and yes, post-run brunch. the kind of bra you forget you're wearing (in a good way).</p>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Accordion: Materials & Care -->
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              materials & care
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <ul>
+                  <li>78% recycled nylon, 22% elastane</li>
+                  <li>removable molded padding inserts</li>
+                  <li>machine wash cold, gentle cycle</li>
+                  <li>lay flat to dry — no tumble dry</li>
+                  <li>do not iron or bleach</li>
+                  <li>made ethically in portugal</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              size guide
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <table class="size-table">
+                  <thead>
+                    <tr>
+                      <th>size</th>
+                      <th>bust</th>
+                      <th>underbust</th>
+                      <th>cup</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>XS</td><td>30-32"</td><td>26-28"</td><td>A-B</td></tr>
+                    <tr><td>S</td><td>32-34"</td><td>28-30"</td><td>A-C</td></tr>
+                    <tr><td>M</td><td>34-36"</td><td>30-32"</td><td>B-C</td></tr>
+                    <tr><td>L</td><td>36-38"</td><td>32-34"</td><td>C-D</td></tr>
+                    <tr><td>XL</td><td>38-40"</td><td>34-36"</td><td>C-D</td></tr>
+                    <tr><td>XXL</td><td>40-42"</td><td>36-38"</td><td>D</td></tr>
+                  </tbody>
+                </table>
+                <p style="margin-top: 12px; font-size: 12px; color: #8b8ba0;">between sizes? size up for a relaxed fit, size down for more compression.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              shipping & returns
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                <ul>
+                  <li>free standard shipping on orders $100+</li>
+                  <li>standard shipping: 5-7 business days</li>
+                  <li>express shipping: 2-3 business days ($12)</li>
+                  <li>this item is final sale — no returns or exchanges</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pairs Well With -->
+        <div style="margin-top: 32px;">
+          <h3 style="font-size: 16px; font-weight: 700; text-transform: lowercase; margin-bottom: 14px;">pairs well with</h3>
+          <div class="pairs-grid">
+            <a href="#" class="pair-card">
+              <img src="https://cooldownrunning.com/cdn/shop/files/46.png?v=1743468098&width=200" alt="Molly Short">
+              <div class="pair-info">
+                <h4>molly short</h4>
+                <p>5" inseam, built-in liner</p>
+                <div class="pair-price">$62</div>
+              </div>
+            </a>
+            <a href="#" class="pair-card">
+              <img src="https://cooldownrunning.com/cdn/shop/files/93.png?v=1743468889&width=200" alt="Meg Tank">
+              <div class="pair-info">
+                <h4>meg tank</h4>
+                <p>lightweight racerback tank</p>
+                <div class="pair-price">$48</div>
+              </div>
+            </a>
+            <a href="#" class="pair-card">
+              <img src="https://cooldownrunning.com/cdn/shop/files/39_19555747-27f9-42de-afc8-bcaacf7e6069.png?v=1743463382&width=200" alt="Kenny Short">
+              <div class="pair-info">
+                <h4>kenny short</h4>
+                <p>3" split short, retro fit</p>
+                <div class="pair-price">$56</div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Outfit Builder CTA -->
+          <div style="margin-top: 24px; background: linear-gradient(135deg, #1a1a2e 0%, #2d2650 100%); border-radius: 16px; padding: 24px; text-align: center;">
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin-bottom: 8px;">build a full outfit & save</p>
+            <p style="color: #fff; font-size: 20px; font-weight: 800; text-transform: lowercase; letter-spacing: -0.5px; margin-bottom: 14px;">katherine bra + molly short</p>
+            <p style="color: #B292E7; font-size: 14px; font-weight: 600; margin-bottom: 16px;">$120 <span style="text-decoration: line-through; color: rgba(255,255,255,0.4); font-weight: 400;">$130</span> &mdash; save $10</p>
+            <button style="background: #B292E7; color: #fff; border: none; padding: 14px 32px; border-radius: 100px; font-family: 'Athletics', 'Inter', sans-serif; font-size: 14px; font-weight: 700; text-transform: lowercase; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#c9a8f0'" onmouseout="this.style.background='#B292E7'">add both to bag</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REVIEWS SECTION -->
+  <section class="reviews-section" id="reviews">
+    <div class="reviews-inner">
+      <!-- label removed -->
+
+      <div class="reviews-header">
+        <div class="reviews-title-block">
+          <h2>what runners are saying</h2>
+          <p class="reviews-subtitle">47 verified reviews from real cooldown runners</p>
+        </div>
+
+        <div class="rating-summary">
+          <div class="rating-big">
+            <div class="number">4.8</div>
+            <div class="out-of">out of 5</div>
+            <div class="stars-big">
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+            </div>
+          </div>
+          <div class="rating-bars">
+            <div class="rating-bar-row">
+              <span class="rating-bar-label">5 stars</span>
+              <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 74.5%;"></div></div>
+              <span class="rating-bar-count">35</span>
+            </div>
+            <div class="rating-bar-row">
+              <span class="rating-bar-label">4 stars</span>
+              <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 17%;"></div></div>
+              <span class="rating-bar-count">8</span>
+            </div>
+            <div class="rating-bar-row">
+              <span class="rating-bar-label">3 stars</span>
+              <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 6.4%;"></div></div>
+              <span class="rating-bar-count">3</span>
+            </div>
+            <div class="rating-bar-row">
+              <span class="rating-bar-label">2 stars</span>
+              <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 2.1%;"></div></div>
+              <span class="rating-bar-count">1</span>
+            </div>
+            <div class="rating-bar-row">
+              <span class="rating-bar-label">1 star</span>
+              <div class="rating-bar-track"><div class="rating-bar-fill" style="width: 0%;"></div></div>
+              <span class="rating-bar-count">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Cards -->
+      <div class="reviews-grid">
+        <!-- Featured Review (spans full width) -->
+        <div class="review-card">
+          <div class="review-top">
+            <div class="reviewer">
+              <div class="reviewer-avatar">JL</div>
+              <div>
+                <div class="reviewer-name">jess l.</div>
+                <div class="verified-badge"><span class="verified-dot"></span> verified purchase</div>
+              </div>
+            </div>
+            <span class="review-date">mar 28, 2026</span>
+          </div>
+          <div class="review-stars">
+            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          </div>
+          <p class="review-text">i've spent an embarrassing amount of money trying to find a running bra that doesn't make me feel like i need a second bra on top of it. the katherine is it. wore it for a 10-miler last weekend in 80-degree heat and it stayed completely in place, no chafing, no readjusting every half mile. the lavender horizon color is gorgeous and hasn't faded after multiple washes. honestly might buy a second one in midnight green.</p>
+          <button class="review-helpful">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            helpful (14)
+          </button>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div class="review-top">
+            <div class="reviewer">
+              <div class="reviewer-avatar">MK</div>
+              <div>
+                <div class="reviewer-name">maria k.</div>
+                <div class="verified-badge"><span class="verified-dot"></span> verified purchase</div>
+              </div>
+            </div>
+            <span class="review-date">apr 2, 2026</span>
+          </div>
+          <div class="review-stars">
+            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          </div>
+          <p class="review-text">sizing is spot-on. i'm usually between M and L and went with M based on their size guide — perfect fit. the removable padding is a nice touch, i actually prefer it without for shorter runs. the racerback design sits flat under tanks which is a huge plus.</p>
+          <button class="review-helpful">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            helpful (8)
+          </button>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div class="review-top">
+            <div class="reviewer">
+              <div class="reviewer-avatar">TP</div>
+              <div>
+                <div class="reviewer-name">tara p.</div>
+                <div class="verified-badge"><span class="verified-dot"></span> verified purchase</div>
+              </div>
+            </div>
+            <span class="review-date">mar 15, 2026</span>
+          </div>
+          <div class="review-stars">
+            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star empty">&#9733;</span>
+          </div>
+          <p class="review-text">great bra overall — the support is real and i love the golden hour color. only reason for 4 stars is that it took a couple wears to break in. the underband felt slightly stiff at first but softened up after a few runs. now it's my go-to for everything from track workouts to gym sessions.</p>
+          <button class="review-helpful">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            helpful (5)
+          </button>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review-card">
+          <div class="review-top">
+            <div class="reviewer">
+              <div class="reviewer-avatar">RN</div>
+              <div>
+                <div class="reviewer-name">rachel n.</div>
+                <div class="verified-badge"><span class="verified-dot"></span> verified purchase</div>
+              </div>
+            </div>
+            <span class="review-date">mar 8, 2026</span>
+          </div>
+          <div class="review-stars">
+            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          </div>
+          <p class="review-text">wore this to run club last week and got three compliments on the color alone (paradise). then wore it straight to coffee after and felt totally fine — no weird sports bra vibes. the fact that it's made from recycled materials is the cherry on top. cooldown keeps getting it right.</p>
+          <button class="review-helpful">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            helpful (11)
+          </button>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review-card">
+          <div class="review-top">
+            <div class="reviewer">
+              <div class="reviewer-avatar">AS</div>
+              <div>
+                <div class="reviewer-name">alex s.</div>
+                <div class="verified-badge"><span class="verified-dot"></span> verified purchase</div>
+              </div>
+            </div>
+            <span class="review-date">feb 22, 2026</span>
+          </div>
+          <div class="review-stars">
+            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          </div>
+          <p class="review-text">d cup runner here. i was skeptical any racerback bra could actually support me but the wide underband on this one is legit. ran a half marathon in it with zero bounce issues. i'm telling everyone in my run crew to get one. the midnight green is chef's kiss.</p>
+          <button class="review-helpful">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            helpful (9)
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOU MIGHT ALSO LIKE -->
+  <section class="also-like-section">
+    <h2>you might also like</h2>
+    <div class="also-like-grid">
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://cooldownrunning.com/cdn/shop/files/46.png?v=1743468098&width=400" alt="Molly Short">
+        </div>
+        <div class="product-card-info">
+          <h4>molly short</h4>
+          <span class="card-price">$62</span>
+          <div class="card-tag">5" inseam &middot; 6 colors</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://cooldownrunning.com/cdn/shop/files/93.png?v=1743468889&width=400" alt="Meg Tank">
+        </div>
+        <div class="product-card-info">
+          <h4>meg tank</h4>
+          <span class="card-price">$48</span>
+          <div class="card-tag">racerback &middot; 5 colors</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://cooldownrunning.com/cdn/shop/files/39_19555747-27f9-42de-afc8-bcaacf7e6069.png?v=1743463382&width=400" alt="Kenny Short">
+        </div>
+        <div class="product-card-info">
+          <h4>kenny short</h4>
+          <span class="card-price">$56</span>
+          <div class="card-tag">3" split &middot; retro fit</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://cooldownrunning.com/cdn/shop/files/33_df0e619b-b7bc-43fd-bc4b-213b6b5d82e0.png?v=1744654315&width=400" alt="Katherine Bra - Maroon">
+        </div>
+        <div class="product-card-info">
+          <h4>katherine bra</h4>
+          <span class="card-price">$58</span>
+          <div class="card-tag">also in maroon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>cool<em>down</em></h3>
+        <p>a social club disguised as a run club. running is just the excuse — community is the point.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="TikTok">tk</a>
+          <a href="#" aria-label="Strava">st</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>shop</h4>
+        <ul>
+          <li><a href="#">new arrivals</a></li>
+          <li><a href="#">tops</a></li>
+          <li><a href="#">bottoms</a></li>
+          <li><a href="#">bras</a></li>
+          <li><a href="#">accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>community</h4>
+        <ul>
+          <li><a href="#">find a run club</a></li>
+          <li><a href="#">our cities</a></li>
+          <li><a href="#">events</a></li>
+          <li><a href="#">ambassadors</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>info</h4>
+        <ul>
+          <li><a href="#">about us</a></li>
+          <li><a href="#">size guide</a></li>
+          <li><a href="#">shipping</a></li>
+          <li><a href="#">contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 cooldown running. all rights reserved.</p>
+      <p style="font-family: 'SpeziaMono', monospace; font-size: 11px; color: rgba(255,255,255,0.2);">concept mockup — not affiliated with cooldown running</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Image Gallery
+    function changeImage(thumb, src) {
+      document.getElementById('mainImg').src = src;
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    }
+
+    // Color Selector
+    function selectColor(swatch, colorName) {
+      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+      swatch.classList.add('active');
+      document.querySelector('.selector-label span').textContent = '— ' + colorName;
+
+      // Map colors to image sets
+      const colorImages = {
+        'lavender horizon': '15_5531720f-55d7-4d41-b829-68bd7371b9d1',
+        'midnight green': '6_3a43c84a-a9d9-43f0-bad0-1ba31125436a',
+        'moon': '2_972659ba-40f7-433f-9651-212282270459',
+        'paradise': '24_3376386b-4b7f-402d-b5e6-1de617a6fbb9',
+        'skyway cloud': '20_08aabfa7-bc9f-4447-abcb-fc88befefc7c',
+        'golden hour': '10_55f4a3dd-08e7-4a64-9568-3499a0d69307'
+      };
+
+      if (colorImages[colorName]) {
+        const imgUrl = 'https://cooldownrunning.com/cdn/shop/files/' + colorImages[colorName] + '.png?v=1744654315&width=800';
+        document.getElementById('mainImg').src = imgUrl;
+      }
+    }
+
+    // Size Selector
+    function selectSize(btn) {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Update the selector label
+      const sizeLabels = btn.closest('.size-selector').querySelector('.selector-label span');
+      sizeLabels.textContent = '— ' + btn.textContent.toLowerCase();
+    }
+
+    // Accordion
+    function toggleAccordion(header) {
+      const body = header.nextElementSibling;
+      const icon = header.querySelector('.accordion-icon');
+      const isOpen = body.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.accordion-icon').forEach(i => i.textContent = '+');
+
+      if (!isOpen) {
+        body.classList.add('open');
+        icon.textContent = '−';
+      }
+    }
+  </script>
+
+</body>
+</html>

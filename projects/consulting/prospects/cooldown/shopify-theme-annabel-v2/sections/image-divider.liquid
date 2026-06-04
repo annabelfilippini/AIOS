@@ -1,0 +1,30 @@
+{{ 'section-image-divider.css' | asset_url | stylesheet_tag }}
+
+
+<div class="image-divider">
+      {{ section.settings.image | image_url: width: 1500 | image_tag:
+      loading: 'lazy',
+      sizes: sizes,
+      widths: '165, 360, 535, 750, 1070, 1500'
+    }}
+</div>
+
+{% schema %}
+{
+  "name": "Image Divider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Divider Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Divider"
+    }
+  ]
+}
+{% endschema %}

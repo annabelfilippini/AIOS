@@ -1,0 +1,498 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_wXJTHc": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_qV8B9P": {
+          "type": "heading",
+          "settings": {
+            "heading": "cooldown university",
+            "heading_size": "h0"
+          }
+        },
+        "text_tifdUn": {
+          "type": "text",
+          "settings": {
+            "text": "build something real. on your campus.",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_qV8B9P",
+        "text_tifdUn"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Screenshot_2026-01-30_at_2.33.51_PM.png",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "accent-2",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "rich_text_kYb9RC": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_NeQAd3": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>what this is </p>",
+            "heading_size": "h1"
+          }
+        },
+        "text_iAmKG3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>cooldown university is your chance to launch and lead a run club on your campus — backed by a national brand, real partners, and a built-in community. you’re not just joining a club. you’re running one.</p><p>this is part community, part creative project, part entrepreneurial experience.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_NeQAd3",
+        "text_iAmKG3"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-2",
+        "full_width": true,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "image_with_text_ywUz9c": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_rYECKA": {
+          "type": "heading",
+          "settings": {
+            "heading": "why start one",
+            "heading_size": "h1"
+          }
+        },
+        "text_NbWeap": {
+          "type": "text",
+          "settings": {
+            "text": "<p>starting a cooldown university chapter puts you in a real leadership role with real-world experience — the kind that actually translates after graduation.</p><p>you’ll gain hands-on experience in:</p><ul><li>marketing and social media<br/></li><li>event planning and community building<br/></li><li>leadership and team management<br/></li><li>working directly with national and local brands<br/></li><li>growing and managing something from the ground up<br/></li></ul><p>This is founder-level experience, with support.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rYECKA",
+        "text_NbWeap"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/DSC08155.heic",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "image_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "image_with_text_UwBJGQ": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_BTPjy4": {
+          "type": "heading",
+          "settings": {
+            "heading": "how it works",
+            "heading_size": "h1"
+          }
+        },
+        "text_ni6C7r": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>as a cooldown university leader, you'll:</h2><ul><li>build a run club that's completely <em>your</em> vibe</li><li>host runs, socials, and campus events</li><li>collaborate with brands like <strong>Red Bull, Altra, and more</strong></li><li>build real connections with brands you could one day work for</li><li>unlock paid opportunities tied to events, partnerships, and growth</li><li>meet cool people across campus (and beyond it)</li><li>go for a group run, then grab beers after</li></ul><h2>cooldown provides:</h2><ul><li>brand credibility and national partnerships</li><li>marketing assets, templates, and guidance</li><li>apparel, sponsorship, and event support</li><li>direct access to the cooldown team</li><li>a network of leaders at other universities</li></ul><p>You bring the ideas. We help you turn them into something real.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BTPjy4",
+        "text_ni6C7r"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Screenshot_2026-01-30_at_4.44.34_PM.png",
+        "height": "small",
+        "desktop_image_width": "small",
+        "layout": "text_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-2",
+        "mobile_content_alignment": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "image_with_text_t9P67h": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_eL8MNH": {
+          "type": "heading",
+          "settings": {
+            "heading": "who we want",
+            "heading_size": "h1"
+          }
+        },
+        "text_cV4MUV": {
+          "type": "text",
+          "settings": {
+            "text": "<h2></h2><p>this is for students who:</p><ul><li>want real experience <em>and</em> real opportunities<br/></li><li>are interested in startups, marketing, events, or brand work<br/></li><li>like the idea of building something that can grow<br/></li><li>want to make connections — and some money — along the way<br/></li></ul><p>no pace requirements. just show up and lead.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_eL8MNH",
+        "text_cV4MUV"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Screenshot_2025-12-18_at_12.20.15_PM.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_ibQYxL": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_8bhmPa": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>ready to build something cool on your campus?</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_fXXgDd": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_pn988e": {
+          "type": "button",
+          "settings": {
+            "button_label": "apply here",
+            "button_link": "https://docs.google.com/forms/d/e/1FAIpQLSdnsiadCfrU5X3gvpTkKu8h4WUyllZ3cplxR6yE97_OAuyqQw/viewform?usp=header",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_8bhmPa",
+        "text_fXXgDd",
+        "button_pn988e"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-2",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "df6ba312-e5fb-44d4-aca7-1a16f83409ec": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "your local run club",
+            "heading_size": "h1"
+          }
+        },
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>...or walk club. or rollerblade club, stand-and-chat club, drinking club, really whatever your heart desires. we're just happy to have you. 🙃</p>",
+            "text_style": "body"
+          }
+        },
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-0",
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-1",
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/IMG_5818_bac83555-c762-497a-8eb6-bfdbc16b2da6.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "content_layout": "overlap",
+        "color_scheme": "accent-2",
+        "mobile_content_alignment": "center",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "5292ce00-b679-4fbb-87b4-d4dcef07eab5": {
+      "type": "image-banner",
+      "blocks": {
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h1"
+          }
+        },
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-1": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-2": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-0",
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-1",
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/3.png",
+        "image_2": "shopify://shop_images/4.png",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    },
+    "f8781b33-9d27-4ca8-b55b-c873f836b313": {
+      "type": "rich-text",
+      "blocks": {
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>our founders</p>",
+            "heading_size": "h2"
+          }
+        },
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Hi Cooldown fam 👋 We are Bailey & Daniel - two besties who bond over our mutual love for friendship, running, and </p>"
+          }
+        },
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-0",
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-1",
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "4e0653c4-b888-4723-aeb9-eff16679af4d": {
+      "type": "multicolumn",
+      "blocks": {
+        "template--16892992553234__4e0653c4-b888-4723-aeb9-eff16679af4d-16744286990b3a1646-0": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/5_1a7387b4-7442-4074-8e31-b94f44c7b82a.png",
+            "title": "Bailey",
+            "text": "<p>Bailey went to the University of Minnesota where she ran Cross Country and Track. Her main focuses were staying warm and not failing out. After forging her diploma in Canva, she created her own social media marketing agency. Although she is very self-driven, her actual driving skills remain subpar at best.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "template--16892992553234__4e0653c4-b888-4723-aeb9-eff16679af4d-16744286990b3a1646-1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/4_d41f0a5d-85bc-4d0b-bf4b-562450f624d4.png",
+            "title": "Daniel",
+            "text": "<p>Daniel barely graduated from the University of North Carolina where he ran the 400m dash. Nowadays he focuses on breaking Strava records and running his real estate private equity company. You’ve probably driven by one of his self-storage facilities and thought, “who would ever want to own this.” His only role within Cooldown is helping with taxes and is honestly confused why he is on the website.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__4e0653c4-b888-4723-aeb9-eff16679af4d-16744286990b3a1646-0",
+        "template--16892992553234__4e0653c4-b888-4723-aeb9-eff16679af4d-16744286990b3a1646-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "our founders",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 2,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "button_label": "follow cooldown on instagram plz",
+        "button_link": "https://www.instagram.com/cooldownrunning/",
+        "color_scheme": "background-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d": {
+      "type": "collage",
+      "blocks": {
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-0": {
+          "type": "video",
+          "disabled": true,
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "description": "Describe the video",
+            "image_padding": false
+          }
+        },
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-1": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "second_image": false
+          }
+        },
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-2": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-0",
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-1",
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Multimedia collage",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "collage",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "background-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "eeb58df1-4dc0-4449-b7f5-9d6e09ef5869": {
+      "type": "instafeed",
+      "disabled": true,
+      "settings": {
+        "heading_size": 20,
+        "feed_width": 100,
+        "html_area": ""
+      }
+    }
+  },
+  "order": [
+    "image_banner_wXJTHc",
+    "rich_text_kYb9RC",
+    "image_with_text_ywUz9c",
+    "image_with_text_UwBJGQ",
+    "image_with_text_t9P67h",
+    "rich_text_ibQYxL",
+    "main",
+    "df6ba312-e5fb-44d4-aca7-1a16f83409ec",
+    "5292ce00-b679-4fbb-87b4-d4dcef07eab5",
+    "f8781b33-9d27-4ca8-b55b-c873f836b313",
+    "4e0653c4-b888-4723-aeb9-eff16679af4d",
+    "07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d",
+    "eeb58df1-4dc0-4449-b7f5-9d6e09ef5869"
+  ]
+}

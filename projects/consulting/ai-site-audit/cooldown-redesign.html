@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cooldown running — redesign concept</title>
+  <meta name="description" content="Cooldown Running: a social club disguised as a run club. Find your crew in 15+ cities.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== COOLDOWN BRAND FONTS ===== */
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-regular.otf?v=1711998886') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-medium.otf?v=1711998886') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-bold.otf?v=1711998886') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-extra-bold.otf?v=1711998886') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Athletics';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/athletics-black.otf?v=1711998886') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'SpeziaMono';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/speziamono-regular.otf?v=1711998886') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'SpeziaMono';
+      src: url('https://cdn.nitroapps.co/fontify/cooldown-running.myshopify.com/speziamono-bold.otf?v=1711998886') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Athletics', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1a1a2e;
+      background: #ffffff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===== ANNOTATION BAR ===== */
+    .promo-bar {
+      background: #B292E7;
+      text-align: center;
+      padding: 9px 16px;
+    }
+
+    .promo-bar a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-family: 'SpeziaMono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: lowercase;
+    }
+
+    .promo-bar a:hover {
+      color: #fff;
+    }
+
+    .annotation-bar {
+      background: #1a1a2e;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      padding: 6px 16px;
+      font-family: 'SpeziaMono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .annotation-bar span {
+      color: #B292E7;
+      font-weight: 500;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-transform: lowercase;
+      color: #1a1a2e;
+    }
+
+    .nav-logo em {
+      font-style: normal;
+      color: #B292E7;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: lowercase;
+      color: #1a1a2e;
+      transition: color 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links a:hover {
+      color: #B292E7;
+    }
+
+    .nav-links .nav-shop {
+      background: #1a1a2e;
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-weight: 700;
+    }
+
+    .nav-links .nav-shop:hover {
+      background: #2d2650;
+    }
+
+    .nav-links .nav-cta {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .nav-links .nav-cta:hover {
+      background: #B292E7;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .mobile-menu span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #1a1a2e;
+      border-radius: 2px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: #1a1a2e;
+      overflow: hidden;
+      padding: 80px 24px;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      color: rgba(255, 255, 255, 0.9);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-family: 'SpeziaMono', monospace;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      text-transform: lowercase;
+      margin-bottom: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .hero h1 {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: clamp(42px, 7vw, 80px);
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.05;
+      text-transform: lowercase;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .accent {
+      color: #CFD6F0;
+    }
+
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px);
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #1a1a2e;
+      padding: 16px 36px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: lowercase;
+      letter-spacing: 0.3px;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #CFD6F0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ffffff;
+      padding: 16px 36px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 500;
+      text-transform: lowercase;
+      letter-spacing: 0.3px;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat .number {
+      font-family: 'SpeziaMono', 'Athletics', monospace;
+      font-size: 36px;
+      font-weight: 700;
+      color: #ffffff;
+      display: block;
+      letter-spacing: -1px;
+    }
+
+    .hero-stat .label {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: lowercase;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+    }
+
+    .hero-promo {
+      margin-top: 48px;
+    }
+
+    .hero-promo a {
+      display: inline-block;
+      font-family: 'SpeziaMono', monospace;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      padding: 12px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 100px;
+      transition: all 0.3s;
+    }
+
+    .hero-promo a:hover {
+      color: #fff;
+      border-color: #B292E7;
+      background: rgba(178, 146, 231, 0.15);
+    }
+
+    /* ===== SECTION UTILITY ===== */
+    .section {
+      padding: 100px 48px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header h2 {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      text-transform: lowercase;
+      letter-spacing: -1.5px;
+      color: #1a1a2e;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      font-size: 17px;
+      color: #6b6b80;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ===== CITY GRID ===== */
+    .cities {
+      background: #f8f7fc;
+    }
+
+    .city-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .city-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(178, 146, 231, 0.1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .city-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #B292E7, #CFD6F0);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .city-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(178, 146, 231, 0.15);
+      border-color: rgba(178, 146, 231, 0.3);
+    }
+
+    .city-card:hover::before {
+      opacity: 1;
+    }
+
+    .city-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #B292E7;
+      display: inline-block;
+      margin-right: 8px;
+      position: relative;
+    }
+
+    .city-dot::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(178, 146, 231, 0.2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0; }
+    }
+
+    .city-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: lowercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+    }
+
+    .city-card .city-detail {
+      font-family: 'SpeziaMono', monospace;
+      font-size: 12px;
+      color: #8b8ba0;
+      margin-bottom: 16px;
+      padding-left: 18px;
+    }
+
+    .city-card .city-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: #B292E7;
+      text-transform: lowercase;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+      padding-left: 18px;
+    }
+
+    .city-card:hover .city-link {
+      color: #1a1a2e;
+    }
+
+    /* ===== STORY SECTION ===== */
+    .story {
+      background: #1a1a2e;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(178, 146, 231, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .story-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .story-text h2 {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 800;
+      text-transform: lowercase;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      line-height: 1.1;
+    }
+
+    .story-text h2 .accent {
+      color: #B292E7;
+    }
+
+    .story-text p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .story-text .founder-note {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .story-text .founder-note p {
+      font-style: italic;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .story-text .founder-note .sig {
+      font-style: normal;
+      font-weight: 600;
+      color: #B292E7;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .story-image {
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(145deg, #2d2650, #4a3a7a);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(26, 26, 46, 0.6), transparent);
+    }
+
+    .story-image-label {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+      text-align: center;
+      z-index: 1;
+    }
+
+    /* ===== PRODUCTS ===== */
+    .products {
+      background: #ffffff;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-image {
+      aspect-ratio: 3 / 4;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-image:nth-child(1) {
+      background: linear-gradient(145deg, #CFD6F0, #e8e4f5);
+    }
+
+    .product-card:nth-child(1) .product-image {
+      background: linear-gradient(145deg, #CFD6F0, #ddd8f0);
+    }
+
+    .product-card:nth-child(2) .product-image {
+      background: linear-gradient(145deg, #B292E7, #c9a8f0);
+    }
+
+    .product-card:nth-child(3) .product-image {
+      background: linear-gradient(145deg, #e8e4f5, #CFD6F0);
+    }
+
+    .product-card:nth-child(4) .product-image {
+      background: linear-gradient(145deg, #2d2650, #4a3a7a);
+    }
+
+    .product-image-label {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    .product-card:nth-child(1) .product-image-label,
+    .product-card:nth-child(3) .product-image-label {
+      color: rgba(26, 26, 46, 0.25);
+    }
+
+    .product-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: lowercase;
+      margin-bottom: 4px;
+    }
+
+    .product-card .price {
+      font-size: 14px;
+      color: #8b8ba0;
+      font-weight: 400;
+    }
+
+    .product-card .tag {
+      display: inline-block;
+      background: #f0edf7;
+      color: #B292E7;
+      font-family: 'SpeziaMono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+    }
+
+    /* ===== REVIEWS ===== */
+    .reviews {
+      background: #f8f7fc;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .review-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 32px 28px;
+      border: 1px solid rgba(178, 146, 231, 0.08);
+      transition: all 0.3s;
+    }
+
+    .review-card:hover {
+      box-shadow: 0 8px 30px rgba(178, 146, 231, 0.1);
+    }
+
+    .review-stars {
+      color: #B292E7;
+      font-size: 16px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .review-card p {
+      font-size: 15px;
+      color: #4a4a60;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B292E7, #CFD6F0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .review-author-info .name {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: lowercase;
+    }
+
+    .review-author-info .location {
+      font-size: 12px;
+      color: #8b8ba0;
+    }
+
+    /* ===== BLOG ===== */
+    .blog {
+      background: #ffffff;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .blog-card {
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .blog-image {
+      aspect-ratio: 16 / 10;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .blog-card:nth-child(1) .blog-image {
+      background: linear-gradient(135deg, #4a3a7a, #B292E7);
+    }
+
+    .blog-card:nth-child(2) .blog-image {
+      background: linear-gradient(135deg, #CFD6F0, #e8e4f5);
+    }
+
+    .blog-card:nth-child(3) .blog-image {
+      background: linear-gradient(135deg, #1a1a2e, #2d2650);
+    }
+
+    .blog-image-label {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    .blog-card:nth-child(2) .blog-image-label {
+      color: rgba(26, 26, 46, 0.25);
+    }
+
+    .blog-card .blog-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #B292E7;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .blog-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: lowercase;
+      line-height: 1.35;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .blog-card .blog-excerpt {
+      font-size: 14px;
+      color: #8b8ba0;
+      line-height: 1.6;
+    }
+
+    /* ===== CTA / EMAIL ===== */
+    .cta-section {
+      background: linear-gradient(165deg, #1a1a2e 0%, #2d2650 50%, #4a3a7a 100%);
+      text-align: center;
+      padding: 100px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(178, 146, 231, 0.2), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .cta-content h2 {
+      font-family: 'Athletics', 'Inter', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      text-transform: lowercase;
+      letter-spacing: -1.5px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .cta-content p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .email-form {
+      display: flex;
+      gap: 12px;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .email-form input {
+      flex: 1;
+      padding: 16px 22px;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      color: #ffffff;
+      font-size: 14px;
+      font-family: 'Athletics', 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .email-form input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .email-form input:focus {
+      border-color: #B292E7;
+    }
+
+    .email-form button {
+      padding: 16px 32px;
+      border-radius: 100px;
+      background: #B292E7;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Athletics', 'Inter', sans-serif;
+      border: none;
+      cursor: pointer;
+      text-transform: lowercase;
+      letter-spacing: 0.3px;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .email-form button:hover {
+      background: #c9a8f0;
+      transform: translateY(-2px);
+    }
+
+    .cta-perks {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cta-perks span {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: lowercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cta-perks span::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #B292E7;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #111122;
+      padding: 60px 48px 32px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: lowercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand h3 em {
+      font-style: normal;
+      color: #B292E7;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-social a:hover {
+      background: #B292E7;
+      color: #ffffff;
+    }
+
+    .footer-col h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.3);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul a {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.2s;
+      text-transform: lowercase;
+    }
+
+    .footer-col ul a:hover {
+      color: #B292E7;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 72px 24px;
+      }
+
+      .nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+
+      .hero {
+        min-height: 85vh;
+        padding: 60px 24px;
+      }
+
+      .hero-stats {
+        gap: 28px;
+      }
+
+      .hero-stat .number {
+        font-size: 28px;
+      }
+
+      .city-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .story-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .story-image {
+        aspect-ratio: 16 / 10;
+        order: -1;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .review-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .email-form {
+        flex-direction: column;
+      }
+
+      .email-form button {
+        width: 100%;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .cta-section {
+        padding: 72px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .city-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROMO BAR -->
+  <div class="promo-bar">
+    <a href="#products">buy 4+ items &bull; get 20% off</a>
+  </div>
+
+  <!-- ANNOTATION BAR -->
+  <div class="annotation-bar">
+    redesign concept by <span>annabel filippini</span> &mdash; april 2026
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <a href="#" class="nav-logo"><img src="https://cooldownrunning.com/cdn/shop/files/footer-logo.svg?v=1706118872" alt="cooldown running" style="height: 28px; width: auto; filter: brightness(0);"></a>
+    <ul class="nav-links">
+      <li><a href="#products" class="nav-shop">shop</a></li>
+      <li><a href="#cities">find your city</a></li>
+      <li><a href="#story">our story</a></li>
+      <li><a href="#blog">from the run</a></li>
+      <li><a href="#cta" class="nav-cta">join the crew</a></li>
+    </ul>
+    <button class="mobile-menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <video class="hero-video" autoplay loop playsinline muted>
+      <source src="https://cdn.shopify.com/videos/c/o/v/81b6b4dcb2cf4947b2d2b59e7e2dbe0e.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <div class="hero-badge">now running in 15+ cities</div>
+      <h1>a social club<br>disguised as a <span class="accent">run club</span></h1>
+      <p>we started cooldown because we believe the best part of a run isn't the miles &mdash; it's the people you share them with. find your crew, show up every week, and belong to something real.</p>
+      <div class="hero-buttons">
+        <a href="#cities" class="btn-primary">find your city</a>
+        <a href="#products" class="btn-secondary">shop the collection</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section products" id="products">
+    <div class="section-header">
+      <h2>gear that moves with you</h2>
+      <p>designed for the run. made for after. every piece tested by the crew.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-image" style="background: #f0edf7;">
+          <img src="https://cooldownrunning.com/cdn/shop/files/33_df0e619b-b7bc-43fd-bc4b-213b6b5d82e0.png?v=1744654315&width=600" alt="Katherine Bra" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+        </div>
+        <h3>katherine bra</h3>
+        <span class="price">$58</span>
+        <div class="tag">best seller</div>
+      </div>
+      <div class="product-card">
+        <div class="product-image" style="background: #f0edf7;">
+          <img src="https://cooldownrunning.com/cdn/shop/files/46.png?v=1743468098&width=600" alt="Molly Short" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+        </div>
+        <h3>molly short</h3>
+        <span class="price">$62</span>
+      </div>
+      <div class="product-card">
+        <div class="product-image" style="background: #f0edf7;">
+          <img src="https://cooldownrunning.com/cdn/shop/files/93.png?v=1743468889&width=600" alt="Meg Tank" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+        </div>
+        <h3>meg tank</h3>
+        <span class="price">$48</span>
+      </div>
+      <div class="product-card">
+        <div class="product-image" style="background: #f0edf7;">
+          <img src="https://cooldownrunning.com/cdn/shop/files/39_19555747-27f9-42de-afc8-bcaacf7e6069.png?v=1743463382&width=600" alt="Kenny Short" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+        </div>
+        <h3>kenny short</h3>
+        <span class="price">$68</span>
+        <div class="tag">new drop</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITY GRID -->
+  <section class="section cities" id="cities">
+    <div class="section-header">
+      <h2>find your crew</h2>
+      <p>every city, every week. free runs, real people, no pace requirements. just show up.</p>
+    </div>
+    <div class="city-grid">
+      <div class="city-card">
+        <h3><span class="city-dot"></span>denver</h3>
+        <div class="city-detail">tuesdays &amp; thursdays &middot; 6:00 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>tampa</h3>
+        <div class="city-detail">wednesdays &middot; 6:30 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>boston</h3>
+        <div class="city-detail">tuesdays &middot; 6:00 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>charlotte</h3>
+        <div class="city-detail">thursdays &middot; 6:15 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>san diego</h3>
+        <div class="city-detail">wednesdays &middot; 6:00 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>chicago</h3>
+        <div class="city-detail">tuesdays &middot; 6:30 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>nashville</h3>
+        <div class="city-detail">wednesdays &middot; 6:00 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>austin</h3>
+        <div class="city-detail">thursdays &middot; 6:00 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>atlanta</h3>
+        <div class="city-detail">tuesdays &middot; 6:15 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>raleigh</h3>
+        <div class="city-detail">wednesdays &middot; 6:00 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>dallas</h3>
+        <div class="city-detail">tuesdays &middot; 6:30 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+      <div class="city-card">
+        <h3><span class="city-dot"></span>miami</h3>
+        <div class="city-detail">thursdays &middot; 6:00 pm</div>
+        <div class="city-link">join us &rarr;</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="section story" id="story">
+    <div class="story-inner">
+      <div class="story-text">
+        <h2>why we <span class="accent">run</span></h2>
+        <p>cooldown didn't start with a business plan. it started with a group chat. a few friends in denver who wanted to run together after work, grab a drink after, and actually talk to each other face-to-face.</p>
+        <p>turns out, a lot of people were craving the same thing. not another fitness app. not another virtual challenge. just a consistent place to show up, be yourself, and move with people who get it.</p>
+        <p>now we're in 15+ cities, and the formula hasn't changed: show up, run together, cool down together. no pace requirements, no membership fees, no ego. just people.</p>
+        <div class="founder-note">
+          <p>"the clothes came second. the community always came first."</p>
+          <div class="sig">&mdash; cooldown founders</div>
+        </div>
+      </div>
+      <div class="story-image" style="background: url('https://cooldownrunning.com/cdn/shop/files/20230510-A7_00492.jpg?v=1691622630&width=800') center/cover no-repeat;">
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section reviews" id="reviews">
+    <div class="section-header">
+      <h2>what runners are saying</h2>
+      <p>the gear is great. but the people are why you stay.</p>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>"i moved to charlotte knowing no one. showed up to a cooldown run on a wednesday, and now i have dinner plans every week. oh, and the molly shorts are insanely comfortable."</p>
+        <div class="review-author">
+          <div class="review-avatar">J</div>
+          <div class="review-author-info">
+            <div class="name">jessica m.</div>
+            <div class="location">charlotte chapter</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>"my therapist told me to join a community. i found cooldown. best thing i've done for my mental health this year. the vibes are unmatched and there's zero pressure to be fast."</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div class="review-author-info">
+            <div class="name">marcus t.</div>
+            <div class="location">denver chapter</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>"i'm not even a 'runner.' i'm a slow jogger at best. but cooldown doesn't care. everyone cheers for everyone. also the katherine bra changed my life, not being dramatic."</p>
+        <div class="review-author">
+          <div class="review-avatar">A</div>
+          <div class="review-author-info">
+            <div class="name">alani r.</div>
+            <div class="location">tampa chapter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="section blog" id="blog">
+    <div class="section-header">
+      <h2>from the run</h2>
+      <p>stories, guides, and spotlights from the cooldown community.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-image" style="background: url('https://cooldownrunning.com/cdn/shop/files/denver.jpg?v=1706726483&width=800') center/cover no-repeat; border-radius: 14px;">
+        </div>
+        <div class="blog-tag">routes</div>
+        <h3>best running routes in denver</h3>
+        <p class="blog-excerpt">from cherry creek trail to city park loops &mdash; our denver crew's favorite routes for every fitness level.</p>
+      </div>
+      <div class="blog-card">
+        <div class="blog-image" style="background: url('https://cooldownrunning.com/cdn/shop/files/collage1.jpg?v=1706284741&width=800') center/cover no-repeat; border-radius: 14px;">
+        </div>
+        <div class="blog-tag">new here?</div>
+        <h3>what to wear to your first cooldown</h3>
+        <p class="blog-excerpt">spoiler: whatever you want. but if you're curious about our favorites, here's where to start.</p>
+      </div>
+      <div class="blog-card">
+        <div class="blog-image" style="background: url('https://cooldownrunning.com/cdn/shop/files/Altra_Cooldown_Austin-31.jpg?v=1752725683&width=800') center/cover no-repeat; border-radius: 14px;">
+        </div>
+        <div class="blog-tag">crew spotlight</div>
+        <h3>meet the crew: tampa chapter</h3>
+        <p class="blog-excerpt">how a group chat turned into 80+ people showing up every wednesday in tampa bay.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="cta-content">
+      <h2>join the movement</h2>
+      <p>weekly run updates, new drops, city events, and the occasional meme. no spam, no fluff &mdash; just community.</p>
+      <form class="email-form" onsubmit="event.preventDefault()">
+        <input type="email" placeholder="your email" aria-label="Email address">
+        <button type="submit">count me in</button>
+      </form>
+      <div class="cta-perks">
+        <span>run updates</span>
+        <span>new drops first</span>
+        <span>city events</span>
+        <span>unsubscribe anytime</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3><img src="https://cooldownrunning.com/cdn/shop/files/footer-logo.svg?v=1706118872" alt="cooldown running" style="height: 24px; width: auto;"></h3>
+        <p>a social club disguised as a run club. free weekly runs in 15+ cities. no pace requirements, no fees. just show up.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a>
+          <a href="#" aria-label="Strava">ST</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Run</h4>
+        <ul>
+          <li><a href="#">find your city</a></li>
+          <li><a href="#">start a chapter</a></li>
+          <li><a href="#">ambassador program</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">all products</a></li>
+          <li><a href="#">women</a></li>
+          <li><a href="#">men</a></li>
+          <li><a href="#">accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">our story</a></li>
+          <li><a href="#">from the run (blog)</a></li>
+          <li><a href="#">contact</a></li>
+          <li><a href="#">returns &amp; exchanges</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 cooldown running. all rights reserved.</p>
+      <p>built with love in 15+ cities</p>
+    </div>
+  </footer>
+
+</body>
+</html>

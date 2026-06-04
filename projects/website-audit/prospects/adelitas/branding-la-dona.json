@@ -1,0 +1,106 @@
+{
+  "color_scheme": "light",
+  "logo": null,
+  "fonts": [
+    {
+      "family": "Times New Roman",
+      "role": "body"
+    },
+    {
+      "family": "DIN Regular",
+      "role": "heading"
+    },
+    {
+      "family": "Sherlock Vintage",
+      "role": "display"
+    },
+    {
+      "family": "DIN Condensed Bold",
+      "role": "heading"
+    },
+    {
+      "family": "Brigitte Eigner",
+      "role": "unknown"
+    }
+  ],
+  "colors": {
+    "primary": "#E38C33",
+    "secondary": "#0D766B",
+    "accent": "#8D3132",
+    "background": "#FBFBFA",
+    "textPrimary": "#191819",
+    "link": "#8D3132"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Times New Roman",
+      "heading": "DIN Regular"
+    },
+    "fontStacks": {
+      "heading": [
+        "Sherlock Vintage"
+      ],
+      "body": [
+        "Times New Roman"
+      ],
+      "paragraph": [
+        "DIN Regular"
+      ]
+    },
+    "fontSizes": {
+      "h1": "60px",
+      "h2": "60px",
+      "body": "16px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 10,
+    "borderRadius": "0px"
+  },
+  "components": {},
+  "icons": null,
+  "images": {
+    "favicon": "https://static.showit.co/200/tUYkSmpUQrO9IM_REc_l8A/144618/circle_logo_1.png",
+    "ogImage": "https://static.showit.co/1200/sLNvgLPpQiyCtdCPRqCCuQ/144618/la_dona_mezcaleria_share_logo.jpg"
+  },
+  "animations": null,
+  "layout": null,
+  "tone": null,
+  "personality": {
+    "tone": "traditional",
+    "energy": "medium",
+    "targetAudience": "adults interested in mezcal and dining experiences"
+  },
+  "__llm_logo_reasoning": {
+    "selectedIndex": -1,
+    "reasoning": "No valid brand logo - the candidates provided do not match the typical characteristics of a brand logo. Candidate #0 is extremely large and likely a hero image, while Candidate #1 is too small and lacks brand indicators.",
+    "confidence": 0.3,
+    "rejected": true,
+    "source": "llm"
+  },
+  "designSystem": {
+    "framework": "custom",
+    "componentLibrary": ""
+  },
+  "confidence": {
+    "buttons": 0,
+    "colors": 0.9,
+    "overall": 0.45
+  },
+  "__llm_metadata": {
+    "logoSelection": {
+      "llmCalled": true,
+      "llmSucceeded": true,
+      "finalSource": "llm",
+      "rawLogoSelection": {
+        "selectedLogoIndex": -1,
+        "selectedLogoReasoning": "No valid brand logo - the candidates provided do not match the typical characteristics of a brand logo. Candidate #0 is extremely large and likely a hero image, while Candidate #1 is too small and lacks brand indicators.",
+        "confidence": 0.3
+      }
+    },
+    "buttonClassification": {
+      "llmCalled": false,
+      "llmSucceeded": false
+    }
+  }
+}

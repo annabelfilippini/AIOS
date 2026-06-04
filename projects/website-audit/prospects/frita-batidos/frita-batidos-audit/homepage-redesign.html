@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Frita Batidos — Cuban Inspired Street Food | Ann Arbor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --blue: #4A90D9;
+    --blue-light: #7EC8E3;
+    --blue-deep: #3A7BC8;
+    --white: #FFFFFF;
+    --off-white: #F5F5F5;
+    --dark: #1A1A1A;
+    --dark-muted: #555555;
+    --gold: #D4A843;
+    --gold-light: #E8C876;
+    --blue-bg: #EAF3FB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--dark);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ---------- Fade-on-scroll ---------- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    height: 64px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,144,217,0.12);
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-flower {
+    width: 32px;
+    height: 32px;
+  }
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .nav-logo-name {
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    color: var(--blue);
+    text-transform: uppercase;
+  }
+  .nav-logo-tag {
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    color: var(--dark-muted);
+    margin-top: 1px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .nav-links a {
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--dark);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover {
+    color: var(--blue);
+  }
+  .nav-cta {
+    background: var(--blue);
+    color: var(--white) !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover {
+    background: var(--blue-deep) !important;
+  }
+  .nav-mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--dark);
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--white) 0%, var(--blue-bg) 100%);
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-text {
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+  .hero-headline {
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+  .hero-headline strong {
+    font-weight: 600;
+  }
+  .hero-sub {
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--dark-muted);
+    max-width: 440px;
+    margin-bottom: 32px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background: var(--blue-deep);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    display: inline-block;
+    color: var(--dark);
+    padding: 14px 24px;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .btn-secondary:hover {
+    color: var(--blue);
+  }
+  .hero-image-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-image-container {
+    position: relative;
+    width: 380px;
+    max-width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(74,144,217,0.18), 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .hero-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    will-change: transform;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(126,200,227,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ---------- Awards Ribbon ---------- */
+  .awards {
+    background: var(--blue);
+    padding: 24px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .awards-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding: 0 40px;
+  }
+  .award-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  .award-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .award-text {
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+  }
+  .award-divider {
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Menu Highlights ---------- */
+  .menu-section {
+    padding: 100px 0;
+    background: var(--white);
+  }
+  .section-eyebrow {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--dark);
+    margin-bottom: 48px;
+  }
+  .section-title strong {
+    font-weight: 600;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .menu-card {
+    background: var(--off-white);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(74,144,217,0.12);
+  }
+  .menu-card-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+  .menu-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .menu-card:hover .menu-card-image img {
+    transform: scale(1.04);
+  }
+  .menu-card-body {
+    padding: 20px;
+  }
+  .menu-card-name {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .menu-card-desc {
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--dark-muted);
+  }
+  .menu-card-reviews {
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--blue);
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- Story ---------- */
+  .story-section {
+    padding: 100px 0;
+    background: var(--off-white);
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .story-image {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  }
+  .story-image img {
+    width: 100%;
+    height: auto;
+  }
+  .story-text .section-eyebrow { margin-bottom: 12px; }
+  .story-text .section-title { margin-bottom: 24px; }
+  .story-body {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--dark-muted);
+    margin-bottom: 16px;
+  }
+  .story-detail {
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--blue);
+    letter-spacing: 0.02em;
+    padding: 12px 0;
+    border-top: 1px solid rgba(74,144,217,0.15);
+    margin-top: 20px;
+  }
+
+  /* ---------- Locations ---------- */
+  .locations-section {
+    padding: 100px 0;
+    background: var(--white);
+  }
+  .locations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .location-card {
+    background: var(--off-white);
+    border-radius: 16px;
+    padding: 36px;
+    border: 1px solid rgba(74,144,217,0.08);
+    transition: box-shadow 0.3s;
+  }
+  .location-card:hover {
+    box-shadow: 0 8px 32px rgba(74,144,217,0.1);
+  }
+  .location-city {
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .location-label {
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 20px;
+  }
+  .location-info {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--dark-muted);
+  }
+  .location-info strong {
+    font-weight: 500;
+    color: var(--dark);
+  }
+  .location-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 24px;
+    border: 1px solid var(--blue);
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--blue);
+    transition: background 0.2s, color 0.2s;
+  }
+  .location-btn:hover {
+    background: var(--blue);
+    color: var(--white);
+  }
+
+  /* ---------- Social Proof ---------- */
+  .reviews-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--blue-bg) 0%, var(--white) 100%);
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .review-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .review-stars {
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .review-quote {
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--dark);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .review-author {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--dark-muted);
+  }
+  .review-source {
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--blue);
+    margin-top: 2px;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    background: var(--dark);
+    padding: 48px 0;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer-logo-text {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    color: var(--blue-light);
+    text-transform: uppercase;
+  }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .footer-links a {
+    font-weight: 400;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover {
+    color: var(--white);
+  }
+  .footer-copy {
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ---------- Audit pills ---------- */
+  .audit-pill {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    z-index: 5;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .audit-pill.new { background: #1db954; color: #fff; }
+  .audit-pill.fix { background: #f5c518; color: #000; }
+  .audit-pill.sig { background: #3b82f6; color: #fff; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .nav-inner { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-mobile-toggle { display: block; }
+
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .hero-text { order: 1; }
+    .hero-image-wrap { order: 2; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-image-container { width: 280px; }
+    .hero-glow { display: none; }
+
+    .awards-track { gap: 20px; justify-content: center; }
+    .award-divider { display: none; }
+
+    .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .menu-card-image { height: 180px; }
+
+    .story-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .story-image { order: 2; }
+    .story-text { order: 1; }
+
+    .locations-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-headline { font-size: 32px; }
+    .hero-sub { font-size: 15px; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .hero-image-container { width: 240px; }
+    .hero-inner { min-height: auto; padding: 32px 20px; }
+    .menu-section, .story-section, .locations-section { padding: 64px 0; }
+    .reviews-section { padding: 56px 0; }
+    .section-title { font-size: 26px; }
+    .awards-track { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <!-- Inline SVG flower icon -->
+      <svg class="nav-flower" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="5" fill="#4A90D9"/>
+        <ellipse cx="20" cy="9" rx="5" ry="8" fill="#7EC8E3" opacity="0.85"/>
+        <ellipse cx="20" cy="31" rx="5" ry="8" fill="#7EC8E3" opacity="0.85"/>
+        <ellipse cx="9" cy="14" rx="5" ry="8" fill="#7EC8E3" opacity="0.85" transform="rotate(-60 9 14)"/>
+        <ellipse cx="31" cy="26" rx="5" ry="8" fill="#7EC8E3" opacity="0.85" transform="rotate(-60 31 26)"/>
+        <ellipse cx="9" cy="26" rx="5" ry="8" fill="#7EC8E3" opacity="0.85" transform="rotate(60 9 26)"/>
+        <ellipse cx="31" cy="14" rx="5" ry="8" fill="#7EC8E3" opacity="0.85" transform="rotate(60 31 14)"/>
+      </svg>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">Frita Batidos</span>
+        <span class="nav-logo-tag">Cuban Inspired Street Food!</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#story">Story</a>
+      <a href="#locations">Locations</a>
+      <a href="https://www.toasttab.com/fritabatidos" class="nav-cta" target="_blank">Order Now</a>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" style="position:relative;">
+  <div class="hero-inner">
+    <div class="hero-text fade-in">
+      <p class="hero-eyebrow">Est. 2010 / Ann Arbor, MI</p>
+      <h1 class="hero-headline">
+        <strong>Ann Arbor's Best Burger.</strong><br/>
+        11 Years Running.
+      </h1>
+      <p class="hero-sub">
+        Cuban-inspired fritas topped with shoestring fries, melted Muenster, and a fried egg. Paired with hand-spun tropical batidos.
+      </p>
+      <div class="hero-actions">
+        <a href="https://www.toasttab.com/fritabatidos" class="btn-primary" target="_blank">Order Now</a>
+        <a href="#menu" class="btn-secondary">See the Menu</a>
+      </div>
+    </div>
+    <div class="hero-image-wrap fade-in" style="transition-delay: 0.15s;">
+      <div class="hero-glow"></div>
+      <div class="hero-image-container" data-parallax>
+        <img src="assets/frita-hero-yelp.jpg" alt="Beef frita burger with fried egg and shoestring fries alongside a tropical batido" loading="eager"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== AWARDS RIBBON ========== -->
+<section class="awards">
+  <div class="awards-track">
+    <div class="award-item">
+      <svg class="award-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.77 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z" fill="#D4A843"/>
+      </svg>
+      <span class="award-text">Best Burger, Michigan Daily 2014 - 2025</span>
+    </div>
+    <div class="award-divider"></div>
+    <div class="award-item">
+      <svg class="award-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.77 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z" fill="#D4A843"/>
+      </svg>
+      <span class="award-text">Metro Times Best Cuban Restaurant 2020 - 2024</span>
+    </div>
+    <div class="award-divider"></div>
+    <div class="award-item">
+      <svg class="award-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.77 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z" fill="#D4A843"/>
+      </svg>
+      <span class="award-text">Yelp Top 100 Burger Spots #31</span>
+    </div>
+    <div class="award-divider"></div>
+    <div class="award-item">
+      <svg class="award-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.77 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z" fill="#D4A843"/>
+      </svg>
+      <span class="award-text">Best Specialty Burger, Hour Magazine 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MENU HIGHLIGHTS ========== -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-eyebrow">The Menu</p>
+      <h2 class="section-title">Street food, <strong>elevated.</strong></h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card fade-in" style="position:relative;">
+        <span class="audit-pill sig">SIGNATURE</span>
+        <div class="menu-card-image">
+          <img src="assets/frita-hero-yelp.jpg" alt="Beef Frita with fried egg and shoestring fries" loading="lazy"/>
+        </div>
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">Beef Frita</h3>
+          <p class="menu-card-desc">The original. House-ground beef, melted Muenster, shoestring fries piled on top. Add a fried egg.</p>
+          <p class="menu-card-reviews">218 reviews on Yelp</p>
+        </div>
+      </div>
+      <div class="menu-card fade-in" style="transition-delay:0.1s; position:relative;">
+        <div class="menu-card-image">
+          <img src="assets/frita-bowl-yelp.jpg" alt="Chorizo Frita with tropical slaw" loading="lazy"/>
+        </div>
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">Chorizo Frita</h3>
+          <p class="menu-card-desc">Spiced house-made chorizo, tropical slaw, pickled onion, cilantro. The fan favorite.</p>
+          <p class="menu-card-reviews">229 reviews on Yelp</p>
+        </div>
+      </div>
+      <div class="menu-card fade-in" style="transition-delay:0.2s; position:relative;">
+        <div class="menu-card-image" style="height: 220px;">
+          <img src="assets/frita-coconut-batido-yelp.jpg" alt="Coconut Cream Batido with umbrella" loading="lazy" style="object-position: center top;"/>
+        </div>
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">Coconut Batido</h3>
+          <p class="menu-card-desc">Hand-spun tropical milkshake. Creamy coconut blended with real fruit. Served with an umbrella.</p>
+          <p class="menu-card-reviews">50 reviews on Yelp</p>
+        </div>
+      </div>
+      <div class="menu-card fade-in" style="transition-delay:0.3s; position:relative;">
+        <div class="menu-card-image">
+          <img src="assets/frita-snack-yelp.jpg" alt="Plantain chips and dip platter" loading="lazy"/>
+        </div>
+        <div class="menu-card-body">
+          <h3 class="menu-card-name">Plantain Chips</h3>
+          <p class="menu-card-desc">Crispy fried plantains with house-made dips. The perfect starter while your frita is on the grill.</p>
+          <p class="menu-card-reviews">46 reviews on Yelp</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== THE STORY ========== -->
+<section class="story-section" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text fade-in">
+        <p class="section-eyebrow">The Story</p>
+        <h2 class="section-title">Cuban soul,<br/><strong>Michigan roots.</strong></h2>
+        <p class="story-body">
+          Founded by chef Eve Aronoff in 2010, Frita Batidos brings the Cuban street food tradition to downtown Ann Arbor. Inspired by the frita cubana sold at Havana lunch counters, every burger is built on locally sourced ingredients and a Slow Food philosophy.
+        </p>
+        <p class="story-body">
+          We strive to source our meat, cheese and produce from Michigan or the Midwest whenever possible. All chicken and beef is certified Halal.
+        </p>
+        <div class="story-detail">
+          Locally sourced / Slow Food philosophy / Certified Halal chicken and beef
+        </div>
+      </div>
+      <div class="story-image fade-in" style="transition-delay: 0.15s;">
+        <img src="assets/frita-drinks-yelp.jpg" alt="Frita Batidos bar interior with blue menu boards on white brick walls" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LOCATIONS ========== -->
+<section class="locations-section" id="locations">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-eyebrow">Visit Us</p>
+      <h2 class="section-title">Two locations. <strong>Same soul.</strong></h2>
+    </div>
+    <div class="locations-grid">
+      <div class="location-card fade-in" style="position:relative;">
+        <span class="audit-pill new">FLAGSHIP</span>
+        <h3 class="location-city">Ann Arbor</h3>
+        <p class="location-label">Original Location</p>
+        <div class="location-info">
+          <strong>117 W Washington St</strong><br/>
+          Ann Arbor, MI 48104<br/><br/>
+          <strong>Hours</strong><br/>
+          Mon - Thu: 11:00 AM - 11:00 PM<br/>
+          Fri - Sat: 11:00 AM - 12:00 AM<br/>
+          Sun: 11:00 AM - 11:00 PM<br/><br/>
+          <strong>Phone</strong><br/>
+          (734) 761-2882
+        </div>
+        <a href="https://maps.google.com/?q=117+W+Washington+St+Ann+Arbor+MI+48104" class="location-btn" target="_blank">Get Directions</a>
+      </div>
+      <div class="location-card fade-in" style="transition-delay: 0.1s;">
+        <h3 class="location-city">Detroit</h3>
+        <p class="location-label">Midtown</p>
+        <div class="location-info">
+          <strong>66 W Columbia</strong><br/>
+          Detroit, MI 48201<br/><br/>
+          Bringing the same Cuban-inspired flavors to Midtown Detroit.
+        </div>
+        <a href="https://maps.google.com/?q=66+W+Columbia+Detroit+MI+48201" class="location-btn" target="_blank">Get Directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SOCIAL PROOF ========== -->
+<section class="reviews-section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;">
+      <p class="section-eyebrow">What People Say</p>
+      <h2 class="section-title">4.4 stars. <strong>2,521 reviews.</strong></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="review-stars">* * * * *</div>
+        <p class="review-quote">"The frita burger with the shoestring fries on top is so good and honestly unlike anything else around here."</p>
+        <p class="review-author">Haley M.</p>
+        <p class="review-source">Yelp, Mar 2026</p>
+      </div>
+      <div class="review-card fade-in" style="transition-delay:0.1s;">
+        <div class="review-stars">* * * * *</div>
+        <p class="review-quote">"A staple in downtown Ann Arbor, Frita is always a great spot to meet up with friends."</p>
+        <p class="review-author">Dorothy H.</p>
+        <p class="review-source">Yelp Elite '26, Mar 2026</p>
+      </div>
+      <div class="review-card fade-in" style="transition-delay:0.2s;">
+        <div class="review-stars">* * * * *</div>
+        <p class="review-quote">"I would drive all the way from Chicago to Michigan to get this batido again."</p>
+        <p class="review-author">Kari O.</p>
+        <p class="review-source">Yelp Elite '26 All-Star, Jan 2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="5" fill="#7EC8E3"/>
+          <ellipse cx="20" cy="9" rx="5" ry="8" fill="#7EC8E3" opacity="0.55"/>
+          <ellipse cx="20" cy="31" rx="5" ry="8" fill="#7EC8E3" opacity="0.55"/>
+          <ellipse cx="9" cy="14" rx="5" ry="8" fill="#7EC8E3" opacity="0.55" transform="rotate(-60 9 14)"/>
+          <ellipse cx="31" cy="26" rx="5" ry="8" fill="#7EC8E3" opacity="0.55" transform="rotate(-60 31 26)"/>
+          <ellipse cx="9" cy="26" rx="5" ry="8" fill="#7EC8E3" opacity="0.55" transform="rotate(60 9 26)"/>
+          <ellipse cx="31" cy="14" rx="5" ry="8" fill="#7EC8E3" opacity="0.55" transform="rotate(60 31 14)"/>
+        </svg>
+        <span class="footer-logo-text">Frita Batidos</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/fritabatidos/" target="_blank">Instagram</a>
+        <a href="https://www.toasttab.com/fritabatidos" target="_blank">Order Online</a>
+        <a href="#menu">Menu</a>
+        <a href="#locations">Locations</a>
+      </div>
+    </div>
+    <p class="footer-copy">
+      Frita Batidos. Cuban Inspired Street Food. Ann Arbor & Detroit.
+    </p>
+  </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+  // --- Fade-on-scroll via IntersectionObserver ---
+  document.addEventListener('DOMContentLoaded', function() {
+    var els = document.querySelectorAll('.fade-in');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(function(el) { observer.observe(el); });
+    } else {
+      // Fallback: show everything
+      els.forEach(function(el) { el.classList.add('visible'); });
+    }
+
+    // --- Parallax on hero image ---
+    var parallaxEl = document.querySelector('[data-parallax] img');
+    if (parallaxEl) {
+      window.addEventListener('scroll', function() {
+        var scrollY = window.pageYOffset;
+        var rate = scrollY * 0.15;
+        parallaxEl.style.transform = 'translateY(' + rate + 'px) scale(1.05)';
+      }, { passive: true });
+    }
+
+    // --- Review stars: replace asterisks with filled star SVGs ---
+    document.querySelectorAll('.review-stars').forEach(function(el) {
+      el.innerHTML = Array(5).fill('<svg width="14" height="14" viewBox="0 0 20 20" fill="#D4A843" xmlns="http://www.w3.org/2000/svg"><path d="M10 1l2.47 5.01L18 6.9l-4 3.9.94 5.5L10 13.77 5.06 16.3l.94-5.5-4-3.9 5.53-.89L10 1z"/></svg>').join('');
+    });
+  });
+</script>
+</body>
+</html>

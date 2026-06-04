@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About - Annabel Filippini</title>
+<style>
+  @font-face {
+    font-family: "Fraunces";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("assets/d80a4ffa-e753-4ff7-9546-74dd00573b21.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Public Sans";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url("assets/2fdc68cd-badc-4f5f-b765-239416229352.woff2") format("woff2");
+  }
+
+  :root {
+    --coral: #C97E6D;
+    --cream: #F5EDDE;
+    --ivory: #FCF6E9;
+    --butter: #ECD68C;
+    --sage: #D4D9BD;
+    --forest: #1F3F2F;
+    --maroon: #7A2620;
+    --terracotta: #B95A47;
+    --display: "Fraunces", Georgia, serif;
+    --sans: "Public Sans", system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--forest);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 28px 24px;
+    background: rgba(245, 237, 222, 0.94);
+    box-shadow: 0 10px 28px rgba(31, 63, 47, 0.10);
+  }
+  .nav a {
+    color: var(--forest);
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .nav a[aria-current="page"] { color: var(--terracotta); }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.65fr);
+    gap: 64px;
+    align-items: end;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 96px 48px 84px;
+  }
+  .eyebrow {
+    color: var(--terracotta);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 22px;
+  }
+  h1, h2, h3, p { margin-top: 0; }
+  .hero__title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(54px, 8vw, 112px);
+    line-height: 0.94;
+    color: var(--maroon);
+    margin-bottom: 28px;
+    max-width: 10ch;
+    text-wrap: balance;
+  }
+  .hero__lede {
+    font-size: 22px;
+    line-height: 1.55;
+    max-width: 47ch;
+    margin-bottom: 0;
+  }
+  .portrait {
+    align-self: stretch;
+    min-height: 520px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--coral);
+  }
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .story {
+    background: var(--forest);
+    color: var(--cream);
+    padding: 96px 48px 104px;
+  }
+  .story__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(220px, 0.45fr) minmax(0, 1fr);
+    gap: 72px;
+  }
+  .badge {
+    width: 96px;
+    height: 96px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--butter);
+    color: var(--forest);
+    font-family: var(--display);
+    font-size: 34px;
+  }
+  .story__body {
+    display: grid;
+    gap: 28px;
+    font-size: clamp(24px, 3.1vw, 38px);
+    line-height: 1.24;
+  }
+  .story__body p { margin: 0; }
+  .hl { color: var(--butter); }
+
+  .proof {
+    padding: 92px 48px 108px;
+  }
+  .proof__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .proof__header {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(280px, 0.55fr);
+    gap: 56px;
+    align-items: end;
+    margin-bottom: 44px;
+  }
+  .proof__title {
+    font-family: var(--display);
+    font-size: clamp(42px, 5vw, 72px);
+    line-height: 1;
+    color: var(--maroon);
+    margin-bottom: 0;
+  }
+  .proof__lede {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .card {
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    border: 1px solid rgba(31, 63, 47, 0.18);
+    border-radius: 8px;
+    padding: 24px;
+    background: var(--ivory);
+  }
+  .card__tag {
+    color: var(--terracotta);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .card__title {
+    font-family: var(--display);
+    color: var(--forest);
+    font-size: 30px;
+    line-height: 1.04;
+    margin-bottom: 12px;
+  }
+  .card__body {
+    color: rgba(31, 63, 47, 0.78);
+    font-size: 15px;
+    line-height: 1.55;
+    margin-bottom: 0;
+  }
+
+  .cta {
+    background: var(--coral);
+    color: var(--cream);
+    padding: 76px 48px;
+  }
+  .cta__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+  }
+  .cta__title {
+    font-family: var(--display);
+    font-size: clamp(36px, 4vw, 58px);
+    line-height: 1;
+    margin-bottom: 0;
+    max-width: 12ch;
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    padding: 16px 22px;
+    border-radius: 2px;
+    background: var(--forest);
+    color: var(--cream);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 980px) {
+    .hero,
+    .story__inner,
+    .proof__header {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .portrait { min-height: 460px; }
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 720px) {
+    .nav {
+      justify-content: flex-start;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 22px 20px;
+    }
+    .hero,
+    .story,
+    .proof,
+    .cta {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .hero { padding-top: 64px; }
+    .hero__lede { font-size: 18px; }
+    .portrait { min-height: 360px; }
+    .story__body { font-size: 23px; }
+    .cards { grid-template-columns: 1fr; }
+    .card { min-height: auto; }
+    .cta__inner {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .button {
+      width: 100%;
+      white-space: normal;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="work-with-me.html">Work With Me</a>
+    <a href="skills.html">Skills</a>
+    <a href="lab.html">Lab</a>
+    <a href="about.html" aria-current="page">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">About</p>
+      <h1 class="hero__title">AI, systems, and human judgment.</h1>
+      <p class="hero__lede">I help people and businesses figure out where AI belongs, what should stay human, and how messy work can become clearer, repeatable systems.</p>
+    </div>
+    <div class="portrait">
+      <img src="assets/d604204d-7df3-4e3d-8af3-b6a954dc8e05.png" alt="Annabel Filippini">
+    </div>
+  </header>
+
+  <section class="story">
+    <div class="story__inner">
+      <div class="badge" aria-hidden="true">AF</div>
+      <div class="story__body">
+        <p>This is my home base: who I am, what I am building, and how I can help.</p>
+        <p>I am a University of Michigan School of Information graduate joining Okta as a Product Analyst. My work sits between technology, people, data, and design, with a focus on making AI practical instead of overwhelming.</p>
+        <p>For small businesses, I audit workflows and customer journeys to find where AI or better systems would help, then turn that into a clearer starting point.</p>
+        <p>Alongside the client work, I share the thinking behind it: <span class="hl">AI operating systems</span>, research, workflow design, website audits, data storytelling, product judgment, and small projects I am building in public.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="proof__inner">
+      <header class="proof__header">
+        <div>
+          <p class="eyebrow">What connects it</p>
+          <h2 class="proof__title">Credible, curious, and useful.</h2>
+        </div>
+        <p class="proof__lede">The thread is simple: understand the work, find the repeated friction, keep the human judgment, and build a system that gets better over time.</p>
+      </header>
+      <div class="cards">
+        <article class="card">
+          <div class="card__tag">Education</div>
+          <div>
+            <h3 class="card__title">Michigan SI</h3>
+            <p class="card__body">A background in information, UX, data, product thinking, and how people actually use technology.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card__tag">Product</div>
+          <div>
+            <h3 class="card__title">Okta</h3>
+            <p class="card__body">Incoming Product Analyst work that keeps the technical side tied to real users, decisions, and business context.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card__tag">Builder</div>
+          <div>
+            <h3 class="card__title">AI-OS</h3>
+            <p class="card__body">A living operating system for projects, agents, memory, handoffs, research, and repeatable skills.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card__tag">Small business</div>
+          <div>
+            <h3 class="card__title">Audit work</h3>
+            <p class="card__body">Practical website, workflow, Shopify, and AIOS audits for owners who need clarity before implementation.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta__inner">
+      <h2 class="cta__title">Start with the useful next step.</h2>
+      <a class="button" href="contact.html">Contact Annabel</a>
+    </div>
+  </section>
+</body>
+</html>

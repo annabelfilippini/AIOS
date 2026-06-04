@@ -1,0 +1,194 @@
+{{ 'section-location-detail.css' | asset_url | stylesheet_tag }}
+
+
+<div class="club-cols">
+{% for block in section.blocks %}
+      <div class="club-cover">
+          {%- assign city_class = block.settings.city | handleize -%}
+          {%- if block.settings.image != blank -%}
+            {%- if block.settings.image.width != blank -%}
+              {{ block.settings.image | image_url: width: 1500 | image_tag:
+                loading: 'lazy',
+                class: city_class,
+                sizes: '(min-width: 750px) 50vw, 100vw',
+                widths: '375, 550, 750, 1100, 1500'
+              }}
+            {%- else -%}
+              <img
+                src="{{ block.settings.image | escape }}"
+                alt="{{ block.settings.city | escape }}"
+                class="{{ city_class }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+          {%- endif -%}
+      </div>
+      <div class="club-details">
+          
+            <h2>{{ block.settings.city }}</h2>
+            <h3>{{ block.settings.state }}</h3>
+            <div class="deets">
+                {%- if block.settings.when != blank -%}
+                   <div class="when">
+                    <span>When</span>
+                    <p>{{ block.settings.when }}</p>
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.where != blank -%}
+                   <div class="where">
+                    <span>Where</span>
+                    {{ block.settings.where }}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.what != blank -%}
+                   <div class="what">
+                    <span>What</span>
+                    {{ block.settings.what }}
+                  </div>
+                {%- endif -%}
+                <div class="leaders">
+                    <span>Leaders</span>
+                    <div class="lead-grid">
+                        {%- if block.settings.leader1 != blank -%}
+                           <div class="lead-deets">
+                            {{ block.settings.leader1 }}
+                          </div>
+                        {%- endif -%}
+                        {%- if block.settings.leader2 != blank -%}
+                           <div class="lead-deets">
+                            {{ block.settings.leader2 }}
+                          </div>
+                        {%- endif -%}
+                            {%- if block.settings.leader3 != blank -%}
+                           <div class="lead-deets">
+                            {{ block.settings.leader3 }}
+                          </div>
+                        {%- endif -%}
+                            {%- if block.settings.leader4 != blank -%}
+                           <div class="lead-deets">
+                            {{ block.settings.leader4 }}
+                          </div>
+                        {%- endif -%}
+                            {%- if block.settings.leader5 != blank -%}
+                           <div class="lead-deets">
+                            {{ block.settings.leader5 }}
+                          </div>
+                        {%- endif -%}
+                            {%- if block.settings.leader6 != blank -%}
+                           <div class="lead-deets">
+                            {{ block.settings.leader6 }}
+                          </div>
+                        {%- endif -%}
+                            {%- if block.settings.leader7 != blank -%}
+                           <div class="lead-deets">
+                            {{ block.settings.leader7 }}
+                          </div>
+                        {%- endif -%}
+                            {%- if block.settings.leader8 != blank -%}
+                           <div class="lead-deets">
+                            {{ block.settings.leader8 }}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                </div>
+    
+            </div>
+           
+            </div>
+     {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Run Club Location Details",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+   "blocks": [
+    {
+      "type": "column",
+      "name": "Location Details",
+      "settings": [
+          {
+          "type": "url",
+          "id": "image",
+          "label": "Location Image URL"
+        },
+        {
+          "type": "text",
+          "id": "city",
+          "label": "City"
+        },
+        {
+          "type": "text",
+          "id": "state",
+          "label": "State"
+        },
+        {
+          "type": "text",
+          "id": "when",
+          "label": "When"
+        },
+        {
+          "type": "richtext",
+          "id": "where",
+          "label": "Where"
+        },
+        {
+          "type": "richtext",
+          "id": "what",
+          "label": "What"
+        },
+        {
+          "type": "richtext",
+          "id": "leader1",
+          "label": "Leader 1"
+        },
+                {
+          "type": "richtext",
+          "id": "leader2",
+          "label": "Leader 2"
+        },
+                {
+          "type": "richtext",
+          "id": "leader3",
+          "label": "Leader 3"
+        },
+                {
+          "type": "richtext",
+          "id": "leader4",
+          "label": "Leader 4"
+        },
+                {
+          "type": "richtext",
+          "id": "leader5",
+          "label": "Leader 5"
+        },
+                {
+          "type": "richtext",
+          "id": "leader6",
+          "label": "Leader 6"
+        },
+                {
+          "type": "richtext",
+          "id": "leader7",
+          "label": "Leader 7"
+        },
+                {
+          "type": "richtext",
+          "id": "leader8",
+          "label": "Leader 8"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Run Club Location Details",
+       "blocks": []
+      
+    }
+  ]
+
+}
+{% endschema %}

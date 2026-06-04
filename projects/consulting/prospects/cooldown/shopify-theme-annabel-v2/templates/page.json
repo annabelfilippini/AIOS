@@ -1,0 +1,351 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "df6ba312-e5fb-44d4-aca7-1a16f83409ec": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "your local run club",
+            "heading_size": "h1"
+          }
+        },
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>or walk club. or rollerblade club, stand-and-chat club, drinking club, really whatever your heart desires. we're just happy to have you. 🙃</p>",
+            "text_style": "body"
+          }
+        },
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-0",
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-1",
+        "template--16892992553234__df6ba312-e5fb-44d4-aca7-1a16f83409ec-167243733820e48abc-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/IMG_5818_bac83555-c762-497a-8eb6-bfdbc16b2da6.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "content_layout": "overlap",
+        "color_scheme": "accent-2",
+        "mobile_content_alignment": "center",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "5292ce00-b679-4fbb-87b4-d4dcef07eab5": {
+      "type": "image-banner",
+      "blocks": {
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "start a cooldown",
+            "heading_size": "h0"
+          }
+        },
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-2": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-0",
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-2"
+      ],
+      "custom_css": [
+        "h2 {color: white;}",
+        ".banner__text {color: white; line-height: 1.4; font-size: 20px;}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 30px !important; }}",
+        "@media screen and (max-width: 767px) {.banner__text {font-size: 16px !important; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Altra_Cooldown_Austin-31.jpg",
+        "image_2": "shopify://shop_images/20230510-A7_00492.jpg",
+        "image_overlay_opacity": 20,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    },
+    "rich_text_ic4XaW": {
+      "type": "rich-text",
+      "blocks": {
+        "text_gYTwp3": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>cooldown doesn’t exist without the people who lead it.</h2><h2>if you love community, bringing people together, and want a passion project that actually means something — you’re already halfway there.</h2><h2>joining the cooldown crew means stepping into a leadership role and helping build a run community where you live or learn. how you do that is up to you.</h2>"
+          }
+        }
+      },
+      "block_order": [
+        "text_gYTwp3"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-2",
+        "full_width": true,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "rich_text_r666cA": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_fC9TUt": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>choose your path</p>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_fC9TUt"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 44,
+        "padding_bottom": 0
+      }
+    },
+    "multicolumn_xxwgPD": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_xc3amd": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-01-30_at_12.06.44_PM.png",
+            "title": "start a cooldown in your city",
+            "text": "<p>this isn’t just showing up — it’s stepping up.</p><p>you’ll gain leadership experience, real ownership, and the chance to build something from the ground up — with support from the cooldown team and a network of leaders doing the same thing.</p>",
+            "link_label": "Learn more about starting a city",
+            "link": "shopify://pages/cooldown-city"
+          }
+        },
+        "column_PwbjHc": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-01-30_at_12.03.05_PM.png",
+            "title": "start a cooldown university chapter",
+            "text": "<p>on a college campus (or about to be)?</p><p>bring cooldown to your university and create a low-pressure, social run club for students who want real connection. you'll gain leadership and entrepreneurial experience while building community.</p>",
+            "link_label": "Learn more about starting a university chapter",
+            "link": "shopify://pages/cooldown-university"
+          }
+        }
+      },
+      "block_order": [
+        "column_xc3amd",
+        "column_PwbjHc"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 2,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "background-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 32,
+        "padding_bottom": 80
+      }
+    },
+    "blocks_GjNBfT": {
+      "type": "_blocks",
+      "name": "Application button",
+      "settings": {}
+    },
+    "f8781b33-9d27-4ca8-b55b-c873f836b313": {
+      "type": "rich-text",
+      "blocks": {
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "4e0653c4-b888-4723-aeb9-eff16679af4d": {
+      "type": "multicolumn",
+      "blocks": {
+        "template--16892992553234__4e0653c4-b888-4723-aeb9-eff16679af4d-16744286990b3a1646-0": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/2.png",
+            "title": "Bailey",
+            "text": "<p><strong>Favorite things: </strong>colorful clothing, cute coffee shops, tropical vacations, my friends<br/><br/><strong>Past Life:</strong> University of Minnesota track & field athlete</p><p><br/><strong>Currently: </strong>Founder of a social media marketing agency, Nesscessity</p><p><br/><strong>Favorite running memory:</strong> running the New York City Marathon with 50,000 of my closest friends<br/><br/><strong>Hometown:</strong> St. Paul, Minnesota<br/><br/><strong>Denver has been home since:</strong> Summer 2020</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "template--16892992553234__4e0653c4-b888-4723-aeb9-eff16679af4d-16744286990b3a1646-1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/3_87377714-2dfc-4ca7-b1d6-d1556db2cad3.png",
+            "title": "Daniel",
+            "text": "<p><strong>Favorite things: </strong>snowboarding & surfing trips<br/><br/><strong>Past Life:</strong> 400m athlete at UNC</p><p><br/><strong>Currently: </strong>co-founder of Ivywild Capital, a boutique real estate private equity company</p><p><br/><strong>Favorite running memory:</strong> any 4x400 relay</p><p><br/><strong>Hometown:</strong> Colorado Springs, CO<br/><br/><strong>Denver has been home since:</strong> Spring 2021</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__4e0653c4-b888-4723-aeb9-eff16679af4d-16744286990b3a1646-0",
+        "template--16892992553234__4e0653c4-b888-4723-aeb9-eff16679af4d-16744286990b3a1646-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 2,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "button_label": "follow cooldown on instagram plz",
+        "button_link": "https://www.instagram.com/cooldownrunning/",
+        "color_scheme": "background-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d": {
+      "type": "collage",
+      "blocks": {
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-0": {
+          "type": "video",
+          "disabled": true,
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "description": "Describe the video",
+            "image_padding": false
+          }
+        },
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-1": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "second_image": false
+          }
+        },
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-2": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-0",
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-1",
+        "template--16892992553234__07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d-167442852305f03c32-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Multimedia collage",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "collage",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "background-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "eeb58df1-4dc0-4449-b7f5-9d6e09ef5869": {
+      "type": "instafeed",
+      "disabled": true,
+      "settings": {
+        "heading_size": 20,
+        "feed_width": 100,
+        "html_area": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "df6ba312-e5fb-44d4-aca7-1a16f83409ec",
+    "5292ce00-b679-4fbb-87b4-d4dcef07eab5",
+    "rich_text_ic4XaW",
+    "rich_text_r666cA",
+    "multicolumn_xxwgPD",
+    "blocks_GjNBfT",
+    "f8781b33-9d27-4ca8-b55b-c873f836b313",
+    "4e0653c4-b888-4723-aeb9-eff16679af4d",
+    "07d67cb9-6bd9-46f9-aeec-b92ee74c7d0d",
+    "eeb58df1-4dc0-4449-b7f5-9d6e09ef5869"
+  ]
+}

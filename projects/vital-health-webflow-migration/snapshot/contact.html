@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contact &mdash; Vital Health Integrative Medicine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5EFE0;
+    --cream-2:#EFE8D5;
+    --paper:#FBF7EC;
+    --sand:#E9DFC3;
+    --stone:#E0D7BE;
+    --stone-2:#CFC4A6;
+    --sage:#D6DCC9;
+    --ink:#2A2A26;
+    --ink-2:#3F3F38;
+    --muted:#7A776B;
+    --forest:#1F4D2A;
+    --forest-2:#163820;
+    --forest-soft:#27583B;
+    --gold:#C9A04A;
+    --gold-soft:#E2C887;
+    --gold-dim:#A6823A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:400;letter-spacing:-0.014em;color:var(--ink);font-optical-sizing:auto}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  .eyebrow{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--forest)}
+
+  .pulse{display:block;width:56px;height:14px;margin-bottom:22px}
+  .pulse path{fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:160;stroke-dashoffset:160;animation:pulseDraw 2.2s ease-out 0.3s forwards}
+  .pulse--center{margin-left:auto;margin-right:auto}
+  @keyframes pulseDraw{to{stroke-dashoffset:0}}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1 !important;transform:none !important;transition:none !important}}
+  .reveal-d-1{transition-delay:.08s}
+  .reveal-d-2{transition-delay:.16s}
+  .reveal-d-3{transition-delay:.24s}
+
+  /* ——— Nav ——— */
+  nav.top{position:fixed;top:0;left:0;right:0;z-index:50;padding:20px 56px;display:flex;align-items:center;justify-content:space-between;transition:background .35s ease,backdrop-filter .35s ease,padding .35s ease,box-shadow .35s ease;color:var(--ink);background:rgba(245,239,224,0.88);backdrop-filter:blur(8px)}
+  nav.top .brand{display:inline-flex;align-items:center;gap:14px;text-decoration:none;color:inherit}
+  nav.top .brand .brand-logo{height:56px;width:auto;display:block;flex-shrink:0}
+  nav.top .brand .brand-txt{display:inline-flex;flex-direction:column;line-height:1;gap:7px}
+  nav.top .brand .brand-name{font-family:'Fraunces',serif;font-size:26px;color:var(--forest);font-weight:400;line-height:1;letter-spacing:-0.005em}
+  nav.top .brand .brand-tag{font-family:'Inter',sans-serif;font-size:9.5px;color:var(--forest);opacity:0.78;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;line-height:1}
+  nav.top .nav-center{display:flex;gap:34px;list-style:none;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+  nav.top .nav-center a{transition:color .25s;padding:8px 0}
+  nav.top .nav-center a:hover{color:var(--forest)}
+  nav.top .nav-center a.active{color:var(--forest);position:relative}
+  nav.top .nav-center a.active::after{content:'';position:absolute;left:-4px;right:-4px;bottom:0;height:1px;background:var(--gold)}
+  nav.top .portal{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;background:transparent;color:var(--forest);padding:11px 22px;border-radius:0;font-weight:600;transition:all .25s;font-family:'Inter',sans-serif;border:1.5px solid var(--forest);display:inline-flex;align-items:center;gap:8px}
+  nav.top .portal:hover{background:var(--forest);color:var(--cream)}
+  nav.top .portal svg{width:12px;height:12px}
+  nav.top.scrolled{background:rgba(245,239,224,0.96);box-shadow:0 1px 0 var(--stone);padding:14px 56px}
+  nav.top .menu-toggle{display:none;width:38px;height:38px;border-radius:999px;border:1px solid var(--stone-2);background:transparent;color:var(--ink);align-items:center;justify-content:center;flex-direction:column;gap:4px;margin-left:12px}
+  nav.top .menu-toggle span{display:block;width:16px;height:1px;background:currentColor;transition:transform .3s, opacity .3s}
+  nav.top.open .menu-toggle span:nth-child(1){transform:translateY(2.5px) rotate(45deg)}
+  nav.top.open .menu-toggle span:nth-child(2){transform:translateY(-2.5px) rotate(-45deg)}
+  .mobile-menu{position:fixed;inset:0;z-index:45;background:var(--cream);color:var(--ink);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+  .mobile-menu.open{opacity:1;pointer-events:auto}
+  .mobile-menu a{font-family:'Fraunces',serif;font-size:32px;font-weight:300;letter-spacing:-0.012em;color:var(--ink)}
+  .mobile-menu a.active{color:var(--forest)}
+  .mobile-menu .m-cta{margin-top:20px;background:var(--forest);color:var(--cream);padding:14px 28px;border-radius:0;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:0.06em;font-weight:500}
+
+  /* ——— Page hero ——— */
+  .page-hero{position:relative;padding:170px 56px 80px;background:linear-gradient(180deg,var(--cream) 0%,var(--paper) 100%);border-bottom:1px solid var(--stone)}
+  .page-hero-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.15fr 1fr;gap:80px;align-items:end}
+  .page-hero .eyebrow{display:block;margin-bottom:16px}
+  .page-hero h1{font-size:clamp(54px,6.2vw,92px);line-height:1.02;font-weight:300;letter-spacing:-0.024em;color:var(--ink);padding-bottom:0.08em}
+  .page-hero h1 .emph{color:var(--forest);font-weight:400}
+  .page-hero p{font-size:16.5px;color:var(--ink-2);line-height:1.8;max-width:500px}
+
+  /* ——— Contact grid ——— */
+  .contact{padding:110px 56px 140px;background:var(--paper);min-height:calc(100vh - 96px)}
+  .contact-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:90px;align-items:start}
+
+  /* Info panel */
+  .info-panel{display:flex;flex-direction:column;gap:42px}
+  .info-card{background:var(--forest);color:var(--cream);padding:56px 52px 50px;position:relative;overflow:hidden}
+  .info-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(201,160,74,0.22),transparent 55%);pointer-events:none}
+  .info-card .pulse{margin-bottom:24px}
+  .info-card .pulse path{stroke:var(--gold-soft)}
+  .info-card .eyebrow{color:var(--gold-soft);display:block;margin-bottom:16px}
+  .info-card h3{color:var(--cream);font-size:clamp(34px,3.4vw,46px);line-height:1.04;font-weight:300;letter-spacing:-0.02em;margin-bottom:18px}
+  .info-card h3 .emph{color:var(--gold-soft);font-weight:400}
+  .info-card p{font-size:16px;line-height:1.75;opacity:0.86;margin-bottom:34px;max-width:440px}
+  .info-card .cta-row{display:flex;flex-direction:column;gap:14px;position:relative;z-index:2}
+  .cta-white{font-size:13px;letter-spacing:0.05em;background:var(--cream);color:var(--forest);padding:14px 26px;border-radius:0;font-weight:500;display:inline-flex;align-items:center;gap:10px;transition:all .3s;align-self:flex-start}
+  .cta-white:hover{background:var(--gold-soft);color:var(--forest-2)}
+  .cta-ghost{font-size:13px;letter-spacing:0.05em;color:var(--cream);padding:14px 26px;border:1px solid rgba(245,239,224,0.35);border-radius:0;font-weight:500;display:inline-flex;align-items:center;gap:10px;transition:all .3s;align-self:flex-start}
+  .cta-ghost:hover{border-color:var(--gold-soft);color:var(--gold-soft)}
+
+  .facts-list{display:flex;flex-direction:column;gap:30px;padding-top:10px}
+  .facts-list .facts-eyebrow{display:block;margin-bottom:18px;padding-bottom:24px;border-bottom:1px solid var(--stone)}
+  .fact-item{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start;padding-bottom:26px;border-bottom:1px solid var(--stone)}
+  .fact-item:last-child{border-bottom:none;padding-bottom:0}
+  .fact-item .lbl{font-size:10.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dim);font-weight:500;padding-top:3px}
+  .fact-item .val{font-family:'Fraunces',serif;font-size:18px;color:var(--ink);line-height:1.5;font-weight:400;letter-spacing:-0.004em}
+  .fact-item .val a{color:var(--ink);border-bottom:1px solid transparent;transition:border-color .25s}
+  .fact-item .val a:hover{border-color:var(--gold)}
+
+  /* Map band */
+  .map-band{padding:0;background:var(--cream-2);position:relative}
+  .map-band-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:0;min-height:280px}
+  .map-band-text{padding:80px 56px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+  .map-band-text .eyebrow{display:block;margin-bottom:4px}
+  .map-band-text h3{font-size:clamp(28px,3vw,38px);font-weight:300;line-height:1.1;letter-spacing:-0.02em;max-width:460px}
+  .map-band-text h3 .emph{color:var(--forest);font-weight:400}
+  .map-band-text p{font-size:15px;color:var(--ink-2);line-height:1.7;max-width:420px}
+  .map-band-img{position:relative;background:var(--sage);overflow:hidden}
+  .map-band-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85) brightness(0.96)}
+  .map-band-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--cream-2) 0%,rgba(239,232,213,0) 20%);pointer-events:none}
+
+  /* ——— Footer ——— */
+  footer{background:var(--forest);color:var(--cream);padding:84px 56px 38px}
+  .foot{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:60px;margin-bottom:68px}
+  footer h4{font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:20px;font-weight:500}
+  footer .brand-f{font-family:'Fraunces',serif;font-size:30px;color:var(--cream);margin-bottom:16px;font-weight:400;display:inline-flex;align-items:center;gap:14px}
+  footer .brand-f .brand-mark{display:inline-block;width:54px;height:45px;-webkit-mask:url('vital-health-hummingbird.png') center/contain no-repeat;mask:url('vital-health-hummingbird.png') center/contain no-repeat;background-color:var(--gold-soft);flex-shrink:0}
+  footer .brand-f .brand-txt{display:inline-flex;flex-direction:column;line-height:1;gap:4px}
+  footer .brand-f .brand-name{font-family:'Fraunces',serif;font-size:28px;color:var(--cream);font-weight:400;line-height:1;letter-spacing:-0.002em}
+  footer .brand-f .brand-tag{font-family:'Inter',sans-serif;font-size:10px;color:var(--gold-soft);letter-spacing:0.26em;text-transform:uppercase;font-weight:500;line-height:1}
+  footer .brand-f + p{font-size:14px;line-height:1.8;opacity:0.78;max-width:340px}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:10px;font-size:14px;opacity:0.82}
+  footer ul li a:hover{opacity:1;color:var(--gold-soft)}
+  .foot-bottom{max-width:1320px;margin:0 auto;padding-top:28px;border-top:1px solid rgba(245,239,224,0.14);display:flex;justify-content:space-between;align-items:center;font-size:11.5px;opacity:0.72;letter-spacing:0.04em;flex-wrap:wrap;gap:16px}
+  .foot-bottom .mantra{font-family:'Fraunces',serif;font-size:14px;color:var(--gold-soft);letter-spacing:0.02em;opacity:1}
+
+  @media (max-width:1100px){
+    nav.top{padding:16px 20px;gap:10px}
+    nav.top.scrolled{padding:12px 20px}
+    nav.top .nav-center{display:none}
+    nav.top .portal{padding:9px 14px;font-size:10px;letter-spacing:0.14em}
+    nav.top .menu-toggle{display:inline-flex}
+    .page-hero,.contact,.map-band-text{padding-left:24px;padding-right:24px}
+    .page-hero{padding-top:120px;padding-bottom:60px}
+    .page-hero-inner{grid-template-columns:1fr;gap:32px}
+    .contact{padding-top:72px;padding-bottom:96px;min-height:0}
+    .contact-inner{grid-template-columns:1fr;gap:48px}
+    .info-card{padding:40px 30px 34px}
+    .fact-item{grid-template-columns:1fr;gap:6px}
+    .map-band-inner{grid-template-columns:1fr;gap:0}
+    .map-band-text{padding:56px 24px}
+    .map-band-img{min-height:260px}
+    .foot{grid-template-columns:1fr;gap:32px}
+    footer{padding:56px 24px 28px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top" id="nav">
+  <div class="brand">
+    <img class="brand-logo" src="vh-logo-transparent.png" alt="Vital Health Integrative Medicine" />
+    <span class="brand-txt">
+      <span class="brand-name">Vital Health</span>
+      <span class="brand-tag">Integrative Medicine</span>
+    </span>
+  </div>
+  <ul class="nav-center">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a class="portal" href="https://vitalhealth.md-hq.com" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+    Patient Portal
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="index.html" data-close>Home</a>
+  <a href="services.html" data-close>Services</a>
+  <a href="about.html" data-close>About</a>
+  <a href="contact.html" class="active" data-close>Contact</a>
+  <a href="https://vitalhealth.md-hq.com" class="m-cta" target="_blank" rel="noopener">Patient Portal &rarr;</a>
+</div>
+
+<!-- Page hero -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="reveal">
+      <span class="eyebrow">Contact</span>
+      <h1>Let's <span class="emph">start the conversation.</span></h1>
+    </div>
+    <div class="reveal reveal-d-1">
+      <p>Call, email, or book your complimentary consultation directly. We'll respond within one business day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact body -->
+<section class="contact">
+  <div class="contact-inner">
+
+    <!-- SCHEDULE CARD -->
+    <div class="info-card reveal">
+      <svg class="pulse" viewBox="0 0 100 24" aria-hidden="true"><path d="M2 12 H22 L28 4 L36 20 L44 8 L52 16 L60 12 H98"/></svg>
+      <span class="eyebrow">Schedule a visit</span>
+      <h3>Complimentary <span class="emph">consultation.</span></h3>
+      <p>Thirty minutes, no cost. We'll hear what's bringing you in and tell you whether Vital Health is the right fit.</p>
+      <div class="cta-row">
+        <a href="https://vitalhealth.md-hq.com" target="_blank" rel="noopener" class="cta-white">Book a consultation <span>&rarr;</span></a>
+        <a href="tel:5125594350" class="cta-ghost">Call (512) 559-4350</a>
+      </div>
+    </div>
+
+    <!-- FACTS LIST -->
+    <div class="facts-list reveal reveal-d-1">
+      <span class="eyebrow facts-eyebrow">The practice</span>
+      <div class="fact-item">
+        <span class="lbl">Phone</span>
+        <span class="val"><a href="tel:5125594350">(512) 559-4350</a></span>
+      </div>
+      <div class="fact-item">
+        <span class="lbl">Email</span>
+        <span class="val"><a href="mailto:info@vitalhealthim.com">info@vitalhealthim.com</a></span>
+      </div>
+      <div class="fact-item">
+        <span class="lbl">Location</span>
+        <span class="val">7000 Bee Cave Road, Suite 310<br/>Austin, TX 78746</span>
+      </div>
+      <div class="fact-item">
+        <span class="lbl">Hours</span>
+        <span class="val">Monday &ndash; Friday<br/>8:00am &ndash; 5:00pm</span>
+      </div>
+      <div class="fact-item">
+        <span class="lbl">Portal</span>
+        <span class="val"><a href="https://vitalhealth.md-hq.com" target="_blank" rel="noopener">Patient portal (MD-HQ) &rarr;</a></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Map band -->
+<section class="map-band">
+  <div class="map-band-inner">
+    <div class="map-band-text reveal">
+      <span class="eyebrow">Visit us</span>
+      <h3>In the hills of <span class="emph">West Austin.</span></h3>
+      <p>7000 Bee Cave Road, Suite 310 &mdash; between the Barton Creek Greenbelt and downtown. Ample parking, ground-floor access.</p>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=7000+Bee+Cave+Road+Suite+310+Austin+TX+78746" target="_blank" rel="noopener" class="cta-white" style="background:var(--forest);color:var(--cream);align-self:flex-start;margin-top:4px">Get directions <span>&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div>
+      <div class="brand-f">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-txt">
+          <span class="brand-name">Vital Health</span>
+          <span class="brand-tag">Integrative Medicine</span>
+        </span>
+      </div>
+      <p>Integrative, regenerative, and preventive medicine &mdash; built on fifty years of clinical foundation and the long view of whole-body health.</p>
+    </div>
+    <div><h4>Explore</h4><ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://vitalhealth.md-hq.com" target="_blank" rel="noopener">Patient Portal</a></li>
+    </ul></div>
+    <div><h4>Services</h4><ul>
+      <li><a href="services.html#peptide">Peptide Therapy</a></li>
+      <li><a href="services.html#hormone">Hormone Optimization</a></li>
+      <li><a href="services.html#weight">Medical Weight Loss</a></li>
+      <li><a href="services.html#wellness">Wellness &amp; Rejuvenation</a></li>
+    </ul></div>
+    <div><h4>Visit</h4><ul>
+      <li>7000 Bee Cave Road</li>
+      <li>Suite 310</li>
+      <li>Austin, TX 78746</li>
+      <li style="padding-top:8px">(512) 559-4350</li>
+      <li>info@vitalhealthim.com</li>
+      <li>Mon &ndash; Fri &middot; 8a &ndash; 5p</li>
+    </ul></div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Vital Health Integrative Medicine</span>
+    <span class="mantra">Hope and Healing</span>
+    <span>Patient Portal &middot; Privacy &middot; HIPAA</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const menuBtn = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  const openMenu = (open) => {
+    nav.classList.toggle('open', open);
+    menu.classList.toggle('open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    menuBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  menuBtn.addEventListener('click', () => openMenu(!menu.classList.contains('open')));
+  menu.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => openMenu(false)));
+</script>
+
+</body>
+</html>

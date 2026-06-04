@@ -1,0 +1,50 @@
+[
+  {
+    "site": "frita-batidos",
+    "page": "homepage-main",
+    "url": "https://fritabatidos.com/",
+    "error": "HTTP Error 503: Service Unavailable"
+  },
+  {
+    "site": "frita-batidos",
+    "page": "ann-arbor-home",
+    "url": "https://fritabatidos.com/ann-arbor",
+    "error": "HTTP Error 503: Service Unavailable"
+  },
+  {
+    "site": "frita-batidos",
+    "page": "ann-arbor-food",
+    "url": "https://fritabatidos.com/ann-arbor/food",
+    "error": "HTTP Error 503: Service Unavailable"
+  },
+  {
+    "site": "frita-batidos",
+    "page": "ann-arbor-chef",
+    "url": "https://fritabatidos.com/ann-arbor/chef",
+    "error": "HTTP Error 503: Service Unavailable"
+  },
+  {
+    "site": "frita-batidos",
+    "page": "ann-arbor-philosophy",
+    "url": "https://fritabatidos.com/ann-arbor/philosophy",
+    "error": "HTTP Error 503: Service Unavailable"
+  },
+  {
+    "site": "frita-batidos",
+    "page": "ann-arbor-praise",
+    "url": "https://fritabatidos.com/ann-arbor/praise",
+    "error": "HTTP Error 503: Service Unavailable"
+  },
+  {
+    "site": "frita-batidos",
+    "page": "ann-arbor-contact",
+    "url": "https://fritabatidos.com/ann-arbor/contact",
+    "error": "HTTP Error 503: Service Unavailable"
+  },
+  {
+    "site": "frita-batidos",
+    "page": "detroit-home",
+    "url": "https://fritabatidos.com/detroit",
+    "error": "HTTP Error 503: Service Unavailable"
+  }
+]

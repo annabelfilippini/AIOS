@@ -1,0 +1,188 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "video_banner_KY3LwV": {
+      "type": "video-banner",
+      "blocks": {
+        "heading_YeYDTJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "uniting the world through running",
+            "heading_size": "h0"
+          }
+        },
+        "buttons_7VDhtV": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "shop apparel",
+            "button_link_1": "",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false,
+            "custom_liquid": "<div data-tf-live=\"01J0BY8736E1DPY3KNMTY39A5S\"></div><script src=\"//embed.typeform.com/next/embed.js\"></script>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_YeYDTJ",
+        "buttons_7VDhtV"
+      ],
+      "custom_css": [
+        "video {display: block; margin: 0 auto; width: 100%; height: 100vh; object-fit: cover;}"
+      ],
+      "settings": {
+        "image_height": "large",
+        "vid_url": "https://cdn.shopify.com/videos/c/o/v/81b6b4dcb2cf4947b2d2b59e7e2dbe0e.mp4",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center"
+      }
+    },
+    "home_featured_collection_dAWBXC": {
+      "type": "home-featured-collection",
+      "custom_css": [
+        ".button {color: #000; border-color: #000 !important; padding: 5px 25px 4px; max-width: 130px;}"
+      ],
+      "settings": {
+        "title": "running apparel that's just as functional as it is colorful",
+        "heading_size": "h2",
+        "collection": "homepage-featured-items",
+        "view_all_url": "",
+        "view_all_style": "outline",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-1",
+        "image_ratio": "square",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 160
+      }
+    },
+    "runclubs_home_7kzCw9": {
+      "type": "runclubs-home",
+      "blocks": {
+        "column_e3eWgK": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/denver.jpg",
+            "city": "Denver",
+            "page": ""
+          }
+        },
+        "column_HKQKHD": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/newyork.jpg",
+            "city": "New York",
+            "page": ""
+          }
+        },
+        "column_PX8FJc": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/minny.jpg",
+            "city": "Minneapolis",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_e3eWgK",
+        "column_HKQKHD",
+        "column_PX8FJc"
+      ],
+      "settings": {
+        "header": "a social club disguised as a run club",
+        "button-txt": "see all cities",
+        "button-url": "",
+        "custom_liquid": ""
+      }
+    },
+    "homepage_collage_hUUnEG": {
+      "type": "homepage-collage",
+      "blocks": {
+        "column_ppF48g": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/collage1.jpg",
+            "title": "Column",
+            "text": "<p>Sonia in the Mileke Bra + Emmy Short</p>",
+            "link_label": "",
+            "mobile_link_label": "",
+            "link": ""
+          }
+        },
+        "column_H6g8gH": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/collage2.jpg",
+            "title": "Column",
+            "text": "<p>Alyssa in the Mileke Bra + Alkal Short</p>",
+            "link_label": "",
+            "mobile_link_label": "",
+            "link": ""
+          }
+        },
+        "column_zKTFPN": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_1.png",
+            "title": "cooldown & you <3",
+            "text": "",
+            "link_label": "shop all",
+            "mobile_link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_ppF48g",
+        "column_H6g8gH",
+        "column_zKTFPN"
+      ],
+      "custom_css": [
+        "slider-component {max-height: none;}"
+      ],
+      "settings": {
+        "title": "cooldown & you <3",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "columns_mobile": "1",
+        "mobile_link_label": "",
+        "mobile_link": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "video_banner_KY3LwV",
+    "home_featured_collection_dAWBXC",
+    "runclubs_home_7kzCw9",
+    "homepage_collage_hUUnEG"
+  ]
+}

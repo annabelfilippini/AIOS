@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mani Osteria &amp; Bar — Ann Arbor</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1715;
+    --cream: #F5EFE6;
+    --cream-warm: #EFE7D8;
+    --gold: #B7985B;
+    --gold-deep: #9A7E43;
+    --gray: #8A8078;
+    --line: rgba(26, 23, 21, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 22px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 400ms ease, backdrop-filter 400ms ease, padding 400ms ease, color 400ms ease;
+    color: #fff;
+  }
+  .topbar.is-scrolled {
+    background: rgba(245, 239, 230, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--ink);
+    padding: 14px 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .topbar nav {
+    display: flex;
+    gap: 36px;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .topbar nav a { opacity: 0.9; transition: opacity 200ms; }
+  .topbar nav a:hover { opacity: 1; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    height: 100vh;
+    min-height: 720px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    background: url('assets/mani-crostini.jpg') center/cover no-repeat;
+    z-index: 0;
+    transform: scale(1.05);
+    animation: slowZoom 18s ease-out forwards;
+  }
+  @keyframes slowZoom {
+    from { transform: scale(1.08); }
+    to { transform: scale(1.0); }
+  }
+  .hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(26, 23, 21, 0.52) 0%,
+      rgba(26, 23, 21, 0.38) 30%,
+      rgba(26, 23, 21, 0.38) 70%,
+      rgba(26, 23, 21, 0.72) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 20px;
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.92;
+    margin-bottom: 32px;
+  }
+  .hero-wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(80px, 14vw, 196px);
+    letter-spacing: 0.06em;
+    line-height: 0.95;
+    font-variation-settings: 'opsz' 144;
+    margin-bottom: 28px;
+  }
+  .hero-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    opacity: 0.9;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 500;
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: currentColor;
+    margin: 14px auto 0;
+    opacity: 0.7;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+  }
+
+  /* ---------- Image grid ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    background: var(--ink);
+  }
+  .grid-tile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #222;
+  }
+  .grid-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .grid-tile:hover img { transform: scale(1.05); }
+
+  /* ---------- Section primitives ---------- */
+  section { padding: 140px 40px; }
+  .container { max-width: 1240px; margin: 0 auto; }
+  .container-narrow { max-width: 760px; margin: 0 auto; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--gold-deep);
+    margin-bottom: 36px;
+  }
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    font-variation-settings: 'opsz' 144;
+  }
+  .section-title em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .prose {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .prose p + p { margin-top: 22px; }
+  .prose-lead {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(24px, 2.6vw, 34px);
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+
+  .link-underline {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--ink);
+    transition: color 200ms, border-color 200ms;
+  }
+  .link-underline:hover {
+    color: var(--gold-deep);
+    border-bottom-color: var(--gold-deep);
+  }
+  .link-underline.gold {
+    color: var(--gold-deep);
+    border-bottom-color: var(--gold);
+  }
+  .link-underline.cream { color: var(--cream); border-bottom-color: var(--cream); }
+  .link-underline.cream:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ---------- Welcome — centered text-only, palate cleanser between hero and grid ---------- */
+  .welcome {
+    background: var(--cream);
+    padding: 140px 40px;
+    text-align: center;
+  }
+  .welcome-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .welcome-inner .eyebrow {
+    display: inline-flex;
+    margin-bottom: 40px;
+  }
+  .welcome-inner .prose-lead {
+    margin-bottom: 44px;
+    text-wrap: balance;
+  }
+  .welcome-inner .prose {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink);
+    opacity: 0.82;
+    margin-bottom: 22px;
+    text-wrap: pretty;
+  }
+  .welcome-inner .prose:last-of-type { margin-bottom: 0; }
+
+  /* ---------- Menu preview ---------- */
+  .menu-preview { background: var(--cream-warm); }
+  .menu-preview .eyebrow { display: flex; justify-content: center; }
+  .menu-preview .section-title { text-align: center; margin-bottom: 80px; }
+  .menu-rows {
+    display: grid;
+    gap: 0;
+    max-width: 1060px;
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+  .menu-row {
+    display: grid;
+    grid-template-columns: 140px 220px 1fr auto;
+    gap: 40px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .menu-row-thumb {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: #ddd;
+  }
+  .menu-row-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .menu-row:hover .menu-row-thumb img { transform: scale(1.05); }
+  .menu-row-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 30px;
+    letter-spacing: 0.005em;
+  }
+  .menu-row-dishes {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .menu-row-dishes span + span::before {
+    content: ' · ';
+    margin: 0 4px;
+    color: var(--gold);
+  }
+  .menu-row-count {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gray);
+    white-space: nowrap;
+  }
+  .menu-cta { text-align: center; margin-top: 64px; }
+
+  /* ---------- Dine in / out ---------- */
+  .dine { background: var(--ink); color: var(--cream); }
+  .dine .eyebrow { color: var(--gold); }
+  .dine-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .dine-col h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 48px;
+    letter-spacing: -0.005em;
+    margin-bottom: 28px;
+  }
+  .dine-col p {
+    font-size: 16px;
+    line-height: 1.75;
+    opacity: 0.86;
+    margin-bottom: 32px;
+  }
+  .dine-col .fine {
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    margin-top: 28px;
+    margin-bottom: 0;
+    opacity: 1;
+    font-weight: 500;
+  }
+
+  /* ---------- "In the room" editorial gallery ---------- */
+  .gallery { background: var(--cream); padding: 140px 40px 160px; }
+  .gallery-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 80px;
+  }
+  .gallery-head .eyebrow { display: inline-flex; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 120px;
+    gap: 14px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .gallery-tile {
+    overflow: hidden;
+    background: #222;
+    position: relative;
+  }
+  .gallery-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .gallery-tile:hover img { transform: scale(1.04); }
+  /* Asymmetric placements — Pinterest style */
+  .gallery-tile.g1 { grid-column: span 5; grid-row: span 4; }
+  .gallery-tile.g2 { grid-column: span 4; grid-row: span 3; }
+  .gallery-tile.g3 { grid-column: span 3; grid-row: span 3; }
+  .gallery-tile.g4 { grid-column: span 3; grid-row: span 3; }
+  .gallery-tile.g5 { grid-column: span 4; grid-row: span 4; }
+  .gallery-tile.g6 { grid-column: span 5; grid-row: span 3; }
+
+  /* ---------- Visit ---------- */
+  .visit { background: var(--cream-warm); }
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .visit-info .section-title { margin-bottom: 48px; }
+  .hours-list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .hours-list li span:first-child {
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--ink);
+    min-width: 120px;
+  }
+  .hours-list li span:last-child { color: var(--ink); opacity: 0.78; }
+  .happy-hour {
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid var(--gold);
+    background: rgba(183, 152, 91, 0.07);
+  }
+  .happy-hour strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    margin-bottom: 10px;
+    letter-spacing: 0.01em;
+    color: var(--gold-deep);
+  }
+  .happy-hour span { display: block; font-size: 14px; color: var(--ink); line-height: 1.7; }
+  .contact-block {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .contact-block div { font-size: 14px; line-height: 1.7; }
+  .contact-block .label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .visit-photo {
+    aspect-ratio: 4 / 5;
+    background: url('assets/ta-mani-3.jpg') center/cover no-repeat;
+  }
+
+  /* ---------- Events — photo-backed block ---------- */
+  .events {
+    position: relative;
+    padding: 160px 40px;
+    background: #111;
+    color: var(--cream);
+    overflow: hidden;
+  }
+  .events-bg {
+    position: absolute;
+    inset: 0;
+    background: url('assets/ta-caption-4.jpg') center/cover no-repeat;
+    opacity: 0.45;
+    transform: scale(1.04);
+  }
+  .events::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(17,17,17,0.7) 0%, rgba(17,17,17,0.5) 50%, rgba(17,17,17,0.82) 100%);
+  }
+  .events-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .events-card {
+    padding: 48px;
+    background: rgba(26, 23, 21, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(245, 239, 230, 0.14);
+  }
+  .events-card .eyebrow { color: var(--gold); }
+  .events-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 34px;
+    line-height: 1.18;
+    margin-bottom: 20px;
+    letter-spacing: -0.005em;
+    color: var(--cream);
+  }
+  .events-card h3 em { font-style: italic; }
+  .events-card p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.82;
+    margin-bottom: 32px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--ink); color: var(--cream); padding: 80px 40px 40px; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  footer .wordmark-foot {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 56px;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  footer .tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    opacity: 0.75;
+    max-width: 320px;
+    line-height: 1.55;
+  }
+  footer h4 {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 500;
+    color: var(--gold);
+  }
+  footer ul { list-style: none; padding: 0; }
+  footer li { font-size: 14px; line-height: 1.85; opacity: 0.82; }
+  footer li a:hover { opacity: 1; color: var(--gold); }
+  footer .bottom-strip {
+    max-width: 1240px;
+    margin: 64px auto 0;
+    padding-top: 28px;
+    border-top: 1px solid rgba(245, 239, 230, 0.14);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+  }
+
+  /* ---------- Reveal animations ---------- */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Drop-in pattern — larger travel, tighter stagger, subtle scale */
+  [data-drop] {
+    opacity: 0;
+    transform: translateY(48px) scale(0.985);
+    transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  [data-drop].is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 100px; }
+    .gallery-tile.g1 { grid-column: span 6; grid-row: span 3; }
+    .gallery-tile.g2 { grid-column: span 3; grid-row: span 3; }
+    .gallery-tile.g3 { grid-column: span 3; grid-row: span 3; }
+    .gallery-tile.g4 { grid-column: span 3; grid-row: span 3; }
+    .gallery-tile.g5 { grid-column: span 3; grid-row: span 3; }
+    .gallery-tile.g6 { grid-column: span 6; grid-row: span 3; }
+  }
+  @media (max-width: 900px) {
+    .topbar { padding: 16px 20px; }
+    .topbar.is-scrolled { padding: 12px 20px; }
+    .topbar nav { gap: 20px; font-size: 11px; }
+    .topbar nav a:nth-child(3) { display: none; }
+    section { padding: 80px 24px; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .dine-grid, .visit-grid, .events-inner, .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .welcome { padding: 80px 24px; }
+    .menu-row { grid-template-columns: 80px 1fr; grid-template-rows: auto auto auto; gap: 16px; padding: 24px 0; }
+    .menu-row-thumb { grid-row: span 3; }
+    .menu-row-count { grid-column: 2; }
+    .hero-scroll { display: none; }
+    .visit-photo { aspect-ratio: 4 / 3; }
+    .contact-block { grid-template-columns: 1fr; gap: 20px; }
+    footer .wordmark-foot { font-size: 40px; }
+    footer .bottom-strip { flex-direction: column; gap: 12px; }
+    .events { padding: 100px 24px; }
+    .events-card { padding: 32px; }
+  }
+  @media (max-width: 560px) {
+    .topbar .wordmark { font-size: 18px; }
+    .topbar nav a:nth-child(2), .topbar nav a:nth-child(3) { display: none; }
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<header class="topbar" id="topbar">
+  <a href="#" class="wordmark">Mani</a>
+  <nav>
+    <a href="#menu">Menus</a>
+    <a href="#visit">Reservations</a>
+    <a href="#events">Private Events</a>
+    <a href="#visit">Visit</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" data-reveal-group>
+  <div class="hero-image"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-reveal>Since 2011 · Downtown Ann Arbor</div>
+    <h1 class="hero-wordmark" data-reveal>Mani</h1>
+    <div class="hero-sub" data-reveal>Wood-fired pizza, handmade pasta, and signature antipasti.</div>
+  </div>
+  <a href="#grid" class="hero-scroll">Scroll</a>
+</section>
+
+<!-- Welcome — palate cleanser between hero and grid -->
+<section class="welcome">
+  <div class="welcome-inner" data-reveal-group>
+    <div class="eyebrow" data-reveal>Welcome</div>
+    <p class="prose-lead" data-reveal>
+      A family-friendly osteria on East Liberty, serving wood-fired pizzas, handmade pastas, and signature antipasti since <em>2011</em>.
+    </p>
+    <p class="prose" data-reveal>
+      Mani is our neighborhood osteria — a place built for lingering. The oven runs all night, the kitchen is open to the room, and the menu turns with what's good that week.
+    </p>
+    <p class="prose" data-reveal>
+      Blistered crusts. House-made pasta. Antipasti meant to share. And a bar program that takes cocktails as seriously as the food — Aperol spritzes on happy hour, amaros late.
+    </p>
+    <p class="prose" data-reveal>
+      Walk in for a bite at the bar. Book the whole dining room for a celebration. Whatever the shape, we keep it warm, loud, and generous — the way an osteria should be.
+    </p>
+  </div>
+</section>
+
+<!-- Image grid — all drop together -->
+<section id="grid" class="grid" style="padding:0;" data-drop-group data-drop-stagger="40">
+  <div class="grid-tile" data-drop><img src="assets/mani-tomatoes.jpg" alt="Pickled tomatoes with olive tapenade"></div>
+  <div class="grid-tile" data-drop><img src="assets/ta-margherita.jpg" alt="Margherita pizza with charred crust and basil"></div>
+  <div class="grid-tile" data-drop><img src="assets/interior-2.jpg" alt="Wood-fired pizza oven with stacked firewood"></div>
+  <div class="grid-tile" data-drop><img src="assets/ta-mani-3.jpg" alt="Mani Osteria signage with scallop awning"></div>
+  <div class="grid-tile" data-drop><img src="assets/mani-cocktails.jpg" alt="Cocktail with flame and citrus spray"></div>
+  <div class="grid-tile" data-drop><img src="assets/ta-interior.jpg" alt="Bar scene at Mani Osteria"></div>
+  <div class="grid-tile" data-drop><img src="assets/ta-caption-1.jpg" alt="Arancini with parmesan and romesco"></div>
+  <div class="grid-tile" data-drop><img src="assets/ta-asparagus.jpg" alt="Asparagus with crispy onions"></div>
+  <div class="grid-tile" data-drop><img src="assets/ta-pizza.jpg" alt="Pepperoni pizza on tomato-can pedestal"></div>
+  <div class="grid-tile" data-drop><img src="assets/ta-caption-2.jpg" alt="Spaghetti and meatballs"></div>
+</section>
+
+<!-- Menu preview with thumbnails -->
+<section id="menu" class="menu-preview">
+  <div class="container-narrow" style="text-align:center;" data-reveal-group>
+    <div class="eyebrow" data-reveal>The menu</div>
+    <h2 class="section-title" data-reveal>From the kitchen &amp; <em>the oven</em></h2>
+  </div>
+  <div class="menu-rows" style="margin-top:80px;" data-reveal-group>
+    <div class="menu-row" data-reveal>
+      <div class="menu-row-thumb"><img src="assets/ta-margherita.jpg" alt="Margherita pizza"></div>
+      <div class="menu-row-label">Wood-fired pizza</div>
+      <div class="menu-row-dishes">
+        <span>Margherita</span><span>Tartufo</span><span>Red Onion &amp; Pistachio</span><span>Arugula &amp; Prosciutto</span><span>Puttanesca</span>
+      </div>
+      <div class="menu-row-count">5 of many</div>
+    </div>
+    <div class="menu-row" data-reveal>
+      <div class="menu-row-thumb"><img src="assets/ta-caption-2.jpg" alt="Spaghetti and meatballs"></div>
+      <div class="menu-row-label">Handmade pasta</div>
+      <div class="menu-row-dishes">
+        <span>Tagliatelle Carbonara</span><span>Tomato Vodka Rigatoni</span><span>Shrimp Scampi</span><span>Bolognese</span>
+      </div>
+      <div class="menu-row-count">Daily specials</div>
+    </div>
+    <div class="menu-row" data-reveal>
+      <div class="menu-row-thumb"><img src="assets/ta-caption-1.jpg" alt="Arancini"></div>
+      <div class="menu-row-label">Antipasti</div>
+      <div class="menu-row-dishes">
+        <span>Arancini</span><span>Whipped Ricotta</span><span>Pickled Tomatoes</span><span>Crispy Pork Belly</span><span>Charred Octopus</span><span>Caesar</span>
+      </div>
+      <div class="menu-row-count">Small plates</div>
+    </div>
+  </div>
+  <div class="menu-cta" data-reveal>
+    <a class="link-underline gold" href="https://maniosteria.com/wp-content/uploads/sites/2/2026/04/MAN_DIN_20260414_v2.pdf" target="_blank" rel="noopener">Full dinner menu (PDF)</a>
+    &nbsp;&nbsp;&nbsp;
+    <a class="link-underline" href="https://maniosteria.com/wp-content/uploads/sites/2/2026/04/MAN_BEV_20260414_cropped.pdf" target="_blank" rel="noopener">Wine &amp; drinks</a>
+  </div>
+</section>
+
+<!-- Dine in / Dine out -->
+<section class="dine" data-reveal-group>
+  <div class="dine-grid">
+    <div class="dine-col" data-reveal>
+      <div class="eyebrow">Dine in</div>
+      <h3>At the table.</h3>
+      <p>Mani's dining room is first-come, first-serve. Walk in, grab a seat at the bar, and settle in. Reservations are held for parties of six or more — book through OpenTable.</p>
+      <a href="https://www.opentable.com/mani-osteria" target="_blank" rel="noopener" class="link-underline cream">Reserve for 6+</a>
+      <p class="fine">Parties of 15+ — contact events@cascabel.us</p>
+    </div>
+    <div class="dine-col" data-reveal>
+      <div class="eyebrow">Dine out</div>
+      <h3>At home.</h3>
+      <p>Pickup is open through Toast. Order online or call us and we'll have it ready. Gift cards also available — buy $100, get a $10 complimentary card.</p>
+      <a href="https://www.toasttab.com/mani-osteria-bar/v3" target="_blank" rel="noopener" class="link-underline cream">Order pickup</a>
+      <p class="fine">Or call 734-769-6700</p>
+    </div>
+  </div>
+</section>
+
+<!-- In the room — editorial gallery, all tiles drop together -->
+<section class="gallery">
+  <div class="gallery-head" data-reveal-group>
+    <div class="eyebrow" data-reveal>In the room</div>
+    <h2 class="section-title" data-reveal>Blistered crusts, bar seats, <em>a kitchen that's always on.</em></h2>
+  </div>
+  <div class="gallery-grid" data-drop-group data-drop-stagger="60">
+    <div class="gallery-tile g1" data-drop><img src="assets/ta-pizza.jpg" alt="Pepperoni pizza on a can of Italian tomatoes"></div>
+    <div class="gallery-tile g2" data-drop><img src="assets/interior-3.jpg" alt="Pendant-lit bar and dining area"></div>
+    <div class="gallery-tile g3" data-drop><img src="assets/mani-tomatoes.jpg" alt="Pickled tomatoes with olive tapenade"></div>
+    <div class="gallery-tile g4" data-drop><img src="assets/ta-asparagus.jpg" alt="Asparagus with crispy onions"></div>
+    <div class="gallery-tile g5" data-drop><img src="assets/dining-room.jpg" alt="Dining room at night"></div>
+    <div class="gallery-tile g6" data-drop><img src="assets/ta-mani-4.jpg" alt="Bolognese pasta overhead"></div>
+  </div>
+</section>
+
+<!-- Visit -->
+<section id="visit" class="visit" data-reveal-group>
+  <div class="visit-grid">
+    <div class="visit-info">
+      <div class="eyebrow" data-reveal>Visit</div>
+      <h2 class="section-title" data-reveal>341 E. Liberty St.<br><em>Ann Arbor.</em></h2>
+      <ul class="hours-list" data-reveal>
+        <li><span>Mon</span><span>Closed</span></li>
+        <li><span>Tue – Thu</span><span>4:00 – 10:00 PM</span></li>
+        <li><span>Fri – Sat</span><span>12:00 – 10:00 PM</span></li>
+        <li><span>Sun</span><span>12:00 – 9:00 PM</span></li>
+      </ul>
+      <div class="happy-hour" data-reveal>
+        <strong>Happy Hour</strong>
+        <span>Tuesday – Thursday · 4:00 – 6:00 PM</span>
+        <span>Friday – Sunday · 3:00 – 5:00 PM</span>
+      </div>
+      <div class="contact-block" data-reveal>
+        <div>
+          <span class="label">Call</span>
+          734-769-6700
+        </div>
+        <div>
+          <span class="label">Write</span>
+          contact@mani-a2.com
+        </div>
+      </div>
+      <div style="margin-top:48px;" data-reveal>
+        <a href="https://www.opentable.com/mani-osteria" target="_blank" rel="noopener" class="link-underline gold">Make a reservation</a>
+      </div>
+    </div>
+    <div class="visit-photo" data-reveal></div>
+  </div>
+</section>
+
+<!-- Events — image-backed -->
+<section id="events" class="events" data-reveal-group>
+  <div class="events-bg"></div>
+  <div class="events-inner">
+    <div class="events-card" data-reveal>
+      <div class="eyebrow">Private events</div>
+      <h3>Rehearsal dinners, <em>cocktail parties, full buyouts.</em></h3>
+      <p>Mani hosts everything from sit-down rehearsal dinners to standing cocktail receptions. Smaller parties — ask about partial bookings. Bigger vision — take the whole room.</p>
+      <a href="https://cascabelventuresllc.tripleseat.com/party_request/24885" target="_blank" rel="noopener" class="link-underline cream">Inquire about your event</a>
+    </div>
+    <div class="events-card" data-reveal>
+      <div class="eyebrow">Graduation 2027</div>
+      <h3>Planning ahead for <em>graduation weekend?</em></h3>
+      <p>Graduation weekends book quickly. Join the interest list and we'll be in touch with availability, seating blocks, and menus as the date gets closer.</p>
+      <a href="https://forms.gle/3FEJ7SHhB6Ug8x8C7" target="_blank" rel="noopener" class="link-underline cream">Stay in the loop</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="wordmark-foot">Mani</div>
+      <p class="tag">A family-friendly osteria on East Liberty, serving wood-fired pizzas, handmade pastas, and signature antipasti since 2011.</p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li>341 E. Liberty St.</li>
+        <li>Ann Arbor, MI 48104</li>
+        <li>734-769-6700</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <ul>
+        <li>Tue – Thu · 4 – 10</li>
+        <li>Fri – Sat · 12 – 10</li>
+        <li>Sun · 12 – 9</li>
+        <li>Mon · Closed</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Quick links</h4>
+      <ul>
+        <li><a href="https://maniosteria.com/wp-content/uploads/sites/2/2026/04/MAN_DIN_20260414_v2.pdf" target="_blank" rel="noopener">Dinner menu</a></li>
+        <li><a href="https://www.opentable.com/mani-osteria" target="_blank" rel="noopener">Reservations</a></li>
+        <li><a href="https://www.toasttab.com/mani-osteria-bar/v3" target="_blank" rel="noopener">Pickup</a></li>
+        <li><a href="https://www.toasttab.com/mani-osteria-bar/giftcards" target="_blank" rel="noopener">Gift cards</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div>© 2026 Mani Osteria &amp; Bar</div>
+    <div>Cascabel Ventures</div>
+  </div>
+</footer>
+
+<script>
+  // Topbar scroll state
+  const topbar = document.getElementById('topbar');
+  const updateTopbar = () => {
+    if (window.scrollY > 80) topbar.classList.add('is-scrolled');
+    else topbar.classList.remove('is-scrolled');
+  };
+  window.addEventListener('scroll', updateTopbar, { passive: true });
+  updateTopbar();
+
+  // Reveal animations — two flavors:
+  //   [data-reveal] inside [data-reveal-group] → gentle 80ms stagger
+  //   [data-drop] inside [data-drop-group] → tighter stagger (configurable, default 40ms)
+  //     and larger travel for the "all come down together" feel Annabel asked for.
+  const observe = (selector, groupSelector, defaultStagger) => {
+    const els = document.querySelectorAll(selector);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const group = entry.target.closest(groupSelector);
+        if (group) {
+          const stagger = parseInt(group.dataset.dropStagger || group.dataset.revealStagger || defaultStagger, 10);
+          const siblings = group.querySelectorAll(selector);
+          const idx = Array.from(siblings).indexOf(entry.target);
+          entry.target.style.transitionDelay = `${Math.min(idx, 12) * stagger}ms`;
+        }
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    els.forEach((el) => io.observe(el));
+  };
+
+  observe('[data-reveal]', '[data-reveal-group]', 80);
+  observe('[data-drop]', '[data-drop-group]', 40);
+</script>
+
+</body>
+</html>

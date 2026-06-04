@@ -1,0 +1,21 @@
+{%- liquid
+  assign normalized_title = title | default: ''
+  assign normalized_downcase = normalized_title | downcase | strip
+
+  case normalized_downcase
+    when 'shop all'
+      echo 'Shop All'
+    when 'tops'
+      echo 'Tops'
+    when 'bottoms'
+      echo 'Bottoms'
+    when 'accessories'
+      echo 'Accessories'
+    when 'featured'
+      echo 'Featured'
+    when "what's new"
+      echo "What's New"
+    else
+      echo normalized_title | escape
+  endcase
+-%}

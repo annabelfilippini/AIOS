@@ -1,0 +1,131 @@
+
+## The AIOS Model
+- 0. Before you start!
+- 1. The AI Operating System [video] [3 guides: atomicops-aios.zip, aios-quick-start-guide.html, Assets.zip]
+- 2. AIOS Overview [video] [1 guide: module-02-architecture-overview.html]
+- 3. Mapping Your Business [video] [2 guides: pod-mapper-20260422.zip, module-03-map-your-os.html]
+- 4. Pods [video]
+- 5. AIOS Context Mapping [video] [1 guide: context-layer-decision-matrix.html]
+- 6. Multiuser AIOS Designs [video] [1 guide: module-06-multi-user.html]
+- 6.5. Automating AIOS Onboarding [video] [4 guides: onboard-skill-refactored-20260422.zip, pod-mapper-20260422.zip, offer-engine-20260422.zip, module-06.5-onboarding-automation.html]
+- 7. System Design & Planning [video] [1 guide: module-05-system-design.html]
+- 7.5. Operations & Scale [video] [2 guides: aios-health-check.zip, module-07-operations-scale.html]
+- 8. AI OS Prac Walkthrough [video]
+- 9. Cowork AIOS Setup Guide
+- 10. Client Acquisition [video]
+- 11. AIOS Security [video] [2 guides: security-audit.zip, security-audit-2026-04-10.html]
+- 12. Monitoring [2 guides: command-centre-2026-04-22.zip, command-centre-community-guide.html]
+- 13. Support / Feedback
+- 14. AIOS Consulting Playbook [2 guides: aios-consultant-playbook.html, Audit Deep Dive]
+- 15. Github Automation [video] [1 guide: github-aios-setup.zip]
+- 16. AIOS Failover [1 guide: portable-aios-video-companion.html]
+
+## One-Person AI Transformation
+- Phase 0 - Foundations
+  - 2. What is Consulting?
+  - 4. Finding an Accountant [video]
+  - 5. Domain, Email & Digital Presence Setup [video]
+- Phase 1 - Crafting Your Offer
+  - 1. Design Your USP & Market Research [video]
+  - 2. How to Position Yourself [video]
+  - 3. Pricing Methodologies [video]
+  - 4. Using Value-based Pricing [video]
+  - 5. Choose Your Business Model [video]
+  - 6. Framework - Audit / AI Readiness [video] [3 guides: Audit Notion Page, Knowledge Base-20260406084428.md, Content Whiteboard.svg]
+  - 7. Framework - Maintenance [video]
+- Phase 2 - Client Acquisition & Lead Generation
+  - 1. Welcome to Phase 2 [video]
+  - 2. Lead Gen 101 [video]
+  - 3. Lead Gen 102 [video]
+  - 4. LeadGen 103 [video]
+  - 5. Outreach Best Practices [video]
+  - 6. Pattern Interrupts [video]
+  - 7. Where to find contracts [video]
+  - 8. Personal Brand [video]
+  - 9. Partnering With Established Businesses [video]
+  - 10. Recruiters as Strategic Partners [video] [2 guides: Information: Recruiters, Task: Research Recruiters/Agencies]
+- Phase 3 - Sales & Client Engagement
+  - 1. Welcome to Phase 3
+  - 2. Sell Without Selling [video]
+  - 3. Discovery Call Deep Dive [video]
+  - 4. Objection Handling [video]
+  - 5. Closing Deals [video]
+  - 6. Crafting Winning Technical Proposals [video]
+- Phase 4 - Client Delivery & Project Management
+  - 1. Welcome to Phase 4
+  - 2. Leading Technical Change in Organizations [video]
+  - 3. Managing Client Comms PT 1 [video]
+  - 4. Managing Client Comms PT 2 [video]
+  - 5. Managing Client Expectations 1 [video]
+  - 6. Managing Client Expectations 2 [video]
+  - 7. Project Management [video]
+  - 8. Change & Client Psychology [video]
+  - 9. Achieving Delivery Excellence [video]
+
+## Blueprint Library
+- Ultimate AI Memory System [video] [1 guide: setup_memory.py]
+- AI Operating System [1 guide: atomicops-aios.zip]
+- GTM OS
+  - Offer Creation + Lead Gen [video]
+  - System Overview + GTM Setup [video] [1 guide: gtm-os-community-plugin.zip]
+- Content OS [1 guide: content-os.zip]
+- Playwright Automated Testing [1 guide: playwright-tester.zip]
+- App building - ATLAS v3 [1 guide: build-app.zip]
+- Ai News Monitor [1 guide: ai-news-monitor.zip]
+- Daily Brief [1 guide: daily-brief.zip]
+- AI SEO / GEO [1 guide: ai-seo.zip]
+- Frontend Website Builder [1 guide: build-frontend.zip]
+- Gamma Slides [1 guide: gamma-slides.zip]
+- Proposal Generator [1 guide: proposal-generator.zip]
+- Call Digest [1 guide: call-digest.zip]
+- Meeting Prep [1 guide: meeting-prep.zip]
+- Context Audit [1 guide: context-audit.zip]
+- Slide Generator (handdrawn style) [2 guides: sketchnote-illustrator.zip, sketchnote-illustrator-guide.html]
+
+## Vibe Coding & Agentic Workflows
+- Level 1 - The Foundations
+  - What is Vibe Coding? [video]
+  - How LLMs work [video]
+  - The Tool Landscape [video]
+  - Basic Data Formats - JSON [video]
+  - Apps 101 [video]
+  - Software 101 [video]
+  - Databases 101 [video]
+  - Databases 102 [video]
+  - The System Handbook [video]
+  - Setting up your IDE [video] [2 guides: CLAUDE.md, ATLAS Skill]
+  - Setting up Github [video]
+  - Building Basic Apps [video]
+- Level 2 - The Agentic Toolkit
+  - What is Agentic? [video]
+  - The Agent Autonomy Spectrum [video]
+  - Why AI Agents Fail [video]
+  - The Anatomy of Automation [video]
+  - Using AI as a Thinking Partner [video]
+  - Agentic Design Patterns [video]
+  - Busting Agentic Myths [video]
+  - MCP 101
+  - RAG 101 [video]
+  - RAG 101 Practical [video]
+  - Building with Lovable [video]
+- Level 3 - Context + Prompt Engineering
+  - Writing Great Prompts [video]
+  - Iterative Prompting [video]
+  - Context Engineering
+  - Tool - Prompt Cowboy [video]
+  - Skills
+  - Skills 2.0 (EVALS and Workflow Testing)
+  - Skill Chaining
+  - Skills VS Agents [1 guide: Skills-vs-Agents.pdf]
+  - Plugins 101
+- Level 4 - Agentic Frameworks Overview
+  - The ATLAS Framework [video]
+  - The AI Operating System
+  - Building a local MVP [video]
+- Level 5 - Web App Toolkit
+  - Supabase 101 [video]
+  - Vercel 101 [video]
+  - Webscraping (FireCrawl 101) [video]
+  - Building a Web App - Vercel + Supa [video]
+- Level 6 - coming soon
+  - Security for vibe coders

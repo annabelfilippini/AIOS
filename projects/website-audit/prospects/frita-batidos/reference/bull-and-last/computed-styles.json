@@ -1,0 +1,50 @@
+{
+  "url": "https://thebullandlast.co.uk/",
+  "h1count": 1,
+  "h2count": 5,
+  "body": {
+    "fontFamily": "\"Neue Montreal\", Helvetica, Arial, sans-serif",
+    "fontSize": "16px"
+  },
+  "h1": {
+    "tag": "H1",
+    "fontFamily": "joanna-nova, serif",
+    "fontSize": "96px",
+    "fontWeight": "600",
+    "lineHeight": "96px",
+    "letterSpacing": "-2.4px",
+    "textTransform": "uppercase",
+    "text": "a pub with guest rooms in north london"
+  },
+  "h2": {
+    "fontFamily": "joanna-nova, serif",
+    "fontSize": "30px",
+    "fontWeight": "300",
+    "letterSpacing": "normal",
+    "textTransform": "uppercase",
+    "text": "Monday - Friday 12- 5PM £19 STEAK FRITES"
+  },
+  "h3": {
+    "fontFamily": "joanna-nova, serif",
+    "fontSize": "30px",
+    "fontWeight": "300",
+    "letterSpacing": "normal",
+    "textTransform": "uppercase",
+    "text": "Somerset"
+  },
+  "button": {
+    "fontFamily": "\"Neue Montreal\", Helvetica, Arial, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "textTransform": "none",
+    "letterSpacing": "normal",
+    "text": ""
+  },
+  "section": {
+    "paddingTop": "0px",
+    "paddingBottom": "0px",
+    "maxWidth": "none"
+  }
+}

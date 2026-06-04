@@ -1,0 +1,29 @@
+{
+  "pool": "instagram-carousel",
+  "templates": [
+    {
+      "id": "vh-editorial-cover",
+      "role": "hero",
+      "status": "pilot",
+      "description": "Cream editorial cover with still-life image zone and forest emphasis word."
+    },
+    {
+      "id": "vh-body-split",
+      "role": "body",
+      "status": "pilot",
+      "description": "Split body slide with one headline, short explanation, and botanical image crop."
+    },
+    {
+      "id": "vh-proof-card",
+      "role": "body",
+      "status": "pilot",
+      "description": "Clinical note card with large numeral or key phrase."
+    },
+    {
+      "id": "vh-cta",
+      "role": "cta",
+      "status": "pilot",
+      "description": "Quiet CTA slide with logo and consultation prompt."
+    }
+  ]
+}

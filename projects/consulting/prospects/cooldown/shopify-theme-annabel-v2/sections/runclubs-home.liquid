@@ -1,0 +1,115 @@
+{{ 'section-runclubs-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'run-club-slider.js' | asset_url }}" defer="defer"></script>
+
+
+<div class="run-clubs-slider">
+  <div class="rc-title">
+    <h3>{{ section.settings.header }}</h3>
+    <div class="rc-btns">
+      <a class="button" href="{{ section.settings.button-url}}"><span class="btn-text test">{{ section.settings.button-txt}}</span></a>
+      <div class="tf">{{ section.settings.custom_liquid }}</div>
+    </div>
+  </div>
+  <div class="slider-wrap">
+      <div class="btn-wrap">
+    	<button class="prev-btn"><img src="https://cdn.shopify.com/s/files/1/0675/6905/8066/files/slider-arrow-left.svg?v=1706803495" class="arrow" width="20" height="20" alt=""></button>
+    	<button class="next-btn"><img src="https://cdn.shopify.com/s/files/1/0675/6905/8066/files/slider-arrow-right.svg?v=1706803495" class="arrow" width="20" height="20" alt=""></button>
+      </div>
+      <div class="club-slider">
+       {% for block in section.blocks %}
+        
+          <div class="club-slide-item grid__item slider__slide {{ block.settings.city }}">
+             <a class="img-link" href="{{ block.settings.page }}">
+              {{ block.settings.image | image_url: width: 1500 | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                widths: '165, 360, 535, 750, 1070, 1500'
+              }}
+              <div class="card-overlay"></div>
+             </a>
+             <div class="loc-slide-deets">
+              <span>{{ block.settings.city }}</span>
+              <!--<a href="{{ block.settings.page }}">hang with us<span class="line"></span></a>-->
+             </div>
+          </div>
+        
+        {%- endfor -%}
+      </div>
+  </div>
+
+</div>
+  <div class="run-clubs-grid">
+      {% for block in section.blocks %}
+          <a class="rc-grid-block" href="{{ block.settings.page }}">
+
+              {{ block.settings.image | image_url: width: 1500 | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                widths: '165, 360, 535, 750, 1070, 1500'
+              }}
+              <span class="rc-grid-city">{{ block.settings.city }}</span>
+          </a>
+        {%- endfor -%}
+  </div>
+
+{% schema %}
+{
+  "name": "Run Clubs Slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Header"
+        },
+            {
+          "type": "text",
+          "id": "button-txt",
+          "label": "Button Text"
+        },
+            {
+          "type": "url",
+          "id": "button-url",
+          "label": "Button Page"
+        },
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Typeform Button Embed",
+          "info": "Add app snippets or other liquid code to create advanced customizations."
+       }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Club Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Thumbnail Image"
+        },
+        {
+          "type": "text",
+          "id": "city",
+          "label": "City"
+        },
+                  {
+          "type": "url",
+          "id": "page",
+          "label": "Location Page Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Run Clubs Slider",
+       "blocks": []
+      
+    }
+  ]
+
+}
+{% endschema %}

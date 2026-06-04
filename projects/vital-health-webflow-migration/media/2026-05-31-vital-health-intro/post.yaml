@@ -1,0 +1,116 @@
+version: 1
+brand: Vital Health
+project: vital-health-webflow-migration
+runner: claude
+date: 2026-05-31
+slug: vh-intro-carousel
+platform: instagram
+format: carousel
+canvas:
+  width: 1080
+  height: 1350
+  aspect: "4:5"
+status: draft
+revision: v3-website-anchored
+
+caption: |
+  Dr. Julie Swett spent twenty-three years working the ER in Austin. She kept seeing
+  the same pattern. Most of what came through the door was not random. It was the
+  late chapter of something that could have been caught much earlier.
+
+  That is why she built Vital Health. Ninety-minute first visits. Comprehensive labs
+  that take weeks to read, not minutes. Four practitioners, one coordinated record,
+  four sets of eyes on every chart. Care here reads more like a relationship than
+  an appointment.
+
+  If you want to know whether we are the right fit, the first step is a free
+  thirty-minute call. vitalhealthaustin.com.
+
+hashtags:
+  - "#integrativemedicine"
+  - "#preventivemedicine"
+  - "#functionalmedicine"
+  - "#austintx"
+  - "#austinhealth"
+
+slides:
+  - n: 1
+    role: hero
+    move: carousel-hero-human-touch
+    headline: "Medicine that catches it / before it catches you."
+    subline: "VITAL HEALTH · INTEGRATIVE MEDICINE · AUSTIN"
+    layout: full-bleed-centered
+    image: images/slide-1.png
+    raw_photo: raw/s1-hero.png
+    photo_subject: woman at sunlit window with tea
+  - n: 2
+    role: body
+    move: forest-emphasis-word + botanical-still-life
+    headline: "Most emergencies were *preventable*."
+    subline: "Dr. Swett spent twenty-three years in the ER watching it happen. Vital Health was the answer."
+    layout: split-left-text
+    image: images/slide-2.png
+    raw_photo: raw/s2-philosophy.png
+    photo_subject: growing potted herbs on sunlit windowsill
+  - n: 3
+    role: body
+    move: carousel-artifact-ui (styled still-life translation)
+    headline: "Your first visit is ninety minutes."
+    subline: "Long enough to read your story before we write any of it."
+    layout: full-bleed-centered
+    image: images/slide-3.png
+    raw_photo: raw/s3-first-visit.png
+    photo_subject: tea + folded intake card + brass pen + rosemary
+  - n: 4
+    role: body
+    move: botanical-still-life
+    headline: "Measurement that / takes weeks, / not minutes."
+    subline: "Comprehensive labs, four sets of eyes, one coordinated record."
+    layout: split-with-vertical-rule
+    image: images/slide-4.png
+    raw_photo: raw/s4-diagnostics.png
+    photo_subject: amber bottle + capsules + green leaf on bright marble
+  - n: 5
+    role: body
+    move: carousel-loud-stat (re-cast as brand line)
+    headline: "Care that reads / more like a relationship."
+    subline: null
+    layout: full-bleed-loud
+    image: images/slide-5.png
+    raw_photo: raw/s5-plan.png
+    photo_subject: older man walking through Austin wildflowers toward downtown skyline
+  - n: 6
+    role: cta
+    move: carousel-signoff-cta
+    headline: "Start with a free / thirty-minute call."
+    subline: "vitalhealthaustin.com · Austin, TX"
+    layout: full-bleed-centered-with-hummingbird
+    image: images/slide-6.png
+    raw_photo: raw/s6-signoff.png
+    photo_subject: woman walking into sunlit clinic reception
+
+story_alignment:
+  source: snapshot/about.html + brand_context/positioning.md + brand_context/voice-profile.md
+  key_lines_borrowed:
+    - "so many emergencies were rooted in preventable chronic diseases" (Dr. Swett, about page)
+    - "first visit is ninety minutes, not fifteen" (about page)
+    - "measurement that takes weeks, not minutes" (about page)
+    - "four sets of eyes" (about page)
+    - "Care here reads more like a relationship than an appointment" (about page)
+    - "Thirty minutes, no cost" — free consult (about page)
+    - "preventive" frame (positioning.md core)
+  voice_rules_followed:
+    - no "miracle", "cure", "guaranteed", "reverse disease" (voice-profile.md avoid list)
+    - quiet confidence, not hype (voice-profile.md)
+    - end with a soft next step (voice-profile.md)
+
+artifacts:
+  review_html: review.html
+  desktop_copy: /Users/annabelfilippini/Desktop/vh-intro-carousel-review.html
+  plan: plan.md
+  log: pipeline-log.md
+
+version_history:
+  - v1: initial brief — quieter golden-hour mood, hands+notebook hero/signoff, paper on 4 slides
+  - v2: brighter preventive vibe, people (back-only) on slides 1+5+6, paper only on slide 3, no notebook
+  - v3: copy rewritten from website (Julie's ER story, 90-min, 4 sets of eyes, free 30-min call); slide 5 woman → older man patient

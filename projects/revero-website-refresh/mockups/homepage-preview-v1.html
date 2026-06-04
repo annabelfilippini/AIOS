@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revero | Real People Real Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #02B3E2;
+    --navy: #1D283F;
+    --white: #FFFFFF;
+    --tint-blue: #F5FAFF;
+    --tint-cyan: #E6F8FD;
+    --tint-grey: #E8EBF1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    color: var(--navy);
+    background: var(--white);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, .nav, .btn, .eyebrow {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  }
+  h1 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; }
+  h2 { font-weight: 600; letter-spacing: -0.015em; line-height: 1.1; }
+  h3 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+  h4 { font-weight: 600; line-height: 1.3; }
+  p { font-weight: 400; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .accent { color: var(--cyan); }
+
+  /* Containers */
+  .wrap-full { width: 100%; padding: 0 32px; }
+  .wrap-wide { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .wrap-std  { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  .wrap-narrow { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 16px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 0;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: opacity 180ms ease, background-color 180ms ease, color 180ms ease;
+  }
+  .btn-primary {
+    background: var(--cyan);
+    color: var(--white);
+    border-color: var(--cyan);
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    border-color: var(--navy);
+  }
+  .btn-secondary:hover { background: var(--navy); color: var(--white); }
+  .btn-dark {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+  .btn-dark:hover { opacity: 0.88; }
+
+  /* Header */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--white);
+    border-bottom: 1px solid var(--tint-grey);
+  }
+  header.site .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  header.site .logo { height: 36px; width: auto; }
+  header.site nav { display: flex; align-items: center; gap: 36px; }
+  header.site nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  header.site nav a:hover { color: var(--cyan); }
+  header.site .actions { display: flex; align-items: center; gap: 20px; }
+  header.site .phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  header.site .btn { padding: 10px 22px; font-size: 13px; }
+
+  /* Hero */
+  .hero {
+    padding: 96px 0 128px;
+    background: linear-gradient(180deg, var(--white) 0%, var(--tint-blue) 100%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(48px, 6.2vw, 88px);
+    margin-bottom: 24px;
+  }
+  .hero .sub {
+    font-size: 20px;
+    color: #4A556B;
+    margin-bottom: 40px;
+    max-width: 460px;
+  }
+  .hero .ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Conditions */
+  .conditions {
+    padding: 56px 0 96px;
+  }
+  .conditions .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+  }
+  .conditions h2 {
+    font-size: clamp(32px, 3.6vw, 44px);
+    margin-bottom: 16px;
+    max-width: 760px;
+  }
+  .conditions .lede {
+    font-size: 17px;
+    color: #4A556B;
+    max-width: 720px;
+    margin-bottom: 56px;
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--tint-grey);
+    border: 1px solid var(--tint-grey);
+  }
+  .tile {
+    background: var(--white);
+    padding: 40px 32px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .tile .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 24px;
+  }
+  .tile h3 {
+    font-size: 26px;
+    font-weight: 600;
+  }
+  .conditions .more {
+    margin-top: 48px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    border-bottom: 2px solid var(--cyan);
+    padding-bottom: 4px;
+    display: inline-block;
+  }
+
+  /* How it works */
+  .how {
+    padding: 140px 0;
+    background: var(--tint-blue);
+  }
+  .how h2 {
+    font-size: clamp(34px, 4vw, 52px);
+    text-align: center;
+    margin-bottom: 96px;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .pair + .pair { margin-top: 120px; }
+  .pair.flip > div:first-child { order: 2; }
+  .pair img { width: 100%; height: auto; }
+  .pair .copy h3 {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  .pair .copy p {
+    font-size: 17px;
+    color: #4A556B;
+    margin-bottom: 20px;
+  }
+  .typo-block {
+    background: var(--white);
+    padding: 64px 48px;
+    border: 1px solid var(--tint-grey);
+  }
+  .typo-block .lead-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    margin-bottom: 32px;
+  }
+  .typo-block h4 {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  /* Smart clinic */
+  .smart {
+    padding: 112px 0;
+    background: var(--tint-cyan);
+  }
+  .smart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  .smart h2 {
+    font-size: clamp(32px, 3.6vw, 46px);
+    margin-bottom: 20px;
+  }
+  .smart .lede {
+    font-size: 17px;
+    color: #4A556B;
+    margin-bottom: 32px;
+  }
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    padding-top: 64px;
+    border-top: 1px solid rgba(2, 179, 226, 0.25);
+  }
+  .benefits h4 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .benefits p { color: #4A556B; font-size: 15px; }
+  .benefits .glyph {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--cyan);
+    margin-bottom: 18px;
+  }
+
+  /* Pull quotes */
+  .pulls {
+    padding: 80px 0;
+    background: var(--white);
+  }
+  .pulls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+  .pull {
+    border-left: 2px solid var(--cyan);
+    padding: 8px 0 8px 32px;
+  }
+  .pull p {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .pull .who {
+    font-size: 14px;
+    color: #4A556B;
+    letter-spacing: 0.05em;
+  }
+  .pulls .phone-row {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--tint-grey);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--navy);
+  }
+  .pulls .phone-row span.num { color: var(--cyan); font-weight: 600; }
+
+  /* Pricing teaser */
+  .pricing {
+    padding: 128px 0;
+    background: var(--navy);
+    color: var(--white);
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .pricing h2 {
+    font-size: clamp(32px, 3.5vw, 44px);
+    margin-bottom: 24px;
+  }
+  .pricing .lede {
+    color: #B7C0D2;
+    font-size: 17px;
+    margin-bottom: 32px;
+  }
+  .pricing ul { list-style: none; }
+  .pricing li {
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .pricing li::before {
+    content: "—";
+    color: var(--cyan);
+    font-weight: 600;
+  }
+  .pricing .btn-primary { margin-top: 16px; }
+
+  /* Comparison */
+  .compare {
+    padding: 112px 0;
+    background: var(--tint-blue);
+  }
+  .compare h2 {
+    font-size: clamp(34px, 4vw, 52px);
+    max-width: 880px;
+    margin-bottom: 16px;
+  }
+  .compare .lede {
+    color: #4A556B;
+    margin-bottom: 64px;
+    font-size: 18px;
+  }
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--tint-grey);
+  }
+  .col {
+    background: var(--white);
+    padding: 48px 40px;
+  }
+  .col.revero { background: var(--navy); color: var(--white); }
+  .col h3 {
+    font-size: 20px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--tint-grey);
+  }
+  .col.revero h3 { border-color: rgba(255,255,255,0.12); }
+  .col ul { list-style: none; }
+  .col li {
+    padding: 16px 0;
+    font-size: 16px;
+    color: #4A556B;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .col.revero li { color: #DDE3EF; }
+  .col li::before {
+    content: "×";
+    color: #B7C0D2;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+  }
+  .col.revero li::before {
+    content: "✓";
+    color: var(--cyan);
+  }
+  .compare .ctas {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Featured testimonials */
+  .stories {
+    padding: 140px 0;
+  }
+  .stories-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 72px;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stories-head h2 { font-size: clamp(32px, 3.6vw, 46px); }
+  .stories-head .more {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    border-bottom: 2px solid var(--cyan);
+    padding-bottom: 4px;
+  }
+  .stories-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .story-feature img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+  }
+  .story p {
+    font-size: 16px;
+    color: #4A556B;
+    margin-bottom: 24px;
+  }
+  .story .name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+  }
+  .story h4 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  /* Footer */
+  footer.site {
+    background: var(--navy);
+    color: var(--white);
+  }
+  footer.site .callband {
+    padding: 64px 32px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  footer.site .callband p {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+  footer.site .callband .num { color: var(--cyan); }
+  footer.site .links {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 32px 48px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  footer.site .links h5 {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 20px;
+  }
+  footer.site .links ul { list-style: none; }
+  footer.site .links li { padding: 6px 0; }
+  footer.site .links a {
+    color: #C7CFE0;
+    font-size: 14px;
+  }
+  footer.site .links a:hover { color: var(--white); }
+  footer.site .brand-col img { height: 32px; margin-bottom: 20px; filter: brightness(0) invert(1); }
+  footer.site .brand-col p { color: #B7C0D2; font-size: 14px; max-width: 320px; }
+  footer.site .legal {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 24px 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #8A93AA;
+    font-size: 12px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  footer.site .reg-note {
+    background: rgba(255,255,255,0.04);
+    color: #8A93AA;
+    font-size: 12px;
+    padding: 16px 32px;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 700ms ease, transform 700ms ease;
+    will-change: opacity, transform;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-grid, .pair, .pair.flip, .smart-grid, .pricing-grid,
+    .compare-grid, .stories-grid, .pulls-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px;
+    }
+    .pair.flip > div:first-child { order: 0; }
+    .tiles { grid-template-columns: repeat(2, 1fr); }
+    .benefits { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
+    .hero { padding: 64px 0 80px; }
+    .how { padding: 88px 0; }
+    .pricing { padding: 80px 0; }
+    .stories { padding: 88px 0; }
+    header.site nav { display: none; }
+    footer.site .links { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .tiles { grid-template-columns: 1fr; }
+    footer.site .links { grid-template-columns: 1fr; }
+    footer.site .legal { justify-content: center; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. HEADER -->
+<header class="site">
+  <div class="inner">
+    <a href="#" aria-label="Revero home">
+      <img src="assets/revero-logo.png" alt="Revero" class="logo">
+    </a>
+    <nav>
+      <a href="#how">How It Works</a>
+      <a href="#stories">Testimonials</a>
+      <a href="#">Organizations</a>
+      <a href="#">Resources</a>
+      <a href="#pricing">Membership</a>
+      <a href="#">For Providers</a>
+    </nav>
+    <div class="actions">
+      <span class="phone">(415) 835-4151</span>
+      <a href="#pricing" class="btn btn-primary">Join Now</a>
+    </div>
+  </div>
+</header>
+
+<!-- 2. HERO -->
+<section class="hero">
+  <div class="wrap-wide">
+    <div class="hero-grid">
+      <div class="reveal">
+        <h1>Take back your <span class="accent">health</span></h1>
+        <p class="sub">Get root cause treatment for your chronic conditions today.</p>
+        <div class="ctas">
+          <a href="#pricing" class="btn btn-primary">Join Now</a>
+          <a href="#" class="btn btn-secondary">Free Info Call</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <img src="assets/revero-care-preview.png" alt="Revero members and clinicians" class="hero-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. CONDITIONS WE TREAT -->
+<section class="conditions">
+  <div class="wrap-wide">
+    <p class="eyebrow reveal">Conditions We Treat</p>
+    <h2 class="reveal">Personalized treatment for chronic conditions, built around your biology.</h2>
+    <p class="lede reveal">Revero combines nutrition therapy with clinical expertise and technology to deliver personalized treatments for chronic conditions.</p>
+    <div class="tiles reveal">
+      <div class="tile"><span class="label">01 / Metabolic</span><h3>Type II Diabetes</h3></div>
+      <div class="tile"><span class="label">02 / Metabolic</span><h3>Prediabetes</h3></div>
+      <div class="tile"><span class="label">03 / Cardiometabolic</span><h3>Primary Hypertension</h3></div>
+      <div class="tile"><span class="label">04 / Autoimmune</span><h3>Autoimmune Disease</h3></div>
+      <div class="tile"><span class="label">05 / Digestive</span><h3>Digestive Issues</h3></div>
+      <div class="tile"><span class="label">06 / Inflammatory</span><h3>Skin Conditions</h3></div>
+    </div>
+    <a href="#" class="more reveal">Learn more about the Revero Treatment</a>
+  </div>
+</section>
+
+<!-- 4. HOW REVERO WORKS -->
+<section class="how" id="how">
+  <div class="wrap-std">
+    <h2 class="reveal">Targeting the root causes of chronic disease.</h2>
+
+    <div class="pair">
+      <div class="reveal">
+        <img src="assets/revero-original-clinician.png" alt="Revero clinician in a virtual visit">
+      </div>
+      <div class="copy reveal">
+        <h3>Ongoing in-app medical care</h3>
+        <p>A licensed care team meets with you regularly through the Revero app. They monitor your biomarkers, adjust medications when appropriate, and treat the underlying drivers of your condition, not just the symptoms.</p>
+        <p>Visits, labs, and check-ins all live in one place. Your care plan moves with you.</p>
+      </div>
+    </div>
+
+    <div class="pair flip">
+      <div class="reveal">
+        <div class="typo-block">
+          <p class="lead-num">02 / Nutrition Therapy</p>
+          <h4>A personalized nutrition protocol designed for your condition, your labs, and your life.</h4>
+        </div>
+      </div>
+      <div class="copy reveal">
+        <h3>Personalized nutrition therapy</h3>
+        <p>Food is the lever most chronic conditions respond to first. Your registered dietitian builds a protocol from your biomarkers and adjusts as your numbers change.</p>
+        <p>No generic meal plans. No restriction for its own sake. A plan that fits your kitchen, your culture, and the data your care team is watching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. SMART CLINIC -->
+<section class="smart">
+  <div class="wrap-wide">
+    <div class="smart-grid">
+      <div class="reveal">
+        <img src="assets/revero-hero-app.png" alt="Revero member app screens">
+      </div>
+      <div class="reveal">
+        <h2>Smart clinic and care team in your pocket.</h2>
+        <p class="lede">We treat the root cause with personalized medical care and nutrition. Your labs, your dietitian, your clinician, your data, all in one app.</p>
+        <a href="#pricing" class="btn btn-dark">See How It Works</a>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="reveal">
+        <p class="glyph">01</p>
+        <h4>Lower blood sugar</h4>
+        <p>Members reduce A1c and stabilize glucose through diet, monitoring, and supervised medication changes.</p>
+      </div>
+      <div class="reveal">
+        <p class="glyph">02</p>
+        <h4>Reduce inflammation</h4>
+        <p>Targeted nutrition and lifestyle protocols address autoimmune and inflammatory drivers at the source.</p>
+      </div>
+      <div class="reveal">
+        <p class="glyph">03</p>
+        <h4>Restore gut health</h4>
+        <p>A protocol that rebuilds gut function, the foundation most chronic conditions sit on top of.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PULL QUOTES -->
+<section class="pulls">
+  <div class="wrap-wide">
+    <div class="pulls-grid">
+      <div class="pull reveal">
+        <p>"Working with my care team gave me back the energy I had not felt in fifteen years. The plan was mine, not a template."</p>
+        <p class="who">Revero Member</p>
+      </div>
+      <div class="pull reveal">
+        <p>"My care team is fabulous. They actually read my labs, they remember my history, and they explain what is happening."</p>
+        <p class="who">Revero Member</p>
+      </div>
+    </div>
+    <p class="phone-row reveal">Have questions before joining? Call us at <span class="num">(415) 835-4151</span> for a free info call.</p>
+  </div>
+</section>
+
+<!-- 7. PRICING TEASER -->
+<section class="pricing" id="pricing">
+  <div class="wrap-std">
+    <div class="pricing-grid">
+      <div class="reveal">
+        <h2>Start your journey with an incredible first month.</h2>
+        <p class="lede">One membership covers your medical care, your nutrition therapy, your biomarker monitoring, and the app that ties it together.</p>
+        <a href="#" class="btn btn-primary">Sign Up For Revero</a>
+      </div>
+      <ul class="reveal">
+        <li>Comprehensive lab panel and biomarker baseline</li>
+        <li>Medical supervision from a licensed clinician</li>
+        <li>Remote monitoring devices shipped to your door</li>
+        <li>Ongoing biomarker tracking inside the app</li>
+        <li>Medication adjustments based on your numbers</li>
+        <li>Regular check-ins with a dedicated health coach</li>
+        <li>Video learning modules built for your condition</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 8. TRADITIONAL CARE VS REVERO -->
+<section class="compare">
+  <div class="wrap-wide">
+    <h2 class="reveal">What if medicine treated the cause, not the symptoms?</h2>
+    <p class="lede reveal">Here is how Revero is different.</p>
+    <div class="compare-grid reveal">
+      <div class="col">
+        <h3>Traditional Care</h3>
+        <ul>
+          <li>More symptoms lead to more prescriptions</li>
+          <li>Long waits for short appointments</li>
+          <li>Focused on acute problems, not chronic drivers</li>
+          <li>Manage side effects rather than reverse the condition</li>
+        </ul>
+      </div>
+      <div class="col revero">
+        <h3>Revero</h3>
+        <ul>
+          <li>Personalized nutritional plan built from your labs</li>
+          <li>Ongoing care team and community support</li>
+          <li>Designed specifically for chronic conditions</li>
+          <li>Sustainable habits that compound over time</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ctas reveal">
+      <a href="#pricing" class="btn btn-primary">Get Started</a>
+      <a href="#" class="btn btn-secondary">Book a Free Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FEATURED TESTIMONIALS -->
+<section class="stories" id="stories">
+  <div class="wrap-wide">
+    <div class="stories-head">
+      <h2 class="reveal">Our members say it best.</h2>
+      <a href="#" class="more reveal">See more success stories</a>
+    </div>
+    <div class="stories-grid">
+      <div class="story story-feature reveal">
+        <img src="assets/revero-original-article-1.png" alt="Revero member before and after">
+        <h4>Kevin reversed his Type II diabetes in nine months.</h4>
+        <p>"I came in skeptical. I had been told for years that diabetes was a one-way street. My care team treated me like a person, built a protocol around my actual life, and my A1c dropped further than I thought possible."</p>
+        <p class="name">Kevin, Revero Member</p>
+      </div>
+      <div class="story reveal">
+        <h4>Rob got off two medications.</h4>
+        <p>"The monitoring is the difference. Someone was actually watching my numbers between visits and adjusting. I had never had care that felt that responsive."</p>
+        <p class="name">Rob, Revero Member</p>
+      </div>
+      <div class="story reveal">
+        <h4>Kiska put her autoimmune flare into remission.</h4>
+        <p>"I had tried every elimination diet on the internet. Working with a real dietitian who read my labs was a completely different experience. The flare quieted and stayed quiet."</p>
+        <p class="name">Kiska, Revero Member</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FOOTER -->
+<footer class="site">
+  <div class="callband reveal">
+    <p>Call us at <span class="num">(415) 835-4151</span> for a free info call.</p>
+    <a href="tel:+14158354151" class="btn btn-primary">Call Now</a>
+  </div>
+  <div class="links">
+    <div class="brand-col">
+      <img src="assets/revero-logo.png" alt="Revero">
+      <p>A data-driven digital clinic with the mission to reverse autoimmune and other chronic diseases by addressing the root causes.</p>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">News and press</a></li>
+        <li><a href="#">Healthcare Providers</a></li>
+        <li><a href="#">Contact us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="#">Diabetes</a></li>
+        <li><a href="#">Inflammatory conditions</a></li>
+        <li><a href="#">Obesity and hypertension</a></li>
+        <li><a href="#">Research</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Privacy Practice</a></li>
+        <li><a href="#">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="reg-note">Due to state regulations, patients who have labs drawn in NJ, NY, and RI must self-pay for labs or contact their insurance provider for possible coverage.</p>
+  <div class="legal">
+    <span>Copyright 2026 Revero Inc.</span>
+    <span>(415) 835-4151</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal via IntersectionObserver
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

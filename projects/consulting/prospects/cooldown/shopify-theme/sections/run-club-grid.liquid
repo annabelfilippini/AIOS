@@ -1,0 +1,71 @@
+{{ 'section-run-club-grid.css' | asset_url | stylesheet_tag }}
+
+
+<div class="club-grid">
+  {% for block in section.blocks %}
+  <div class="club-block">
+    <a href="{{ block.settings.page_link }}">
+      <div class="loc-image {{ block.settings.title }}">
+          {{ block.settings.image | image_url: width: 1500 | image_tag:
+            loading: 'lazy',
+            sizes: sizes,
+            widths: '165, 360, 535, 750, 1070, 1500'
+          }}
+      </div>
+    <div class="card-overlay"></div>
+      <div class="loc-info">
+        <h2>{{ block.settings.title }}</h2>
+        <!--<div class="state">{{ block.settings.state }}</div>-->
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Run Club Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [  ],
+   "blocks": [
+    {
+      "type": "column",
+      "name": "Run Club",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "City",
+          "label": "City"
+        },
+        {
+          "type": "text",
+          "id": "state",
+          "default": "State",
+          "label": "State",
+          "info": "State"
+        },
+        {
+          "type": "url",
+          "id": "page_link",
+          "label": "Page Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Run Club Grid",
+       "blocks": []
+      
+    }
+  ]
+
+}
+{% endschema %}

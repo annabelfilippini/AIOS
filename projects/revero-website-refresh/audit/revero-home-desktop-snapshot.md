@@ -1,0 +1,65 @@
+- generic [active] [ref=e1]:
+  - region "Cookie and Tracking Consent" [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - heading "Cookie and Tracking Consent" [level=2] [ref=e5]
+        - paragraph [ref=e6]: We use cookies and similar technologies to improve your experience, deliver personalized content, and analyze our traffic. You can choose to accept all cookies or manage your preferences.
+      - generic [ref=e7]:
+        - generic [ref=e8]
+        - button "Show Preferences" [ref=e12] [cursor=pointer]
+  - generic [ref=e16]:
+    - generic:     
+    - generic [ref=e17]:
+      - generic [ref=e20]:
+        - link [ref=e25] [cursor=pointer]:
+          - /url: https://www.revero.com/
+        - navigation [ref=e29]
+      - text:      
+      - generic [ref=e48]:
+        - generic [ref=e50]
+        - img [ref=e69]
+      - text:    
+      - generic:
+        - generic:   ›
+      - generic [ref=e71]:
+        - generic [ref=e74]
+        - generic [ref=e82]
+        - generic [ref=e111]
+        - link "Learn more about the Revero Treatment" [ref=e144] [cursor=pointer]:
+          - /url: /what-we-treat
+      - generic [ref=e147]:
+        - generic [ref=e150]
+        - generic [ref=e157]
+      - generic [ref=e182]:
+        - generic [ref=e185]
+        - generic [ref=e198]
+        - generic [ref=e228]
+      - generic [ref=e259]:
+        - img [ref=e263]
+        - generic [ref=e265]
+      - generic [ref=e280]:
+        - generic [ref=e283]
+        - generic [ref=e293]
+        - generic [ref=e324]
+      - generic [ref=e335]:
+        - heading "What if medicine treated the Cause, not the symptoms?" [level=1] [ref=e337]
+        - heading "Here's how Revero is different." [level=1] [ref=e341]
+        - generic [ref=e347]
+        - generic [ref=e378]
+      - generic [ref=e386]:
+        - heading "Our members say it best" [level=1] [ref=e391]
+        - generic [ref=e393]
+        - link "See more success stories" [ref=e428] [cursor=pointer]:
+          - /url: https://www.revero.com/testimonials
+      - generic [ref=e432]:
+        - generic [ref=e434]
+        - img [ref=e453]
+      - generic:
+        - generic:   ›
+      - generic [ref=e457]:
+        - generic [ref=e458]
+        - navigation [ref=e501]
+        - generic [ref=e513]
+      - generic:
+        - generic:       
+  - text: 

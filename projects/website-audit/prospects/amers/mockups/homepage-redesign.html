@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amer's Deli — Mediterranean Deli, State Street Ann Arbor, Since 1988</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#2A1D15;
+    --ivory:#F3ECDE;
+    --brick:#A23A2A;
+    --brass:#B08B4F;
+    --ink:#1A120B;
+    --cream:#EEE3CC;
+    --max: 1280px;
+    --gutter: 48px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--ivory);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+  .container{max-width:var(--max);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+  .eyebrow{font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+  .serif{font-family:'Playfair Display',Georgia,serif}
+  .script{font-family:'Caveat',cursive;font-weight:600}
+
+  /* === SECTION 1: ANNOUNCEMENT BAR === */
+  .announce{background:var(--espresso);color:var(--ivory);height:36px;display:flex;align-items:center;font-size:12.5px;letter-spacing:.04em}
+  .announce .container{display:flex;align-items:center;justify-content:center;width:100%}
+  .announce a{border-bottom:1px solid var(--brass);padding-bottom:1px;color:var(--ivory)}
+
+  /* === SECTION 2: NAV === */
+  .nav{background:var(--ivory);border-bottom:1px solid rgba(42,29,21,.08);position:relative;z-index:20}
+  .nav .container{display:flex;align-items:center;justify-content:space-between;padding-top:22px;padding-bottom:22px;gap:32px}
+  .wordmark{display:flex;flex-direction:column;line-height:1}
+  .wordmark .name{font-family:'Playfair Display',serif;font-weight:900;font-size:30px;letter-spacing:.02em;color:var(--ink)}
+  .wordmark .tag{font-size:10px;letter-spacing:.24em;color:var(--brass);margin-top:6px;font-weight:600}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--ink);letter-spacing:.02em;position:relative;padding:4px 0}
+  .nav-links a:hover{color:var(--brick)}
+  .nav-links a:hover::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--brass)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;letter-spacing:.04em;padding:12px 22px;border:0;transition:all .2s ease;cursor:pointer}
+  .btn-primary{background:var(--brick);color:var(--ivory)}
+  .btn-primary:hover{background:#8a2e21;transform:translateY(-1px)}
+  .btn-underline{color:var(--ink);border-bottom:1.5px solid var(--brass);padding:2px 0;font-weight:600;font-size:14px;letter-spacing:.02em;transition:color .2s}
+  .btn-underline:hover{color:var(--brick)}
+  .hamburger{display:none;background:none;border:0;padding:8px}
+
+  /* === SECTION 3: HERO === */
+  .hero{background:var(--ivory);max-height:100vh;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:40fr 60fr;min-height:calc(100vh - 120px);max-height:calc(100vh - 120px)}
+  .hero-photo{position:relative;overflow:hidden;background:#1a120b}
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .frog-badge{position:absolute;right:28px;bottom:28px;width:120px;height:120px;border-radius:50%;background:rgba(243,236,222,.92);display:flex;align-items:center;justify-content:center;transform:rotate(-6deg);box-shadow:0 8px 24px rgba(0,0,0,.25);border:1.5px solid rgba(176,139,79,.55)}
+  .frog-badge img{width:78%;height:auto;opacity:.92}
+  .hero-copy{display:flex;flex-direction:column;justify-content:center;padding:72px 64px;gap:22px;background:var(--ivory)}
+  .hero-copy .eyebrow{margin-bottom:6px}
+  .hero-copy h1{font-family:'Playfair Display',serif;font-weight:900;font-size:68px;line-height:1.02;color:var(--ink);letter-spacing:-.01em}
+  .hero-copy .subhead{font-size:20px;line-height:1.45;color:var(--espresso);max-width:46ch}
+  .hero-ctas{display:flex;align-items:center;gap:24px;margin-top:8px;flex-wrap:wrap}
+  .hero-meta{font-size:13px;color:rgba(42,29,21,.6);margin-top:4px;letter-spacing:.02em}
+
+  /* === SECTION 4: MARQUEE === */
+  .marquee{background:var(--espresso);color:var(--ivory);padding:54px 0 28px;overflow:hidden;position:relative}
+  .marquee-track{display:flex;gap:48px;white-space:nowrap;animation:scroll 40s linear infinite;will-change:transform}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  .marquee-item{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:40px;color:var(--ivory);display:inline-flex;align-items:center;gap:48px}
+  .marquee-item .sep{display:inline-flex;align-items:center;color:var(--brass)}
+  @keyframes scroll{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+  .marquee-legend{text-align:center;margin-top:32px;font-size:11px;letter-spacing:.22em;color:var(--brass);font-weight:600;text-transform:uppercase;padding:0 var(--gutter)}
+
+  /* === SECTION 5: SIGNATURE DISHES === */
+  .dishes{background:var(--ivory);padding:110px 0}
+  .dishes-head{text-align:center;margin-bottom:60px}
+  .dishes-head h2{font-family:'Playfair Display',serif;font-weight:700;font-size:48px;line-height:1.1;color:var(--ink);letter-spacing:-.01em}
+  .dishes-head p{font-size:16px;color:rgba(42,29,21,.7);margin-top:14px}
+  .dishes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .dish{background:var(--cream);display:flex;flex-direction:column}
+  .dish-photo{aspect-ratio:4/3;overflow:hidden;background:#222}
+  .dish-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .dish:hover .dish-photo img{transform:scale(1.04)}
+  .dish-body{padding:22px 22px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .dish .eyebrow{margin-bottom:2px}
+  .dish-name{font-family:'Playfair Display',serif;font-weight:700;font-size:26px;line-height:1.15;color:var(--ink)}
+  .dish-desc{font-size:14px;line-height:1.55;color:rgba(26,18,11,.78)}
+  .dish-price{font-weight:600;font-size:14px;color:var(--ink);letter-spacing:.02em;margin-top:auto;padding-top:8px}
+  .market{color:var(--brass);letter-spacing:.22em;font-size:12px;font-weight:600}
+  .dishes-cta{text-align:center;margin-top:54px}
+
+  /* === SECTION 6: STORY === */
+  .story{background:var(--ivory);padding:120px 0}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+  .story-copy{padding-right:20px}
+  .story-copy .eyebrow{margin-bottom:18px}
+  .story-copy h2{font-family:'Playfair Display',serif;font-weight:700;font-size:54px;line-height:1.08;color:var(--ink);letter-spacing:-.01em;margin-bottom:28px}
+  .story-copy p{font-size:17px;line-height:1.65;color:var(--espresso);margin-bottom:22px}
+  .pullquote{border-left:3px solid var(--brass);padding:6px 0 6px 24px;margin:32px 0}
+  .pullquote q{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:30px;line-height:1.25;color:var(--ink);display:block;quotes:none}
+  .pullquote q::before,.pullquote q::after{content:""}
+  .pullquote .attr{margin-top:14px;font-size:12px;letter-spacing:.12em;color:rgba(42,29,21,.6);text-transform:uppercase}
+  .story-img{aspect-ratio:4/5;overflow:hidden}
+  .story-img img{width:100%;height:100%;object-fit:cover}
+
+  /* === SECTION 7: SUB-BRANDS === */
+  .subs{background:var(--espresso);padding:0}
+  .subs-grid{display:grid;grid-template-columns:1fr 1fr}
+  .sub{padding:90px 60px;display:flex;flex-direction:column;gap:22px}
+  .sub + .sub{border-left:1px solid rgba(238,227,204,.12)}
+  .sub-card{background:var(--cream);padding:26px;border-radius:2px}
+  .sub-photo{aspect-ratio:16/10;overflow:hidden;margin-bottom:22px}
+  .sub-photo img{width:100%;height:100%;object-fit:cover}
+  .sub .eyebrow{color:var(--brass)}
+  .sub h3{font-family:'Playfair Display',serif;font-weight:900;font-size:48px;color:var(--ivory);line-height:1;letter-spacing:-.01em}
+  .sub p{font-size:16px;line-height:1.6;color:rgba(238,227,204,.82);max-width:44ch}
+
+  /* === SECTION 8: PRESS === */
+  .press{background:var(--ivory);padding:120px 0;text-align:center}
+  .press-inner{max-width:860px;margin:0 auto;padding:0 var(--gutter)}
+  .press .eyebrow{margin-bottom:28px}
+  .press q{font-family:'Playfair Display',serif;font-weight:700;font-size:44px;line-height:1.2;color:var(--espresso);display:block;quotes:none;letter-spacing:-.005em}
+  .press q::before,.press q::after{content:""}
+  .press .attr{display:inline-block;margin-top:36px;font-size:13px;letter-spacing:.22em;font-weight:600;color:var(--brass);border-bottom:1px solid var(--brass);padding-bottom:2px}
+  .press .attr:hover{color:var(--brick)}
+
+  /* === SECTION 9: VISIT === */
+  .visit{background:var(--espresso);color:var(--ivory)}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:540px}
+  .visit-copy{padding:100px 64px;display:flex;flex-direction:column;gap:20px;justify-content:center}
+  .visit-copy .eyebrow{margin-bottom:10px}
+  .visit-copy h2{font-family:'Playfair Display',serif;font-weight:700;font-size:42px;line-height:1.1;color:var(--ivory);margin-bottom:18px;letter-spacing:-.01em}
+  .visit-block{font-size:18px;line-height:1.55;color:var(--ivory)}
+  .visit-block a:hover{border-bottom:1px solid var(--brass);padding-bottom:1px}
+  .visit-cta{margin-top:24px}
+  .visit-cta a{color:var(--ivory);border-bottom:1.5px solid var(--brass);padding-bottom:2px;font-size:15px;font-weight:600;letter-spacing:.02em}
+  .visit-cta a:hover{color:var(--brass)}
+  .visit-photo{background:#000;overflow:hidden}
+  .visit-photo img{width:100%;height:100%;object-fit:cover}
+
+  /* === SECTION 10: FOOTER === */
+  footer{background:var(--espresso);color:var(--ivory);padding:80px 0 40px;position:relative;overflow:hidden}
+  .footer-watermark{position:absolute;right:32px;bottom:24px;width:72px;opacity:.25;pointer-events:none}
+  .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:64px;align-items:flex-start}
+  .footer-brand .name{font-family:'Playfair Display',serif;font-weight:900;font-size:34px;letter-spacing:.02em;color:var(--ivory)}
+  .footer-brand .tag{margin-top:10px;font-size:11px;letter-spacing:.24em;color:var(--brass);font-weight:600}
+  .footer-nav{display:flex;flex-direction:column;gap:12px}
+  .footer-nav a{font-size:14px;color:var(--ivory);letter-spacing:.02em}
+  .footer-nav a:hover{color:var(--brass)}
+  .footer-contact{font-size:14px;line-height:1.7;color:var(--ivory)}
+  .footer-contact a:hover{color:var(--brass)}
+  .socials{display:flex;gap:14px;margin-top:18px}
+  .socials a{width:36px;height:36px;border:1px solid rgba(238,227,204,.35);display:inline-flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s}
+  .socials a:hover{background:var(--brass);border-color:var(--brass)}
+  .socials svg{width:15px;height:15px;fill:var(--ivory)}
+  .footer-meta{margin-top:60px;padding-top:24px;border-top:1px solid rgba(238,227,204,.12);font-size:11px;color:rgba(238,227,204,.6);letter-spacing:.04em;text-align:center}
+
+  /* === RESPONSIVE === */
+  @media (max-width: 1024px){
+    :root{--gutter:36px}
+    .hero-copy{padding:56px 44px}
+    .hero-copy h1{font-size:54px}
+    .dishes-grid{grid-template-columns:repeat(2,1fr)}
+    .story-grid{gap:48px}
+    .story-copy h2{font-size:44px}
+  }
+  @media (max-width: 768px){
+    :root{--gutter:22px}
+    .announce{height:auto;padding:10px 0;font-size:11.5px;text-align:center}
+    .announce .container{flex-direction:column}
+    .nav .container{padding-top:16px;padding-bottom:16px;gap:12px}
+    .nav-links{display:none}
+    .hamburger{display:inline-flex;color:var(--ink)}
+    .wordmark .name{font-size:24px}
+    .wordmark .tag{font-size:9px}
+    .btn{padding:10px 16px;font-size:13px}
+    .hero-grid{grid-template-columns:1fr;min-height:auto;max-height:none}
+    .hero-photo{aspect-ratio:4/3}
+    .hero-copy{padding:44px 22px 56px}
+    .hero-copy h1{font-size:40px}
+    .hero-copy .subhead{font-size:17px}
+    .frog-badge{width:96px;height:96px;right:16px;bottom:16px}
+    .marquee{padding:36px 0 20px}
+    .marquee-item{font-size:28px;gap:28px}
+    .marquee-track{gap:28px}
+    .marquee-legend{margin-top:22px;font-size:10px}
+    .dishes{padding:72px 0}
+    .dishes-head h2{font-size:32px}
+    .dishes-grid{grid-template-columns:1fr;gap:22px}
+    .story{padding:72px 0}
+    .story-grid{grid-template-columns:1fr;gap:40px}
+    .story-copy{padding-right:0}
+    .story-copy h2{font-size:34px}
+    .pullquote q{font-size:22px}
+    .subs-grid{grid-template-columns:1fr}
+    .sub{padding:60px 22px}
+    .sub + .sub{border-left:0;border-top:1px solid rgba(238,227,204,.12)}
+    .sub h3{font-size:36px}
+    .press{padding:72px 0}
+    .press q{font-size:28px}
+    .visit-grid{grid-template-columns:1fr;min-height:auto}
+    .visit-copy{padding:60px 22px}
+    .visit-copy h2{font-size:32px}
+    .visit-photo{aspect-ratio:4/3}
+    .footer-grid{grid-template-columns:1fr;gap:40px}
+    .footer-watermark{width:56px;right:16px;bottom:12px}
+    .hero-ctas{gap:18px}
+  }
+</style>
+</head>
+<body>
+
+<!-- SECTION 1: ANNOUNCEMENT BAR -->
+<section class="announce" aria-label="hours and location">
+  <div class="container">
+    <span>Open daily, 8 am – 10 pm · 312 S. State St., across from the Diag · <a href="tel:+17347616000">(734) 761-6000</a></span>
+  </div>
+</section>
+
+<!-- SECTION 2: NAVIGATION -->
+<section class="nav-wrap" aria-label="navigation">
+<nav class="nav" aria-label="primary">
+  <div class="container">
+    <a href="#" class="wordmark" aria-label="Amer's home">
+      <span class="name">AMER'S</span>
+      <span class="tag">MEDITERRANEAN DELI · SINCE 1988</span>
+    </a>
+    <div class="nav-links">
+      <a href="assets/amers-menu.pdf" target="_blank" rel="noopener">Menu</a>
+      <a href="#story">Our Story</a>
+      <a href="#catering">Catering</a>
+      <a href="#visit">Visit</a>
+    </div>
+    <a href="https://www.amersdeli.com/popmenu-order" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Order now</a>
+    <button class="hamburger" aria-label="menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+</section>
+
+<!-- SECTION 3: HERO -->
+<section class="hero" aria-label="welcome">
+  <div class="hero-grid">
+    <div class="hero-photo">
+      <img src="assets/hero-composition.jpg" alt="Açaí bowl topped with fruit, coconut, and granola on rustic wood">
+      <div class="frog-badge" aria-hidden="true">
+        <img src="assets/welcome-frog.png" alt="">
+      </div>
+    </div>
+    <div class="hero-copy">
+      <span class="eyebrow">State Street, Ann Arbor · Since 1988</span>
+      <h1>A coffee house and a delicatessen in one.</h1>
+      <p class="subhead">Not a coffee house with food choices. Not a delicatessen with coffee choices. We are Amer's.</p>
+      <div class="hero-ctas">
+        <a href="https://www.amersdeli.com/popmenu-order" target="_blank" rel="noopener" class="btn btn-primary">Order now</a>
+        <a href="assets/amers-menu.pdf" target="_blank" rel="noopener" class="btn-underline">See the full menu</a>
+      </div>
+      <p class="hero-meta">Open 8 am – 10 pm · (734) 761-6000 · Across from the Diag</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: HERITAGE MARQUEE -->
+<section class="marquee" aria-label="press and awards">
+  <div class="marquee-track">
+    <!-- 2x duplicate for seamless loop -->
+    <div class="marquee-item">Best Sandwich<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Deli<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Coffee<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Juice Bar<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Restaurant<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Sandwich<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Deli<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Coffee<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Juice Bar<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+    <div class="marquee-item">Best Restaurant<span class="sep"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 2v8a2 2 0 0 0 2 2v10h1v-10a2 2 0 0 0 2-2V2h-1v7h-1V2h-1v7h-1V2H8zm9 0c-1.66 0-3 2.24-3 5s1 5 2 5v10h2V2h-1z"/></svg></span></div>
+  </div>
+  <p class="marquee-legend">Awards + features from The Michigan Daily, Ann Arbor Observer, Ann Arbor News, Metro Times, and Oakland Jewish News.</p>
+</section>
+
+<!-- SECTION 5: SIGNATURE DISHES -->
+<section class="dishes" id="menu">
+  <div class="container">
+    <div class="dishes-head">
+      <h2>The menu spans over half the restaurant.</h2>
+      <p>Here are four to start with.</p>
+    </div>
+    <div class="dishes-grid">
+      <article class="dish">
+        <div class="dish-photo"><img src="assets/hero-composition.jpg" alt="Power Açaí Bowl overhead"></div>
+        <div class="dish-body">
+          <span class="eyebrow">Signature</span>
+          <h3 class="dish-name">Power Açaí Bowl</h3>
+          <p class="dish-desc">100% açaí berry base. Build your own toppings from the bar. The Michigan Daily called it their 'home base.'</p>
+          <div class="dish-price"><span class="market">MARKET</span></div>
+        </div>
+      </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="assets/reuben.jpg" alt="Reuben sandwich on grilled rye"></div>
+        <div class="dish-body">
+          <span class="eyebrow">Deli classic</span>
+          <h3 class="dish-name">Reuben</h3>
+          <p class="dish-desc">Shaved pastrami and sauerkraut, grilled rye, kosher pickle on the side.</p>
+          <div class="dish-price">$14.99</div>
+        </div>
+      </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="assets/chicago-dog.jpg" alt="Chicago-style hot dog"></div>
+        <div class="dish-body">
+          <span class="eyebrow">Amer's original</span>
+          <h3 class="dish-name">Chicago Reds Dog</h3>
+          <p class="dish-desc">Vienna all-beef, neon relish, sport peppers, tomato, pickle, yellow mustard, onion, steamed poppyseed bun.</p>
+          <div class="dish-price"><span class="market">MARKET</span></div>
+        </div>
+      </article>
+      <article class="dish">
+        <div class="dish-photo"><img src="assets/puff-pastry.jpg" alt="Nutella and strawberry crêpe"></div>
+        <div class="dish-body">
+          <span class="eyebrow">Campus favorite</span>
+          <h3 class="dish-name">Nutella & Strawberry Crêpe</h3>
+          <p class="dish-desc">Crispy yet pillow-soft, filled with warm Nutella and strawberries. A Diag-across-the-street ritual.</p>
+          <div class="dish-price"><span class="market">MARKET</span></div>
+        </div>
+      </article>
+    </div>
+    <div class="dishes-cta">
+      <a href="assets/amers-menu.pdf" target="_blank" rel="noopener" class="btn-underline">See the full menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: OUR STORY -->
+<section class="story" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-copy">
+        <span class="eyebrow">Since 1988 · On State Street since 1990</span>
+        <h2>A coffee house married a deli. Then Amer opened the door.</h2>
+        <p>The concept was built in Flint in 1988 and moved to the U-M campus in 1990. Thirty-five years on State Street since — coffee, sandwiches, crêpes, salads, frozen yogurt, and an eight-page menu that physically takes up half the restaurant.</p>
+        <div class="pullquote">
+          <q>Often, you will find Amer, himself, behind the counter, offering opinions and advice on what to order.</q>
+          <div class="attr">— The Michigan Daily, December 2022</div>
+        </div>
+        <p>Amer's was an originator of a lot of things in Ann Arbor: chai teas, loose teas, fair trade coffee, raw juices, soy products. It is still the only place where the menu has both falafel and a hand-made reuben.</p>
+      </div>
+      <div class="story-img">
+        <img src="assets/deli-case.jpg" alt="Amer's pastry case with chalkboard menu boards behind">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: SUB-BRANDS -->
+<section class="subs">
+  <div class="subs-grid">
+    <div class="sub">
+      <div class="sub-card">
+        <div class="sub-photo"><img src="assets/chicago-dog.jpg" alt="Chicago-style hot dog, dragged through the garden"></div>
+      </div>
+      <span class="eyebrow">A sub-brand at Amer's</span>
+      <h3 class="serif">Chicago Reds</h3>
+      <p>The Chicago-style hot-dog menu, served the only way it's supposed to be: dragged through the garden, never with ketchup.</p>
+    </div>
+    <div class="sub">
+      <div class="sub-card">
+        <div class="sub-photo"><img src="assets/frozen-yogurt-cup.jpg" alt="Cup of frozen yogurt from Yogurt Rush"></div>
+      </div>
+      <span class="eyebrow">A sub-brand at Amer's</span>
+      <h3 class="serif">Yogurt Rush</h3>
+      <p>Six rotating flavors of self-serve frozen yogurt. Original Tart, Vanilla, Chocolate, Cake Batter, Strawberry Cheesecake, Juicy Orange.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: PRESS -->
+<section class="press">
+  <div class="press-inner">
+    <span class="eyebrow">Press</span>
+    <q>Amer's Delicatessen is a quintessential campus eatery with staff members who remember your name — and sometimes your exact order.</q>
+    <a class="attr" href="https://www.michigandaily.com/arts/amers-delicatessen-a-university-of-michigan-students-home-base/" target="_blank" rel="noopener">THE MICHIGAN DAILY · DECEMBER 2022</a>
+  </div>
+</section>
+
+<!-- SECTION 9: VISIT -->
+<section class="visit" id="visit">
+  <div class="visit-grid">
+    <div class="visit-copy">
+      <span class="eyebrow">Visit</span>
+      <h2>On State Street since 1990.</h2>
+      <div class="visit-block">
+        <a href="https://maps.google.com/?q=312+S+State+St+Ann+Arbor+MI+48104" target="_blank" rel="noopener">
+          312 S. State St.<br>
+          Ann Arbor, MI 48104
+        </a>
+      </div>
+      <div class="visit-block">Open every day, 8 am – 10 pm</div>
+      <div class="visit-block"><a href="tel:+17347616000">(734) 761-6000</a></div>
+      <div class="visit-cta" id="catering">
+        <a href="https://www.amersdeli.com/catering" target="_blank" rel="noopener">Catering inquiries →</a>
+      </div>
+    </div>
+    <div class="visit-photo">
+      <img src="assets/yogurt-machines.jpg" alt="Self-serve frozen yogurt machines inside Amer's">
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: FOOTER -->
+<section as="footer">
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="name">AMER'S</div>
+        <div class="tag">MEDITERRANEAN DELI · SINCE 1988</div>
+      </div>
+      <div class="footer-nav">
+        <a href="assets/amers-menu.pdf" target="_blank" rel="noopener">Menu</a>
+        <a href="#story">Our Story</a>
+        <a href="#catering">Catering</a>
+        <a href="#visit">Visit</a>
+        <a href="https://www.amersdeli.com/popmenu-order" target="_blank" rel="noopener">Order now</a>
+      </div>
+      <div class="footer-contact">
+        <a href="https://maps.google.com/?q=312+S+State+St+Ann+Arbor+MI+48104" target="_blank" rel="noopener">312 S. State St., Ann Arbor, MI 48104</a><br>
+        Open every day, 8 am – 10 pm<br>
+        <a href="tel:+17347616000">(734) 761-6000</a>
+        <div class="socials" aria-label="social links">
+          <a href="https://www.facebook.com/amersdeli/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.5-3h-3v-2c0-.9.3-1.5 1.6-1.5H17V4.2c-.3 0-1.3-.2-2.4-.2-2.4 0-4.1 1.5-4.1 4.1V10.5H8v3h2.5V21h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/amersdeli/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.5 1 .4.4.7.9 1 1.5.2.4.4 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-1 1.5-.4.4-.9.7-1.5 1-.4.2-1.1.4-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.5-1-.4-.4-.7-.9-1-1.5-.2-.4-.4-1.1-.4-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 1-1.5.4-.4.9-.7 1.5-1 .4-.2 1.1-.4 2.3-.4C8.4 2.2 8.8 2.2 12 2.2zm0 2c-3.1 0-3.5 0-4.7.1-1.1 0-1.7.2-2.1.4-.5.2-.9.5-1.3.9-.4.4-.6.8-.9 1.3-.1.4-.3 1-.4 2.1C2.6 10.2 2.6 10.6 2.6 12s0 1.8.1 3c0 1.1.2 1.7.4 2.1.2.5.5.9.9 1.3.4.4.8.6 1.3.9.4.1 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1 0 1.7-.2 2.1-.4.5-.2.9-.5 1.3-.9.4-.4.6-.8.9-1.3.1-.4.3-1 .4-2.1 0-1.2.1-1.6.1-3s0-1.8-.1-3c0-1.1-.2-1.7-.4-2.1-.2-.5-.5-.9-.9-1.3-.4-.4-.8-.6-1.3-.9-.4-.1-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.3c2.6 0 4.6 2.1 4.6 4.6 0 2.6-2.1 4.6-4.6 4.6S7.4 14.6 7.4 12c0-2.6 2-4.5 4.6-4.5zm0 7.6c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm5.9-7.8c0 .6-.5 1.1-1.1 1.1s-1.1-.5-1.1-1.1c0-.6.5-1.1 1.1-1.1s1.1.5 1.1 1.1z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-meta">© 2026 Amer's Deli. Across from the Diag.</div>
+  </div>
+  <img class="footer-watermark" src="assets/welcome-frog.png" alt="" aria-hidden="true">
+</footer>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+.text-btn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:60px 0;
+}
+
+.text-btn h4 {
+  color:#0d1f34;
+  font-size:48px;
+  font-family: 'Athletics-Bold' !important;
+  margin:0;
+  padding:0;
+}
+
+.text-btn .button {
+  border-color:#0d1f34!important;
+  color:#0d1f34!important;
+  margin-top:25px;
+  padding:5px 20px;
+}
+
+@media (max-width:749px) {
+   .text-btn h4 {
+    font-size:35px;
+    }
+}

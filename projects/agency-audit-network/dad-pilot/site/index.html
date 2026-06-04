@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CFS AIOS Pilot — Walkthrough for Dad</title>
+    <meta name="description" content="How the AI operating system at Charter Flight Support works, what closed loops are, and a worked LinkedIn example." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23cf887f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Public Sans, sans-serif' font-size='14' font-weight='900' fill='%23fbf7ef'%3EAF%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#overview" aria-label="CFS AIOS pilot home">
+        <span class="brand-mark">AF</span>
+        <span>CFS · AIOS Pilot</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary tabs" role="tablist">
+        <button type="button" data-tab="overview" role="tab" aria-selected="true">System</button>
+        <button type="button" data-tab="loops" role="tab" aria-selected="false">Closed Loops</button>
+        <button type="button" data-tab="example" role="tab" aria-selected="false">Example</button>
+        <button type="button" data-tab="multiseat" role="tab" aria-selected="false">Multi-seat</button>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- =================== TAB 1: SYSTEM =================== -->
+      <section class="tab-panel" data-panel="overview">
+        <div class="hero-band">
+          <div class="hero-inner">
+            <p class="eyebrow">For Tom</p>
+            <h1>An AI operating system for CFS</h1>
+            <p class="hero-lede">
+              Erica's AI knows your voice. Every call, email, and post feeds one company brain. The next hire inherits all of it.
+            </p>
+            <div class="pill-row" style="justify-content:center">
+              <span class="pill">$150–300/mo</span>
+              <span class="pill">4 weeks to live</span>
+              <span class="pill green">one person at a time</span>
+              <span class="pill dark">drafts only</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="diagram-card">
+            <svg viewBox="0 0 1000 780" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI Operating System architecture for Charter Flight Support">
+              <defs>
+                <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#71855f" />
+                </marker>
+                <marker id="arrow-rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#cf887f" />
+                </marker>
+              </defs>
+
+              <!-- Anthropic API -->
+              <rect x="360" y="20" width="280" height="60" rx="14" fill="#fffdf8" stroke="#27483a" stroke-width="1.5"/>
+              <text x="500" y="46" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">ANTHROPIC API</text>
+              <text x="500" y="66" text-anchor="middle" fill="#766b61" font-size="11" font-family="Public Sans, sans-serif">Claude — the model that powers Cowork</text>
+
+              <line x1="500" y1="80" x2="500" y2="110" stroke="#71855f" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+              <!-- Erica's Laptop -->
+              <rect x="220" y="115" width="560" height="170" rx="22" fill="#efc8c0" stroke="#cf887f" stroke-width="2"/>
+              <text x="500" y="144" text-anchor="middle" fill="#27483a" font-size="22" font-family="Fraunces, serif">Erica's Laptop</text>
+              <text x="500" y="164" text-anchor="middle" fill="#6f2f2d" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">THE ONLY PLACE SHE TOUCHES</text>
+
+              <rect x="370" y="180" width="260" height="80" rx="14" fill="#fbf7ef" stroke="#27483a" stroke-width="1.5"/>
+              <text x="500" y="208" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">CLAUDE COWORK</text>
+              <text x="500" y="226" text-anchor="middle" fill="#766b61" font-size="11" font-family="Public Sans, sans-serif">desktop app · skills · memory · CLAUDE.md</text>
+              <text x="500" y="246" text-anchor="middle" fill="#71855f" font-size="11" font-style="italic" font-family="Public Sans, sans-serif">reads Dropbox + Supabase at runtime</text>
+
+              <rect x="240" y="190" width="110" height="32" rx="16" fill="#fbf7ef" stroke="#71855f" stroke-width="1.2"/>
+              <text x="295" y="211" text-anchor="middle" fill="#27483a" font-size="12" font-weight="700" font-family="Public Sans, sans-serif">Granola</text>
+              <rect x="240" y="228" width="110" height="32" rx="16" fill="#fbf7ef" stroke="#71855f" stroke-width="1.2"/>
+              <text x="295" y="249" text-anchor="middle" fill="#27483a" font-size="12" font-weight="700" font-family="Public Sans, sans-serif">Gmail</text>
+              <rect x="650" y="190" width="110" height="32" rx="16" fill="#fbf7ef" stroke="#71855f" stroke-width="1.2"/>
+              <text x="705" y="211" text-anchor="middle" fill="#27483a" font-size="12" font-weight="700" font-family="Public Sans, sans-serif">Beehiiv</text>
+              <rect x="650" y="228" width="110" height="32" rx="16" fill="#fbf7ef" stroke="#71855f" stroke-width="1.2"/>
+              <text x="705" y="249" text-anchor="middle" fill="#27483a" font-size="12" font-weight="700" font-family="Public Sans, sans-serif">LinkedIn</text>
+
+              <path d="M 340 285 L 340 330 L 200 330 L 200 370" stroke="#cf887f" stroke-width="2" fill="none" marker-end="url(#arrow-rose)"/>
+              <path d="M 660 285 L 660 330 L 800 330 L 800 370" stroke="#cf887f" stroke-width="2" fill="none" marker-end="url(#arrow-rose)"/>
+              <text x="220" y="322" fill="#a45a50" font-size="11" font-weight="700" font-family="Public Sans, sans-serif">reads voice + offer</text>
+              <text x="700" y="322" fill="#a45a50" font-size="11" font-weight="700" font-family="Public Sans, sans-serif">reads + writes</text>
+
+              <rect x="80" y="370" width="240" height="200" rx="20" fill="#dfe6cc" stroke="#27483a" stroke-width="1.5"/>
+              <text x="200" y="398" text-anchor="middle" fill="#27483a" font-size="18" font-family="Fraunces, serif">Dropbox</text>
+              <text x="200" y="416" text-anchor="middle" fill="#6f2f2d" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">SHARED COMPANY CONTEXT</text>
+              <rect x="100" y="428" width="200" height="22" rx="6" fill="#fffdf8"/>
+              <text x="110" y="444" fill="#27483a" font-size="12" font-family="SF Mono, Menlo, monospace">voice.md</text>
+              <rect x="100" y="454" width="200" height="22" rx="6" fill="#fffdf8"/>
+              <text x="110" y="470" fill="#27483a" font-size="12" font-family="SF Mono, Menlo, monospace">my-icp.md</text>
+              <rect x="100" y="480" width="200" height="22" rx="6" fill="#fffdf8"/>
+              <text x="110" y="496" fill="#27483a" font-size="12" font-family="SF Mono, Menlo, monospace">my-business.md</text>
+              <rect x="100" y="506" width="200" height="22" rx="6" fill="#fffdf8"/>
+              <text x="110" y="522" fill="#27483a" font-size="12" font-family="SF Mono, Menlo, monospace">offer.md</text>
+              <rect x="100" y="532" width="200" height="22" rx="6" fill="#fffdf8"/>
+              <text x="110" y="548" fill="#27483a" font-size="12" font-family="SF Mono, Menlo, monospace">goals.md</text>
+
+              <rect x="680" y="370" width="240" height="280" rx="20" fill="#27483a"/>
+              <text x="800" y="398" text-anchor="middle" fill="#efc8c0" font-size="18" font-family="Fraunces, serif">Supabase</text>
+              <text x="800" y="416" text-anchor="middle" fill="#dfe6cc" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">COMPANY BRAIN</text>
+              <rect x="700" y="428" width="200" height="22" rx="6" fill="rgba(251,247,239,0.16)"/>
+              <text x="710" y="444" fill="#fbf7ef" font-size="12" font-family="SF Mono, Menlo, monospace">clients</text>
+              <rect x="700" y="454" width="200" height="22" rx="6" fill="rgba(251,247,239,0.16)"/>
+              <text x="710" y="470" fill="#fbf7ef" font-size="12" font-family="SF Mono, Menlo, monospace">calls</text>
+              <rect x="700" y="480" width="200" height="22" rx="6" fill="rgba(251,247,239,0.16)"/>
+              <text x="710" y="496" fill="#fbf7ef" font-size="12" font-family="SF Mono, Menlo, monospace">drafts</text>
+              <rect x="700" y="506" width="200" height="22" rx="6" fill="rgba(251,247,239,0.16)"/>
+              <text x="710" y="522" fill="#fbf7ef" font-size="12" font-family="SF Mono, Menlo, monospace">sent_emails</text>
+              <rect x="700" y="532" width="200" height="22" rx="6" fill="rgba(251,247,239,0.16)"/>
+              <text x="710" y="548" fill="#fbf7ef" font-size="12" font-family="SF Mono, Menlo, monospace">linkedin_posts</text>
+              <rect x="700" y="558" width="200" height="22" rx="6" fill="rgba(251,247,239,0.16)"/>
+              <text x="710" y="574" fill="#fbf7ef" font-size="12" font-family="SF Mono, Menlo, monospace">skill_runs</text>
+              <rect x="700" y="584" width="200" height="22" rx="6" fill="rgba(251,247,239,0.16)"/>
+              <text x="710" y="600" fill="#fbf7ef" font-size="12" font-family="SF Mono, Menlo, monospace">voice_evidence</text>
+              <text x="800" y="635" text-anchor="middle" fill="#a7ad84" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">where all signals meet</text>
+
+              <rect x="220" y="610" width="440" height="64" rx="32" fill="#a45a50" stroke="#6f2f2d" stroke-width="1.5"/>
+              <text x="440" y="638" text-anchor="middle" fill="#fbf7ef" font-size="18" font-family="Fraunces, serif">Cloudflare Workers</text>
+              <text x="440" y="660" text-anchor="middle" fill="#fbf7ef" font-size="11" font-weight="700" letter-spacing="1" font-family="Public Sans, sans-serif">POLLING · CRONS · ROUTING (always-on plumbing)</text>
+
+              <line x1="660" y1="630" x2="680" y2="630" stroke="#71855f" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+              <rect x="60" y="700" width="160" height="56" rx="14" fill="#fffdf8" stroke="#a7ad84" stroke-width="1.5"/>
+              <text x="140" y="725" text-anchor="middle" fill="#27483a" font-size="13" font-weight="700" font-family="Public Sans, sans-serif">Granola API</text>
+              <text x="140" y="742" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">call transcripts</text>
+
+              <rect x="240" y="700" width="160" height="56" rx="14" fill="#fffdf8" stroke="#a7ad84" stroke-width="1.5"/>
+              <text x="320" y="725" text-anchor="middle" fill="#27483a" font-size="13" font-weight="700" font-family="Public Sans, sans-serif">Gmail API</text>
+              <text x="320" y="742" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">replies · drafts</text>
+
+              <rect x="480" y="700" width="160" height="56" rx="14" fill="#fffdf8" stroke="#a7ad84" stroke-width="1.5"/>
+              <text x="560" y="725" text-anchor="middle" fill="#27483a" font-size="13" font-weight="700" font-family="Public Sans, sans-serif">Beehiiv API</text>
+              <text x="560" y="742" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">open / click rates</text>
+
+              <rect x="660" y="700" width="160" height="56" rx="14" fill="#fffdf8" stroke="#a7ad84" stroke-width="1.5"/>
+              <text x="740" y="725" text-anchor="middle" fill="#27483a" font-size="13" font-weight="700" font-family="Public Sans, sans-serif">LinkedIn</text>
+              <text x="740" y="742" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">engagement</text>
+
+              <line x1="140" y1="700" x2="270" y2="674" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+              <line x1="320" y1="700" x2="370" y2="674" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+              <line x1="560" y1="700" x2="510" y2="674" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+              <line x1="740" y1="700" x2="610" y2="674" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+            </svg>
+            <p class="diagram-caption">Erica only ever talks to Cowork. Everything else is plumbing that keeps the company brain fed and the drafts arriving on time.</p>
+          </div>
+
+          <div class="card-grid" style="margin-top:2.4rem;">
+            <div class="card">
+              <span class="card-label">Sources</span>
+              <h3>External APIs</h3>
+              <p>Granola, Gmail, Beehiiv, LinkedIn, Anthropic. Standard accounts you already use or sign up for.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Plumbing</span>
+              <h3>Cloudflare Workers</h3>
+              <p>Always-on. Polls APIs, fires crons, routes data into Supabase. Erica never sees it.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Context</span>
+              <h3>Dropbox · 5 files</h3>
+              <p>Voice, ICP, business, offer, goals. <strong>The hour we spend with you first.</strong> AI quality is bottlenecked by these.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Brain</span>
+              <h3>Supabase</h3>
+              <p>One Postgres database. Every call, draft, email, post. The next hire plugs in and inherits everything.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Interface</span>
+              <h3>Erica's laptop</h3>
+              <p>Cowork is her chat app. She reviews drafts, sends, posts. Nothing auto-publishes.</p>
+            </div>
+          </div>
+
+          <h2 style="margin-top: 3rem;">Erica's day, week 4</h2>
+          <div class="split">
+            <div class="card">
+              <span class="card-label">7 AM</span>
+              <h3>Daily Brief</h3>
+              <p>Five-minute read. Yesterday's leads, prioritized replies, newsletter performance.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">9 AM</span>
+              <h3>Call → draft email</h3>
+              <p>Granola records. While she's at lunch, the draft lands in her Gmail.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">11 AM</span>
+              <h3>"/draft linkedin"</h3>
+              <p>Reads voice + top posts. Drafts on-tone. She edits two sentences and schedules.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">5 PM</span>
+              <h3>Laptop closed</h3>
+              <p>Cloudflare keeps polling. Tomorrow's brief starts assembling overnight.</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>Three roles.</strong> Dad = <strong>AI Founder</strong> (holds conviction). Erica = <strong>DRI</strong> (owns the lead-pipeline outcome). Annabel = <strong>Builder</strong> (ships and fixes).
+          </div>
+        </div>
+      </section>
+
+      <!-- =================== TAB 2: CLOSED LOOPS =================== -->
+      <section class="tab-panel" data-panel="loops">
+        <div class="hero-band">
+          <div class="hero-inner">
+            <p class="eyebrow">Why this isn't ChatGPT</p>
+            <h1>Closed loops, not open loops</h1>
+            <p class="hero-lede">
+              A thermostat measures the room and adjusts. Most AI workflows are heaters. We build thermostats. Three loops, nested.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Three nested loops</h2>
+
+          <div class="diagram-card" style="margin-top:1.4rem; max-width:880px;">
+            <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three nested closed loops">
+              <rect x="40" y="40" width="720" height="400" rx="36" fill="#dfe6cc" stroke="#71855f" stroke-width="2" stroke-dasharray="6 4"/>
+              <text x="400" y="78" text-anchor="middle" fill="#27483a" font-size="20" font-family="Fraunces, serif">Loop 3 · Brand</text>
+              <text x="400" y="98" text-anchor="middle" fill="#27483a" font-size="11" font-weight="800" letter-spacing="3" font-family="Public Sans, sans-serif">MONTHS</text>
+              <text x="400" y="118" text-anchor="middle" fill="#27483a" font-size="12" font-family="Public Sans, sans-serif">Voice / ICP / Offer evolve</text>
+
+              <rect x="120" y="138" width="560" height="280" rx="28" fill="#efc8c0" stroke="#cf887f" stroke-width="2" stroke-dasharray="6 4"/>
+              <text x="400" y="174" text-anchor="middle" fill="#27483a" font-size="18" font-family="Fraunces, serif">Loop 2 · Workflow</text>
+              <text x="400" y="194" text-anchor="middle" fill="#6f2f2d" font-size="11" font-weight="800" letter-spacing="3" font-family="Public Sans, sans-serif">WEEKS</text>
+              <text x="400" y="214" text-anchor="middle" fill="#27483a" font-size="12" font-family="Public Sans, sans-serif">Patterns sharpen. Rules update.</text>
+
+              <rect x="240" y="234" width="320" height="160" rx="20" fill="#fffdf8" stroke="#27483a" stroke-width="2"/>
+              <text x="400" y="268" text-anchor="middle" fill="#27483a" font-size="16" font-family="Fraunces, serif">Loop 1 · Skill</text>
+              <text x="400" y="286" text-anchor="middle" fill="#27483a" font-size="11" font-weight="800" letter-spacing="3" font-family="Public Sans, sans-serif">DAYS</text>
+              <text x="400" y="308" text-anchor="middle" fill="#27483a" font-size="12" font-family="Public Sans, sans-serif">Each draft measured.</text>
+              <text x="400" y="344" text-anchor="middle" fill="#27483a" font-size="13" font-style="italic" font-family="Public Sans, sans-serif">measure → compare → adjust</text>
+              <text x="400" y="370" text-anchor="middle" fill="#a45a50" font-size="11" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">THE THERMOSTAT</text>
+            </svg>
+          </div>
+
+          <div class="card-grid">
+            <div class="card">
+              <span class="card-label">Inner · days</span>
+              <h3>Did this draft work?</h3>
+              <p>Email sent vs draft (what got edited?). Reply received? LinkedIn engagement logged. Next draft reads what worked.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Middle · weeks</span>
+              <h3>Are patterns sharpening?</h3>
+              <p>Weekly cron surfaces top objections, themes without skills, trends. Erica updates rules or promotes a new skill.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Outer · months</span>
+              <h3>Is the voice sharper?</h3>
+              <p>Monthly diff proposed against voice / ICP / offer. <strong>System proposes. Humans approve.</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>The LinkedIn loop</h2>
+          <p style="max-width:680px;">Six steps. Same pattern works for email (reply outcomes) and newsletter (open rates).</p>
+
+          <div class="diagram-card" style="margin-top:1.4rem;">
+            <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LinkedIn closed loop, six steps clockwise">
+              <defs>
+                <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#a45a50" />
+                </marker>
+              </defs>
+
+              <rect x="350" y="30" width="200" height="80" rx="18" fill="#efc8c0" stroke="#6f2f2d" stroke-width="1.5"/>
+              <text x="450" y="58" text-anchor="middle" fill="#27483a" font-size="13" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">1 · TRIGGER</text>
+              <text x="450" y="78" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">/draft linkedin about NBAA</text>
+              <text x="450" y="96" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">or weekly cron</text>
+
+              <rect x="640" y="140" width="220" height="120" rx="18" fill="#dfe6cc" stroke="#71855f" stroke-width="1.5"/>
+              <text x="750" y="166" text-anchor="middle" fill="#27483a" font-size="13" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">2 · READ</text>
+              <text x="750" y="188" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">voice.md</text>
+              <text x="750" y="206" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">top-engagement posts (90d)</text>
+              <text x="750" y="224" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">this week's call themes</text>
+
+              <rect x="640" y="300" width="220" height="120" rx="18" fill="#fffdf8" stroke="#27483a" stroke-width="1.5"/>
+              <text x="750" y="326" text-anchor="middle" fill="#27483a" font-size="13" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">3 · DRAFT</text>
+              <text x="750" y="348" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">10-point rubric</text>
+              <text x="750" y="366" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">revise until all pass</text>
+              <text x="750" y="392" text-anchor="middle" fill="#71855f" font-size="11" font-style="italic" font-family="Public Sans, sans-serif">→ linkedin_drafts</text>
+
+              <rect x="350" y="440" width="200" height="90" rx="18" fill="#efc8c0" stroke="#6f2f2d" stroke-width="1.5"/>
+              <text x="450" y="468" text-anchor="middle" fill="#27483a" font-size="13" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">4 · POST</text>
+              <text x="450" y="488" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">Erica reviews + publishes</text>
+              <text x="450" y="510" text-anchor="middle" fill="#a45a50" font-size="11" font-weight="800" font-family="Public Sans, sans-serif">never auto</text>
+
+              <rect x="40" y="300" width="220" height="120" rx="18" fill="#fffdf8" stroke="#27483a" stroke-width="1.5"/>
+              <text x="150" y="326" text-anchor="middle" fill="#27483a" font-size="13" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">5 · LOG</text>
+              <text x="150" y="348" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">impressions · reactions</text>
+              <text x="150" y="366" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">comments · shares</text>
+              <text x="150" y="392" text-anchor="middle" fill="#71855f" font-size="11" font-style="italic" font-family="Public Sans, sans-serif">→ linkedin_posts</text>
+
+              <rect x="40" y="140" width="220" height="120" rx="18" fill="#dfe6cc" stroke="#71855f" stroke-width="1.5"/>
+              <text x="150" y="166" text-anchor="middle" fill="#27483a" font-size="13" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">6 · FEED BACK</text>
+              <text x="150" y="188" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">next draft reads</text>
+              <text x="150" y="206" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">top-engagement posts</text>
+              <text x="150" y="232" text-anchor="middle" fill="#a45a50" font-size="11" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">THERMOSTAT</text>
+
+              <!-- Six arrows, all clockwise -->
+              <path d="M 550 85 Q 700 100 720 140" stroke="#a45a50" stroke-width="2.5" fill="none" marker-end="url(#ac)"/>
+              <path d="M 750 260 L 750 300" stroke="#a45a50" stroke-width="2.5" fill="none" marker-end="url(#ac)"/>
+              <path d="M 720 420 Q 700 470 550 470" stroke="#a45a50" stroke-width="2.5" fill="none" marker-end="url(#ac)"/>
+              <path d="M 350 470 Q 200 470 180 420" stroke="#a45a50" stroke-width="2.5" fill="none" marker-end="url(#ac)"/>
+              <path d="M 150 300 L 150 260" stroke="#a45a50" stroke-width="2.5" fill="none" marker-end="url(#ac)"/>
+              <path d="M 180 140 Q 200 85 350 80" stroke="#a45a50" stroke-width="2.5" fill="none" marker-end="url(#ac)"/>
+            </svg>
+            <p class="diagram-caption">The arrow from 6 back into 1 is what makes this not-ChatGPT.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Same shape, every skill</h2>
+          <div class="card-grid">
+            <div class="card">
+              <span class="card-label">Skill #2 · email</span>
+              <h3>Email loop</h3>
+              <p><strong>Reads:</strong> thread + voice + last 5 edits + last 5 replies.</p>
+              <p><strong>Signal:</strong> sent as-is, edited, deleted, replied.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Skill #3 · LinkedIn</span>
+              <h3>LinkedIn loop</h3>
+              <p><strong>Reads:</strong> voice + 90d top posts + call themes.</p>
+              <p><strong>Signal:</strong> impressions, reactions, comments, shares.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Skill #4 · newsletter</span>
+              <h3>Newsletter loop</h3>
+              <p><strong>Reads:</strong> voice + last 4 newsletters' performance + this week's data.</p>
+              <p><strong>Signal:</strong> opens, clicks, unsubscribes.</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>What makes this not ChatGPT.</strong>
+            <em>(1)</em> Your voice file — ChatGPT doesn't have it.
+            <em>(2)</em> Reads your top 90 days of posts ranked by performance.
+            <em>(3)</em> Logs every outcome. ChatGPT generates and forgets.
+          </div>
+        </div>
+      </section>
+
+      <!-- =================== TAB 3: EXAMPLE =================== -->
+      <section class="tab-panel" data-panel="example">
+        <div class="hero-band">
+          <div class="hero-inner">
+            <p class="eyebrow">Worked example</p>
+            <h1>The CFS LinkedIn skill, end-to-end</h1>
+            <p class="hero-lede">
+              One of the four skills, built out. This is Erica's LinkedIn workflow.
+            </p>
+            <div class="pill-row" style="justify-content:center">
+              <span class="pill">community register</span>
+              <span class="pill">10-point rubric</span>
+              <span class="pill green">reads top posts</span>
+              <span class="pill dark">never auto-posts</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>What it reads before drafting</h2>
+          <div class="card-grid">
+            <div class="card">
+              <span class="card-label">Input 1</span>
+              <h3>voice.md (community)</h3>
+              <p>Warm, peer-to-peer. Allows "stoked," "friends," "come find us." Anchored in aviation outcomes. No insurance language, no "luxury redefined."</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Input 2</span>
+              <h3>Top posts (90 days)</h3>
+              <p>Sorted by engagement. Seed pool: Tuvoli, NBAA shuttle seats, Charter Connect recap, office dog Ace, Josh's $4M / 10% AOG stats.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Input 3</span>
+              <h3>This week's call themes</h3>
+              <p>Top 5 recurring themes from Granola. If topic is blank, the skill proposes three directions.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>The skill</h2>
+          <p style="max-width:680px;">Lives at <code>skills/cfs-linkedin-post/SKILL.md</code>. Drops in on day one.</p>
+
+<pre class="code">---
+name: cfs-linkedin-post
+description: Draft a LinkedIn post in CFS voice. Reads voice file,
+  recent high-engagement posts, and this-week Granola themes.
+inputs:
+  - topic (string, required)
+  - register (community | thought_leadership, default: community)
+  - length_target (short 60-90 | medium 90-150, default: medium)
+context_files:
+  - voice.md
+context_queries:
+  - supabase: SELECT post_text, impressions, reactions
+    FROM linkedin_posts
+    WHERE posted_at > now() - interval '90 days'
+    ORDER BY (reactions::float / NULLIF(impressions, 0)) DESC
+    LIMIT 10
+  - supabase: SELECT theme_tag, count(*) FROM calls
+    WHERE ingested_at > now() - interval '7 days'
+    GROUP BY theme_tag ORDER BY count DESC LIMIT 5
+---
+
+# Rubric — every check must pass
+
+ 1. Length: 60-150 words (or 60-90 short).
+ 2. Register: community by default.
+ 3. Names a specific aviation moment.
+ 4. Uses load-bearing vocab: AOG, mechanical, recovery, broker,
+    operator, replacement aircraft, cost difference, Part 135.
+ 5. No forbidden phrases: "luxury redefined," "elevate,"
+    "white glove," "game-changing," "frictionless," "unlock,"
+    "disrupt," "revolutionary," "never worry," "risk-free."
+ 6. No insurance language.
+ 7. No safety or operational-control claims.
+ 8. Ends with practical implication or quiet invitation.
+ 9. Peer-to-peer, not corporate.
+10. Pricing / eligibility / reimbursement → human template.
+</pre>
+        </div>
+
+        <div class="section">
+          <h2>Three sample drafts</h2>
+
+          <div class="draft-card">
+            <div class="draft-meta">
+              <span class="pill">NBAA shuttle seats</span>
+              <span class="pill green">community · short · 84w</span>
+            </div>
+            <div class="draft-body">NBAA week. We have five open seats on a light jet from Scottsdale to Las Vegas, Monday morning. Free for CFS clients heading to the convention.
+
+If you're flying in and the seat works for your schedule, send a note and we'll get you on the manifest. If we miss each other on the ride, come find us on the floor — happy to talk AOG recovery, broker-operator workflows, or just trade notes on how the season's been.
+
+Hope to see you out there.</div>
+            <p class="draft-check"><strong>Passes:</strong> length · community register · specific moment · vocab · no forbidden phrases · quiet invitation</p>
+          </div>
+
+          <div class="draft-card">
+            <div class="draft-meta">
+              <span class="pill">Charter Connect recap</span>
+              <span class="pill green">community · medium · 117w</span>
+            </div>
+            <div class="draft-body">Great few days at Charter Connect. No booth this year, just good conversations.
+
+The most useful ones weren't about features or pricing. They were about the actual decisions brokers and operators have to make when an aircraft goes mechanical: which replacement option protects the client experience, what the cost delta does to the trip economics, and how you keep your team focused on client communication while recovery logistics happen behind the scenes.
+
+Those decisions don't change much from year to year. The way teams prepare for them does. Thanks to everyone who made time to sit down with us — and to Goodwin for co-hosting an event that keeps getting the format right.</div>
+            <p class="draft-check"><strong>Passes:</strong> length · community register · event moment · vocab · partner-thanks ending</p>
+          </div>
+
+          <div class="draft-card">
+            <div class="draft-meta">
+              <span class="pill">The $30K decision</span>
+              <span class="pill">thought leadership · 130w</span>
+            </div>
+            <div class="draft-body">A mechanical event isn't one decision. It's two stacked on top of each other.
+
+Decision one is operational: where's the recovery aircraft, what's its tail history, who's the operator, is it on the DNU list. Decision two is financial: what does the cost delta do to the trip — and to the relationship.
+
+When the on-time replacement costs $30,000 more, most brokers don't get to choose freely. The math forces a tradeoff between client experience and trip economics. That tradeoff is where a lot of broker-operator relationships quietly erode — not because anyone made the wrong call, but because someone had to absorb a loss that wasn't theirs to absorb.
+
+The recovery decision is operational. The cost decision is structural. They're worth separating.</div>
+            <p class="draft-check"><strong>Passes:</strong> length · thought-leadership register · specific tension · vocab · practical implication ending</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>What gets logged</h2>
+          <p style="max-width:680px;">A week after Draft 3 publishes:</p>
+
+<pre class="code">linkedin_posts
+  id: lp_0421
+  posted_at: 2026-05-21
+  impressions: 4,820
+  reactions: 87
+  comments: 14
+  shares: 6
+  theme_tag: cost_delta_tension
+  engagement_rate: 1.80%
+
+voice_evidence
+  excerpt: "The recovery decision is operational.
+           The cost decision is structural."
+  signal_type: high_engagement_phrase</pre>
+
+          <div class="callout">
+            Next <code>/draft linkedin</code> reads this row. <strong>Thermostat measured. Next draft adjusts.</strong>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Heater vs thermostat</h2>
+          <p style="max-width:680px;">Ship the heater in week 4. Close the loop in week 6 once there's engagement data.</p>
+
+          <table class="compare-table" style="margin-top:1.2rem;">
+            <thead>
+              <tr><th>Capability</th><th>Week 4</th><th>Week 6+</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Reads voice.md</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+              <tr><td>Rubric self-check</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+              <tr><td>Reads past top posts</td><td>seed pool</td><td class="yes">live query</td></tr>
+              <tr><td>Reads call themes</td><td class="no">✗</td><td class="yes">✓</td></tr>
+              <tr><td>Logs engagement</td><td class="no">✗</td><td class="yes">✓</td></tr>
+              <tr><td>Captures voice_evidence</td><td class="no">✗</td><td class="yes">✓</td></tr>
+              <tr><td>Feeds next draft</td><td class="no">✗</td><td class="yes">✓</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout">
+            <strong>Ship the heater first. Turn it into a thermostat once we have readings.</strong>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- =================== TAB 4: MULTI-SEAT =================== -->
+      <section class="tab-panel" data-panel="multiseat">
+        <div class="hero-band">
+          <div class="hero-inner">
+            <p class="eyebrow">Built to grow</p>
+            <h1>How this scales past Tom</h1>
+            <p class="hero-lede">
+              Five additions that keep the system healthy past month twelve, scale to Erica and future hires without a rebuild, and let new skills get added without Annabel writing every one.
+            </p>
+            <div class="pill-row" style="justify-content:center">
+              <span class="pill">shared brain</span>
+              <span class="pill">scoped per seat</span>
+              <span class="pill green">checked before you see it</span>
+              <span class="pill dark">evolves over time</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Patch 1: Shared brain, scoped per seat ===== -->
+        <div class="section">
+          <p class="eyebrow">Patch 1 · multi-seat</p>
+          <h2>One brain. Each seat sees only what they should.</h2>
+          <p style="max-width:680px;">
+            Supabase is the company's shared brain — every seat reads from and writes to it. Row-Level Security (a Postgres feature) makes the database itself enforce who sees what, so a forgotten filter in a worker can't leak Tom's queue to Erica.
+          </p>
+
+          <div class="diagram-card" style="margin-top:1.6rem;">
+            <svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Supabase shared brain with three seats and row-level security">
+              <defs>
+                <marker id="ms-arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#71855f" />
+                </marker>
+                <marker id="ms-arrow-rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#cf887f" />
+                </marker>
+              </defs>
+
+              <!-- Supabase brain at top -->
+              <rect x="300" y="30" width="300" height="180" rx="20" fill="#27483a"/>
+              <text x="450" y="62" text-anchor="middle" fill="#efc8c0" font-size="18" font-family="Fraunces, serif">Supabase</text>
+              <text x="450" y="82" text-anchor="middle" fill="#dfe6cc" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">THE COMPANY BRAIN</text>
+              <rect x="320" y="96" width="260" height="20" rx="5" fill="rgba(251,247,239,0.16)"/>
+              <text x="332" y="111" fill="#fbf7ef" font-size="11" font-family="SF Mono, Menlo, monospace">seats · signals · decisions</text>
+              <rect x="320" y="120" width="260" height="20" rx="5" fill="rgba(251,247,239,0.16)"/>
+              <text x="332" y="135" fill="#fbf7ef" font-size="11" font-family="SF Mono, Menlo, monospace">canon_facts · loops · executions</text>
+              <rect x="320" y="144" width="260" height="20" rx="5" fill="rgba(251,247,239,0.16)"/>
+              <text x="332" y="159" fill="#fbf7ef" font-size="11" font-family="SF Mono, Menlo, monospace">health_checks</text>
+              <text x="450" y="190" text-anchor="middle" fill="#a7ad84" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">every seat reads + writes here</text>
+
+              <!-- RLS gate -->
+              <rect x="240" y="230" width="420" height="48" rx="24" fill="#a45a50" stroke="#6f2f2d" stroke-width="1.5"/>
+              <text x="450" y="252" text-anchor="middle" fill="#fbf7ef" font-size="13" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">ROW-LEVEL SECURITY</text>
+              <text x="450" y="268" text-anchor="middle" fill="#fbf7ef" font-size="10" font-family="Public Sans, sans-serif">the database bouncer — filters rows by seat_id before they leave</text>
+
+              <line x1="380" y1="210" x2="380" y2="230" stroke="#71855f" stroke-width="2" marker-end="url(#ms-arrow-green)"/>
+              <line x1="520" y1="210" x2="520" y2="230" stroke="#71855f" stroke-width="2" marker-end="url(#ms-arrow-green)"/>
+
+              <!-- Three seats below -->
+              <line x1="320" y1="278" x2="160" y2="330" stroke="#cf887f" stroke-width="1.8" fill="none" marker-end="url(#ms-arrow-rose)"/>
+              <line x1="450" y1="278" x2="450" y2="330" stroke="#cf887f" stroke-width="1.8" fill="none" marker-end="url(#ms-arrow-rose)"/>
+              <line x1="580" y1="278" x2="740" y2="330" stroke="#cf887f" stroke-width="1.8" fill="none" marker-end="url(#ms-arrow-rose)"/>
+
+              <!-- Tom -->
+              <rect x="40" y="334" width="240" height="170" rx="18" fill="#dfe6cc" stroke="#71855f" stroke-width="1.8"/>
+              <text x="160" y="362" text-anchor="middle" fill="#27483a" font-size="16" font-family="Fraunces, serif">Tom</text>
+              <text x="160" y="380" text-anchor="middle" fill="#6f2f2d" font-size="9" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">OWNER</text>
+              <text x="160" y="402" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">sees everything</text>
+              <text x="160" y="420" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">his queue · every seat's</text>
+              <text x="160" y="434" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">rollups · health flags</text>
+              <text x="160" y="462" text-anchor="middle" fill="#a45a50" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">APPROVES NEW SKILLS</text>
+              <text x="160" y="486" text-anchor="middle" fill="#766b61" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">Claude Code, his machines</text>
+
+              <!-- Annabel -->
+              <rect x="330" y="334" width="240" height="170" rx="18" fill="#fffdf8" stroke="#27483a" stroke-width="1.5"/>
+              <text x="450" y="362" text-anchor="middle" fill="#27483a" font-size="16" font-family="Fraunces, serif">Annabel</text>
+              <text x="450" y="380" text-anchor="middle" fill="#6f2f2d" font-size="9" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">BUILDER · OPS</text>
+              <text x="450" y="402" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">sees system health</text>
+              <text x="450" y="420" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">flagged drafts · OAuth</text>
+              <text x="450" y="434" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">expiry · spend drift</text>
+              <text x="450" y="462" text-anchor="middle" fill="#a45a50" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">NOT IN TOM'S QUEUE</text>
+              <text x="450" y="486" text-anchor="middle" fill="#766b61" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">retires after Phase 4</text>
+
+              <!-- Erica -->
+              <rect x="620" y="334" width="240" height="170" rx="18" fill="#efc8c0" stroke="#cf887f" stroke-width="1.8"/>
+              <text x="740" y="362" text-anchor="middle" fill="#27483a" font-size="16" font-family="Fraunces, serif">Erica</text>
+              <text x="740" y="380" text-anchor="middle" fill="#6f2f2d" font-size="9" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">MEMBER · PHASE 5</text>
+              <text x="740" y="402" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">sees only her own</text>
+              <text x="740" y="420" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">queue · her L1 trend</text>
+              <text x="740" y="434" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">shared canon_facts</text>
+              <text x="740" y="462" text-anchor="middle" fill="#a45a50" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">CAN PROPOSE NEW SKILLS</text>
+              <text x="740" y="486" text-anchor="middle" fill="#766b61" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">Cowork, web</text>
+            </svg>
+            <p class="diagram-caption">RLS on from day one. The data shape is multi-tenant before the second user exists — so adding Erica is a config change, not a migration.</p>
+          </div>
+
+          <div class="callout">
+            <strong>Why now, not at Phase 5.</strong> Turning RLS on later with three seats already querying means rewriting every worker. Doing it before the second seat exists costs nothing and locks in the design.
+          </div>
+        </div>
+
+        <!-- ===== Patch 2: Worker template ===== -->
+        <div class="section">
+          <p class="eyebrow">Patch 2 · clean scaling</p>
+          <h2>Add a venture, not new code.</h2>
+          <p style="max-width:680px;">
+            Every ingestion worker is one template parameterized by <code>{source, venture, auth_method}</code>. Adding the 8th system in month 6 is a config row, not a new worker.
+          </p>
+
+          <div class="diagram-card" style="margin-top:1.6rem;">
+            <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One worker template fanning out to many configs">
+              <defs>
+                <marker id="ms-arrow-fan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#71855f" />
+                </marker>
+              </defs>
+
+              <!-- Template at top -->
+              <rect x="300" y="30" width="300" height="100" rx="18" fill="#27483a"/>
+              <text x="450" y="60" text-anchor="middle" fill="#efc8c0" font-size="18" font-family="Fraunces, serif">ingest-template.ts</text>
+              <text x="450" y="80" text-anchor="middle" fill="#dfe6cc" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">ONE PIECE OF CODE</text>
+              <text x="450" y="102" text-anchor="middle" fill="#a7ad84" font-size="11" font-family="SF Mono, Menlo, monospace">{source, venture, auth_method, parse_fn}</text>
+
+              <!-- Six config rows below -->
+              <line x1="450" y1="130" x2="120" y2="200" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#ms-arrow-fan)"/>
+              <line x1="450" y1="130" x2="290" y2="200" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#ms-arrow-fan)"/>
+              <line x1="450" y1="130" x2="450" y2="200" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#ms-arrow-fan)"/>
+              <line x1="450" y1="130" x2="610" y2="200" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#ms-arrow-fan)"/>
+              <line x1="450" y1="130" x2="780" y2="200" stroke="#71855f" stroke-width="1.5" fill="none" marker-end="url(#ms-arrow-fan)"/>
+
+              <rect x="40" y="208" width="160" height="74" rx="12" fill="#dfe6cc" stroke="#71855f" stroke-width="1.2"/>
+              <text x="120" y="232" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">front · cfs</text>
+              <text x="120" y="252" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">inbox items</text>
+              <text x="120" y="268" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">30 min</text>
+
+              <rect x="210" y="208" width="160" height="74" rx="12" fill="#dfe6cc" stroke="#71855f" stroke-width="1.2"/>
+              <text x="290" y="232" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">hubspot · fsl</text>
+              <text x="290" y="252" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">deals · contacts</text>
+              <text x="290" y="268" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">30 min</text>
+
+              <rect x="380" y="208" width="160" height="74" rx="12" fill="#dfe6cc" stroke="#71855f" stroke-width="1.2"/>
+              <text x="460" y="232" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">art · cfs</text>
+              <text x="460" y="252" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">trip · AOG</text>
+              <text x="460" y="268" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">30 min</text>
+
+              <rect x="550" y="208" width="160" height="74" rx="12" fill="#dfe6cc" stroke="#71855f" stroke-width="1.2"/>
+              <text x="630" y="232" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">airtable · cfs+fsl</text>
+              <text x="630" y="252" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">ops · projects</text>
+              <text x="630" y="268" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">30 min</text>
+
+              <rect x="720" y="208" width="160" height="74" rx="12" fill="#dfe6cc" stroke="#71855f" stroke-width="1.2"/>
+              <text x="800" y="232" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">m365 · tom</text>
+              <text x="800" y="252" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">calendar diffs</text>
+              <text x="800" y="268" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">hourly</text>
+
+              <!-- Future row -->
+              <rect x="290" y="310" width="320" height="64" rx="14" fill="#fffdf8" stroke="#a7ad84" stroke-width="1.2" stroke-dasharray="5 4"/>
+              <text x="450" y="334" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">+ next venture · year 2</text>
+              <text x="450" y="354" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">one config row · zero new code</text>
+              <line x1="450" y1="282" x2="450" y2="310" stroke="#a7ad84" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+
+              <!-- Caption -->
+              <text x="450" y="410" text-anchor="middle" fill="#6f2f2d" font-size="14" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">5 configs in v1 → 8 by Phase 4 → 12+ by year 2</text>
+              <text x="450" y="432" text-anchor="middle" fill="#766b61" font-size="11" font-style="italic" font-family="Public Sans, sans-serif">same code path, every one</text>
+            </svg>
+            <p class="diagram-caption">The template costs an extra two hours in Phase 1. Saves two weeks at Phase 4 and every Phase after.</p>
+          </div>
+        </div>
+
+        <!-- ===== Patch 3: Pre-surface validation ===== -->
+        <div class="section">
+          <p class="eyebrow">Patch 3 · quality gate</p>
+          <h2>Drafts get checked before you see them.</h2>
+          <p style="max-width:680px;">
+            The drafter doesn't put a draft into your queue directly. A second pass — the validator — checks the draft against a fixed rubric. Pass → your queue. Fail → Annabel's review queue. Hallucinations and shape errors never reach Tom as a "first draft to fix."
+          </p>
+
+          <div class="diagram-card" style="margin-top:1.6rem;">
+            <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Drafter feeds validator, which forks to seat queue or Annabel review">
+              <defs>
+                <marker id="ms-arrow-val" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#a45a50" />
+                </marker>
+                <marker id="ms-arrow-pass" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#71855f" />
+                </marker>
+              </defs>
+
+              <!-- Drafter -->
+              <rect x="340" y="30" width="220" height="76" rx="16" fill="#27483a"/>
+              <text x="450" y="58" text-anchor="middle" fill="#efc8c0" font-size="14" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">DRAFTER</text>
+              <text x="450" y="78" text-anchor="middle" fill="#dfe6cc" font-size="11" font-family="Public Sans, sans-serif">Claude API + canon_facts</text>
+              <text x="450" y="96" text-anchor="middle" fill="#a7ad84" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">produces draft text</text>
+
+              <line x1="450" y1="106" x2="450" y2="140" stroke="#a45a50" stroke-width="2.4" marker-end="url(#ms-arrow-val)"/>
+
+              <!-- Validator -->
+              <rect x="220" y="140" width="460" height="220" rx="20" fill="#efc8c0" stroke="#6f2f2d" stroke-width="2"/>
+              <text x="450" y="170" text-anchor="middle" fill="#27483a" font-size="16" font-family="Fraunces, serif">Validator · rubric pass</text>
+              <text x="450" y="190" text-anchor="middle" fill="#6f2f2d" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">SECOND CLAUDE CALL · FIXED CHECKS</text>
+
+              <rect x="246" y="208" width="408" height="30" rx="8" fill="#fffdf8"/>
+              <text x="258" y="228" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">1 · cites at least one canon_fact by id?</text>
+
+              <rect x="246" y="244" width="408" height="30" rx="8" fill="#fffdf8"/>
+              <text x="258" y="264" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">2 · decision_type matches the source signal_type?</text>
+
+              <rect x="246" y="280" width="408" height="30" rx="8" fill="#fffdf8"/>
+              <text x="258" y="300" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">3 · recommended action is in allowed-actions list?</text>
+
+              <rect x="246" y="316" width="408" height="30" rx="8" fill="#fffdf8"/>
+              <text x="258" y="336" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">4 · dollar amounts / dates / names appear in source?</text>
+
+              <!-- Fork -->
+              <path d="M 330 360 Q 200 400 160 440" stroke="#a45a50" stroke-width="2.4" fill="none" marker-end="url(#ms-arrow-val)"/>
+              <path d="M 570 360 Q 700 400 740 440" stroke="#71855f" stroke-width="2.4" fill="none" marker-end="url(#ms-arrow-pass)"/>
+
+              <text x="240" y="394" fill="#a45a50" font-size="11" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">ANY FAIL</text>
+              <text x="660" y="394" fill="#71855f" font-size="11" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">ALL PASS</text>
+
+              <!-- Left: Annabel review -->
+              <rect x="40" y="448" width="280" height="84" rx="16" fill="#fffdf8" stroke="#a45a50" stroke-width="1.8"/>
+              <text x="180" y="476" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Annabel's review queue</text>
+              <text x="180" y="496" text-anchor="middle" fill="#766b61" font-size="11" font-family="Public Sans, sans-serif">flagged · validation_notes captured</text>
+              <text x="180" y="516" text-anchor="middle" fill="#a45a50" font-size="10" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">DRAFTER OR RUBRIC FIXED</text>
+
+              <!-- Right: Seat queue -->
+              <rect x="580" y="448" width="280" height="84" rx="16" fill="#dfe6cc" stroke="#71855f" stroke-width="1.8"/>
+              <text x="720" y="476" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Tom's queue (or Erica's)</text>
+              <text x="720" y="496" text-anchor="middle" fill="#766b61" font-size="11" font-family="Public Sans, sans-serif">passed · ready to approve / edit / ship</text>
+              <text x="720" y="516" text-anchor="middle" fill="#71855f" font-size="10" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">WORST OUTPUT NEVER REACHED HIM</text>
+            </svg>
+            <p class="diagram-caption">The rubric tightens at every L2 review — false-positive checks get relaxed, hallucinations that slip through get a new check added.</p>
+          </div>
+        </div>
+
+        <!-- ===== Patch 4: Health check ===== -->
+        <div class="section">
+          <p class="eyebrow">Patch 4 · longevity</p>
+          <h2>The system tells you when it's drifting.</h2>
+          <p style="max-width:680px;">
+            Every Sunday at 22:00 MT, a worker checks six things that quietly break AI systems over time. Any flag emails Annabel that night and shows up in Tom's Friday message.
+          </p>
+
+          <div class="diagram-card" style="margin-top:1.6rem;">
+            <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Health check worker fires weekly and flags issues to Annabel and Tom">
+              <defs>
+                <marker id="ms-arrow-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#71855f" />
+                </marker>
+                <marker id="ms-arrow-hr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#a45a50" />
+                </marker>
+              </defs>
+
+              <!-- Cron at top -->
+              <rect x="320" y="20" width="260" height="80" rx="16" fill="#a45a50" stroke="#6f2f2d" stroke-width="1.5"/>
+              <text x="450" y="48" text-anchor="middle" fill="#fbf7ef" font-size="14" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">HEALTH-CHECK WORKER</text>
+              <text x="450" y="68" text-anchor="middle" fill="#fbf7ef" font-size="11" font-family="Public Sans, sans-serif">Cloudflare cron</text>
+              <text x="450" y="86" text-anchor="middle" fill="#efc8c0" font-size="11" font-style="italic" font-family="Public Sans, sans-serif">Sunday · 22:00 MT</text>
+
+              <!-- Six checks in two rows -->
+              <line x1="450" y1="100" x2="450" y2="124" stroke="#a45a50" stroke-width="2"/>
+              <rect x="60" y="130" width="780" height="200" rx="20" fill="#dfe6cc" stroke="#71855f" stroke-width="1.5"/>
+              <text x="450" y="156" text-anchor="middle" fill="#27483a" font-size="14" font-family="Fraunces, serif">Six things it checks</text>
+
+              <rect x="86" y="178" width="232" height="64" rx="12" fill="#fffdf8" stroke="#a7ad84" stroke-width="1"/>
+              <text x="202" y="200" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">OAuth expiry</text>
+              <text x="202" y="220" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">tokens expiring</text>
+              <text x="202" y="234" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">in next 14 days</text>
+
+              <rect x="334" y="178" width="232" height="64" rx="12" fill="#fffdf8" stroke="#a7ad84" stroke-width="1"/>
+              <text x="450" y="200" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">Connector errors</text>
+              <text x="450" y="220" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">non-200 responses</text>
+              <text x="450" y="234" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">over last 7 days</text>
+
+              <rect x="582" y="178" width="232" height="64" rx="12" fill="#fffdf8" stroke="#a7ad84" stroke-width="1"/>
+              <text x="698" y="200" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">Model deprecations</text>
+              <text x="698" y="220" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">any worker using</text>
+              <text x="698" y="234" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">a sunset model</text>
+
+              <rect x="86" y="252" width="232" height="64" rx="12" fill="#fffdf8" stroke="#a7ad84" stroke-width="1"/>
+              <text x="202" y="274" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">Cron staleness</text>
+              <text x="202" y="294" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">workers silent</text>
+              <text x="202" y="308" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">when they shouldn't be</text>
+
+              <rect x="334" y="252" width="232" height="64" rx="12" fill="#fffdf8" stroke="#a7ad84" stroke-width="1"/>
+              <text x="450" y="274" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">Canon drift</text>
+              <text x="450" y="294" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">atom-count delta</text>
+              <text x="450" y="308" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">since last week</text>
+
+              <rect x="582" y="252" width="232" height="64" rx="12" fill="#fffdf8" stroke="#a7ad84" stroke-width="1"/>
+              <text x="698" y="274" text-anchor="middle" fill="#27483a" font-size="12" font-weight="800" font-family="Public Sans, sans-serif">Spend drift</text>
+              <text x="698" y="294" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">month-to-date vs</text>
+              <text x="698" y="308" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">$250/mo cap</text>
+
+              <!-- Outputs -->
+              <line x1="280" y1="330" x2="220" y2="380" stroke="#a45a50" stroke-width="2" marker-end="url(#ms-arrow-hr)"/>
+              <line x1="620" y1="330" x2="680" y2="380" stroke="#71855f" stroke-width="2" marker-end="url(#ms-arrow-h)"/>
+
+              <rect x="40" y="386" width="360" height="100" rx="16" fill="#efc8c0" stroke="#cf887f" stroke-width="1.5"/>
+              <text x="220" y="414" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Email to Annabel</text>
+              <text x="220" y="436" text-anchor="middle" fill="#6f2f2d" font-size="11" font-family="Public Sans, sans-serif">Sunday night, if any flags</text>
+              <text x="220" y="456" text-anchor="middle" fill="#766b61" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">she fixes before Friday</text>
+
+              <rect x="500" y="386" width="360" height="100" rx="16" fill="#dfe6cc" stroke="#71855f" stroke-width="1.5"/>
+              <text x="680" y="414" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Line in Tom's Friday message</text>
+              <text x="680" y="436" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">"3 health flags this week, all resolved"</text>
+              <text x="680" y="456" text-anchor="middle" fill="#766b61" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">visible, not blocking</text>
+            </svg>
+            <p class="diagram-caption">Mansel's quarterly health check, weekly instead. If a flag goes unresolved 2 weeks running, it blocks the next phase shipping.</p>
+          </div>
+        </div>
+
+        <!-- ===== Patch 5: Skills self-service ===== -->
+        <div class="section">
+          <p class="eyebrow">Patch 5 · evolves over time</p>
+          <h2>Erica adds her own skills.</h2>
+          <p style="max-width:680px;">
+            A skill is one row in <code>loops</code> + a drafter prompt + a validator rubric + an L1 design. Erica writes the spec, Annabel reviews feasibility, Tom approves, Annabel scaffolds, ships heater first. Same closed-loops rule as Tom's workflows.
+          </p>
+
+          <div class="diagram-card" style="margin-top:1.6rem;">
+            <svg viewBox="0 0 1000 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five-step flow for adding a new skill">
+              <defs>
+                <marker id="ms-arrow-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#27483a" />
+                </marker>
+              </defs>
+
+              <!-- Five steps -->
+              <rect x="20" y="80" width="170" height="160" rx="16" fill="#efc8c0" stroke="#cf887f" stroke-width="1.5"/>
+              <text x="105" y="106" text-anchor="middle" fill="#6f2f2d" font-size="11" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">STEP 1</text>
+              <text x="105" y="132" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Erica writes spec</text>
+              <text x="105" y="158" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">trigger · signal_type</text>
+              <text x="105" y="174" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">decision_type</text>
+              <text x="105" y="190" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">validator rubric</text>
+              <text x="105" y="206" text-anchor="middle" fill="#27483a" font-size="10" font-family="Public Sans, sans-serif">L1 signal</text>
+              <text x="105" y="226" text-anchor="middle" fill="#766b61" font-size="9" font-style="italic" font-family="SF Mono, Menlo, monospace">_proposed-skills/</text>
+
+              <line x1="190" y1="160" x2="216" y2="160" stroke="#27483a" stroke-width="2" marker-end="url(#ms-arrow-flow)"/>
+
+              <rect x="220" y="80" width="170" height="160" rx="16" fill="#fffdf8" stroke="#27483a" stroke-width="1.5"/>
+              <text x="305" y="106" text-anchor="middle" fill="#6f2f2d" font-size="11" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">STEP 2</text>
+              <text x="305" y="132" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Annabel reviews</text>
+              <text x="305" y="158" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">feasibility</text>
+              <text x="305" y="178" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">substrate fit</text>
+              <text x="305" y="194" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">data sources</text>
+              <text x="305" y="210" text-anchor="middle" fill="#766b61" font-size="10" font-family="Public Sans, sans-serif">rubric tight enough</text>
+
+              <line x1="390" y1="160" x2="416" y2="160" stroke="#27483a" stroke-width="2" marker-end="url(#ms-arrow-flow)"/>
+
+              <rect x="420" y="80" width="170" height="160" rx="16" fill="#dfe6cc" stroke="#71855f" stroke-width="1.8"/>
+              <text x="505" y="106" text-anchor="middle" fill="#6f2f2d" font-size="11" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">STEP 3</text>
+              <text x="505" y="132" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Tom approves</text>
+              <text x="505" y="160" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">loops.approved_by</text>
+              <text x="505" y="178" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">= Tom</text>
+              <text x="505" y="208" text-anchor="middle" fill="#a45a50" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">ONE GATE</text>
+              <text x="505" y="222" text-anchor="middle" fill="#a45a50" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">DOESN'T DELEGATE</text>
+
+              <line x1="590" y1="160" x2="616" y2="160" stroke="#27483a" stroke-width="2" marker-end="url(#ms-arrow-flow)"/>
+
+              <rect x="620" y="80" width="170" height="160" rx="16" fill="#fffdf8" stroke="#27483a" stroke-width="1.5"/>
+              <text x="705" y="106" text-anchor="middle" fill="#6f2f2d" font-size="11" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">STEP 4</text>
+              <text x="705" y="132" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Annabel scaffolds</text>
+              <text x="705" y="160" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">config on template</text>
+              <text x="705" y="180" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">or drafter variant</text>
+              <text x="705" y="210" text-anchor="middle" fill="#766b61" font-size="10" font-style="italic" font-family="Public Sans, sans-serif">rarely net-new code</text>
+
+              <line x1="790" y1="160" x2="816" y2="160" stroke="#27483a" stroke-width="2" marker-end="url(#ms-arrow-flow)"/>
+
+              <rect x="820" y="80" width="170" height="160" rx="16" fill="#dfe6cc" stroke="#71855f" stroke-width="1.8"/>
+              <text x="905" y="106" text-anchor="middle" fill="#6f2f2d" font-size="11" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">STEP 5</text>
+              <text x="905" y="132" text-anchor="middle" fill="#27483a" font-size="14" font-weight="800" font-family="Public Sans, sans-serif">Ships heater</text>
+              <text x="905" y="160" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">no measurement</text>
+              <text x="905" y="180" text-anchor="middle" fill="#27483a" font-size="11" font-family="Public Sans, sans-serif">at first</text>
+              <text x="905" y="210" text-anchor="middle" fill="#a45a50" font-size="10" font-weight="800" letter-spacing="2" font-family="Public Sans, sans-serif">THERMOSTAT IN 2-4 WK</text>
+              <text x="905" y="226" text-anchor="middle" fill="#766b61" font-size="9" font-style="italic" font-family="Public Sans, sans-serif">same closed-loops rule</text>
+
+              <!-- Top label -->
+              <text x="500" y="40" text-anchor="middle" fill="#27483a" font-size="16" font-family="Fraunces, serif">Adding a new skill — five steps</text>
+              <text x="500" y="60" text-anchor="middle" fill="#766b61" font-size="11" font-style="italic" font-family="Public Sans, sans-serif">spec template lives at aviation/aios/_templates/skill-spec.md</text>
+
+              <!-- Bottom note -->
+              <text x="500" y="290" text-anchor="middle" fill="#6f2f2d" font-size="13" font-weight="800" letter-spacing="1" font-family="Public Sans, sans-serif">Year 1: 3 skills (Tom). Year 2: 8+ (Tom + Erica + ...)</text>
+              <text x="500" y="312" text-anchor="middle" fill="#766b61" font-size="11" font-style="italic" font-family="Public Sans, sans-serif">Annabel doesn't write every new skill — the system supports adding them</text>
+            </svg>
+            <p class="diagram-caption">Erica's likely first skills: <code>content_draft</code> and <code>email_draft</code> — both reuse the existing drafter shape. She proposes them via the spec template the day she gets her Cowork seat.</p>
+          </div>
+        </div>
+
+        <!-- ===== Summary callout ===== -->
+        <div class="section">
+          <h2>What these five patches do together</h2>
+          <div class="card-grid">
+            <div class="card">
+              <span class="card-label">Patch 1</span>
+              <h3>Multi-seat from day one</h3>
+              <p>RLS on, seat-scoped tables. Erica plugs in at Phase 5 as config, not migration.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Patch 2</span>
+              <h3>Clean scaling</h3>
+              <p>One worker template handles every ingestion. Adding a venture is a config row.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Patch 3</span>
+              <h3>Quality gate</h3>
+              <p>Validator catches hallucinations before they reach the seat queue.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Patch 4</span>
+              <h3>Longevity</h3>
+              <p>Weekly health check catches OAuth expiry, connector breaks, model deprecation, spend drift.</p>
+            </div>
+            <div class="card">
+              <span class="card-label">Patch 5</span>
+              <h3>Evolves over time</h3>
+              <p>Seats propose new skills via spec template. Annabel scaffolds; Tom approves. System grows without rebuild.</p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>The promise to Tom is preserved.</strong> Nothing here adds to his cognitive load — he still only sees spend approval, OAuth grants, phase-gate decisions, his Friday message, and the one gate he doesn't delegate (approving new skills). These patches make the system he uses on day 1 the same one Erica can use on day 90.
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      For Tom Filippini · CFS pilot · 2026-05-14 ·
+      <a href="../plan-v1-2026-05-14.md" style="color:var(--clay)">plan</a> ·
+      <a href="../loops-explained-2026-05-14.md" style="color:var(--clay)">loops</a> ·
+      <a href="../linkedin-skill-demo-2026-05-14.md" style="color:var(--clay)">linkedin skill</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

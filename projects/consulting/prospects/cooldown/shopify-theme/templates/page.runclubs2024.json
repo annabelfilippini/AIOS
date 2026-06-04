@@ -1,0 +1,268 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "run_club_grid_jk8RzU": {
+      "type": "run-club-grid",
+      "blocks": {
+        "column_hR8EqP": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/denver.jpg",
+            "title": "Denver",
+            "state": "Colorado",
+            "page_link": "shopify://pages/denver"
+          }
+        },
+        "column_E9fTVB": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/newyork.jpg",
+            "title": "New York",
+            "state": "New York",
+            "page_link": "shopify://pages/new-york"
+          }
+        },
+        "column_hFyVJX": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/minny.jpg",
+            "title": "Minneapolis",
+            "state": "Minnesota",
+            "page_link": "shopify://pages/minnesota"
+          }
+        },
+        "column_3W7DWT": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/austin.jpg",
+            "title": "Austin",
+            "state": "Texas",
+            "page_link": "shopify://pages/austin"
+          }
+        },
+        "column_MyiXVg": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/20210101-A7_00335_7a70789d-86b5-4090-ab0e-ad9b5b100cee.jpg",
+            "title": "Nashville",
+            "state": "Tennessee",
+            "page_link": "shopify://pages/nashville"
+          }
+        },
+        "column_KdAQbV": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/la.jpg",
+            "title": "Los Angeles",
+            "state": "California",
+            "page_link": "shopify://pages/los-angeles"
+          }
+        },
+        "column_HHaWWm": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Prophecy_Owen_CooldownRunning_4.11.23-07120.jpg",
+            "title": "Atlanta",
+            "state": "Georgia",
+            "page_link": "shopify://pages/atlanta"
+          }
+        },
+        "column_kVkURN": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/20220809-A7_00891.jpg",
+            "title": "Dallas",
+            "state": "Texas",
+            "page_link": "shopify://pages/dallas"
+          }
+        },
+        "column_zTk764": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/6-8C9A0794.jpg",
+            "title": "Chicago",
+            "state": "Illinois",
+            "page_link": "shopify://pages/chicago-1"
+          }
+        },
+        "column_fz4jVL": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/8C9A0965.jpg",
+            "title": "Colorado Springs",
+            "state": "Colorado",
+            "page_link": "shopify://pages/colorado-springs"
+          }
+        },
+        "column_JT7b7c": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/20230628-A7_00188_2.jpg",
+            "title": "Seattle",
+            "state": "Washington",
+            "page_link": "shopify://pages/seattle"
+          }
+        },
+        "column_NFBe8b": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/cdtoronto-09.jpg",
+            "title": "Toronto",
+            "state": "Ontario",
+            "page_link": "shopify://pages/toronto"
+          }
+        },
+        "column_AEbTqc": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-02-23_at_7.17.19_PM.png",
+            "title": "Washington",
+            "state": "D.C.",
+            "page_link": "shopify://pages/dc"
+          }
+        },
+        "column_MikMYE": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-12-18_at_12.14.58_PM.png",
+            "title": "Boulder",
+            "state": "Colorado",
+            "page_link": ""
+          }
+        },
+        "column_8Bwg8d": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-12-18_at_12.20.15_PM.png",
+            "title": "University of Michigan",
+            "state": "Michigan",
+            "page_link": ""
+          }
+        },
+        "column_JnJz8k": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/20220809-A7_00726.jpg",
+            "title": "Boston",
+            "state": "Massachusetts",
+            "page_link": "shopify://pages/boston-1"
+          }
+        },
+        "column_MV9mRN": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/29-8C9A7164_1.jpg",
+            "title": "San Diego",
+            "state": "California",
+            "page_link": "shopify://pages/san-diego"
+          }
+        },
+        "column_4DTxjx": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/IMG_2402.jpg",
+            "title": "Scottsdale",
+            "state": "Arizone",
+            "page_link": "shopify://pages/copy-of-chicago"
+          }
+        },
+        "column_Qtb8Lt": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/34-8C9A7190.jpg",
+            "title": "Tampa",
+            "state": "Florida",
+            "page_link": "shopify://pages/tampa-1"
+          }
+        }
+      },
+      "block_order": [
+        "column_hR8EqP",
+        "column_E9fTVB",
+        "column_hFyVJX",
+        "column_3W7DWT",
+        "column_MyiXVg",
+        "column_KdAQbV",
+        "column_HHaWWm",
+        "column_kVkURN",
+        "column_zTk764",
+        "column_fz4jVL",
+        "column_JT7b7c",
+        "column_NFBe8b",
+        "column_AEbTqc",
+        "column_MikMYE",
+        "column_8Bwg8d",
+        "column_JnJz8k",
+        "column_MV9mRN",
+        "column_4DTxjx",
+        "column_Qtb8Lt"
+      ],
+      "settings": {}
+    },
+    "rich_text_CPpmCg": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_zApYtQ": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>don't see your city?</p>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_zApYtQ"
+      ],
+      "custom_css": [
+        ".rich-text__heading span {font-size: 48px; font-family: \"Athletics-Bold\" !important;}",
+        "@media (max-width: 749px) {.rich-text__heading span {font-size: 35px; }}"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 24
+      }
+    },
+    "custom_liquid_CpJVkn": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".typeform-button {text-align: center;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"typeform-button\" data-tf-live=\"01J04F85GBAHDF1BG005S3TNPQ\" data-tf-redirect-target=\"_blank\"></div><script src=\"//embed.typeform.com/next/embed.js\"></script>",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "run_club_grid_jk8RzU",
+    "rich_text_CPpmCg",
+    "custom_liquid_CpJVkn"
+  ]
+}

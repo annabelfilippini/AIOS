@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vital Health Instagram Carousel</title>
+  <style>
+    :root {
+      --cream: #f5efe0;
+      --paper: #fbf7ec;
+      --forest: #1f4d2a;
+      --deep: #163820;
+      --gold: #c9a04a;
+      --ink: #2a2a26;
+      --muted: #7a776b;
+      --line: #ded3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #d8d0bd;
+      color: var(--ink);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .deck {
+      display: grid;
+      gap: 32px;
+      padding: 32px;
+      justify-content: center;
+    }
+
+    .slide {
+      position: relative;
+      width: 1080px;
+      height: 1350px;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 16px 50px rgba(22, 56, 32, 0.18);
+      isolation: isolate;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 80% 10%, rgba(201, 160, 74, 0.16), transparent 28%),
+        linear-gradient(135deg, rgba(31, 77, 42, 0.06), transparent 40%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .masthead {
+      position: absolute;
+      top: 72px;
+      left: 72px;
+      right: 72px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--forest);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.23em;
+    }
+
+    .masthead span:nth-child(2)::before,
+    .masthead span:nth-child(2)::after {
+      content: "•";
+      color: var(--gold);
+      margin: 0 24px;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    .serif {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 116px;
+      line-height: 0.96;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 86px;
+      line-height: 1.02;
+    }
+
+    p {
+      margin: 0;
+      color: #3c3b35;
+      font-size: 31px;
+      line-height: 1.47;
+    }
+
+    .green {
+      color: var(--forest);
+      font-weight: 650;
+    }
+
+    .gold {
+      color: var(--gold);
+    }
+
+    .logo {
+      position: absolute;
+      left: 72px;
+      bottom: 72px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--forest);
+    }
+
+    .logo img {
+      width: 78px;
+      height: 78px;
+      object-fit: contain;
+    }
+
+    .logo strong {
+      display: block;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 34px;
+      font-weight: 650;
+      line-height: 1;
+    }
+
+    .logo small {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+    }
+
+    .page {
+      position: absolute;
+      right: 72px;
+      bottom: 90px;
+      color: var(--forest);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+    }
+
+    .dots {
+      position: absolute;
+      left: 50%;
+      bottom: 82px;
+      display: flex;
+      gap: 11px;
+      transform: translateX(-50%);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--forest);
+      border-radius: 99px;
+      opacity: 0.55;
+    }
+
+    .dot.active {
+      background: var(--forest);
+      opacity: 1;
+    }
+
+    .rule {
+      width: 160px;
+      height: 2px;
+      margin: 34px 0;
+      background: var(--gold);
+    }
+
+    .kicker {
+      color: var(--forest);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .cover .image {
+      position: absolute;
+      right: -110px;
+      top: 0;
+      width: 610px;
+      height: 100%;
+      background-image:
+        linear-gradient(90deg, rgba(251, 247, 236, 0.92) 0%, rgba(251, 247, 236, 0.45) 34%, rgba(251, 247, 236, 0) 62%),
+        url("sourced/homepage-hero.png");
+      background-size: auto 100%, cover;
+      background-position: left center, 61% center;
+      opacity: 0.86;
+    }
+
+    .cover .content {
+      position: absolute;
+      left: 72px;
+      top: 230px;
+      width: 690px;
+    }
+
+    .cover p {
+      width: 610px;
+      margin-top: 42px;
+    }
+
+    .body-split .photo {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 455px;
+      height: 100%;
+      background-image:
+        linear-gradient(90deg, rgba(251, 247, 236, 0.96), rgba(251, 247, 236, 0.18) 45%, rgba(251, 247, 236, 0) 80%),
+        url("sourced/homepage-hero.png");
+      background-size: auto 100%, cover;
+      background-position: center, 78% center;
+      opacity: 0.84;
+    }
+
+    .body-split .content {
+      position: absolute;
+      left: 72px;
+      top: 214px;
+      width: 660px;
+    }
+
+    .body-split p {
+      width: 600px;
+      margin-top: 42px;
+    }
+
+    .note {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 212px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 70px 0 82px;
+    }
+
+    .note .number {
+      display: flex;
+      align-items: baseline;
+      gap: 15px;
+      margin-bottom: 50px;
+      color: var(--ink);
+      font-family: Fraunces, Georgia, serif;
+      font-size: 178px;
+      line-height: 0.82;
+    }
+
+    .note .number small {
+      color: var(--gold);
+      font-family: Inter, Arial, sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .note p {
+      width: 760px;
+    }
+
+    .services {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 760px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .service {
+      min-height: 112px;
+      border: 1px solid var(--line);
+      padding: 22px 24px;
+      background: rgba(255, 252, 244, 0.62);
+      color: var(--forest);
+      font-family: Fraunces, Georgia, serif;
+      font-size: 30px;
+      line-height: 1.05;
+    }
+
+    .quote-slide {
+      background: var(--cream);
+    }
+
+    .quote-slide .content {
+      position: absolute;
+      left: 92px;
+      right: 92px;
+      top: 214px;
+      text-align: center;
+    }
+
+    .quote-slide h2 {
+      margin-top: 48px;
+      font-size: 91px;
+    }
+
+    .quote-slide p {
+      width: 790px;
+      margin: 44px auto 0;
+    }
+
+    .quote-slide .mark {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      background: url("sourced/vh-logo-transparent.png") center / contain no-repeat;
+      opacity: 0.9;
+    }
+
+    .cta {
+      background: var(--deep);
+      color: var(--paper);
+    }
+
+    .cta::before {
+      background:
+        radial-gradient(circle at 78% 12%, rgba(201, 160, 74, 0.16), transparent 30%),
+        radial-gradient(circle at 20% 86%, rgba(245, 239, 224, 0.08), transparent 34%);
+    }
+
+    .cta .masthead,
+    .cta .logo,
+    .cta .page,
+    .cta .kicker {
+      color: var(--paper);
+    }
+
+    .cta .content {
+      position: absolute;
+      left: 92px;
+      right: 92px;
+      top: 210px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      color: var(--paper);
+      font-size: 102px;
+    }
+
+    .cta p {
+      width: 760px;
+      margin: 46px auto 0;
+      color: rgba(251, 247, 236, 0.82);
+    }
+
+    .cta .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 372px;
+      height: 84px;
+      margin-top: 70px;
+      border: 1px solid rgba(251, 247, 236, 0.72);
+      color: var(--paper);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .cta .logo img {
+      filter: brightness(0) invert(1);
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section id="slide-1" class="slide cover">
+      <div class="image"></div>
+      <div class="masthead"><span>AUSTIN, TEXAS</span><span>INTEGRATIVE MEDICINE</span><span>SINCE 1970</span></div>
+      <div class="content">
+        <div class="kicker">The practice</div>
+        <div class="rule"></div>
+        <h1>A different kind of <span class="green">integrative care.</span></h1>
+        <p>Care that starts with the whole person, not a protocol pulled off a shelf.</p>
+      </div>
+      <div class="logo"><img src="sourced/vh-logo-transparent.png" alt=""><span><strong>Vital Health</strong><small>INTEGRATIVE MEDICINE</small></span></div>
+      <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="page">01 / 05</div>
+    </section>
+
+    <section id="slide-2" class="slide body-split">
+      <div class="photo"></div>
+      <div class="masthead"><span>AUSTIN, TEXAS</span><span>INTEGRATIVE MEDICINE</span><span>SINCE 1970</span></div>
+      <div class="content">
+        <div class="kicker">First visit</div>
+        <div class="rule"></div>
+        <h2>A full workup, <span class="green">not a triage.</span></h2>
+        <p>Your history, symptoms, labs, goals, and physiology all matter before recommendations are made.</p>
+      </div>
+      <div class="logo"><img src="sourced/vh-logo-transparent.png" alt=""><span><strong>Vital Health</strong><small>INTEGRATIVE MEDICINE</small></span></div>
+      <div class="dots"><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="page">02 / 05</div>
+    </section>
+
+    <section id="slide-3" class="slide">
+      <div class="masthead"><span>AUSTIN, TEXAS</span><span>INTEGRATIVE MEDICINE</span><span>SINCE 1970</span></div>
+      <div class="note">
+        <div class="kicker">The long view</div>
+        <div class="number">50<small>+ YEARS</small></div>
+        <h2>Built on <span class="green">clinical foundation.</span></h2>
+        <p>Vital Health carries forward decades of integrative medicine experience with a care model designed for follow-through.</p>
+      </div>
+      <div class="logo"><img src="sourced/vh-logo-transparent.png" alt=""><span><strong>Vital Health</strong><small>INTEGRATIVE MEDICINE</small></span></div>
+      <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="page">03 / 05</div>
+    </section>
+
+    <section id="slide-4" class="slide body-split">
+      <div class="photo"></div>
+      <div class="masthead"><span>AUSTIN, TEXAS</span><span>INTEGRATIVE MEDICINE</span><span>SINCE 1970</span></div>
+      <div class="content">
+        <div class="kicker">Care options</div>
+        <div class="rule"></div>
+        <h2>Considered in <span class="green">context.</span></h2>
+        <p>Services are evaluated against your physiology, your labs, and your goals.</p>
+      </div>
+      <div class="services">
+        <div class="service">Hormone Optimization</div>
+        <div class="service">Medical Weight Loss</div>
+        <div class="service">Peptide Therapy</div>
+        <div class="service">Wellness & Rejuvenation</div>
+      </div>
+      <div class="logo"><img src="sourced/vh-logo-transparent.png" alt=""><span><strong>Vital Health</strong><small>INTEGRATIVE MEDICINE</small></span></div>
+      <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span></div>
+      <div class="page">04 / 05</div>
+    </section>
+
+    <section id="slide-5" class="slide cta">
+      <div class="masthead"><span>AUSTIN, TEXAS</span><span>INTEGRATIVE MEDICINE</span><span>SINCE 1970</span></div>
+      <div class="content">
+        <div class="mark"></div>
+        <div class="kicker">Start here</div>
+        <div class="rule" style="margin-left:auto;margin-right:auto;"></div>
+        <h2>Begin with a <span class="gold">consultation.</span></h2>
+        <p>Bring your questions, your goals, and the whole picture. We will help you understand the next right step.</p>
+        <div class="button">Schedule a visit</div>
+      </div>
+      <div class="logo"><img src="sourced/vh-logo-transparent.png" alt=""><span><strong>Vital Health</strong><small>INTEGRATIVE MEDICINE</small></span></div>
+      <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span></div>
+      <div class="page">05 / 05</div>
+    </section>
+  </main>
+</body>
+</html>

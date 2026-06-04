@@ -1,0 +1,139 @@
+{
+  "source": "firecrawl:branding",
+  "url": "https://www.theheneats.com/",
+  "branding": {
+    "color_scheme": "light",
+    "logo": null,
+    "fonts": [
+      {
+        "family": "Montserrat",
+        "role": "body"
+      }
+    ],
+    "colors": {
+      "primary": "#D53BD5",
+      "secondary": "#4AD504",
+      "accent": "#F93262",
+      "background": "#FFFFFF",
+      "textPrimary": "#222222",
+      "link": "#F93262"
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Montserrat",
+        "heading": "Montserrat"
+      },
+      "fontStacks": {
+        "heading": [
+          "Montserrat",
+          "sans-serif"
+        ],
+        "body": [
+          "Montserrat",
+          "sans-serif"
+        ],
+        "paragraph": [
+          "Montserrat",
+          "sans-serif"
+        ]
+      },
+      "fontSizes": {
+        "h1": "56px",
+        "h2": "48px",
+        "body": "20px"
+      }
+    },
+    "spacing": {
+      "baseUnit": 4,
+      "borderRadius": "2px"
+    },
+    "components": {
+      "buttonPrimary": {
+        "background": "#FFFFFF",
+        "textColor": "#D53BD5",
+        "borderColor": "#D53BD5",
+        "borderRadius": "50px",
+        "borderRadiusCorners": {
+          "topLeft": "50px",
+          "topRight": "50px",
+          "bottomRight": "50px",
+          "bottomLeft": "50px"
+        },
+        "shadow": "rgba(213, 59, 213, 0.5) 0px 0px 15px 5px"
+      },
+      "buttonSecondary": {
+        "background": "#D53BD5",
+        "textColor": "#FFFFFF",
+        "borderColor": "#D53BD5",
+        "borderRadius": "50px",
+        "borderRadiusCorners": {
+          "topLeft": "50px",
+          "topRight": "50px",
+          "bottomRight": "50px",
+          "bottomLeft": "50px"
+        },
+        "shadow": "rgba(213, 59, 213, 0.5) 0px 0px 15px 5px"
+      }
+    },
+    "icons": null,
+    "images": {
+      "logo": "https://cdn.prod.website-files.com/67715e101aae5b8ed110762a/67715e101aae5b8ed11076c6_TheHen-Logo-Black-Transp%20Cropped.avif",
+      "favicon": "https://cdn.prod.website-files.com/67715e101aae5b8ed110762a/67715e101aae5b8ed11076cf_TheHen_Logo-Icon-Black.png",
+      "ogImage": "https://cdn.prod.website-files.com/67715e101aae5b8ed110762a/6775a863cd28293507398a7b_GraphImage2.jpg",
+      "logoHref": "/",
+      "logoAlt": "The Hen Logo"
+    },
+    "animations": null,
+    "layout": null,
+    "tone": null,
+    "personality": {
+      "tone": "playful",
+      "energy": "high",
+      "targetAudience": "young adults and families"
+    },
+    "__llm_logo_reasoning": {
+      "selectedIndex": 0,
+      "reasoning": "Selected #0 because it matches the favicon and is the most visible representation of the brand 'The Hen Ann Arbor'.",
+      "confidence": 0.85,
+      "source": "llm"
+    },
+    "__llm_button_reasoning": {
+      "primary": {
+        "index": 2,
+        "text": "ORDER\u00a0NOW",
+        "reasoning": "The 'ORDER NOW' button is likely the primary CTA due to its action-oriented text and distinct color contrast, drawing attention for immediate action."
+      },
+      "secondary": {
+        "index": 0,
+        "text": "SEE\u00a0MENU",
+        "reasoning": "The 'SEE MENU' button is secondary as it uses the brand color but is less action-oriented than 'ORDER NOW'."
+      },
+      "confidence": 0.9
+    },
+    "designSystem": {
+      "framework": "custom",
+      "componentLibrary": ""
+    },
+    "confidence": {
+      "buttons": 0.9,
+      "colors": 0.95,
+      "overall": 0.925
+    },
+    "__llm_metadata": {
+      "logoSelection": {
+        "llmCalled": true,
+        "llmSucceeded": true,
+        "finalSource": "llm",
+        "rawLogoSelection": {
+          "selectedLogoIndex": 0,
+          "selectedLogoReasoning": "Selected #0 because it matches the favicon and is the most visible representation of the brand 'The Hen Ann Arbor'.",
+          "confidence": 0.85
+        }
+      },
+      "buttonClassification": {
+        "llmCalled": true,
+        "llmSucceeded": true
+      }
+    }
+  }
+}

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PEPPER PONG | WORLD'S HOTTEST NEW GAME</title>
+<meta name="description" content="Shark Tank record-breaking mini pickleball tabletop game. 100,000+ sets sold. Any surface is your center court."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+    /* ============================
+       PEPPER PONG HOMEPAGE
+       Ported from Stitch v4 skeleton + v1 handbuilt patterns.
+       Font stack: Gotham → Impact → Arial Black (fallback chain)
+       Most users render with Impact; body uses Inter.
+       ============================ */
+    :root {
+        --coral: #ED1846;
+        --coral-dark: #c91238;
+        --green: #7ED641;
+        --ink: #111827;
+        --orange: #FF8A00;
+    }
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        color: var(--ink);
+    }
+    .font-headline {
+        font-family: 'Gotham', 'Impact', 'Arial Black', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.01em;
+    }
+    .font-subheadline {
+        font-family: 'Gotham', 'Impact', 'Arial Black', sans-serif;
+        font-weight: 700;
+    }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* Press marquee scroll animation (from v1) */
+    @keyframes scroll-logos {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+    .press-track {
+        display: flex;
+        align-items: center;
+        gap: 56px;
+        animation: scroll-logos 30s linear infinite;
+        width: max-content;
+    }
+    .press-track img {
+        height: 28px;
+        width: auto;
+        filter: brightness(0) invert(1);
+        opacity: 0.92;
+        flex-shrink: 0;
+    }
+
+    /* UGC overlay (auto-play feel) — ported verbatim from v1 */
+    .ugc-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        pointer-events: none;
+        z-index: 5;
+    }
+    .ugc-mute {
+        align-self: flex-end;
+        margin: 12px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .ugc-mute svg { opacity: 0.9; }
+    .ugc-progress {
+        height: 3px;
+        background: rgba(255,255,255,0.22);
+        position: relative;
+        overflow: hidden;
+    }
+    .ugc-progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: #fff;
+        animation: video-progress 8s linear infinite;
+    }
+    .ugc-card:nth-child(1) .ugc-progress-bar { animation-delay: 0s; }
+    .ugc-card:nth-child(2) .ugc-progress-bar { animation-delay: -3s; }
+    .ugc-card:nth-child(3) .ugc-progress-bar { animation-delay: -5s; }
+    @keyframes video-progress {
+        0% { width: 0%; }
+        100% { width: 100%; }
+    }
+
+    /* Audit tags (ported from v1) */
+    .audit-tag {
+        display: inline-block;
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 3px;
+        margin-left: 6px;
+        vertical-align: middle;
+        white-space: nowrap;
+        letter-spacing: 0.02em;
+        line-height: 1.4;
+    }
+    .audit-tag.fix { background: #FF8A00; color: #111827; }
+    .audit-tag.new { background: #7ED641; color: #111827; }
+    .audit-tag.sig { background: #D4E5FF; color: #1a3a6b; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-title { font-size: 42px !important; }
+        .nav-center { display: none !important; }
+        .nav-social { display: none !important; }
+        .section-pad { padding-top: 48px !important; padding-bottom: 48px !important; }
+        .ugc-grid { grid-template-columns: 1fr !important; max-width: 320px; margin-left: auto; margin-right: auto; }
+        .skeptic-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+        .rally-grid { grid-template-columns: 1fr !important; }
+        .product-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+        .schools-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    }
+    @media (max-width: 480px) {
+        .hero-title { font-size: 36px !important; }
+    }
+</style>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    coral: "#ED1846",
+                    "coral-dark": "#c91238",
+                    green: "#7ED641",
+                    ink: "#111827",
+                    orange: "#FF8A00"
+                },
+                fontFamily: {
+                    headline: ["Gotham", "Impact", "Arial Black", "sans-serif"],
+                    body: ["Inter", "sans-serif"],
+                    label: ["Inter", "sans-serif"]
+                }
+            },
+        },
+    }
+</script>
+</head>
+<body class="bg-white text-ink antialiased">
+
+<!-- ═══════════════════════════════════
+     PROMO BAR
+     AUDIT FIX #13: No announcement bar for active promotions
+     ═══════════════════════════════════ -->
+<div class="h-[36px] bg-[#ED1846] text-white flex items-center justify-center text-xs font-bold gap-2 px-4">
+    <span><strong>BUY 1, GET 1 50% OFF</strong> &mdash; Free Shipping on All Orders</span>
+    <span class="audit-tag new">NEW &mdash; Audit #13</span>
+</div>
+
+<!-- ═══════════════════════════════════
+     NAVIGATION
+     AUDIT FIX #2: Schools not in main nav
+     AUDIT FIX #15: Social links buried in sub-footer
+     ═══════════════════════════════════ -->
+<nav class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm px-6 md:px-12 py-4">
+    <div class="flex justify-between items-center w-full max-w-[1440px] mx-auto">
+        <div class="font-headline text-[#ED1846] text-2xl lowercase tracking-tight">pepper pong</div>
+        <div class="nav-center hidden lg:flex items-center space-x-6">
+            <a class="text-[#111827] font-bold text-sm hover:text-coral transition-colors uppercase tracking-wide" href="#">How to Play</a>
+            <a class="text-[#111827] font-bold text-sm hover:text-coral transition-colors uppercase tracking-wide" href="#">Shop</a>
+            <div class="flex items-center gap-1">
+                <a class="text-[#111827] font-bold text-sm hover:text-coral transition-colors uppercase tracking-wide" href="#">Schools</a>
+                <span class="audit-tag new">NEW &mdash; Audit #2</span>
+            </div>
+            <a class="text-[#111827] font-bold text-sm hover:text-coral transition-colors uppercase tracking-wide" href="#">Our Story</a>
+            <a class="text-[#111827] font-bold text-sm hover:text-coral transition-colors uppercase tracking-wide" href="#">Reviews</a>
+            <a class="text-[#111827] font-bold text-sm hover:text-coral transition-colors uppercase tracking-wide" href="#">Press</a>
+            <a class="text-[#111827] font-bold text-sm hover:text-coral transition-colors uppercase tracking-wide" href="#">FAQs</a>
+        </div>
+        <div class="flex items-center space-x-3">
+            <div class="nav-social hidden md:flex items-center space-x-3 text-[#111827]">
+                <a class="hover:text-coral transition-colors" href="#" title="Instagram">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a class="hover:text-coral transition-colors" href="#" title="TikTok">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.43v-7.15a8.16 8.16 0 005.58 2.2V11.2a4.85 4.85 0 01-3.77-1.74V6.69h3.77z"/></svg>
+                </a>
+                <a class="hover:text-coral transition-colors" href="#" title="Facebook">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+            </div>
+            <span class="audit-tag fix">MOVED &mdash; Audit #15</span>
+            <a class="text-[#111827] hover:text-coral transition-colors" href="#">
+                <span class="material-symbols-outlined text-2xl">shopping_cart</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════
+     1. HERO — Shark Tank energy
+     AUDIT FIX: Vocabulary mismatch (mini pickleball tabletop)
+     ═══════════════════════════════════ -->
+<header class="relative min-h-[620px] md:min-h-[720px] flex items-center bg-ink overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img class="w-full h-full object-cover opacity-40" alt="Friends rallying with Pepper Pong at a banquet table" src="assets/hero-banquet.jpg"/>
+        <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-24">
+        <span class="inline-block bg-coral text-white font-headline text-xs md:text-sm tracking-[0.2em] px-4 py-1.5 mb-6 uppercase">
+            Shark Tank Record Breaker
+        </span>
+        <h1 class="hero-title font-headline text-5xl md:text-7xl lg:text-8xl text-white leading-[0.9] mb-6 uppercase tracking-tighter">
+            World's Hottest <br/><span class="text-coral">New Game</span>
+        </h1>
+        <p class="font-subheadline text-xl md:text-3xl text-white mb-4 uppercase">
+            Any Surface Is Your Center Court.
+        </p>
+        <div class="flex flex-wrap items-center gap-3 mb-10">
+            <p class="text-gray-300 text-lg font-medium max-w-2xl">
+                The original mini pickleball tabletop game &mdash; portable, competitive, addictive.
+            </p>
+            <span class="audit-tag fix">FIX &mdash; Vocabulary mismatch</span>
+        </div>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-10">
+            <a href="#" class="bg-coral text-white font-headline text-lg md:text-xl px-10 py-5 rounded-full shadow-[0_4px_24px_rgba(237,24,70,0.5)] hover:scale-105 transition-transform uppercase inline-block">
+                Get the Set &mdash; $89.99
+            </a>
+        </div>
+        <div class="flex flex-wrap gap-3">
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2">
+                <span class="text-coral font-black">&#9733; 4.93</span> &middot; 211+ reviews
+            </div>
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-bold">
+                100,000+ sets sold
+            </div>
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full text-sm font-bold">
+                60-day guarantee
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════════════════════════════
+     2. PRESS MARQUEE — Real logos scroll
+     SIGNATURE: Red bar, white-knockout real press logos
+     ═══════════════════════════════════ -->
+<div class="bg-coral overflow-hidden py-4 border-y-2 border-ink">
+    <div class="press-track">
+        <img src="assets/logo-fox.png" alt="FOX"/>
+        <img src="assets/logo-abc.png" alt="ABC"/>
+        <img src="assets/logo-huffpost.png" alt="HuffPost"/>
+        <img src="assets/logo-natgeo.png" alt="National Geographic"/>
+        <img src="assets/logo-bostonglobe.png" alt="Boston Globe"/>
+        <img src="assets/logo-sharktank.png" alt="Shark Tank"/>
+        <img src="assets/logo-nbc.png" alt="NBC"/>
+        <img src="assets/logo-gq.png" alt="GQ"/>
+        <img src="assets/logo-usatoday.png" alt="USA Today"/>
+        <img src="assets/logo-fox.png" alt="FOX"/>
+        <img src="assets/logo-abc.png" alt="ABC"/>
+        <img src="assets/logo-huffpost.png" alt="HuffPost"/>
+        <img src="assets/logo-natgeo.png" alt="National Geographic"/>
+        <img src="assets/logo-bostonglobe.png" alt="Boston Globe"/>
+        <img src="assets/logo-sharktank.png" alt="Shark Tank"/>
+        <img src="assets/logo-nbc.png" alt="NBC"/>
+        <img src="assets/logo-gq.png" alt="GQ"/>
+        <img src="assets/logo-usatoday.png" alt="USA Today"/>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     3. TRUST BAR
+     ═══════════════════════════════════ -->
+<div class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="border-r border-gray-200 last:border-0 flex items-center justify-center font-subheadline text-xs md:text-sm uppercase tracking-widest px-2">
+            As Seen on Shark Tank
+        </div>
+        <div class="md:border-r border-gray-200 last:border-0 flex items-center justify-center font-subheadline text-xs md:text-sm uppercase tracking-widest px-2">
+            &#9733; 4.93 &middot; 100,000+ Sold
+        </div>
+        <div class="border-r border-gray-200 last:border-0 flex items-center justify-center font-subheadline text-xs md:text-sm uppercase tracking-widest px-2">
+            Free Shipping
+        </div>
+        <div class="flex items-center justify-center font-subheadline text-xs md:text-sm uppercase tracking-widest px-2">
+            60-Day Guarantee
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     4. PRODUCT SHOWCASE
+     AUDIT FIX: Vocabulary (tabletop paddle game, mini pickleball)
+     ═══════════════════════════════════ -->
+<section class="section-pad py-24 bg-white">
+    <div class="product-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+        <div class="relative">
+            <div class="absolute top-6 left-6 z-10 bg-coral text-white font-headline px-6 py-2 rounded-full text-lg shadow-xl uppercase tracking-wide">
+                Best Seller
+            </div>
+            <img class="rounded-lg shadow-2xl w-full aspect-square object-cover border-4 border-ink" alt="Pepper Pong full set — paddles, tabletop net, and balls" src="assets/product-fullset.jpg"/>
+        </div>
+        <div>
+            <h2 class="font-headline text-5xl md:text-6xl uppercase leading-none mb-6">The Full Set</h2>
+            <div class="space-y-4 mb-8">
+                <div class="flex items-start gap-2 flex-wrap">
+                    <p class="text-xl text-gray-600 leading-relaxed font-medium">
+                        The original tabletop paddle game that turns any surface into a rally court. Easy to learn, impossible to put down. For all ages and skill levels.
+                    </p>
+                    <span class="audit-tag fix">FIX &mdash; Vocabulary</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-6 mb-10">
+                <div class="flex items-center gap-4">
+                    <div class="bg-gray-100 p-3 rounded-lg"><span class="material-symbols-outlined text-coral">flight_takeoff</span></div>
+                    <span class="font-headline text-sm uppercase">Travel Friendly</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="bg-gray-100 p-3 rounded-lg"><span class="material-symbols-outlined text-coral">bolt</span></div>
+                    <span class="font-headline text-sm uppercase">Instant Fun</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="bg-gray-100 p-3 rounded-lg"><span class="material-symbols-outlined text-coral">groups</span></div>
+                    <span class="font-headline text-sm uppercase">All Ages</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="bg-gray-100 p-3 rounded-lg"><span class="material-symbols-outlined text-coral">featured_seasonal_and_gifts</span></div>
+                    <span class="font-headline text-sm uppercase">Best Gift Ever</span>
+                </div>
+            </div>
+            <div class="flex items-baseline gap-4 mb-8">
+                <span class="text-5xl font-black text-ink">$89.99</span>
+                <span class="text-2xl text-gray-400 line-through font-bold">$134.99</span>
+            </div>
+            <a href="#" class="inline-block bg-coral text-white font-headline text-2xl px-12 py-6 rounded-full shadow-[0_4px_24px_rgba(237,24,70,0.5)] hover:scale-105 transition-transform uppercase">
+                Shop Now
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     5. WHAT'S INSIDE
+     ═══════════════════════════════════ -->
+<section class="section-pad py-16 bg-white border-y border-gray-100">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="font-headline text-4xl uppercase text-center mb-16">What's Inside</h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+            <div class="space-y-4">
+                <div class="h-24 flex items-center justify-center"><span class="material-symbols-outlined text-6xl text-ink">sports_tennis</span></div>
+                <span class="font-subheadline uppercase tracking-tight">2 Paddles</span>
+            </div>
+            <div class="space-y-4">
+                <div class="h-24 flex items-center justify-center"><span class="material-symbols-outlined text-6xl text-ink">grid_view</span></div>
+                <span class="font-subheadline uppercase tracking-tight">Tabletop Net</span>
+            </div>
+            <div class="space-y-4">
+                <div class="h-24 flex items-center justify-center relative">
+                    <span class="material-symbols-outlined text-6xl text-ink">blur_on</span>
+                    <div class="absolute top-1/2 left-1/2 w-3 h-3 bg-coral rounded-full translate-x-2 -translate-y-2"></div>
+                </div>
+                <span class="font-subheadline uppercase tracking-tight">4 Game Balls</span>
+            </div>
+            <div class="space-y-4">
+                <div class="h-24 flex items-center justify-center"><span class="material-symbols-outlined text-6xl text-ink">menu_book</span></div>
+                <span class="font-subheadline uppercase tracking-tight">Rule Book</span>
+            </div>
+            <div class="space-y-4">
+                <div class="h-24 flex items-center justify-center"><span class="material-symbols-outlined text-6xl text-ink">shopping_bag</span></div>
+                <span class="font-subheadline uppercase tracking-tight">Carry Case</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     6. UGC VIDEOS
+     AUDIT FIX: 21 static thumbnails → 3 curated with auto-play feel
+     SIGNATURE: UGC energy (mute icon + progress bar overlay)
+     ═══════════════════════════════════ -->
+<section class="section-pad py-24 bg-[#F7F7F7]">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <span class="font-headline text-coral text-sm uppercase tracking-[0.2em] mb-4 block">Real Players. Real Rallies.</span>
+                <h2 class="font-headline text-4xl md:text-6xl uppercase leading-tight">
+                    See Why 100,000+ <br/><span class="underline decoration-coral decoration-8 underline-offset-8">Can't Shut Up</span> About It.
+                </h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="audit-tag fix">FIX &mdash; 21 videos → 3 curated</span>
+            </div>
+        </div>
+        <div class="ugc-grid grid md:grid-cols-3 gap-8 mb-12">
+            <div class="ugc-card group relative rounded-xl overflow-hidden aspect-[9/16] shadow-xl border-4 border-white cursor-pointer bg-ink">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Player rallying at a dinner table" src="assets/first-rally.webp"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+                <div class="ugc-overlay">
+                    <div class="ugc-mute"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></div>
+                    <div class="ugc-progress"><div class="ugc-progress-bar"></div></div>
+                </div>
+                <div class="absolute bottom-6 left-6 text-white z-10">
+                    <span class="font-headline text-lg uppercase tracking-tight">The Dinner Table Rivalry</span>
+                </div>
+            </div>
+            <div class="ugc-card group relative rounded-xl overflow-hidden aspect-[9/16] shadow-xl border-4 border-white cursor-pointer bg-ink">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Friends playing on a girls trip" src="assets/girls-trip.jpg"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+                <div class="ugc-overlay">
+                    <div class="ugc-mute"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></div>
+                    <div class="ugc-progress"><div class="ugc-progress-bar"></div></div>
+                </div>
+                <div class="absolute bottom-6 left-6 text-white z-10">
+                    <span class="font-headline text-lg uppercase tracking-tight">Ultimate Party Vibes</span>
+                </div>
+            </div>
+            <div class="ugc-card group relative rounded-xl overflow-hidden aspect-[9/16] shadow-xl border-4 border-white cursor-pointer bg-ink">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Family game night with Pepper Pong" src="assets/hero-wend-friends.jpg"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+                <div class="ugc-overlay">
+                    <div class="ugc-mute"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></div>
+                    <div class="ugc-progress"><div class="ugc-progress-bar"></div></div>
+                </div>
+                <div class="absolute bottom-6 left-6 text-white z-10">
+                    <span class="font-headline text-lg uppercase tracking-tight">Competitive Family Night</span>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <a class="inline-flex items-center gap-2 font-headline text-xl md:text-2xl uppercase hover:text-coral transition-colors" href="#">
+                See All Videos <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     7. SKEPTIC → OBSESSED
+     SIGNATURE: Brand's best storytelling arc
+     ═══════════════════════════════════ -->
+<section class="section-pad py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <span class="font-headline text-gray-400 text-sm uppercase tracking-[0.2em] mb-4 block">Same Story. 100,000+ Times.</span>
+            <h2 class="font-headline text-4xl md:text-6xl uppercase mb-4 leading-tight max-w-4xl mx-auto">
+                Everyone Goes From <span class="text-coral">Skeptic</span> to <span class="text-coral">Obsessed</span> in One Rally
+            </h2>
+            <span class="audit-tag sig">SIGNATURE &mdash; Kept intact</span>
+        </div>
+        <div class="skeptic-grid grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-0">
+            <div class="relative border-2 md:border-r-0 border-ink bg-white flex flex-col overflow-hidden min-h-[340px]">
+                <img src="assets/skeptical.jpg" alt="Someone looking skeptical at a Pepper Pong set" class="w-full h-44 object-cover"/>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="font-headline text-3xl text-gray-200">01</div>
+                    <div>
+                        <h3 class="font-headline text-2xl uppercase mb-2">Skeptic</h3>
+                        <p class="font-medium text-gray-500 italic">"This looks dumb."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative border-2 md:border-r-0 border-ink bg-white flex flex-col overflow-hidden min-h-[340px]">
+                <img src="assets/first-rally.webp" alt="First rally — trying the game" class="w-full h-44 object-cover"/>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="font-headline text-3xl text-gray-200">02</div>
+                    <div>
+                        <h3 class="font-headline text-2xl uppercase mb-2">First rally</h3>
+                        <p class="font-medium text-gray-500 italic">"Ok, one game."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative border-2 md:border-r-0 border-ink bg-white flex flex-col overflow-hidden min-h-[340px]">
+                <img src="assets/girls-trip.jpg" alt="Competitive rally in progress" class="w-full h-44 object-cover"/>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="font-headline text-3xl text-gray-200">03</div>
+                    <div>
+                        <h3 class="font-headline text-2xl uppercase mb-2">Competitive</h3>
+                        <p class="font-medium text-gray-500 italic">"One more best of 7?"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative border-2 border-ink bg-coral text-white flex flex-col overflow-hidden min-h-[340px] shadow-[8px_8px_0px_#111827]">
+                <img src="assets/obsessed.jpg" alt="Obsessed player buying sets for friends" class="w-full h-44 object-cover"/>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="font-headline text-3xl opacity-50">04</div>
+                    <div>
+                        <h3 class="font-headline text-2xl uppercase mb-2">Obsessed</h3>
+                        <p class="font-bold italic">"I'm buying this for everyone I know."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     8. WHERE WILL YOU RALLY?
+     SIGNATURE: Use-case cards. Verbatim v1 quotes.
+     ═══════════════════════════════════ -->
+<section class="section-pad py-24 bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="font-headline text-4xl md:text-6xl uppercase text-center mb-16">
+            Where Will You <span class="text-coral">Rally</span>?
+        </h2>
+        <div class="rally-grid grid md:grid-cols-3 gap-10">
+            <div class="group">
+                <img class="w-full aspect-square object-cover rounded-lg mb-6 border-2 border-transparent group-hover:border-coral transition-all" alt="Friends playing Pepper Pong on a girls trip" src="assets/use-girls-trip.jpg"/>
+                <h3 class="font-headline text-2xl uppercase mb-3">Girls Trips</h3>
+                <blockquote class="text-gray-600 font-medium italic mb-2">"I packed it in my suitcase on a girls trip. Once we started playing, it's all we wanted to do. Every night!"</blockquote>
+                <cite class="font-bold uppercase text-sm text-ink not-italic">&mdash; Wendy S.</cite>
+            </div>
+            <div class="group">
+                <img class="w-full aspect-square object-cover rounded-lg mb-6 border-2 border-transparent group-hover:border-coral transition-all" alt="Pepper Pong in an office break room" src="assets/use-office.jpg"/>
+                <h3 class="font-headline text-2xl uppercase mb-3">The Office</h3>
+                <blockquote class="text-gray-600 font-medium italic mb-2">"Brought this into my office today and everyone loved it! They also appreciated the story of donating them to recovery centers."</blockquote>
+                <cite class="font-bold uppercase text-sm text-ink not-italic">&mdash; Robert P.</cite>
+            </div>
+            <div class="group">
+                <img class="w-full aspect-square object-cover rounded-lg mb-6 border-2 border-transparent group-hover:border-coral transition-all" alt="Pepper Pong at a tailgate / outdoor gathering" src="assets/use-dinner-party.png"/>
+                <h3 class="font-headline text-2xl uppercase mb-3">Tailgates</h3>
+                <blockquote class="text-gray-600 font-medium italic mb-2">"We've played it on a car hood, picnic tables in the park, bars &amp; restaurants."</blockquote>
+                <cite class="font-bold uppercase text-sm text-ink not-italic">&mdash; Sarah J.</cite>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     9. SCHOOLS BAND
+     AUDIT FIX #2: Education market invisible — $599 pack needs presence
+     ═══════════════════════════════════ -->
+<section class="section-pad bg-ink text-white overflow-hidden">
+    <div class="schools-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 items-center gap-16 py-24">
+        <div>
+            <div class="flex items-center gap-4 mb-6 flex-wrap">
+                <span class="font-headline text-green text-sm uppercase tracking-[0.2em]">For Educators &amp; Programs</span>
+                <span class="audit-tag new">NEW &mdash; Audit #2</span>
+            </div>
+            <h2 class="font-headline text-4xl md:text-6xl uppercase leading-tight mb-8">Bring Pepper Pong to Your School</h2>
+            <ul class="space-y-4 mb-10">
+                <li class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-green">check_circle</span>
+                    <span class="font-headline text-lg uppercase tracking-tight">Special Volume Pricing</span>
+                </li>
+                <li class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-green">check_circle</span>
+                    <span class="font-headline text-lg uppercase tracking-tight">SEL Integrated Curriculum</span>
+                </li>
+                <li class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-green">check_circle</span>
+                    <span class="font-headline text-lg uppercase tracking-tight">Fast 2-Minute Indoor Setup</span>
+                </li>
+                <li class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-green">check_circle</span>
+                    <span class="font-headline text-lg uppercase tracking-tight">Official Rally 4 Recovery Partner</span>
+                </li>
+            </ul>
+            <a href="#" class="inline-block bg-green text-ink font-headline text-lg md:text-xl px-10 py-5 rounded-full hover:scale-105 transition-transform uppercase">
+                Learn More &mdash; School Packs
+            </a>
+        </div>
+        <div class="relative">
+            <div class="absolute -inset-4 border-2 border-green rounded-lg translate-x-8 translate-y-8 -z-10"></div>
+            <img class="rounded-lg shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" alt="Pepper Pong 8-Pack Plus for schools and programs" src="assets/school-pack.jpg"/>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     10. FINAL CTA
+     ═══════════════════════════════════ -->
+<section class="section-pad bg-coral py-24 text-center">
+    <div class="max-w-4xl mx-auto px-6">
+        <h2 class="font-headline text-5xl md:text-7xl lg:text-8xl uppercase text-ink mb-6">
+            Ready to <span class="text-white italic">Rally</span>?
+        </h2>
+        <p class="font-headline text-lg md:text-2xl text-ink uppercase mb-12">
+            Join 100,000+ players who turned their tables into center court.
+        </p>
+        <a href="#" class="inline-block bg-white text-coral font-headline text-2xl md:text-3xl px-12 md:px-16 py-6 md:py-8 rounded-full shadow-[0_12px_48px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-95 transition-all uppercase">
+            Get the Set &mdash; $89.99
+        </a>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+     AUDIT FIXES: FAQs grammar (#8), SHOP → all products (#8), social visible (#15)
+     ═══════════════════════════════════ -->
+<footer class="bg-[#111827] border-t-8 border-[#ED1846] w-full py-12 px-6">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-8 max-w-7xl mx-auto text-center md:text-left">
+        <div class="max-w-xs mx-auto md:mx-0">
+            <div class="text-3xl font-black text-white mb-4 font-headline italic">PEPPER PONG</div>
+            <p class="text-gray-400 font-bold uppercase text-[10px] tracking-widest leading-relaxed">
+                The world's most addictive tabletop game. From the tank to your table.
+            </p>
+            <div class="flex justify-center md:justify-start gap-3 mt-6">
+                <a href="#" title="Instagram" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-coral hover:text-white transition-colors">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="#" title="TikTok" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-coral hover:text-white transition-colors">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.43v-7.15a8.16 8.16 0 005.58 2.2V11.2a4.85 4.85 0 01-3.77-1.74V6.69h3.77z"/></svg>
+                </a>
+                <a href="#" title="Facebook" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-coral hover:text-white transition-colors">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="#" title="YouTube" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-coral hover:text-white transition-colors">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-12 w-full md:w-auto">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#7ED641] font-bold uppercase text-xs tracking-widest">SHOP</span>
+                <div class="flex items-center gap-2 justify-center md:justify-start">
+                    <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">All Products</a>
+                    <span class="audit-tag fix">FIX &mdash; Audit #8</span>
+                </div>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">Full Set &mdash; $89.99</a>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">Double Down &mdash; $159.99</a>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">Gift Cards</a>
+            </div>
+            <div class="flex flex-col gap-4">
+                <span class="text-[#7ED641] font-bold uppercase text-xs tracking-widest">LEARN</span>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">How to Play</a>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">School Packs</a>
+                <div class="flex items-center gap-2 justify-center md:justify-start">
+                    <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">FAQs</a>
+                    <span class="audit-tag fix">FIX &mdash; was "FAQ's"</span>
+                </div>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">Reviews</a>
+            </div>
+            <div class="flex flex-col gap-4 col-span-2 md:col-span-1">
+                <span class="text-[#7ED641] font-bold uppercase text-xs tracking-widest">CONTACT</span>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">Wholesale</a>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">Privacy Policy</a>
+                <a class="text-gray-400 hover:text-white transition-colors font-bold text-xs uppercase hover:underline decoration-[#ED1846] decoration-2" href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-white/10 text-center">
+        <p class="text-gray-500 font-bold uppercase text-[10px] tracking-widest">&copy; 2026 Pepper Pong. All rights reserved. Patent No. US 11,878,444 B2</p>
+    </div>
+</footer>
+
+</body>
+</html>

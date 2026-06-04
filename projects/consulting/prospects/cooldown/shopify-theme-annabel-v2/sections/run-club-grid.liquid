@@ -1,0 +1,86 @@
+{{ 'section-run-club-grid.css' | asset_url | stylesheet_tag }}
+
+
+<div class="club-grid">
+  {% for block in section.blocks %}
+    {%- assign city_class = block.settings.title | handleize -%}
+    <div class="club-block">
+      {%- if block.settings.page_link != blank -%}
+        <a href="{{ block.settings.page_link }}">
+      {%- else -%}
+        <div class="club-block__inner">
+      {%- endif -%}
+      <div class="loc-image {{ city_class }}">
+          {{ block.settings.image | image_url: width: 1500 | image_tag:
+            loading: 'lazy',
+            sizes: sizes,
+            widths: '165, 360, 535, 750, 1070, 1500'
+          }}
+      </div>
+    <div class="card-overlay"></div>
+      <div class="loc-info">
+        <h2>{{ block.settings.title }}</h2>
+        <!--<div class="state">{{ block.settings.state }}</div>-->
+      </div>
+      {%- if block.settings.page_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Run club grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add, reorder, disable, or update run club cards here. Leave Page link blank for coming-soon clubs that should show as cards without clicking anywhere."
+    }
+  ],
+   "blocks": [
+    {
+      "type": "column",
+      "name": "Run club card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "City",
+          "label": "City"
+        },
+        {
+          "type": "text",
+          "id": "state",
+          "default": "State",
+          "label": "State",
+          "info": "State"
+        },
+        {
+          "type": "url",
+          "id": "page_link",
+          "label": "Run club page link",
+          "info": "Choose the location page after it has been created. Leave blank for coming-soon locations."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Run club grid",
+       "blocks": []
+      
+    }
+  ]
+
+}
+{% endschema %}

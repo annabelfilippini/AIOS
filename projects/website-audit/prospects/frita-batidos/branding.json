@@ -1,0 +1,70 @@
+{
+  "source": "annabel+wayback+yelp+live-rescrape-2026-04-19",
+  "url": "https://fritabatidos.com/ann-arbor",
+  "direction_locked": "2026-04-19 — Path 2: keep blue/white futuristic, refs contribute layout/type/motion only (not palette)",
+  "colors": {
+    "primary_blue": "#0E3A8A",
+    "signature_blue": "#3B7DD8",
+    "ice_blue": "#E8F1FB",
+    "white": "#FFFFFF",
+    "paper": "#F7F9FC",
+    "ink": "#0A0F1C",
+    "ink_soft": "#1F2937",
+    "accent_gold": "#D4A843",
+    "note": "Two-tone blue (deep navy + signature mid-blue) + ice-blue tint + crisp whites. Ink is near-black for type contrast. Gold reserved for awards/press callouts only. NO warm creams, NO terracotta, NO browns — those belong to the refs, not Frita."
+  },
+  "fonts": {
+    "display": "Fraunces (variable serif — editorial with warmth, modern enough for futuristic feel)",
+    "display_fallback": "Newsreader, Source Serif 4, Georgia",
+    "body": "Inter (400/500/600)",
+    "ui": "Inter (500 for labels, 600 for buttons)",
+    "tagline_accent": "Caveat or Homemade Apple for Cuban-inspired script flourishes (used sparingly — eyebrow only, never body)",
+    "rule": "Inter over Montserrat. Serif display for headlines, sans for UI. NEVER all-sans heavy — kills editorial feel and screams AI-SaaS."
+  },
+  "logo": {
+    "description": "FRITA BATIDOS wordmark with flower/pinwheel icon (6-petal). Tagline 'Cuban Inspired Street Food!' in script.",
+    "favicon": "https://fritabatidos.com/assets/ico/favicon.ico",
+    "flower_icon_visible_on": "counter signage, cups, menu boards, current logo lockup"
+  },
+  "design_direction": {
+    "path_chosen": "Path 2 — cool-palette editorial (blue/white futuristic) with hospitality-editorial execution from refs",
+    "refs_cited": [
+      "rarebirdrooftop.com",
+      "thebullandlast.co.uk",
+      "kingrestaurant.nyc",
+      "lasemilla.kitchen"
+    ],
+    "what_to_extract_from_refs": [
+      "Full-bleed food-as-art hero photography (but cool-grade, not warm)",
+      "Editorial restraint — no card boxes, horizontal rules or whitespace between sections",
+      "Serif display + clean sans UI type pairing",
+      "Confident whitespace — sections breathe, no density",
+      "On-site readable menus (never PDF-behind-a-button)",
+      "Press/awards as real publication logos with links — not unsourced stars",
+      "Smooth motion: parallax scroll on hero, fade-in on reveal, marquee on award strip"
+    ],
+    "what_to_reject_from_refs": [
+      "Warm palettes (cream, terracotta, wine, sage) — we are blue/white",
+      "Heritage/rustic photography treatment — we are cool/modern",
+      "British-pub or Mediterranean-villa typography flourishes — we keep flower mark as the only signature ornament",
+      "Tablecloth/serviette imagery — Frita is counter-service, picnic benches"
+    ],
+    "brand_dna_must_survive": [
+      "Flower/pinwheel logo mark",
+      "'Cuban Inspired Street Food!' tagline (exact)",
+      "Shoestring-fries-on-burger signature (the one product photo that must appear)",
+      "Chef Eve Aronoff's voice: Slow Food, halal sourcing, Great Lakes dairy, Michigan-first",
+      "Awards stack — Michigan Daily Best Burger 2014-2025 consecutive",
+      "Communal picnic-bench seating personality (casual chef-driven, not stuffy)"
+    ],
+    "futuristic_interpretation": "'Futuristic' = cool-tone + confident whitespace + smooth motion + oversized restrained typography. NOT neon, NOT cyberpunk, NOT Y2K, NOT gradients. Apple-meets-editorial-restaurant."
+  },
+  "interior_aesthetic": {
+    "walls": "White painted brick",
+    "menu_boards": "Blue background with white text (on-brand — palette source of truth)",
+    "ceiling": "Exposed industrial ductwork, pendant globe lights",
+    "counter": "Wood top with white base, flower logo decal",
+    "seating": "Picnic bench style, communal",
+    "details": "Net bags of produce hanging on walls, colorful juice dispensers at bar"
+  }
+}

@@ -1,0 +1,345 @@
+.rc-btns {
+  display:flex;
+  width:100%;
+}
+
+.tf {
+  margin-left:10px;
+}
+
+@media (max-width:1300px) {
+  .rc-btns {
+    flex-direction:column;
+  }
+
+  .tf {
+    margin-left:0px;
+    margin-top:10px;
+    width:84%;
+  }
+
+  .tf button {
+    width:100%!important;
+  }
+
+  .rc-btns .button {
+    width:100%;
+    max-width:none!important;
+  }
+}
+
+@media (max-width:750px) {
+  .rc-btns {
+    display:none;
+  }
+}
+
+
+.tf button {
+  border:2px solid #000 !important;
+  background:transparent!important;
+  color:#000!important;
+  border-radius:360px!important;
+}
+
+.run-clubs-slider {
+  margin:0 0 100px;
+  padding:0;
+  position:relative;
+  display:flex;
+}
+
+.rc-title {
+  width:35%;
+  padding:0 50px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.rc-title .button {
+  border:2px solid #000!important;
+  padding:6px 25px 4px;
+  max-width:150px;
+  text-align:center;
+}
+
+.run-clubs-slider h3 {
+  color:#191919;
+  font-size:2.4vw;
+      font-family: Athletics-Regular!important;
+  max-width:335px;
+  margin-bottom:25px;
+}
+
+.prev-btn:hover, .next-btn:hover {
+  cursor:pointer;
+}
+
+@media (min-width:1400px) {
+  .run-clubs-slider h3 {
+    font-size:32px!important;
+  }
+}
+
+.run-clubs-slider  .slider__slide {
+  margin-right:20px;
+  margin-left:0!important;
+  overflow:hidden;
+}
+
+.run-clubs-slider  .slider__slide img {
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
+.run-clubs-slider .slider__slide.Austin img {
+   object-position:center top;
+}
+
+.slider-wrap {
+  width:65%;
+}
+
+
+.loc-slide-deets {
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  background:#fff;
+  padding:15px;
+  position:relative;
+  z-index:2;
+}
+
+.loc-slide-deets span {
+  color:#191919;
+  font-size:16px;
+  margin:3px 0 0 0;
+  padding:0;
+  font-family: Athletics-Bold!important;
+}
+
+.loc-slide-deets a {
+  font-size:16px;
+  color:#191919;
+  margin:0;
+  padding:0 0 2px;
+  line-height:1;
+  text-decoration:none;
+}
+
+.loc-slide-deets a span {
+  width:100%;
+  height:2px;
+  background:#191919;
+  display:block;
+  transition:all .2s ease;
+  transform-origin:center center;
+}
+
+.loc-slide-deets a:hover span {
+  transform: scaleX(.3);
+}
+
+.loc-slide-deets a:active span {
+  transform: scaleX(.15);
+}
+
+.img-link {
+  overflow:hidden;
+  position:relative;
+}
+
+.img-link img {
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  transition:all .25s ease;
+}
+
+.run-clubs-slider .card-overlay {
+  background:transparent;
+  height:100%;
+  width:100%;
+  position:absolute;
+  z-index:1;
+  display:block!important;
+  top:0;
+  left:0;
+  transition:background .25s ease;
+}
+
+.club-slide-item:hover .card-overlay {
+  /*background:rgba(0,0,0,.3);*/
+}
+
+
+.club-slide-item:hover .img-link img {
+  transform:scale(1.03);
+}
+
+.club-slide-item:hover .loc-slide-deets a span {
+  transform: scaleX(.3);
+}
+.club-slide-item:active .loc-slide-deets a span {
+  transform: scaleX(.15);
+}
+
+.btn-wrap {
+  position:absolute;
+  right:20px;
+  top:-60px;
+  width:40px;
+}
+
+.arrow {
+  height:14px;
+  width:14px;
+}
+
+.prev-btn, .next-btn {
+  height:42px;
+  width:42px;
+  background:#e6e6e6;
+  border-radius:100%;
+  border:0px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  transition:all .1s ease;
+  /*border:4px solid #f4f3f2;*/
+}
+
+.prev-btn:hover, .next-btn:hover {
+  /*border:4px solid #e6e6e6;*/
+  transform:scale(1.1);
+}
+
+.prev-btn:active, .next-btn:active {
+  /*height:34px;
+  width:34px;*/
+  transform:scale(0.9);
+}
+
+.prev-btn {
+  margin-right:20px;
+  left:-60px;
+}
+
+.next-btn {
+  right:0px;
+}
+
+.run-clubs-grid {
+  display:none;
+}
+
+@media (max-width:749px) {
+  .run-clubs-slider h3 {
+    padding-left:15px;
+    font-size:22px;
+    max-width:240px;
+    line-height:23px;
+    margin-bottom:20px;
+  }
+
+  
+.rc-title .button {
+  display:none;
+}
+
+  .rc-title {
+    width:100%;
+    display:block;
+    padding:0 0 5px 15px;
+  }
+
+  .rc-title h3 {
+    padding:0;
+  }
+
+  .run-clubs-slider {
+    margin:0;
+  }
+
+  .slider-wrap {
+    display:none;
+  }
+
+  .slider-wrap {
+    padding-left:0px;
+  }
+
+  .run-clubs-slider  .slider__slide {
+      margin-right:20px;
+    }
+
+  .btn-wrap {
+    display:none;
+  }
+
+  .loc-slide-deets {
+    padding-left:10px;
+  }
+
+  .loc-slide-deets span {
+    font-size:18px;
+    font-family: Athletics-Bold!important;
+    margin-top:10px;
+  }
+
+  .run-clubs-slider  .slider__slide img {
+    border:1px solid #000;
+  }
+
+  .loc-slide-deets a {
+    display:block;
+    width:140px;
+    padding:12px 20px;
+    border:1px solid #000;
+    border-radius:22px;
+    margin-top:10px;
+  }
+
+  .loc-slide-deets {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+  }
+
+  .run-clubs-grid {
+    display:flex;
+    column-gap:15px;
+    row-gap:15px;
+    flex-wrap:wrap;
+    align-items:center;
+    margin:0 15px 100px;
+  }
+
+  .rc-grid-block {
+    width:47.5%;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    background:#fff;
+    text-decoration:none;
+    color:#191919;
+  }
+
+  .rc-grid-block img {
+    width:33.3%;
+    height:auto;
+    margin-right:7px;
+    object-fit:cover;
+    object-position:center top;
+  }
+
+  .rc-grid-block span {
+    font-family: SpeziaMono-Regular!important;
+    font-size:12px;
+    color:#191919;
+  }
+}

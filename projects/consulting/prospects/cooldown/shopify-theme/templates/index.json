@@ -1,0 +1,408 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_6aR8R7": {
+      "type": "image-banner",
+      "blocks": {
+        "text_7GHmcK": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_3ggytV": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "shop all",
+            "button_link_1": "https://cooldownrunning.com/collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "text_7GHmcK",
+        "buttons_3ggytV"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "image": "shopify://shop_images/Cooldown_Web_Banner_3.png",
+        "image_2": "shopify://shop_images/Cooldown_Web_Banner_3.png",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-right",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": true
+      }
+    },
+    "video_banner_4CKNRj": {
+      "type": "video-banner",
+      "blocks": {
+        "heading_YryNYH": {
+          "type": "heading",
+          "settings": {
+            "heading": "uniting the world through running",
+            "heading_size": "h0"
+          }
+        },
+        "buttons_VHFcUV": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "shop apparel",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "our run club",
+            "button_link_2": "shopify://pages/run-clubs",
+            "button_style_secondary_2": true,
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_YryNYH",
+        "buttons_VHFcUV"
+      ],
+      "custom_css": [
+        "video {display: block; margin: 0 auto; width: 100%; height: 100vh; object-fit: cover;}"
+      ],
+      "settings": {
+        "image_height": "large",
+        "vid_url": "https://cdn.shopify.com/videos/c/o/v/81b6b4dcb2cf4947b2d2b59e7e2dbe0e.mp4",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center"
+      }
+    },
+    "rich_text_c7b66a": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_tCpgQX": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h0"
+          }
+        },
+        "text_8MGPWW": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_FmfaYw": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_tCpgQX",
+        "text_8MGPWW",
+        "button_FmfaYw"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".rich-text {background: #7a8fda; line-height: 1.4; font-size: 20px;}",
+        ".rich-text__text {color: white;}",
+        ".button {color: white; background-color: #7a8fda;}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 31px !important; max-width: 180px; margin: 0 auto 0vh; line-height: 1; }}",
+        "@media screen and (max-width: 767px) {.rich-text__text {font-size: 16px !important; }}"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "inverse",
+        "full_width": true,
+        "padding_top": 68,
+        "padding_bottom": 72
+      }
+    },
+    "home_featured_collection_4UMaqM": {
+      "type": "home-featured-collection",
+      "custom_css": [
+        ".button {color: #000; border-color: #000 !important; padding: 5px 25px 4px; max-width: 130px;}",
+        "slider-component {max-height: none;}"
+      ],
+      "settings": {
+        "title": "running apparel that’s just as functional as it is colorful",
+        "heading_size": "h2",
+        "collection": "homepage-featured-items",
+        "view_all_url": "shopify://collections/all",
+        "view_all_style": "outline",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-1",
+        "image_ratio": "square",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 0,
+        "padding_bottom": 160
+      }
+    },
+    "runclubs_home_GDYkA4": {
+      "type": "runclubs-home",
+      "blocks": {
+        "column_Fx6Xyt": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/denver.jpg",
+            "city": "Denver",
+            "page": "shopify://pages/denver"
+          }
+        },
+        "column_CryGYr": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/newyork.jpg",
+            "city": "New York",
+            "page": "shopify://pages/new-york"
+          }
+        },
+        "column_PrXUyN": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/minny.jpg",
+            "city": "Minneapolis",
+            "page": "shopify://pages/minnesota"
+          }
+        },
+        "column_aAVVkd": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/austin.jpg",
+            "city": "Austin",
+            "page": "shopify://pages/austin"
+          }
+        },
+        "column_RfhBgY": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/20210101-A7_00335_9697467a-4521-4a85-a90b-1ef7ca25f03d.jpg",
+            "city": "Nashville",
+            "page": "shopify://pages/nashville"
+          }
+        },
+        "column_fLEfzb": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/la.jpg",
+            "city": "Los Angeles",
+            "page": "shopify://pages/los-angeles"
+          }
+        },
+        "column_G8HatD": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/29-8C9A7164_1.jpg",
+            "city": "San Diego",
+            "page": "shopify://pages/san-diego"
+          }
+        },
+        "column_wfeN9J": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Prophecy_Owen_CooldownRunning_4.11.23-07120.jpg",
+            "city": "Atlanta",
+            "page": "shopify://pages/atlanta"
+          }
+        },
+        "column_KkiMDH": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/20220809-A7_00891.jpg",
+            "city": "Dallas",
+            "page": "shopify://pages/dallas"
+          }
+        },
+        "column_UhYajg": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Prophecy_Owen_CooldownRunning_4.11.23-07050.jpg",
+            "city": "Chicago",
+            "page": "shopify://pages/chicago-1"
+          }
+        },
+        "column_dLk9fi": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/79.png",
+            "city": "Seattle",
+            "page": "shopify://pages/seattle"
+          }
+        }
+      },
+      "block_order": [
+        "column_Fx6Xyt",
+        "column_CryGYr",
+        "column_PrXUyN",
+        "column_aAVVkd",
+        "column_RfhBgY",
+        "column_fLEfzb",
+        "column_G8HatD",
+        "column_wfeN9J",
+        "column_KkiMDH",
+        "column_UhYajg",
+        "column_dLk9fi"
+      ],
+      "settings": {
+        "header": "a social club disguised as a run club",
+        "button-txt": "see all cities",
+        "button-url": "shopify://pages/run-clubs",
+        "custom_liquid": ""
+      }
+    },
+    "image_banner_6h3PEw": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_GFrhnC": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h0"
+          }
+        },
+        "text_UzjX8R": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "subtitle"
+          }
+        },
+        "buttons_y48jbn": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_GFrhnC",
+        "text_UzjX8R",
+        "buttons_y48jbn"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".placeholder {display: none;}",
+        ".banner--small:not(.banner--adapt) {min-height: 300px; background: #7a8fda; margin-top: 0px;}",
+        ".banner__box .banner__heading {margin-bottom: 20px;}",
+        "h2 {color: #white;}",
+        ".banner__text {color: #white; line-height: 1.4; font-size: 20px;}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 31px !important; max-width: 180px; margin: 0 auto 5vh; line-height: 1; }}",
+        "@media screen and (max-width: 767px) {.banner__text {font-size: 16px !important; }}"
+      ],
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "homepage_collage_BprmLy": {
+      "type": "homepage-collage",
+      "blocks": {
+        "column_VDp4Nz": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/collage1.jpg",
+            "title": "",
+            "text": "<p>Sonia in the Mikelle Bra + Emmy Short</p>",
+            "link_label": "",
+            "mobile_link_label": "",
+            "link": ""
+          }
+        },
+        "column_c7AhL9": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/collage2.jpg",
+            "title": "",
+            "text": "<p>Alyssa in the Mikelle Bra + Alkal Short</p>",
+            "link_label": "",
+            "mobile_link_label": "",
+            "link": ""
+          }
+        },
+        "column_JEnrdr": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_1.png",
+            "title": "cooldown & you <3",
+            "text": "",
+            "link_label": "shop all",
+            "mobile_link_label": "",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "column_VDp4Nz",
+        "column_c7AhL9",
+        "column_JEnrdr"
+      ],
+      "custom_css": [
+        "slider-component {max-height: none;}"
+      ],
+      "settings": {
+        "title": "cooldown & you <3",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "columns_mobile": "1",
+        "mobile_link_label": "shop the collection",
+        "mobile_link": "shopify://collections/all",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "image_banner_6aR8R7",
+    "video_banner_4CKNRj",
+    "rich_text_c7b66a",
+    "home_featured_collection_4UMaqM",
+    "runclubs_home_GDYkA4",
+    "image_banner_6h3PEw",
+    "homepage_collage_BprmLy"
+  ]
+}

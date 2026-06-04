@@ -1,0 +1,61 @@
+{%- liquid
+  assign parent = parent_title | default: '' | downcase
+  assign title = link_title | default: '' | downcase
+  assign resolved_url = default_url | default: routes.all_products_collection_url
+  assign gender = ''
+  assign category = ''
+
+  if parent contains "women" or title contains "women"
+    assign gender = 'womens'
+  elsif parent contains "men" or title contains "men"
+    assign gender = 'mens'
+  endif
+
+  if title contains 'shop all'
+    assign category = 'all'
+  elsif title contains 'top'
+    assign category = 'tops'
+  elsif title contains 'bottom'
+    assign category = 'bottoms'
+  elsif title contains 'accessor'
+    assign category = 'accessories'
+  endif
+
+  if gender != blank and category == blank
+    if title contains "women" or title contains "men"
+      assign category = 'all'
+    endif
+  endif
+
+  if gender != blank
+    if category == 'all'
+      assign collection_handle = gender | append: '-collection'
+      if collections[collection_handle] != blank and collections[collection_handle].products_count > 0
+        assign resolved_url = collections[collection_handle].url
+      elsif gender == 'womens' and collections['womens-collection'] != blank
+        assign resolved_url = collections['womens-collection'].url
+      else
+        assign resolved_url = routes.all_products_collection_url | append: '?cd_gender=' | append: gender
+      endif
+    elsif category != blank
+      assign collection_handle = gender | append: '-' | append: category
+      if collections[collection_handle] != blank and collections[collection_handle].products_count > 0
+        assign resolved_url = collections[collection_handle].url
+      elsif category == 'accessories' and collections['accessories'] != blank and collections['accessories'].products_count > 0
+        assign resolved_url = collections['accessories'].url | append: '?cd_gender=' | append: gender | append: '&cd_category=' | append: category
+      elsif gender == 'womens' and collections['womens-collection'] != blank
+        assign resolved_url = collections['womens-collection'].url | append: '?cd_gender=' | append: gender | append: '&cd_category=' | append: category
+      else
+        assign resolved_url = routes.all_products_collection_url | append: '?cd_gender=' | append: gender | append: '&cd_category=' | append: category
+      endif
+    endif
+  elsif title contains 'featured'
+    if collections['newest-products'] != blank
+      assign resolved_url = collections['newest-products'].url
+    else
+      assign resolved_url = '/collections/newest-products'
+    endif
+  endif
+
+  echo resolved_url
+-%}

@@ -1,0 +1,253 @@
+{{ 'section-location-detail.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign use_page_metafields = section.settings.use_page_metafields
+  assign location_image = section.settings.image
+  assign city = section.settings.city | default: page.title
+  assign state = section.settings.state
+
+  if use_page_metafields
+    if page.metafields.custom.cover_image.value != blank
+      assign location_image = page.metafields.custom.cover_image.value
+    endif
+
+    if page.metafields.custom.city.value != blank
+      assign city = page.metafields.custom.city.value
+    endif
+
+    if page.metafields.custom.state.value != blank
+      assign state = page.metafields.custom.state.value
+    endif
+  endif
+
+  capture when_content
+    if use_page_metafields and page.metafields.custom.time.value != blank
+      echo page.metafields.custom.time.value
+    elsif section.settings.when != blank
+      echo section.settings.when
+    endif
+  endcapture
+
+  capture where_content
+    if use_page_metafields and page.metafields.custom.where != blank
+      echo page.metafields.custom.where | metafield_tag
+    elsif section.settings.where != blank
+      echo section.settings.where
+    endif
+  endcapture
+
+  capture what_content
+    if use_page_metafields and page.metafields.custom.what != blank
+      echo page.metafields.custom.what | metafield_tag
+    elsif section.settings.what != blank
+      echo section.settings.what
+    endif
+  endcapture
+
+  capture leaders_content
+    if use_page_metafields
+      if page.metafields.custom.leader_1 != blank
+        echo '<div class="lead-deets">'
+        echo page.metafields.custom.leader_1 | metafield_tag
+        echo '</div>'
+      endif
+      if page.metafields.custom.leader_2 != blank
+        echo '<div class="lead-deets">'
+        echo page.metafields.custom.leader_2 | metafield_tag
+        echo '</div>'
+      endif
+      if page.metafields.custom.leader_3 != blank
+        echo '<div class="lead-deets">'
+        echo page.metafields.custom.leader_3 | metafield_tag
+        echo '</div>'
+      endif
+      if page.metafields.custom.leader_4 != blank
+        echo '<div class="lead-deets">'
+        echo page.metafields.custom.leader_4 | metafield_tag
+        echo '</div>'
+      endif
+      if page.metafields.custom.leader_5 != blank
+        echo '<div class="lead-deets">'
+        echo page.metafields.custom.leader_5 | metafield_tag
+        echo '</div>'
+      endif
+      if page.metafields.custom.leader_6 != blank
+        echo '<div class="lead-deets">'
+        echo page.metafields.custom.leader_6 | metafield_tag
+        echo '</div>'
+      endif
+      if page.metafields.custom.leader_7 != blank
+        echo '<div class="lead-deets">'
+        echo page.metafields.custom.leader_7 | metafield_tag
+        echo '</div>'
+      endif
+      if page.metafields.custom.leader_8 != blank
+        echo '<div class="lead-deets">'
+        echo page.metafields.custom.leader_8 | metafield_tag
+        echo '</div>'
+      endif
+    else
+      if section.settings.leader_1 != blank
+        echo '<div class="lead-deets">'
+        echo section.settings.leader_1
+        echo '</div>'
+      endif
+      if section.settings.leader_2 != blank
+        echo '<div class="lead-deets">'
+        echo section.settings.leader_2
+        echo '</div>'
+      endif
+      if section.settings.leader_3 != blank
+        echo '<div class="lead-deets">'
+        echo section.settings.leader_3
+        echo '</div>'
+      endif
+      if section.settings.leader_4 != blank
+        echo '<div class="lead-deets">'
+        echo section.settings.leader_4
+        echo '</div>'
+      endif
+    endif
+  endcapture
+
+  assign when_content = when_content | strip
+  assign where_content = where_content | strip
+  assign what_content = what_content | strip
+  assign leaders_content = leaders_content | strip
+  assign city_class = city | handleize
+-%}
+
+<div class="club-cols">
+  <div class="club-cover">
+    {%- if location_image != blank -%}
+      {%- if location_image.width != blank -%}
+        {{ location_image | image_url: width: 1500 | image_tag:
+          loading: 'lazy',
+          class: city_class,
+          sizes: '(min-width: 750px) 50vw, 100vw',
+          widths: '375, 550, 750, 1100, 1500'
+        }}
+      {%- else -%}
+        <img
+          src="{{ location_image | escape }}"
+          alt="{{ city | escape }}"
+          class="{{ city_class }}"
+          loading="lazy"
+        >
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+  <div class="club-details">
+    <h2>{{ city }}</h2>
+    {%- if state != blank -%}
+      <h3>{{ state }}</h3>
+    {%- endif -%}
+    <div class="deets">
+      {%- if when_content != blank -%}
+        <div class="when">
+          <span>When</span>
+          <p>{{ when_content }}</p>
+        </div>
+      {%- endif -%}
+      {%- if where_content != blank -%}
+        <div class="where">
+          <span>Where</span>
+          {{ where_content }}
+        </div>
+      {%- endif -%}
+      {%- if what_content != blank -%}
+        <div class="what">
+          <span>What</span>
+          {{ what_content }}
+        </div>
+      {%- endif -%}
+      {%- if leaders_content != blank -%}
+        <div class="leaders">
+          <span>Leaders</span>
+          <div class="lead-grid">
+            {{ leaders_content }}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Run club location",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Bailey-friendly: keep 'Use page metafields' on, then edit each run club page's metafields for city, state, time, where, what, leaders, and cover image."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_page_metafields",
+      "default": true,
+      "label": "Use page metafields"
+    },
+    {
+      "type": "header",
+      "content": "Manual fallback"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Cover image"
+    },
+    {
+      "type": "text",
+      "id": "city",
+      "label": "City"
+    },
+    {
+      "type": "text",
+      "id": "state",
+      "label": "State"
+    },
+    {
+      "type": "text",
+      "id": "when",
+      "label": "When"
+    },
+    {
+      "type": "richtext",
+      "id": "where",
+      "label": "Where"
+    },
+    {
+      "type": "richtext",
+      "id": "what",
+      "label": "What"
+    },
+    {
+      "type": "richtext",
+      "id": "leader_1",
+      "label": "Leader 1"
+    },
+    {
+      "type": "richtext",
+      "id": "leader_2",
+      "label": "Leader 2"
+    },
+    {
+      "type": "richtext",
+      "id": "leader_3",
+      "label": "Leader 3"
+    },
+    {
+      "type": "richtext",
+      "id": "leader_4",
+      "label": "Leader 4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Run club location"
+    }
+  ]
+}
+{% endschema %}

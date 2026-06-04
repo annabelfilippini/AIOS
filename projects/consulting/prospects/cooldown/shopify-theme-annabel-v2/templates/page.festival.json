@@ -1,0 +1,351 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "5292ce00-b679-4fbb-87b4-d4dcef07eab5": {
+      "type": "image-banner",
+      "blocks": {
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-2": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-2"
+      ],
+      "custom_css": [
+        "h2 {color: white;}",
+        ".banner__text {color: white; line-height: 1.4; font-size: 20px;}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 30px !important; }}",
+        "@media screen and (max-width: 767px) {.banner__text {font-size: 16px !important; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Untitled_1280_x_720_px_d5e967ac-8087-497b-b8f4-4877440a66cf.png",
+        "image_2": "shopify://shop_images/Untitled_1280_x_720_px_d5e967ac-8087-497b-b8f4-4877440a66cf.png",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    },
+    "image_banner_7Tqfei": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_QJYfRU": {
+          "type": "heading",
+          "settings": {
+            "heading": "join the cooldown race party!",
+            "heading_size": "h1"
+          }
+        },
+        "text_BnRC9D": {
+          "type": "text",
+          "settings": {
+            "text": "we’re so excited to present the cooldown festival 2025 - a 5kish race on september 7th hosted in 7 cooldown cities: minneapolis, denver, austin, dallas, new york city, chicago, boston",
+            "text_style": "subtitle"
+          }
+        },
+        "buttons_h3DAHw": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_QJYfRU",
+        "text_BnRC9D",
+        "buttons_h3DAHw"
+      ],
+      "custom_css": [
+        ".placeholder {display: none;}",
+        ".banner--small:not(.banner--adapt) {min-height: 300px; background: #f4f3f2; margin-top: 10px;}",
+        ".banner__box .banner__heading {margin-bottom: 20px;}",
+        "h2 {color: #191919;}",
+        ".banner__text {color: #191919; line-height: 1.4; font-size: 20px;}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 33px !important; max-width: 180px; margin: 0 auto 5vh; line-height: 1; }}",
+        "@media screen and (max-width: 767px) {.banner__text {font-size: 16px !important; }}"
+      ],
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "adapt_height_first_image": true,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "a557dc44-bf0a-4282-8089-f42a5b0e4c00": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--21363800736018__a557dc44-bf0a-4282-8089-f42a5b0e4c00-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>more info</h2><p>everyone will be meeting up for drinks after the race in typical cooldown fashion.</p><p><strong>disclaimer:</strong> we will not have a timing system, so bring your own watch!</p><p><strong>you can expect:</strong></p><p>- free race t-shirts<br/>- free Barry's class <br/>- lots of great sponsorships<br/>- discounts on clothing<br/>- prizes<br/>- sensational vibes </p>",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "template--21363800736018__a557dc44-bf0a-4282-8089-f42a5b0e4c00-text-1"
+      ],
+      "custom_css": [
+        "h2 {font-size: 35px; line-height: 0.4;}",
+        "p {font-size: 18px;}",
+        "@media screen and (max-width: 767px) {p {font-size: 16px !important; }}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 34px !important; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Altra_Cooldown_Austin-31.jpg",
+        "height": "small",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_VLzg47": {
+      "type": "image-with-text",
+      "blocks": {
+        "text_ijnUj9": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>sign up here</h2><p><a href=\"https://sweatpals.com/event/cooldown-nyc-race\" target=\"_blank\" title=\"https://sweatpals.com/event/cooldown-nyc-race\">new york city</a></p><p><a href=\"https://www.sweatpals.com/event/cooldown-chicago-race\" target=\"_blank\" title=\"https://www.sweatpals.com/event/cooldown-chicago-race\">chicago</a></p><p><a href=\"https://www.sweatpals.com/event/cooldown-minneapolis-race\" title=\"https://www.sweatpals.com/event/cooldown-minneapolis-race\">minneapolis</a></p><p><a href=\"https://www.sweatpals.com/event/cooldown-dallas-race\" target=\"_blank\" title=\"https://www.sweatpals.com/event/cooldown-dallas-race\">dallas</a></p><p><a href=\"https://www.sweatpals.com/event/cooldown-atx-race\" target=\"_blank\" title=\"https://www.sweatpals.com/event/cooldown-atx-race\">austin</a></p><p><a href=\"https://www.sweatpals.com/event/denver-race\" target=\"_blank\" title=\"https://www.sweatpals.com/event/denver-race\">denver</a></p><p><a href=\"https://www.sweatpals.com/event/cooldown-boston-race\" target=\"_blank\" title=\"https://www.sweatpals.com/event/cooldown-boston-race\">boston</a></p><p><a href=\"https://sweatpals.com/event/cooldown-nashville-race\" target=\"_blank\" title=\"https://sweatpals.com/event/cooldown-nashville-race\">nashville</a></p>",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "text_ijnUj9"
+      ],
+      "custom_css": [
+        "h2 {font-size: 35px; line-height: 0.4;}",
+        "p {font-size: 18px;}",
+        "@media screen and (max-width: 767px) {p {font-size: 16px !important; }}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 34px !important; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Altra_Cooldown_Austin-64.jpg",
+        "height": "small",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "f8781b33-9d27-4ca8-b55b-c873f836b313": {
+      "type": "rich-text",
+      "blocks": {
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>our founders</p>",
+            "heading_size": "h2"
+          }
+        },
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Hi Cooldown fam 👋 We are Bailey & Daniel - two besties who bond over our mutual love for friendship, running, and </p>"
+          }
+        },
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-0",
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-1",
+        "template--16892992553234__f8781b33-9d27-4ca8-b55b-c873f836b313-1672437465fe831bc2-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "65ab2c39-83b1-4aa2-ade3-3c074b0eaf50": {
+      "type": "image-with-text",
+      "blocks": {
+        "e7ceb140-11c1-4c0e-8e31-5f088b6d9965": {
+          "type": "heading",
+          "settings": {
+            "heading": "Daniel",
+            "heading_size": "h1"
+          }
+        },
+        "bacb4a1c-38a6-4338-bc5c-536e7355aff2": {
+          "type": "text",
+          "settings": {
+            "text": "<h4><strong>Favorite things: </strong>snowboarding & surfing trips<br/><br/><strong>Past Life:</strong> 400m athlete at UNC<br/><br/><strong>Currently: </strong>co-founder of Ivywild Capital, a boutique real estate private equity company</h4><h4><strong>Favorite running memory:</strong> any 4x400 relay</h4><h4><strong>Hometown:</strong> Colorado Springs, CO<br/><br/><strong>Denver has been home since:</strong> Spring 2021</h4>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "e7ceb140-11c1-4c0e-8e31-5f088b6d9965",
+        "bacb4a1c-38a6-4338-bc5c-536e7355aff2"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "h2 {font-size: 35px; line-height: 0.4;}",
+        "h4 {font-size: 17px;}",
+        "@media screen and (max-width: 767px) {h4 {font-size: 15px !important; }}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 30px !important; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/3_87377714-2dfc-4ca7-b1d6-d1556db2cad3.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "runclubs_home_Cdcm6p": {
+      "type": "runclubs-home",
+      "blocks": {
+        "column_MTg8PJ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/denver-cover.jpg",
+            "city": "Denver",
+            "page": "https://www.sweatpals.com/event/denver-race"
+          }
+        },
+        "column_MxmqD3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/newyork.jpg",
+            "city": "New York City",
+            "page": "https://www.sweatpals.com/event/cooldown-nyc-race"
+          }
+        },
+        "column_8cxHEh": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/austin.jpg",
+            "city": "Austin",
+            "page": "https://www.sweatpals.com/event/cooldown-atx-race"
+          }
+        },
+        "column_QcnMp6": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Prophecy_Owen_CooldownRunning_4.11.23-07050.jpg",
+            "city": "Chicago",
+            "page": "https://www.sweatpals.com/event/cooldown-chicago-race"
+          }
+        },
+        "column_eEgGX9": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/minny.jpg",
+            "city": "Minneapolis",
+            "page": "https://www.sweatpals.com/event/cooldown-minneapolis-race"
+          }
+        },
+        "column_dUWdqN": {
+          "type": "column",
+          "settings": {
+            "city": "Dallas",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_MTg8PJ",
+        "column_MxmqD3",
+        "column_8cxHEh",
+        "column_QcnMp6",
+        "column_eEgGX9",
+        "column_dUWdqN"
+      ],
+      "disabled": true,
+      "settings": {
+        "header": "sign up for the race!",
+        "button-txt": "see all",
+        "button-url": "https://www.sweatpals.com/host/cooldown",
+        "custom_liquid": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "5292ce00-b679-4fbb-87b4-d4dcef07eab5",
+    "image_banner_7Tqfei",
+    "a557dc44-bf0a-4282-8089-f42a5b0e4c00",
+    "image_with_text_VLzg47",
+    "f8781b33-9d27-4ca8-b55b-c873f836b313",
+    "65ab2c39-83b1-4aa2-ade3-3c074b0eaf50",
+    "runclubs_home_Cdcm6p"
+  ]
+}

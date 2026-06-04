@@ -1,0 +1,196 @@
+{
+  "url": "https://www.savasannarbor.com/",
+  "native": {
+    "color_scheme": "light",
+    "logo": null,
+    "fonts": [
+      {
+        "family": "Brandon Grotesque",
+        "role": "heading"
+      },
+      {
+        "family": "Aktiv Grotesk",
+        "role": "body"
+      }
+    ],
+    "colors": {
+      "primary": "#DDBD6B",
+      "accent": "#A54223",
+      "background": "#FFFFFF",
+      "textPrimary": "#5B5C62",
+      "link": "#A54223"
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Aktiv Grotesk",
+        "heading": "Brandon Grotesque"
+      },
+      "fontStacks": {
+        "heading": [
+          "sans-serif"
+        ],
+        "body": [
+          "sans-serif"
+        ],
+        "paragraph": [
+          "brandon-grotesque"
+        ]
+      },
+      "fontSizes": {
+        "h1": "17px",
+        "h2": "51px",
+        "body": "22.1px"
+      }
+    },
+    "spacing": {
+      "baseUnit": 4,
+      "borderRadius": "0px"
+    },
+    "components": {
+      "input": {
+        "background": "#FFFFFF",
+        "textColor": "#000000",
+        "borderColor": "#E0E0E0",
+        "borderRadius": "0px",
+        "borderRadiusCorners": {
+          "topLeft": "0px",
+          "topRight": "0px",
+          "bottomRight": "0px",
+          "bottomLeft": "0px"
+        },
+        "shadow": "none"
+      },
+      "buttonPrimary": {
+        "background": "#A54223",
+        "textColor": "#FFFFFF",
+        "borderRadius": "0px",
+        "borderRadiusCorners": {
+          "topLeft": "0px",
+          "topRight": "0px",
+          "bottomRight": "0px",
+          "bottomLeft": "0px"
+        },
+        "shadow": "none"
+      },
+      "buttonSecondary": {
+        "background": "#5B5C62",
+        "textColor": "#FFFFFF",
+        "borderRadius": "0px",
+        "borderRadiusCorners": {
+          "topLeft": "0px",
+          "topRight": "0px",
+          "bottomRight": "0px",
+          "bottomLeft": "0px"
+        },
+        "shadow": "none"
+      }
+    },
+    "icons": null,
+    "images": {
+      "logo": "https://images.squarespace-cdn.com/content/v1/67cf414f31701c1c1927f87d/ef1a141c-a632-4a08-b99b-797a2e9070b3/savas-web.png?format=1500w",
+      "favicon": "https://images.squarespace-cdn.com/content/v1/67cf414f31701c1c1927f87d/d7f297a0-6c6d-46f3-af45-19911f9d176d/favicon.ico?format=100w",
+      "ogImage": "http://static1.squarespace.com/static/67cf414f31701c1c1927f87d/t/67cf428338de324b3aaace51/1741636227450/savas-web.png?format=1500w",
+      "logoHref": "/",
+      "logoAlt": "Sava&#39;s Ann Arbor"
+    },
+    "animations": null,
+    "layout": null,
+    "tone": null,
+    "personality": {
+      "tone": "modern",
+      "energy": "medium",
+      "targetAudience": "restaurant-goers in Ann Arbor"
+    },
+    "__llm_logo_reasoning": {
+      "selectedIndex": 1,
+      "reasoning": "Selected #1 because it is visible, located in the header, links to the homepage, and matches the brand name 'Sava's Ann Arbor'.",
+      "confidence": 0.95,
+      "source": "llm"
+    },
+    "__llm_button_reasoning": {
+      "primary": {
+        "index": 3,
+        "text": "RESERVATIONS",
+        "reasoning": "Button #3 with text 'RESERVATIONS' uses the vibrant brand color #A54223, making it the most prominent CTA."
+      },
+      "secondary": {
+        "index": 0,
+        "text": "Sign Up",
+        "reasoning": "Button #0 with text 'Sign Up' uses a neutral color #5B5C62, providing a clear contrast to the primary button's vibrant color."
+      },
+      "confidence": 0.95
+    },
+    "designSystem": {
+      "framework": "custom",
+      "componentLibrary": ""
+    },
+    "confidence": {
+      "buttons": 0.95,
+      "colors": 0.9,
+      "overall": 0.925
+    },
+    "__llm_metadata": {
+      "logoSelection": {
+        "llmCalled": true,
+        "llmSucceeded": true,
+        "finalSource": "llm",
+        "rawLogoSelection": {
+          "selectedLogoIndex": 1,
+          "selectedLogoReasoning": "Selected #1 because it is visible, located in the header, links to the homepage, and matches the brand name 'Sava's Ann Arbor'.",
+          "confidence": 0.95
+        }
+      },
+      "buttonClassification": {
+        "llmCalled": true,
+        "llmSucceeded": true
+      }
+    }
+  },
+  "fallback": {
+    "source": "fallback:rawHtml+regex",
+    "url": "https://www.savasannarbor.com/",
+    "colors": {
+      "hex": [],
+      "rgb": [
+        "rgb(193, 193, 193)"
+      ]
+    },
+    "fonts": {
+      "font_families": [
+        "Roboto",
+        "aktiv-grotesk",
+        "brandon-grotesque"
+      ],
+      "google_fonts": []
+    },
+    "logos": [
+      "https://images.squarespace-cdn.com/content/v1/67cf414f31701c1c1927f87d/420cae71-95fb-40b8-a9bf-ed2f707b363e/aventura-logo-white.png",
+      "https://images.squarespace-cdn.com/content/v1/67cf414f31701c1c1927f87d/59eead9c-d4de-468b-8801-f88914e70a11/TPG+Logo+White.png.png"
+    ],
+    "favicons": [
+      "https://images.squarespace-cdn.com/content/v1/67cf414f31701c1c1927f87d/6cfcd6c4-55b3-45b2-b2a9-d6f329767f85/favicon.ico?format=100w",
+      "https://images.squarespace-cdn.com/content/v1/67cf414f31701c1c1927f87d/d7f297a0-6c6d-46f3-af45-19911f9d176d/favicon.ico?format=100w"
+    ],
+    "links_sample": [
+      "https://www.savasannarbor.com/cart",
+      "https://www.savasannarbor.com/about"
+    ]
+  },
+  "colors": {
+    "primary": "#DDBD6B",
+    "accent": "#A54223",
+    "background": "#FFFFFF",
+    "textPrimary": "#5B5C62",
+    "link": "#A54223"
+  },
+  "fonts": [
+    {
+      "family": "Brandon Grotesque",
+      "role": "heading"
+    },
+    {
+      "family": "Aktiv Grotesk",
+      "role": "body"
+    }
+  ]
+}

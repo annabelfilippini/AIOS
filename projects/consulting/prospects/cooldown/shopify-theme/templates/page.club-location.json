@@ -1,0 +1,95 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "location_detail_DNn7Ax": {
+      "type": "location-detail",
+      "blocks": {
+        "column_7tpHQy": {
+          "type": "column",
+          "settings": {
+            "image": "{{ page.metafields.custom.cover_image.value }}",
+            "city": "{{ page.metafields.custom.city.value }}",
+            "state": "{{ page.metafields.custom.state.value }}",
+            "when": "{{ page.metafields.custom.time.value }}",
+            "where": "{{ page.metafields.custom.where | metafield_tag }}",
+            "what": "{{ page.metafields.custom.what | metafield_tag }}",
+            "leader1": "{{ page.metafields.custom.leader_1 | metafield_tag }}",
+            "leader2": "{{ page.metafields.custom.leader_2 | metafield_tag }}",
+            "leader3": "{{ page.metafields.custom.leader_3 | metafield_tag }}",
+            "leader4": "{{ page.metafields.custom.leader_4 | metafield_tag }}",
+            "leader5": "{{ page.metafields.custom.leader_5 | metafield_tag }}",
+            "leader6": "{{ page.metafields.custom.leader_6 | metafield_tag }}",
+            "leader7": "{{ page.metafields.custom.leader_7 | metafield_tag }}",
+            "leader8": "{{ page.metafields.custom.leader_8 | metafield_tag }}"
+          }
+        },
+        "column_BnxFB8": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "",
+            "city": "",
+            "state": "",
+            "when": "",
+            "where": "",
+            "what": "",
+            "leader1": "",
+            "leader2": "",
+            "leader3": "",
+            "leader4": "",
+            "leader5": "",
+            "leader6": "",
+            "leader7": "",
+            "leader8": ""
+          }
+        },
+        "column_JjXWMA": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "",
+            "city": "",
+            "state": "",
+            "when": "",
+            "where": "",
+            "what": "",
+            "leader1": "",
+            "leader2": "",
+            "leader3": "",
+            "leader4": "",
+            "leader5": "",
+            "leader6": "",
+            "leader7": "",
+            "leader8": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_7tpHQy",
+        "column_BnxFB8",
+        "column_JjXWMA"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "location_detail_DNn7Ax"
+  ]
+}

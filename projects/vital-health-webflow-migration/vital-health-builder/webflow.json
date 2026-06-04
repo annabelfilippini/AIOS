@@ -1,0 +1,13 @@
+{
+  "name": "vital-health-builder",
+  "publicDir": "public",
+  "size": "default",
+  "apiVersion": "2",
+  "telemetry": {
+    "global": {
+      "allowTelemetry": true,
+      "lastPrompted": 1779821337066,
+      "version": "1.23.0"
+    }
+  }
+}

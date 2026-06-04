@@ -1,0 +1,9 @@
+{
+  "slug": "pepper-pong",
+  "url": "https://pepperpong.com",
+  "status": "success",
+  "failed_step": null,
+  "detail": "all steps passed",
+  "elapsed_s": 37,
+  "deploy_url": null
+}

@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5efe0;
+  color: #2a2a26;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  color: #1f4d2a;
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+p {
+  color: #3f3f38;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+button {
+  width: 100%;
+  margin: 14px 0;
+  border: 0;
+  border-radius: 0;
+  background: #1f4d2a;
+  color: #f5efe0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 14px 16px;
+  text-transform: uppercase;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.status {
+  border-top: 1px solid #cfc4a6;
+  margin-top: 18px;
+  padding-top: 14px;
+}
+
+.note {
+  color: #7a776b;
+  font-size: 12px;
+}

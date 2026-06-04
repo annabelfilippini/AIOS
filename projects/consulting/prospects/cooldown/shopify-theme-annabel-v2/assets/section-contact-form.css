@@ -1,0 +1,133 @@
+.contact {
+  display:flex;
+  align-items:top;
+  justify-content:center;
+}
+
+.form-left, .form-right {
+  width:50%;
+}
+
+.form-left {
+  padding:100px 50px 0;
+}
+
+.form-right img {
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  margin-bottom:-10px;
+}
+
+.contact img {
+  max-width: 100%;
+}
+
+.contact .form__message {
+  align-items: flex-start;
+  border:0px!important;
+  outline:none!important;
+}
+
+.contact .icon-success {
+  margin-top: 0.2rem;
+}
+
+.contact .field {
+  margin-bottom: 1.5rem;
+}
+
+.contact .field__label, 
+.contact .field__input, #ContactForm-name, #ContactForm-body, #ContactForm-phone, #ContactForm-email {
+  font-family: 'Athletics-Regular'!important;
+    font-size: 16px;
+}
+
+.contact .field__label {
+  color:#888;
+}
+
+.contact .field__input {
+  background:#fff;
+  border-radius:15px;
+  color:#191919;
+  border:2px solid #fff;
+}
+
+.contact .field__input:focus {
+  border:2px solid #4A65C1;
+}
+
+.contact .field:before, .contact .select:before,
+.contact .field:after, .contact .select:after, 
+.contact.field__input:focus {
+  box-shadow:none!important;
+}
+
+.contact__button .button {
+  border:2px solid #000!important;
+  color:#000!important;
+  background:transparent!important;
+  font-family: 'Athletics-Bold'!important;
+  padding:10px 25px!important;
+}
+
+/*.form-status-list {
+  display:none;
+}*/
+
+.icon-error, #ContactForm-email-error {
+  display:none;
+}
+
+[aria-describedby='error'] {
+  border:2px solid #ED4242!important3;
+}
+
+@media (max-width:989px) {
+  .form-right {
+    display:none;
+  }
+
+  .form-left {
+    width:100%;
+    padding:40px 15px;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .contact .field {
+    margin-bottom: 2rem;
+  }
+}
+
+.contact__button {
+  margin-top: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .contact__button {
+    margin-top: 4rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .contact__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2rem;
+  }
+}
+
+@media (min-width:1500px) {
+  .contact {
+    max-height:100vh;
+  }
+}
+
+@media (max-width: 749px) {
+  .contact .field__label {
+  top:13px;
+  left:20px;
+  }
+}

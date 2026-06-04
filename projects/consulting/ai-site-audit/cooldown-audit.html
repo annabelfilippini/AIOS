@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Cooldown Running — Website Audit</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; max-width: 800px; color: #1a1a2e; line-height: 1.7; }
+    h1, h2, h3, h4 { color: #1a1a2e; letter-spacing: -0.02em; }
+    h1 { font-size: 28px; border-bottom: 3px solid #B292E7; padding-bottom: 12px; }
+    h2 { font-size: 22px; margin-top: 2.5em; border-bottom: 1px solid #e8e8f0; padding-bottom: 8px; }
+    h3 { font-size: 18px; color: #444; }
+    table { border-collapse: collapse; width: 100%; }
+    th { background: #f0edf7; color: #1a1a2e; font-weight: 600; text-align: left; padding: 10px 14px; }
+    td { padding: 10px 14px; border-bottom: 1px solid #f0edf7; }
+    tr:hover td { background: #faf9fd; }
+    strong { color: #1a1a2e; }
+    a { color: #B292E7; }
+    hr { border: none; border-top: 1px solid #e8e8f0; margin: 2em 0; }
+    blockquote { border-left: 3px solid #B292E7; background: #faf9fd; }
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Cooldown Running — Website Audit</h1>
+</header>
+<p><strong>Prepared by Annabel Filippini | April 2026</strong> <strong>Site: cooldownrunning.com | Platform: Shopify (Dawn 7.0.1)</strong></p>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>Cooldown Running has a strong brand identity and genuinely compelling community positioning — the “social club disguised as a run club” concept is excellent and the energy comes through. The site looks polished at first glance and the product photography is high quality. However, there are real gaps in SEO fundamentals (missing meta descriptions, generic image alt text, no blog strategy), accessibility (missing alt text on product images, heading hierarchy issues), and some housekeeping items (duplicate/test pages indexed, URL slugs with “-copy” artifacts) that are leaving growth on the table. The biggest opportunity is content — Cooldown has an incredible story with 15+ city chapters, and the site barely tells it.</p>
+<hr />
+<h2 id="score-card">Score Card</h2>
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 25%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>Grade</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Technical Health</td>
+<td>B-</td>
+<td>Solid Shopify foundation, but test pages indexed, duplicate URLs, announcement bar links to wrong page</td>
+</tr>
+<tr class="even">
+<td>SEO</td>
+<td>C+</td>
+<td>Missing meta descriptions across the site, no alt text on product images, empty blog, no structured product schema beyond Shopify defaults</td>
+</tr>
+<tr class="odd">
+<td>Accessibility</td>
+<td>C</td>
+<td>Generic/missing image alt text, heading hierarchy skips levels, unclear form labels</td>
+</tr>
+<tr class="even">
+<td>Content &amp; UX</td>
+<td>B</td>
+<td>Great brand voice and photography, but product descriptions are inconsistent, no reviews visible, community story undertold</td>
+</tr>
+<tr class="odd">
+<td>AI Opportunities</td>
+<td>N/A</td>
+<td>Significant upside — detailed below</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="top-5-quick-wins">Top 5 Quick Wins</h2>
+<p>These are high-impact fixes that should take under an hour each:</p>
+<h3 id="fix-the-announcement-bar-link">1. Fix the Announcement Bar Link</h3>
+<p>The announcement bar says “buy 4+ items - get 20% off” but links to <code>/pages/run-clubs</code> instead of <code>/pages/bundle-and-save</code>. Customers clicking the promo land on the run clubs page, not the bundle deal. Swap the href.</p>
+<h3 id="add-meta-descriptions-to-all-pages">2. Add Meta Descriptions to All Pages</h3>
+<p>Not a single page has a custom meta description. Google is auto-generating snippets from page content, which means you’re losing control of how you appear in search results. Write a compelling 150-160 character description for at least: homepage, collections pages, about page, and run clubs page. Shopify makes this easy — it’s in the SEO section at the bottom of each page/product editor.</p>
+<h3 id="fix-product-image-alt-text">3. Fix Product Image Alt Text</h3>
+<p>Every product image across the site uses generic alt text like “Katherine Bra” or “Molly Short” repeated for all 20-30 images per product. Change these to descriptive text: “Katherine Bra in lavender horizon - front view,” “Molly Short in midnight green - side pocket detail.” This helps both SEO and screen reader users.</p>
+<h3 id="remove-or-noindex-the-test-page">4. Remove or Noindex the Test Page</h3>
+<p><code>/pages/run-clubs-typeform-test</code> is a test page that’s publicly accessible and indexed in the sitemap. Either delete it, set it to draft in Shopify, or add a noindex tag. Same for duplicate city pages (<code>/boston</code> vs <code>/boston-1</code>, <code>/tampa</code> vs <code>/tampa-1</code>) — decide which is canonical and redirect the other.</p>
+<h3 id="clean-up--copy-product-urls">5. Clean Up “-copy” Product URLs</h3>
+<p>Two products have URL slugs with “-copy” artifacts from being duplicated in Shopify: - <code>/products/elizabeth-short-copy</code> (the Elizabeth Short) - <code>/products/molly-short-copy</code> (the Boulderthon Molly Short) - <code>/products/boulderthon-katherine-bra-copy</code> (the Boulderthon Tank)</p>
+<p>These look unprofessional in shared links and hurt SEO. Update the URL handles in Shopify’s product editor and set up redirects from the old URLs.</p>
+<hr />
+<h2 id="detailed-findings">Detailed Findings</h2>
+<h3 id="technical-health-b-">Technical Health (B-)</h3>
+<p><strong>What’s Working:</strong> - SSL is active (HTTPS across the site) - Shopify CDN handles image delivery with width parameters for responsive serving - Custom fonts use <code>font-display: swap</code> for decent loading behavior - hCaptcha protection on forms - Payment integrations (Apple Pay, Google Pay, Shop Pay) are properly configured - Responsive breakpoints at 750px and 990px</p>
+<p><strong>Issues Found:</strong></p>
+<p><strong>Announcement Bar Mismatch</strong> The promo “buy 4+ items - get 20% off” links to <code>/pages/run-clubs</code> — completely wrong destination. Should link to <code>/pages/bundle-and-save</code> where the actual bundle builder lives. This is actively costing conversions.</p>
+<p><strong>Duplicate/Orphan Pages in Sitemap</strong> The sitemap includes 35 pages. Several are problematic: - <code>/pages/run-clubs-typeform-test</code> — test page, publicly indexed - <code>/pages/boston</code> AND <code>/pages/boston-1</code> — two Boston pages with different leader lists - <code>/pages/tampa</code> AND <code>/pages/tampa-1</code> — two Tampa pages with different schedules (Sundays vs Thursdays) - <code>/pages/chicago-1</code> — why the “-1” suffix?</p>
+<p>If Tampa and Boston genuinely have two chapters each, the pages need to be named clearly (e.g., <code>/pages/tampa-south</code>, <code>/pages/tampa-downtown</code>). If they’re duplicates, consolidate and redirect.</p>
+<p><strong>Product URL Slugs with “-copy”</strong> Three products have copy artifacts in their URLs: - <code>elizabeth-short-copy</code> - <code>molly-short-copy</code> (this is actually the Boulderthon Molly Short) - <code>boulderthon-katherine-bra-copy</code> (this is actually the Boulderthon Tank)</p>
+<p>These happen when you duplicate a product in Shopify and forget to update the handle. Fix in the Shopify admin under product SEO settings.</p>
+<p><strong>Heavy Third-Party Script Load</strong> The site loads a significant number of third-party scripts: - Google Tag Manager + Google Ads conversion tracking - Facebook Pixel - Mailchimp integration - Loox (reviews app — but no reviews are displayed anywhere) - Pop Convert (popup app) - Instafeed - Globo Swatch - Easy Bundles by GiftBox - TikTok pixel - Shopify’s own analytics stack</p>
+<p>That’s 10+ third-party scripts. Each one adds load time. If Loox isn’t actively displaying reviews, consider removing it. Same for any other apps not actively used.</p>
+<p><strong>San Diego Page Says “Paused for Winter”</strong> It’s April. If the club is still paused, update the messaging. If it’s back, update the status. Stale content erodes trust.</p>
+<hr />
+<h3 id="seo-c">SEO (C+)</h3>
+<p><strong>What’s Working:</strong> - Clean URL structure for products (<code>/products/katherine-bra</code>) and collections (<code>/collections/womens-collection</code>) - Organization schema (JSON-LD) with social profiles - SearchAction schema for site search - Sitemap is properly structured and submitted - robots.txt is well-configured (standard Shopify)</p>
+<p><strong>Issues Found:</strong></p>
+<p><strong>No Meta Descriptions — Anywhere</strong> Checked homepage, collections, product pages, about page, contact page — none have custom meta descriptions. This is the single biggest SEO gap. Google will auto-generate snippets, but they’re often pulled from random page content and rarely compelling. Every key page should have a hand-written meta description.</p>
+<p><strong>Page Titles Are Bare</strong> - Homepage: “Cooldown” — should be something like “Cooldown Running | Colorful Running Apparel &amp; Social Run Clubs” - Collections: “All - Cooldown” — should include keywords like “running apparel,” “women’s running clothes” - Products: “Katherine Bra - Cooldown” — decent but could include “running bra” or “athletic bra”</p>
+<p><strong>No Blog Content</strong> The blog section exists (<code>/blogs/news</code>) but has zero published posts. The blog index page shows section headers (“Movement Together,” “Desk Job Wellness”) but no actual articles. A running apparel brand with 15+ city chapters has unlimited content to write about — race recaps, runner spotlights, training tips, city guides. This is a massive missed opportunity for organic traffic.</p>
+<p><strong>Product Image Alt Text is Generic</strong> Every product image uses just the product name as alt text. With 20-30 images per product, that means “Katherine Bra” appears 30 times. Google can’t distinguish between a front view, a side view, a detail shot, or a lifestyle photo. Descriptive alt text helps image search rankings and accessibility.</p>
+<p><strong>No Product-Level Structured Data Beyond Defaults</strong> Shopify provides basic product schema, but there’s no: - Review/rating schema (because there are no reviews) - FAQ schema on product pages - BreadcrumbList schema - Aggregate rating data</p>
+<p><strong>Inconsistent Product Descriptions</strong> Some products (Kenny Short, Meg Tank) have detailed descriptions with materials, features, and comparisons. Others (Molly Short, Katherine Bra based on the crawl) appear to have minimal or no description content. Consistency matters for both SEO and conversion.</p>
+<p><strong>City Pages Are Thin Content</strong> Each city page has maybe 50 words of unique content (day, time, leaders). For 15+ cities, these could be rich pages with local SEO value — “best run clubs in Denver,” etc. Currently they’re too thin to rank for anything.</p>
+<hr />
+<h3 id="accessibility-c">Accessibility (C)</h3>
+<p><strong>What’s Working:</strong> - Skip-to-content links present (“Skip to content,” “Skip to product information”) - Form elements have associated labels on the contact page - Responsive design supports various screen sizes - ARIA hidden attributes used on modals</p>
+<p><strong>Issues Found:</strong></p>
+<p><strong>Image Alt Text</strong> This is the biggest accessibility issue. Product images use generic alt text (just the product name repeated). Many page images (hero banners, city photos, lifestyle images on the about/join pages) have no alt text at all. Screen reader users get almost no useful information from images across the site.</p>
+<p>Examples of missing/poor alt text: - Join Our Crew page hero images: no alt text - City page cover images: no alt text - Product images: “Katherine Bra” x30 instead of descriptive text</p>
+<p><strong>Heading Hierarchy Issues</strong> The site jumps from H2 to H5 in many places, skipping H3 and H4 entirely. H5 is used extensively for stylistic purposes (applying the SpeziaMono-Bold font) rather than semantic meaning. This confuses screen readers that navigate by heading level.</p>
+<p>Example from homepage: - H2: “uniting the world through running” - H5: (used for styled text that should be a span or p with a class) - H2: “running apparel that’s just as functional as it is colorful”</p>
+<p>The fix: use CSS classes for styling instead of heading tags. Reserve headings for document structure.</p>
+<p><strong>Color Contrast Considerations</strong> The brand uses light lavender backgrounds (rgb 207, 214, 240) with purple accents (rgb 178, 146, 231). Text on these backgrounds should be verified against WCAG AA standards (4.5:1 ratio for normal text). The light purple on light blue-grey could be problematic.</p>
+<p><strong>Form Accessibility</strong> The contact form has labels, but the newsletter signup form in the footer (“join the email list”) should be checked for proper label association. The email input should have a visible label or proper aria-label, not just placeholder text.</p>
+<p><strong>Final Sale Modal</strong> The modal that warns about final sale items uses <code>aria-hidden</code> toggling, which is good. But keyboard focus management should be verified — when the modal opens, does focus move to it? Can users close it with Escape? Can they tab through it without getting trapped?</p>
+<hr />
+<h3 id="content-ux-b">Content &amp; UX (B)</h3>
+<p><strong>What’s Working Well:</strong> - <strong>Brand voice is strong.</strong> “A social club disguised as a run club” is a great tagline. The copy is casual, warm, and authentic throughout. Lowercase styling feels intentional and on-brand. - <strong>Product photography is excellent.</strong> Clean, colorful, well-lit product shots with multiple angles and lifestyle images. - <strong>Community positioning is compelling.</strong> The run club network across 15+ cities is a genuine differentiator. Products named after real people (Katherine, Molly, Meg, Nicole) adds a personal touch. - <strong>Color palette is distinctive.</strong> The lavender/purple/navy brand colors stand out in the running apparel space and reinforce the “colorful” positioning. - <strong>Hero video on homepage</strong> creates energy and movement.</p>
+<p><strong>Issues Found:</strong></p>
+<p><strong>No Reviews Visible Anywhere</strong> Loox (a reviews app) is installed and loading scripts, but no reviews appear on any product page. Customer reviews are one of the highest-impact conversion drivers for e-commerce. Either: - Reviews haven’t been collected yet (set up post-purchase email flows to request them) - Loox isn’t configured to display (fix the widget placement) - There are reviews but the display is broken (debug the app)</p>
+<p>If you’re paying for Loox and not showing reviews, you’re wasting money. If you don’t have reviews yet, that’s priority #1 for conversion optimization.</p>
+<p><strong>Inconsistent Product Descriptions</strong> - <strong>Good:</strong> Kenny Short has “Why We Made This” section, features list, materials, care instructions, size guide, and even a comparison to similar products. - <strong>Good:</strong> Meg Tank has feature sections (“Speed Meets Function,” “Pocket for the Long Haul”) - <strong>Weak:</strong> Katherine Bra and Molly Short appear to have minimal description content despite being featured products.</p>
+<p>Every product should have the same level of detail as the Kenny Short. Materials, features, what makes it different, who it’s for.</p>
+<p><strong>Run Clubs Page Doesn’t List All Cities</strong> The main run clubs page shows interactive cards for about 15 cities, but the sitemap reveals additional city pages (Charlotte, San Diego, Boston) that may not all be linked. Charlotte and San Diego are in the sitemap but need verification that they’re reachable from the run clubs hub. Some cities show “coming soon” or “paused” — these should be visually distinguished from active clubs.</p>
+<p><strong>No About Page (It’s a Franchise Page)</strong> The navigation says “About” and links to <code>/pages/about-us</code>, but this page is actually titled “franchise a cooldown” and is focused on recruiting chapter leaders. There’s no page that tells the Cooldown origin story, introduces the founders, or explains the brand mission. For a community-driven brand, this is a significant gap. Visitors want to know: who started this? Why? What’s the vision?</p>
+<p><strong>Bundle Promotion is Buried</strong> The “buy 4+ items, get 20% off” offer is mentioned in the announcement bar but links to the wrong page (run clubs instead of bundle-and-save). Even with the correct link, the bundle-and-save page loads a third-party app (Easy Bundles) which may be slow. The promotion should be more prominently featured — maybe a dedicated section on the homepage or a banner on collection pages.</p>
+<p><strong>Navigation Missing Key Links</strong> - No direct link to the bundle/save promotion in the main nav - “Start a Cooldown” nav item goes to <code>/pages/join-our-crew-1</code> — the URL has a “-1” suffix (another Shopify duplicate artifact) - No men’s collection highlighted as prominently as women’s in the featured products on homepage</p>
+<p><strong>Size Guide Pages</strong> There are four separate size guide pages (women’s, men’s, unisex tops, t-shirt). The women’s size guide at <code>/pages/size-guide</code> appears to have no actual content — just a page shell with no measurements or charts visible. If the size guide content is loading via JavaScript/an embedded app, it may not be accessible to all users. Individual product pages (like Kenny Short) do have inline size guides, which is good — but the standalone pages should also work.</p>
+<hr />
+<h3 id="ai-opportunities">AI Opportunities</h3>
+<p>This is where it gets exciting. Cooldown is at a perfect stage to leverage AI tools — small team, growing fast, lots of repetitive content needs.</p>
+<p><strong>1. AI-Powered Product Descriptions (Quick Win)</strong> Use AI to generate consistent, high-quality product descriptions for every item. Feed it the product name, materials, features, and brand voice guidelines, and it can produce descriptions matching the quality of the Kenny Short page — but for every product in minutes instead of hours. This directly improves SEO and conversions.</p>
+<p><strong>2. AI Customer Service Chatbot</strong> A chatbot on the site could handle the most common questions instantly: - “What size should I get?” (pulling from size guides) - “What’s your return policy?” (15-day returns, final sale items excluded) - “When does the [city] run club meet?” (pulling from city pages) - “How do I start a Cooldown chapter?” (directing to the franchise page) This reduces the load on whoever monitors the contact form and provides instant answers 24/7.</p>
+<p><strong>3. AI-Generated Blog Content</strong> Cooldown has unlimited content to work with but zero published blog posts. AI can help produce: - City-specific run guides (“Best running routes in Denver for your Cooldown meetup”) - Race recaps and event coverage - Training tips and running advice - Runner spotlight interviews (AI helps draft, human adds the personal touch) - “What to wear” seasonal guides</p>
+<p>Even 2-4 posts per month would dramatically improve organic search traffic. Each city page could link to related blog content, creating an internal linking web that boosts the entire site.</p>
+<p><strong>4. Email Marketing Automation</strong> The site has Mailchimp integrated and a newsletter signup, but there’s an opportunity for AI-driven email flows: - <strong>Post-purchase sequences:</strong> “How to care for your new [product]” + “Leave a review” + “Here’s what pairs with what you bought” - <strong>City-specific emails:</strong> “This week’s Denver meetup is at [location]” — personalized by the user’s city - <strong>Re-engagement:</strong> “We miss you at Cooldown [city]” for lapsed run club attendees - <strong>Product launch announcements</strong> with AI-written copy tailored to different segments (new customers vs. repeat buyers)</p>
+<p><strong>5. Inventory and Demand Forecasting</strong> With 21 products across multiple colors and sizes, AI can help predict: - Which variants will sell out (the Katherine Bra already has many sold-out variants) - When to reorder based on sales velocity - Which cities drive the most product sales (informing where to expand)</p>
+<hr />
+<h2 id=”closing-notes”>Closing Notes</h2>
+<p>Cooldown has something most brands would kill for — a genuine community. 15+ city chapters, real people leading real meetups, products named after real humans. The brand voice is authentic and the visual identity is strong. The bones are great.</p>
+<p>Most of the gaps identified in this audit are foundational — meta descriptions, alt text, consistent product copy, page consolidation. Individually they're small, but collectively they determine whether Cooldown appears when someone in Denver searches “fun run clubs near me” or when a potential customer discovers your products through Google Images.</p>
+<p>The AI opportunities represent a significant advantage for a team of your size. The right tools for content generation, customer service, and email automation can dramatically reduce the time spent on repetitive work — and Cooldown is well-positioned to adopt them, given how strong and consistent the brand voice already is.</p>
+<hr />
+<p><em>Audit conducted April 2026 by Annabel Filippini using AI-powered site analysis tools.</em></p>
+</body>
+</html>

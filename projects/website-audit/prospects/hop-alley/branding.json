@@ -1,0 +1,102 @@
+{
+  "source": "firecrawl:branding",
+  "url": "https://hopalleydenver.com/",
+  "branding": {
+    "color_scheme": "dark",
+    "logo": null,
+    "fonts": [
+      {
+        "family": "Raleway",
+        "role": "body"
+      },
+      {
+        "family": "DIN Condensed",
+        "role": "heading"
+      },
+      {
+        "family": "Brandon Grotesque",
+        "role": "unknown"
+      }
+    ],
+    "colors": {
+      "primary": "#FA00D9",
+      "accent": "#FB04E7",
+      "background": "#000000",
+      "textPrimary": "#000000",
+      "link": "#FB04E7"
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Raleway",
+        "heading": "DIN Condensed"
+      },
+      "fontStacks": {
+        "heading": [
+          "sans-serif"
+        ],
+        "body": [
+          "sans-serif"
+        ],
+        "paragraph": [
+          "Raleway"
+        ]
+      },
+      "fontSizes": {
+        "h1": "32px",
+        "h2": "32px",
+        "body": "16px"
+      }
+    },
+    "spacing": {
+      "baseUnit": 4,
+      "borderRadius": "0px"
+    },
+    "components": {},
+    "icons": null,
+    "images": {
+      "logo": "https://images.squarespace-cdn.com/content/v1/559b4924e4b0e8559d2b7a1b/1449538122014-XJR1PLCV3OITVNXRWZ5X/Hop+Alley+Chinese+Food%2C+Denver",
+      "favicon": "https://images.squarespace-cdn.com/content/v1/559b4924e4b0e8559d2b7a1b/1449527499147-LCI3A9VUQV2810LGTPI3/favicon.ico",
+      "ogImage": null,
+      "logoAlt": "Hop Alley Chinese Food, Denver"
+    },
+    "animations": null,
+    "layout": null,
+    "tone": null,
+    "personality": {
+      "tone": "bold",
+      "energy": "high",
+      "targetAudience": "urban food enthusiasts"
+    },
+    "__llm_logo_reasoning": {
+      "selectedIndex": 1,
+      "reasoning": "Selected #1 because it is visible, has an alt text matching the brand 'Hop Alley', and is of a suitable size for a logo.",
+      "confidence": 0.85,
+      "source": "llm"
+    },
+    "designSystem": {
+      "framework": "custom",
+      "componentLibrary": ""
+    },
+    "confidence": {
+      "buttons": 0.5,
+      "colors": 0.9,
+      "overall": 0.7
+    },
+    "__llm_metadata": {
+      "logoSelection": {
+        "llmCalled": true,
+        "llmSucceeded": true,
+        "finalSource": "llm",
+        "rawLogoSelection": {
+          "selectedLogoIndex": 1,
+          "selectedLogoReasoning": "Selected #1 because it is visible, has an alt text matching the brand 'Hop Alley', and is of a suitable size for a logo.",
+          "confidence": 0.85
+        }
+      },
+      "buttonClassification": {
+        "llmCalled": false,
+        "llmSucceeded": true
+      }
+    }
+  }
+}

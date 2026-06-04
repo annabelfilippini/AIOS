@@ -1,0 +1,113 @@
+.club-grid {
+  display:flex;
+  flex-wrap:wrap;
+  width:101%;
+  position:relative;
+}
+
+.club-block {
+  width:33.3%;
+  position:relative;
+  min-height:400px;
+  max-height:680px;
+  overflow:hidden;
+}
+
+.loc-image img {
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  transition:all .25s ease;
+}
+
+.loc-info {
+  position:absolute;
+  bottom:35px;
+  left:35px;
+  z-index:2;
+}
+
+.loc-info h2 {
+  color: #F4F3F2;
+  font-family: 'Athletics-Bold' !important;
+  font-size: 3.5vw;
+  line-height: 36px;
+  margin:0 0 17px;
+  padding:0;
+}
+
+.state {
+  border:1px solid #fff;
+  border-radius:40px;
+  padding:2px 12px 0px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'SpeziaMono-Regular' !important;
+  font-size:16px;
+  color:#fff;
+  background-color: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.card-overlay {
+  /*background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0.3) 75%, rgba(0,0,0,0.3) 100%);*/
+  background:transparent;
+  height:100%;
+  width:100%;
+  position:absolute;
+  z-index:1;
+  display:block!important;
+  top:0;
+  left:0;
+  transition:background .25s ease;
+}
+
+.club-block:hover .card-overlay {
+  background:rgba(0,0,0,.3);
+}
+
+.club-block:hover .loc-image img {
+  width:105%;
+  height:105%;
+}
+
+@media (min-width:750px) and (max-width:989px) {
+  .club-block {
+    max-height:420px;
+  }
+}
+
+@media (min-width:990px) and (max-width:1250px) {
+  .club-block {
+    max-height:550px;
+  }
+}
+
+@media (max-width:749px) {
+  .club-block {
+    width:100%;
+    max-height:570px;
+  }
+
+  .loc-info h2 {
+    font-size:50px;
+  }
+}
+
+@media (min-width:500px) and (max-width:749px) {
+  .loc-image img {
+    margin-top:-30%;
+  }
+
+  .loc-image.Austin img {
+    margin-top:0;
+  }
+}
+
+@media (min-width:1400px) {
+  .loc-info h2 {
+    font-size:48px;
+  }
+}

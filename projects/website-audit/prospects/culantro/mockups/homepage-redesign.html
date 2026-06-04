@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Culantro — The taste of Peru, hand-built in Michigan.</title>
+<link rel="icon" href="assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#2A1410;
+    --bg-deep:#1A0C09;
+    --bg-card:#F5EEE3;
+    --cream:#F5EEE3;
+    --cream-dim:#E6DCC9;
+    --ink:#1A1410;
+    --ink-dim:#4D3C36;
+    --flame:#E8661F;
+    --flame-deep:#C9530E;
+    --gold:#C59D5F;
+    --terracotta:#B14B2D;
+    --rule:rgba(245,238,227,.18);
+    --rule-strong:rgba(245,238,227,.35);
+    --rule-dark:rgba(26,20,16,.18);
+    --rule-dark-strong:rgba(26,20,16,.35);
+    --serif:"EB Garamond", "Cormorant Garamond", "Playfair Display", Georgia, serif;
+    --sans:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --max:1280px;
+    --text-max:1100px;
+    --sig-max:720px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.6;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- Shared primitives ---------- */
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 40px;width:100%}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    display:inline-block;
+  }
+  .eyebrow-ink{color:var(--terracotta)}
+  h1,h2,h3,h4{
+    font-family:var(--serif);
+    font-weight:500;
+    letter-spacing:-0.01em;
+    line-height:1.08;
+    margin:0;
+  }
+  h2{font-size:48px}
+  h3{font-size:28px}
+  p{margin:0}
+  .section{padding:120px 0;position:relative}
+  .section-cream{background:var(--cream);color:var(--ink)}
+  .section-cream .eyebrow{color:var(--terracotta)}
+  .rule-divider{height:1px;background:var(--rule);border:0;margin:0}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 24px;
+    font-family:var(--sans);
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border-radius:2px;
+    transition:background-color .2s ease, color .2s ease, transform .2s ease, border-color .2s ease;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-flame{background:var(--flame);color:var(--cream)}
+  .btn-flame:hover{background:var(--flame-deep);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--cream);border-color:var(--cream)}
+  .btn-ghost:hover{background:var(--cream);color:var(--ink);transform:translateY(-2px)}
+  .btn-ink{background:var(--ink);color:var(--cream)}
+  .btn-ink:hover{background:var(--flame);transform:translateY(-2px)}
+  .btn-ghost-ink{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn-ghost-ink:hover{background:var(--ink);color:var(--cream);transform:translateY(-2px)}
+  .btn-sm{padding:10px 18px;font-size:12px}
+
+  /* underline link */
+  .link-u{
+    font-family:var(--sans);
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border-bottom:1px solid var(--terracotta);
+    padding-bottom:3px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .link-u:hover{color:var(--flame);border-bottom-color:var(--flame)}
+  .link-u-cream{color:var(--cream);border-bottom-color:var(--gold)}
+  .link-u-cream:hover{color:var(--flame);border-bottom-color:var(--flame)}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(26,12,9,0.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:76px;
+    gap:32px;
+  }
+  .nav-logo img{height:44px;width:auto}
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:32px;
+    font-family:var(--sans);
+    font-size:13px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .nav-links a{color:var(--cream);opacity:.85;transition:opacity .2s ease, color .2s ease}
+  .nav-links a:hover{opacity:1;color:var(--flame)}
+  .nav-burger{
+    display:none;
+    background:none;
+    border:0;
+    padding:8px;
+    cursor:pointer;
+    color:var(--cream);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    height:min(100vh, 820px);
+    min-height:640px;
+    overflow:hidden;
+    background:var(--bg-deep);
+  }
+  .hero-img{
+    position:absolute;
+    inset:0;
+    background-image:url("assets/gallery/AnnArbor-After.jpg");
+    background-size:cover;
+    background-position:center 58%;
+    animation:kenburns 20s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns{
+    from{transform:scale(1.0)}
+    to{transform:scale(1.05)}
+  }
+  .hero-scrim{
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(180deg, rgba(26,12,9,0.2) 0%, rgba(26,12,9,0) 30%, rgba(26,12,9,0.55) 70%, rgba(26,12,9,0.9) 100%),
+      linear-gradient(90deg, rgba(26,12,9,0.65) 0%, rgba(26,12,9,0.15) 55%, rgba(26,12,9,0) 100%);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 40px;
+    height:100%;
+    display:flex;
+    align-items:flex-end;
+    padding-bottom:88px;
+  }
+  .hero-inner{max-width:780px}
+  .hero-eyebrow{
+    color:var(--gold);
+    font-family:var(--sans);
+    font-size:13px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    font-weight:500;
+    margin-bottom:28px;
+  }
+  .hero h1{
+    font-size:72px;
+    line-height:1.02;
+    letter-spacing:-0.015em;
+    color:var(--cream);
+    margin-bottom:22px;
+    font-weight:500;
+  }
+  .hero h1 em{font-style:italic;color:var(--cream)}
+  .hero-sub{
+    color:var(--cream);
+    opacity:.86;
+    font-size:19px;
+    line-height:1.55;
+    max-width:640px;
+    margin-bottom:36px;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* ---------- LOCATION PICKER ---------- */
+  .sec-header{
+    text-align:center;
+    max-width:780px;
+    margin:0 auto 72px;
+  }
+  .sec-header .eyebrow{margin-bottom:18px}
+  .sec-header h2{margin-bottom:16px}
+  .sec-header p{opacity:.8;font-size:17px}
+
+  .loc-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+  .loc-card{
+    background:var(--cream);
+    color:var(--ink);
+    border-radius:3px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--rule-dark);
+  }
+  .loc-photo{
+    position:relative;
+    aspect-ratio:3/2;
+    overflow:hidden;
+    background:#201210;
+  }
+  .loc-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .6s ease;
+  }
+  .loc-card:hover .loc-photo img{transform:scale(1.03)}
+  .loc-body{padding:36px 36px 32px}
+  .loc-eyebrow{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    font-weight:500;
+    margin-bottom:10px;
+  }
+  .loc-card h3{
+    font-size:36px;
+    margin-bottom:4px;
+    font-weight:500;
+  }
+  .loc-sub{
+    color:var(--ink-dim);
+    font-size:14px;
+    letter-spacing:0.02em;
+    margin-bottom:20px;
+  }
+  .loc-addr{
+    font-size:16px;
+    color:var(--ink);
+    margin-bottom:20px;
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .loc-addr svg{flex-shrink:0;margin-top:2px;color:var(--terracotta)}
+  .hours{
+    border-top:1px solid var(--rule-dark);
+    border-bottom:1px solid var(--rule-dark);
+    padding:16px 0;
+    margin-bottom:20px;
+  }
+  .hours dl{margin:0;display:grid;grid-template-columns:80px 1fr;row-gap:6px;font-size:14px}
+  .hours dt{color:var(--ink-dim);letter-spacing:0.08em;text-transform:uppercase;font-size:12px;font-weight:500;align-self:center}
+  .hours dd{margin:0;color:var(--ink);font-variant-numeric:tabular-nums}
+  .rating{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    color:var(--ink-dim);
+    margin-bottom:22px;
+    border-bottom:1px solid var(--terracotta);
+    padding-bottom:2px;
+    transition:color .2s ease;
+  }
+  .rating:hover{color:var(--flame)}
+  .rating svg{color:#D9241E}
+  .loc-ctas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:auto;
+  }
+  .counter-note{
+    display:inline-flex;
+    align-items:center;
+    padding:10px 18px;
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    font-weight:500;
+    color:var(--ink-dim);
+    border:1px dashed var(--rule-dark-strong);
+    border-radius:2px;
+  }
+
+  /* ---------- SIGNATURES ---------- */
+  .sigs{
+    max-width:var(--sig-max);
+    margin:0 auto;
+  }
+  .sig-block{
+    border:1px solid var(--rule-strong);
+    padding:40px 44px 32px;
+    margin-bottom:28px;
+    background:rgba(245,238,227,0.02);
+  }
+  /* Scroll reveal — Black Pearl pattern */
+  [data-reveal]{
+    opacity:0;
+    transform:translateY(22px);
+    transition:
+      opacity 780ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
+      transform 780ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+    will-change:opacity, transform;
+  }
+  [data-reveal].is-visible{
+    opacity:1;
+    transform:none;
+  }
+  .no-js [data-reveal]{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{opacity:1;transform:none;transition:none}
+  }
+  .sig-label{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    margin-bottom:6px;
+    text-align:center;
+  }
+  .sig-title{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:28px;
+    text-align:center;
+    margin:0 0 28px;
+    color:var(--cream);
+    font-weight:500;
+    letter-spacing:0.005em;
+  }
+  .sig-title::after{
+    content:"";
+    display:block;
+    width:40px;
+    height:1px;
+    background:var(--gold);
+    margin:14px auto 0;
+    opacity:.7;
+  }
+  .sig-row{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px dotted var(--rule);
+    font-family:var(--serif);
+    font-size:18px;
+    line-height:1.45;
+    color:var(--cream);
+  }
+  .sig-row:last-child{border-bottom:0}
+  .sig-row .dish{flex:1}
+  .sig-row .price{color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .sig-ctas{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    margin-top:44px;
+  }
+
+  /* ---------- STORY STRIP ---------- */
+  .story-header{
+    max-width:var(--text-max);
+    margin:0 auto 56px;
+  }
+  .story-header .eyebrow{margin-bottom:18px}
+  .story-header h2{margin-bottom:20px;max-width:640px}
+  .story-header p{
+    max-width:640px;
+    opacity:.82;
+    font-size:18px;
+    line-height:1.6;
+  }
+  .strip{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:14px;
+  }
+  .strip-tile{
+    position:relative;
+    aspect-ratio:3/4;
+    overflow:hidden;
+    background:#231310;
+    border:1px solid var(--rule);
+  }
+  .strip-tile img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .6s ease, filter .3s ease;
+    filter:saturate(1.02);
+  }
+  .strip-tile:hover img{transform:scale(1.06)}
+  .strip-caption{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    padding:14px 16px;
+    background:linear-gradient(180deg, rgba(26,12,9,0) 0%, rgba(26,12,9,0.85) 70%, rgba(26,12,9,0.95) 100%);
+    color:var(--cream);
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:15px;
+    line-height:1.3;
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity .3s ease, transform .3s ease;
+  }
+  .strip-tile:hover .strip-caption,
+  .strip-tile:focus-within .strip-caption{opacity:1;transform:translateY(0)}
+
+  /* ---------- SOCIAL PROOF ---------- */
+  .quotes{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:40px;
+    margin-bottom:60px;
+  }
+  .quote{
+    border-top:1px solid var(--rule-dark-strong);
+    padding-top:28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .quote-stars{
+    display:flex;
+    gap:3px;
+    color:#D9241E;
+    margin-bottom:18px;
+  }
+  .quote-body{
+    font-family:var(--serif);
+    font-size:22px;
+    line-height:1.4;
+    color:var(--ink);
+    margin-bottom:24px;
+    font-weight:400;
+    letter-spacing:-0.005em;
+  }
+  .quote-body::before{content:"\201C"}
+  .quote-body::after{content:"\201D"}
+  .quote-attr{
+    font-family:var(--sans);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    font-weight:500;
+    margin-top:auto;
+  }
+  .quote-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    font-weight:500;
+    margin-bottom:8px;
+  }
+  .quote-badge svg{color:#D9241E}
+  .stat-strip{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px 36px;
+    padding-top:40px;
+    border-top:1px solid var(--rule-dark);
+    font-family:var(--sans);
+    font-size:14px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    font-weight:500;
+  }
+  .stat-strip span{display:inline-flex;align-items:center;gap:8px}
+  .stat-strip svg{color:#D9241E}
+
+  /* ---------- FIND US / FOLLOW ---------- */
+  .find{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:80px;
+    align-items:center;
+  }
+  .find-left h2{margin-bottom:18px}
+  .find-left p{max-width:520px;opacity:.82;font-size:18px;margin-bottom:28px;line-height:1.6}
+  .find-socials{display:flex;flex-wrap:wrap;gap:12px}
+  .find-right{
+    background:rgba(245,238,227,0.04);
+    border:1px solid var(--rule);
+    padding:44px 40px;
+  }
+  .find-right h3{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:26px;
+    margin-bottom:14px;
+    color:var(--cream);
+    font-weight:500;
+  }
+  .find-right p{font-size:16px;line-height:1.55;opacity:.84}
+  .find-right .small{
+    display:block;
+    margin-top:14px;
+    font-family:var(--sans);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--bg-deep);
+    padding:80px 0 40px;
+    border-top:1px solid var(--rule);
+  }
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1.2fr 1fr;
+    gap:60px;
+    margin-bottom:60px;
+  }
+  .foot-brand img{height:52px;margin-bottom:22px}
+  .foot-brand p{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:19px;
+    line-height:1.45;
+    color:var(--cream);
+    opacity:.85;
+    max-width:360px;
+  }
+  .foot-addr{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  .foot-addr h4{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    margin-bottom:12px;
+  }
+  .foot-addr p{font-size:14px;line-height:1.6;color:var(--cream);opacity:.82}
+  .foot-links h4{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    margin-bottom:12px;
+  }
+  .foot-links ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .foot-links a{
+    font-size:14px;
+    color:var(--cream);
+    opacity:.82;
+    transition:color .2s ease, opacity .2s ease;
+  }
+  .foot-links a:hover{color:var(--flame);opacity:1}
+  .foot-bottom{
+    border-top:1px solid var(--rule);
+    padding-top:28px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:.55;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .loc-grid{grid-template-columns:1fr}
+    .quotes{grid-template-columns:1fr;gap:32px}
+    .find{grid-template-columns:1fr;gap:40px}
+    .foot-grid{grid-template-columns:1fr;gap:44px}
+    .hero h1{font-size:56px}
+    h2{font-size:38px}
+  }
+  @media (max-width:768px){
+    .wrap{padding:0 24px}
+    .section{padding:72px 0}
+    .nav-links{display:none}
+    .nav-burger{display:inline-flex;align-items:center;justify-content:center}
+    .hero{min-height:560px;height:auto;padding-top:96px;padding-bottom:72px}
+    .hero-content{position:relative;padding:0 24px;align-items:flex-end;padding-bottom:56px}
+    .hero-inner{max-width:100%}
+    .hero h1{font-size:40px;line-height:1.05}
+    .hero-sub{font-size:16px;margin-bottom:28px}
+    .hero-ctas .btn{flex:1 1 160px;justify-content:center}
+    h2{font-size:32px}
+    .loc-body{padding:24px 24px 28px}
+    .loc-card h3{font-size:28px}
+    .hours dl{grid-template-columns:72px 1fr}
+    .sig-block{padding:28px 22px 22px}
+    .sig-row{font-size:16px}
+    .sec-header{margin-bottom:48px}
+    .story-header{margin-bottom:36px}
+    .strip{
+      grid-template-columns:repeat(6, 72vw);
+      gap:12px;
+      overflow-x:auto;
+      padding:0 24px;
+      margin:0 -24px;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
+    .strip-tile{scroll-snap-align:start}
+    .strip-caption{opacity:1;transform:none}
+    .quote-body{font-size:19px}
+    .find-right{padding:32px 24px}
+    .foot-addr{grid-template-columns:1fr}
+    footer{padding:56px 0 32px}
+  }
+
+  /* subtle focus ring */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--flame);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-logo" href="#top" aria-label="Culantro home">
+      <img src="assets/logo.png" alt="Culantro" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#locations">Menu</a>
+      <a href="#locations">Locations</a>
+      <a href="#story">Story</a>
+      <a href="https://www.opentable.com/r/culantro-peruvian-eatery-ferndale" target="_blank" rel="noopener">Reserve</a>
+    </nav>
+    <a href="https://culantro.square.site/" target="_blank" rel="noopener" class="btn btn-flame btn-sm" style="letter-spacing:0.12em">Order Online</a>
+    <button class="nav-burger" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <line x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="hero" aria-label="Intro" data-reveal-group>
+  <div class="hero-img" role="img" aria-label="Culantro Ann Arbor dining room — illuminated logo, living wall, warm pendants"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <div class="hero-inner">
+      <div class="hero-eyebrow" data-reveal>FERNDALE  +  ANN ARBOR</div>
+      <h1 data-reveal>The taste of Peru,<br/><em>hand-built in Michigan.</em></h1>
+      <p class="hero-sub" data-reveal>Pollo a la Brasa from the rotisserie. Ceviche cured in fresh lime. Lomo Saltado over the fire. Two neighborhood spots, family-run.</p>
+      <div class="hero-ctas" data-reveal>
+        <a href="#locations" class="btn btn-flame">Choose a location</a>
+        <a href="https://culantro.square.site/" target="_blank" rel="noopener" class="btn btn-ghost">See the menu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCATION PICKER ============ -->
+<section id="locations" class="section" data-reveal-group>
+  <div class="wrap">
+    <div class="sec-header">
+      <div class="eyebrow" data-reveal>VISIT</div>
+      <h2 data-reveal>Two spots. One kitchen. Pick yours.</h2>
+    </div>
+
+    <div class="loc-grid">
+      <!-- FERNDALE -->
+      <article class="loc-card" data-reveal>
+        <a href="https://maps.google.com/?q=22939+Woodward+Ave,+Ferndale,+MI+48220" target="_blank" rel="noopener" class="loc-photo" aria-label="Culantro Ferndale entrance">
+          <img src="assets/gallery/door.jpg" alt="Culantro Ferndale entrance — hand-painted orange mural at 22939 Woodward Ave" />
+        </a>
+        <div class="loc-body">
+          <div class="loc-eyebrow">FERNDALE, MI</div>
+          <h3>Ferndale</h3>
+          <p class="loc-sub">Flagship · Downtown</p>
+          <p class="loc-addr">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>22939 Woodward Ave, Ferndale, MI 48220</span>
+          </p>
+          <div class="hours" aria-label="Hours">
+            <dl>
+              <dt>Mon–Wed</dt><dd>11am – 9pm</dd>
+              <dt>Thu</dt><dd>11am – 10pm</dd>
+              <dt>Fri</dt><dd>11am – 10pm</dd>
+              <dt>Sat</dt><dd>12pm – 10pm</dd>
+              <dt>Sun</dt><dd>12pm – 9pm</dd>
+            </dl>
+          </div>
+          <a href="https://www.yelp.com/biz/culantro-ferndale" target="_blank" rel="noopener" class="rating">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+            <span>4.2 ★ · 303 Yelp reviews</span>
+          </a>
+          <div class="loc-ctas">
+            <a href="https://culantro.square.site/" target="_blank" rel="noopener" class="btn btn-ink btn-sm">Menu</a>
+            <a href="https://culantro.square.site/" target="_blank" rel="noopener" class="btn btn-ghost-ink btn-sm">Order online</a>
+            <a href="https://maps.google.com/?q=22939+Woodward+Ave,+Ferndale,+MI+48220" target="_blank" rel="noopener" class="btn btn-ghost-ink btn-sm">Directions</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ANN ARBOR -->
+      <article class="loc-card" data-reveal>
+        <a href="https://maps.google.com/?q=223+N+Main+St,+Ann+Arbor,+MI+48104" target="_blank" rel="noopener" class="loc-photo" aria-label="Culantro Ann Arbor exterior">
+          <img src="assets/yelp/aa-exterior.jpg" alt="Culantro Ann Arbor — brick Kerrytown storefront at 223 N Main St" />
+        </a>
+        <div class="loc-body">
+          <div class="loc-eyebrow">ANN ARBOR, MI</div>
+          <h3>Ann Arbor</h3>
+          <p class="loc-sub">Kerrytown · Corner of Main &amp; Miller</p>
+          <p class="loc-addr">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>223 N Main St, Ann Arbor, MI 48104</span>
+          </p>
+          <div class="hours" aria-label="Hours">
+            <dl>
+              <dt>Mon–Wed</dt><dd>11am – 9pm</dd>
+              <dt>Thu</dt><dd>11am – 10pm</dd>
+              <dt>Fri</dt><dd>11am – 10pm</dd>
+              <dt>Sat</dt><dd>12pm – 10pm</dd>
+              <dt>Sun</dt><dd>12pm – 9pm</dd>
+            </dl>
+          </div>
+          <a href="https://www.yelp.com/biz/culantro-ann-arbor" target="_blank" rel="noopener" class="rating">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+            <span>3.7 ★ · 65 Yelp reviews</span>
+          </a>
+          <div class="loc-ctas">
+            <a href="assets/culantro-menu-annarbor.pdf" target="_blank" rel="noopener" class="btn btn-ink btn-sm">Menu</a>
+            <span class="counter-note">Order at counter</span>
+            <a href="https://maps.google.com/?q=223+N+Main+St,+Ann+Arbor,+MI+48104" target="_blank" rel="noopener" class="btn btn-ghost-ink btn-sm">Directions</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule-divider"/>
+
+<!-- ============ SIGNATURES ============ -->
+<section id="signatures" class="section" data-reveal-group>
+  <div class="wrap">
+    <div class="sec-header">
+      <div class="eyebrow" data-reveal>SIGNATURES</div>
+      <h2 data-reveal>Dishes we're known for.</h2>
+    </div>
+
+    <div class="sigs">
+      <div class="sig-block" data-reveal>
+        <div class="sig-title">From the Rotisserie</div>
+        <div class="sig-row"><span class="dish">Pollo a la Brasa — marinated overnight, charcoal-fired. Served with aji verde.</span><span class="price">$18.70</span></div>
+        <div class="sig-row"><span class="dish">Sandwich de Chicharrón — pork belly, sweet potato, salsa criolla on pan francés.</span><span class="price">$18.40</span></div>
+      </div>
+
+      <div class="sig-block" data-reveal>
+        <div class="sig-title">From the Sea</div>
+        <div class="sig-row"><span class="dish">Ceviche — fresh fish cured in lime, red onion, Peruvian corn, sweet potato.</span><span class="price">$18.40</span></div>
+        <div class="sig-row"><span class="dish">Arroz con Mariscos — shellfish-laden saffron rice, the Peruvian paella.</span><span class="price">$22.40</span></div>
+      </div>
+
+      <div class="sig-block" data-reveal>
+        <div class="sig-title">From the Wok</div>
+        <div class="sig-row"><span class="dish">Lomo Saltado — beef, red onion, tomato, soy, stir-fried over french fries.</span><span class="price">$23.70</span></div>
+        <div class="sig-row"><span class="dish">Arroz Chaufa — Peruvian–Chinese fried rice, our chifa classic.</span><span class="price">$18.40</span></div>
+        <div class="sig-row"><span class="dish">Tallarín Saltado — stir-fried noodles, tender beef, Peruvian aji.</span><span class="price">$23.70</span></div>
+      </div>
+
+      <div class="sig-block" data-reveal>
+        <div class="sig-title">From the Home Kitchen</div>
+        <div class="sig-row"><span class="dish">Aji de Gallina — shredded chicken in a creamy walnut-chili sauce. The dish that tastes like home.</span><span class="price">$18.70</span></div>
+        <div class="sig-row"><span class="dish">Seco a la Norteña — slow-braised beef in cilantro, served with canary beans + rice.</span><span class="price">$21.10</span></div>
+        <div class="sig-row"><span class="dish">Carne a la Plancha — grilled sirloin, salsa criolla, plantains.</span><span class="price">$24.90</span></div>
+      </div>
+
+      <div class="sig-block" data-reveal>
+        <div class="sig-title">Sides &amp; Sweets</div>
+        <div class="sig-row"><span class="dish">Patacones Picantes — crispy green plantains, spicy dip.</span><span class="price">$11.90</span></div>
+        <div class="sig-row"><span class="dish">Yuca Frita — fried yuca, aji amarillo mayo.</span><span class="price"></span></div>
+        <div class="sig-row"><span class="dish">Tres Leches — three-milk cake, the dessert.</span><span class="price">$10.50</span></div>
+        <div class="sig-row"><span class="dish">Alfajores — dulce de leche between shortbread.</span><span class="price">$5.30</span></div>
+      </div>
+
+      <div class="sig-ctas" data-reveal>
+        <a href="https://culantro.square.site/" target="_blank" rel="noopener" class="link-u link-u-cream">See the full Ferndale menu</a>
+        <a href="assets/culantro-menu-annarbor.pdf" target="_blank" rel="noopener" class="link-u link-u-cream">See the full Ann Arbor menu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule-divider"/>
+
+<!-- ============ STORY STRIP ============ -->
+<section id="story" class="section" data-reveal-group>
+  <div class="wrap">
+    <div class="story-header">
+      <div class="eyebrow" data-reveal>STORY</div>
+      <h2 data-reveal>Hand-crafted in Michigan.</h2>
+      <p data-reveal>Every wall painted, every sign carved, every rotisserie fired by a small family team. A few years in Ferndale. Ann Arbor followed — Kerrytown's newest corner kitchen. Peru on the plate. Michigan on the door.</p>
+    </div>
+
+    <div class="strip" role="list">
+      <div class="strip-tile" role="listitem" data-reveal>
+        <img src="assets/gallery/AnnArbor-Before.jpg" alt="Ann Arbor build, day one" loading="lazy" />
+        <div class="strip-caption">Ann Arbor, day one.</div>
+      </div>
+      <div class="strip-tile" role="listitem" data-reveal>
+        <img src="assets/gallery/AnnArbor-After.jpg" alt="Ann Arbor dining room, finished" loading="lazy" />
+        <div class="strip-caption">Ann Arbor, finished.</div>
+      </div>
+      <div class="strip-tile" role="listitem" data-reveal>
+        <img src="assets/gallery/sign.jpg" alt="Hand-carved Culantro sign" loading="lazy" />
+        <div class="strip-caption">The sign, carved by hand.</div>
+      </div>
+      <div class="strip-tile" role="listitem" data-reveal>
+        <img src="assets/gallery/door.jpg" alt="Hand-painted Culantro entrance door, Ferndale" loading="lazy" />
+        <div class="strip-caption">The door, painted by a friend.</div>
+      </div>
+      <div class="strip-tile" role="listitem" data-reveal>
+        <img src="assets/gallery/walls.jpg" alt="Hand-painted Peruvian mural, Ferndale" loading="lazy" />
+        <div class="strip-caption">Murals, Ferndale.</div>
+      </div>
+      <div class="strip-tile" role="listitem" data-reveal>
+        <img src="assets/gallery/oven.jpg" alt="The rotisserie oven" loading="lazy" />
+        <div class="strip-caption">The rotisserie. The heart.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOCIAL PROOF ============ -->
+<section class="section section-cream" data-reveal-group>
+  <div class="wrap">
+    <div class="sec-header">
+      <div class="eyebrow eyebrow-ink" data-reveal>REVIEWS</div>
+      <h2 data-reveal>What Michigan says.</h2>
+    </div>
+
+    <div class="quotes">
+      <figure class="quote" data-reveal>
+        <div class="quote-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          Yelp · Ferndale
+        </div>
+        <div class="quote-stars" aria-label="5 stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+        </div>
+        <blockquote class="quote-body">Every single one was so flavorful and delicious. I particularly loved the tallarín saltado. The food is reasonably priced for a good portion as well.</blockquote>
+        <figcaption class="quote-attr">Ashley T. · Yelp Elite · Troy, MI</figcaption>
+      </figure>
+
+      <figure class="quote" data-reveal>
+        <div class="quote-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          Yelp · Ferndale
+        </div>
+        <div class="quote-stars" aria-label="5 stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+        </div>
+        <blockquote class="quote-body">I used to frequent a Peruvian restaurant in Los Angeles and thought I'd never find it in Michigan — so I'm happy I found this place.</blockquote>
+        <figcaption class="quote-attr">Yelp reviewer · Ferndale</figcaption>
+      </figure>
+
+      <figure class="quote" data-reveal>
+        <div class="quote-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          Yelp · Ann Arbor
+        </div>
+        <div class="quote-stars" aria-label="5 stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+        </div>
+        <blockquote class="quote-body">The experience here was phenomenal. This restaurant deserves any attention it can get — it's one of the only genuine Latin American food spots in the area.</blockquote>
+        <figcaption class="quote-attr">Yelp reviewer · Ann Arbor</figcaption>
+      </figure>
+    </div>
+
+    <div class="stat-strip" data-reveal>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9 7.5.6-5.7 5 1.7 7.3L12 18l-6.4 3.8 1.7-7.3-5.7-5 7.5-.6L12 2z"/></svg>
+        4.2 ★ Yelp Ferndale
+      </span>
+      <span>303 reviews</span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:#1877F2"><path d="M22 12a10 10 0 1 0-11.6 9.87v-6.99H7.9V12h2.5V9.8c0-2.5 1.5-3.87 3.77-3.87 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.88h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>
+        2,895 Facebook likes
+      </span>
+      <span>2,492 check-ins</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIND US / FOLLOW ============ -->
+<section class="section" data-reveal-group>
+  <div class="wrap">
+    <div class="find">
+      <div class="find-left">
+        <div class="eyebrow" style="margin-bottom:18px" data-reveal>FOLLOW</div>
+        <h2 data-reveal>Peruvian, the Michigan way.</h2>
+        <p data-reveal>Follow <strong>@eatculantro</strong> on Instagram for specials, private events, and the next hand-painted wall.</p>
+        <div class="find-socials" data-reveal>
+          <a href="https://www.instagram.com/eatculantro/" target="_blank" rel="noopener" class="btn btn-flame">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            Follow on Instagram
+          </a>
+          <a href="https://www.facebook.com/culantroperu/" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.87v-6.99H7.9V12h2.5V9.8c0-2.5 1.5-3.87 3.77-3.87 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.88h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>
+            We're on Facebook too
+          </a>
+        </div>
+      </div>
+
+      <aside class="find-right" data-reveal>
+        <div class="eyebrow" style="margin-bottom:14px">CATERING</div>
+        <h3>Planning something bigger?</h3>
+        <p>We cater private events and large-party dinners. Reach out via <a href="https://www.instagram.com/eatculantro/" target="_blank" rel="noopener" class="link-u link-u-cream" style="font-size:inherit;letter-spacing:0;text-transform:none">Instagram DM</a> to start the conversation.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Culantro" />
+        <p>The taste of Peru, from Ferndale to Kerrytown.</p>
+      </div>
+      <div class="foot-addr">
+        <div>
+          <h4>Ferndale</h4>
+          <p>22939 Woodward Ave<br/>Ferndale, MI 48220<br/>Mon–Sun · 11am–10pm</p>
+        </div>
+        <div>
+          <h4>Ann Arbor</h4>
+          <p>223 N Main St<br/>Ann Arbor, MI 48104<br/>Mon–Sun · 11am–10pm</p>
+        </div>
+      </div>
+      <div class="foot-links">
+        <h4>Visit &amp; follow</h4>
+        <ul>
+          <li><a href="https://culantro.square.site/" target="_blank" rel="noopener">Menu · Ferndale</a></li>
+          <li><a href="assets/culantro-menu-annarbor.pdf" target="_blank" rel="noopener">Menu · Ann Arbor</a></li>
+          <li><a href="https://culantro.square.site/" target="_blank" rel="noopener">Order online</a></li>
+          <li><a href="https://www.opentable.com/r/culantro-peruvian-eatery-ferndale" target="_blank" rel="noopener">Reserve</a></li>
+          <li><a href="https://www.instagram.com/eatculantro/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/culantroperu/" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; Culantro Peruvian Eatery. Family-owned, hand-built.</span>
+      <span>Ferndale + Ann Arbor · Michigan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal — Black Pearl pattern.
+  // [data-reveal] fades up on scroll. [data-reveal-group] children stagger by 90ms.
+  (function(){
+    if (!('IntersectionObserver' in window)) {
+      document.documentElement.classList.add('no-js');
+      return;
+    }
+    // Stagger children inside each reveal group.
+    document.querySelectorAll('[data-reveal-group]').forEach(function(group){
+      group.querySelectorAll('[data-reveal]').forEach(function(el, i){
+        el.style.setProperty('--reveal-delay', (i * 90) + 'ms');
+      });
+    });
+    // Anything already in the initial viewport reveals immediately (no fade-in on first paint).
+    var vh = window.innerHeight;
+    document.querySelectorAll('[data-reveal]').forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < vh * 0.92) el.classList.add('is-visible');
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold: 0.14, rootMargin: '0px 0px -70px 0px'});
+    document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach(function(el){ io.observe(el); });
+  })();
+
+  // Mobile nav toggle (progressive — keeps closed by default)
+  (function(){
+    var style = document.createElement('style');
+    style.textContent = '@media(max-width:768px){.nav-links.open{display:flex;position:absolute;top:76px;left:0;right:0;flex-direction:column;background:rgba(26,12,9,0.96);padding:20px 24px;gap:18px;border-bottom:1px solid var(--rule)}}';
+    document.head.appendChild(style);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Creative Business Refresh | Annabel Filippini</title>
+    <meta
+      name="description"
+      content="A founder letter from Annabel Filippini about helping creative small business owners use AI, automation, websites, and thoughtful systems."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700;6..72,800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #202620;
+        --muted: #59635c;
+        --cream: #fffaf1;
+        --green: #173f36;
+        --rose: #9e4e49;
+        --line: rgba(32, 38, 32, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #e9e0d4;
+        color: var(--ink);
+        font-family: Newsreader, Georgia, serif;
+      }
+
+      .document {
+        display: grid;
+        gap: 28px;
+        width: min(920px, calc(100% - 32px));
+        margin: 36px auto;
+      }
+
+      .page {
+        min-height: 1120px;
+        border: 1px solid rgba(32, 38, 32, 0.18);
+        background: var(--cream);
+        box-shadow: 0 24px 70px rgba(32, 30, 24, 0.16);
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--rose);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h2,
+      h3 {
+        margin: 0;
+        font-family: Newsreader, Georgia, serif;
+        font-weight: 600;
+        letter-spacing: 0;
+      }
+
+      .content-page {
+        padding: 50px;
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        gap: 38px;
+        align-items: start;
+      }
+
+      h2 {
+        max-width: 620px;
+        margin-bottom: 20px;
+        font-size: 50px;
+        line-height: 0.95;
+      }
+
+      h3 {
+        margin-bottom: 12px;
+        font-size: 26px;
+        line-height: 1;
+      }
+
+      p {
+        margin: 0 0 16px;
+        color: #3f4741;
+        font-family: Newsreader, Georgia, serif;
+        font-size: 19px;
+        line-height: 1.48;
+      }
+
+      .pull {
+        margin: 24px 0;
+        padding: 20px 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        color: var(--green);
+        font-family: Newsreader, Georgia, serif;
+        font-size: 32px;
+        line-height: 1.05;
+      }
+
+      .founder-copy h2 {
+        margin-bottom: 26px;
+      }
+
+      .founder-copy p {
+        margin-bottom: 22px;
+        font-size: 20px;
+        line-height: 1.56;
+      }
+
+      .founder-copy .pull {
+        margin: 34px 0 26px;
+        padding: 24px 0;
+        font-size: 34px;
+      }
+
+      .side-card {
+        padding: 22px;
+        border: 1px solid var(--line);
+        background: #f8f1e6;
+      }
+
+      .side-card + .side-card {
+        margin-top: 16px;
+      }
+
+      .side-card p {
+        margin: 0;
+        color: var(--muted);
+        font-family: Newsreader, Georgia, serif;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .side-card strong {
+        color: var(--green);
+      }
+
+      .side-card h3 {
+        margin-bottom: 14px;
+      }
+
+      .side-card.contact-card p,
+      .side-card.contact-card a {
+        color: var(--green);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.35;
+        text-decoration: none;
+      }
+
+      .side-card.contact-card p + p {
+        margin-top: 3px;
+      }
+
+      .contact-card {
+        padding: 14px 18px;
+      }
+
+      .intro-photo {
+        width: 100%;
+        height: 390px;
+        margin: 0 0 16px;
+        overflow: hidden;
+        border: 1px solid rgba(32, 38, 32, 0.18);
+        background: #e7ded1;
+      }
+
+      .intro-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      .case-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 30px;
+      }
+
+      .case-card {
+        min-height: 290px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        background: #f8f1e6;
+      }
+
+      .case-card p,
+      .service-list p {
+        color: var(--muted);
+        font-family: Newsreader, Georgia, serif;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .service-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-top: 26px;
+      }
+
+      .service-heading {
+        margin: 32px 0 -4px;
+      }
+
+      .service-list div {
+        padding: 14px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .sendable-footer {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+        margin-top: 42px;
+        padding: 18px 0 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .sendable-footer p {
+        margin: 0;
+        color: var(--ink);
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .sendable-footer a {
+        color: var(--green);
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .contact-details {
+        display: grid;
+        gap: 4px;
+        text-align: right;
+      }
+
+      .contact-details span,
+      .contact-details a {
+        color: var(--green);
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.25;
+        text-decoration: none;
+      }
+
+      @media print {
+        @page {
+          margin: 0;
+          size: letter;
+        }
+
+        body {
+          background: white;
+        }
+
+        .document {
+          width: 8.5in;
+          margin: 0;
+          gap: 0;
+        }
+
+        .page {
+          width: 8.5in;
+          height: 11in;
+          min-height: 0;
+          overflow: hidden;
+          box-shadow: none;
+          break-after: page;
+        }
+
+        .content-page {
+          padding: 0.46in;
+        }
+
+        h2 {
+          font-size: 44px;
+        }
+
+        p {
+          font-size: 17px;
+        }
+
+        .founder-copy p {
+          margin-bottom: 20px;
+          font-size: 18px;
+          line-height: 1.53;
+        }
+
+        .pull {
+          font-size: 29px;
+        }
+
+        .founder-copy .pull {
+          margin: 28px 0 24px;
+          padding: 22px 0;
+          font-size: 31px;
+        }
+
+        .intro-photo {
+          height: 350px;
+        }
+
+        .case-card {
+          min-height: 270px;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .document {
+          width: 100%;
+          margin: 0;
+        }
+
+        .page {
+          min-height: auto;
+        }
+
+        .content-page {
+          padding: 34px;
+        }
+
+        .two-column,
+        .case-grid,
+        .service-list,
+        .sendable-footer {
+          grid-template-columns: 1fr;
+        }
+
+        h2 {
+          font-size: 42px;
+        }
+
+        .contact-details {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="document" id="top">
+      <section class="page content-page" aria-label="Founder letter">
+        <div class="two-column">
+          <article class="founder-copy">
+            <h2>Less admin. More of the work that made you start.</h2>
+            <p>
+              Some of the best small businesses are run by people who are wildly creative, deeply thoughtful, and
+              incredibly good at what they do.
+            </p>
+            <p>
+              But too often, the work that keeps the business alive starts crowding out the work that made the business
+              special in the first place: the admin, website updates, notes, follow-ups, internal systems, outreach,
+              finances, and tiny tasks that quietly eat the day.
+            </p>
+            <p>
+              That is where I come in. I help passionate entrepreneurs use AI, automation, and better digital systems to
+              make their business feel lighter, sharper, and more ready for its next chapter.
+            </p>
+            <div class="pull">
+              The goal is to help business owners spend more time working on their business, not in their business.
+            </div>
+            <p>
+              My job is to understand what you are trying to build, where your energy is being drained, and what would
+              make the biggest difference first. Then I help build the system, workflow, or digital update that will
+              actually make your day easier.
+            </p>
+          </article>
+
+          <aside>
+            <figure class="intro-photo">
+              <img src="assets/img/annabel-headshot-web.jpg" alt="Annabel Filippini" />
+            </figure>
+            <div class="side-card">
+              <h3>Annabel Filippini</h3>
+              <p>
+                I graduated from the University of Michigan in May 2026 and have spent the past year testing
+                how today's AI tools actually fit together: Claude, Codex, automation tools, coworking agents,
+                workflow builders, and everything in between.
+              </p>
+            </div>
+            <div class="side-card">
+              <p>
+                I care about AI because it can give small business owners more time for the creative, human, high-energy
+                parts of the work: the parts that made them want to build the business in the first place.
+              </p>
+            </div>
+            <div class="side-card contact-card">
+              <p><a href="mailto:annabelflip1@gmail.com">annabelflip1@gmail.com</a></p>
+              <p><a href="tel:+13038593694">303-859-3694</a></p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="page content-page" aria-label="Examples and services">
+        <p class="eyebrow">What this can look like</p>
+        <h2>Different businesses need different kinds of help.</h2>
+        <p>
+          I do not believe every business needs the same AI stack. Some businesses need a better website. Some need fewer
+          manual tasks. Some need cleaner communication. Some need help turning messy ideas into real systems. Some need
+          to grow. Some need to stabilize. Most need both.
+        </p>
+
+        <div class="case-grid">
+          <article class="case-card">
+            <p class="eyebrow">Cooldown</p>
+            <h3>A website refresh that finally got done.</h3>
+            <p>
+              Cooldown already had the personality, product, and vision. I helped turn the website into something
+              cleaner and more polished, so the online experience finally matched the energy of the business itself.
+            </p>
+          </article>
+          <article class="case-card">
+            <p class="eyebrow">Marta</p>
+            <h3>Helping a life coach stay present in sessions.</h3>
+            <p>
+              Marta, a life coach, wanted to spend less time constantly taking notes and organizing follow-ups. I helped
+              create tools and automation that supported her behind the scenes so she could be more present with clients.
+            </p>
+          </article>
+          <article class="case-card">
+            <p class="eyebrow">Private aviation</p>
+            <h3>Practical AI adoption for a team.</h3>
+            <p>
+              For a private aviation company, I helped identify where AI could support operations and how employees could
+              use it in practical, non-intimidating ways.
+            </p>
+          </article>
+        </div>
+
+        <p class="eyebrow service-heading">Some of the ways I can help</p>
+
+        <div class="service-list">
+          <div>
+            <h3>Websites and digital presence</h3>
+            <p>Making the site feel more polished, current, and aligned with the business behind it.</p>
+          </div>
+          <div>
+            <h3>AI workflows</h3>
+            <p>Notes, follow-ups, outreach, reminders, planning, finance organization, and repeatable admin work.</p>
+          </div>
+          <div>
+            <h3>Internal systems</h3>
+            <p>Cleaner processes for client information, team handoffs, operations, and everyday decision-making.</p>
+          </div>
+          <div>
+            <h3>Team support</h3>
+            <p>Helping employees understand how AI can fit into their work.</p>
+          </div>
+        </div>
+
+        <div class="sendable-footer">
+          <p>If this sounds like your business, I would love to talk.</p>
+          <div class="contact-details" aria-label="Contact information">
+            <a href="mailto:annabelflip1@gmail.com">annabelflip1@gmail.com</a>
+            <a href="tel:+13038593694">303-859-3694</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

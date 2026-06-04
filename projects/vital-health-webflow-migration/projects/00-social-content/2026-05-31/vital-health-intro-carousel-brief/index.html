@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vital Health Intro Carousel V3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --cream: #f5efe0;
+        --paper: #fbf7ec;
+        --forest: #1f4d2a;
+        --deep: #163820;
+        --gold: #c9a04a;
+        --ink: #2a2a26;
+        --muted: #7a776b;
+        --line: #ded3b8;
+        --white: #fffdf7;
+        --sage: #a8b78f;
+        --rose: #c58d79;
+        --shadow: 0 24px 70px rgba(31, 77, 42, 0.16);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 15% 4%, rgba(201, 160, 74, 0.2), transparent 28rem),
+          linear-gradient(135deg, #f7f0de 0%, #ede1c8 48%, #f8f4e8 100%);
+        font-family: Inter, Arial, sans-serif;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .page {
+        width: min(1460px, calc(100vw - 40px));
+        margin: 0 auto;
+        padding: 34px 0 72px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        padding: 18px 0 36px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand img {
+        width: 70px;
+      }
+
+      .brand-name {
+        display: block;
+        color: var(--forest);
+        font-family: Fraunces, Georgia, serif;
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 0.95;
+      }
+
+      .brand-tag {
+        display: block;
+        margin-top: 8px;
+        color: var(--forest);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.22em;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+        gap: 42px;
+        align-items: end;
+        padding: 34px 0 54px;
+      }
+
+      .eyebrow {
+        color: var(--forest);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      h1, h2, h3, p { margin: 0; }
+
+      h1 {
+        max-width: 780px;
+        margin-top: 18px;
+        font-family: Fraunces, Georgia, serif;
+        font-size: clamp(56px, 7vw, 104px);
+        font-weight: 500;
+        line-height: 0.91;
+        letter-spacing: 0;
+      }
+
+      h1 span,
+      .section-head h2 span {
+        color: var(--forest);
+      }
+
+      .hero-copy {
+        max-width: 670px;
+        margin-top: 24px;
+        color: #41413a;
+        font-size: 19px;
+        line-height: 1.58;
+      }
+
+      .brief-card {
+        border: 1px solid rgba(31, 77, 42, 0.2);
+        background: rgba(251, 247, 236, 0.86);
+        box-shadow: var(--shadow);
+        padding: 28px;
+      }
+
+      .brief-card h2 {
+        color: var(--forest);
+        font-family: Fraunces, Georgia, serif;
+        font-size: 34px;
+        font-weight: 500;
+        line-height: 1.04;
+      }
+
+      .brief-list {
+        display: grid;
+        gap: 13px;
+        margin-top: 22px;
+      }
+
+      .brief-list p {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.38;
+      }
+
+      .brief-list b {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin: 34px 0 24px;
+        border-top: 1px solid rgba(31, 77, 42, 0.18);
+        padding-top: 34px;
+      }
+
+      .section-head h2 {
+        max-width: 760px;
+        color: var(--ink);
+        font-family: Fraunces, Georgia, serif;
+        font-size: clamp(38px, 5vw, 66px);
+        font-weight: 500;
+        line-height: 0.98;
+      }
+
+      .section-head p {
+        max-width: 560px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.55;
+      }
+
+      .carousel-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .slide-wrap {
+        min-width: 0;
+      }
+
+      .slide {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4 / 5;
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      .slide h3 {
+        font-family: Fraunces, Georgia, serif;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+
+      .slide p {
+        font-size: clamp(13px, 1vw, 16px);
+        line-height: 1.45;
+      }
+
+      .full-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .s1 {
+        color: var(--white);
+      }
+
+      .s1::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(22, 56, 32, 0.78), rgba(22, 56, 32, 0.2) 52%, rgba(22, 56, 32, 0.04)),
+          linear-gradient(180deg, rgba(22, 56, 32, 0.16), rgba(22, 56, 32, 0.82));
+      }
+
+      .s1 .logo-word {
+        position: absolute;
+        z-index: 2;
+        top: 34px;
+        left: 34px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255, 253, 247, 0.92);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .s1 .logo-word img {
+        width: 42px;
+        filter: brightness(0) invert(1);
+        opacity: 0.9;
+      }
+
+      .s1 .copy {
+        position: absolute;
+        z-index: 2;
+        left: 38px;
+        right: 38px;
+        bottom: 46px;
+      }
+
+      .s1 h3 {
+        font-size: clamp(36px, 3.35vw, 54px);
+        line-height: 0.96;
+      }
+
+      .s1 h3 em {
+        color: #f4d680;
+        font-style: normal;
+      }
+
+      .s1 p {
+        max-width: 360px;
+        margin-top: 18px;
+        color: rgba(255, 253, 247, 0.9);
+      }
+
+      .s2 {
+        background: #f7ead2;
+      }
+
+      .s2 .image-band {
+        position: absolute;
+        inset: 0;
+        height: 70%;
+        overflow: hidden;
+        clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
+      }
+
+      .s2 .image-band::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(251, 247, 236, 0), rgba(247, 234, 210, 0.88));
+      }
+
+      .s2 .copy {
+        position: absolute;
+        left: 36px;
+        right: 36px;
+        bottom: 38px;
+      }
+
+      .s2 .small-tag {
+        display: inline-block;
+        margin-bottom: 14px;
+        border-bottom: 1px solid var(--gold);
+        color: var(--forest);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .s2 h3 {
+        color: var(--forest);
+        font-size: clamp(38px, 3.6vw, 58px);
+        line-height: 0.96;
+      }
+
+      .s2 p {
+        margin-top: 14px;
+        color: #49483e;
+      }
+
+      .s3 {
+        background: #f5eddd;
+      }
+
+      .s3 .full-img {
+        opacity: 0.78;
+      }
+
+      .s3::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(245, 237, 221, 0.04), rgba(245, 237, 221, 0.2));
+      }
+
+      .s3 .notebook-copy {
+        position: absolute;
+        z-index: 2;
+        left: 92px;
+        right: 116px;
+        top: 48%;
+        transform: rotate(-1.5deg);
+        text-align: center;
+      }
+
+      .s3 h3 {
+        color: var(--deep);
+        font-size: clamp(27px, 2.45vw, 34px);
+        line-height: 0.98;
+      }
+
+      .s3 p {
+        max-width: 300px;
+        margin: 10px auto 0;
+        color: #4d4c43;
+        font-size: 12px;
+      }
+
+      .s4 {
+        background:
+          radial-gradient(circle at 25% 18%, rgba(201, 160, 74, 0.2), transparent 16rem),
+          var(--deep);
+        color: var(--white);
+        padding: 36px;
+      }
+
+      .s4 h3 {
+        max-width: 390px;
+        color: var(--white);
+        font-size: clamp(31px, 2.7vw, 42px);
+        line-height: 0.98;
+      }
+
+      .s4 .sub {
+        margin-top: 12px;
+        color: rgba(255, 253, 247, 0.76);
+      }
+
+      .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .icon-card {
+        min-height: 118px;
+        border: 1px solid rgba(251, 247, 236, 0.2);
+        background: rgba(251, 247, 236, 0.08);
+        padding: 13px;
+      }
+
+      .icon {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        margin-bottom: 10px;
+        border: 1px solid rgba(243, 216, 138, 0.55);
+        border-radius: 50%;
+        color: #f3d88a;
+      }
+
+      .icon svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.8;
+      }
+
+      .icon-card b {
+        display: block;
+        color: #f3d88a;
+        font-family: Fraunces, Georgia, serif;
+        font-size: 19px;
+        font-weight: 500;
+      }
+
+      .icon-card span {
+        display: block;
+        margin-top: 5px;
+        color: rgba(255, 253, 247, 0.82);
+        font-size: 9px;
+        font-weight: 700;
+        line-height: 1.22;
+        text-transform: uppercase;
+      }
+
+      .s5 {
+        color: var(--white);
+      }
+
+      .s5::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(22, 56, 32, 0.06), rgba(22, 56, 32, 0.78)),
+          linear-gradient(90deg, rgba(22, 56, 32, 0.68), rgba(22, 56, 32, 0.06) 56%);
+      }
+
+      .s5 .copy {
+        position: absolute;
+        z-index: 2;
+        left: 36px;
+        right: 36px;
+        bottom: 48px;
+      }
+
+      .s5 h3 {
+        max-width: 410px;
+        font-size: clamp(38px, 3.5vw, 56px);
+        line-height: 0.98;
+      }
+
+      .s5 p {
+        max-width: 380px;
+        margin-top: 16px;
+        color: rgba(255, 253, 247, 0.88);
+      }
+
+      .s6 {
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 72% 16%, rgba(201, 160, 74, 0.22), transparent 16rem),
+          linear-gradient(180deg, #fcf8ed, #f3ead8);
+        padding: 44px;
+        text-align: center;
+      }
+
+      .s6::before {
+        content: "";
+        position: absolute;
+        inset: 26px;
+        border: 1px solid rgba(31, 77, 42, 0.18);
+      }
+
+      .s6 .inner {
+        position: relative;
+        z-index: 2;
+      }
+
+      .s6 .bird {
+        width: 112px;
+        margin: 0 auto 26px;
+      }
+
+      .s6 h3 {
+        color: var(--forest);
+        font-size: clamp(38px, 3.6vw, 58px);
+        line-height: 0.95;
+      }
+
+      .s6 p {
+        max-width: 390px;
+        margin: 18px auto 0;
+        color: #4d4c43;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 54px;
+        margin-top: 30px;
+        background: var(--forest);
+        color: var(--white);
+        padding: 0 26px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .slide-note {
+        margin-top: 13px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .slide-note b {
+        color: var(--forest);
+      }
+
+      .system {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 20px;
+      }
+
+      .system-card {
+        border: 1px solid rgba(31, 77, 42, 0.18);
+        background: rgba(251, 247, 236, 0.8);
+        padding: 22px;
+      }
+
+      .system-card h3 {
+        color: var(--forest);
+        font-family: Fraunces, Georgia, serif;
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 1.05;
+      }
+
+      .system-card p {
+        margin-top: 12px;
+        color: #4d4c43;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      @media (max-width: 1120px) {
+        .hero,
+        .carousel-grid,
+        .system {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .page {
+          width: min(100vw - 24px, 520px);
+          padding-bottom: 48px;
+        }
+
+        .topbar,
+        .section-head {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .meta {
+          text-align: left;
+        }
+
+        .hero,
+        .carousel-grid,
+        .system {
+          grid-template-columns: 1fr;
+        }
+
+        .brief-card {
+          padding: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand">
+          <img src="../../../../snapshot/vh-logo-transparent.png" alt="Vital Health logo">
+          <div>
+            <span class="brand-name">Vital Health</span>
+            <span class="brand-tag">Integrative Medicine</span>
+          </div>
+        </div>
+        <div class="meta">Instagram carousel concept v3<br>Preventive medicine copy</div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <div class="eyebrow">V3 direction</div>
+          <h1>Preventive medicine. <span>More curated slide rhythm.</span></h1>
+          <p class="hero-copy">This version keeps the generated image direction, but changes the copy spine to Vital Health's real story: functional, preventive care shaped by Julie's emergency medicine lens and the belief that many problems deserve attention before they become urgent.</p>
+        </div>
+        <aside class="brief-card">
+          <h2>Saved rules from feedback</h2>
+          <div class="brief-list">
+            <p><b>Hook</b> Slide 1 needs stronger curiosity and a more emotionally scroll-stopping image.</p>
+            <p><b>Images</b> Do not pull visuals directly from the website for ads. Generate aligned but new campaign assets.</p>
+            <p><b>Variety</b> Avoid repeating the same border, masthead, and frame across every slide.</p>
+            <p><b>Execution</b> Align text to the visual logic of the image, especially notebook/lab scenes.</p>
+            <p><b>Logo</b> Use the newer bird mark, not the old cropped hummingbird.</p>
+            <p><b>Copy</b> Lead with functional/preventive medicine, not vague wellness poetry.</p>
+            <p><b>Hierarchy</b> Do not make every slide a header plus subheader.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Carousel v3</div>
+            <h2>A warmer intro ad about <span>getting ahead of the problem.</span></h2>
+          </div>
+          <p>The goal is not to scare people. It is to make the preventive idea feel obvious: listen earlier, look deeper, and start with a real conversation.</p>
+        </div>
+
+        <div class="carousel-grid">
+          <article class="slide-wrap">
+            <div class="slide s1">
+              <img class="full-img" src="assets/slide-1-hands.png" alt="Warm close crop of hands resting together">
+              <div class="logo-word">
+                <img src="../../../../logo-options/bird-final-transparent.png" alt="">
+                <span>Vital Health</span>
+              </div>
+              <div class="copy">
+                <h3>Before a small signal becomes a <em>big problem.</em></h3>
+                <p>Functional care for people who would rather look deeper sooner.</p>
+              </div>
+            </div>
+            <p class="slide-note"><b>Fix:</b> stronger hook + generated emotional image. No repeated border frame.</p>
+          </article>
+
+          <article class="slide-wrap">
+            <div class="slide s2">
+              <div class="image-band">
+                <img class="full-img" src="assets/slide-2-still-life.png" alt="Generated botanical clinical still life">
+              </div>
+              <div class="copy">
+                <h3>Functional medicine looks upstream.</h3>
+                <p>Labs, history, symptoms, habits, and goals all belong in the same conversation.</p>
+              </div>
+            </div>
+            <p class="slide-note"><b>Fix:</b> new generated still-life, no website image, no cut-off text, different composition.</p>
+          </article>
+
+          <article class="slide-wrap">
+            <div class="slide s3">
+              <img class="full-img" src="assets/slide-3-consult.png" alt="Generated consultation desk with notebook and lab reports">
+              <div class="notebook-copy">
+                <h3>Her ER years made prevention personal.</h3>
+                <p>What could we notice earlier?</p>
+              </div>
+            </div>
+            <p class="slide-note"><b>Fix:</b> kept the notebook idea, added Julie's ER-to-prevention lens.</p>
+          </article>
+
+          <article class="slide-wrap">
+            <div class="slide s4">
+              <h3>The work can start in a few places.</h3>
+              <div class="icon-grid">
+                <div class="icon-card">
+                  <div class="icon"><svg viewBox="0 0 48 48"><circle cx="13" cy="17" r="4"></circle><circle cx="24" cy="24" r="4"></circle><circle cx="35" cy="31" r="4"></circle><path d="M16 18l5 4M27 26l5 4"></path></svg></div>
+                  <b>Peptides</b>
+                  <span>recovery + vitality</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon"><svg viewBox="0 0 48 48"><path d="M24 6l14 8v16l-14 8-14-8V14z"></path><path d="M18 20h12M18 28h12M24 14v20"></path></svg></div>
+                  <b>Hormones</b>
+                  <span>lab-aware balance</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon"><svg viewBox="0 0 48 48"><rect x="9" y="12" width="30" height="26" rx="3"></rect><path d="M15 25h18M24 18v14"></path></svg></div>
+                  <b>Weight</b>
+                  <span>supervised support</span>
+                </div>
+                <div class="icon-card">
+                  <div class="icon"><svg viewBox="0 0 48 48"><path d="M24 8c-7 7-7 15 0 24 7-9 7-17 0-24z"></path><path d="M14 27c2 6 6 9 10 9s8-3 10-9"></path></svg></div>
+                  <b>Wellness</b>
+                  <span>rejuvenation options</span>
+                </div>
+              </div>
+            </div>
+            <p class="slide-note"><b>Fix:</b> kept the concept, reduced white space, added icons and denser visual rhythm.</p>
+          </article>
+
+          <article class="slide-wrap">
+            <div class="slide s5">
+              <img class="full-img" src="assets/slide-5-walking.png" alt="Generated outdoor walking scene in warm morning light">
+              <div class="copy">
+                <h3>Prevention is a quieter kind of care.</h3>
+                <p>Energy, hormones, weight, recovery, and longevity deserve context before things feel urgent.</p>
+              </div>
+            </div>
+            <p class="slide-note"><b>Kept:</b> this slide direction worked. V2 uses a generated outdoor lifestyle image.</p>
+          </article>
+
+          <article class="slide-wrap">
+            <div class="slide s6">
+              <div class="inner">
+                <img class="bird" src="../../../../logo-options/bird-final-transparent.png" alt="Vital Health newer hummingbird mark">
+                <h3>Start before it feels urgent.</h3>
+                <p>Book a complimentary consultation. Thirty minutes, no cost, no pressure.</p>
+                <div class="button">Book a consultation</div>
+              </div>
+            </div>
+            <p class="slide-note"><b>Fix:</b> CTA kept quiet, but switched to the newer bird mark.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Reusable workflow</div>
+            <h2>What this teaches the system.</h2>
+          </div>
+          <p>The future automation should store critique as rules before regenerating. This pass adds a copy rule: extract the true strategic spine from the business, not just the visual vibe.</p>
+        </div>
+        <div class="system">
+          <div class="system-card">
+            <h3>1. Never clone the site</h3>
+            <p>The site is a brand source, not an image source. Ads need new campaign assets that feel adjacent.</p>
+          </div>
+          <div class="system-card">
+            <h3>2. Hook earns slide 2</h3>
+            <p>The cover image and line must create enough curiosity or emotion to make swiping feel worthwhile.</p>
+          </div>
+          <div class="system-card">
+            <h3>3. Variety is structural</h3>
+            <p>Different images are not enough if every slide has the same border and header treatment.</p>
+          </div>
+          <div class="system-card">
+            <h3>4. Copy follows truth</h3>
+            <p>For Vital Health, the truth is preventive functional medicine shaped by emergency medicine experience.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

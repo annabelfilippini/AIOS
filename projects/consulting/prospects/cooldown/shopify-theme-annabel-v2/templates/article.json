@@ -1,0 +1,237 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_6ATD4c": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/On_Running_x_Cool_Down_Opening_-3.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "content": {
+          "type": "content",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "content",
+        "share"
+      ],
+      "settings": {}
+    },
+    "rich_text_C6Ufe3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_wpHpDh": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p><strong>Desk Job Wellness: The Ultimate Guide to Staying Fresh & Fit at Work</strong></p>",
+            "heading_size": "h1"
+          }
+        },
+        "text_mYCqz6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Desk job got you down? Craving a healthy dose of movement throughout the day? Don’t fret, we’ve got you covered with the ultimate Cooldown guide to desk job wellness. Revolutionize that desk job and stay fresh and fit, Cooldown style, with these essential wellness tips. </p><h2><strong>1. Virtual Walking Meetings </strong></h2><p>Swap those sit-down meetings for a stroll outside. Grab your phone, catch some vitamin D, and breathe in the fresh air. <a href=\"https://chphealthmt.org/news/what-fresh-air-does-for-your-health\"><span style=\"text-decoration:underline\">Getting outside</span></a> is a win-win for your mind and body; boost those happy hormones and melt the stress away. </p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wpHpDh",
+        "text_mYCqz6"
+      ],
+      "custom_css": [
+        "p {color: #000000; font-family: \"Athletics-Regular\" !important; line-height: 29px; font-size: 16px; max-width: 800px; text-align: left; font-weight: normal;}",
+        "@media (max-width: 749px) {p {text-align: center; } p strong {display: block; margin-right: 0; }}"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "image_banner_m3XLLj": {
+      "type": "image-banner",
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/wellness_tips_for_young_professionals.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "adapt_height_first_image": true,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "multicolumn_AdJUKF": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_RHra3x": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/wellness_tips_for_young_professionals.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_xiMtKC": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/womens_running_clothes.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_RHra3x",
+        "column_xiMtKC"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "background-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_AHyPWW": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_qiQiYX": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/wellness_tips_for_young_professionals.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_qiQiYX"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "half",
+        "image_ratio": "square",
+        "columns_desktop": 2,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "background-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "image_with_text_Bhamqh": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_8zaVQR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Virtual Walking Meetings",
+            "heading_size": "h2"
+          }
+        },
+        "text_jnPggY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Swap those sit-down meetings for a stroll outside. Grab your phone, catch some vitamin D, and breathe in the fresh air. <a href=\"https://chphealthmt.org/news/what-fresh-air-does-for-your-health\"><span style=\"text-decoration:underline\">Getting outside</span></a> is a win-win for your mind and body; boost those happy hormones and melt the stress away.</p>",
+            "text_style": "body"
+          }
+        },
+        "caption_TEHY8A": {
+          "type": "caption",
+          "settings": {
+            "caption": "Swap those sit-down meetings for a stroll outside. Grab your phone, catch some vitamin D, and breathe in the fresh air. Getting outside is a win-win for your mind and body; boost those happy hormones and melt the stress away.",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8zaVQR",
+        "text_jnPggY",
+        "caption_TEHY8A"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "image": "shopify://shop_images/wellness_tips_for_young_professionals.jpg",
+        "height": "small",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "mobile-image": "image_show",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "image_banner_6ATD4c",
+    "main",
+    "rich_text_C6Ufe3",
+    "image_banner_m3XLLj",
+    "multicolumn_AdJUKF",
+    "multicolumn_AHyPWW",
+    "image_with_text_Bhamqh"
+  ]
+}

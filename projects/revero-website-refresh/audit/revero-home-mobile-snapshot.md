@@ -1,0 +1,79 @@
+- generic [active] [ref=e1]:
+  - region "Cookie and Tracking Consent" [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - heading "Cookie and Tracking Consent" [level=2] [ref=e5]
+        - paragraph [ref=e6]: We use cookies and similar technologies to improve your experience, deliver personalized content, and analyze our traffic. You can choose to accept all cookies or manage your preferences.
+      - generic [ref=e7]:
+        - generic [ref=e8]
+        - button "Show Preferences" [ref=e12] [cursor=pointer]
+  - generic [ref=e16]:
+    - generic:     
+    - generic [ref=e17]:
+      - generic:
+        - generic:  ›
+      - text: 
+      - generic [ref=e550]:
+        - heading "Take back your health" [level=1] [ref=e552]
+        - paragraph [ref=e558]
+      - generic [ref=e565]:
+        - img [ref=e567]
+        - generic [ref=e568]
+      - generic [ref=e576]:
+        - generic [ref=e579]
+        - link "Learn more about the Revero Treatment" [ref=e643] [cursor=pointer]:
+          - /url: /how-it-works
+      - generic [ref=e646]:
+        - generic [ref=e649]
+        - generic [ref=e659]
+        - generic [ref=e670]
+      - generic [ref=e679]:
+        - heading "Smart clinic and care team in your pocket" [level=1] [ref=e681]
+        - heading "Our mobile application provides access to medical providers and health coaches on an on-going basis, with advanced technology and remote patient monitoring capabilities which enables personalized care plans for all our patients." [level=2] [ref=e685]
+        - generic [ref=e687]
+      - text:  
+      - generic [ref=e695]:
+        - generic [ref=e698]
+        - generic [ref=e708]
+        - generic [ref=e739]
+      - generic [ref=e746]:
+        - heading "Call us at (415) 835-4151 for a free info call" [level=1] [ref=e748]
+        - heading "You can talk to our enrollment advisors for free to learn more. You can call now at (415) 835-4151 or schedule a call at your convenience for more information." [level=2] [ref=e751]
+        - generic [ref=e753]
+      - generic [ref=e762]:
+        - link [ref=e766] [cursor=pointer]:
+          - /url: https://www.revero.com/
+        - generic [ref=e768]
+      - text: 
+      - generic [ref=e182]:
+        - generic [ref=e185]
+        - generic [ref=e198]
+        - generic [ref=e228]
+      - text:    
+      - generic [ref=e335]:
+        - heading "What if medicine treated the Cause, not the symptoms?" [level=1] [ref=e337]
+        - heading "Here's how Revero is different." [level=1] [ref=e341]
+        - generic [ref=e347]
+        - generic [ref=e378]
+      - generic [ref=e386]:
+        - heading "Our members say it best" [level=1] [ref=e391]
+        - generic [ref=e393]
+        - link "See more success stories" [ref=e428] [cursor=pointer]:
+          - /url: https://www.revero.com/testimonials
+      - text:  
+      - generic [ref=e783]:
+        - link [ref=e787] [cursor=pointer]:
+          - /url: https://www.revero.com/
+        - generic [ref=e789]
+      - generic:
+        - generic:      
+      - generic [ref=e808]:
+        - img [ref=e810]
+        - paragraph [ref=e812]
+        - link "Contact us now" [ref=e815] [cursor=pointer]:
+          - /url: https://revero.zendesk.com/hc/en-us
+        - navigation [ref=e818]
+        - generic [ref=e828]
+        - generic [ref=e851]
+        - generic [ref=e866]
+  - text: 

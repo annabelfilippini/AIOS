@@ -1,0 +1,74 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_WzKzdy": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_mAJwNN": {
+          "type": "heading",
+          "settings": {
+            "heading": "Returns & Exchanges",
+            "heading_size": "h1"
+          }
+        },
+        "text_jccVF6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>If the fear of buying the wrong size gets you heated, we keep it cool; returns and exchanges easy. <strong>Undamaged, unused clothes can be returned or exchanged within 15 days. </strong>You will just pay the shipping fee to ship the product back to us.</p><p></p><p>Fill out this form to start your return process!</p>",
+            "text_style": "body"
+          }
+        },
+        "button_XBznLY": {
+          "type": "button",
+          "settings": {
+            "button_label": "start your return",
+            "button_link": "https://cooldown.loopreturns.com/#/"
+          }
+        }
+      },
+      "block_order": [
+        "heading_mAJwNN",
+        "text_jccVF6",
+        "button_XBznLY"
+      ],
+      "custom_css": [
+        ".image-with-text__text p {margin-bottom: 3rem;}",
+        ".image-with-text__text p strong {font-family: Athletics-ExtraBold !important;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/returns.jpg",
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "mobile-image": "image_hide",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_WzKzdy"
+  ]
+}

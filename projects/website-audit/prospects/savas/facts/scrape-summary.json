@@ -1,0 +1,22 @@
+{
+  "yelp": {
+    "url": "https://www.yelp.com/biz/savas-ann-arbor",
+    "ok": true,
+    "note": "ok"
+  },
+  "opentable": {
+    "url": "https://www.opentable.com/savas",
+    "ok": false,
+    "note": "weak (len=139)"
+  },
+  "google": {
+    "url": "https://www.google.com/search?q=Savas+Ann+Arbor+hours+phone+address+reviews",
+    "ok": true,
+    "note": "ok"
+  },
+  "tock": {
+    "url": "https://www.exploretock.com/savas",
+    "ok": true,
+    "note": "ok"
+  }
+}

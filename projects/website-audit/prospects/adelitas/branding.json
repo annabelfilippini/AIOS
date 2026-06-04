@@ -1,0 +1,106 @@
+{
+  "color_scheme": "light",
+  "logo": null,
+  "fonts": [
+    {
+      "family": "Times New Roman",
+      "role": "body"
+    },
+    {
+      "family": "Helvetica",
+      "role": "body"
+    },
+    {
+      "family": "Arial",
+      "role": "body"
+    },
+    {
+      "family": "DIN Condensed Black",
+      "role": "heading"
+    },
+    {
+      "family": "Beyond The Mountains",
+      "role": "display"
+    }
+  ],
+  "colors": {
+    "primary": "#E59A2A",
+    "secondary": "#F26522",
+    "accent": "#F6861F",
+    "background": "#FBFBFA",
+    "textPrimary": "#000000",
+    "link": "#F6861F"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Times New Roman",
+      "heading": "DIN Condensed Black"
+    },
+    "fontStacks": {
+      "heading": [
+        "DIN Condensed Black"
+      ],
+      "body": [
+        "Times New Roman"
+      ],
+      "paragraph": [
+        "DIN Condensed Regular"
+      ]
+    },
+    "fontSizes": {
+      "h1": "22px",
+      "h2": "45px",
+      "body": "22px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 2,
+    "borderRadius": "0px"
+  },
+  "components": {},
+  "icons": null,
+  "images": {
+    "favicon": "https://static.showit.co/200/S7S03sb2RbOcuP_guZFsAA/158265/favicon-2.png",
+    "ogImage": "https://static.showit.co/1200/a7QpByL7R8OxQOTmyVNGSw/158265/adelitas_-_social_media_shared_image_preview_1.jpg"
+  },
+  "animations": null,
+  "layout": null,
+  "tone": null,
+  "personality": {
+    "tone": "traditional",
+    "energy": "medium",
+    "targetAudience": "Families and individuals seeking authentic Mexican cuisine in Denver."
+  },
+  "__llm_logo_reasoning": {
+    "selectedIndex": -1,
+    "reasoning": "No valid brand logo - only tiny/invisible/UI icons. None of the candidates are suitable as a main brand logo for Adelitas.",
+    "confidence": 0.3,
+    "rejected": true,
+    "source": "llm"
+  },
+  "designSystem": {
+    "framework": "custom",
+    "componentLibrary": ""
+  },
+  "confidence": {
+    "buttons": 0,
+    "colors": 0.9,
+    "overall": 0.45
+  },
+  "__llm_metadata": {
+    "logoSelection": {
+      "llmCalled": true,
+      "llmSucceeded": true,
+      "finalSource": "llm",
+      "rawLogoSelection": {
+        "selectedLogoIndex": -1,
+        "selectedLogoReasoning": "No valid brand logo - only tiny/invisible/UI icons. None of the candidates are suitable as a main brand logo for Adelitas.",
+        "confidence": 0.3
+      }
+    },
+    "buttonClassification": {
+      "llmCalled": false,
+      "llmSucceeded": false
+    }
+  }
+}

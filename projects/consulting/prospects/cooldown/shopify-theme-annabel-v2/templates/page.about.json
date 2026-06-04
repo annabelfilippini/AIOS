@@ -1,0 +1,266 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "5292ce00-b679-4fbb-87b4-d4dcef07eab5": {
+      "type": "image-banner",
+      "blocks": {
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "franchise a cooldown",
+            "heading_size": "h0"
+          }
+        },
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-1": {
+          "type": "text",
+          "settings": {
+            "text": "want to bring the cooldown movement to your local community? been itching to build something of your own? love community, leadership, and (yes) running? you're in the right place",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": [
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-0",
+        "template--16892992553234__5292ce00-b679-4fbb-87b4-d4dcef07eab5-167243769962f687dd-1"
+      ],
+      "custom_css": [
+        "h2 {color: white;}",
+        ".banner__text {color: white; line-height: 1.4; font-size: 20px;}",
+        "@media screen and (max-width: 767px) {h2 {font-size: 38px !important; max-width: 180px; margin: 0 auto 30vh; line-height: 1; }}",
+        "@media screen and (max-width: 767px) {.banner__text {font-size: 16px !important; } .banner--large:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {min-height: 59rem; } .banner--large.banner--stacked:not(.banner--mobile-bottom):not(.banner--adapt) > .banner__media {height: 59rem; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Screenshot_2026-01-30_at_1.12.03_PM.png",
+        "image_2": "shopify://shop_images/about-mobile.jpg",
+        "image_overlay_opacity": 20,
+        "image_height": "large",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    },
+    "rich_text_XfabiF": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_R8Bndi": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>what this actually is</p>",
+            "heading_size": "h1"
+          }
+        },
+        "text_EGXihP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>starting a Cooldown means <strong>building </strong><em><strong>your</strong></em><strong> run club</strong>, powered by cooldown.</p><p>you’ll lead your local chapter, shape the culture, and create a space people genuinely want to show up for. think founder energy, but with support — not starting from scratch.</p><p>it’s entrepreneurial. it’s community-driven. and it’s very much <em>your thing</em>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_R8Bndi",
+        "text_EGXihP"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-2",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "17698054352f3ea409": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1e6f52d_hCyi4g": {
+          "type": "ai_gen_block_1e6f52d",
+          "settings": {
+            "layout": "image_first",
+            "mobile_layout": "image_first",
+            "desktop_width_percent": 100,
+            "image": "shopify://shop_images/ALP-CooldownDC-21.jpg",
+            "heading": "what this means for you",
+            "description": "<h2>your role</h2><ul><li>own and lead your local Cooldown</li><li>build an inclusive, social run community</li><li>set the vibe + grow something real</li><li>be the go-to person for runners in your city</li><li>promote your cooldown run club within your community</li></ul><h2>our role</h2><ul><li>give you the brand, tools, and playbook</li><li>support you every step of the way</li><li>help you grow and sustain your community</li><li>connect you with a nationwide network of leaders<br/></li></ul><p>you bring the people. we bring the support.</p>",
+            "button_text": "Learn more",
+            "button_link": "",
+            "text_vertical_alignment": "flex-start",
+            "text_horizontal_alignment": "flex-start",
+            "text_padding": 50,
+            "text_spacing": 20,
+            "heading_size": 32,
+            "text_size": 16,
+            "text_background_color": "#f4f3f2",
+            "heading_color": "#191919",
+            "text_color": "#162f4b",
+            "button_background_color": "#162f4b",
+            "button_text_color": "#ffffff",
+            "button_hover_color": "#b292e7",
+            "button_border_radius": 0
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_1e6f52d_tYhRei": {
+          "type": "ai_gen_block_1e6f52d",
+          "settings": {
+            "layout": "text_first",
+            "mobile_layout": "image_first",
+            "desktop_width_percent": 100,
+            "image": "shopify://shop_images/Screenshot_2025-12-18_at_12.15.02_PM.png",
+            "heading": "who this is for",
+            "description": "<p>you don’t need to be elite. you <em>do</em> need to love people.</p><p>If you’re:</p><ul><li>social, motivated, and community-obsessed</li><li>enjoy making content or capturing events</li><li>looking for a passion project with purpose</li><li>excited to lead and build something meaningful<br/></li></ul><p><em>you’ll fit right in.</em></p>",
+            "button_text": "Learn more",
+            "button_link": "",
+            "text_vertical_alignment": "center",
+            "text_horizontal_alignment": "flex-start",
+            "text_padding": 40,
+            "text_spacing": 20,
+            "heading_size": 32,
+            "text_size": 16,
+            "text_background_color": "#f4f3f2",
+            "heading_color": "#191919",
+            "text_color": "#191919",
+            "button_background_color": "#162f4b",
+            "button_text_color": "#ffffff",
+            "button_hover_color": "#b292e7",
+            "button_border_radius": 10
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1e6f52d_hCyi4g",
+        "ai_gen_block_1e6f52d_tYhRei"
+      ],
+      "settings": {}
+    },
+    "rich_text_phErhx": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_mGFQGm": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>ready to start something special?</p>",
+            "heading_size": "h1"
+          }
+        },
+        "text_JCiaAD": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_rt4V3c": {
+          "type": "button",
+          "settings": {
+            "button_label": "apply here",
+            "button_link": "https://docs.google.com/forms/d/e/1FAIpQLSdFZW24P2ZbQNaAnIMJZcjoe6EfIAwEvbkTVGbqqhj8hZvTSg/viewform?usp=header",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_mGFQGm",
+        "text_JCiaAD",
+        "button_rt4V3c"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-2",
+        "full_width": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "bio_columns_pzbnzJ": {
+      "type": "bio-columns",
+      "blocks": {
+        "column_nRmKVG": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/IMG_9337.jpg",
+            "title": "Bailey Ness",
+            "insta_name": "@baileynesss",
+            "grew": "St. Paul, MN",
+            "current-loc": "Denver, CO",
+            "bio": "<p>Bailey went to the University of Minnesota where she ran Cross Country and Track. Her main focuses were staying warm and not failing out. After forging her diploma in Canva, she created her own social media marketing agency. Although she is very self-driven, her actual driving skills remain subpar at best.</p>",
+            "favorite": "<p>Colorful clothing, cute coffee shops, tropical vacations, my friends</p>",
+            "past": "<p>Ran track and field at the University of Minnesota</p>",
+            "currently": "<p>Founder of a social media  marketing agency, Nessessity</p>",
+            "memory": "<p>Running the NYC Marathon with 50,000 of my closest friends</p>"
+          }
+        },
+        "column_3nRQBn": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/IMG_9314.jpg",
+            "title": "Daniel Belk",
+            "insta_name": "@daniel__belk",
+            "grew": "Colorado Springs, CO",
+            "current-loc": "Denver, CO",
+            "bio": "<p>Daniel is a former UNC track athlete turned entrepreneur who co-founded Cooldown to bring people together through running and create gear that actually works for runners. After building his Colorado-based commercial real estate portfolio, he shifted focus to something more personal—combining his love for sport, style, and community. When he’s not working you can catch Daniel enjoying a good workout, doing anything outdoors, or spending quality time with his family.</p>",
+            "favorite": "<p>Snowboarding and surfing trips</p>",
+            "past": "<p>400m athlete at UNC</p>",
+            "currently": "<p>Co-founder of Ivywild Capital, a boutique real estate private equity company</p>",
+            "memory": "<p>Any 4x400m relay</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_nRmKVG",
+        "column_3nRQBn"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 749px) {.multicolumn-list {margin-bottom: 60px; }}",
+        "slider-component {max-height: none;}"
+      ],
+      "settings": {
+        "title": "meet our founders",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 2,
+        "column_alignment": "left",
+        "background_style": "none",
+        "columns_mobile": "1",
+        "padding_top": 32,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "5292ce00-b679-4fbb-87b4-d4dcef07eab5",
+    "rich_text_XfabiF",
+    "17698054352f3ea409",
+    "rich_text_phErhx",
+    "bio_columns_pzbnzJ"
+  ]
+}

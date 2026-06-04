@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_ah6qKr": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_G6ncWL": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Movement Together</p>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_G6ncWL"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "run_club_grid_RVw4qh": {
+      "type": "run-club-grid",
+      "blocks": {
+        "column_WWyeCH": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/4KSWk_MyVzLBiVj6FFgktWv-9JyZQqqVVGcIeZDTRF5Bw4sT_H9RF5tnwUs9ekaE_3-GCaoJEbkSfDbrdDsZDySNGO0Mds9ls4i6Ih2UIvbPhuow0Wc6VIMFzPAF.jpg",
+            "title": "Cooling Down with Cooldown",
+            "state": "",
+            "page_link": ""
+          }
+        },
+        "column_9tPGeH": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/C22Jf6CX7Y_ZmA6qN8JFDpB_6_Pran0nHHT81ZacVkagPNmKtBUlMIX4cxu_BNiIEpBZYzIlRLWsIe0wV7ojLyvWwFgoDnx_PHvkZ6QelvmYLJmmgSVZ1IPxOUFY.jpg",
+            "title": "Desk Job Wellness",
+            "state": "The Ultimate Guide to Staying Fresh & Fit at Work",
+            "page_link": ""
+          }
+        },
+        "column_VwzcUJ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/July-Cooldown-6366_1.jpg",
+            "title": "Cooldown with an Evening Ritual",
+            "state": "",
+            "page_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_WWyeCH",
+        "column_9tPGeH",
+        "column_VwzcUJ"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_ah6qKr",
+    "run_club_grid_RVw4qh"
+  ]
+}
