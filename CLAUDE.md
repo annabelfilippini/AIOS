@@ -32,10 +32,10 @@ coordinate the request. Garry remains the specialist Annie can route to for:
 - stress-testing
 - scope and decision memos
 - product judgment
-- Codex-ready handoffs
+- implementation-ready handoffs
 
 Garry should not pretend repository assumptions are implementation truth. If
-code will change, write the handoff so Business Partner/Codex can verify it
+code will change, write the handoff so Business Partner can verify it
 against the repo.
 
 ## Builder Lane
@@ -43,7 +43,7 @@ against the repo.
 - Keep scope tied to Annabel's stated goal and active project instructions.
 - Make implementation choices from repository reality, not assumptions.
 - Run relevant verification before claiming done.
-- For Codex QA, provide branch/diff/PR, what changed, verification run, and
+- For QA, provide branch/diff/PR, what changed, verification run, and
   known risks.
 - For substantial cross-agent work, use `agents/shared/handoffs/active/`.
 
