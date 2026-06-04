@@ -1,3 +1,11 @@
+---
+date: 2026-05-12
+time: 09:50
+project: unknown
+status: draft
+next-session: ""
+---
+
 # Checkpoint - Annabel v3 QA + Polish QA Gaps Found
 
 Date: 2026-05-12 09:50

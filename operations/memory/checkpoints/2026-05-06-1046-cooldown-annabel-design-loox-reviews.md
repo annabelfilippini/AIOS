@@ -1,6 +1,13 @@
+---
+date: 2026-05-06
+time: 10:46
+project: unknown
+status: draft
+next-session: ""
+---
+
 # Checkpoint: Cooldown Annabel Design Loox Reviews Placement
 
-Date: 2026-05-06
 Project: `projects/consulting/prospects/cooldown/shopify-theme`
 
 ## Session Intent
@@ -24,51 +31,15 @@ That was not the draft Annabel meant in Shopify admin.
 
 ## Theme Changes Made
 
-Changed files:
+Placed Loox reviews directly under the “Others loved” recommendations grid using Loox-owned container markup (not a hard-embedded iframe), plus light CSS cleanup and removal of prior iframe hacks:
 
-- `sections/product-recommendations.liquid`
-  - Added a `product-recommendations__reviews` block directly under the `Others loved` recommendations grid.
-  - Uses Loox-owned markup:
-    - `id="looxReviews"`
-    - `class="loox-reviews-default"`
-    - `data-product-id="{{ product.id }}"`
-    - `{{ product.metafields.loox.reviews }}`
-  - This avoids manually embedding the Loox iframe.
-- `assets/base.css`
-  - Added spacing/max-width styling for `.product-recommendations__reviews`.
-  - Removed iframe height hacks from the earlier failed attempt.
-- `assets/global.js`
-  - Removed earlier Loox iframe mutation/height fallback script.
-- Product JSON templates:
-  - `templates/product.json`
-  - `templates/product.alkal-short.json`
-  - `templates/product.cooldown-tee.json`
-  - `templates/product.emmy-short.json`
-  - `templates/product.mikelle-bra.json`
-  - `templates/product.swillz-tank.json`
-  - Removed the separate trailing Loox app section from template order so reviews are no longer floating as a separate section after recommendations.
+- `sections/product-recommendations.liquid` (adds `#looxReviews` container fed by `product.metafields.loox.reviews`)
+- `assets/base.css`, `assets/global.js`
+- `templates/product*.json` (removed trailing Loox app section so reviews don’t float after recommendations)
 
 ## Important Debugging Notes
 
-Failed approaches:
-
-1. CSS-only height override for `#looxReviewsFrame`
-   - Loox kept setting the iframe inline to `height:0` on localhost.
-2. Moving Loox app block into `product-recommendations`
-   - Shopify rejected this with upload errors: `App blocks are not accepted in this context.`
-3. Manually embedding the Loox iframe under recommendations
-   - On localhost, the iframe showed a broken-file icon.
-   - This was the screenshot Annabel shared.
-
-Working approach:
-
-- Use Loox’s own product review container markup under `product-recommendations`.
-- Let Loox generate and manage the iframe itself.
-
-Localhost caveat:
-
-- Full Loox reviews do not render reliably on `127.0.0.1:9295`.
-- The store-domain preview is the source of truth for Loox review rendering.
+Localhost caveat: Loox reviews can be misleading on `127.0.0.1:9295`; store-domain preview is source of truth. Working approach is to let Loox generate/manage the iframe itself via its container markup.
 
 ## Pushes Performed
 

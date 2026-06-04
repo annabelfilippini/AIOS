@@ -1,6 +1,13 @@
+---
+date: 2026-05-11
+time: 15:07
+project: unknown
+status: draft
+next-session: ""
+---
+
 # Checkpoint: Wayloft Doc Cleanup And Travel-First Reset
 
-**Date:** 2026-05-11
 **Project:** `/Users/annabelfilippini/Documents/AI-OS/projects/wayloft`
 **Purpose:** Fresh-terminal handoff after organizing Wayloft docs and reducing
 default context load.
@@ -34,19 +41,7 @@ Active routing/docs:
   dump to a scoped active plan.
 - `DESIGN.md` remains active because it is compact and useful for UI work.
 
-Archived historical docs:
-
-- `WAYLOFT-MASTER-PLAN-V3.md`
-- `WAYLOFT-BUILD-PLAN.md`
-- `WAYLOFT-UX-HANDOFF.md`
-- `WAYLOFT-ENG-REVIEW.md`
-- `docs/CLAUDE.full.md`
-- `docs/wayloft-three-layer-funnel-design.md`
-- `Tech Stack.md`
-
-They now live in:
-
-`docs/archive/2026-05-doc-cleanup/`
+Archived older plans/hand-offs into `docs/archive/2026-05-doc-cleanup/` so the default read-path stays small.
 
 ## Current Product Direction
 
@@ -82,29 +77,11 @@ Allowed travel data sources for current work:
 The worktree was already dirty before this doc cleanup. Do not assume every
 dirty file belongs to this pass.
 
-Known current work in flight from this session:
-
-- Travel-first UI wording/order changes under `apps/web/app/(app)/travel` and
-  related travel components.
-- New/updated docs from the reset and cleanup.
-- Archived/moved historical docs.
-- Pre-existing unrelated dirty files include `.mcp.json`,
-  `scripts/daily-community-scan.sh`, `.claude/skills/`, `apps/web/scripts/`,
-  and `scripts/award-intel-probe.mjs`.
+Known in-flight work includes travel UI tweaks + doc edits; repo also had pre-existing unrelated dirty files before this pass.
 
 ## Verification
 
-After the prior travel UI pass:
-
-- `pnpm --dir apps/web type-check` passed.
-- Targeted ESLint for changed travel files passed.
-- Full repo lint still had unrelated pre-existing lint debt.
-
-After doc cleanup:
-
-- Active docs outside archive plus `DESIGN.md` are about 1,100 lines.
-- Default fresh-terminal read path is intended to be only `CLAUDE.md` and
-  `docs/README.md`, then one task-specific doc.
+After doc cleanup: default read path is `CLAUDE.md` + `docs/README.md`, then one task-specific doc. (Prior travel UI pass had type-check + targeted lint passing.)
 
 ## Recommended Next Move
 
