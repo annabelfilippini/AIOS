@@ -37,3 +37,4 @@
 {"timestamp":"2026-06-02T07:42:07.477Z","type":"skill","id":"guardrails-lite","agent":"codex","note":"Bounded apartment tracker expansion around authenticated scraping and anti-bot/access-control constraints.","source":"apartment-hunt"}
 {"timestamp":"2026-06-02T18:44:05.326Z","type":"cli","id":"windguru","agent":"codex","note":"Used live Windguru forecasts for Tarifa/Algarve/Andalusia kitesurf routing on 2026-06-03/04.","source":"cli-connections/windguru"}
 {"timestamp":"2026-06-04T09:04:14.452Z","type":"skill","id":"checkpoint","agent":"codex","note":"Saved Hermes VPS and AI-OS Git sync checkpoint for next-session continuity","source":"codex-session"}
+{"timestamp":"2026-06-05T11:22:02.512Z","type":"skill","id":"checkpoint","agent":"codex","note":"Saved Copenhagen short trip planning checkpoint","source":"manual"}
