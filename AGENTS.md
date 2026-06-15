@@ -27,6 +27,13 @@ Universal operating rules for coding agents and LLM runtimes in this AI-OS.
 - Operational docs live in `operations/`.
 - `_system/` is legacy compatibility unless a tool still requires it.
 - `wiki` is a compatibility symlink to `knowledge`.
+- Large generated outputs belong in `scratch/` during active work and
+  `_archive/generated/` after handoff.
+- Preview/QA screenshots must NOT be dropped at the repo root. Save them under
+  the relevant `projects/<project>/` folder (e.g. that project's `assets/` or
+  `scratch/`) and delete them once they have served their purpose. Loose
+  root-level images (`/*.png`, `/*.jpeg`, `/*.jpg`) are git-ignored and treated
+  as disposable, so anything left there is fair game to clean up.
 - Project-specific instructions override root guidance when more specific.
 - Prefer targeted project docs over broad AI-OS searches.
 
@@ -132,3 +139,35 @@ Use `agents/annie/` as Annie's source of truth. Annie is the default routing lay
 - Weekly Sunday consolidation proposes permanent updates from real session evidence and cleans stale memory.
 
 Before `/clear`, `/new`, or a project switch, prefer saving a short checkpoint if the current session produced reusable decisions or open loops.
+
+## Stack
+
+This is the stack reality at the AI-OS root level. Do NOT assume anything
+beyond what is listed here. Project folders carry their own `## Stack` section
+that overrides or extends this one.
+
+**Configured at the AI-OS / system level:**
+
+- Claude Code CLI (`~/.claude/`) and Codex CLI (`~/.codex/`) as peer runtime
+  adapters. Other capable runtimes (for example Hermes) operate from these same
+  rules.
+- Git for all version control.
+- AI-OS memory and checkpoint system under `operations/memory/`.
+- Shared AI-OS skills, standards, and CLI connections are available to all
+  capable runtimes, not owned by any one runtime.
+- MCP servers available in-session: Telegram, Playwright, Stitch, Firecrawl,
+  Google (Gmail/Calendar/Drive).
+
+**Skool content scraping:** use `skool-curl`, not generic web scraping.
+
+**Explicitly NOT configured at the root level** (do not assume; ask before
+introducing):
+
+- Dropbox, Supabase, Cloudflare, Claude Teams.
+- Any deploy or hosting target (Vercel, Netlify, etc.), declared per-project.
+- Any analytics, billing, or CRM tool.
+
+**For project folders:** add a `## Stack` section to that project's
+`CLAUDE.md` or `AGENTS.md` listing the tools that ARE configured for that
+project, the deploy target if any, and an explicit "not assumed" line for tools
+that adjacent projects use but this one does not.
