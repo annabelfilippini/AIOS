@@ -9,13 +9,10 @@ in the current runtime.
 
 ## Read Only What Applies
 
-- Read `AGENTS.md` for universal AI-OS rules.
+- Read `AGENTS.md` first for the universal AI-OS rules (routing, agent roles,
+  workspace, stack). It is the source of truth; this file only adds
+  Claude-runtime specifics.
 - Read project-specific `CLAUDE.md` or `AGENTS.md` before broad searches.
-- Read `agents/agent.md` when coordinating Annie, Garry, and Business Partner.
-- Read `agents/garry/README.md` when Annabel explicitly wants Garry or
-  strategy/planning work.
-- Read `agents/annie/README.md` when the request involves orchestration,
-  inbox/calendar/docs, follow-through, or personal/business operations.
 - Read `SOUL.md` or `USER.md` only when voice, preference, or personal context
   matters.
 
@@ -49,33 +46,17 @@ against the repo.
 
 ## Source Of Truth
 
-- Agent coordination: `agents/agent.md`
-- Garry identity and commands: `agents/garry/`
-- Annie identity and SOPs: `agents/annie/`
-- Business Partner identity and SOPs: `agents/business-partner/`
-- Global skills for all capable runtimes: `skills/`
-- Global CLI/tool connections: `cli-connections/`
-- Cross-agent handoffs, QA, and templates: `agents/shared/`
-- Durable memory/checkpoints: `operations/memory/`
-- Knowledge vault: `knowledge/`
-- Active project work: `projects/<project>/`
-
-Runtime folders like `~/.claude/skills` and `~/.codex/skills` should point to
-top-level `skills/`. They are adapters, not source-of-truth copies.
+The folder map (agents, skills, cli-connections, shared handoffs/QA, memory,
+knowledge, projects) is universal and lives in `AGENTS.md` (`## Workspace
+Rules`). Claude-runtime note: `~/.claude/skills` should symlink to the top-level
+`skills/` rather than hold its own copies.
 
 ## Workspace Rules
 
-- This root is an index, not a working project.
-- Work inside `projects/<project>/` for project work.
-- Project-specific instructions override root guidance.
-- On session start or project switch, run
-  `node operations/memory/scripts/recall.mjs --cwd "$PWD" --query "<task>"`
-  and use the surfaced checkpoints/candidates before reading memory broadly.
-- `wiki` is a compatibility symlink to `knowledge`.
-
-Generated-output and screenshot-placement rules are universal and live in
-`AGENTS.md` (`## Workspace Rules`). Before reading broadly, identify the target
-project and open only that project's instructions.
+Workspace rules are universal and live in `AGENTS.md` (`## Workspace Rules`),
+including the `recall.mjs` session-start step and generated-output/screenshot
+placement. Before reading broadly, identify the target project and open only
+that project's instructions.
 
 ## Stack
 
