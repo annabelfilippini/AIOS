@@ -1,6 +1,11 @@
 # macOS
 .DS_Store
 
+# iCloud/file-sync conflict copies (e.g. "name 2.md", "name 3.json")
+*[ ][2-9].*
+*[ ][2-9]
+*.part
+
 # Runtime/cache folders
 __pycache__/
 .venv/
