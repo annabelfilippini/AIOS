@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>The Morning Edit — The Day</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Morning Edit" />
+<meta name="theme-color" content="#f3efe9" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3efe9;--card:#faf8f4;--paper:#fffdf8;--ink:#1b1916;--accent:#3a352d;--muted:#7c756a;--line:#e0d9cd;--love:#b54b5a;
+    --green:#7e8a6b;--blue:#7e95a3;--sand:#c9bea6;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif;--r:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}
+  body{font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 72px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}
+  .back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:10px 14px;font-size:10px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .back:hover{border-color:var(--muted);color:var(--ink)}
+  .synced{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:right}
+  .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:22px;align-items:stretch;margin-bottom:22px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 16px 50px rgba(27,25,22,.045)}
+  .hero-main{min-height:308px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;background:linear-gradient(135deg,#fbf8f2 0%,#f3efe9 52%,#ede5d8 100%)}
+  .hero-main:after{content:'';position:absolute;right:-80px;top:-110px;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle,rgba(181,75,90,.14),rgba(181,75,90,0) 68%)}
+  .kicker{font-size:11px;font-weight:400;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);position:relative;z-index:1}
+  h1{font-family:var(--serif);font-weight:500;font-size:68px;line-height:.92;margin:16px 0 12px;letter-spacing:.005em;position:relative;z-index:1;text-wrap:balance}
+  .sub{font-family:var(--serif);font-size:23px;line-height:1.28;color:var(--accent);max-width:16em;position:relative;z-index:1}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px;position:relative;z-index:1}
+  .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:rgba(250,248,244,.72);border-radius:999px;padding:8px 11px;font-size:10px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .chip strong{color:var(--ink);font-weight:500}
+  .brief{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .mini{border-top:1px solid var(--line);padding-top:12px}
+  .mini .n{font-family:var(--serif);font-size:30px;line-height:1;color:var(--ink)}
+  .mini .l{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .section-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:12px}
+  .section-title h2{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1;margin:0}
+  .section-title span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .timeline{display:flex;flex-direction:column;gap:10px}
+  .event{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:12px 13px}
+  .time{font-size:11px;letter-spacing:.08em;color:var(--muted);line-height:1.35;text-align:right}
+  .event-title{font-family:var(--serif);font-size:21px;font-weight:500;line-height:1.05}
+  .event-meta{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .dot{width:12px;height:12px;border-radius:50%;background:var(--sand)}
+  .empty{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:21px;padding:26px 4px;text-align:center}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .outfit{display:grid;grid-template-columns:132px 1fr;gap:18px;align-items:start}
+  .outfit-imgs{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .frame{aspect-ratio:3/4;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .frame img{width:100%;height:100%;object-fit:cover}
+  .frame .ph{font-family:var(--serif);font-style:italic;color:var(--muted);padding:10px;text-align:center}
+  .outfit h3{font-family:var(--serif);font-size:31px;font-weight:600;line-height:1;margin:0 0 8px}
+  .outfit p{font-size:14px;line-height:1.65;color:var(--accent);margin:0}
+  .confidence{display:inline-flex;margin-top:13px;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .confidence b{color:var(--love);font-weight:500}
+  .pieces{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+  .piece{font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 9px;color:var(--muted);background:var(--bg)}
+  .todo-list,.mail-list{display:flex;flex-direction:column;gap:10px}
+  .todo,.mail{background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:12px 13px}
+  .todo{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .todo .t{font-family:var(--serif);font-size:20px;font-weight:500;line-height:1.1}
+  .todo .d,.mail .d{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .mail .from{font-family:var(--serif);font-size:20px;font-weight:500;line-height:1.1}
+  .mail .subject{font-size:13px;color:var(--accent);margin-top:5px;line-height:1.35}
+  .money textarea{width:100%;min-height:98px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink);font:300 14px/1.55 var(--sans);padding:13px}
+  .money textarea:focus{outline:none;border-color:var(--muted)}
+  .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+  button,.btn{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:9px 12px;font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;text-decoration:none}
+  button:hover,.btn:hover{border-color:var(--muted);color:var(--ink)}
+  .primary{background:var(--ink);border-color:var(--ink);color:#faf8f4}
+  .primary:hover{background:var(--accent);color:#faf8f4}
+  .corrections{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .saved{font-size:11px;color:var(--muted);margin-top:10px;min-height:16px}
+  .prep-list{display:grid;gap:10px}
+  .prep{display:flex;gap:10px;align-items:flex-start;border-top:1px solid var(--line);padding-top:10px;color:var(--accent);font-size:14px;line-height:1.45}
+  .prep b{font-weight:500;color:var(--ink)}
+  @media(max-width:900px){
+    .wrap{padding:18px 14px 64px}.top{margin-bottom:16px}.hero,.grid{grid-template-columns:1fr;gap:14px}.panel{border-radius:18px;padding:18px}h1{font-size:48px}.sub{font-size:20px}.brief{grid-template-columns:repeat(3,1fr)}.outfit{grid-template-columns:1fr}.outfit-imgs{grid-template-columns:repeat(4,1fr)}.event{grid-template-columns:58px 1fr auto}.event-title{font-size:19px}
+  }
+  @media(max-width:520px){.outfit-imgs{grid-template-columns:repeat(2,1fr)}.brief{grid-template-columns:1fr}.synced{display:none}.back{padding:9px 11px}.section-title{align-items:flex-start;flex-direction:column}.section-title span{white-space:normal}.hero-main{min-height:260px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" id="backLink" href="/planner.html">← The Day</a>
+    <div class="synced" id="synced">Loading your morning…</div>
+  </div>
+
+  <section class="hero">
+    <div class="panel hero-main">
+      <div>
+        <div class="kicker">Personal · The Morning Edit</div>
+        <h1 id="heroTitle">Today, edited.</h1>
+        <div class="sub" id="heroSub">Calendar first, then outfit, priorities, and a small money intention.</div>
+      </div>
+      <div>
+        <div class="hero-meta">
+          <span class="chip"><strong id="dateChip">Today</strong></span>
+          <span class="chip" id="modeChip">Mode · soft structure</span>
+          <span class="chip" id="styleChip">Style · from The Edit</span>
+        </div>
+        <div class="brief">
+          <div class="mini"><div class="n" id="eventCount">–</div><div class="l">calendar items</div></div>
+          <div class="mini"><div class="n" id="todoCount">–</div><div class="l">open to-dos</div></div>
+          <div class="mini"><div class="n" id="mailCount">–</div><div class="l">pressing mail</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-title"><h2>What to wear</h2><span id="outfitOcc">From calendar + The Edit</span></div>
+      <div class="outfit">
+        <div class="outfit-imgs" id="outfitImgs"></div>
+        <div>
+          <h3 id="outfitTitle">Reading your day…</h3>
+          <p id="outfitNote">I’ll use your calendar occasions, purchases, and taste notes. If the data is thin, I’ll label the suggestion as a guess instead of pretending.</p>
+          <div class="confidence" id="confidence">Confidence · <b>loading</b></div>
+          <div class="pieces" id="pieces"></div>
+          <div class="corrections">
+            <button data-correct="Not my style">Not my style</button>
+            <button data-correct="Too formal">Too formal</button>
+            <button data-correct="Too casual">Too casual</button>
+            <button data-correct="Wrong weather assumption">Wrong weather</button>
+          </div>
+          <div class="saved" id="styleSaved"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <div class="section-title"><h2>Calendar</h2><span id="calendarSource">The Day</span></div>
+      <div class="timeline" id="timeline"><div class="empty">Loading calendar…</div></div>
+      <div class="actions"><a class="btn" id="openPlanner" href="/planner.html">Open planner</a></div>
+    </div>
+
+    <div class="panel">
+      <div class="section-title"><h2>Priorities</h2><span>Inbox + free time</span></div>
+      <div class="todo-list" id="todos"><div class="empty">Loading to-dos…</div></div>
+      <div class="prep-list" id="prep"></div>
+    </div>
+
+    <div class="panel money">
+      <div class="section-title"><h2>Money intention</h2><span>Manual v1</span></div>
+      <textarea id="moneyNote" placeholder="Example: Keep today low-spend except coffee / groceries. Add one thing you want to be mindful of."></textarea>
+      <div class="actions"><button class="primary" id="saveMoney">Save today’s note</button><button id="clearMoney">Clear</button></div>
+      <div class="saved" id="moneySaved"></div>
+    </div>
+
+    <div class="panel">
+      <div class="section-title"><h2>Pressing</h2><span>Email + reminders</span></div>
+      <div class="mail-list" id="mail"><div class="empty">Loading pressing mail…</div></div>
+      <div class="actions"><a class="btn" href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener">Open Gmail</a><a class="btn" id="editLink" href="#">Open The Edit</a></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var KEY='';
+  try{
+    var p=new URLSearchParams(location.search);
+    if(p.get('k')){ KEY=p.get('k'); try{localStorage.setItem('tdk',KEY);}catch(e){} }
+    else { try{KEY=localStorage.getItem('tdk')||'';}catch(e){KEY='';} }
+    if(KEY){
+      document.querySelectorAll('a[href^="/"]').forEach(a=>{try{const u=new URL(a.getAttribute('href'), location.href); u.searchParams.set('k',KEY); a.href=u.pathname+u.search;}catch(e){}});
+    }
+  }catch(e){}
+  if(KEY){
+    var _f=window.fetch.bind(window);
+    window.fetch=function(input,init){
+      init=init||{};
+      try{
+        var url=(typeof input==='string')?input:(input&&input.url)||'';
+        if(url && new URL(url, location.href).origin===location.origin){
+          var h=new Headers(init.headers||{}); h.set('X-Day-Key',KEY); init=Object.assign({},init,{headers:h});
+        }
+      }catch(e){}
+      return _f(input,init);
+    };
+  }
+})();
+const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const COLORS={work:'#3a352d',active:'#7e8a6b',social:'#b54b5a',home:'#7c756a',travel:'#7e95a3',none:'#c9bea6'};
+function z(n){return String(n).padStart(2,'0')}
+function iso(d){return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())}
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function bare(hm){if(!hm)return '';let[h,m]=hm.split(':').map(Number);let hh=h%12;if(hh===0)hh=12;return hh+':'+z(m)}
+function fmt(hm){if(!hm)return '';let[h,m]=hm.split(':').map(Number);const ap=h<12?'AM':'PM';let hh=h%12;if(hh===0)hh=12;return hh+':'+z(m)+' '+ap}
+function todayWords(){const d=new Date();return MON[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()}
+function occasionOf(t){
+  t=(t||'').toLowerCase();
+  if(/dinner|drinks|date night|\bdate\b|party|wedding|cocktail|\bbar\b|birthday|night out|formal|reservation/.test(t)) return 'going-out';
+  if(/flight|airport|\btrip\b|vacation|hotel|resort|travel|packing|getaway/.test(t)) return 'vacation';
+  if(/gym|strength|lift|barre|barry|pilates|yoga|\brun\b|bike|cycle|swim|workout|hike|tennis|core|spin|legs|glutes|upper body|stretch/.test(t)) return 'active';
+  if(/work|meeting|call with|client|interview|presentation|zoom|webflow|office|deadline|sync|1:1/.test(t)) return 'work';
+  if(/coffee|lunch|brunch|errand|grocery|shopping|market|museum|gallery|walk|family/.test(t)) return 'casual';
+  return null;
+}
+function meta(t){const occ=occasionOf(t);return {occ,c:COLORS[occ==='going-out'?'social':occ==='vacation'?'travel':occ]||COLORS.none};}
+function selectOccasion(events){
+  const priority=['going-out','vacation','work','active','casual'];
+  const found=new Set(events.map(e=>occasionOf(e.t)).filter(Boolean));
+  return priority.find(x=>found.has(x)) || 'casual';
+}
+function piecesFor(occ, purchases){
+  const text=p=>(((p&&p.name)||'')+' '+((p&&p.color)||'')+' '+((p&&p.brand)||'')).toLowerCase();
+  const by=(re,not)=>purchases.find(p=>re.test(text(p)) && !(not&&not.test(text(p))));
+  const uniq=(arr)=>{const seen=new Set();return arr.filter(p=>{if(!p)return false;const k=(p.id||p.name||JSON.stringify(p)).toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});};
+  const whiteTop=by(/(white|cream|ecru|cloud).*(top|tee|shirt|tank)|cotton sleeveless|ribbed sleeveless|halter|broderie|forevermore|leah|lace/, /short|hoodie|sneaker/);
+  const blackTop=by(/martini|black.*(halter|top|tank)|ribbed sleeveless.*black/, /short|sneaker/);
+  const shorts=by(/short/, /butter cheeky/ ) || by(/embroidered shorts|striped shorts/);
+  const hoodie=by(/hoodie|sweatfleece/);
+  const sneaker=by(/mexico 66|sneaker/);
+  const active=by(/butter|tank|sweatfleece|hoodie/, /short/);
+  if(occ==='going-out') return uniq([blackTop||whiteTop, {name:'Loose black trousers', brand:'My guess', color:'Black'}, {name:'Gold jewelry', brand:'Style rule', color:'Delicate'}]);
+  if(occ==='work') return uniq([whiteTop, {name:'Loose black or navy trousers', brand:'Style rule', color:'Black / navy'}, {name:'Pointed flat or low heel', brand:'Style rule', color:'Neutral'}]);
+  if(occ==='active') return uniq([active, {name:'Full-length leggings or sweat-set', brand:'Style rule', color:'Neutral / all-black'}, sneaker||{name:'New Balance or clean sneaker', brand:'Style rule', color:'Neutral'}]);
+  if(occ==='vacation') return uniq([whiteTop, shorts, hoodie, sneaker]);
+  return uniq([whiteTop, shorts, {name:'Oversized knit or cardigan', brand:'Style rule', color:'Oatmeal / grey / navy'}, sneaker]);
+}
+function outfitCopy(occ){
+  const map={
+    'going-out':['Sleek quiet going-out','Black or ivory top, relaxed black trousers, gold jewelry. A little satin is good; sparkly/costume is not.'],
+    work:['Polished but not stiff','Ivory or cream clean-neckline top with loose black/navy trousers. European / Toteme / The Row energy.'],
+    active:['Pilates-to-coffee neutral set','Neutral or all-black matching set, full-length only. No capri/cropped leggings.'],
+    vacation:['Soft travel uniform','White/cream top, relaxed denim or ecru shorts, hoodie/cardigan layer, clean sneakers. Easy but pulled together.'],
+    casual:['Cozy elevated everyday','Oversized knit/cardigan, wide denim or cream shorts, brown leather accents, gold jewelry.']
+  };
+  return map[occ]||map.casual;
+}
+async function getJSON(url, fallback){try{const r=await fetch(url,{cache:'no-store'}); if(!r.ok) throw 0; return await r.json();}catch(e){return fallback;}}
+async function loadAll(){
+  const today=iso(new Date());
+  const tomorrow=new Date(); tomorrow.setDate(tomorrow.getDate()+1);
+  const [cal,inbox,emails,style]=await Promise.all([
+    getJSON('/api/calendar?start='+today+'&end='+iso(tomorrow)+'&t='+Date.now(),{events:[],live:false}),
+    getJSON('/api/inbox?t='+Date.now(),{inbox:[]}),
+    getJSON('/api/emails?t='+Date.now(),{emails:[]}),
+    getJSON('/api/style?t='+Date.now(),{purchases:[],tasteRules:[],styleFeedUrl:'#'})
+  ]);
+  render({today,cal,inbox,emails,style});
+}
+function render({today,cal,inbox,emails,style}){
+  const events=(cal.events||[]).filter(e=>e.day===today).sort((a,b)=>(a.allDay?0:1)-(b.allDay?0:1)||(a.s||'').localeCompare(b.s||''));
+  const todos=(inbox.inbox||[]).slice(0,4);
+  const mail=(emails.emails||[]).slice(0,3);
+  const occ=selectOccasion(events);
+  const [title,note]=outfitCopy(occ);
+  const purchases=style.purchases||[];
+  const pieces=piecesFor(occ,purchases);
+  document.getElementById('dateChip').textContent=todayWords();
+  document.getElementById('eventCount').textContent=events.length;
+  document.getElementById('todoCount').textContent=(inbox.inbox||[]).length;
+  document.getElementById('mailCount').textContent=(emails.emails||[]).length;
+  document.getElementById('synced').textContent=(cal.live?'Live calendar':'Saved/offline calendar')+' · '+todayWords();
+  document.getElementById('modeChip').textContent='Mode · '+(events.length>=4?'full day':events.length?'open structure':'quiet day');
+  document.getElementById('styleChip').textContent='Style · '+(purchases.length?'from purchases':'from taste notes');
+  document.getElementById('heroSub').textContent=events.length ? 'You have '+events.length+' calendar item'+(events.length===1?'':'s')+'. I’d keep the day structured, but visually light.' : 'Your calendar looks open. Use the space intentionally instead of filling it by default.';
+  document.getElementById('outfitOcc').textContent=occ.replace('-', ' ')+' · The Edit';
+  document.getElementById('outfitTitle').textContent=title;
+  document.getElementById('outfitNote').textContent=note;
+  document.getElementById('confidence').innerHTML='Confidence · <b>'+(purchases.length?'inferred':'guess')+'</b>';
+  document.getElementById('pieces').innerHTML=pieces.map(p=>'<span class="piece">'+esc(p.name||'Piece')+'</span>').join('');
+  document.getElementById('outfitImgs').innerHTML=pieces.slice(0,4).map(p=>p&&p.img?'<div class="frame"><img src="'+esc(p.img)+'" alt="'+esc(p.name||'style piece')+'"></div>':'<div class="frame"><div class="ph">'+esc((p&&p.name)||'Style rule')+'</div></div>').join('');
+  document.getElementById('timeline').innerHTML=events.length?events.map(e=>{const m=meta(e.t);return '<div class="event"><div class="time">'+(e.allDay?'All day':fmt(e.s)+'<br>'+fmt(e.e))+'</div><div><div class="event-title">'+esc(e.t)+'</div><div class="event-meta">'+(m.occ?m.occ.replace('-',' '):'calendar')+'</div></div><span class="dot" style="background:'+m.c+'"></span></div>';}).join(''):'<div class="empty">Nothing scheduled today.</div>';
+  document.getElementById('todos').innerHTML=todos.length?todos.map(t=>'<div class="todo"><div><div class="t">'+esc(t.t)+'</div><div class="d">'+(t.mins||30)+' min</div></div><span class="dot" style="background:var(--green)"></span></div>').join(''):'<div class="empty">No open to-dos in The Day inbox.</div>';
+  document.getElementById('mail').innerHTML=mail.length?mail.map(m=>'<div class="mail"><div class="from">'+esc(m.from)+'</div><div class="subject">'+esc(m.subject)+'</div><div class="d">'+(m.unread?'Unread':'Starred')+'</div></div>').join(''):'<div class="empty">Nothing pressing in email.</div>';
+  document.getElementById('prep').innerHTML=buildPrep(events, mail, occ).map(x=>'<div class="prep"><span>✶</span><div>'+x+'</div></div>').join('');
+  const edit=document.getElementById('editLink'); if(style.styleFeedUrl){edit.href=style.styleFeedUrl;} else {edit.removeAttribute('href');}
+  loadMoney(today);
+}
+function buildPrep(events, mail, occ){
+  const out=[];
+  if(events.some(e=>/flight|airport|travel/i.test(e.t))) out.push('<b>Travel day:</b> keep the outfit comfortable enough for sitting and add a layer.');
+  if(events.some(e=>/meeting|client|work|presentation|zoom/i.test(e.t))) out.push('<b>Work polish:</b> use the cream-top + loose-trouser formula unless the event is casual.');
+  if(events.some(e=>/pilates|gym|workout|run|barre|yoga/i.test(e.t))) out.push('<b>Movement:</b> choose a full-length neutral set and pack the post-workout layer.');
+  if(mail.length) out.push('<b>Inbox:</b> '+mail.length+' message'+(mail.length===1?'':'s')+' look pressing; handle before the day gets noisy.');
+  if(!out.length) out.push('<b>Keep it simple:</b> one useful priority, one outfit you feel good in, no fake productivity.');
+  if(occ==='casual') out.push('<b>Style note:</b> if uncertain, default to cream/black/brown/denim rather than bright color.');
+  return out.slice(0,4);
+}
+function moneyKey(day){return 'morning-edit:money:'+day}
+function loadMoney(day){const ta=document.getElementById('moneyNote'); try{ta.value=localStorage.getItem(moneyKey(day))||'';}catch(e){} }
+document.getElementById('saveMoney').onclick=()=>{const day=iso(new Date());localStorage.setItem(moneyKey(day),document.getElementById('moneyNote').value);document.getElementById('moneySaved').textContent='Saved for today.';};
+document.getElementById('clearMoney').onclick=()=>{document.getElementById('moneyNote').value='';document.getElementById('saveMoney').click();};
+document.querySelectorAll('[data-correct]').forEach(b=>b.onclick=()=>{const key='morning-edit:style-corrections';let arr=[];try{arr=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){};arr.push({at:new Date().toISOString(),note:b.dataset.correct});localStorage.setItem(key,JSON.stringify(arr.slice(-100)));document.getElementById('styleSaved').textContent='Saved correction: '+b.dataset.correct+'.';});
+loadAll();
+</script>
+</body>
+</html>

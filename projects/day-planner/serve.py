@@ -31,6 +31,9 @@ except Exception:
     GCAL_OK = False  # libs not installed yet → /api/calendar serves the snapshot
 
 ROOT = pathlib.Path(__file__).resolve().parent
+STYLE_ROOT = ROOT.parent / "style-feed"
+STYLE_PURCHASES = STYLE_ROOT / "data" / "purchases.json"
+STYLE_TASTE = STYLE_ROOT / "taste-feedback.md"
 
 # Load .env (gitignored) so ANTHROPIC_API_KEY is available for AI email drafts,
 # without leaking the key into the environment of other processes.
@@ -369,6 +372,38 @@ def _write_json(path, payload):
     tmp.replace(path)
 
 
+def _read_style_summary():
+    """Small read-only bridge from The Day to The Edit.
+
+    The Morning Edit should use The Edit's taste/purchase data without exposing
+    private token files or serving the whole style-feed directory from this app.
+    """
+    purchases = []
+    try:
+        data = json.loads(STYLE_PURCHASES.read_text())
+        purchases = data.get("purchases", []) if isinstance(data, dict) else []
+    except Exception:
+        purchases = []
+
+    taste_rules = []
+    try:
+        for raw in STYLE_TASTE.read_text().splitlines():
+            line = raw.strip()
+            if line.startswith("- "):
+                taste_rules.append(line[2:])
+    except Exception:
+        taste_rules = []
+
+    return {
+        "source": "The Edit",
+        "styleFeedUrl": "http://localhost:8801/feed.html",
+        "lookbookUrl": "http://localhost:8801/lookbook.html",
+        "theEditUrl": "http://localhost:8801/the-edit.html",
+        "purchases": purchases[-40:],
+        "tasteRules": taste_rules[:80],
+    }
+
+
 def _week_bounds(now):
     monday = (now - timedelta(days=now.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
     return monday, monday + timedelta(days=7)
@@ -462,7 +497,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     # Only these static files are ever served; everything else is API or 404.
     # Stops the default handler from listing the dir / leaking .env + token.json.
-    STATIC_OK = {"/planner.html", "/apple-touch-icon.png"}
+    STATIC_OK = {"/planner.html", "/morning.html", "/apple-touch-icon.png"}
 
     def do_GET(self):
         if not self._gate():
@@ -475,6 +510,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return
         if route == "/api/calendar":
             return self._json(200, self._calendar(self.path))
+        if route == "/api/style":
+            return self._json(200, _read_style_summary())
         if route == "/api/emails":
             return self._json(200, self._emails())
         if route == "/api/inbox":
