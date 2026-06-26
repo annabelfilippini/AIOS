@@ -546,6 +546,19 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Location", "/morning.html")
             self.end_headers()
             return
+        if route in ("/the-edit", "/the-edit.html"):
+            # The Edit lives in ../style-feed; serve its self-contained lookbook
+            # so the Morning Edit's "Open The Edit" button works from one server.
+            edit = STYLE_ROOT / "the-edit.html"
+            if not edit.exists():
+                return self.send_error(404)
+            body = edit.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
         if route == "/api/health":
             return self._json(200, {"ok": True, "app": "The Day", "morning": (ROOT / "morning.html").exists()})
         if route == "/api/calendar":
