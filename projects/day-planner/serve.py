@@ -416,6 +416,8 @@ def _read_style_summary():
                     "occ": item.get("occ", []),
                     "why": item.get("why"),
                     "score": item.get("score"),
+                    "c": item.get("c"),
+                    "neut": item.get("neut"),
                     "source": "The Edit",
                 })
                 if len(top_items) >= 160:
