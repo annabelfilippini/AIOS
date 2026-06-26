@@ -621,6 +621,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def _looks(self, path=""):
         """Per-event looks from The Edit's taste engine over today's calendar.
         Reuses the same live calendar pull as /api/calendar."""
+        from urllib.parse import urlparse, parse_qs
+        per = parse_qs(urlparse(path).query).get("per", ["lane"])[0]
         cal = self._calendar(path)
         events = cal.get("events", [])
         try:
@@ -628,8 +630,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 sys.path.insert(0, str(STYLE_ROOT))
             import style_engine
             closet = style_engine.load_closet()
-            looks = style_engine.build_week(events, closet)
-            if not looks:  # nothing outfit-driving today → her everyday lane
+            # per=event → one look per calendar event (weekly Edit);
+            # default → one per occasion lane (today's Morning Edit).
+            looks = (style_engine.build_events if per == "event"
+                     else style_engine.build_week)(events, closet)
+            if not looks:  # nothing outfit-driving → her everyday lane
                 looks = [style_engine.build_look("Everyday", closet, "casual")]
         except Exception as ex:
             print("  looks build failed:", ex)

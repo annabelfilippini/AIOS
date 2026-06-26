@@ -197,6 +197,7 @@ def build_look(event, closet, occ=None):
             pieces.append({"slot": slotdef["slot"], "name": label, "brand": brand,
                            "color": "", "img": None, "owned": False, "guess": True})
     owned_n = sum(1 for p in pieces if p["owned"])
+    ev = event if isinstance(event, dict) else {}
     return {
         "occasion": occ,
         "event": title,
@@ -206,13 +207,14 @@ def build_look(event, closet, occ=None):
         "pieces": pieces,
         "confidence": "owned" if owned_n >= len(pieces) - 1 else
                       "mixed" if owned_n else "guess",
+        "start": ev.get("s"), "day": ev.get("day"), "allDay": ev.get("allDay"),
     }
 
 
 def build_week(events, closet):
     """One look per occasion lane (you wear one outfit per occasion type),
-    labeled by the first event in that lane. Calendar order. Non-dress events
-    (money due, admin) get no card."""
+    labeled by the first event in that lane. Best for a single day (the Morning
+    Edit) where you dress once. Non-dress events (money due, admin) get no card."""
     looks, seen = [], set()
     for e in events:
         title = e.get("t") if isinstance(e, dict) else e
@@ -220,6 +222,24 @@ def build_week(events, closet):
         if occ is None or occ in seen:
             continue
         seen.add(occ)
+        looks.append(build_look(e, closet, occ))
+    return looks
+
+
+def build_events(events, closet):
+    """One look per distinct event (deduped by occasion+title). Best for the
+    weekly Edit, where each thing on the calendar gets styled. Skips non-dress
+    events."""
+    looks, seen = [], set()
+    for e in events:
+        title = e.get("t") if isinstance(e, dict) else e
+        occ = occasion_of(title)
+        if occ is None:
+            continue
+        key = (occ, (title or "").strip().lower())
+        if key in seen:
+            continue
+        seen.add(key)
         looks.append(build_look(e, closet, occ))
     return looks
 
@@ -239,6 +259,12 @@ def demo():
     assert occasion_of("CHASE MONEY DUE") is None
     assert occasion_of("Rent due") is None
     assert build_week([{"t": "CHASE MONEY DUE"}], closet) == []
+
+    # build_week collapses a day to one look per lane; build_events keeps each
+    # distinct event. Two coffees + one dinner: lane=2 looks, event=3 looks.
+    day = [{"t": "Coffee with mom"}, {"t": "Coffee with Sara"}, {"t": "Dinner date"}]
+    assert len(build_week(day, closet)) == 2
+    assert len(build_events(day, closet)) == 3
 
     # Going-out picks a sleek black/satin top she owns, never red.
     look = build_look("Dinner reservation", closet)
