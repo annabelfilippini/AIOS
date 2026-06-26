@@ -144,7 +144,9 @@ AUTOMATED_DOMAINS = (
     "managebuilding.com", "squarespace.com", "vercel.com", "openai.com",
     "firecrawl.dev", "amazon.com", "amazonses.com", "paypal.com", "stripe.com",
     "mailchimp.com", "sendgrid.net", "substack.com", "facebookmail.com",
-    "linkedin.com", "intuit.com", "uber.com", "lyft.com",
+    "linkedin.com", "intuit.com", "uber.com", "lyft.com", "venmo.com",
+    "cash.app", "zellepay.com", "doordash.com", "instacart.com",
+    "walgreens.com", "depop.com", "pge.com", "pgemail.com",
 )
 
 
@@ -158,8 +160,11 @@ def _looks_automated(email):
     words = set(local.replace("+", ".").replace("_", ".").replace("-", ".").split("."))
     if any(w in AUTOMATED_LOCALPARTS for w in words):
         return True
-    # whole local-part containing a glued keyword (e.g. "noreply-payments")
-    if any(k in local for k in ("noreply", "no-reply", "donotreply", "notification", "purchases", "itinerary")):
+    # whole local-part containing a glued keyword (e.g. "noreply-payments",
+    # "customerserviceonline", "photoorders") that the word-split above misses
+    if any(k in local for k in ("noreply", "no-reply", "donotreply", "notification",
+                                "purchases", "itinerary", "customerservice", "service",
+                                "magiclink", "automated", "mailer")):
         return True
     return any(domain == d or domain.endswith("." + d) for d in AUTOMATED_DOMAINS)
 
@@ -177,13 +182,13 @@ def _parse_from(raw):
 
 
 def fetch_pressing_emails():
-    """Pull Primary-inbox threads that are unread or starred, drop the automated
-    ones, and return a clean list the page can render. Read-only Gmail."""
+    """Pull the most recent Primary-inbox threads from real human senders
+    (automated/notification senders dropped), newest first. Read-only Gmail."""
     svc = _gmail()
     me = "annabelflip1@gmail.com"
     res = svc.users().messages().list(
-        userId="me", maxResults=200,
-        q="in:inbox category:primary (is:unread OR is:starred)",
+        userId="me", maxResults=120,
+        q="in:inbox category:primary",
     ).execute()
     ids = [m["id"] for m in res.get("messages", [])]
     seen_threads, out = set(), []
@@ -205,8 +210,7 @@ def fetch_pressing_emails():
         name, email = _parse_from(hdrs.get("from", ""))
         if email == me:              # skip your own messages
             continue
-        # STARRED always passes; UNREAD only if the sender looks human
-        if not (starred or (unread and not _looks_automated(email))):
+        if _looks_automated(email):  # recent inbox, but only real human senders
             continue
         seen_threads.add(tid)
         out.append({
