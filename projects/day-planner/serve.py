@@ -33,6 +33,7 @@ except Exception:
 ROOT = pathlib.Path(__file__).resolve().parent
 STYLE_ROOT = ROOT.parent / "style-feed"
 STYLE_PURCHASES = STYLE_ROOT / "data" / "purchases.json"
+STYLE_ITEMS = STYLE_ROOT / "data" / "items.json"
 STYLE_TASTE = STYLE_ROOT / "taste-feedback.md"
 
 # Load .env (gitignored) so ANTHROPIC_API_KEY is available for AI email drafts,
@@ -394,12 +395,41 @@ def _read_style_summary():
     except Exception:
         taste_rules = []
 
+    top_items = []
+    try:
+        raw_items = json.loads(STYLE_ITEMS.read_text())
+        if isinstance(raw_items, list):
+            banned = ("cardigan", "burgundy", "maroon")
+            for item in raw_items:
+                if not isinstance(item, dict):
+                    continue
+                text = f"{item.get('brand','')} {item.get('title','')} {item.get('cats',[])}".lower()
+                if any(b in text for b in banned):
+                    continue
+                top_items.append({
+                    "id": item.get("id"),
+                    "brand": item.get("brand"),
+                    "name": item.get("title"),
+                    "img": item.get("img"),
+                    "url": item.get("url"),
+                    "cats": item.get("cats", []),
+                    "occ": item.get("occ", []),
+                    "why": item.get("why"),
+                    "score": item.get("score"),
+                    "source": "The Edit",
+                })
+                if len(top_items) >= 160:
+                    break
+    except Exception:
+        top_items = []
+
     return {
         "source": "The Edit",
         "styleFeedUrl": "http://localhost:8801/feed.html",
         "lookbookUrl": "http://localhost:8801/lookbook.html",
         "theEditUrl": "http://localhost:8801/the-edit.html",
         "purchases": purchases[-40:],
+        "topItems": top_items,
         "tasteRules": taste_rules[:80],
     }
 
