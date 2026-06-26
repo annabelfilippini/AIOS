@@ -1,34 +1,60 @@
 # apartment-hunt
 
-Pulls SF rental listings from Craigslist, 8 directly-fetched aggregator/manager
-pages, 21 anti-bot-blocked or JS-only sites via Firecrawl structured extraction,
-Exa neural search across the rental web + Reddit, and Zillow via Firecrawl
-(paginated across 3 pages). It dedupes against a local seen-set, writes
-`digest_latest.md`, and archives dated markdown digests in `digests/`.
+Pulls rental listings for a chosen city from Craigslist, directly-fetched
+aggregator/manager pages, anti-bot-blocked or JS-only sites via Firecrawl
+structured extraction, Exa neural search across the rental web + Reddit, and
+Zillow via Firecrawl (paginated across 3 pages). It dedupes against a per-city
+seen-set, writes `digest_<city>_latest.md`, and archives dated markdown digests
+in `digests/<city>/`.
 
-## Sources (37 total)
+## Cities
 
-- **Craigslist** sfbay/sfc
-- **Direct fetch** (8): apartmentguide.com, homefinder.com, redfin.com,
-  rentable.co, rentberry.com, rentcafe.com, rentsfnow.com, structureproperties.com
-- **Firecrawl-routed** (21): apartments.com, apartmentfinder.com,
-  apartmenthomeliving.com, apartmentlist.com, avaloncommunities.com, compass.com,
-  equityapartments.com, forrent.com, hotpads.com, padmapper.com, realtor.com,
-  rent.com, renthop.com, trulia.com, zumper.com, chandlerproperties.com,
-  gaetanirealestate.com, jwavro.com, sfcityrents.com, trinitysf.com, yeeproperties.com
-- **Zillow via Firecrawl** (paginated, 3 pages)
-- **Exa neural search** across 7 target neighborhoods + Reddit + property
-  managers + aggregator detail pages
+Everything city-specific (criteria, neighborhoods, ZIP rules, every source URL,
+Zillow bounds, Exa query strings) lives in `profiles.py`. Two ship today:
 
-## Criteria (edit in `apartment_hunt.py`)
+- **`sf`** (default) — Annabel's 3BR Russian Hill / North Beach hunt, unchanged.
+- **`denver`** — whole-metro 3BR, wide budget, no required neighborhood.
 
-- 3BR only
-- ideal max $7,500/mo ($2,500/person for 3 people)
-- stretch max $9,000/mo for unusually good fits
-- top priority: Russian Hill, North Beach
-- fallback: Hayes Valley, Marina, Pacific Heights, Cow Hollow, Nob Hill
+Pick one with `--city`:
+
+```bash
+.venv/bin/python apartment_hunt.py --city denver
+.venv/bin/python build_html_digest.py --city denver
+```
+
+To add a city, copy a `SearchProfile` in `profiles.py`, swap the URLs/labels,
+and add it to `PROFILES`. Craigslist, Zillow, and the Exa city sweep are the
+robust backbone; hand-tuned aggregator URLs that turn out wrong just show up as
+`error`/`blocked` in the coverage report and fall back to Exa.
+
+## Sources
+
+Each profile names its own seed URLs. The shapes are the same per city:
+
+- **Craigslist** the city's CL region
+- **Direct fetch** aggregator/manager pages that return inventory in raw HTML
+- **Firecrawl-routed** anti-bot-blocked or JS-only aggregators + property managers
+- **Zillow via Firecrawl** (paginated, 3 pages, per-city map bounds)
+- **Exa neural search** across the city (per-hood where curated) + Reddit +
+  aggregator detail pages
+
+SF ships the full ~37-source set. Denver ships the cross-city backbone (CL,
+Zillow, the major aggregators, Exa); add local property managers to its profile
+as you find them.
+
+## Criteria (edit in `profiles.py`)
+
+**SF** (`sf`):
+- 3BR, ideal max $7,500/mo ($2,500/person for 3), stretch $9,000
+- top priority Russian Hill, North Beach; fallback Hayes Valley, Marina,
+  Pacific Heights, Cow Hollow, Nob Hill
 - hard no: Tenderloin, TenderNob, Lower Nob, Polk Gulch, Civic Center, South Beach
-- Move-in by 2026-06-15
+- move by 2026-06-15
+
+**Denver** (`denver`):
+- 3BR, wide budget (ideal max $4,500, stretch $7,000), whole metro (no required
+  neighborhood). Tighten these in `profiles.py` once the friends settle on a
+  budget/area.
 
 ## Setup
 
@@ -44,25 +70,31 @@ cp .env.example .env
 ```
 
 **Strongly recommended:** paste a `FIRECRAWL_API_KEY` (from
-<https://www.firecrawl.dev/app/api-keys>) into `.env`. Without it, **22 of 37
-sources are skipped** (Zillow + the 21 Firecrawl-routed aggregators and
-managers). The pipeline still runs on the rest, but you'll miss most of the
-real inventory.
+<https://www.firecrawl.dev/app/api-keys>) into `.env`. Without it, Zillow and
+every Firecrawl-routed aggregator/manager is skipped. The pipeline still runs on
+the rest, but you'll miss most of the real inventory.
 
 ## Run
 
 ```bash
-# Full run (writes digest + dated archive, then updates seen-set)
+# Full run for SF (writes digest + dated archive, then updates seen-set)
 .venv/bin/python apartment_hunt.py
 
-# Dry run (writes digest only, no seen-set update)
-.venv/bin/python apartment_hunt.py --dry
+# Run Denver instead
+.venv/bin/python apartment_hunt.py --city denver
 
-# Wipe seen-set (next run resurfaces everything)
-.venv/bin/python apartment_hunt.py --reset
+# Dry run (writes digest only, no seen-set update)
+.venv/bin/python apartment_hunt.py --city denver --dry
+
+# Wipe a city's seen-set (next run resurfaces everything)
+.venv/bin/python apartment_hunt.py --city denver --reset
+
+# Styled HTML page (writes digest_<city>_latest.html + a copy on the Desktop)
+.venv/bin/python build_html_digest.py --city denver
 ```
 
-Latest digest is always at `digest_latest.md`. Dated archives in `digests/`.
+Latest markdown digest is at `digest_<city>_latest.md`; styled HTML at
+`digest_<city>_latest.html`. Dated archives in `digests/<city>/`.
 
 Each digest includes a **Direct source coverage** section showing which public
 source pages were reachable directly, which were blocked/rate-limited, and how
@@ -70,10 +102,12 @@ many raw listing candidates were parsed before the normal criteria filters ran.
 
 ## Schedule
 
-To run daily at 9am, add to `~/Documents/AI-OS/projects/apartment-hunt/crontab.txt`:
+To run both cities daily at 9am, add to
+`~/Documents/AI-OS/projects/apartment-hunt/crontab.txt`:
 
 ```
-0 9 * * * cd ~/Documents/AI-OS/projects/apartment-hunt && .venv/bin/python apartment_hunt.py >> logs/cron.log 2>&1
+0 9 * * * cd ~/Documents/AI-OS/projects/apartment-hunt && .venv/bin/python apartment_hunt.py --city sf >> logs/cron.log 2>&1
+5 9 * * * cd ~/Documents/AI-OS/projects/apartment-hunt && .venv/bin/python apartment_hunt.py --city denver >> logs/cron.log 2>&1
 ```
 
 Then `crontab crontab.txt` to install.
@@ -92,8 +126,10 @@ Then `crontab crontab.txt` to install.
 
 ## Files
 
-- `apartment_hunt.py` — the whole tool
-- `seen_3br_sf_core.json` — listing IDs we've already shown for this 3BR SF search (auto-managed)
+- `apartment_hunt.py` — the scrape/filter/digest pipeline
+- `profiles.py` — per-city search profiles (criteria, neighborhoods, source URLs)
+- `build_html_digest.py` — renders the styled HTML page (Editorial Cream)
+- `seen_<city>.json` — listing IDs already shown for that city (auto-managed)
 - `notes/` — change notes for each material edit to the pipeline (one file per change)
-- `digest_latest.md` — most recent digest
-- `digests/YYYY-MM-DD.md` — archive
+- `digest_<city>_latest.md` / `digest_<city>_latest.html` — most recent digest
+- `digests/<city>/YYYY-MM-DD.md` — archive

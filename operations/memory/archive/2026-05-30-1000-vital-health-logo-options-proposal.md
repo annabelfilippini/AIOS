@@ -12,6 +12,7 @@ Supersedes nothing on the build side; complements
 `2026-05-30-0930-vital-health-webflow-client-edits-round2.md`.
 
 ## Client feedback this round
+
 - Rob + the doctor (via text): branch on hummingbird logo reads phallic; wants it
   repositioned or removed. Pricing "sounds appropriate." Owner becoming amenable.
 - Rob: make proposal MORE specific — include hours to date + estimated ranges per
@@ -24,12 +25,14 @@ Supersedes nothing on the build side; complements
   (open to paying). Will confirm with Dr. Feste over weekend, reply Monday.
 
 ## Decisions / inputs from Annabel
+
 - Rate = **$95/hour** (confirmed).
 - Instagram = **automated weekly posting**, added as optional Phase 5 add-on
   after site launch, same $95/hr. Included in proposal so client sees it's on the
   radar, but priced/ scoped later.
 
 ## Logo work (done)
+
 - `snapshot/vital-health-hummingbird.png` is ALREADY the branch-removed bird.
 - `snapshot/vh-logo-transparent.png` is the current logo WITH the branch (olive
   sprig off lower-right body — the flagged one).
@@ -44,6 +47,7 @@ Supersedes nothing on the build side; complements
   chosen version vector-clean before uploading as the site logo asset.
 
 ## Proposal (done — CORRECTED structure)
+
 - Drafted at `docs/proposal-vital-health-website.md`.
 - IMPORTANT correction from Annabel: Cerbo/backend/retail/headshots are NOT
   excluded — they are the NEXT phase, done AFTER she meets the managers. The
@@ -62,6 +66,7 @@ Supersedes nothing on the build side; complements
   before exceeding $5k" + "final billable TBD with Julie/staff input" disclaimers.
 
 ## Logo: FINAL clean+tilt direction (latest)
+
 - Annabel marked a screenshot (Desktop) circling a leftover LEAF remnant on the
   bird's lower-right body. That remnant came from `out_removed.png` (traced out
   of the full logo). CORRECT clean base = `snapshot/vital-health-hummingbird.png`
@@ -74,6 +79,7 @@ Supersedes nothing on the build side; complements
   wide — for final site logo/favicon, recreate chosen angle at higher res / vector.
 
 ## HTML logo page fix
+
 - First HTML used external img src + stalled / wouldn't open for Annabel.
 - Rebuilt SELF-CONTAINED with base64-embedded images (244KB, 5 imgs) and saved a
   copy to ~/Desktop/vital-health-logo-options.html. Opened fine.
@@ -81,6 +87,7 @@ Supersedes nothing on the build side; complements
   review pages must embed images inline (base64) + drop a Desktop copy.
 
 ## Session instability gotcha
+
 - This session repeatedly stalled: parallel Bash calls got cancelled, shell cwd
   kept resetting to project root, image Read previews intermittently failed then
   succeeded. Heredocs sometimes returned empty. Workarounds that worked:
@@ -88,6 +95,7 @@ Supersedes nothing on the build side; complements
   building an HTML review page instead of relying on inline image rendering.
 
 ## Key paths
+
 - Logo options + HTML: `projects/vital-health-webflow-migration/logo-options/`
 - Proposal: `projects/vital-health-webflow-migration/docs/proposal-vital-health-website.md`
 - Site IDs etc.: see `2026-05-30-0930-...-client-edits-round2.md`.

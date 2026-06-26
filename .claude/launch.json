@@ -1,0 +1,56 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "apt-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8753", "-d", "projects/apartment-hunt"],
+      "port": 8753
+    },
+    {
+      "name": "kite-wind-watch",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8804", "-d", "projects/websites/kite-wind-watch"],
+      "port": 8804
+    },
+    {
+      "name": "fym-tarifa",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8849", "-d", "projects/websites/freeyourmind-tarifa"],
+      "port": 8849
+    },
+    {
+      "name": "addict-tarifa",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8857", "-d", "projects/websites/addict-kiteschool-tarifa"],
+      "port": 8857
+    },
+    {
+      "name": "wayloft-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "projects/wayloft/apps/web", "run", "dev"],
+      "port": 3000
+    },
+    {
+      "name": "the-day",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["projects/day-planner/serve.py", "8803", "--no-open"],
+      "port": 8803,
+      "autoPort": false
+    },
+    {
+      "name": "the-edit",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["projects/style-feed/serve.py", "8801", "--no-open"],
+      "port": 8801,
+      "autoPort": false
+    },
+    {
+      "name": "life-os",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["projects/life-os/serve.py", "8800", "--no-open"],
+      "port": 8800,
+      "autoPort": false
+    }
+  ]
+}

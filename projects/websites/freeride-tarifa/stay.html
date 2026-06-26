@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where to stay in Tarifa | Freeride Tarifa</title>
+  <meta name="description" content="Where to stay in Tarifa for a kite trip: beachfront hotels, an old-town kite hostel and a coliving kite house, all a few minutes from the spot. Freeride can fold a room into your trip.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111516'/%3E%3Cpath d='M32 8 52 32 32 56 12 32Z' fill='%2354d894'/%3E%3Cpath d='M32 16 44 32 32 48 20 32Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0c1112;
+      --muted: #777d80;
+      --soft: #c8ccce;
+      --line: #e4e7e8;
+      --paper: #fbfbf8;
+      --white: #ffffff;
+      --green: #54d894;
+      --green-dark: #279568;
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Work Sans", Arial, sans-serif;
+    }
+
+    ::selection { background: var(--green); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+    h1, h2, h3, p { margin: 0; }
+
+    /* ---------- top bar ---------- */
+    .topbar {
+      position: fixed;
+      z-index: 30;
+      inset: 0 0 auto 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      min-height: 5rem;
+      padding: 0 clamp(1rem, 4vw, 4rem);
+      color: var(--white);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(180deg, rgba(6, 18, 22, 0.55), rgba(6, 18, 22, 0));
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    body.is-scrolled .topbar {
+      color: var(--ink);
+      border-bottom-color: rgba(12, 17, 18, 0.1);
+      background: rgba(251, 251, 248, 0.94);
+      backdrop-filter: blur(16px);
+    }
+    .brand { display: inline-flex; align-items: center; width: min(11rem, 40vw); }
+    .brand img { height: auto; object-fit: contain; filter: brightness(0) invert(1); }
+    body.is-scrolled .brand img { filter: none; }
+
+    .top-tabs { display: flex; justify-self: center; gap: clamp(0.6rem, 2vw, 2rem); }
+    .top-tabs a {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.82;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+    }
+    .top-tabs a:hover { opacity: 1; }
+    .top-tabs a.is-active { opacity: 1; border-bottom-color: var(--green); }
+
+    .top-action {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.6rem;
+      padding: 0 1.1rem;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    body.is-scrolled .top-action { background: var(--ink); color: var(--white); }
+
+    /* page with a white split hero: dark top bar from the start */
+    body.light-hero .topbar {
+      color: var(--ink);
+      border-bottom-color: rgba(12, 17, 18, 0.08);
+      background: transparent;
+    }
+    body.light-hero .brand img { filter: none; }
+    body.light-hero .top-action { background: var(--ink); color: var(--white); }
+
+    /* ---------- hero (split: white text panel + image) ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      align-items: stretch;
+      min-height: 88svh;
+      background: var(--white);
+      color: var(--ink);
+      isolation: isolate;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem clamp(1.4rem, 5vw, 5.5rem) 4.5rem;
+    }
+    .hero-media { position: relative; overflow: hidden; min-height: 46svh; }
+    .hero-media img { position: absolute; inset: 0; filter: saturate(1.05) contrast(1.02); }
+    .hero-kicker {
+      display: block;
+      margin-bottom: 1.1rem;
+      color: var(--green-dark);
+      font-size: clamp(0.72rem, 1vw, 0.82rem);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(3.4rem, 9vw, 9rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .hero h1 em { font-style: normal; color: var(--green); }
+    .hero-copy {
+      max-width: 40rem;
+      margin-top: 1.4rem;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.4vw, 1.25rem);
+      line-height: 1.55;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 3rem;
+      padding: 0 1.2rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid currentColor;
+    }
+    .btn.solid { background: var(--white); color: var(--ink); border-color: transparent; }
+    .btn.dark { background: var(--ink); color: var(--white); border-color: transparent; }
+    .btn.green { background: var(--green); color: var(--ink); border-color: transparent; }
+    .btn::after { content: "→"; }
+
+    /* ---------- shared section frame ---------- */
+    .wrap { width: min(100%, 116rem); margin: 0 auto; padding: clamp(4.5rem, 9vw, 8rem) clamp(1rem, 4vw, 4rem); }
+    .eyebrow {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+    }
+    .section-title {
+      max-width: 22ch;
+      font-size: clamp(2.1rem, 4.4vw, 4rem);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+    }
+    .lead {
+      max-width: 46rem;
+      margin-top: 1.3rem;
+      font-size: clamp(1.04rem, 1.4vw, 1.3rem);
+      font-weight: 500;
+      line-height: 1.55;
+      color: rgba(12, 17, 18, 0.82);
+    }
+
+    /* ---------- accommodation cards ---------- */
+    .venue-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(0.7rem, 1.5vw, 1rem);
+      margin-top: clamp(2.4rem, 4.5vw, 3.4rem);
+    }
+    .venue {
+      position: relative;
+      display: grid;
+      align-content: end;
+      gap: 0.45rem;
+      min-height: 19rem;
+      padding: 1.1rem;
+      color: var(--white);
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .venue img {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      transition: transform 0.55s ease;
+    }
+    .venue::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(0deg, rgba(6, 18, 22, 0.94) 0%, rgba(6, 18, 22, 0.4) 46%, rgba(6, 18, 22, 0.04) 100%);
+    }
+    .venue:hover img { transform: scale(1.06); }
+
+    .venue-tags {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.85rem;
+      right: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .rate-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      padding: 0.28rem 0.55rem;
+      background: rgba(251, 251, 248, 0.95);
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+    .rate-chip .star { color: #f5a623; }
+    .vibe-chip {
+      padding: 0.28rem 0.55rem;
+      background: rgba(251, 251, 248, 0.95);
+      color: var(--ink);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .venue strong { font-size: clamp(1.05rem, 1.5vw, 1.32rem); font-weight: 800; line-height: 1.05; }
+    .venue p { color: rgba(255, 255, 255, 0.85); font-size: 0.85rem; line-height: 1.45; }
+    .venue .review-link {
+      margin-top: 0.15rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+    .venue:hover .review-link { text-decoration: underline; }
+
+    /* ---------- more ways to stay (honest pointer, no fabricated ratings) ---------- */
+    .more-stay {
+      margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      max-width: 60rem;
+      color: rgba(12, 17, 18, 0.72);
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.55;
+    }
+    .more-stay a {
+      color: var(--green-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ---------- cta ---------- */
+    .cta {
+      position: relative;
+      min-height: 70svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 4vw, 4rem);
+      color: var(--white);
+      overflow: hidden;
+      isolation: isolate;
+      background: #07171d;
+    }
+    .cta img { position: absolute; inset: 0; z-index: -2; }
+    .cta::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(6, 18, 22, 0.62); }
+    .cta-inner { display: grid; justify-items: center; gap: 1.4rem; max-width: 44rem; }
+    .cta h2 { font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.02; }
+    .cta p { color: rgba(255, 255, 255, 0.86); font-size: clamp(1.02rem, 1.4vw, 1.25rem); line-height: 1.5; }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+
+    /* ---------- footer ---------- */
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.4rem clamp(1rem, 4vw, 4rem);
+      border-top: 1px solid var(--line);
+      color: rgba(12, 17, 18, 0.6);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .footer nav { display: flex; gap: 1.4rem; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 860px) {
+      .topbar { grid-template-columns: auto 1fr; min-height: 4.4rem; }
+      .top-tabs { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-text { padding: 7rem clamp(1.4rem, 6vw, 3rem) 2.5rem; }
+      .hero-media { min-height: 40svh; order: 2; }
+      .venue-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .hero h1 { font-size: clamp(2.8rem, 15vw, 5rem); }
+      .venue-grid { grid-template-columns: 1fr; }
+      .venue { min-height: 16rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .venue:hover img { transform: none; }
+    }
+
+    /* ---------- scroll reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.75s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition-delay: var(--rd, 0s);
+      will-change: opacity, transform;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body class="light-hero">
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Freeride Tarifa home">
+      <img src="https://freeridetarifa.com/wp-content/uploads/2017/11/LogotypeStickyMenu-Freeride_Tarifa.png" alt="Freeride Tarifa">
+    </a>
+    <nav class="top-tabs" aria-label="Main sections">
+      <a href="index.html">Freeride</a>
+      <a href="lessons.html">Lessons</a>
+      <a href="rent.html">Rent gear</a>
+      <a href="tarifa.html">Tarifa</a>
+      <a class="is-active" href="stay.html">Stay</a>
+    </nav>
+    <a class="top-action" href="https://wa.me/34601655993">WhatsApp</a>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <span class="hero-kicker">Kite &amp; sleep</span>
+        <h1>Where to <em>stay</em></h1>
+        <p class="hero-copy">Freeride can fold a room into your trip, from beachfront hotels to old-town kite houses. These are the places they put riders, all a short hop from the spot.</p>
+        <div class="hero-actions">
+          <a class="btn green" href="https://wa.me/34601655993">Plan your stay on WhatsApp</a>
+          <a class="btn dark" href="lessons.html">See lesson packages</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="assets/web/oldtown.jpg" alt="Whitewashed old-town street in Tarifa with cafe tables and people walking, where many of the kite houses and hostels are">
+      </div>
+    </section>
+
+    <!-- WHERE TO STAY -->
+    <section class="wrap" id="options">
+      <span class="eyebrow reveal">Hotels, hostels &amp; kite houses</span>
+      <h2 class="section-title reveal">Beds a few minutes from the beach</h2>
+      <p class="lead reveal">Four places Freeride books riders into, from beachfront pools to old-town rooftops. The Google rating sits on each card; tap one to see the place and plan your stay.</p>
+
+      <div class="venue-grid">
+        <a class="venue reveal" href="https://freeridetarifa.com/beach-hotel-tarifa/" target="_blank" rel="noopener">
+          <img src="assets/web/venues/hotel-hurricane.jpg" alt="Palm-fringed pool with sea view at the Hurricane Hotel in Tarifa" loading="lazy">
+          <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.5</span><span class="vibe-chip">Beachfront</span></div>
+          <strong>Hurricane Hotel</strong>
+          <p>Beachfront hotel in a subtropical garden between the two main kite spots, with sea view pools and a daily yoga shala.</p>
+          <span class="review-link">See the place ↗</span>
+        </a>
+        <a class="venue reveal" href="https://freeridetarifa.com/spa-hotel-in-tarifa/" target="_blank" rel="noopener">
+          <img src="assets/web/venues/hotel-residencia.jpg" alt="Rooftop sea view pool at Hotel La Residencia in Tarifa" loading="lazy">
+          <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.7</span><span class="vibe-chip">Spa hotel</span></div>
+          <strong>Hotel La Residencia</strong>
+          <p>Moroccan-style 4 star hotel by the harbour, with a rooftop sea view pool and a full spa, a short walk from the old town.</p>
+          <span class="review-link">See the place ↗</span>
+        </a>
+        <a class="venue reveal" href="https://freeridetarifa.com/kite-hostel-tarifa/" target="_blank" rel="noopener">
+          <img src="assets/web/venues/hostal-africa.jpg" alt="Boho rooftop terrace at Hostal Africa in Tarifa old town" loading="lazy">
+          <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.5</span><span class="vibe-chip">Old town</span></div>
+          <strong>Hostal Africa</strong>
+          <p>Bali-style kite and yoga hostel in the old town, with private rooms, a shared kitchen and a rooftop for daily yoga.</p>
+          <span class="review-link">See the place ↗</span>
+        </a>
+        <a class="venue reveal" href="https://freeridetarifa.com/tarifa-kite-house/" target="_blank" rel="noopener">
+          <img src="assets/web/venues/surfers-residence.jpg" alt="Rooftop sun loungers with sea view at Surfers Residence in Tarifa" loading="lazy">
+          <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.8</span><span class="vibe-chip">Coliving</span></div>
+          <strong>Surfers Residence</strong>
+          <p>Coliving kite house on a quiet old-town street, with private rooms and a sea view rooftop for weekly BBQ nights.</p>
+          <span class="review-link">See the place ↗</span>
+        </a>
+      </div>
+
+      <p class="more-stay reveal">Want your own space? Freeride also lists <a href="https://freeridetarifa.com/tarifa-holiday-rentals/" target="_blank" rel="noopener">apartments</a> and <a href="https://freeridetarifa.com/tarifa-holiday-beach-houses/" target="_blank" rel="noopener">beach houses &amp; bungalows</a> in and around Tarifa. Message us with your dates and group size and we will match you to the right one.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <img src="assets/web/grab.jpg" alt="Kitesurfer grabbing the board mid-jump off Tarifa with the hills behind">
+      <div class="cta-inner reveal">
+        <h2>Tell us your dates, we will sort the room</h2>
+        <p>Lessons, gear and a bed near the beach can all go in one message. Tell us your level and your dates and Freeride will put the trip together.</p>
+        <div class="cta-actions">
+          <a class="btn green" href="https://wa.me/34601655993">Plan your stay on WhatsApp</a>
+          <a class="btn" style="color: var(--white)" href="lessons.html">View lessons</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Freeride Tarifa · Kitesurfing in Tarifa, Spain</span>
+    <nav>
+      <a href="lessons.html">Lessons</a>
+      <a href="rent.html">Rent</a>
+      <a href="https://wa.me/34601655993">WhatsApp</a>
+    </nav>
+  </footer>
+
+  <script>
+    // top bar turns solid after the hero
+    const hero = document.querySelector(".hero");
+    const onScroll = () => {
+      const threshold = hero ? hero.offsetHeight - 80 : 160;
+      document.body.classList.toggle("is-scrolled", window.scrollY > threshold);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // scroll reveal: fade + lift elements as they enter view
+    (() => {
+      const revealEls = document.querySelectorAll(".reveal");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (revealEls.length && "IntersectionObserver" in window && !reduceMotion) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add("in"); io.unobserve(entry.target); }
+          });
+        }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add("in"));
+      }
+    })();
+  </script>
+</body>
+</html>

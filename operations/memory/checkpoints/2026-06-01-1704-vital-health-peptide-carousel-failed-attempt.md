@@ -56,7 +56,7 @@ Annabel paused the build, asked for a failed-attempt checkpoint, and to delete t
   - AG1 $72 welcome kit (offer grid with struck-through prices)
   - AG1 Erica B + Sloane S (testimonial with plate quote + attribution chip)
   - KLIK camera (comparison ad with column structure)
-  - Simone Scrapes video https://youtu.be/REEzMNF54GY — carousel-variety thesis
+  - Simone Scrapes video <https://youtu.be/REEzMNF54GY> — carousel-variety thesis
 - **Voice direction from Annabel**: "lean away from italic" — at most one italic moment, not the v5 four-of-six pattern.
 - **Slide 1 direction from Annabel**: lead with the WORD "peptides" as eye-catcher, not poetic abstraction. The Ritual packshot pattern fits this exactly.
 - **Testimonial photo path chosen**: option (b) — anonymized (no face, hand on vial / hand at window). VH does not need to source real patient photos for this attempt.
@@ -65,6 +65,7 @@ Annabel paused the build, asked for a failed-attempt checkpoint, and to delete t
 ## What was deleted (per Annabel's request)
 
 All bespoke content created this session, removed at session end:
+
 - `projects/00-social-content/claude/2026-06-01/vh-peptide-intro/` (entire folder: brief.md, slides 1-3 HTML, review-batch1.html)
 - `~/Desktop/vh-peptide-intro-batch1.html`
 - `~/Desktop/vh-peptide-intro-batch1-assets/` (entire folder)

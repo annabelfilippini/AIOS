@@ -11,10 +11,12 @@ next-session: Awaiting Annabel review. Open question flagged to her: footer hour
 Follow-up to `2026-05-30-1110-vital-health-feste-restored-new-logo.md`.
 
 ## Why
+
 Annabel had to correct the copy several times. Two specific fixes plus a request
 to capture the voice lessons durably so it stops recurring.
 
 ## About page edits (published to staging vital-health-9bf311.webflow.io)
+
 1. **Hero subhead** reworded so Feste reads as present, not legacy:
    "…four practitioners, one coordinated record. Meet the team continuing
    Dr. Feste's model and writing its next chapter." (was "carrying forward
@@ -33,6 +35,7 @@ Still present (flagged, not changed): footer hours use EN-dashes
 "Mon – Fri · 8a – 5p" in the shared Site Footer component.
 
 ## Voice file updated
+
 SOUL.md → "## Annabel's Voice When Drafting For Her" → new subsection
 "### Copy mechanics (any copy in her voice: websites, client deliverables,
 outreach)". Four durable rules: (1) no dashes as punctuation ever, including
@@ -42,6 +45,7 @@ when restoring/quoting source text; (2) match a real person's current status
 phrasing, no decorative clauses.
 
 ## Key IDs (About page 6a19b8b56de372b248e55901)
+
 - Hero subhead string 6f25496c-8e2c-ddf2-1165-b261c528b35a
 - Feste bio string 87bc0b6c-…-2684 | Feste quote string 87bc0b6c-…-2688
 - Philosophy para 4 string 3536fe07-758c-384f-fcd7-c183f199a24a

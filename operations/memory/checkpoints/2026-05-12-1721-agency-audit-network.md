@@ -38,6 +38,7 @@ Stress-tested `projects/agency-audit-network/PLAN.md` through Garry + Business P
 ## Context to preserve
 
 **Files produced this session:**
+
 - `projects/agency-audit-network/PLAN.md` — rewritten v2 (sprint dated 2026-05-12 → 2026-05-26)
 - `projects/agency-audit-network/templates/quick-read.md` — Tier 1 template, Mansel-vocabulary aligned
 - `projects/agency-audit-network/research/mansel-aios-framework-2026-05-12.md` — full framework synthesis from 10 captured AIOS Model modules
@@ -45,12 +46,14 @@ Stress-tested `projects/agency-audit-network/PLAN.md` through Garry + Business P
 - `projects/agency-audit-network/research/mansel-framework-2026-05-12.md` — earlier public-only sync notes
 
 **Annabel's existing assets (newly surfaced mid-session):**
+
 - Cooldown — deployed website she built + audit PDF (not flagship format)
 - Life coach — AI process automation, can reference
 - Both have given (or will give) permission to be named
 - Building her own website via **Claude Design** (not Claude Code)
 
 **Garry / BP framing applied:**
+
 - Three Garry pushbacks the user accepted: narrow ICP, defer multi-track audit until Track 1 ships, don't pitch agencies before having proof
 - One BP pushback that succeeded: don't repackage Cooldown audit retroactively — deployed website is stronger
 

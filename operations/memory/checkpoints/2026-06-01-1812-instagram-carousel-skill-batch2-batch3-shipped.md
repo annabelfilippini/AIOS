@@ -11,6 +11,7 @@ next-session: First real use of the skill on a new brand. Touch `~/.claude/state
 ## What we worked on
 
 ### Batch 2 — relocation
+
 - Moved `projects/vital-health-webflow-migration/projects/00-social-content/claude/2026-05-31/vh-intro-carousel/` (14 items, ~50 MB) → `projects/vital-health-webflow-migration/media/2026-05-31-vital-health-intro/`.
 - Removed the now-empty `projects/00-social-content/claude/` subtree. Left sibling `projects/00-social-content/2026-05-31/` alone — out of scope (carries unrelated work from earlier sessions).
 - Copied the 6 final slide PNGs to `~/Documents/AI-OS/skills/instagram-carousel/inspiration/vital-health-intro-2026-05-31/` with a structured `note.md` covering the 6-slide arc table, what to lift, what NOT to lift, and cross-refs to `pipeline-log.md` + `preferences.md` + `ad-analyses-health.md`.
@@ -18,6 +19,7 @@ next-session: First real use of the skill on a new brand. Touch `~/.claude/state
 - Verified `~/Desktop/vh-intro-carousel-review.html` still parses with all 6 inline base64 images intact post-move.
 
 ### Batch 3 — hooks layer
+
 - Wrote `~/Documents/AI-OS/skills/instagram-carousel/scripts/save_correction.py`. Aggressive trigger regex (20+ patterns, case-insensitive). Category inference walks 6 ordered keyword groups → `## Typography`, `## Photography`, `## Copy`, `## Layout / Composition`, `## TEXT-ON-PHOTO LEGIBILITY`, `## Voice`, with `## Don't do this` and `## Uncategorized` as fallbacks. Inserts entries at the END of the matched category (preserves order with existing entries).
 - Wrote `~/Documents/AI-OS/skills/instagram-carousel/scripts/enforce_media_folder.py`. Inspects tool payload; blocks Write/Edit of `.png/.html/.yaml/.jsonl` outside `*/media/YYYY-MM-DD-<slug>/`. For Bash: smart write-detection — only flags redirection targets, `cp`/`mv`/`rsync`/`install` *destinations* (last protected-ext arg, not source), `tee`, `dd of=`. Reads like `cat foo.png` are NOT flagged.
 - Wrote `~/.claude/hooks/listen-for-corrections.sh` + `~/.claude/hooks/enforce-media-folder.sh`. Both are thin bash wrappers: check lockfile → exec the python script. Both chmod +x.
@@ -25,6 +27,7 @@ next-session: First real use of the skill on a new brand. Touch `~/.claude/state
 - Added SKILL.md §0 with `touch`/`rm` instructions for the lockfile.
 
 ### Scoping model
+
 - Hooks are session-globally registered (Claude Code matchers only filter by tool name, not by active skill) but **lockfile-gated**: first line is `[ -f ~/.claude/state/active-skills/instagram-carousel.lock ] || exit 0`. Outside an active run the overhead is one bash spawn + one filesystem stat (~1ms), then exit 0. Inside one, the listener captures corrections and the enforcer fences writes.
 - Same architectural pattern as the existing `file-placement-guard.sh` (registered globally, fires narrowly).
 

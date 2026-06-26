@@ -38,6 +38,7 @@ Annabel asked to scrape paid Mansel Skool resources + Beau YouTube content to in
 ## Context to preserve
 
 **Files produced this session:**
+
 - `projects/agency-audit-network/research/audit-system-synthesis-2026-05-14.md` — the deliverable. 9 sections, action-shaped.
 - `projects/agency-audit-network/research/sources/beau-bosar-aif-sop-2026-05-11.md` — full SOP transcript + direct lifts
 - `projects/agency-audit-network/research/sources/bo-sar-ai-first-playbook-2026-05-06.md` — foundation methodology transcript
@@ -47,6 +48,7 @@ Annabel asked to scrape paid Mansel Skool resources + Beau YouTube content to in
 - `projects/agency-audit-network/research/sources/mansel-ainative-2026-05-14/` — full ainative classroom structure: README + module catalog (123 modules) + resources catalog (48 files) + module-tree.txt + attention-residuals post body
 
 **New durable memories:**
+
 - `~/.claude/projects/-Users-annabelfilippini/memory/reference_skool_account_shared_with_dad.md`
 - `~/.claude/projects/-Users-annabelfilippini/memory/reference_skool_resources_need_playwright.md`
 

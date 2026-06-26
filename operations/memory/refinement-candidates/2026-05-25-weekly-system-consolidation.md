@@ -38,4 +38,3 @@ Rationale: top-level canonical skills are now `skills/office-hours-lite` and
 2. **Deliberate `knowledge/` vault reconciliation:** `knowledge/` is its own Git
    repo and remains behind remote with local deletes + new raw imports; handle
    as a dedicated pass so it doesn’t pollute AI-OS memory work.
-

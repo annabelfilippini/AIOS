@@ -11,16 +11,21 @@ next-session: Send/await Rob's reply on the client email (hosting cost OK? + Jul
 Supersedes `2026-05-29-1802-vital-health-webflow-touchups.md`.
 
 ## Site state (unchanged from 18:02 checkpoint — all live + verified)
+
 Staging `vital-health-9bf311.webflow.io` (subdomain only, `customDomains: []`).
 Verified via curl: 0 em-dashes on every page; "Hope and Healing" gone; Contact
 Portal row removed; Services 4 jump links now forest green (`.svcpg-jumplink`,
-#1F4D2A in published CSS). About team heading → "The team that stays with you";
+
+# 1F4D2A in published CSS). About team heading → "The team that stays with you"
+
 "three sets of eyes" line rewritten. Home founder stat → "established by founder
 Dr. Joseph Feste". Full edit detail in the superseded 18:02 checkpoint.
 
 ## NEW this session: client email to Rob
+
 Annabel is sending Rob an email (handing the site to the original owners). Final
 draft includes:
+
 - Site moved to Webflow so anyone can edit/add promos.
 - Flag: Webflow hosting = $40/mo ongoing, billed to Vital Health. Asks if OK.
 - **Founder-story question routed to Julie** (Annabel was unsure, wanted Rob to
@@ -37,6 +42,7 @@ draft includes:
 Email kept in Annabel's plainer, direct voice; no em-dashes.
 
 ## Still open / needs Annabel
+
 1. **CLAUDE.md em-dash rule** — auto-mode classifier blocked the self-edit to
    `~/.claude/CLAUDE.md` Voice & Tone. Needs Annabel to approve/apply. Proposed:
    "Never use the em-dash (—) to tack on or expand a thought. Rewrite as two
@@ -46,6 +52,7 @@ Email kept in Annabel's plainer, direct voice; no em-dashes.
    sign-off on Services (semaglutide / exosome 96%→7% / testosterone ~50%).
 
 ## Gotchas (reconfirmed)
+
 - Designer `element_tool` times out mid-batch (~every other large call); retry
   with Designer tab foregrounded; re-query "—" to see what landed. Batches of
   ~5-6 set_text were the sweet spot. Data API (pages/sites) never timed out.
@@ -54,6 +61,7 @@ Email kept in Annabel's plainer, direct voice; no em-dashes.
 - Webflow caches published HTML; curl-grep live URLs to verify.
 
 ## Key IDs (additions this round)
+
 - New style: svcpg-jumplink (8c37938b-4684-9fb6-de8f-22d731be0176)
 - Home hero image (alt fixed): 2912fcca-10a7-e746-265f-608f4d140fac
 - (Site/page/footer/script IDs in earlier checkpoints.)

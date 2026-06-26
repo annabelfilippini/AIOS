@@ -1,0 +1,1 @@
+14:00 — hormone-bullet-li style created (gold #c9a04a, 7px, ::before). For men list (11/11) styled in Designer, not published. Next: 4 For women bioidentical + 8 For women post-menopausal + 8 What we treat = 20 items, then publish + curl verify.

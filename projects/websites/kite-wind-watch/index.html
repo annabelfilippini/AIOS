@@ -1,0 +1,2014 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kite Wind Watch</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231c3d6e'/%3E%3Cpath d='M7 22L25 7L21 25L16 19L7 22Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #e9eef7;
+      --bg-2: #f3f6fc;
+      --card: #ffffff;
+      --ink: #16243d;
+      --ink-soft: #45577a;
+      --muted: #8492ad;
+      --line: #e3e9f3;
+      --navy: #1c3d6e;
+      --navy-2: #2f6bb0;
+      --navy-soft: #e7eefb;
+      --sky: #5aa9f7;
+      --good: #2fbf91;
+      --marg: #5aa9f7;
+      --light: #9aa6c4;
+      --strong: #f5a623;
+      --nuke: #ef5a78;
+      --shadow: 0 18px 50px rgba(20, 45, 90, .13);
+      --shadow-sm: 0 8px 24px rgba(20, 45, 90, .08);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 600px at 88% -8%, #d3e1f6 0%, transparent 60%),
+        radial-gradient(900px 500px at -5% 110%, #dfe9fc 0%, transparent 55%),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.4;
+    }
+
+    button, select, input { font: inherit; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { margin: 0; }
+
+    .shell {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: clamp(16px, 2.4vw, 30px);
+      display: grid;
+      grid-template-columns: 232px minmax(0, 1fr);
+      gap: clamp(16px, 2vw, 26px);
+      align-items: start;
+    }
+
+    /* ---------- Sidebar ---------- */
+    .side {
+      position: sticky;
+      top: clamp(16px, 2.4vw, 30px);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 18px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 4px 6px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand-mark {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      display: grid; place-items: center;
+      box-shadow: 0 8px 18px rgba(28, 61, 110, .34);
+      flex: none;
+    }
+    .brand-mark svg { width: 22px; height: 22px; }
+    .brand-name { font-weight: 800; font-size: 15px; line-height: 1.1; letter-spacing: -.01em; }
+    .brand-name small { display: block; font-weight: 600; font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+    /* mascot */
+    .mascot { display: grid; place-items: center; padding: 2px 0 4px; color: var(--navy); }
+    .mascot svg { width: 150px; height: auto; opacity: .92; }
+    .mascot-cap { font-size: 11px; font-weight: 700; color: var(--muted); margin-top: 2px; }
+
+    .settings {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      display: grid; gap: 13px;
+    }
+    .settings h4 {
+      font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--muted);
+    }
+    label { display: grid; gap: 6px; font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+    .field { display: grid; gap: 6px; }
+    select, input {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg-2);
+      padding: 0 12px;
+      outline: 0;
+      font-weight: 600;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    select:focus, input:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(28, 61, 110, .16); }
+
+    .btn {
+      min-height: 46px;
+      border: 0;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: #fff;
+      font-weight: 700; font-size: 14px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 10px 22px rgba(28, 61, 110, .32);
+      transition: transform .12s, box-shadow .12s;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 26px rgba(28, 61, 110, .38); }
+    .btn svg { width: 17px; height: 17px; }
+
+    /* ---------- Main ---------- */
+    .main { display: grid; gap: clamp(14px, 1.7vw, 22px); min-width: 0; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      padding: 2px 4px;
+    }
+    .topbar .place { display: grid; gap: 4px; }
+    .topbar .place strong { font-size: clamp(20px, 3vw, 27px); font-weight: 800; letter-spacing: -.02em; }
+    .topbar .place span { font-size: 13px; color: var(--muted); font-weight: 600; }
+    .status { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      font-size: 12px; font-weight: 700;
+      padding: 7px 12px; border-radius: 999px;
+      background: var(--card); color: var(--ink-soft);
+      box-shadow: var(--shadow-sm);
+    }
+    .pill.live { background: var(--navy); color: #fff; }
+    .pill.ghost { background: transparent; box-shadow: none; color: var(--muted); }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 2vw, 26px);
+    }
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 16px;
+    }
+    .card-head h3 { font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
+    .card-head .tag { font-size: 12px; font-weight: 700; color: var(--muted); }
+
+    /* ---- Top row: answer + other days ---- */
+    .row-top { display: grid; grid-template-columns: minmax(0, 1.72fr) minmax(214px, 1fr); gap: clamp(14px, 1.7vw, 22px); align-items: start; }
+
+    /* The answer card (headline + chart) */
+    .answer { display: grid; gap: 18px; align-content: start; }
+    .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .head-l { display: grid; gap: 7px; min-width: 0; }
+    .head-eyebrow { font-size: 13px; font-weight: 800; color: var(--navy); letter-spacing: .01em; }
+    .head-num { display: flex; align-items: flex-start; gap: 5px; font-size: clamp(44px, 6.4vw, 66px); font-weight: 800; line-height: .85; letter-spacing: -.04em; }
+    .head-num small { font-size: clamp(15px, 2vw, 20px); font-weight: 700; color: var(--muted); margin-top: 8px; }
+    .head-sub { font-size: 13px; font-weight: 600; color: var(--ink-soft); }
+    .cond {
+      align-self: flex-end;
+      display: inline-flex; align-items: center;
+      padding: 8px 16px; border-radius: 999px;
+      background: var(--good); color: #fff;
+      font-weight: 800; font-size: 14px;
+      box-shadow: 0 8px 18px rgba(0,0,0,.10);
+      white-space: nowrap;
+    }
+
+    /* Chart */
+    .chart-svg { width: 100%; height: auto; display: block; }
+    .cx-lab { fill: var(--muted); font-size: 12px; font-weight: 600; }
+    .cx-val { fill: var(--muted); font-size: 12px; font-weight: 700; }
+    .cx-val.on { fill: var(--ink); }
+    .cx-line { fill: none; stroke: var(--navy); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .cx-dot { fill: #fff; stroke: var(--navy); stroke-width: 2.4; }
+    .cx-dot.on { fill: var(--navy); }
+    .cx-thr { stroke: #cdd8ea; stroke-width: 1.5; stroke-dasharray: 4 6; }
+    .cx-thrlab { fill: var(--muted); font-size: 11px; font-weight: 600; }
+    .cx-win { fill: rgba(47, 107, 176, .14); }
+    .cx-winlab { fill: var(--navy); font-size: 13px; font-weight: 800; }
+    .empty { padding: 40px 26px; text-align: center; color: var(--muted); font-weight: 600; font-size: 14px; }
+
+    /* Other days rail */
+    .od-card { display: grid; gap: 14px; align-content: start; }
+    .od-list { display: grid; gap: 7px; }
+    .od {
+      position: relative; text-align: left; cursor: pointer; width: 100%;
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px;
+      padding: 9px 14px; border-radius: var(--radius-sm); line-height: 1.22;
+      background: var(--bg-2); border: 1.5px solid transparent;
+      transition: transform .12s, border-color .15s, background .15s;
+    }
+    .od:hover { transform: translateX(2px); }
+    .od.sel { background: var(--navy-soft); border-color: rgba(28,61,110,.42); }
+    .od-l { display: grid; gap: 2px; min-width: 0; }
+    .od-day { font-size: 14px; font-weight: 800; letter-spacing: -.01em; }
+    .od-win { font-size: 12px; font-weight: 700; }
+    .od-r { text-align: right; }
+    .od-kt { font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+    .od-kt small { font-size: 11px; font-weight: 700; color: var(--muted); margin-left: 2px; }
+    .od-best {
+      position: absolute; top: -8px; left: 12px;
+      background: var(--navy); color: #fff;
+      font-size: 10px; font-weight: 800; letter-spacing: .04em;
+      padding: 3px 8px; border-radius: 999px;
+    }
+
+    /* Sources (bottom) */
+    .srcs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .src {
+      border: 1px solid var(--line); border-radius: var(--radius-sm);
+      padding: 16px; display: grid; gap: 12px; align-content: start;
+      background: var(--bg-2);
+    }
+    .src.off { background: #fdf4f4; border-color: #f6dada; }
+    .src-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .src-top strong { font-size: 14px; font-weight: 800; }
+    .src-tag {
+      font-size: 11px; font-weight: 700; color: var(--navy);
+      background: var(--navy-soft); padding: 4px 9px; border-radius: 999px;
+    }
+    .src-tag.off { color: var(--nuke); background: #fbe2e6; }
+    .src-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .src-metrics > div { text-align: center; }
+    .src-metrics b { display: block; font-size: 19px; font-weight: 800; }
+    .src-metrics span { display: block; font-size: 10px; font-weight: 700; color: var(--muted); margin-top: 3px; }
+    .src-err { margin: 0; font-size: 12px; font-weight: 700; color: var(--nuke); }
+
+    .foot {
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      padding: 6px 6px 4px; color: var(--muted); font-size: 12px; font-weight: 600;
+    }
+    .foot a { color: var(--navy); font-weight: 700; }
+
+    /* ---------- Region tabs ---------- */
+    .tabs {
+      display: inline-flex; gap: 4px; padding: 5px;
+      background: var(--card); border-radius: 999px;
+      box-shadow: var(--shadow-sm); justify-self: start;
+    }
+    .tab {
+      border: 0; cursor: pointer; background: transparent;
+      padding: 9px 18px; border-radius: 999px;
+      font-weight: 700; font-size: 13px; color: var(--ink-soft);
+      transition: background .15s, color .15s;
+    }
+    .tab:hover { color: var(--ink); }
+    .tab.sel {
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: #fff; box-shadow: 0 8px 18px rgba(28, 61, 110, .28);
+    }
+
+    /* ---------- "What people are saying" (Colorado + Wyoming) ---------- */
+    .chatter { display: grid; gap: 18px; }
+    .chatter[hidden] { display: none; }   /* class display: grid would otherwise defeat [hidden] */
+    .dadrow { display: grid; gap: 8px; }
+    .dad {
+      display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px;
+      padding: 12px 14px; border-radius: var(--radius-sm);
+      background: var(--bg-2); border: 1px solid var(--line);
+    }
+    .dad-dot { width: 10px; height: 10px; border-radius: 999px; background: var(--muted); flex: none; }
+    .dad-dot.on { background: var(--good); box-shadow: 0 0 0 4px rgba(47, 191, 145, .18); }
+    .dad-l { display: grid; gap: 2px; min-width: 0; }
+    .dad-l b { font-size: 14px; font-weight: 800; }
+    .dad-l span { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
+    .dad-badge {
+      font-size: 11px; font-weight: 800; white-space: nowrap;
+      padding: 5px 10px; border-radius: 999px;
+      background: #eef1f6; color: var(--muted);
+    }
+    .dad-badge.on { background: rgba(47, 191, 145, .16); color: #1d8f6a; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+    .chip {
+      text-align: left; cursor: default; border: 1px solid var(--line);
+      background: var(--bg-2); border-radius: 14px; padding: 9px 13px;
+      display: grid; gap: 3px; transition: transform .12s, border-color .15s, box-shadow .15s;
+    }
+    .chip.go { cursor: pointer; }
+    .chip.go:hover { transform: translateY(-1px); border-color: var(--navy-2); box-shadow: var(--shadow-sm); }
+    .chip-n { font-size: 13px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+    .chip-w { font-size: 11px; font-weight: 700; color: var(--muted); }
+    .chip .b { font-style: normal; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 999px; letter-spacing: .02em; }
+    .chip .b.new { background: var(--navy-soft); color: var(--navy); }
+    .chip .b.dad { background: #fff1dd; color: #b9742a; }
+
+    .threads { display: grid; gap: 10px; }
+    .thread {
+      display: grid; gap: 5px; padding: 13px 15px; border-radius: var(--radius-sm);
+      background: var(--bg-2); border: 1px solid var(--line);
+      transition: transform .12s, border-color .15s, box-shadow .15s;
+    }
+    .thread:hover { transform: translateX(2px); border-color: var(--navy-2); box-shadow: var(--shadow-sm); }
+    .thread-top { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+    .thread-sub { font-size: 11px; font-weight: 800; color: var(--navy); background: var(--navy-soft); padding: 3px 9px; border-radius: 999px; }
+    .thread-spots { font-size: 11px; font-weight: 700; color: var(--muted); }
+    .thread-title { font-size: 14px; font-weight: 800; color: var(--ink); }
+    .thread-snip { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); line-height: 1.45; }
+    .chatter .empty code { background: var(--bg); padding: 2px 6px; border-radius: 6px; font-size: 12px; }
+
+    .discovered { display: grid; gap: 8px; }
+    .disc-h { font-size: 12px; font-weight: 800; color: var(--ink); }
+    .disc-h span { font-weight: 700; color: var(--muted); }
+    .disc-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .disc-chip {
+      display: grid; gap: 2px; padding: 7px 11px; border-radius: 12px;
+      background: var(--bg); border: 1px dashed var(--navy-2);
+    }
+    .disc-chip b { font-size: 12.5px; font-weight: 800; color: var(--ink); }
+    .disc-chip span { font-size: 11px; font-weight: 700; color: var(--muted); }
+
+    /* ---------- Map (hero) ---------- */
+    .mapcard { padding: 0; overflow: hidden; position: relative; }
+    .mapcard .map-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding: 16px 20px 12px; flex-wrap: wrap;
+    }
+    .mapcard .map-head h3 { font-size: 15px; font-weight: 800; }
+    .map-legend { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .map-legend span { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; color: var(--ink-soft); }
+    .map-legend i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+    .map-legend i.dot-track { background: var(--navy); }
+    .map-legend i.dot-new { background: var(--strong); }
+    .map-legend i.dot-sel { background: var(--good); }
+    #map { width: 100%; height: clamp(360px, 46vh, 520px); background: var(--bg-2); }
+    .map-fallback {
+      width: 100%; height: clamp(360px, 46vh, 520px);
+      display: grid; place-items: center; text-align: center; padding: 30px;
+      background:
+        repeating-linear-gradient(45deg, var(--bg-2), var(--bg-2) 14px, #eef3fb 14px, #eef3fb 28px);
+    }
+    .map-fallback .mf-inner { max-width: 460px; display: grid; gap: 10px; }
+    .map-fallback h4 { font-size: 16px; font-weight: 800; color: var(--ink); }
+    .map-fallback p { font-size: 13px; font-weight: 600; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+    .map-fallback code { background: var(--navy-soft); color: var(--navy); padding: 2px 7px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+
+    /* Google InfoWindow content */
+    .iw { font-family: var(--sans); min-width: 190px; max-width: 240px; padding: 2px 2px 4px; }
+    .iw-name { font-size: 14px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 7px; }
+    .iw-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 999px; }
+    .iw-badge.new { background: #fdecc8; color: #8a5a00; }
+    .iw-region { font-size: 11.5px; font-weight: 700; color: var(--muted); margin-top: 2px; }
+    .iw-quote { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); font-style: italic; margin: 7px 0; line-height: 1.4; border-left: 2px solid var(--strong); padding-left: 8px; }
+    .iw-btn {
+      margin-top: 6px; width: 100%; border: 0; border-radius: 10px; cursor: pointer;
+      padding: 9px 12px; font-size: 12.5px; font-weight: 800;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff;
+    }
+    .iw-btn.ghost { background: var(--navy-soft); color: var(--navy); }
+    .iw-btn + .iw-btn { margin-top: 6px; }
+
+    /* ---------- Live now (real station observations) ---------- */
+    .livewrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 9px; }
+    .livenow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border-radius: 999px; background: #eafaf3;
+      border: 1px solid #c4ecdc; font-size: 12.5px; font-weight: 700; color: var(--ink-soft);
+      width: fit-content;
+    }
+    .livenow .lv-dot {
+      width: 9px; height: 9px; border-radius: 50%; background: var(--good);
+      box-shadow: 0 0 0 3px rgba(47, 191, 145, .22); flex: none;
+    }
+    .livenow b { font-size: 14px; color: var(--ink); font-weight: 800; }
+    .livenow .lv-src { color: var(--muted); font-weight: 600; }
+    .livenow.lv-stale { background: var(--bg-2); border-color: var(--line); }
+    .livenow.lv-stale .lv-dot { background: var(--muted); box-shadow: none; }
+    .livenow.lv-loading .lv-dot { background: var(--marg); box-shadow: none; }
+
+    body.loading .main { opacity: .72; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .mascot { display: none; }
+      .settings { border-top: 0; padding-top: 2px; }
+      .row-top { grid-template-columns: 1fr; }
+      .srcs { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .head-num { font-size: 52px; }
+      .dad { grid-template-columns: auto 1fr; }
+      .dad-badge { grid-column: 2; justify-self: start; }
+      .tabs { width: 100%; }
+      .tab { flex: 1; text-align: center; padding: 10px 8px; }
+    }
+
+    /* ====================================================================
+       MAP-FIRST LAYOUT (2026-06-18) — the app IS a full-bleed Google
+       satellite map; brand/settings/legend float top-left, and clicking a
+       pin opens the forecast in the right-hand panel (hours + the week).
+       This block overrides the earlier stacked-card layout; the inner
+       content styles (chart, other-days, sources, chatter) are reused.
+       ==================================================================== */
+    :root {
+      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      --panel-bg: rgba(252, 253, 255, .9);
+    }
+    html, body { height: 100%; }
+    body { margin: 0; overflow: hidden; background: #0d1a2e; }
+
+    .app { position: fixed; inset: 0; overflow: hidden; }
+    #map { position: absolute; inset: 0; width: 100%; height: 100%; background: #1b2740; }
+
+    /* frosted squared panel base */
+    .panel {
+      background: var(--panel-bg);
+      -webkit-backdrop-filter: blur(18px) saturate(1.35);
+      backdrop-filter: blur(18px) saturate(1.35);
+      border: 1px solid rgba(255, 255, 255, .6);
+      box-shadow: 0 18px 50px rgba(8, 20, 45, .26);
+      border-radius: 0;
+    }
+
+    /* left stack: brand · settings · legend */
+    .leftstack {
+      position: absolute; top: 18px; left: 18px; z-index: 5;
+      width: 250px; display: flex; flex-direction: column; gap: 12px;
+      max-height: calc(100vh - 36px); overflow-y: auto;
+    }
+    .brand-panel { padding: 15px 18px 16px; }
+    .bm-mark { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--navy); font-weight: 700; }
+    .bm-title { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1; margin: 5px 0 9px; letter-spacing: -.01em; color: var(--ink); }
+    .bm-status { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); }
+    .bm-status b { color: var(--good); }
+
+    /* settings: neutralize the old sticky-card styling, keep .panel chrome */
+    .side { position: static; top: auto; border-radius: 0; box-shadow: none; padding: 16px 16px 18px; gap: 0; background: transparent; }
+    .side select, .side input, .btn { border-radius: 0; }
+
+    /* legend */
+    .legend { padding: 13px 16px; }
+    .legend h4 { font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin: 0 0 9px; font-weight: 700; }
+    .lg-row { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px; }
+    .lg-row:last-child { margin-bottom: 0; }
+    .lg-row i { width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 1px 3px rgba(0, 0, 0, .25); flex: none; }
+    .lg-row i.dot-light  { background: var(--light); }
+    .lg-row i.dot-marg   { background: var(--marg); }
+    .lg-row i.dot-good   { background: var(--good); }
+    .lg-row i.dot-strong { background: var(--strong); }
+    .lg-row i.dot-nuke   { background: var(--nuke); }
+    .lg-row i.dot-ring   { background: #fff; border: 3px solid var(--navy-2); box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+    .lg-row i.dot-unknown { background: var(--navy); }
+
+    /* right spot detail panel */
+    .spot-panel {
+      position: absolute; top: 18px; right: 18px; z-index: 5;
+      width: 374px; max-height: calc(100vh - 36px); overflow-y: auto;
+      display: block; padding: 0; gap: 0;
+    }
+    /* nested cards become flat sections divided by hairlines */
+    .spot-panel .card { background: transparent; box-shadow: none; border-radius: 0; padding: 16px 22px; border-bottom: 1px solid var(--line); margin: 0; }
+    .spot-panel .topbar { padding: 18px 22px 14px; border-bottom: 1px solid var(--line); }
+    .spot-panel .place strong { font-family: var(--serif); font-weight: 600; font-size: 30px; letter-spacing: -.01em; }
+    .spot-panel .row-top { display: block; padding: 0; gap: 0; }
+    .spot-panel .head-num { font-size: 46px; }
+    .spot-panel .srcs { grid-template-columns: repeat(3, 1fr); }
+    .spot-panel .foot { padding: 14px 22px 18px; flex-direction: column; gap: 6px; }
+    .spot-panel::-webkit-scrollbar { width: 8px; }
+    .spot-panel::-webkit-scrollbar-thumb { background: rgba(28, 61, 110, .25); }
+
+    /* mobile: panels collapse to a top bar + a bottom forecast sheet */
+    @media (max-width: 760px) {
+      .leftstack { left: 10px; right: 10px; top: 10px; width: auto; }
+      .legend { display: none; }
+      .spot-panel { left: 10px; right: 10px; top: auto; bottom: 10px; width: auto; max-height: 56vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="top">
+    <!-- ============ FULL-BLEED GOOGLE SATELLITE MAP ============ -->
+    <div id="map"></div>
+
+    <!-- ============ LEFT STACK: brand · settings · legend ============ -->
+    <div class="leftstack">
+      <div class="panel brand-panel">
+        <div class="bm-mark">Kite Wind Watch</div>
+        <h1 class="bm-title">The map.</h1>
+        <div class="bm-status" id="brandStatus"><b>●</b> Click a pin to read its wind</div>
+      </div>
+
+      <aside class="panel side">
+        <form class="settings" id="controls">
+          <h4>Settings</h4>
+          <label class="field">Spot
+            <select id="spotSelect"></select>
+          </label>
+          <label class="field">Rideable from
+            <input id="thresholdInput" type="number" min="8" max="30" value="15">
+          </label>
+          <label class="field">Daylight
+            <select id="daylightSelect">
+              <option value="9-20">9 AM – 8 PM</option>
+              <option value="10-19">10 AM – 7 PM</option>
+              <option value="8-21">8 AM – 9 PM</option>
+            </select>
+          </label>
+          <button class="btn" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+            Refresh wind
+          </button>
+        </form>
+      </aside>
+
+      <div class="panel legend">
+        <h4>Pin colour = wind right now</h4>
+        <div class="lg-row"><i class="dot-light"></i>Too light</div>
+        <div class="lg-row"><i class="dot-marg"></i>Building</div>
+        <div class="lg-row"><i class="dot-good"></i>Rideable</div>
+        <div class="lg-row"><i class="dot-strong"></i>Strong</div>
+        <div class="lg-row"><i class="dot-nuke"></i>Too much</div>
+        <div class="lg-row"><i class="dot-ring"></i>Reddit tip</div>
+      </div>
+    </div>
+
+    <!-- ============ RIGHT: spot detail panel (forecast on pin click) ============ -->
+    <main class="panel spot-panel" id="spotPanel">
+      <header class="topbar">
+        <div class="place">
+          <strong id="spotName">Loading…</strong>
+          <span id="spotRegion">Checking the wind</span>
+          <div id="liveNow" class="livewrap" hidden></div>
+        </div>
+        <div class="status" id="statusLine">
+          <span class="pill live">Loading live forecasts…</span>
+        </div>
+      </header>
+
+      <!-- Top row: the answer (best window + chart) | other days -->
+      <section class="row-top">
+        <div class="card answer">
+          <div class="head">
+            <div class="head-l">
+              <span class="head-eyebrow" id="headEyebrow">Checking models</span>
+              <span class="head-num" id="headNum">--<small>kt</small></span>
+              <span class="head-sub" id="headSub">—</span>
+            </div>
+            <span class="cond" id="headCond">Loading</span>
+          </div>
+          <div id="chart"><div class="empty">Loading hourly wind…</div></div>
+        </div>
+
+        <div class="card od-card">
+          <div class="card-head">
+            <h3>Other days</h3>
+            <span class="tag">best hours</span>
+          </div>
+          <div class="od-list" id="otherDays"></div>
+        </div>
+      </section>
+
+      <!-- What people are saying — Reddit chatter for all tracked spots -->
+      <section class="card chatter" id="chatterCard">
+        <div class="card-head">
+          <h3>What people are saying</h3>
+          <span class="tag" id="chatterTag">Reddit · scanning…</span>
+        </div>
+        <div class="dadrow" id="dadStatus"></div>
+        <div class="chips" id="spotChips"></div>
+        <div class="discovered" id="discoveredSpots"></div>
+        <div class="threads" id="threadList"></div>
+      </section>
+
+      <!-- Sources (bottom) -->
+      <section class="card" id="sources">
+        <div class="card-head">
+          <h3>Sources</h3>
+          <span class="tag" id="sourcesTag">model readings</span>
+        </div>
+        <div class="srcs" id="sourceList"></div>
+      </section>
+
+      <footer class="foot">
+        <span>A first screen, not a launch decision. Colorado wind is gusty and storm-driven.</span>
+        <span>Sources:
+          <a href="https://www.windguru.cz/" target="_blank" rel="noreferrer">Windguru</a>,
+          <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>,
+          <a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noreferrer">NWS API</a>
+        </span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="data/discourse.js"></script>
+  <script>
+    /* ============================================================
+       DATA LAYER — preserved from the working prototype.
+       Pulls live wind from Windguru + Open-Meteo models + NWS.
+       ============================================================ */
+    const SPOTS = [
+      // ---- Denver / Front Range — "Front Range wind" tab ----
+      {
+        name: "Aurora Reservoir",
+        area: "front-range",
+        region: "Denver Front Range",
+        lat: 39.61,
+        lon: -104.66,
+        windguruId: 313163,
+        note: "Local Denver-area option. Watch Wednesday-style north/west setups and storm timing."
+      },
+      {
+        name: "Cherry Creek Reservoir",
+        area: "front-range",
+        region: "Denver Front Range",
+        lat: 39.638,
+        lon: -104.8501,
+        windguruId: 645926,
+        note: "Close to Denver, but inland gust spread matters. Check access and local restrictions."
+      },
+      {
+        name: "Chatfield Reservoir",
+        area: "front-range",
+        region: "Denver Front Range",
+        lat: 39.5475,
+        lon: -105.0669,
+        windguruId: 767568,
+        note: "Coordinate-verified Windguru id. Several search hits are wrong; this one is the local reservoir."
+      },
+      {
+        name: "Union Reservoir",
+        area: "front-range",
+        region: "Longmont · Front Range",
+        lat: 40.1797,
+        lon: -105.0383,
+        windguruId: 1291528,
+        note: "Longmont-area watch spot. Verify city rules and watercraft policy before counting on it."
+      },
+      {
+        name: "Boyd Lake",
+        area: "front-range",
+        region: "Loveland · Front Range",
+        lat: 40.4402,
+        lon: -105.0362,
+        windguruId: 185674,
+        note: "Loveland-area lake. Often worth comparing against Union when north winds show up."
+      },
+      // ---- Colorado + Wyoming — "Colorado + Wyoming" tab (incl. Dad's tips) ----
+      {
+        name: "Lake Dillon",
+        area: "co-wy",
+        region: "Colorado mountains",
+        lat: 39.6173,
+        lon: -106.0558,
+        windguruId: 227588,
+        note: "Cold mountain water and terrain effects. Treat every forecast as a first screen only."
+      },
+      {
+        name: "Pueblo Reservoir",
+        area: "co-wy",
+        region: "Southern Colorado",
+        lat: 38.2674,
+        lon: -104.7382,
+        windguruId: 649378,
+        note: "Southern Colorado option. Watch storm timing, shoreline access, and state park rules."
+      },
+      {
+        name: "Lake McConaughy",
+        area: "co-wy",
+        region: "Nebraska high plains · driveable",
+        lat: 41.245,
+        lon: -101.808,
+        windguruId: 248586,
+        note: "Most-recommended driveable spot on Reddit. Often stronger, but the drive raises the bar."
+      },
+      {
+        name: "Lake Hattie Reservoir",
+        area: "co-wy",
+        flagged: "Dad",
+        region: "Wyoming · Laramie",
+        lat: 41.2435,
+        lon: -105.9285,
+        note: "Dad's tip. Reddit riders confirm it: windy, but can be gusty. No Windguru id yet."
+      },
+      {
+        name: "Twin Buttes Lake",
+        area: "co-wy",
+        flagged: "Dad",
+        region: "Wyoming · Laramie",
+        lat: 41.2387,
+        lon: -105.8622,
+        note: "Dad's tip, just east of Lake Hattie. No Reddit chatter surfaced yet. No Windguru id yet."
+      },
+      {
+        name: "Williams Fork Reservoir",
+        area: "co-wy",
+        flagged: "Dad",
+        region: "Colorado · Grand County",
+        lat: 40.0178,
+        lon: -106.2116,
+        note: "Dad's tip. High mountain reservoir; cold water and terrain effects, scout it first. No Windguru id yet."
+      }
+    ];
+
+    const OPEN_METEO_MODELS = [
+      {
+        id: "best_match",
+        name: "Open-Meteo Best",
+        short: "Best",
+        endpoint: "https://api.open-meteo.com/v1/forecast",
+        source: "Highest-resolution model Open-Meteo selects for the point."
+      },
+      {
+        id: "ecmwf_ifs025",
+        name: "ECMWF IFS",
+        short: "ECMWF",
+        endpoint: "https://api.open-meteo.com/v1/ecmwf",
+        source: "European global model, useful for larger weather pattern confidence."
+      },
+      {
+        id: "gfs_global",
+        name: "NOAA GFS",
+        short: "GFS",
+        endpoint: "https://api.open-meteo.com/v1/gfs",
+        source: "NOAA global model. Windguru GFS and this feed should rhyme, not always match."
+      },
+      {
+        id: "icon_global",
+        name: "DWD ICON",
+        short: "ICON",
+        endpoint: "https://api.open-meteo.com/v1/forecast",
+        source: "German Weather Service global model for another independent read."
+      },
+      {
+        id: "ncep_hrrr_conus",
+        name: "NOAA HRRR",
+        short: "HRRR",
+        endpoint: "https://api.open-meteo.com/v1/gfs",
+        source: "NOAA High-Resolution Rapid Refresh — 3 km, hourly updates. The model US kiters rate highest for short-term gusty wind (next ~48h)."
+      }
+    ];
+
+    const state = {
+      tab: "front-range",
+      spot: SPOTS[0],
+      days: 7,
+      threshold: 15,
+      daylight: [9, 20],
+      sources: [],
+      consensus: [],
+      dayWindows: [],
+      selectedDate: null,
+      bestDate: null
+    };
+
+    const els = {
+      spotSelect: document.getElementById("spotSelect"),
+      thresholdInput: document.getElementById("thresholdInput"),
+      daylightSelect: document.getElementById("daylightSelect"),
+      controls: document.getElementById("controls"),
+      spotName: document.getElementById("spotName"),
+      spotRegion: document.getElementById("spotRegion"),
+      statusLine: document.getElementById("statusLine"),
+      headEyebrow: document.getElementById("headEyebrow"),
+      headNum: document.getElementById("headNum"),
+      headSub: document.getElementById("headSub"),
+      headCond: document.getElementById("headCond"),
+      chart: document.getElementById("chart"),
+      otherDays: document.getElementById("otherDays"),
+      sourcesTag: document.getElementById("sourcesTag"),
+      sourceList: document.getElementById("sourceList"),
+      tabs: document.getElementById("tabs"),
+      chatterCard: document.getElementById("chatterCard"),
+      chatterTag: document.getElementById("chatterTag"),
+      dadStatus: document.getElementById("dadStatus"),
+      spotChips: document.getElementById("spotChips"),
+      discoveredSpots: document.getElementById("discoveredSpots"),
+      threadList: document.getElementById("threadList"),
+      liveNow: document.getElementById("liveNow")
+    };
+
+    function windCondition(kt) {
+      if (kt == null) return { label: "No data", color: "var(--muted)" };
+      if (kt < 11) return { label: "Too light", color: "var(--light)" };
+      if (kt < 15) return { label: "Marginal", color: "var(--marg)" };
+      if (kt <= 24) return { label: "Rideable", color: "var(--good)" };
+      if (kt <= 31) return { label: "Strong", color: "var(--strong)" };
+      return { label: "Nuking", color: "var(--nuke)" };
+    }
+
+    // The <script src="data/discourse.js"> tag gives instant (possibly cached)
+    // data; this re-fetches the JSON with no-store so a fresh scrape always wins
+    // over a stale browser/dev-server cache.
+    async function loadDiscourse() {
+      try {
+        const r = await fetch("data/discourse.json", { cache: "no-store" });
+        if (r.ok) window.KWW_DISCOURSE = await r.json();
+      } catch (e) { /* keep whatever the script tag provided */ }
+    }
+
+    async function init() {
+      loadUserSpots();
+      populateSpots();
+      await loadDiscourse();
+
+      els.controls.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const chosen = SPOTS[Number(els.spotSelect.value)];
+        if (chosen) {
+          state.spot = chosen;
+          if (typeof focusMarker === "function") focusMarker(chosen);
+        }
+        state.threshold = clamp(Number(els.thresholdInput.value) || 15, 8, 30);
+        state.daylight = els.daylightSelect.value.split("-").map(Number);
+        state.selectedDate = null;
+        applyWindColors(); // re-tier pin colours against the new threshold
+        run();
+      });
+
+      renderChatter();
+      bootMap();
+      run();
+    }
+
+    function spotsInTab() {
+      // Tabs retired — the map is the primary nav, so the menu lists every spot.
+      return SPOTS.map((s, i) => ({ s, i }));
+    }
+
+    function populateSpots() {
+      const inTab = spotsInTab();
+      els.spotSelect.innerHTML = inTab.map(o =>
+        `<option value="${o.i}">${o.s.name}${o.s.flagged ? " · " + o.s.flagged + "'s pick" : ""}</option>`
+      ).join("");
+      if (!inTab.find(o => o.s === state.spot)) {
+        state.spot = inTab.length ? inTab[0].s : SPOTS[0];
+      }
+      els.spotSelect.value = String(SPOTS.indexOf(state.spot));
+    }
+
+    async function run() {
+      setLoading();
+      updateLiveNow(state.spot);
+
+      const tasks = [
+        fetchWindguru(state.spot),
+        ...OPEN_METEO_MODELS.map(model => fetchOpenMeteo(state.spot, model)),
+        fetchNws(state.spot)
+      ];
+
+      const settled = await Promise.allSettled(tasks);
+      state.sources = settled.map(result => result.status === "fulfilled"
+        ? result.value
+        : failedSource("Unknown source", result.reason && result.reason.message ? result.reason.message : "Fetch failed"));
+
+      state.consensus = buildConsensus(state.sources);
+      renderAll();
+    }
+
+    function setLoading() {
+      els.spotName.textContent = state.spot.name;
+      els.spotRegion.textContent = state.spot.region;
+      els.statusLine.innerHTML = `<span class="pill live">Loading live forecasts…</span>`;
+      els.headEyebrow.textContent = "Checking models";
+      els.headNum.innerHTML = `--<small>kt</small>`;
+      els.headSub.textContent = "—";
+      els.headCond.textContent = "Loading";
+      els.headCond.style.background = "var(--muted)";
+      els.chart.innerHTML = `<div class="empty">Loading hourly wind…</div>`;
+      els.otherDays.innerHTML = "";
+      els.sourceList.innerHTML = "";
+      document.body.classList.add("loading");
+      if (typeof highlightSelectedMarker === "function") highlightSelectedMarker();
+    }
+
+    function renderAll() {
+      document.body.classList.remove("loading");
+      const live = state.sources.filter(source => source.ok);
+      const failed = state.sources.filter(source => !source.ok);
+
+      els.spotName.textContent = state.spot.name;
+      els.spotRegion.textContent = state.spot.region;
+
+      els.statusLine.innerHTML = [
+        `<span class="pill live">${live.length} sources live</span>`,
+        failed.length ? `<span class="pill">${failed.length} blocked</span>` : "",
+        `<span class="pill">rideable from ${state.threshold} kt</span>`,
+        `<span class="pill ghost">Updated ${new Date().toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</span>`
+      ].join("");
+
+      state.dayWindows = computeDayWindows();
+      state.bestDate = pickBestDate(state.dayWindows);
+      if (!state.selectedDate || !state.dayWindows.find(d => d.date === state.selectedDate)) {
+        state.selectedDate = state.bestDate;
+      }
+
+      renderSelected();
+      renderOtherDays();
+    }
+
+    /* ---- consensus across live models, hour by hour ---- */
+    function buildHourlyConsensus(date) {
+      const live = state.sources.filter(s => s.ok);
+      const byHour = {};
+      live.forEach(s => {
+        (s.hours || []).forEach(h => {
+          if (h.date !== date) return;
+          if (h.localHour < state.daylight[0] || h.localHour >= state.daylight[1]) return;
+          const slot = byHour[h.localHour] || (byHour[h.localHour] = { winds: [], gusts: [] });
+          if (h.wind != null) slot.winds.push(h.wind);
+          if (h.gust != null) slot.gusts.push(h.gust);
+        });
+      });
+      return Object.keys(byHour)
+        .map(Number)
+        .sort((a, b) => a - b)
+        .map(hr => ({
+          localHour: hr,
+          wind: byHour[hr].winds.length ? avg(byHour[hr].winds) : null,
+          gust: byHour[hr].gusts.length ? avg(byHour[hr].gusts) : null
+        }))
+        .filter(r => r.wind != null);
+    }
+
+    /* For a day: the rideable EXTENT (every contiguous hour over threshold) and
+       the peak WINDOW (the strongest sustained block, capped so it reads as
+       "the best hours to go" rather than "it's windy all day"). */
+    const PEAK_MAX_HOURS = 4;
+
+    function analyzeDay(rows, threshold) {
+      const runs = [];
+      let cur = null;
+      for (const r of rows) {
+        if (r.wind >= threshold) {
+          if (cur && r.localHour === cur[cur.length - 1].localHour + 1) cur.push(r);
+          else { cur = [r]; runs.push(cur); }
+        } else {
+          cur = null;
+        }
+      }
+      if (!runs.length) return null;
+
+      const extentRun = runs.slice().sort((a, b) =>
+        b.length - a.length || avg(b.map(h => h.wind)) - avg(a.map(h => h.wind))
+      )[0];
+
+      let peak = null;
+      for (const run of runs) {
+        const len = Math.min(PEAK_MAX_HOURS, run.length);
+        for (let i = 0; i + len <= run.length; i += 1) {
+          const block = run.slice(i, i + len);
+          const mean = avg(block.map(h => h.wind));
+          if (!peak || mean > peak.mean + 1e-9 || (Math.abs(mean - peak.mean) < 1e-9 && block.length > peak.hours.length)) {
+            peak = { hours: block, mean };
+          }
+        }
+      }
+      return { window: summarizeBlock(peak.hours), extent: summarizeBlock(extentRun) };
+    }
+
+    function summarizeBlock(hours) {
+      const winds = hours.map(h => h.wind);
+      const gusts = hours.map(h => h.gust).filter(v => v != null);
+      return {
+        startHour: hours[0].localHour,
+        endHour: hours[hours.length - 1].localHour,
+        endExclusive: hours[hours.length - 1].localHour + 1,
+        hours: hours.slice(),
+        mean: avg(winds),
+        low: Math.min(...winds),
+        high: Math.max(...winds),
+        gust: gusts.length ? Math.max(...gusts) : null,
+        length: hours.length
+      };
+    }
+
+    function dayPeakHour(rows) {
+      let peak = null;
+      for (const r of rows) {
+        if (r.wind != null && (!peak || r.wind > peak.wind)) peak = r;
+      }
+      return peak;
+    }
+
+    function computeDayWindows() {
+      return state.consensus
+        .slice()
+        .sort((a, b) => a.date.localeCompare(b.date))
+        .map(c => {
+          const rows = buildHourlyConsensus(c.date);
+          const a = analyzeDay(rows, state.threshold);
+          return {
+            date: c.date,
+            consensus: c,
+            rows,
+            window: a ? a.window : null,
+            extent: a ? a.extent : null,
+            topHour: dayPeakHour(rows)
+          };
+        });
+    }
+
+    function pickBestDate(dayWindows) {
+      const withWin = dayWindows.filter(d => d.window);
+      if (withWin.length) {
+        withWin.sort((a, b) => b.window.mean - a.window.mean || b.window.length - a.window.length);
+        return withWin[0].date;
+      }
+      const sorted = dayWindows.slice().sort((a, b) => (b.topHour ? b.topHour.wind : 0) - (a.topHour ? a.topHour.wind : 0));
+      return sorted.length ? sorted[0].date : null;
+    }
+
+    function selectDate(date) {
+      state.selectedDate = date;
+      renderSelected();
+      renderOtherDays();
+    }
+
+    function renderSelected() {
+      const dw = state.dayWindows.find(d => d.date === state.selectedDate);
+      if (!dw) {
+        els.headEyebrow.textContent = "No live data";
+        els.headNum.innerHTML = `--<small>kt</small>`;
+        els.headSub.textContent = "No models responded for this spot.";
+        els.headCond.textContent = "No data";
+        els.headCond.style.background = "var(--muted)";
+        els.chart.innerHTML = `<div class="empty">No hourly data available yet.</div>`;
+        renderSources(null);
+        return;
+      }
+      renderHeadline(dw);
+      renderChart(dw);
+      renderSources(dw.date);
+    }
+
+    function renderHeadline(dw) {
+      const dir = dw.consensus.dir;
+      if (dw.window) {
+        const w = dw.window;
+        const cond = windCondition(w.mean);
+        els.headEyebrow.textContent = `Best window · ${formatDay(dw.date)}`;
+        els.headNum.innerHTML = `${Math.round(w.mean)}<small>kt</small>`;
+        els.headCond.textContent = cond.label;
+        els.headCond.style.background = cond.color;
+        const holds = Math.round(w.low) === Math.round(w.high)
+          ? `holds ${Math.round(w.low)} kt`
+          : `holds ${Math.round(w.low)}–${Math.round(w.high)} kt`;
+        const parts = [
+          `Go ${fmtWindow(w.startHour, w.endExclusive)}`,
+          `${dir || "var"} wind`,
+          holds
+        ];
+        if (w.gust != null) parts.push(`gusts ${Math.round(w.gust)}`);
+        if (dw.extent && dw.extent.length > w.length) {
+          parts.push(`rideable ${fmtWindow(dw.extent.startHour, dw.extent.endExclusive)}`);
+        }
+        els.headSub.textContent = parts.join(" · ");
+      } else {
+        const p = dw.topHour;
+        const cond = windCondition(p ? p.wind : null);
+        els.headEyebrow.textContent = formatDay(dw.date);
+        els.headNum.innerHTML = p ? `${Math.round(p.wind)}<small>kt</small>` : `--<small>kt</small>`;
+        els.headCond.textContent = cond.label;
+        els.headCond.style.background = cond.color;
+        els.headSub.textContent = p
+          ? `Peak ${Math.round(p.wind)} kt at ${fmtHour(p.localHour)} · stays under your ${state.threshold} kt line · no rideable block`
+          : "No daytime data for this day.";
+      }
+    }
+
+    function renderChart(dw) {
+      const rows = dw.rows;
+      if (!rows.length) {
+        els.chart.innerHTML = `<div class="empty">No daytime hours for this day.</div>`;
+        return;
+      }
+
+      const W = 760, H = 348, padX = 34, padTop = 52, padB = 40;
+      const n = rows.length;
+      const winds = rows.map(r => r.wind);
+      const maxKt = Math.max(20, Math.ceil((Math.max(...winds, state.threshold) + 5) / 5) * 5);
+      const step = n === 1 ? 0 : (W - 2 * padX) / (n - 1);
+      const X = i => n === 1 ? W / 2 : padX + i * step;
+      const Y = kt => padTop + (1 - (kt / maxKt)) * (H - padTop - padB);
+      const pts = rows.map((r, i) => [X(i), Y(r.wind)]);
+
+      const line = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
+      const area = `M${pts[0][0].toFixed(1)},${(H - padB).toFixed(1)} `
+        + pts.map(p => "L" + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ")
+        + ` L${pts[n - 1][0].toFixed(1)},${(H - padB).toFixed(1)} Z`;
+      const thrY = Y(state.threshold);
+
+      // Which row indexes are inside the best (peak) window?
+      const inWin = new Set();
+      let winRect = "", winLabel = "";
+      if (dw.window) {
+        const si = rows.findIndex(r => r.localHour === dw.window.startHour);
+        const ei = rows.findIndex(r => r.localHour === dw.window.endHour);
+        if (si >= 0 && ei >= 0) {
+          for (let i = si; i <= ei; i += 1) inWin.add(i);
+          const x0 = Math.max(padX - 4, X(si) - step / 2);
+          const x1 = Math.min(W - padX + 4, X(ei) + step / 2);
+          winRect = `<rect x="${x0.toFixed(1)}" y="${padTop}" width="${(x1 - x0).toFixed(1)}" height="${(H - padB - padTop).toFixed(1)}" rx="10" class="cx-win"/>`;
+          winLabel = `<text x="${((x0 + x1) / 2).toFixed(1)}" y="30" class="cx-winlab" text-anchor="middle">▸ Go ${fmtWindow(dw.window.startHour, dw.window.endExclusive)}</text>`;
+        }
+      }
+
+      const dots = pts.map((p, i) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.4" class="cx-dot ${inWin.has(i) ? "on" : ""}"/>`).join("");
+      const valLabels = rows.map((r, i) => (i % 2 === 0 || inWin.has(i))
+        ? `<text x="${X(i).toFixed(1)}" y="${(Y(r.wind) - 12).toFixed(1)}" class="cx-val ${inWin.has(i) ? "on" : ""}" text-anchor="middle">${round(r.wind)}</text>`
+        : "").join("");
+      const hourLabels = rows.map((r, i) => ((r.localHour - state.daylight[0]) % 2 === 0)
+        ? `<text x="${X(i).toFixed(1)}" y="${H - 12}" class="cx-lab" text-anchor="middle">${fmtHour(r.localHour)}</text>`
+        : "").join("");
+
+      els.chart.innerHTML = `
+        <svg viewBox="0 0 ${W} ${H}" class="chart-svg" role="img" aria-label="Hourly wind for ${formatDay(dw.date)}, best window highlighted">
+          <defs>
+            <linearGradient id="windFill" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#2f6bb0" stop-opacity=".26"/>
+              <stop offset="1" stop-color="#2f6bb0" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          ${winRect}
+          <line x1="${padX}" x2="${W - padX}" y1="${thrY.toFixed(1)}" y2="${thrY.toFixed(1)}" class="cx-thr"/>
+          <text x="${padX}" y="${(thrY + 15).toFixed(1)}" class="cx-thrlab" text-anchor="start">${state.threshold} kt rideable line</text>
+          <path d="${area}" fill="url(#windFill)"/>
+          <path d="${line}" class="cx-line"/>
+          ${dots}${valLabels}${hourLabels}${winLabel}
+        </svg>`;
+    }
+
+    function renderOtherDays() {
+      els.otherDays.innerHTML = state.dayWindows.map(dw => {
+        const sel = dw.date === state.selectedDate;
+        const isBest = dw.date === state.bestDate;
+        let timeTxt, kt, cond, dim;
+        if (dw.window) {
+          timeTxt = fmtWindow(dw.window.startHour, dw.window.endExclusive);
+          kt = Math.round(dw.window.mean);
+          cond = windCondition(dw.window.mean);
+          dim = false;
+        } else {
+          const p = dw.topHour;
+          timeTxt = "no window";
+          kt = p ? Math.round(p.wind) : "--";
+          cond = windCondition(p ? p.wind : null);
+          dim = true;
+        }
+        return `
+          <button class="od ${sel ? "sel" : ""}" type="button" data-date="${dw.date}">
+            ${isBest ? '<span class="od-best">Best</span>' : ""}
+            <span class="od-l">
+              <span class="od-day">${shortDay(dw.date)}</span>
+              <span class="od-win" style="color:${dim ? "var(--muted)" : "var(--ink-soft)"}">${timeTxt}</span>
+            </span>
+            <span class="od-r">
+              <span class="od-kt" style="color:${cond.color}">${kt}<small>kt</small></span>
+            </span>
+          </button>`;
+      }).join("");
+
+      els.otherDays.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", () => selectDate(button.dataset.date));
+      });
+    }
+
+    function renderSources(date) {
+      els.sourcesTag.textContent = date ? `readings for ${formatDay(date)}` : "model readings";
+      els.sourceList.innerHTML = state.sources.map(source => {
+        if (!source.ok) {
+          return `
+            <article class="src off">
+              <div class="src-top"><strong>${source.name}</strong><span class="src-tag off">Unavailable</span></div>
+              <p class="src-err">${source.error}</p>
+            </article>`;
+        }
+        const day = (source.days || []).find(d => d.date === date);
+        const mean = day && day.mean != null ? day.mean : "--";
+        const peak = day && day.peak != null ? day.peak : "--";
+        const hrs = day ? (day.watchHours || 0) : 0;
+        return `
+          <article class="src">
+            <div class="src-top"><strong>${source.name}</strong><span class="src-tag">${source.model || source.short || "Live"}</span></div>
+            <div class="src-metrics">
+              <div><b>${mean}</b><span>mean kt</span></div>
+              <div><b>${peak}</b><span>peak kt</span></div>
+              <div><b>${hrs}</b><span>rideable hrs</span></div>
+            </div>
+          </article>`;
+      }).join("");
+    }
+
+    function esc(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function findSpotIndexByName(name) {
+      const n = String(name).toLowerCase();
+      let idx = SPOTS.findIndex(s => s.name.toLowerCase() === n);
+      if (idx >= 0) return idx;
+      return SPOTS.findIndex(s => {
+        const sn = s.name.toLowerCase();
+        return sn.includes(n) || n.includes(sn);
+      });
+    }
+
+    function renderChatter() {
+      if (!els.chatterCard) return;
+      const d = window.KWW_DISCOURSE;
+      if (!d) {
+        els.chatterTag.textContent = "Reddit · no scan yet";
+        els.dadStatus.innerHTML = "";
+        els.spotChips.innerHTML = "";
+        els.threadList.innerHTML = `<div class="empty">No discourse data yet. Run <code>scraper/scrape_reddit.py</code> to populate this.</div>`;
+        return;
+      }
+      els.chatterTag.textContent = `${esc(d.source || "Reddit")} · scanned ${esc(d.generated_at || "—")}`;
+
+      els.dadStatus.innerHTML = (d.dad_spots || []).map(s => {
+        const on = s.status === "chatter";
+        return `<div class="dad">
+          <span class="dad-dot ${on ? "on" : ""}"></span>
+          <span class="dad-l"><b>${esc(s.name)}</b><span>${esc(s.note)}</span></span>
+          <span class="dad-badge ${on ? "on" : ""}">${on ? "people are talking" : "no chatter yet"}</span>
+        </div>`;
+      }).join("");
+
+      els.spotChips.innerHTML = (d.spots || []).map(s => {
+        const isNew = !s.known && !s.dad;
+        const badge = s.dad ? `<em class="b dad">Dad</em>` : (isNew ? `<em class="b new">new</em>` : "");
+        const idx = findSpotIndexByName(s.name);
+        return `<button class="chip${idx >= 0 ? " go" : ""}" type="button" data-spot="${idx}" title="${esc(s.blurb)}">
+          <span class="chip-n">${esc(s.name)}${badge}</span>
+          <span class="chip-w">${esc(s.where)} · ${esc(s.mentions)}×</span>
+        </button>`;
+      }).join("");
+      els.spotChips.querySelectorAll("button.go").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.dataset.spot);
+          const spot = SPOTS[idx];
+          if (!spot) return;
+          state.spot = spot;
+          els.spotSelect.value = String(idx);
+          state.selectedDate = null;
+          if (typeof focusMarker === "function") focusMarker(spot);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          run();
+        });
+      });
+
+      if (els.discoveredSpots) {
+        const disc = d.discovered_spots || [];
+        els.discoveredSpots.innerHTML = disc.length ? (
+          `<div class="disc-h">New spots people mention <span>not tracked on the dashboard yet</span></div>`
+          + `<div class="disc-chips">`
+          + disc.map(s => `<span class="disc-chip" title="${esc(s.quote || "")}">
+              <b>${esc(s.name)}</b><span>${esc(s.region_guess || "")} · ${esc(s.mentions)}×</span>
+            </span>`).join("")
+          + `</div>`
+        ) : "";
+      }
+
+      // Only the threads that actually matter: high-relevance AND naming a real
+      // kite spot. Newest first, capped to 5. If nothing qualifies, show nothing.
+      const posts = (d.posts || [])
+        .filter(p => p.relevance === "high" && p.spots && p.spots.length)
+        .sort((a, b) => (b.created || 0) - (a.created || 0))
+        .slice(0, 5);
+      els.threadList.innerHTML = posts.map(p => `
+        <a class="thread" href="${esc(p.url)}" target="_blank" rel="noreferrer">
+          <span class="thread-top">
+            <span class="thread-sub">${esc(p.subreddit || "reddit")}</span>
+            <span class="thread-spots">${esc(p.spots.join(" · "))}</span>
+          </span>
+          <span class="thread-title">${esc(p.title)}</span>
+          <span class="thread-snip">${esc(p.snippet)}</span>
+        </a>`).join("");
+    }
+
+    async function fetchOpenMeteo(spot, model) {
+      const url = new URL(model.endpoint);
+      url.searchParams.set("latitude", spot.lat);
+      url.searchParams.set("longitude", spot.lon);
+      url.searchParams.set("hourly", "wind_speed_10m,wind_gusts_10m,wind_direction_10m");
+      url.searchParams.set("wind_speed_unit", "kn");
+      url.searchParams.set("timezone", "auto");
+      url.searchParams.set("forecast_days", state.days);
+      if (model.id !== "best_match") url.searchParams.set("models", model.id);
+
+      const response = await fetch(url.toString());
+      const data = await response.json();
+      if (!response.ok || data.error) {
+        throw new Error(data.reason || `${model.name} failed`);
+      }
+      const hours = openMeteoHours(data);
+      return {
+        ok: true,
+        name: model.name,
+        short: model.short,
+        model: model.id,
+        note: model.source,
+        hours,
+        days: summarizeDays(hours)
+      };
+    }
+
+    async function fetchWindguru(spot) {
+      if (!spot.windguruId) {
+        return failedSource("Windguru", "No Windguru spot id for this lake yet — using the other models.");
+      }
+      const url = `https://www.windguru.cz/int/iapi.php?q=forecast&id_model=3&id_spot=${spot.windguruId}`;
+      try {
+        const response = await fetch(url, { headers: { "Accept": "application/json" } });
+        const data = await response.json();
+        if (!response.ok || data.return === "error") {
+          throw new Error(data.message || "Windguru blocked this browser request");
+        }
+        const hours = windguruHours(data);
+        return {
+          ok: true,
+          name: "Windguru",
+          short: "WG",
+          model: (data.fcst && data.fcst.model_name) || "GFS 13 km",
+          note: "Windguru spot forecast. If this fails in-browser, the Flightscope CLI still works with Windguru request headers.",
+          hours,
+          days: summarizeDays(hours)
+        };
+      } catch (error) {
+        return failedSource(
+          "Windguru",
+          error.message || "Windguru could not be read directly from this browser",
+          "Browser fetches may be rejected even though the local Flightscope CLI can fetch Windguru successfully."
+        );
+      }
+    }
+
+    async function fetchNws(spot) {
+      const pointResponse = await fetch(`https://api.weather.gov/points/${spot.lat},${spot.lon}`, {
+        headers: { "Accept": "application/geo+json" }
+      });
+      const point = await pointResponse.json();
+      const hourlyUrl = point.properties && point.properties.forecastHourly;
+      if (!hourlyUrl) throw new Error("NWS point lookup did not return an hourly forecast URL");
+
+      const forecastResponse = await fetch(hourlyUrl, { headers: { "Accept": "application/geo+json" } });
+      const forecast = await forecastResponse.json();
+      const periods = forecast.properties && forecast.properties.periods;
+      if (!Array.isArray(periods)) throw new Error("NWS hourly forecast did not return periods");
+
+      const hours = periods.slice(0, state.days * 24).map(period => {
+        const date = new Date(period.startTime);
+        const mph = parseWindString(period.windSpeed);
+        const gustMph = parseWindString(period.windGust);
+        const wind = mph == null ? null : mph * 0.868976;
+        const gust = gustMph == null ? null : gustMph * 0.868976;
+        return {
+          time: period.startTime,
+          date: isoDate(date),
+          localHour: date.getHours(),
+          wind,
+          gust,
+          dir: null,
+          dirText: period.windDirection
+        };
+      }).filter(hour => hour.wind != null);
+
+      return {
+        ok: true,
+        name: "NWS Hourly",
+        short: "NWS",
+        model: "Official",
+        note: "Official U.S. hourly forecast. Useful as a sanity check against raw model output.",
+        hours,
+        days: summarizeDays(hours)
+      };
+    }
+
+    function openMeteoHours(data) {
+      const hourly = data.hourly || {};
+      const times = hourly.time || [];
+      const speed = hourly.wind_speed_10m || [];
+      const gust = hourly.wind_gusts_10m || [];
+      const dir = hourly.wind_direction_10m || [];
+      return times.map((time, index) => {
+        return {
+          time,
+          date: time.slice(0, 10),
+          localHour: Number(time.slice(11, 13)),
+          wind: numberOrNull(speed[index]),
+          gust: numberOrNull(gust[index]),
+          dir: numberOrNull(dir[index]),
+          dirText: null
+        };
+      }).filter(hour => hour.wind != null);
+    }
+
+    function windguruHours(data) {
+      const fcst = data.fcst || {};
+      const init = parseWindguruInit(fcst.initdate);
+      const offset = Math.round((data.lon || state.spot.lon || 0) / 15);
+      const hours = fcst.hours || [];
+      const speed = fcst.WINDSPD || [];
+      const gust = fcst.GUST || [];
+      const dir = fcst.WINDDIR || [];
+      return hours.map((hourOffset, index) => {
+        const utc = new Date(init.getTime() + hourOffset * 3600 * 1000);
+        const local = new Date(utc.getTime() + offset * 3600 * 1000);
+        return {
+          time: local.toISOString(),
+          date: isoDate(local),
+          localHour: local.getUTCHours(),
+          wind: numberOrNull(speed[index]),
+          gust: numberOrNull(gust[index]),
+          dir: numberOrNull(dir[index]),
+          dirText: null
+        };
+      }).filter(hour => hour.wind != null);
+    }
+
+    function summarizeDays(hours) {
+      const grouped = {};
+      hours.forEach(hour => {
+        if (hour.localHour < state.daylight[0] || hour.localHour >= state.daylight[1]) return;
+        grouped[hour.date] = grouped[hour.date] || [];
+        grouped[hour.date].push(hour);
+      });
+
+      return dateWindow().map(date => {
+        const rows = grouped[date] || [];
+        const winds = rows.map(row => row.wind).filter(value => value != null);
+        const gusts = rows.map(row => row.gust).filter(value => value != null);
+        const over = rows.filter(row => row.wind >= state.threshold);
+        const dirs = rows.map(row => row.dirText || degToCompass(row.dir)).filter(Boolean);
+        return {
+          date,
+          mean: winds.length ? round(avg(winds)) : null,
+          peak: winds.length ? round(Math.max(...winds)) : null,
+          gust: gusts.length ? round(Math.max(...gusts)) : null,
+          watchHours: over.length,
+          watchable: over.length >= 3,
+          dir: mode(dirs) || "--"
+        };
+      });
+    }
+
+    function buildConsensus(sources) {
+      const live = sources.filter(source => source.ok);
+      return dateWindow().map(date => {
+        const rows = live.map(source => (source.days || []).find(day => day.date === date)).filter(Boolean);
+        const withWind = rows.filter(row => row.mean != null);
+        const meanValues = withWind.map(row => row.mean);
+        const peakValues = withWind.map(row => row.peak).filter(value => value != null);
+        const dirs = rows.map(row => row.dir).filter(Boolean);
+        const watchVotes = rows.filter(row => row.watchable).length;
+        const watchHours = rows.reduce((sum, row) => sum + (row.watchHours || 0), 0);
+        const mean = meanValues.length ? avg(meanValues) : null;
+        return {
+          date,
+          mean,
+          peak: peakValues.length ? Math.max(...peakValues) : null,
+          dir: mode(dirs),
+          sources: withWind.length,
+          watchVotes,
+          watchHours,
+          watchable: watchVotes >= Math.max(1, Math.ceil(live.length / 2)),
+          score: (mean || 0) + watchVotes * 4 + watchHours * 0.35
+        };
+      }).sort((a, b) => b.score - a.score);
+    }
+
+    function dateWindow() {
+      const out = [];
+      const start = new Date();
+      start.setHours(0, 0, 0, 0);
+      for (let i = 0; i < state.days; i += 1) {
+        const date = new Date(start);
+        date.setDate(start.getDate() + i);
+        out.push(isoDate(date));
+      }
+      return out;
+    }
+
+    function failedSource(name, error, note) {
+      return { ok: false, name, error, note, days: [], hours: [] };
+    }
+
+    function parseWindguruInit(value) {
+      if (!value) return new Date();
+      const parts = value.replace(" ", "T") + "Z";
+      return new Date(parts);
+    }
+
+    function parseWindString(value) {
+      if (!value || value === "null") return null;
+      const matches = String(value).match(/\d+/g);
+      if (!matches || !matches.length) return null;
+      const nums = matches.map(Number);
+      return nums.reduce((sum, item) => sum + item, 0) / nums.length;
+    }
+
+    function degToCompass(deg) {
+      if (deg == null || Number.isNaN(deg)) return "";
+      const dirs = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+      return dirs[Math.round(deg / 22.5) % 16];
+    }
+
+    function formatDay(date) {
+      const d = new Date(`${date}T12:00:00`);
+      return d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
+    }
+
+    function shortDay(date) {
+      const d = new Date(`${date}T12:00:00`);
+      return d.toLocaleDateString([], { weekday: "short" });
+    }
+
+    function fmtHour(h) {
+      const m = h < 12 ? "am" : "pm";
+      let hr = h % 12;
+      if (hr === 0) hr = 12;
+      return hr + m;
+    }
+
+    function fmtWindow(start, endExclusive) {
+      const sH = start % 12 || 12;
+      const eH = endExclusive % 12 || 12;
+      const sM = start < 12 ? "am" : "pm";
+      const eM = endExclusive < 12 ? "am" : "pm";
+      return sM === eM ? `${sH}–${eH}${eM}` : `${sH}${sM}–${eH}${eM}`;
+    }
+
+    function isoDate(date) {
+      return date.toISOString().slice(0, 10);
+    }
+
+    function avg(values) {
+      return values.reduce((sum, value) => sum + value, 0) / values.length;
+    }
+
+    function mode(values) {
+      if (!values.length) return "";
+      const counts = values.reduce((acc, value) => {
+        acc[value] = (acc[value] || 0) + 1;
+        return acc;
+      }, {});
+      return Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+    }
+
+    function round(value) {
+      return value == null ? null : Math.round(value);
+    }
+
+    function numberOrNull(value) {
+      return typeof value === "number" && Number.isFinite(value) ? value : null;
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    /* ============================================================
+       LIVE NOW — real current wind from the nearest NWS station.
+       This is an OBSERVATION (an actual anemometer), not a model —
+       the "is it windy right now" reading, separate from forecasts.
+       ============================================================ */
+    const nwsStationCache = {};
+
+    function obsToKnots(o) {
+      if (!o || o.value == null) return null;
+      const u = o.unitCode || "";
+      const v = o.value;
+      if (u.indexOf("km_h") >= 0 || u.indexOf("km/h") >= 0) return v * 0.539957;
+      if (u.indexOf("m_s") >= 0 || u.indexOf("m/s") >= 0) return v * 1.94384;
+      return v; // already knots / mph-ish; treat as-is
+    }
+
+    function minsAgo(iso) {
+      if (!iso) return "";
+      const mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+      if (mins < 1) return "just now";
+      if (mins < 60) return mins + " min ago";
+      const h = Math.round(mins / 60);
+      return h + (h === 1 ? " hr ago" : " hrs ago");
+    }
+
+    async function nearestStations(spot) {
+      if (nwsStationCache[spot.name]) return nwsStationCache[spot.name];
+      const pr = await fetch("https://api.weather.gov/points/" + spot.lat + "," + spot.lon, { headers: { "Accept": "application/geo+json" } });
+      const pt = await pr.json();
+      const stUrl = pt.properties && pt.properties.observationStations;
+      if (!stUrl) return [];
+      const sr = await fetch(stUrl, { headers: { "Accept": "application/geo+json" } });
+      const sd = await sr.json();
+      const list = (sd.features || []).slice(0, 5).map(f => ({ id: f.properties.stationIdentifier, name: f.properties.name }));
+      nwsStationCache[spot.name] = list;
+      return list;
+    }
+
+    async function fetchNwsObservation(spot) {
+      // the closest station sometimes reports no wind (Copper Mtn near Dillon);
+      // walk the nearest few until one has an actual reading.
+      const stations = await nearestStations(spot);
+      for (const station of stations) {
+        try {
+          const r = await fetch("https://api.weather.gov/stations/" + station.id + "/observations/latest", { headers: { "Accept": "application/geo+json" } });
+          if (!r.ok) continue;
+          const d = await r.json();
+          const p = d.properties || {};
+          const wind = obsToKnots(p.windSpeed);
+          if (wind == null) continue;
+          return {
+            wind,
+            gust: obsToKnots(p.windGust),
+            dirText: degToCompass(p.windDirection && p.windDirection.value),
+            time: p.timestamp,
+            stationId: station.id,
+            stationName: station.name,
+            source: "NWS"
+          };
+        } catch (e) { /* try next station */ }
+      }
+      return null;
+    }
+
+    function livePillHtml(obs) {
+      const srcLabel = (obs.sources && obs.sources.length ? obs.sources : [obs.source]).join(" · ");
+      const title = obs.stationName ? (srcLabel + " station: " + obs.stationName + " (" + obs.stationId + ")") : obs.stationId;
+      return '<span class="livenow" title="' + esc(title) + '">'
+        + '<span class="lv-dot"></span>Now <b>' + Math.round(obs.wind) + ' kt</b>'
+        + (obs.gust != null ? ' · gusts ' + Math.round(obs.gust) : "")
+        + (obs.dirText ? " " + obs.dirText : "")
+        + ' <span class="lv-src">· ' + esc(srcLabel) + " " + esc(obs.stationId) + " · " + minsAgo(obs.time) + "</span></span>";
+    }
+
+    async function updateLiveNow(spot) {
+      if (!els.liveNow) return;
+      els.liveNow.hidden = false;
+      els.liveNow.innerHTML = '<span class="livenow lv-loading"><span class="lv-dot"></span><span class="lv-src">checking nearest live stations…</span></span>';
+
+      const jobs = [fetchNwsObservation(spot).catch(() => null)];
+      const hasSynoptic = !!((window.KWW_CONFIG || {}).synopticToken || "").replace(/^PASTE_.*/, "");
+      if (hasSynoptic) jobs.push(fetchSynopticObservation(spot).catch(() => null));
+
+      const results = await Promise.all(jobs);
+      if (state.spot !== spot) return; // spot changed while fetching
+      const obs = dedupeStations(results.filter(Boolean));
+      if (!obs.length) {
+        els.liveNow.innerHTML = '<span class="livenow lv-stale"><span class="lv-dot"></span><span class="lv-src">no live station reading nearby</span></span>';
+        return;
+      }
+      els.liveNow.innerHTML = obs.map(livePillHtml).join("");
+    }
+
+    // NWS and Synoptic often resolve to the SAME physical station (e.g. KFNL).
+    // Collapse those into one reading so we don't show the identical wind twice;
+    // keep the freshest, and note when both networks agree.
+    function dedupeStations(obs) {
+      const byStation = new Map();
+      obs.forEach(o => {
+        const key = String(o.stationId || o.stationName || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+        const prev = byStation.get(key);
+        if (!prev) { byStation.set(key, { ...o, sources: [o.source] }); return; }
+        prev.sources.push(o.source);
+        // keep the freshest timestamp / its reading
+        if (o.time && (!prev.time || new Date(o.time) > new Date(prev.time))) {
+          byStation.set(key, { ...o, sources: prev.sources });
+        }
+      });
+      return [...byStation.values()];
+    }
+
+    /* Synoptic / MesoWest — denser real-station network. Needs a free token in
+       config.js (window.KWW_CONFIG.synopticToken). Silently skipped without one. */
+    async function fetchSynopticObservation(spot) {
+      const token = ((window.KWW_CONFIG || {}).synopticToken || "").trim();
+      if (!token || token.indexOf("PASTE_") === 0) return null;
+      const url = "https://api.synopticdata.com/v2/stations/latest"
+        + "?token=" + encodeURIComponent(token)
+        + "&radius=" + spot.lat + "," + spot.lon + ",30"
+        + "&limit=1&vars=wind_speed,wind_gust,wind_direction&units=speed|kts&within=120&obtimezone=utc";
+      const r = await fetch(url);
+      const d = await r.json();
+      const st = d && d.STATION && d.STATION[0];
+      if (!st || !st.OBSERVATIONS) return null;
+      const o = st.OBSERVATIONS;
+      const sp = o.wind_speed_value_1 && o.wind_speed_value_1.value;
+      if (sp == null) return null;
+      const gust = o.wind_gust_value_1 && o.wind_gust_value_1.value;
+      const dir = o.wind_direction_value_1 && o.wind_direction_value_1.value;
+      const time = o.wind_speed_value_1 && o.wind_speed_value_1.date_time;
+      return {
+        wind: sp,
+        gust: gust == null ? null : gust,
+        dirText: degToCompass(dir),
+        time,
+        stationId: st.STID || "station",
+        stationName: st.NAME || "",
+        source: "Synoptic"
+      };
+    }
+
+    /* ============================================================
+       MAP LAYER — Google Maps hero.
+       Navy pin = tracked spot (click → load its forecast).
+       Yellow pin = a spot Reddit mentioned that isn't tracked yet;
+       open it to preview the forecast or "Add to my spots" to keep
+       it (persisted in this browser, then it feeds the alerts too).
+       ============================================================ */
+    let kwwMap = null;
+    let kwwInfo = null;
+    const kwwMarkers = [];
+    const USER_SPOTS_KEY = "kww_user_spots";
+    const GEOCACHE_KEY = "kww_geocache";
+
+    function getCss(v) {
+      return (getComputedStyle(document.documentElement).getPropertyValue(v) || "").trim() || "#1c3d6e";
+    }
+
+    function pinIcon(color, selected, hollow) {
+      const c = encodeURIComponent(color);
+      const w = selected ? 34 : 27, h = selected ? 46 : 37;
+      // hollow = white teardrop with a coloured outline + coloured centre (Reddit tips).
+      // solid  = coloured teardrop with a white centre (your tracked spots).
+      const body = hollow
+        ? "%3Cpath d='M14 0C6.3 0 0 6.2 0 13.9 0 24 14 38 14 38s14-14 14-24.1C28 6.2 21.7 0 14 0z' fill='%23ffffff' stroke='"
+          + c + "' stroke-width='3'/%3E%3Ccircle cx='14' cy='14' r='4.5' fill='" + c + "'/%3E"
+        : "%3Cpath d='M14 0C6.3 0 0 6.2 0 13.9 0 24 14 38 14 38s14-14 14-24.1C28 6.2 21.7 0 14 0z' fill='"
+          + c + "' stroke='%23ffffff' stroke-width='2'/%3E%3Ccircle cx='14' cy='14' r='5' fill='%23ffffff'/%3E";
+      const svg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 38'%3E" + body + "%3C/svg%3E";
+      return { url: svg, scaledSize: new google.maps.Size(w, h), anchor: new google.maps.Point(w / 2, h) };
+    }
+
+    /* ---- pin colour by current wind (tier relative to the rideable threshold) ---- */
+    function windColor(kt) {
+      const thr = state.threshold || 15;
+      if (kt == null) return getCss("--navy");        // no live read yet
+      if (kt < thr - 7)  return getCss("--light");     // too light
+      if (kt < thr)      return getCss("--marg");      // building
+      if (kt < thr + 10) return getCss("--good");      // rideable
+      if (kt < thr + 19) return getCss("--strong");    // strong
+      return getCss("--nuke");                          // too much
+    }
+
+    // One batched Open-Meteo call for every spot's current wind (knots).
+    async function fetchSpotsWindNow(spots) {
+      if (!spots.length) return [];
+      const lats = spots.map(s => s.lat).join(",");
+      const lons = spots.map(s => s.lon).join(",");
+      const url = "https://api.open-meteo.com/v1/forecast?latitude=" + lats + "&longitude=" + lons
+        + "&current=wind_speed_10m&wind_speed_unit=kn&timezone=auto";
+      try {
+        const r = await fetch(url);
+        const d = await r.json();
+        const arr = Array.isArray(d) ? d : [d]; // multi-coord => array, single => object
+        return spots.map((s, i) => {
+          const cur = arr[i] && arr[i].current;
+          return cur && cur.wind_speed_10m != null ? cur.wind_speed_10m : null;
+        });
+      } catch (e) {
+        return spots.map(() => null);
+      }
+    }
+
+    // Recolour every tracked marker from its stored wind, keeping the selected pin big.
+    function applyWindColors() {
+      if (!window.google || !kwwMarkers.length) return;
+      const sel = state.spot && state.spot.name;
+      kwwMarkers.forEach(m => {
+        const isSel = m.name === sel;
+        m.marker.setIcon(pinIcon(windColor(m.wind), isSel, m.type === "new"));
+        m.marker.setZIndex(isSel ? 999 : (m.type === "new" ? 2 : 5));
+      });
+    }
+
+    async function colorPinsByWind() {
+      const tracked = kwwMarkers.filter(m => m.type === "track");
+      if (!tracked.length) return;
+      const winds = await fetchSpotsWindNow(tracked.map(m => SPOTS[findSpotIndexByName(m.name)] || { lat: 0, lon: 0 }));
+      tracked.forEach((m, i) => { m.wind = winds[i]; });
+      applyWindColors();
+    }
+
+    function bootMap() {
+      const host = document.getElementById("map");
+      if (!host) return;
+      const key = (window.KWW_CONFIG || {}).googleMapsKey || "";
+      if (!key || key.indexOf("PASTE_") === 0) { showMapFallback(host); return; }
+      window.__kwwInitMap = initMap;
+      const s = document.createElement("script");
+      s.src = "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(key) + "&callback=__kwwInitMap";
+      s.async = true;
+      s.onerror = () => showMapFallback(host, "Google Maps could not load. Check the key and that the Maps JavaScript API is enabled for it.");
+      document.head.appendChild(s);
+    }
+
+    function showMapFallback(host, msg) {
+      host.outerHTML = '<div class="map-fallback"><div class="mf-inner">'
+        + "<h4>Map needs a Google Maps key</h4>"
+        + "<p>" + (msg || "Add your key to <code>config.js</code> and reload. Meanwhile, pick a lake from the menu on the left.") + "</p>"
+        + "</div></div>";
+    }
+
+    function initMap() {
+      kwwMap = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 39.9, lng: -105.2 },
+        zoom: 7,
+        mapTypeId: "hybrid",
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          position: google.maps.ControlPosition.TOP_CENTER,
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          mapTypeIds: ["hybrid", "roadmap", "terrain"]
+        },
+        zoomControl: true,
+        zoomControlOptions: { position: google.maps.ControlPosition.LEFT_BOTTOM },
+        streetViewControl: false,
+        fullscreenControl: false,
+        gestureHandling: "greedy"
+      });
+      kwwInfo = new google.maps.InfoWindow();
+
+      const bounds = new google.maps.LatLngBounds();
+      SPOTS.forEach(spot => {
+        addTrackMarker(spot);
+        bounds.extend({ lat: spot.lat, lng: spot.lon });
+      });
+      // fit pins with room for the floating panels (left + right + top)
+      if (!bounds.isEmpty()) kwwMap.fitBounds(bounds, { top: 60, right: 400, bottom: 60, left: 280 });
+
+      addDiscoveredMarkers();
+      highlightSelectedMarker();
+      colorPinsByWind();
+
+      // keep tiles from greying out if the window/container resizes
+      window.addEventListener("resize", () => {
+        if (kwwMap) google.maps.event.trigger(kwwMap, "resize");
+      });
+    }
+
+    function addTrackMarker(spot) {
+      const marker = new google.maps.Marker({
+        position: { lat: spot.lat, lng: spot.lon },
+        map: kwwMap,
+        title: spot.name,
+        icon: pinIcon(getCss("--navy"), false)
+      });
+      marker.addListener("click", () => {
+        kwwInfo.setContent('<div class="iw"><div class="iw-name">' + esc(spot.name) + "</div>"
+          + '<div class="iw-region">' + esc(spot.region || "") + "</div></div>");
+        kwwInfo.open(kwwMap, marker);
+        chooseSpotObject(spot);
+      });
+      kwwMarkers.push({ marker, name: spot.name, type: "track" });
+    }
+
+    async function addDiscoveredMarkers() {
+      const d = window.KWW_DISCOURSE || {};
+      // Only the important new tips on the map (talked about in 2+ threads),
+      // capped so Reddit pins never crowd out your tracked spots.
+      const disc = (d.discovered_spots || [])
+        .filter(s => (s.mentions || 0) >= 2)
+        .slice(0, 8);
+      for (const ds of disc) {
+        if (findSpotIndexByName(ds.name) >= 0) continue;
+        const loc = await geocodeSpot(ds.name, ds.region_guess);
+        if (!loc) continue;
+        addNewMarker(ds, loc);
+        if (state.spot && state.spot.name === ds.name) highlightSelectedMarker();
+      }
+    }
+
+    function addNewMarker(ds, loc) {
+      const spotObj = {
+        name: ds.name,
+        region: (ds.region_guess || "Colorado") + " · mentioned on Reddit",
+        lat: loc.lat, lon: loc.lon, discovered: true
+      };
+      const marker = new google.maps.Marker({
+        position: { lat: loc.lat, lng: loc.lon },
+        map: kwwMap,
+        title: ds.name + " (new spot)",
+        icon: pinIcon(getCss("--navy"), false, true)
+      });
+      marker.addListener("click", () => {
+        const quote = ds.quote ? '<div class="iw-quote">“…' + esc(String(ds.quote).trim()) + '…”</div>' : "";
+        kwwInfo.setContent('<div class="iw">'
+          + '<div class="iw-name">' + esc(ds.name) + ' <span class="iw-badge new">new</span></div>'
+          + '<div class="iw-region">' + esc(ds.region_guess || "") + " · " + esc(ds.mentions) + "× on Reddit</div>"
+          + quote
+          + '<button class="iw-btn" id="iwKeep">Add to my spots</button>'
+          + '<button class="iw-btn ghost" id="iwPreview">Just preview the forecast</button>'
+          + "</div>");
+        kwwInfo.open(kwwMap, marker);
+        google.maps.event.addListenerOnce(kwwInfo, "domready", () => {
+          const keep = document.getElementById("iwKeep");
+          const prev = document.getElementById("iwPreview");
+          if (keep) keep.onclick = () => keepSpot(spotObj, marker);
+          if (prev) prev.onclick = () => chooseSpotObject(spotObj);
+        });
+      });
+      const entry = { marker, name: ds.name, type: "new", wind: null };
+      kwwMarkers.push(entry);
+      // colour this Reddit-tip pin by its own current wind too
+      fetchSpotsWindNow([{ lat: loc.lat, lon: loc.lon }]).then(w => {
+        entry.wind = w[0];
+        marker.setIcon(pinIcon(windColor(entry.wind), state.spot && state.spot.name === ds.name, true));
+      });
+    }
+
+    function keepSpot(spotObj, marker) {
+      const kept = {
+        name: spotObj.name,
+        region: (spotObj.region || "Kept from Reddit").replace(" · mentioned on Reddit", " · kept from Reddit"),
+        area: "kept", lat: spotObj.lat, lon: spotObj.lon, kept: true
+      };
+      if (findSpotIndexByName(kept.name) < 0) {
+        SPOTS.push(kept);
+        persistUserSpot(kept);
+      }
+      const entry = kwwMarkers.find(m => m.marker === marker);
+      if (entry) entry.type = "track";
+      kwwInfo.close();
+      populateSpots();
+      chooseSpotObject(SPOTS[findSpotIndexByName(kept.name)] || kept);
+    }
+
+    function chooseSpotObject(spotObj) {
+      state.spot = spotObj;
+      state.selectedDate = null;
+      const idx = SPOTS.indexOf(spotObj);
+      if (idx >= 0 && els.spotSelect) els.spotSelect.value = String(idx);
+      if (kwwMap) kwwMap.panTo({ lat: spotObj.lat, lng: spotObj.lon });
+      run();
+    }
+
+    function focusMarker(spot) {
+      if (kwwMap && spot) kwwMap.panTo({ lat: spot.lat, lng: spot.lon });
+    }
+
+    function highlightSelectedMarker() {
+      // Pins are coloured by wind; selection just enlarges + lifts the chosen pin.
+      applyWindColors();
+    }
+
+    /* ---- geocoding for discovered spots (keyless, OpenStreetMap) ---- */
+    function loadGeocache() {
+      try { return JSON.parse(localStorage.getItem(GEOCACHE_KEY) || "{}"); } catch (e) { return {}; }
+    }
+    function saveGeocache(c) {
+      try { localStorage.setItem(GEOCACHE_KEY, JSON.stringify(c)); } catch (e) {}
+    }
+    async function geocodeSpot(name, region) {
+      const cache = loadGeocache();
+      const key = (name + "|" + (region || "")).toLowerCase();
+      if (Object.prototype.hasOwnProperty.call(cache, key)) return cache[key];
+      const q = encodeURIComponent(name + ", " + (region || "Colorado") + ", USA");
+      try {
+        const res = await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + q, {
+          headers: { "Accept": "application/json" }
+        });
+        const arr = await res.json();
+        let loc = null;
+        if (arr && arr.length) loc = { lat: parseFloat(arr[0].lat), lon: parseFloat(arr[0].lon) };
+        cache[key] = loc;
+        saveGeocache(cache);
+        return loc;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    /* ---- kept spots persistence (this browser) ---- */
+    function loadUserSpots() {
+      try {
+        const arr = JSON.parse(localStorage.getItem(USER_SPOTS_KEY) || "[]");
+        arr.forEach(s => { if (findSpotIndexByName(s.name) < 0) SPOTS.push(s); });
+      } catch (e) {}
+    }
+    function persistUserSpot(spot) {
+      try {
+        const arr = JSON.parse(localStorage.getItem(USER_SPOTS_KEY) || "[]");
+        if (!arr.find(s => String(s.name).toLowerCase() === spot.name.toLowerCase())) {
+          arr.push(spot);
+          localStorage.setItem(USER_SPOTS_KEY, JSON.stringify(arr));
+        }
+      } catch (e) {}
+    }
+
+    init();
+  </script>
+</body>
+</html>

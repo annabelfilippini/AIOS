@@ -9,10 +9,12 @@ next-session: Proposal is send-ready (2 pages); decide on testimonial + NP-heads
 # Session: Vital Health proposal final edits + 2-page fit
 
 ## What we worked on
+
 - Re-QA'd site + proposal, applied a round of client-requested proposal edits,
   and compressed the PDF layout to fit on 2 pages (signature was orphaned on p3).
 
 ## Site QA (unchanged from prior session, re-confirmed)
+
 - Home, Services, About, Contact all render correctly desktop (1440) + mobile (390).
 - Nav/logo/CTAs/Patient Portal -> vitalhealth.md-hq.com; phone tel:5125594350;
   contact info consistent across pages.
@@ -23,6 +25,7 @@ next-session: Proposal is send-ready (2 pages); decide on testimonial + NP-heads
   2. About: Feste has real photo; Julie (JS) + Kerri (KT) are monogram placeholders.
 
 ## Proposal edits made this session
+
 - Scrubbed ALL em/en-dashes per no-dash rule: title + phase headers use colons
   ("Vital Health: ...", "Phase 1: Website"); table ranges "5 to 7"..."14 to 22 hrs";
   "honest ranges, to be confirmed"; "Running total (Phases 1 and 2)". Verified 0 dashes.
@@ -38,6 +41,7 @@ next-session: Proposal is send-ready (2 pages); decide on testimonial + NP-heads
   ($2,030-$2,790, under $5k).
 
 ## Open decision (carried)
+
 - Terms + "A note on the estimates" still say "final billable confirmed with
   Dr. Feste, Julie, and staff input" — Annabel may want these stripped too for
   consistency (offered; not yet actioned).
@@ -45,14 +49,16 @@ next-session: Proposal is send-ready (2 pages); decide on testimonial + NP-heads
   headshots. Recommendation: send with one line noting they're Phase 2 placeholders.
 
 ## Context to preserve
+
 - Source of truth: docs/proposal-vital-health-website.md
 - Build pipeline: /tmp/build_proposal_pdf.py -> /tmp/proposal-vital-health.html ->
   headless Chrome --print-to-pdf (Google Chrome). H1 + CSS live in the script,
   not the markdown (script strips the md H1). Recreate /tmp script if cleared.
 - Output (both copies): docs/proposal-vital-health-website.pdf AND
   ~/Desktop/Vital Health Proposal.pdf
-- Live review link: https://vital-health-9bf311.webflow.io
+- Live review link: <https://vital-health-9bf311.webflow.io>
 
 ## System refinement candidate
+
 - PDF build pipeline (markdown -> styled HTML -> Chrome print) is reusable and
   worth promoting from /tmp to a project skill or skills/ script.

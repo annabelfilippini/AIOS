@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "life-os",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["serve.py", "8800", "--no-open"],
+      "port": 8800
+    }
+  ]
+}

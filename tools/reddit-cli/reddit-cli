@@ -1,0 +1,817 @@
+#!/usr/bin/env python3
+"""reddit-cli — read-only, authenticated Reddit mirror + search.
+
+Follows the skool-pp-cli pattern (see skills/site-scraper-cli-builder): least
+fragile transport that works, read-only, local store, with doctor / agent-context
+/ auth / sync / find / stats / digest. Reddit blocks anonymous + datacenter +
+headless access, so the working transport is **authenticated HTTP using your own
+logged-in browser session** (the same idea as skool-pp-cli). Your cookie is read
+from a local secrets file, never printed, never committed.
+
+  Transport priority (per the skill): official API -> authenticated cookie ->
+  headless browser -> manual export. The API path is blocked by Reddit's broken
+  app-creation CAPTCHA right now, so we use the authenticated cookie.
+
+Secrets:  ~/.config/reddit-cli/session.json   (cookie + user-agent, chmod 600)
+Data:     ~/.local/share/reddit-cli/data.db   (SQLite mirror — added in sync)
+
+Read-only. No posting, voting, messaging, or account changes. Standard library
+only — no pip install.
+
+Quick start:
+  # in the browser where you're logged into Reddit: DevTools > Network >
+  # right-click a reddit.com request > Copy > "Copy as cURL", then:
+  pbpaste | reddit-cli auth import -
+  reddit-cli doctor
+"""
+
+import argparse
+import json
+import os
+import re
+import sqlite3
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from datetime import datetime, timezone
+
+VERSION = "0.1.0"
+SCHEMA_VERSION = 1
+
+CONFIG_DIR = os.path.expanduser("~/.config/reddit-cli")
+DATA_DIR = os.path.expanduser("~/.local/share/reddit-cli")
+SESSION_PATH = os.path.join(CONFIG_DIR, "session.json")
+DB_PATH = os.path.join(DATA_DIR, "data.db")
+
+# A small, known public thread used to validate that the session can actually
+# read full comment trees (post + comments), not just a health endpoint.
+DOCTOR_THREAD = "https://www.reddit.com/r/Kiteboarding/comments/ugzirg.json?limit=5&raw_json=1"
+
+DEFAULT_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+              "AppleWebKit/537.36 (KHTML, like Gecko) "
+              "Chrome/124.0.0.0 Safari/537.36")
+
+BLOCK_MARKERS = ("blocked by network security", "whoa there", "you've been blocked",
+                 "<!doctype html", "<html")
+
+
+# --------------------------------------------------------------------------- #
+# small helpers
+# --------------------------------------------------------------------------- #
+class CliError(Exception):
+    pass
+
+
+def now_utc():
+    return datetime.now(timezone.utc)
+
+
+def _emit(obj, opts):
+    """Print a result either as JSON (agent/json mode) or human text."""
+    if opts.get("json"):
+        print(json.dumps(obj, indent=None if opts.get("agent") else 2,
+                         ensure_ascii=False))
+    else:
+        _emit_human(obj)
+
+
+def _emit_human(obj):
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if isinstance(v, (dict, list)):
+                print(f"{k}:")
+                print("  " + json.dumps(v, ensure_ascii=False, indent=2
+                                        ).replace("\n", "\n  "))
+            else:
+                print(f"{k}: {v}")
+    else:
+        print(obj)
+
+
+def mask(s, keep=4):
+    if not s:
+        return ""
+    s = str(s)
+    return ("•" * max(0, len(s) - keep)) + s[-keep:] if len(s) > keep else "•" * len(s)
+
+
+# --------------------------------------------------------------------------- #
+# session / auth
+# --------------------------------------------------------------------------- #
+def load_session():
+    # per-call env overrides for agents
+    env_cookie = os.environ.get("REDDIT_CLI_COOKIE", "")
+    if env_cookie.strip():
+        return {"cookie": env_cookie.strip(),
+                "user_agent": os.environ.get("REDDIT_CLI_UA", DEFAULT_UA),
+                "captured_at": None, "source": "env"}
+    if os.path.isfile(SESSION_PATH):
+        with open(SESSION_PATH) as f:
+            d = json.load(f)
+        d["source"] = "file"
+        return d
+    return None
+
+
+def save_session(cookie, user_agent):
+    os.makedirs(CONFIG_DIR, exist_ok=True)
+    payload = {"cookie": cookie,
+               "user_agent": user_agent or DEFAULT_UA,
+               "captured_at": now_utc().isoformat()}
+    # write then lock down perms (secrets never world-readable)
+    fd = os.open(SESSION_PATH, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w") as f:
+        json.dump(payload, f, indent=2)
+    os.chmod(SESSION_PATH, 0o600)
+    return payload
+
+
+def parse_curl_or_cookie(text):
+    """Extract (cookie, user_agent) from a 'Copy as cURL' blob, or treat the
+    whole input as a raw Cookie header string."""
+    text = text.strip()
+    cookie, ua = "", ""
+
+    # cURL: -H 'cookie: ...'  or  -H "Cookie: ..."  or  -b 'name=v; ...'
+    m = re.search(r"""-H\s+['"]cookie:\s*(.+?)['"]""", text, re.I | re.S)
+    if not m:
+        m = re.search(r"""(?:-b|--cookie)\s+['"](.+?)['"]""", text, re.S)
+    if m:
+        cookie = m.group(1).strip()
+    um = re.search(r"""-H\s+['"]user-agent:\s*(.+?)['"]""", text, re.I | re.S)
+    if um:
+        ua = um.group(1).strip()
+
+    # Not a cURL blob? Treat the input itself as the cookie header.
+    if not cookie and "reddit_session" in text or (not cookie and "=" in text
+                                                    and "curl" not in text.lower()):
+        cookie = text
+
+    cookie = cookie.replace("\\\n", " ").replace("\n", " ").strip()
+    return cookie, ua
+
+
+# --------------------------------------------------------------------------- #
+# authenticated fetch
+# --------------------------------------------------------------------------- #
+def fetch_json(url, session, timeout=30, retries=2):
+    """GET a reddit .json URL with the authenticated session. Returns parsed
+    JSON. Retries transient 403/429/5xx with backoff (Reddit throws the odd
+    spurious 403); raises CliError with a clear reason once retries are spent."""
+    if not session:
+        raise CliError("no session — run `reddit-cli auth import` first")
+    req = urllib.request.Request(url, headers={
+        "Cookie": session["cookie"],
+        "User-Agent": session.get("user_agent") or DEFAULT_UA,
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.9",
+    })
+    attempt = 0
+    while True:
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                raw = resp.read().decode("utf-8", "replace")
+            break
+        except urllib.error.HTTPError as e:
+            if e.code in (403, 429, 500, 502, 503) and attempt < retries:
+                time.sleep(2 + attempt * 3)   # 2s, then 5s
+                attempt += 1
+                continue
+            if e.code in (401, 403):
+                raise CliError(f"HTTP {e.code} — session rejected (cookie "
+                               "expired? re-run `auth import`)")
+            if e.code == 429:
+                raise CliError("HTTP 429 — rate limited; slow down / try later")
+            raise CliError(f"HTTP {e.code} for {url}")
+        except Exception as e:  # noqa: BLE001
+            if attempt < retries:
+                time.sleep(2 + attempt * 3)
+                attempt += 1
+                continue
+            raise CliError(f"{type(e).__name__}: {e}")
+
+    low = raw[:400].lower()
+    if any(mk in low for mk in BLOCK_MARKERS):
+        raise CliError("got an HTML/block page, not JSON — session not accepted "
+                       "or Reddit bot-wall (re-capture cookie while logged in)")
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        raise CliError("response was not valid JSON (likely a login/block page)")
+
+
+def session_age_days(session):
+    ts = session.get("captured_at") if session else None
+    if not ts:
+        return None
+    try:
+        return round((now_utc() - datetime.fromisoformat(ts)).total_seconds() / 86400, 1)
+    except ValueError:
+        return None
+
+
+# --------------------------------------------------------------------------- #
+# commands
+# --------------------------------------------------------------------------- #
+def cmd_auth(args, opts):
+    if args.auth_cmd == "import":
+        src = args.source
+        if src in (None, "-"):
+            text = sys.stdin.read()
+        else:
+            with open(os.path.expanduser(src)) as f:
+                text = f.read()
+        cookie, ua = parse_curl_or_cookie(text)
+        if not cookie or "reddit_session" not in cookie and "token" not in cookie.lower():
+            raise CliError("couldn't find a Reddit session cookie in that input. "
+                           "Use DevTools > Network > Copy as cURL on a reddit.com "
+                           "request while logged in, then pipe it in.")
+        saved = save_session(cookie, ua)
+        _emit({"ok": True, "stored": SESSION_PATH,
+               "cookie": mask(cookie, 6), "user_agent": saved["user_agent"],
+               "captured_at": saved["captured_at"],
+               "next": "run `reddit-cli doctor` to validate"}, opts)
+        return 0
+
+    # auth status
+    session = load_session()
+    if not session:
+        _emit({"authenticated": False, "session": None,
+               "hint": "run `reddit-cli auth import`"}, opts)
+        return 1
+    _emit({"authenticated": True, "source": session.get("source"),
+           "cookie": mask(session["cookie"], 6),
+           "user_agent": session.get("user_agent"),
+           "captured_at": session.get("captured_at"),
+           "age_days": session_age_days(session)}, opts)
+    return 0
+
+
+def cmd_doctor(args, opts):
+    checks = []
+
+    def add(name, ok, detail):
+        checks.append({"check": name, "ok": bool(ok), "detail": detail})
+
+    session = load_session()
+    add("session_present", bool(session),
+        SESSION_PATH if session else "missing — run `auth import`")
+
+    age = session_age_days(session) if session else None
+    if age is not None:
+        add("session_age", age < 30,
+            f"{age} days old" + (" (consider re-capturing)" if age >= 30 else ""))
+
+    live_ok, sample = False, ""
+    if session:
+        try:
+            data = fetch_json(DOCTOR_THREAD, session)
+            post = data[0]["data"]["children"][0]["data"]
+            n_comments = post.get("num_comments", 0)
+            comments = data[1]["data"]["children"] if len(data) > 1 else []
+            live_ok = bool(comments)
+            sample = f"read '{post.get('title','')[:48]}' " \
+                     f"({n_comments} comments, {len(comments)} fetched)"
+        except CliError as e:
+            sample = str(e)
+    add("live_read", live_ok, sample or "no session")
+
+    # storage dir writable (DB lands here in sync)
+    try:
+        os.makedirs(DATA_DIR, exist_ok=True)
+        add("data_dir", True, DATA_DIR)
+    except OSError as e:
+        add("data_dir", False, str(e))
+
+    ok = all(c["ok"] for c in checks)
+    _emit({"ok": ok, "version": VERSION, "checks": checks,
+           "summary": "ready" if ok else "not ready — see failing checks"}, opts)
+    return 0 if ok else 1
+
+
+def cmd_agent_context(args, opts):
+    ctx = {
+        "tool": "reddit-cli",
+        "version": VERSION,
+        "schema_version": SCHEMA_VERSION,
+        "read_only": True,
+        "purpose": "Authenticated, read-only Reddit mirror + search "
+                   "(posts + full comment trees).",
+        "transport": "authenticated HTTP using your logged-in browser cookie "
+                     "(Reddit blocks anonymous/datacenter/headless access).",
+        "auth": {
+            "secrets_file": SESSION_PATH,
+            "env_overrides": ["REDDIT_CLI_COOKIE", "REDDIT_CLI_UA"],
+            "sensitive": ["cookie"],
+            "capture": "DevTools > Network > Copy as cURL on a logged-in "
+                       "reddit.com request, then `pbpaste | reddit-cli auth import -`",
+            "expiry": "session cookie lasts a few weeks; `doctor` flags staleness",
+        },
+        "data_store": {"path": DB_PATH, "engine": "sqlite", "status": "added in `sync`"},
+        "commands": [
+            {"name": "doctor", "read_only": True, "desc": "validate auth/transport/store"},
+            {"name": "agent-context", "read_only": True, "desc": "this document"},
+            {"name": "auth import", "read_only": True, "desc": "store session cookie (stdin or file)"},
+            {"name": "auth status", "read_only": True, "desc": "show session freshness"},
+            {"name": "sync", "read_only": True, "desc": "(next build) mirror subreddit threads + comments"},
+            {"name": "find", "read_only": True, "desc": "(next build) full-text search the local mirror"},
+            {"name": "stats", "read_only": True, "desc": "(next build) local mirror freshness/counts"},
+            {"name": "digest", "read_only": True, "desc": "(next build) synthesize recent chatter"},
+        ],
+        "global_flags": ["--agent", "--json", "--no-color", "--no-input"],
+    }
+    opts = dict(opts)
+    opts["json"] = True
+    _emit(ctx, opts)
+    return 0
+
+
+def cmd_version(args, opts):
+    _emit({"reddit-cli": VERSION, "schema": SCHEMA_VERSION}, opts)
+    return 0
+
+
+# --------------------------------------------------------------------------- #
+# local store (SQLite + optional FTS5)
+# --------------------------------------------------------------------------- #
+SCHEMA = """
+CREATE TABLE IF NOT EXISTS sources (
+  subreddit TEXT PRIMARY KEY, last_synced TEXT
+);
+CREATE TABLE IF NOT EXISTS items (
+  id TEXT PRIMARY KEY, subreddit TEXT, title TEXT, selftext TEXT, author TEXT,
+  score INTEGER, num_comments INTEGER, created_utc REAL, permalink TEXT,
+  url TEXT, fetched_at TEXT
+);
+CREATE TABLE IF NOT EXISTS comments (
+  id TEXT PRIMARY KEY, post_id TEXT, parent_id TEXT, subreddit TEXT, author TEXT,
+  body TEXT, score INTEGER, created_utc REAL, depth INTEGER, permalink TEXT,
+  fetched_at TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_comments_post ON comments(post_id);
+CREATE TABLE IF NOT EXISTS sync_state (key TEXT PRIMARY KEY, value TEXT);
+"""
+
+
+def db_connect():
+    os.makedirs(DATA_DIR, exist_ok=True)
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA journal_mode=WAL")
+    return conn
+
+
+def ensure_schema(conn):
+    conn.executescript(SCHEMA)
+    try:
+        conn.execute("CREATE VIRTUAL TABLE IF NOT EXISTS search_fts USING fts5("
+                     "text, kind UNINDEXED, ref_id UNINDEXED, post_id UNINDEXED, "
+                     "subreddit UNINDEXED, permalink UNINDEXED, title UNINDEXED)")
+        conn.commit()
+        return True
+    except sqlite3.OperationalError:
+        conn.commit()
+        return False   # no FTS5 build — find() falls back to LIKE
+
+
+def _now_iso():
+    return now_utc().isoformat()
+
+
+def store_post(conn, fts_ok, p, subreddit=None):
+    sub = p.get("subreddit") or subreddit
+    permalink = p.get("permalink", "")
+    conn.execute(
+        "INSERT OR REPLACE INTO items(id,subreddit,title,selftext,author,score,"
+        "num_comments,created_utc,permalink,url,fetched_at) "
+        "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        (p.get("id"), sub, p.get("title", ""), p.get("selftext", "") or "",
+         p.get("author", ""), p.get("score", 0), p.get("num_comments", 0),
+         p.get("created_utc"), permalink, p.get("url", ""), _now_iso()))
+    if fts_ok:
+        ref = "t3_" + str(p.get("id"))
+        conn.execute("DELETE FROM search_fts WHERE ref_id=?", (ref,))
+        text = (p.get("title", "") + "\n" + (p.get("selftext", "") or "")).strip()
+        conn.execute("INSERT INTO search_fts(text,kind,ref_id,post_id,subreddit,"
+                     "permalink,title) VALUES(?,?,?,?,?,?,?)",
+                     (text, "post", ref, p.get("id"), sub, permalink,
+                      p.get("title", "")))
+
+
+def store_comment(conn, fts_ok, c, post_id, subreddit, post_permalink):
+    permalink = (post_permalink or "") + str(c.get("id", "")) + "/"
+    conn.execute(
+        "INSERT OR REPLACE INTO comments(id,post_id,parent_id,subreddit,author,"
+        "body,score,created_utc,depth,permalink,fetched_at) "
+        "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        (c.get("id"), post_id, c.get("parent_id", ""), subreddit,
+         c.get("author", ""), c.get("body", ""), c.get("score", 0),
+         c.get("created_utc"), c.get("depth", 0), permalink, _now_iso()))
+    if fts_ok:
+        ref = "t1_" + str(c.get("id"))
+        conn.execute("DELETE FROM search_fts WHERE ref_id=?", (ref,))
+        conn.execute("INSERT INTO search_fts(text,kind,ref_id,post_id,subreddit,"
+                     "permalink,title) VALUES(?,?,?,?,?,?,?)",
+                     (c.get("body", ""), "comment", ref, post_id, subreddit,
+                      permalink, ""))
+
+
+# --------------------------------------------------------------------------- #
+# reddit read endpoints (authenticated .json)
+# --------------------------------------------------------------------------- #
+def _q(params):
+    return urllib.parse.urlencode(params)
+
+
+def reddit_search(session, query, subreddit=None, limit=100, time_range="all"):
+    if subreddit and subreddit != "all":
+        url = (f"https://www.reddit.com/r/{subreddit}/search.json?"
+               + _q({"q": query, "restrict_sr": 1, "sort": "relevance",
+                     "t": time_range, "limit": min(limit, 100), "raw_json": 1}))
+    else:
+        url = ("https://www.reddit.com/search.json?"
+               + _q({"q": query, "sort": "relevance", "t": time_range,
+                     "type": "link", "limit": min(limit, 100), "raw_json": 1}))
+    data = fetch_json(url, session)
+    return [c["data"] for c in data.get("data", {}).get("children", [])
+            if c.get("kind") == "t3"]
+
+
+def reddit_listing(session, subreddit, listing="top", time_range="year", limit=100):
+    url = (f"https://www.reddit.com/r/{subreddit}/{listing}.json?"
+           + _q({"t": time_range, "limit": min(limit, 100), "raw_json": 1}))
+    data = fetch_json(url, session)
+    return [c["data"] for c in data.get("data", {}).get("children", [])
+            if c.get("kind") == "t3"]
+
+
+def flatten_comments(node, out, cap, depth=0):
+    if len(out) >= cap or not isinstance(node, dict):
+        return
+    for child in node.get("data", {}).get("children", []):
+        if len(out) >= cap:
+            return
+        if child.get("kind") != "t1":
+            continue
+        d = child.get("data", {})
+        body = (d.get("body") or "").strip()
+        if body and body not in ("[deleted]", "[removed]"):
+            out.append({"id": d.get("id"), "parent_id": d.get("parent_id", ""),
+                        "author": d.get("author", ""), "body": body,
+                        "score": d.get("score", 0),
+                        "created_utc": d.get("created_utc"),
+                        "depth": d.get("depth", depth)})
+        replies = d.get("replies")
+        if isinstance(replies, dict):
+            flatten_comments(replies, out, cap, depth + 1)
+
+
+def reddit_thread(session, subreddit, post_id, max_comments=200):
+    url = (f"https://www.reddit.com/r/{subreddit}/comments/{post_id}.json?"
+           + _q({"limit": 500, "depth": 10, "sort": "top", "raw_json": 1}))
+    data = fetch_json(url, session)
+    if not isinstance(data, list) or len(data) < 2:
+        raise CliError(f"unexpected thread shape for {post_id}")
+    children = data[0]["data"]["children"]
+    post = children[0]["data"] if children else None
+    comments = []
+    flatten_comments(data[1], comments, max_comments)
+    return post, comments
+
+
+# --------------------------------------------------------------------------- #
+# sync / find / stats
+# --------------------------------------------------------------------------- #
+def split_csv(values):
+    out = []
+    for v in values or []:
+        out.extend(part.strip() for part in v.split(",") if part.strip())
+    return out
+
+
+def parse_duration_days(s):
+    m = re.match(r"\s*(\d+)\s*([dwmy])\s*$", str(s).lower())
+    if not m:
+        raise CliError(f"bad --since '{s}'. Use e.g. 30d, 6w, 3m, 1y.")
+    n, unit = int(m.group(1)), m.group(2)
+    return n * {"d": 1, "w": 7, "m": 30, "y": 365}[unit]
+
+
+def cmd_sync(args, opts):
+    session = load_session()
+    if not session:
+        raise CliError("no session — run `reddit-cli auth import` first")
+    subs = split_csv(args.subreddit)
+    queries = args.query or []
+    if not subs and not queries:
+        raise CliError("specify at least --subreddit (and optionally --query)")
+
+    cutoff = None
+    if args.since:
+        cutoff = now_utc().timestamp() - parse_duration_days(args.since) * 86400
+
+    # gather candidate threads
+    cand, source_log = {}, []
+    if queries:
+        targets = subs or ["all"]
+        for sub in targets:
+            for query in queries:
+                try:
+                    posts = reddit_search(session, query, subreddit=sub,
+                                          limit=args.limit, time_range=args.time)
+                except CliError as e:   # one bad source shouldn't kill the run
+                    source_log.append({"scope": f"r/{sub}", "query": query,
+                                       "error": str(e)})
+                    time.sleep(1.5)
+                    continue
+                source_log.append({"scope": f"r/{sub}", "query": query,
+                                   "found": len(posts)})
+                for p in posts:
+                    cand.setdefault(p["id"], p)
+                time.sleep(1.5)
+    else:
+        for sub in subs:
+            try:
+                posts = reddit_listing(session, sub, args.listing, args.time,
+                                       args.limit)
+            except CliError as e:
+                source_log.append({"scope": f"r/{sub}", "listing": args.listing,
+                                   "error": str(e)})
+                time.sleep(1.5)
+                continue
+            source_log.append({"scope": f"r/{sub}", "listing": args.listing,
+                               "found": len(posts)})
+            for p in posts:
+                cand.setdefault(p["id"], p)
+            time.sleep(1.5)
+
+    items = [p for p in cand.values()
+             if not cutoff or (p.get("created_utc") or 0) >= cutoff]
+
+    if args.dry_run:
+        _emit({"dry_run": True, "candidate_threads": len(items),
+               "sources": source_log,
+               "would_fetch_comments": not args.no_comments}, opts)
+        return 0
+
+    conn = db_connect()
+    fts_ok = ensure_schema(conn)
+    n_posts = n_comments = n_failed = 0
+    touched_subs = set()
+    for p in items:
+        sub = p.get("subreddit")
+        touched_subs.add(sub)
+        if args.no_comments:
+            store_post(conn, fts_ok, p, sub)
+            n_posts += 1
+            continue
+        try:
+            post, comments = reddit_thread(session, sub, p["id"], args.max_comments)
+        except CliError:
+            store_post(conn, fts_ok, p, sub)   # fall back to the search record
+            n_posts += 1
+            n_failed += 1
+            continue
+        store_post(conn, fts_ok, post or p, sub)
+        n_posts += 1
+        ppl = (post or p).get("permalink", "")
+        for c in comments:
+            store_comment(conn, fts_ok, c, p["id"], sub, ppl)
+            n_comments += 1
+        conn.commit()
+        time.sleep(1.5)
+
+    for sub in touched_subs:
+        conn.execute("INSERT OR REPLACE INTO sources(subreddit,last_synced) "
+                     "VALUES(?,?)", (sub, _now_iso()))
+    conn.commit()
+    _emit({"ok": True, "posts": n_posts, "comments": n_comments,
+           "threads_failed": n_failed, "subreddits": sorted(touched_subs),
+           "fts": fts_ok, "sources": source_log, "db": DB_PATH}, opts)
+    return 0
+
+
+def _has_fts(conn):
+    row = conn.execute("SELECT name FROM sqlite_master WHERE type='table' "
+                       "AND name='search_fts'").fetchone()
+    return bool(row)
+
+
+def cmd_find(args, opts):
+    if not os.path.isfile(DB_PATH):
+        raise CliError("no local mirror yet — run `reddit-cli sync` first")
+    conn = db_connect()
+    rows, limit = [], args.limit
+    kind = args.kind
+    if _has_fts(conn):
+        where = ["search_fts MATCH ?"]
+        params = [args.query]
+        if args.subreddit:
+            where.append("LOWER(subreddit) = ?")
+            params.append(args.subreddit.lower())
+        if kind != "all":
+            where.append("kind = ?")
+            params.append(kind)
+        sql = ("SELECT kind, subreddit, permalink, title, "
+               "snippet(search_fts, 0, '[', ']', ' … ', 16) AS snip "
+               "FROM search_fts WHERE " + " AND ".join(where)
+               + " ORDER BY rank LIMIT ?")
+        params.append(limit)
+        try:
+            rows = conn.execute(sql, params).fetchall()
+        except sqlite3.OperationalError:
+            # retry with the query as a quoted phrase (handles punctuation)
+            params[0] = '"' + args.query.replace('"', "") + '"'
+            rows = conn.execute(sql, params).fetchall()
+    else:
+        like = f"%{args.query}%"
+        clauses = []
+        if kind in ("post", "all"):
+            clauses.append(("SELECT 'post' kind, subreddit, permalink, title, "
+                            "substr(title||' '||IFNULL(selftext,''),1,220) snip "
+                            "FROM items WHERE (title LIKE ? OR selftext LIKE ?)"
+                            + (" AND LOWER(subreddit)=?" if args.subreddit else ""),
+                            [like, like] + ([args.subreddit.lower()] if args.subreddit else [])))
+        if kind in ("comment", "all"):
+            clauses.append(("SELECT 'comment' kind, subreddit, permalink, '' title, "
+                            "substr(body,1,220) snip FROM comments WHERE body LIKE ?"
+                            + (" AND LOWER(subreddit)=?" if args.subreddit else ""),
+                            [like] + ([args.subreddit.lower()] if args.subreddit else [])))
+        sql = " UNION ALL ".join(c[0] for c in clauses) + " LIMIT ?"
+        params = [x for c in clauses for x in c[1]] + [limit]
+        rows = conn.execute(sql, params).fetchall()
+
+    results = [{"kind": r["kind"], "subreddit": "r/" + (r["subreddit"] or ""),
+                "title": r["title"], "snippet": (r["snip"] or "").replace("\n", " ").strip(),
+                "url": "https://www.reddit.com" + (r["permalink"] or "")} for r in rows]
+    if opts.get("json"):
+        _emit({"query": args.query, "count": len(results), "results": results}, opts)
+    else:
+        if not results:
+            print("no matches")
+        for r in results:
+            print(f"[{r['kind']}] {r['subreddit']}  {r['title'] or ''}".rstrip())
+            print(f"   {r['snippet'][:200]}")
+            print(f"   {r['url']}")
+    return 0
+
+
+def cmd_export(args, opts):
+    """Dump posts (each with its comments) as JSON — a stable contract for
+    downstream processors (e.g. domain spot-extraction) that shouldn't couple to
+    the DB schema."""
+    if not os.path.isfile(DB_PATH):
+        raise CliError("no local mirror yet — run `reddit-cli sync` first")
+    conn = db_connect()
+    where, params = [], []
+    subs = split_csv(args.subreddit)
+    if subs:
+        where.append("LOWER(subreddit) IN (%s)" % ",".join("?" * len(subs)))
+        params += [s.lower() for s in subs]
+    if args.since:
+        cutoff = now_utc().timestamp() - parse_duration_days(args.since) * 86400
+        where.append("created_utc >= ?")
+        params.append(cutoff)
+    wsql = (" WHERE " + " AND ".join(where)) if where else ""
+    sql = "SELECT * FROM items" + wsql + " ORDER BY created_utc DESC"
+    if args.limit:
+        sql += " LIMIT ?"
+        params.append(args.limit)
+    posts = conn.execute(sql, params).fetchall()
+    out = []
+    for p in posts:
+        cs = conn.execute(
+            "SELECT id, body, author, score, depth, permalink, created_utc "
+            "FROM comments WHERE post_id=? ORDER BY score DESC", (p["id"],)
+        ).fetchall()
+        d = dict(p)
+        d["comments"] = [dict(c) for c in cs]
+        out.append(d)
+    # export is a data dump — always JSON
+    print(json.dumps({"posts": out, "count": len(out)}, ensure_ascii=False))
+    return 0
+
+
+def cmd_stats(args, opts):
+    if not os.path.isfile(DB_PATH):
+        raise CliError("no local mirror yet — run `reddit-cli sync` first")
+    conn = db_connect()
+    posts = conn.execute("SELECT COUNT(*) n FROM items").fetchone()["n"]
+    comments = conn.execute("SELECT COUNT(*) n FROM comments").fetchone()["n"]
+    subs = conn.execute("SELECT subreddit, last_synced FROM sources "
+                        "ORDER BY subreddit").fetchall()
+    by_sub = conn.execute("SELECT subreddit, COUNT(*) n FROM items "
+                          "GROUP BY subreddit ORDER BY n DESC").fetchall()
+    _emit({"posts": posts, "comments": comments,
+           "subreddits": [{"subreddit": "r/" + s["subreddit"],
+                           "last_synced": s["last_synced"]} for s in subs],
+           "posts_by_subreddit": {"r/" + b["subreddit"]: b["n"] for b in by_sub},
+           "fts": _has_fts(conn),
+           "db_bytes": os.path.getsize(DB_PATH)}, opts)
+    return 0
+
+
+# --------------------------------------------------------------------------- #
+# arg parsing
+# --------------------------------------------------------------------------- #
+def build_parser():
+    # Global flags live on a parent parser so they're accepted both before and
+    # after the subcommand (`reddit-cli --agent doctor` and `reddit-cli doctor
+    # --agent`). SUPPRESS defaults stop subparsers from resetting a flag set up
+    # the chain.
+    parent = argparse.ArgumentParser(add_help=False)
+    parent.add_argument("--agent", action="store_true", default=argparse.SUPPRESS,
+                        help="agent mode: JSON, compact, non-interactive, no color")
+    parent.add_argument("--json", action="store_true", default=argparse.SUPPRESS,
+                        help="JSON output")
+    parent.add_argument("--no-color", action="store_true", default=argparse.SUPPRESS)
+    parent.add_argument("--no-input", action="store_true", default=argparse.SUPPRESS)
+
+    p = argparse.ArgumentParser(prog="reddit-cli", description=__doc__, parents=[parent],
+                                formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = p.add_subparsers(dest="cmd", required=True)
+
+    sub.add_parser("doctor", parents=[parent],
+                   help="validate auth, transport, and local store")
+    sub.add_parser("agent-context", parents=[parent],
+                   help="machine-readable runtime contract")
+    sub.add_parser("version", parents=[parent], help="print version")
+
+    ap = sub.add_parser("auth", parents=[parent], help="manage the authenticated session")
+    asub = ap.add_subparsers(dest="auth_cmd", required=True)
+    imp = asub.add_parser("import", parents=[parent],
+                          help="store cookie from a Copy-as-cURL (stdin or file)")
+    imp.add_argument("source", nargs="?", default="-",
+                     help="file path, or '-' for stdin (default)")
+    asub.add_parser("status", parents=[parent], help="show session freshness")
+
+    sp = sub.add_parser("sync", parents=[parent],
+                        help="mirror subreddit threads + comment trees")
+    sp.add_argument("-r", "--subreddit", action="append", default=[],
+                    help="subreddit(s), comma-ok; 'all' = site-wide search")
+    sp.add_argument("-q", "--query", action="append", default=[],
+                    help="search query within the subreddit(s); omit to pull a listing")
+    sp.add_argument("--listing", choices=["hot", "new", "top"], default="top",
+                    help="listing to pull when no --query (default top)")
+    sp.add_argument("-t", "--time", choices=["all", "year", "month", "week", "day"],
+                    default="all", help="time window for search/listing (default all "
+                    "— spots are evergreen; narrow for monitoring)")
+    sp.add_argument("--limit", type=int, default=50, help="max threads per source")
+    sp.add_argument("--max-comments", type=int, default=200,
+                    help="max comments fetched per thread")
+    sp.add_argument("--no-comments", action="store_true",
+                    help="store posts only, skip comment trees")
+    sp.add_argument("--since", help="only store threads newer than e.g. 30d, 6m, 1y")
+    sp.add_argument("--dry-run", action="store_true",
+                    help="show what would be fetched, write nothing")
+
+    fp = sub.add_parser("find", parents=[parent],
+                        help="full-text search the local mirror")
+    fp.add_argument("query")
+    fp.add_argument("-r", "--subreddit", help="filter to one subreddit")
+    fp.add_argument("--kind", choices=["post", "comment", "all"], default="all")
+    fp.add_argument("--limit", type=int, default=20)
+
+    ep = sub.add_parser("export", parents=[parent],
+                        help="dump posts + comments as JSON (downstream contract)")
+    ep.add_argument("-r", "--subreddit", action="append", default=[],
+                    help="filter to subreddit(s), comma-ok")
+    ep.add_argument("--since", help="only posts newer than e.g. 30d, 1y")
+    ep.add_argument("--limit", type=int, default=0, help="max posts (0 = all)")
+
+    sub.add_parser("stats", parents=[parent],
+                   help="local mirror counts + freshness")
+    return p
+
+
+def main(argv=None):
+    args = build_parser().parse_args(argv)
+    agent = getattr(args, "agent", False)
+    opts = {"agent": agent,
+            "json": getattr(args, "json", False) or agent,
+            "color": not (getattr(args, "no_color", False) or agent),
+            "input": not (getattr(args, "no_input", False) or agent)}
+    handlers = {
+        "doctor": cmd_doctor,
+        "agent-context": cmd_agent_context,
+        "version": cmd_version,
+        "auth": cmd_auth,
+        "sync": cmd_sync,
+        "find": cmd_find,
+        "stats": cmd_stats,
+        "export": cmd_export,
+    }
+    try:
+        return handlers[args.cmd](args, opts)
+    except CliError as e:
+        if opts["json"]:
+            print(json.dumps({"ok": False, "error": str(e)}))
+        else:
+            print(f"error: {e}", file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

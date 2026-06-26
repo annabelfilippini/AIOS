@@ -37,6 +37,7 @@ Continuation of the morning's Mansel + Bo scrape work. Annabel pushed back that 
 ## Context to preserve
 
 **Files produced this session (after the earlier 09:25 checkpoint):**
+
 - `projects/agency-audit-network/research/audit-system-synthesis-2026-05-14.md` — rewritten Mansel-first, 13 sections
 - `projects/agency-audit-network/research/audit-system-synthesis-2026-05-14-bo-first-draft.md` — archived original (preserved per checkpoint rules)
 - `projects/agency-audit-network/research/sources/mansel-ainative-2026-05-14/captured-module-bodies.md` — 21 module bodies verbatim (the goldmine)

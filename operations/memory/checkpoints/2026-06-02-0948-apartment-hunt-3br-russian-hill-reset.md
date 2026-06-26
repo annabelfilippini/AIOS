@@ -9,6 +9,7 @@ next-session: refresh Telegram bot token, then run apartment_hunt.py without --d
 # Session: apartment-hunt 3BR Russian Hill reset
 
 ## New search intent
+
 - Annabel is looking for 3BR apartments in San Francisco.
 - Favorite neighborhood: Russian Hill. Emphasize it first.
 - Second priority: North Beach.
@@ -18,6 +19,7 @@ next-session: refresh Telegram bot token, then run apartment_hunt.py without --d
 - Budget: ideal max $7,500/month total ($2,500/person for 3 people); stretch max $8,250/month for unusually good fits.
 
 ## Code changes
+
 - Updated `projects/apartment-hunt/apartment_hunt.py` criteria to exact 3BR, $3,200-$8,250, ideal max $7,500.
 - Reordered priorities to Russian Hill, North Beach, then fallback neighborhoods.
 - Removed Mission and Nob Hill from target neighborhoods.
@@ -30,6 +32,7 @@ next-session: refresh Telegram bot token, then run apartment_hunt.py without --d
 - Updated README to match the new hunt and access-boundary rules.
 
 ## Verification
+
 - `python -m py_compile apartment_hunt.py` passed.
 - Live dry run on 2026-06-02:
   - Craigslist: 52 raw listings.
@@ -43,10 +46,12 @@ next-session: refresh Telegram bot token, then run apartment_hunt.py without --d
 - Dry run did not create or advance `seen_3br_sf_core.json`.
 
 ## Access boundary
+
 - Authenticated apartment sources can be added when Annabel explicitly provides access and the site permits that use.
 - Do not implement login bypass, CAPTCHA evasion, private-session scraping without permission, or access-control circumvention.
 
 ## Next steps
+
 1. Refresh Telegram bot token in `~/.claude/channels/telegram/.env`.
 2. Run:
 
@@ -55,4 +60,4 @@ cd /Users/annabelfilippini/Documents/AI-OS/projects/apartment-hunt
 .venv/bin/python apartment_hunt.py
 ```
 
-3. Consider adding a `--deep` mode later if the daily expanded Exa sweep feels too slow or too sparse.
+1. Consider adding a `--deep` mode later if the daily expanded Exa sweep feels too slow or too sparse.

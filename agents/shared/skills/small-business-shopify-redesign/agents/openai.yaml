@@ -1,4 +1,0 @@
-interface:
-  display_name: "Small Business Shopify Redesign"
-  short_description: "Guide draft-only Shopify redesign work for small business sites."
-  default_prompt: "Use this skill to plan, implement, verify, and document a small-business Shopify redesign while protecting the live theme and making future edits owner-friendly."

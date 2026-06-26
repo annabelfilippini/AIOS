@@ -34,7 +34,7 @@ next-session: Open https://tally.so/forms/rjJo05/edit, review the audit form Ann
 
 ## Next steps
 
-1. Annabel opens https://tally.so/forms/rjJo05/edit and reviews the form end-to-end.
+1. Annabel opens <https://tally.so/forms/rjJo05/edit> and reviews the form end-to-end.
 2. **Rotate the Tally API token.** Old token (`tly-1yY5...`) was used in this session and is in the conversation history — treat as compromised.
 3. Add the 5A↔5B logic jump in Tally UI: "if engine = Acquisition → skip 5B; else skip 5A."
 4. Build Google Sheets Step Cards template for Section 6; update the form to link to it.
@@ -45,12 +45,12 @@ next-session: Open https://tally.so/forms/rjJo05/edit, review the audit form Ann
 ## Context to preserve
 
 - **Tally API schema, reverse-engineered** (was undocumented):
-    - Each block needs unique UUID v4. `groupType` MUST match `type` for most blocks (TITLE, INPUT_TEXT, INPUT_EMAIL, TEXTAREA, LINEAR_SCALE, FILE_UPLOAD, etc.).
-    - Headings use `HEADING_1`/`HEADING_2`/`HEADING_3` (underscore, not number-suffix).
-    - **Option blocks** (`MULTIPLE_CHOICE_OPTION`, `DROPDOWN_OPTION`, `CHECKBOX`): share a `groupUuid` across all options; `groupType` is the plural form (`MULTIPLE_CHOICE` / `DROPDOWN` / `CHECKBOXES`); every option needs explicit `isFirst` and `isLast` booleans in payload.
-    - `LINEAR_SCALE` cannot be the first input block in a form; precede it with a simple input.
-    - Tally normalizes `html: "text"` payload into `safeHTMLSchema: [["text"]]` on retrieval.
-    - All these gotchas are documented in the header comment of `scripts/build-tally-audit.mjs`.
+  - Each block needs unique UUID v4. `groupType` MUST match `type` for most blocks (TITLE, INPUT_TEXT, INPUT_EMAIL, TEXTAREA, LINEAR_SCALE, FILE_UPLOAD, etc.).
+  - Headings use `HEADING_1`/`HEADING_2`/`HEADING_3` (underscore, not number-suffix).
+  - **Option blocks** (`MULTIPLE_CHOICE_OPTION`, `DROPDOWN_OPTION`, `CHECKBOX`): share a `groupUuid` across all options; `groupType` is the plural form (`MULTIPLE_CHOICE` / `DROPDOWN` / `CHECKBOXES`); every option needs explicit `isFirst` and `isLast` booleans in payload.
+  - `LINEAR_SCALE` cannot be the first input block in a form; precede it with a simple input.
+  - Tally normalizes `html: "text"` payload into `safeHTMLSchema: [["text"]]` on retrieval.
+  - All these gotchas are documented in the header comment of `scripts/build-tally-audit.mjs`.
 - Tally workspace ID for Annabel: `3ye6Kp`. Form ID: `rjJo05`.
 - Old playbook (consultative version, ~1044 lines) archived but not deleted — useful reference if Annabel ever revisits.
 - Recent prior checkpoint to look at: `2026-05-14-1230-aios-audit-merge-and-self-serve-pivot.md`.

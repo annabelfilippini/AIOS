@@ -41,11 +41,13 @@ Started from `2026-05-12-1721-agency-audit-network.md` checkpoint. Annabel pushe
 ## Context to preserve
 
 **Files produced this session:**
+
 - `projects/agency-audit-network/research/mansel-members-agency-candidates-2026-05-12-v2.md` — 56/64 members captured, demotions documented vs v1
 - `projects/agency-audit-network/research/mark-kashef-members-agency-candidates-2026-05-12.md` — 199/1400 captured (high-activity slice), 6 strong Track 1 picks
 - `~/.claude/projects/-Users-annabelfilippini/memory/feedback_agency_partner_filter.md` — durable filter rule
 
 **Top Track 1 picks (implementation operators):**
+
 - Keith Mortier (ObsidianLogic.ai) — ⭐⭐⭐
 - Bill Candelaria — ⭐⭐⭐
 - Philip Couboura (wiselydrivenai.com) — ⭐⭐⭐
@@ -56,6 +58,7 @@ Started from `2026-05-12-1721-agency-audit-network.md` checkpoint. Annabel pushe
 - Forrest Shaw (Mansel, CIO day job) — ⭐⭐
 
 **Direct-partnership conversation candidates (parallel to Mansel):**
+
 - Mark Kashef + Taha El Harti (Early AI-dopters co-owners).
 
 ## System refinement candidates

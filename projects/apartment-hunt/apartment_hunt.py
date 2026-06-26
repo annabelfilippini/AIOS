@@ -15,6 +15,7 @@ import html
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 from dataclasses import asdict, dataclass, field
@@ -25,168 +26,144 @@ from urllib.parse import urljoin, urlencode, urlparse, urlunparse
 import requests
 from dotenv import load_dotenv
 
+import profiles
+
 # ---------- config ----------
 
 ROOT = Path(__file__).resolve().parent
-SEEN_PATH = ROOT / "seen_3br_sf_core.json"
-DIGEST_PATH = ROOT / "digest_latest.md"
-ARCHIVE_DIR = ROOT / "digests"
 
-# Hunt criteria
-MIN_PRICE = 3200
-IDEAL_MAX_PRICE = 7500  # $2,500/person for 3 people
-MAX_PRICE = 9000        # stretch ceiling for unusually good fits (raised from $8,250 on 2026-06-03)
-MIN_BEDS = 3
-MAX_BEDS = 3
-MOVE_BY = dt.date(2026, 6, 15)
-
-# Neighborhoods Annabel wants. Match against listing title/location text.
-NEIGHBORHOODS = [
-    "russian hill",
-    "north beach",
-    "hayes valley",
-    "marina",
-    "pacific heights",
-    "cow hollow",
-    "nob hill",
-]
-
-# Top priority — these float to the top of the digest.
-PREFERRED_NEIGHBORHOODS = [
-    "russian hill",
-    "north beach",
-]
-
-# Acceptable fallback neighborhoods. Keep them visible, but below the core hunt.
-FALLBACK_NEIGHBORHOODS = [
-    "hayes valley",
-    "marina",
-    "pacific heights",
-    "cow hollow",
-    "nob hill",
-]
-
-# SF ZIP → neighborhood, restricted to the hoods Annabel cares about.
-# Used to validate Exa results that don't repeat the neighborhood name in
-# their title/snippet.
-SF_TARGET_ZIPS = {
-    "94133": "north beach",       # North Beach / Telegraph Hill / part of Russian Hill
-    "94123": "marina",            # Marina / Cow Hollow
-    "94115": "pacific heights",   # Pacific Heights / Lower Pac Heights / Japantown
-    # Deliberately do not use 94109 or 94102 as positive ZIP fallbacks:
-    # 94109 can be Russian Hill, Nob Hill, Polk Gulch, or Tenderloin; 94102 can
-    # be Hayes Valley, Civic Center, or Tenderloin. Require an explicit
-    # neighborhood label for those.
-}
-
-# Craigslist's location field is seller-typed but they overwhelmingly use these
-# canonical labels. Match exactly — substring matching causes false positives
-# like "outer mission" matching "mission" and "lower nob hill" sneaking in.
-_CL_LOCATION_TO_HOOD: dict[str, str] = {
-    "north beach": "north beach",
-    "north beach / telegraph hill": "north beach",
-    "telegraph hill": "north beach",
-    "russian hill": "russian hill",
-    "marina": "marina",
-    "marina / cow hollow": "marina",
-    "cow hollow": "cow hollow",
-    "nob hill": "nob hill",
-    "russian hill / nob hill": "nob hill",
-    "pacific heights": "pacific heights",
-    "lower pacific heights": "pacific heights",
-    "pac hts": "pacific heights",
-    "japantown": "pacific heights",
-    "hayes valley": "hayes valley",
-}
+# Generic, city-agnostic constants ------------------------------------------ #
 
 # Domains we explicitly DON'T want to whitelist for the open-web pass. Exa
-# indexes well across the rental web — RentSFNow, Engel & Völkers, Movoto,
-# Relisto, HomeFinder, Furnished Housing, etc. Whitelisting starves it. Just
-# let it loose and filter on URL shape after.
+# indexes well across the rental web — whitelisting starves it. Just let it
+# loose and filter on URL shape after.
 REDDIT_DOMAINS = ["reddit.com"]
 
-# Major aggregators that gate their search pages with anti-bot challenges
-# (Cloudflare/F5). We can't direct-scrape them, but Exa often indexes their
-# detail pages. Target each domain individually so Exa returns deep listing
-# URLs we'd otherwise miss in the open-web sweep.
+# Major aggregators that gate their search pages with anti-bot challenges. We
+# can't direct-scrape them, but Exa often indexes their detail pages. Target
+# each domain individually so Exa returns deep listing URLs we'd otherwise miss.
+# City-agnostic: the same aggregators cover every US metro.
 AGGREGATOR_DOMAINS = [
-    "apartments.com",
-    "apartmentfinder.com",
-    "apartmentguide.com",
-    "apartmenthomeliving.com",
-    "apartmentlist.com",
-    "avaloncommunities.com",
-    "compass.com",
-    "craigslist.org",
-    "equityapartments.com",
-    "forrent.com",
-    "homefinder.com",
-    "hotpads.com",
-    "lovely.com",
-    "padmapper.com",
-    "redfin.com",
-    "realtor.com",
-    "rent.com",
-    "rentable.co",
-    "rentberry.com",
-    "rentcafe.com",
-    "renthop.com",
-    "rentlingo.com",
-    "rentometer.com",
-    "rents.com",
-    "rentsfnow.com",
-    "sfcityrents.com",
-    "trulia.com",
-    "westside-rentals.com",
-    "zillow.com",
-    "zumper.com",
+    "apartments.com", "apartmentfinder.com", "apartmentguide.com",
+    "apartmenthomeliving.com", "apartmentlist.com", "avaloncommunities.com",
+    "compass.com", "craigslist.org", "equityapartments.com", "forrent.com",
+    "homefinder.com", "hotpads.com", "lovely.com", "padmapper.com",
+    "redfin.com", "realtor.com", "rent.com", "rentable.co", "rentberry.com",
+    "rentcafe.com", "renthop.com", "rentlingo.com", "rentometer.com",
+    "rents.com", "trulia.com", "zillow.com", "zumper.com",
 ]
 
-# Local/property-manager sources that often surface older SF buildings before
-# aggregators do. These are queried through Exa rather than direct-scraped unless
-# a site exposes a stable public listing page.
-PROPERTY_MANAGER_DOMAINS = [
-    "anchorrealtyinc.com",
-    "brickandtimber.com",
-    "chandlerproperties.com",
-    "gaetanirealestate.com",
-    "jwavro.com",
-    "kinetic-re.com",
-    "laphamcompany.com",
-    "rentsfnow.com",
-    "sfcityrents.com",
-    "structureproperties.com",
-    "trinitysf.com",
-    "yeeproperties.com",
-]
-
-DIRECT_SOURCE_SEEDS = [
-    # Direct-fetched sites. Only sites that actually return inventory in raw HTML
-    # live here. Anti-bot-blocked + JS-only sites were migrated to FIRECRAWL_SEEDS
-    # on 2026-06-03 (see notes/2026-06-03-firecrawl-source-rollout.md).
-    # Zillow lives in its own paginated fetcher (fetch_zillow_firecrawl).
-    ("apartmentguide.com", "https://www.apartmentguide.com/apartments/California/San-Francisco/3-beds-1z141xs/"),
-    ("homefinder.com", "https://homefinder.com/rentals/CA/San-Francisco?beds=3"),
-    ("redfin.com", "https://www.redfin.com/city/17151/CA/San-Francisco/apartments-for-rent/filter/property-type=apartment,min-beds=3,max-beds=3"),
-    ("rentable.co", "https://www.rentable.co/san-francisco-ca?beds=3"),
-    ("rentberry.com", "https://rentberry.com/apartments/s/san-francisco-ca/3-bed"),
-    ("rentcafe.com", "https://www.rentcafe.com/3-bedroom-apartments-for-rent/us/ca/san-francisco/"),
-    ("rentsfnow.com", "https://www.rentsfnow.com/apartments-for-rent/san-francisco/"),
-    ("structureproperties.com", "https://structureproperties.com/available-rentals/"),
-    # Broken sites kept commented out — re-enable if their URLs come back to life.
-    # ("anchorrealtyinc.com", "https://www.anchorrealtyinc.com/vacancies"),  # DNS error
-    # ("brickandtimber.com", "https://www.brickandtimber.com/apartments/"),  # 404
-    # ("kinetic-re.com", "https://www.kinetic-re.com/rentals"),              # DNS error
-    # ("laphamcompany.com", "https://www.laphamcompany.com/vacancies"),      # 404
-]
-
-CRAIGSLIST_BASE = "https://sfbay.craigslist.org/search/sfc/apa"
 # Craigslist hard-blocks Python User-Agents (and their RSS feed) but serves HTML
 # fine to a normal browser UA. Use a Safari string.
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
 )
+
+# Active-profile globals ----------------------------------------------------- #
+#
+# The rest of the pipeline reads these module-level names. `apply_profile()`
+# rebinds them from a SearchProfile (see profiles.py) before a run, so swapping
+# cities is a one-line change at the top of main(). SF is applied at import so
+# anything importing these constants (e.g. build_html_digest) just works.
+
+ACTIVE_PROFILE: profiles.SearchProfile
+
+CITY_LABEL: str
+STATE_LABEL: str
+MIN_PRICE: int
+IDEAL_MAX_PRICE: int
+MAX_PRICE: int
+MIN_BEDS: int
+MAX_BEDS: int
+NUM_PEOPLE: int
+MOVE_BY: dt.date | None
+NEIGHBORHOODS: list[str]
+PREFERRED_NEIGHBORHOODS: list[str]
+FALLBACK_NEIGHBORHOODS: list[str]
+_CL_LOCATION_TO_HOOD: dict[str, str]
+REQUIRE_NEIGHBORHOOD_MATCH: bool
+TARGET_ZIPS: dict[str, str]
+CITY_ZIP_PREFIXES: tuple[str, ...]
+REGION_ZIP_RE: "re.Pattern[str]"
+CRAIGSLIST_BASE: str
+DIRECT_SOURCE_SEEDS: list[tuple[str, str]]
+FIRECRAWL_SEEDS: list[tuple[str, str]]
+PROPERTY_MANAGER_DOMAINS: list[str]
+ZILLOW_RENTAL_URL: str
+ZILLOW_SEARCH_TERM: str
+ZILLOW_MAP_BOUNDS: dict
+EXA_NEIGHBORHOODS: list[str]
+BLOCKED_LOCATION_RE: "re.Pattern[str] | None"
+LISTING_NOUN: str
+MIN_BATHROOMS: int
+ENRICH_DETAILS: bool
+CRAIGSLIST_EXTRA_PARAMS: tuple
+PREFERRED_KEYWORDS: tuple
+SEEN_PATH: Path
+DIGEST_PATH: Path
+ARCHIVE_DIR: Path
+
+
+def apply_profile(profile: profiles.SearchProfile) -> None:
+    """Bind the active-profile globals from a SearchProfile."""
+    global ACTIVE_PROFILE, CITY_LABEL, STATE_LABEL
+    global MIN_PRICE, IDEAL_MAX_PRICE, MAX_PRICE, MIN_BEDS, MAX_BEDS, NUM_PEOPLE, MOVE_BY
+    global NEIGHBORHOODS, PREFERRED_NEIGHBORHOODS, FALLBACK_NEIGHBORHOODS
+    global _CL_LOCATION_TO_HOOD, REQUIRE_NEIGHBORHOOD_MATCH
+    global TARGET_ZIPS, CITY_ZIP_PREFIXES, REGION_ZIP_RE
+    global CRAIGSLIST_BASE, DIRECT_SOURCE_SEEDS, FIRECRAWL_SEEDS, PROPERTY_MANAGER_DOMAINS
+    global ZILLOW_RENTAL_URL, ZILLOW_SEARCH_TERM, ZILLOW_MAP_BOUNDS, EXA_NEIGHBORHOODS, REDDIT_SUBREDDITS
+    global BLOCKED_LOCATION_RE, LISTING_NOUN, MIN_BATHROOMS, ENRICH_DETAILS
+    global CRAIGSLIST_EXTRA_PARAMS, PREFERRED_KEYWORDS
+    global SEEN_PATH, DIGEST_PATH, ARCHIVE_DIR
+
+    ACTIVE_PROFILE = profile
+    CITY_LABEL = profile.city_label
+    STATE_LABEL = profile.state_label
+    MIN_PRICE = profile.min_price
+    IDEAL_MAX_PRICE = profile.ideal_max_price
+    MAX_PRICE = profile.max_price
+    MIN_BEDS = profile.min_beds
+    MAX_BEDS = profile.max_beds
+    NUM_PEOPLE = profile.num_people
+    MOVE_BY = profile.move_by
+    NEIGHBORHOODS = list(profile.neighborhoods)
+    PREFERRED_NEIGHBORHOODS = list(profile.preferred_neighborhoods)
+    FALLBACK_NEIGHBORHOODS = list(profile.fallback_neighborhoods)
+    _CL_LOCATION_TO_HOOD = profile.cl_location_to_hood
+    REQUIRE_NEIGHBORHOOD_MATCH = profile.require_neighborhood_match
+    TARGET_ZIPS = profile.target_zips
+    CITY_ZIP_PREFIXES = profile.city_zip_prefixes
+    REGION_ZIP_RE = re.compile(profile.region_zip_pattern)
+    CRAIGSLIST_BASE = profile.craigslist_base
+    DIRECT_SOURCE_SEEDS = list(profile.direct_source_seeds)
+    FIRECRAWL_SEEDS = list(profile.firecrawl_seeds)
+    PROPERTY_MANAGER_DOMAINS = list(profile.property_manager_domains)
+    ZILLOW_RENTAL_URL = profile.zillow_rental_url
+    ZILLOW_SEARCH_TERM = profile.zillow_search_term
+    ZILLOW_MAP_BOUNDS = profile.zillow_map_bounds
+    EXA_NEIGHBORHOODS = list(profile.exa_neighborhoods)
+    REDDIT_SUBREDDITS = list(profile.reddit_subreddits)
+    LISTING_NOUN = profile.listing_noun
+    MIN_BATHROOMS = profile.min_bathrooms
+    ENRICH_DETAILS = profile.enrich_details
+    CRAIGSLIST_EXTRA_PARAMS = profile.craigslist_extra_params
+    PREFERRED_KEYWORDS = profile.preferred_keywords
+    if profile.blocked_location_markers:
+        pattern = r"\b(" + "|".join(
+            m.replace(" ", r"\s+") for m in profile.blocked_location_markers
+        ) + r")\b"
+        BLOCKED_LOCATION_RE = re.compile(pattern, re.IGNORECASE)
+    else:
+        BLOCKED_LOCATION_RE = None
+    SEEN_PATH = ROOT / f"seen_{profile.key}.json"
+    DIGEST_PATH = ROOT / f"digest_{profile.key}_latest.md"
+    ARCHIVE_DIR = ROOT / "digests" / profile.key
+
+
+# Apply SF by default so importers and ad-hoc use have a populated config.
+apply_profile(profiles.SF)
 
 
 # ---------- data ----------
@@ -203,6 +180,32 @@ class Listing:
     posted: str | None = None    # ISO date string if known
     snippet: str = ""
     query_neighborhood: str | None = None  # the hood we searched for, even if title omits it
+
+    # ---- enrichment fields (populated by enrich_listing from the detail page) ----
+    bathrooms: float | None = None
+    sqft: int | None = None
+    has_office: bool | None = None
+    # "confirmed"  -> the detail page explicitly shows a garage/covered parking
+    # "none found" -> we read the page and it does NOT mention one (treat as: no garage)
+    # None         -> not enriched / page couldn't be read (unverified)
+    garage_status: str | None = None
+    enriched: bool = False
+
+    def feature_matches(self) -> list[str]:
+        """Which PREFERRED_KEYWORDS this listing's text mentions. Soft signal:
+        used to rank and badge listings, never to drop them.
+
+        Matches on word boundaries, not bare substrings — otherwise short
+        variants like "den" match inside "Denver", "house" inside "townhouse".
+        """
+        if not PREFERRED_KEYWORDS:
+            return []
+        hay = f"{self.title} {self.snippet}".lower()
+        out = []
+        for label, variants in PREFERRED_KEYWORDS:
+            if any(re.search(rf"\b{re.escape(v)}\b", hay) for v in variants):
+                out.append(label)
+        return out
 
     def matches_neighborhood(self) -> str | None:
         # Craigslist: only trust the seller's location tag, and only if it's an
@@ -279,6 +282,8 @@ def fetch_craigslist() -> list[Listing]:
         "max_bedrooms": MAX_BEDS,
         "availabilityMode": 0,
     }
+    # Profile-specific server-side filters (e.g. housing_type=6 for houses).
+    params.update(dict(CRAIGSLIST_EXTRA_PARAMS))
     url = f"{CRAIGSLIST_BASE}?{urlencode(params)}"
     resp = requests.get(
         url,
@@ -358,6 +363,166 @@ def _parse_beds(title: str) -> int | None:
     if m:
         return _BED_WORDS[m.group(1).lower()]
     return None
+
+
+# ---------- Reddit owner-direct (reddit-cli) ----------
+#
+# The owner-direct / by-owner / sublet channel that Exa was supposed to cover but
+# can't (Exa is IP-banned, 403s on every call). reddit-cli is the working
+# transport: an authenticated, read-only local mirror of Reddit threads
+# (see tools/reddit-cli). We sweep a city's classifieds-ish subreddits for posts
+# that read like rental OFFERS, then let the same ring/price/bed filters
+# downstream decide what survives. These listings can't be detail-page enriched
+# (Firecrawl won't scrape Reddit), so they stay "garage unverified" — they're
+# leads to DM, not portal listings.
+
+# Marks a post as a REQUEST or discussion ("[ISO] 3br house", "best way to find…"),
+# which we never want — we only keep actual offers.
+_REDDIT_WANTED_RE = re.compile(
+    r"\b(iso\b|in search of|looking (?:for|to)|want(?:ing|ed)? to rent|"
+    r"seeking|need(?:ed)? (?:a )?(?:place|house|home|rental|room)|"
+    r"help (?:me )?find|anyone (?:have|know|renting)|best way to|"
+    r"recommend|advice|how (?:do|to|can)|is it (?:legal|normal|possible))\b",
+    re.IGNORECASE,
+)
+# Marks a post as an OFFER (someone renting a place out).
+_REDDIT_OFFER_RE = re.compile(
+    r"(for rent\b|renting out|renting my|now leasing|lease takeover|"
+    r"available (?:now|\w+ \d)|sublet(?:ting)?\b|sublease|\$[\d,]{3,})",
+    re.IGNORECASE,
+)
+# A post must mention an actual dwelling, not "renting a camera/dress/trailer".
+_REDDIT_HOUSING_RE = re.compile(
+    r"\b(house|home|apartment|apt\b|condo|townh(?:ome|ouse)|duplex|"
+    r"bed(?:room)?s?\b|\dbr\b|\dbd\b|unit|sq ?ft|square feet|lease|sublet)\b",
+    re.IGNORECASE,
+)
+# Drop anything older than this — a months-old Reddit post is a dead listing.
+_REDDIT_MAX_AGE_DAYS = 45
+
+
+def _reddit_cli_path() -> Path:
+    """Absolute path to the shared reddit-cli (tools/reddit-cli/reddit-cli)."""
+    return ROOT.parent.parent / "tools" / "reddit-cli" / "reddit-cli"
+
+
+def fetch_reddit() -> tuple[list[Listing], list[SourceReport]]:
+    """Owner-direct rental leads from Reddit via the local reddit-cli.
+
+    Best-effort and non-fatal: a missing CLI, an expired session cookie, or a
+    failed sub just yields a 'skipped'/'error' coverage row and no listings.
+    """
+    reports: list[SourceReport] = []
+    subs = REDDIT_SUBREDDITS
+    if not subs:
+        return [], [SourceReport(
+            source="reddit", url="", status="skipped",
+            note="no reddit_subreddits configured for this city",
+        )]
+
+    cli = _reddit_cli_path()
+    if not cli.exists():
+        return [], [SourceReport(
+            source="reddit", url=str(cli), status="skipped",
+            note="reddit-cli not found",
+        )]
+
+    query = (
+        f'"for rent" OR rental OR renting OR landlord OR sublet '
+        f'OR "{LISTING_NOUN} for rent"'
+    )
+
+    # 1) Refresh the local mirror for each sub (best-effort; ignore failures here,
+    #    the export step below reports per-sub status).
+    for sub in subs:
+        try:
+            subprocess.run(
+                [sys.executable, str(cli), "sync", "-r", sub,
+                 "-q", query, "--limit", "30", "--agent"],
+                capture_output=True, text=True, timeout=150,
+            )
+        except (subprocess.SubprocessError, OSError):
+            continue
+
+    # 2) Export each sub's mirror and keep fresh OFFER posts.
+    out: list[Listing] = []
+    cutoff = time.time() - _REDDIT_MAX_AGE_DAYS * 86400
+    for sub in subs:
+        sub_url = f"https://www.reddit.com/r/{sub}/"
+        try:
+            proc = subprocess.run(
+                [sys.executable, str(cli), "export", "-r", sub, "--json"],
+                capture_output=True, text=True, timeout=90,
+            )
+        except (subprocess.SubprocessError, OSError) as exc:
+            reports.append(SourceReport(source=f"reddit:{sub}", url=sub_url,
+                                        status="error", note=str(exc)[:80]))
+            continue
+        if proc.returncode != 0:
+            reports.append(SourceReport(source=f"reddit:{sub}", url=sub_url,
+                                        status="error",
+                                        note=(proc.stderr or "export failed").strip()[:80]))
+            continue
+        try:
+            payload = json.loads(proc.stdout or "null")
+        except json.JSONDecodeError:
+            reports.append(SourceReport(source=f"reddit:{sub}", url=sub_url,
+                                        status="error", note="unparseable json"))
+            continue
+
+        posts = payload.get("posts", []) if isinstance(payload, dict) else (payload or [])
+        kept = 0
+        for p in posts:
+            title = (p.get("title") or "").strip()
+            body = (p.get("selftext") or "").strip()
+            text = f"{title}\n{body}"
+            created = p.get("created_utc")
+            if created and float(created) < cutoff:
+                continue
+            # A title ending in "?" is almost always a question, not a listing.
+            if title.endswith("?"):
+                continue
+            if _REDDIT_WANTED_RE.search(text):
+                continue
+            if not _REDDIT_OFFER_RE.search(text):
+                continue
+            if not _REDDIT_HOUSING_RE.search(text):
+                continue
+            # A link-post pointing off-site (e.g. a news article about rent
+            # prices) is never an owner's listing — those are always self/text
+            # posts. Drop anything whose link leaves reddit.com.
+            ext = p.get("url") or ""
+            if ext and "reddit.com" not in ext:
+                continue
+
+            permalink = p.get("permalink") or ""
+            # Always link to the reddit thread itself (so the /r/ gate passes and
+            # the card opens the post, not an off-site mirror).
+            url = (f"https://www.reddit.com{permalink}" if permalink else ext)
+            if not url or "/r/" not in url:
+                continue
+            pid = p.get("id") or hashlib.sha1(url.encode()).hexdigest()[:12]
+            posted = None
+            if created:
+                posted = dt.datetime.utcfromtimestamp(float(created)).date().isoformat()
+
+            out.append(Listing(
+                source=f"reddit:{sub}",
+                id=f"reddit-{pid}",
+                title=title or "(reddit post)",
+                url=url,
+                price=_parse_price(title) or _parse_price(body),
+                beds=_parse_beds(title) or _parse_beds(body),
+                neighborhood=None,  # let matches_neighborhood scan title+snippet
+                posted=posted,
+                snippet=body[:500],
+            ))
+            kept += 1
+
+        reports.append(SourceReport(source=f"reddit:{sub}", url=sub_url,
+                                    status="ok", listings=kept,
+                                    note=f"{kept} offer post(s)"))
+    return out, reports
 
 
 # ---------- direct public sources ----------
@@ -635,26 +800,77 @@ def _normalized_url(url: str) -> str:
 
 # ---------- exa ----------
 
+def _bed_phrase() -> str:
+    if MIN_BEDS == MAX_BEDS:
+        return f"{MIN_BEDS} bedroom"
+    return f"{MIN_BEDS} to {MAX_BEDS} bedroom"
+
+
+def _exa_target_phrase() -> str:
+    """The neighborhoods to name in the per-aggregator query, falling back to
+    the city itself for a whole-metro search."""
+    hoods = list(PREFERRED_NEIGHBORHOODS) or list(EXA_NEIGHBORHOODS) or list(NEIGHBORHOODS)
+    if hoods:
+        named = ", ".join(h.title() for h in hoods[:5])
+        return f"{named}, {CITY_LABEL}"
+    return f"{CITY_LABEL}, {STATE_LABEL}"
+
+
+# Circuit breaker. Exa is rate-limited, not dead: it serves ~100 listings then
+# starts 403ing partway through the ~60-query sweep. Two failure modes to handle:
+#   1) a transient 403/429 on one query → short retry, then move on.
+#   2) a sustained block (every query 403s) → without a breaker that's
+#      60 queries × retries = many minutes of dead waiting.
+# So we retry each query briefly, and only disable Exa for the rest of the run
+# after _EXA_FAIL_LIMIT *consecutive* exhausted failures (a real sustained block,
+# not the normal mid-sweep rate-limit that still let earlier queries through).
+_EXA_DISABLED = False
+_EXA_CONSEC_FAILS = 0
+_EXA_FAIL_LIMIT = 5
+
+
 def fetch_exa(api_key: str) -> list[Listing]:
-    """Run a per-neighborhood neural sweep + a Reddit-specific sweep."""
+    """Run a per-neighborhood neural sweep + a Reddit-specific sweep.
+
+    For a whole-metro profile with no curated EXA_NEIGHBORHOODS, the per-hood
+    passes collapse to a single city-wide query so we don't burn credits looping
+    dozens of neighborhoods.
+
+    If Exa returns 403 (the current IP ban), the circuit breaker trips on the
+    first query and the rest of the sweep is skipped — the run falls straight
+    through to Firecrawl/Craigslist/Reddit instead of stalling for 30+ minutes.
+    """
+    global _EXA_DISABLED, _EXA_CONSEC_FAILS
+    _EXA_DISABLED = False  # fresh start each run
+    _EXA_CONSEC_FAILS = 0
     start_pub = (dt.date.today() - dt.timedelta(days=45)).isoformat()
+    bed = _bed_phrase()
+    default_hood = PREFERRED_NEIGHBORHOODS[0] if PREFERRED_NEIGHBORHOODS else None
     out: list[Listing] = []
 
-    # Pass 1: open-web neural search per neighborhood.
-    for n in NEIGHBORHOODS:
+    # Soft feature bias for the open-web pass (e.g. "with a garage, office, open
+    # floor plan"). Built from the profile's preferred_keywords labels.
+    feature_labels = [label for label, _ in PREFERRED_KEYWORDS if label != LISTING_NOUN]
+    feature_phrase = f" with a {', '.join(feature_labels)}" if feature_labels else ""
+
+    sweep_hoods = list(EXA_NEIGHBORHOODS) or [None]
+
+    # Pass 1: open-web neural search, per neighborhood (or city-wide).
+    for n in sweep_hoods:
+        where = f"{n.title()}, {CITY_LABEL}" if n else f"{CITY_LABEL}, {STATE_LABEL}"
         q = (
-            f"3 bedroom apartment for rent in {n.title()}, San Francisco "
-            f"available now or June 2026, with monthly rent price and address"
+            f"{bed} {LISTING_NOUN} for rent in {where} available now{feature_phrase}, "
+            f"with monthly rent price and address"
         )
         out.extend(_exa_search(api_key, q, start_pub, n, source="exa", num_results=10))
 
-    # Pass 2: Reddit sweep — people post sublets and rental leads on
-    # r/sanfrancisco and r/AskSF that aggregators never see. Restrict to
-    # user-thread URLs in keep().
-    for n in NEIGHBORHOODS:
+    # Pass 2: Reddit sweep — people post sublets and rental leads on the local
+    # subreddit that aggregators never see. Restrict to user-thread URLs in keep().
+    for n in sweep_hoods:
+        where = f"{n.title()}, {CITY_LABEL}" if n else f"{CITY_LABEL}, {STATE_LABEL}"
         q = (
-            f"Reddit post: looking to sublet or rent out 3 bedroom apartment "
-            f"in {n.title()}, San Francisco, June 2026, with rent and details"
+            f"Reddit post: looking to sublet or rent out a {bed} {LISTING_NOUN} "
+            f"in {where}, with rent and details"
         )
         out.extend(_exa_search(
             api_key, q, start_pub, n, source="exa-reddit",
@@ -664,29 +880,26 @@ def fetch_exa(api_key: str) -> list[Listing]:
     # Pass 3: per-aggregator sweep. Many sites gate their search pages, so we ask
     # Exa to return deep listing URLs from each domain. _is_aggregator_url drops
     # hub/category pages.
-    target_phrase = (
-        "Russian Hill, North Beach, Hayes Valley, Marina, or Pacific Heights, "
-        "San Francisco"
-    )
+    target_phrase = _exa_target_phrase()
     for domain in AGGREGATOR_DOMAINS:
         q = (
-            f"3 bedroom apartment for rent in {target_phrase} "
+            f"{bed} {LISTING_NOUN} for rent in {target_phrase} "
             f"with monthly rent price and address, available now"
         )
         out.extend(_exa_search(
-            api_key, q, start_pub, "russian hill", source="exa-aggregator",
+            api_key, q, start_pub, default_hood, source="exa-aggregator",
             include_domains=[domain], num_results=10,
         ))
 
-    # Pass 4: local property manager sweep. These often list classic SF buildings
+    # Pass 4: local property manager sweep. These often list classic buildings
     # before or instead of aggregator feeds.
     for domain in PROPERTY_MANAGER_DOMAINS:
         q = (
-            "3 bedroom apartment for rent in Russian Hill or North Beach, "
-            "San Francisco, with monthly rent price and address"
+            f"{bed} {LISTING_NOUN} for rent in {target_phrase}, "
+            f"with monthly rent price and address"
         )
         out.extend(_exa_search(
-            api_key, q, start_pub, "russian hill", source="exa-manager",
+            api_key, q, start_pub, default_hood, source="exa-manager",
             include_domains=[domain], num_results=5,
         ))
 
@@ -716,17 +929,47 @@ def _exa_search(
     if include_domains:
         body["includeDomains"] = include_domains
 
-    try:
-        resp = requests.post(
-            "https://api.exa.ai/search",
-            headers={"x-api-key": api_key, "content-type": "application/json"},
-            json=body,
-            timeout=30,
-        )
-        resp.raise_for_status()
-    except requests.RequestException as exc:
-        print(f"  exa query failed ({query!r}): {exc}", file=sys.stderr)
+    # Circuit breaker already tripped this run (Exa sustained-blocked) — skip.
+    global _EXA_DISABLED, _EXA_CONSEC_FAILS
+    if _EXA_DISABLED:
         return []
+
+    # Rate-limit (403/429): retry a couple of times with a short backoff, then
+    # give up on THIS query and move on. Capped low so a mid-sweep limit costs
+    # seconds, not minutes. A successful query resets the consecutive-fail count;
+    # _EXA_FAIL_LIMIT consecutive exhausted failures disables Exa for the run.
+    resp = None
+    attempts = 3
+    for attempt in range(attempts):
+        try:
+            resp = requests.post(
+                "https://api.exa.ai/search",
+                headers={"x-api-key": api_key, "content-type": "application/json"},
+                json=body,
+                timeout=30,
+            )
+        except requests.RequestException as exc:
+            print(f"  exa query failed ({query!r}): {exc}", file=sys.stderr)
+            resp = None
+            break
+        if resp.status_code in (403, 429) and attempt < attempts - 1:
+            time.sleep(1.5 * (attempt + 1))  # 1.5, 3.0s — ride out a brief limit
+            continue
+        break
+
+    failed = resp is None or resp.status_code != 200
+    if failed:
+        _EXA_CONSEC_FAILS += 1
+        if resp is not None:
+            print(f"  exa query failed ({query!r}): HTTP {resp.status_code}", file=sys.stderr)
+        if _EXA_CONSEC_FAILS >= _EXA_FAIL_LIMIT:
+            _EXA_DISABLED = True
+            print(f"  exa disabled for this run after {_EXA_CONSEC_FAILS} consecutive "
+                  "failures (sustained rate-limit/block). Skipping remaining queries.",
+                  file=sys.stderr)
+        return []
+
+    _EXA_CONSEC_FAILS = 0  # this query worked; reset the streak
 
     out: list[Listing] = []
     for r in resp.json().get("results", []):
@@ -779,6 +1022,22 @@ _HUB_TITLE_PATTERNS = re.compile(
     re.IGNORECASE,
 )
 
+# House-mode hard filter: when LISTING_NOUN == "house", drop anything that reads
+# as an apartment/condo complex or a "N Bedroom Apartments for Rent" hub page —
+# unless it ALSO carries a house marker (rescues real house pages that mention
+# the word "apartment" incidentally).
+_NON_HOUSE_RE = re.compile(
+    r"(\bapartments?\b|\bapt\b|\bcondos?\b|\bcondominiums?\b|"
+    r"\bunits?\s+(?:available|for\s+rent)|"
+    r"[- ](?:one|two|three|four|\d)[- ]bedroom\s+apartments?\b|"
+    r"\bapartment\s+(?:community|complex|homes?))",
+    re.IGNORECASE,
+)
+_HOUSE_RE = re.compile(
+    r"(\bhouse\b|\bsingle[\s-]family\b|\bdetached\b|\bsfh\b|\bbungalow\b)",
+    re.IGNORECASE,
+)
+
 # Sale-style prices: 6+ digit dollar amounts ($500,000+). Real SF rents top out
 # in the low tens of thousands per month even at the high end.
 _SALE_PRICE_RE = re.compile(r"\$\s?[1-9]\d{0,2},\d{3},\d{3}|\$\s?[1-9]\d{2},\d{3}")
@@ -810,36 +1069,10 @@ def _is_aggregator_url(url: str) -> bool:
 # Cost per call: roughly 5-10 Firecrawl credits per site for extraction +
 # JS rendering. 21 sites/day ≈ 150 credits/day ≈ 4,500/month.
 #
-# Each entry corresponds to a sensible "SF 3BR rentals" landing URL. The
-# Firecrawl schema below tells the LLM what fields to pull, so the same
-# extraction logic works across all 21 layouts without site-specific code.
-
-FIRECRAWL_SEEDS = [
-    # Anti-bot blocked aggregators (return 403/429 on direct fetch).
-    ("apartments.com", "https://www.apartments.com/san-francisco-ca/3-bedrooms/"),
-    ("apartmentfinder.com", "https://www.apartmentfinder.com/California/San-Francisco-Apartments/3-Bedrooms"),
-    ("apartmenthomeliving.com", "https://www.apartmenthomeliving.com/san-francisco-ca/apartments-for-rent/3-bedroom"),
-    ("apartmentlist.com", "https://www.apartmentlist.com/ca/san-francisco?beds=3"),
-    ("equityapartments.com", "https://www.equityapartments.com/san-francisco-apartments"),
-    ("forrent.com", "https://www.forrent.com/find/CA/metro-San+Francisco/San+Francisco/beds-3"),
-    ("hotpads.com", "https://hotpads.com/san-francisco-ca/3-bedroom-apartments-for-rent"),
-    ("realtor.com", "https://www.realtor.com/apartments/San-Francisco_CA/beds-3"),
-    # renthop.com dropped 2026-06-03: their search URL returns NYC inventory (no real SF coverage).
-    ("trulia.com", "https://www.trulia.com/for_rent/San_Francisco,CA/3p_beds/"),
-    # JS-only aggregators (return 200 but raw HTML has no listings).
-    ("avaloncommunities.com", "https://www.avaloncommunities.com/california/san-francisco-apartments"),
-    ("compass.com", "https://www.compass.com/for-rent/san-francisco-ca/3-bedrooms/"),
-    ("padmapper.com", "https://www.padmapper.com/apartments/san-francisco-ca/3-beds"),
-    ("rent.com", "https://www.rent.com/california/san-francisco-apartments/3-bedroom"),
-    ("zumper.com", "https://www.zumper.com/apartments-for-rent/san-francisco-ca/3-beds"),
-    # SF property managers (JS-only listing widgets).
-    ("chandlerproperties.com", "https://chandlerproperties.com/"),
-    ("gaetanirealestate.com", "https://www.gaetanirealestate.com/vacancies"),
-    ("jwavro.com", "https://www.jwavro.com/rentals.php"),
-    ("sfcityrents.com", "https://www.sfcityrents.com/"),
-    ("trinitysf.com", "https://www.trinitysf.com/"),
-    ("yeeproperties.com", "https://www.yeeproperties.com/vacancies"),
-]
+# The per-city seed URLs live on each SearchProfile (profiles.py) and are bound
+# into the FIRECRAWL_SEEDS global by apply_profile(). The Firecrawl schema below
+# tells the LLM what fields to pull, so the same extraction logic works across
+# every site layout without site-specific code.
 
 # Firecrawl LLM extraction schema. Same shape every site is normalized into.
 _FIRECRAWL_LISTING_SCHEMA = {
@@ -987,7 +1220,8 @@ def fetch_firecrawl_sources(api_key: str) -> tuple[list[Listing], list[SourceRep
 # required). Falls back gracefully — Zillow detail pages are still indexed by
 # Exa, so a Firecrawl outage doesn't blind the whole pipeline.
 
-ZILLOW_RENTAL_URL = "https://www.zillow.com/san-francisco-ca/rentals/"
+# ZILLOW_RENTAL_URL, ZILLOW_SEARCH_TERM, and ZILLOW_MAP_BOUNDS are profile globals
+# (see apply_profile). Everything else here is city-agnostic.
 
 _ZILLOW_NEXT_DATA_RE = re.compile(
     r'<script[^>]+id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>',
@@ -995,7 +1229,7 @@ _ZILLOW_NEXT_DATA_RE = re.compile(
 )
 
 
-ZILLOW_MAX_PAGES = 3  # Zillow returns ~40 listings/page; 3 pages covers SF 3BR rental inventory
+ZILLOW_MAX_PAGES = 3  # Zillow returns ~40 listings/page; 3 pages covers a metro's 3BR inventory
 
 
 def fetch_zillow_firecrawl(api_key: str) -> tuple[list[Listing], SourceReport]:
@@ -1043,16 +1277,11 @@ def _fetch_zillow_page(api_key: str, page: int) -> tuple[list[Listing], str | No
     """Fetch a single page of Zillow SF rentals. Returns (listings, error_msg)."""
     # Zillow uses an opaque searchQueryState query param to encode filters and
     # pagination. We pre-filter on price/beds server-side so we don't waste
-    # credits on listings that would be dropped anyway. mapBounds covers SF proper.
+    # credits on listings that would be dropped anyway. mapBounds covers the metro.
     search_state = {
         "pagination": {"currentPage": page} if page > 1 else {},
-        "usersSearchTerm": "San Francisco, CA",
-        "mapBounds": {
-            "west": -122.5183,
-            "east": -122.3551,
-            "south": 37.7080,
-            "north": 37.8324,
-        },
+        "usersSearchTerm": ZILLOW_SEARCH_TERM,
+        "mapBounds": dict(ZILLOW_MAP_BOUNDS),
         "isMapVisible": False,
         "filterState": {
             "fr": {"value": True},     # for rent
@@ -1186,36 +1415,204 @@ def _parse_zillow_html(html_text: str) -> list[Listing]:
     return out
 
 
+# ---------- detail-page enrichment ----------
+#
+# The search/aggregator passes give us thin snippets — often just a title and a
+# price. That's not enough to know whether a house actually has a garage, a
+# second bathroom, or an office. So for profiles with enrich_details=True, we
+# fetch each surviving candidate's FULL detail page via Firecrawl and pull a
+# structured record. Then "garage not mentioned" reliably means "no garage",
+# because we read the whole page, not a 500-char blurb.
+#
+# Cost: ~1-5 Firecrawl credits per listing. We only enrich candidates that
+# already passed keep_basic(), and cap the count, so spend stays bounded.
+
+ENRICH_CAP = 160  # max detail pages to fetch per run (cost ceiling)
+
+_ENRICH_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "is_single_listing": {
+            "type": "string", "enum": ["yes", "no"],
+            "description": (
+                "'yes' if this page is ONE specific home/house for rent with its "
+                "own details; 'no' if it's a search-results, map, or hub page."
+            ),
+        },
+        "bedrooms": {"type": "number", "description": "Number of bedrooms"},
+        "bathrooms": {"type": "number", "description": "Number of bathrooms (e.g. 2, 2.5)"},
+        "monthly_rent": {"type": "number", "description": "Monthly rent in USD, digits only"},
+        "has_garage": {
+            "type": "string", "enum": ["yes", "no"],
+            "description": (
+                "Answer 'yes' ONLY if the listing explicitly indicates a garage "
+                "or a dedicated attached/covered parking space (e.g. '2-car "
+                "garage', 'attached garage', 'carport'). If a garage is not "
+                "clearly mentioned anywhere on the page, answer 'no'. Do not guess."
+            ),
+        },
+        "parking_description": {
+            "type": "string",
+            "description": "The exact parking text from the page, if any (e.g. '2-car attached garage').",
+        },
+        "has_office": {
+            "type": "string", "enum": ["yes", "no"],
+            "description": "'yes' if the home has an office, den, study, or bonus/flex room.",
+        },
+        "square_feet": {"type": "number", "description": "Interior square footage"},
+        "address": {"type": "string", "description": "Full street address including ZIP, if shown"},
+        "is_available": {
+            "type": "string", "enum": ["yes", "no", "unknown"],
+            "description": "'no' if the page says rented/leased/no longer available.",
+        },
+    },
+    "required": ["has_garage"],
+}
+
+
+def enrich_listing(api_key: str, listing: Listing) -> None:
+    """Fetch a listing's detail page and fill garage/bath/bed/office/sqft in place.
+
+    On any failure the listing is left as-is (enriched stays False, garage_status
+    stays None = 'unverified'), so a Firecrawl hiccup never drops a candidate.
+    """
+    # Reddit threads can't be scraped by Firecrawl — don't waste a credit; leave
+    # them unverified (they're DM-the-owner leads, not portal detail pages).
+    if listing.source.startswith("reddit"):
+        return
+    try:
+        resp = requests.post(
+            "https://api.firecrawl.dev/v1/scrape",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "url": listing.url,
+                "formats": ["json"],
+                "jsonOptions": {"schema": _ENRICH_SCHEMA},
+                "waitFor": 3500,
+                "timeout": 60000,
+            },
+            timeout=90,
+        )
+    except requests.RequestException:
+        return
+    if resp.status_code != 200:
+        return
+    payload = resp.json()
+    if not payload.get("success"):
+        return
+    data = (payload.get("data") or {}).get("json") or {}
+    if not isinstance(data, dict):
+        return
+
+    # If Firecrawl decided this is a hub/search page, don't trust the fields —
+    # leave the listing unverified rather than stamping a bogus garage answer.
+    if str(data.get("is_single_listing", "")).lower() == "no":
+        return
+
+    listing.enriched = True
+
+    garage = str(data.get("has_garage", "")).lower()
+    if garage == "yes":
+        listing.garage_status = "confirmed"
+    elif garage == "no":
+        listing.garage_status = "none found"
+
+    listing.has_office = str(data.get("has_office", "")).lower() == "yes"
+
+    baths = data.get("bathrooms")
+    if isinstance(baths, (int, float)) and baths > 0:
+        listing.bathrooms = float(baths)
+
+    beds = data.get("bedrooms")
+    if isinstance(beds, (int, float)) and beds > 0:
+        listing.beds = int(beds)
+
+    sqft = data.get("square_feet")
+    if isinstance(sqft, (int, float)) and sqft > 0:
+        listing.sqft = int(sqft)
+
+    rent = data.get("monthly_rent")
+    if listing.price is None and isinstance(rent, (int, float)) and rent > 0:
+        listing.price = int(rent)
+
+    # The full address is the most reliable neighborhood/ZIP signal — fold it
+    # into the fields the ring filter reads so it can place the house correctly.
+    address = (data.get("address") or "").strip()
+    if address:
+        listing.neighborhood = address
+        listing.snippet = (f"{address} | {listing.snippet}")[:500]
+
+    # An explicit "no longer available" → let the stale filter catch it.
+    if str(data.get("is_available", "")).lower() == "no":
+        listing.snippet = (f"{listing.snippet} no longer available")[:520]
+
+
+def enrich_candidates(api_key: str, candidates: list[Listing]) -> int:
+    """Enrich up to ENRICH_CAP candidates, ring-likely ones first. Returns the
+    number enriched. Prints what was skipped so a cap is never silent."""
+    ordered = sorted(candidates, key=lambda ls: 0 if ls.matches_neighborhood() else 1)
+    targets = ordered[:ENRICH_CAP]
+    skipped = len(ordered) - len(targets)
+    print(f"Enriching {len(targets)} detail pages via Firecrawl…", flush=True)
+    if skipped:
+        print(f"  (cost cap: {skipped} candidate(s) not enriched this run)")
+    for i, ls in enumerate(targets, 1):
+        enrich_listing(api_key, ls)
+        if i % 10 == 0:
+            print(f"  enriched {i}/{len(targets)}", flush=True)
+        time.sleep(0.1)
+    return len(targets)
+
+
 # ---------- filtering ----------
 
-_ZIP_RE = re.compile(r"\b(94\d{3})\b")
-_CA_ZIP_RE = re.compile(r"\b(9\d{4})\b")
+
+def _zip_in_city(zip_code: str) -> bool:
+    return any(zip_code.startswith(p) for p in CITY_ZIP_PREFIXES)
 
 
 def _zip_neighborhood(text: str) -> str | None:
-    """Return the target neighborhood if the text contains a target SF ZIP."""
-    for m in _ZIP_RE.finditer(text):
-        hood = SF_TARGET_ZIPS.get(m.group(1))
+    """Return the target neighborhood if the text contains a known target ZIP."""
+    for m in REGION_ZIP_RE.finditer(text):
+        hood = TARGET_ZIPS.get(m.group(1))
         if hood:
             return hood
     return None
 
 
-def _has_nontarget_sf_zip(text: str) -> bool:
-    """True if text contains an SF ZIP that's NOT in our target list — strong
-    signal the listing is somewhere else in SF."""
-    for m in _ZIP_RE.finditer(text):
-        if m.group(1) not in SF_TARGET_ZIPS:
+def _has_nontarget_city_zip(text: str) -> bool:
+    """True if text contains an in-city ZIP that's NOT in our target list — a
+    signal the listing is elsewhere in the city. Only meaningful when we have a
+    target-ZIP list to compare against."""
+    if not TARGET_ZIPS:
+        return False
+    for m in REGION_ZIP_RE.finditer(text):
+        zip_code = m.group(1)
+        if _zip_in_city(zip_code) and zip_code not in TARGET_ZIPS:
             return True
     return False
 
 
-def _has_non_sf_zip(text: str) -> bool:
-    """True if the result names a California ZIP outside San Francisco."""
-    for m in _CA_ZIP_RE.finditer(text):
-        if not m.group(1).startswith("941"):
+def _has_wrong_city_zip(text: str) -> bool:
+    """True if the result names a same-region ZIP outside this metro."""
+    for m in REGION_ZIP_RE.finditer(text):
+        if not _zip_in_city(m.group(1)):
             return True
     return False
+
+
+def _in_city(text: str) -> bool:
+    """Whole-metro searches need *some* evidence the listing is in this city:
+    a known hood, an in-city ZIP, or the city name in the text."""
+    if _zip_neighborhood(text):
+        return True
+    for m in REGION_ZIP_RE.finditer(text):
+        if _zip_in_city(m.group(1)):
+            return True
+    return CITY_LABEL.lower() in text.lower()
 
 
 _STALE_MARKERS = re.compile(
@@ -1224,13 +1621,7 @@ _STALE_MARKERS = re.compile(
     re.IGNORECASE,
 )
 
-_BLOCKED_LOCATION_MARKERS = re.compile(
-    r"\b(tenderloin|tendernob|tender\s+nob|lower\s+nob(?:\s+hill)?|"
-    r"polk\s+gulch|civic\s+center|south\s+beach)\b",
-    re.IGNORECASE,
-)
-
-# Domains that appear in Exa results but aren't useful for SF rentals.
+# Domains that appear in Exa results but aren't useful for rentals anywhere.
 _BANNED_DOMAINS = {
     "thirdhome.com", "api.thirdhome.com",
     "airbnb.com", "vrbo.com", "homeaway.com", "vacasa.com",
@@ -1250,17 +1641,22 @@ _RENTAL_HINTS = re.compile(
 )
 
 
-def keep(listing: Listing) -> bool:
-    """Filter by price, beds, neighborhood, staleness, and 'is this actually a rental listing?'"""
+def keep_basic(listing: Listing) -> bool:
+    """Everything in keep() except the neighborhood gate: price, beds, baths,
+    staleness, sale-vs-rent, house-mode, and 'is this actually a rental?'.
+
+    Split out so the enrichment pass can run on candidates that pass these cheap
+    checks *before* we read their detail page — the page is what tells us the
+    real neighborhood/garage/bath, so the neighborhood gate runs afterward.
+    """
     haystack = f"{listing.title} {listing.neighborhood or ''} {listing.snippet}"
-    matched_hood = listing.matches_neighborhood()
-    if _BLOCKED_LOCATION_MARKERS.search(haystack):
+    if BLOCKED_LOCATION_RE is not None and BLOCKED_LOCATION_RE.search(haystack):
         return False
     if _STALE_MARKERS.search(haystack):
         return False
     if listing.domain() in _BANNED_DOMAINS:
         return False
-    if _has_non_sf_zip(haystack):
+    if _has_wrong_city_zip(haystack):
         return False
     # Sale-price formatting in the snippet ($XXX,XXX or $X,XXX,XXX) → for-sale, not rent.
     if _SALE_PRICE_RE.search(haystack):
@@ -1268,12 +1664,23 @@ def keep(listing: Listing) -> bool:
     # Title is a generic hub like "12 Apartments for Rent in Marina"
     if _HUB_TITLE_PATTERNS.search(listing.title):
         return False
+    # House search: drop apartment/condo complexes and apartment hub pages.
+    if (
+        LISTING_NOUN == "house"
+        and _NON_HOUSE_RE.search(haystack)
+        and not _HOUSE_RE.search(haystack)
+    ):
+        return False
     if listing.price is not None:
         if listing.price < MIN_PRICE or listing.price > MAX_PRICE:
             return False
     if listing.beds is not None:
         if listing.beds < MIN_BEDS or listing.beds > MAX_BEDS:
             return False
+    # Bathrooms floor — only bites once a bath count is known (Craigslist
+    # server-side filter, or the enrichment pass). Unknown bath = not dropped.
+    if MIN_BATHROOMS and listing.bathrooms is not None and listing.bathrooms < MIN_BATHROOMS:
+        return False
 
     # Search/direct/firecrawl results need to actually look like a rental
     # listing, not a generic page.
@@ -1289,15 +1696,42 @@ def keep(listing: Listing) -> bool:
         # Reddit-source results must be a user post, not a corporate page.
         if listing.source == "exa-reddit" and "/r/" not in listing.url:
             return False
-
-    # If the text shows an SF ZIP outside our target list, it's elsewhere in SF — drop.
-    if _has_nontarget_sf_zip(haystack) and _zip_neighborhood(haystack) is None and matched_hood is None:
-        return False
-
-    # Require either a literal neighborhood match or a target ZIP.
-    if matched_hood is None:
-        return False
+    # Owner-direct Reddit posts (reddit:<sub>): must read like a rental and live
+    # on a real thread. Beds may be absent in free-text posts, so don't hard-drop
+    # on a missing bed count the way the portal sources do.
+    if listing.source.startswith("reddit:"):
+        if not _RENTAL_HINTS.search(haystack):
+            return False
+        if "/r/" not in listing.url:
+            return False
     return True
+
+
+def keep(listing: Listing) -> bool:
+    """Filter by price, beds, baths, neighborhood, staleness, and 'is this
+    actually a rental listing?'. Runs keep_basic() then the neighborhood gate."""
+    if not keep_basic(listing):
+        return False
+
+    haystack = f"{listing.title} {listing.neighborhood or ''} {listing.snippet}"
+    matched_hood = listing.matches_neighborhood()
+
+    if REQUIRE_NEIGHBORHOOD_MATCH:
+        # An in-city ZIP outside our target list means it's elsewhere in the city — drop.
+        if (
+            _has_nontarget_city_zip(haystack)
+            and _zip_neighborhood(haystack) is None
+            and matched_hood is None
+        ):
+            return False
+        # Require either a literal neighborhood match or a target ZIP.
+        if matched_hood is None:
+            return False
+        return True
+
+    # Whole-metro search: no required hood, but the listing must still be in this
+    # city (a known hood, an in-city ZIP, or the city name in the text).
+    return matched_hood is not None or _in_city(haystack)
 
 
 # ---------- digest ----------
@@ -1308,18 +1742,31 @@ def render_markdown(
     coverage_reports: list[SourceReport] | None = None,
 ) -> str:
     today = dt.date.today().isoformat()
-    lines = [f"# Apartment hunt — {today}", ""]
-    lines.append(
-        f"**Criteria:** {f'{MIN_BEDS}BR' if MIN_BEDS == MAX_BEDS else f'{MIN_BEDS}-{MAX_BEDS}BR'}"
-        f" · ideal <= ${IDEAL_MAX_PRICE:,} "
-        f"(${IDEAL_MAX_PRICE // 3:,}/person) · stretch <= ${MAX_PRICE:,} · "
-        f"move by {MOVE_BY.isoformat()}"
-    )
-    lines.append(
-        f"**Top priority:** {', '.join(n.title() for n in PREFERRED_NEIGHBORHOODS)}  ·  "
-        f"**Fallback:** {', '.join(n.title() for n in FALLBACK_NEIGHBORHOODS)}  ·  "
-        f"**Hard no:** Tenderloin / TenderNob / Lower Nob / Polk Gulch / Civic Center"
-    )
+    bed_label = f"{MIN_BEDS}BR" if MIN_BEDS == MAX_BEDS else f"{MIN_BEDS}-{MAX_BEDS}BR"
+    lines = [f"# {CITY_LABEL} apartment hunt — {today}", ""]
+    type_bit = f" · {LISTING_NOUN}" if LISTING_NOUN != "apartment" else ""
+    if MAX_PRICE >= 50000:
+        budget_bit = " · budget: any"
+    elif IDEAL_MAX_PRICE == MAX_PRICE:
+        budget_bit = f" · <= ${MAX_PRICE:,}/mo"
+    else:
+        budget_bit = (
+            f" · ideal <= ${IDEAL_MAX_PRICE:,} "
+            f"(${IDEAL_MAX_PRICE // NUM_PEOPLE:,}/person) · stretch <= ${MAX_PRICE:,}"
+        )
+    want = [label for label, _ in PREFERRED_KEYWORDS if label != LISTING_NOUN]
+    want_bit = f" · want {', '.join(want)}" if want else ""
+    criteria = f"**Criteria:** {bed_label}{type_bit}{budget_bit}{want_bit}"
+    if MOVE_BY:
+        criteria += f" · move by {MOVE_BY.isoformat()}"
+    lines.append(criteria)
+    if PREFERRED_NEIGHBORHOODS or FALLBACK_NEIGHBORHOODS:
+        lines.append(
+            f"**Top priority:** {', '.join(n.title() for n in PREFERRED_NEIGHBORHOODS) or '—'}  ·  "
+            f"**Fallback:** {', '.join(n.title() for n in FALLBACK_NEIGHBORHOODS) or '—'}"
+        )
+    else:
+        lines.append(f"**Coverage:** {CITY_LABEL} metro-wide")
     lines.append("")
     if not new:
         lines.append("_No new listings since last run._")
@@ -1328,24 +1775,27 @@ def render_markdown(
         _render_coverage(lines, coverage_reports or [])
         return "\n".join(lines)
 
-    preferred = [ls for ls in new if ls.is_preferred()]
-    other = [ls for ls in new if not ls.is_preferred()]
+    has_priority = bool(PREFERRED_NEIGHBORHOODS)
+    preferred = [ls for ls in new if ls.is_preferred()] if has_priority else []
+    other = [ls for ls in new if ls not in preferred]
 
     summary_bits = []
-    if preferred:
-        summary_bits.append(f"**{len(preferred)} in Russian Hill / North Beach**")
+    if has_priority and preferred:
+        pref_label = " / ".join(n.title() for n in PREFERRED_NEIGHBORHOODS)
+        summary_bits.append(f"**{len(preferred)} in {pref_label}**")
     if other:
-        summary_bits.append(f"{len(other)} in fallback neighborhoods")
+        where = "fallback neighborhoods" if has_priority else f"{CITY_LABEL}"
+        summary_bits.append(f"{len(other)} in {where}")
     lines.append(" · ".join(summary_bits))
     lines.append("")
 
-    if preferred:
-        lines.append("## Top picks — Russian Hill & North Beach")
+    if has_priority and preferred:
+        lines.append(f"## Top picks — {' & '.join(n.title() for n in PREFERRED_NEIGHBORHOODS)}")
         lines.append("")
         _render_listings(lines, preferred)
 
     if other:
-        lines.append("## Fallback neighborhoods")
+        lines.append(f"## {'Fallback neighborhoods' if has_priority else CITY_LABEL + ' ' + bed_label}")
         lines.append("")
         _render_listings(lines, other)
 
@@ -1355,7 +1805,7 @@ def render_markdown(
 
 
 def _render_listings(lines: list[str], listings: list[Listing]) -> None:
-    for ls in sorted(listings, key=lambda x: (_neighborhood_rank(x), x.price or 99999)):
+    for ls in sorted(listings, key=lambda x: (_neighborhood_rank(x), -len(x.feature_matches()), x.price or 99999)):
         price = f"${ls.price:,}" if ls.price else "price n/a"
         if ls.price is not None and ls.price > IDEAL_MAX_PRICE:
             price += " stretch"
@@ -1368,7 +1818,21 @@ def _render_listings(lines: list[str], listings: list[Listing]) -> None:
             hood_label = (ls.matches_neighborhood() or ls.neighborhood or "?").title()
         source_tag = f" _[{ls.source} · {ls.domain()}]_"
         lines.append(f"- **[{ls.title}]({ls.url})**{source_tag}")
-        lines.append(f"  · {price} · {beds} · {hood_label}")
+        bath_bit = f" · {ls.bathrooms:g}BA" if ls.bathrooms is not None else ""
+        sqft_bit = f" · {ls.sqft:,} sqft" if ls.sqft else ""
+        lines.append(f"  · {price} · {beds}{bath_bit}{sqft_bit} · {hood_label}")
+        if ls.garage_status == "confirmed":
+            lines.append("  · ✓ garage")
+        elif ls.garage_status == "none found":
+            lines.append("  · ✗ no garage found")
+        elif ENRICH_DETAILS:
+            lines.append("  · ? garage unverified")
+        # Soft keyword features not covered by the enriched fields.
+        feats = [f for f in ls.feature_matches() if f not in {"house", "garage", "office", "2 bath"}]
+        if ls.has_office:
+            feats = ["office"] + feats
+        if feats:
+            lines.append(f"  · ✓ {' · '.join(feats)}")
         if ls.snippet:
             lines.append(f"  · _{ls.snippet[:220]}_")
         lines.append("")
@@ -1402,13 +1866,8 @@ def _render_coverage(lines: list[str], reports: list[SourceReport]) -> None:
 
 def _neighborhood_rank(ls: Listing) -> int:
     match = ls.matches_neighborhood()
-    order = {
-        "russian hill": 0,
-        "north beach": 1,
-        "hayes valley": 2,
-        "marina": 3,
-        "pacific heights": 4,
-    }
+    ranked = list(PREFERRED_NEIGHBORHOODS) + list(FALLBACK_NEIGHBORHOODS)
+    order = {hood: i for i, hood in enumerate(ranked)}
     return order.get(match or "", 99)
 
 
@@ -1418,18 +1877,113 @@ def _dedupe_key(ls: Listing) -> str:
     return _normalized_url(ls.url)
 
 
+# Street-address parser for cross-source dedup. URL dedup can't catch the same
+# physical house listed on two different sites (e.g. Zillow + Highrises) — those
+# have different URLs but the same street address. This collapses by address.
+_STREET_TYPES = (
+    r"st|street|ave|avenue|blvd|boulevard|way|pl|place|dr|drive|"
+    r"ct|court|ln|lane|rd|road|ter|terrace|cir|circle|pkwy|parkway|trl|trail"
+)
+_ADDRESS_RE = re.compile(
+    rf"\b(\d+)\s+"                                   # house number
+    rf"(?:(?:n|s|e|w|north|south|east|west)\.?\s+)?"  # optional directional (ignored)
+    rf"([a-z0-9][a-z0-9 ]*?)\s+"                      # street name
+    rf"(?:{_STREET_TYPES})\b",                        # street type
+    re.IGNORECASE,
+)
+_ZIP_RE = re.compile(r"\b(8\d{4})\b")  # Colorado ZIPs start with 8
+
+
+def _address_key(ls: Listing) -> str | None:
+    """A normalized (house number, street name, ZIP) key, or None if no address
+    is parseable. Directional (N/S/E/W) is intentionally dropped: the same house
+    shows up as "238 Harrison St" on one source and "238 N Harrison St" on
+    another. The ZIP keeps that from colliding two genuinely different streets."""
+    text = f"{ls.title} {ls.snippet}"
+    m = _ADDRESS_RE.search(text)
+    if not m:
+        return None
+    number = m.group(1)
+    street = re.sub(r"\s+", " ", m.group(2).strip().lower())
+    zip_m = _ZIP_RE.search(text)
+    zip_code = zip_m.group(1) if zip_m else ""
+    return f"{number}|{street}|{zip_code}"
+
+
+# Garage confidence, highest first. "confirmed" is positive evidence from a
+# detail page; "none found" only means that one page didn't mention parking;
+# None means unverified. When two sources disagree, trust the positive signal.
+_GARAGE_RANK = {"confirmed": 2, "none found": 1, None: 0}
+
+
+def collapse_by_address(listings: list[Listing]) -> list[Listing]:
+    """Collapse listings that share a street address into one card, keeping the
+    richest representative and merging the garage signal (confirmed > none found
+    > unverified). Listings with no parseable address (e.g. Craigslist posts
+    titled 'Wash Park house for rent') are passed through untouched."""
+    groups: dict[str, list[Listing]] = {}
+    passthrough: list[Listing] = []
+    for ls in listings:
+        key = _address_key(ls)
+        if key is None:
+            passthrough.append(ls)
+        else:
+            groups.setdefault(key, []).append(ls)
+
+    out: list[Listing] = []
+    for group in groups.values():
+        if len(group) == 1:
+            out.append(group[0])
+            continue
+        # Best garage signal across the group.
+        best_garage = max(
+            (g.garage_status for g in group),
+            key=lambda s: _GARAGE_RANK.get(s, 0),
+        )
+        # Representative: prefer the one already carrying the best garage signal,
+        # then the most-enriched, then the cheapest known price.
+        rep = max(group, key=lambda g: (
+            _GARAGE_RANK.get(g.garage_status, 0),
+            1 if g.enriched else 0,
+            -(g.price or 99999),
+        ))
+        rep.garage_status = best_garage
+        # Backfill any missing detail fields from the duplicates.
+        for g in group:
+            if g is rep:
+                continue
+            if rep.price is None:
+                rep.price = g.price
+            if rep.beds is None:
+                rep.beds = g.beds
+            if rep.bathrooms is None:
+                rep.bathrooms = g.bathrooms
+            if rep.sqft is None:
+                rep.sqft = g.sqft
+        out.append(rep)
+
+    return out + passthrough
+
+
 # ---------- main ----------
 
 def main() -> int:
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--city", default="sf", choices=sorted(profiles.PROFILES),
+        help="which city profile to search (default: sf)",
+    )
     parser.add_argument("--dry", action="store_true", help="write markdown but do not update seen-set")
     parser.add_argument("--reset", action="store_true", help="clear seen-set and exit")
     args = parser.parse_args()
 
+    apply_profile(profiles.get_profile(args.city))
+    print(f"City: {CITY_LABEL} ({ACTIVE_PROFILE.key})")
+
     if args.reset:
         if SEEN_PATH.exists():
             SEEN_PATH.unlink()
-        print("seen-set cleared.")
+        print(f"seen-set cleared for {CITY_LABEL}.")
         return 0
 
     # Load env from project dir.
@@ -1471,6 +2025,11 @@ def main() -> int:
     exa = fetch_exa(exa_key)
     print(f"  {len(exa)} raw listings")
 
+    print("Fetching Reddit owner-direct (reddit-cli)…")
+    reddit, reddit_reports = fetch_reddit()
+    print(f"  {len(reddit)} raw listing candidates")
+    coverage_reports.extend(reddit_reports)
+
     zillow: list[Listing] = []
     if firecrawl_key:
         print("Fetching Zillow via Firecrawl…")
@@ -1486,7 +2045,7 @@ def main() -> int:
             note="FIRECRAWL_API_KEY not configured",
         ))
 
-    all_listings = cl + direct + firecrawl_routed + exa + zillow
+    all_listings = cl + direct + firecrawl_routed + exa + zillow + reddit
 
     # Dedup within this run (Exa often surfaces the same URL across queries).
     by_id: dict[str, Listing] = {}
@@ -1494,8 +2053,18 @@ def main() -> int:
         by_id.setdefault(_dedupe_key(ls), ls)
     deduped = list(by_id.values())
 
-    # Apply criteria filter.
-    matched = [ls for ls in deduped if keep(ls)]
+    # Apply criteria filter. When enrichment is on, read each surviving
+    # candidate's detail page first so the final filter (garage/bath/ring) runs
+    # on real page data, not thin snippets.
+    if ENRICH_DETAILS and firecrawl_key:
+        basic = [ls for ls in deduped if keep_basic(ls)]
+        print(f"  {len(basic)} candidates pass basic filter")
+        enrich_candidates(firecrawl_key, basic)
+        matched = [ls for ls in basic if keep(ls)]
+    else:
+        if ENRICH_DETAILS and not firecrawl_key:
+            print("  enrichment skipped: FIRECRAWL_API_KEY not set")
+        matched = [ls for ls in deduped if keep(ls)]
     print(f"  {len(matched)} match criteria (post-filter)")
 
     # Diff against seen.
@@ -1514,7 +2083,7 @@ def main() -> int:
         print("--dry: skipping seen-set update and dated archive")
     else:
         # Archive a dated copy from real (non-dry) runs only.
-        ARCHIVE_DIR.mkdir(exist_ok=True)
+        ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
         (ARCHIVE_DIR / f"{dt.date.today().isoformat()}.md").write_text(md)
         seen.update(ls.id for ls in matched)
         save_seen(seen)

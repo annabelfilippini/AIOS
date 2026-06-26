@@ -198,4 +198,3 @@ Screenshot capture in the browser plugin has sometimes timed out, but DOM/title/
   - Practical AI Roadmap
 - How transparent should referral/revenue share language be on the public site?
 - Should Annabel remain lightly involved during implementation as a client-side advisor?
-

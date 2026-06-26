@@ -9,6 +9,7 @@ next-session: Swap Dr. Feste's "JF" monogram for his real portrait (portrait-fes
 # Session: Vital Health Webflow — Home Polish Done + About Page Built
 
 ## Designer connection
+
 - This session the Designer MCP connection WORKED reliably for long stretches
   (held ~10 calls), unlike the prior two sessions. It still drops on idle / when
   the Designer tab loses foreground — re-foregrounding the tab + re-running the
@@ -18,6 +19,7 @@ next-session: Swap Dr. Feste's "JF" monogram for his real portrait (portrait-fes
   create_page worked.
 
 ## Home page polish — DONE (all 3 fixes + extras)
+
 1. ✅ Heading weight: six display headings (hero-h1, facts-h2, services-h2,
    phil-h2, rev-h2, sched-h2) set to font-weight **200** (Annabel asked for
    lighter than 300). NOTE: 200 only renders if Fraunces 200/ExtraLight is
@@ -30,13 +32,16 @@ next-session: Swap Dr. Feste's "JF" monogram for his real portrait (portrait-fes
    IntersectionObserver (threshold 0.12, rootMargin -8%), auto-tags section
    content with 80ms stagger, respects prefers-reduced-motion. Now at **v0.0.2**
    (added About selectors). Renders on PUBLISHED site only.
+
 - Extra: removed `border-bottom` from `site-nav` (the "bar under logo+tabs"
   Annabel disliked). Fixed a `"Fraunce"` font-family typo on hero-h1 → "Fraunces".
 
 ## About page — BUILT (id 6a19b8b56de372b248e55901, slug /about)
+
 Body root element: `6a19b8b56de372b248e55907`. Built via whtml_builder with
 **ab-** namespaced classes (to avoid collision with Home/Services styles).
 Sections in order:
+
 - Site Nav component (id 86e91719-83ad-954e-3c69-f8b0eb5e6999)
 - page hero (.ab-hero), philosophy (.ab-phil 2-col), team intro (.ab-team)
 - 4 practitioners (.ab-pr + variant cream/sand/paper/sage; flip via
@@ -46,6 +51,7 @@ Sections in order:
 - Site Footer component (id 012f5c9e-8f09-5be5-b1b2-9a28cb867f35)
 
 ## Remaining on About
+
 - ⚠️ Dr. Feste uses a "JF" monogram placeholder — original has his REAL photo
   (snapshot/portrait-feste.jpg). Needs asset upload + swap into an Image element
   inside an `.ab-cutout` (img object-fit cover). Only practitioner with a photo.
@@ -54,13 +60,15 @@ Sections in order:
 - Drop-cap on first philosophy paragraph (::first-letter) was skipped — minor.
 
 ## Then
+
 - Build Contact page (snapshot/contact.html) — last remaining page.
 
 ## Key IDs
+
 - Site: 6a15e6f364922623e13946da
 - Home page: 6a15e6f464922623e139470e | Services: 6a15f430cbd0f7ef0469e27f
 - About page: 6a19b8b56de372b248e55901 (body el 6a19b8b56de372b248e55907)
 - Components: Site Nav 86e91719-83ad-954e-3c69-f8b0eb5e6999 ;
   Site Footer 012f5c9e-8f09-5be5-b1b2-9a28cb867f35
 - Reveal script id: vhscrollreveal (v0.0.2, site footer)
-- Designer launch: https://vital-health-9bf311.design.webflow.com?app=dc8209c65e3ec02254d15275ca056539c89f6d15741893a0adf29ad6f381eb99
+- Designer launch: <https://vital-health-9bf311.design.webflow.com?app=dc8209c65e3ec02254d15275ca056539c89f6d15741893a0adf29ad6f381eb99>

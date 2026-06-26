@@ -13,6 +13,7 @@ Staging republished twice this session: `vital-health-9bf311.webflow.io`
 (subdomain only, `customDomains: []`).
 
 ## Touchups applied + verified live (curl)
+
 - **Contact:** removed the entire "Portal / Patient portal (MD-HQ)" ct-fact row
   (element ...ce754). Verified 0 occurrences live.
 - **Footer (Site Footer component 012f5c9e):** removed "Hope and Healing" mantra
@@ -31,6 +32,7 @@ Staging republished twice this session: `vital-health-9bf311.webflow.io`
   longer seeing patients").
 
 ## Em-dashes scrubbed site-wide (Annabel strongly dislikes them)
+
 Removed ALL em-dashes (—) from visible copy, SEO, and alt text. Final live count
 = **0 on every page**. Rules used: prose "X — Y" → comma; parentheticals
 "A — B — C" → "(B)"; list intros → colon; eyebrow "01 — Service" → "01 · Service"
@@ -40,6 +42,7 @@ placeholders), About (4), Contact (1), Footer (1), plus all 4 page SEO
 titles+descriptions (Data API, OG set to copy) and 1 Home hero image alt.
 
 ## Two follow-ups (not done — need Annabel)
+
 1. **CLAUDE.md em-dash rule** — tried to add a "never use em-dash to expand a
    thought" rule to `~/.claude/CLAUDE.md` Voice & Tone section; the auto-mode
    safety classifier BLOCKED the self-edit. Needs Annabel to approve/apply.
@@ -51,11 +54,13 @@ titles+descriptions (Data API, OG set to copy) and 1 Home hero image alt.
    departure cleanly.
 
 ## Still-standing blockers before live (custom-domain) publish
+
 - Real testimonials (Home still 3× placeholder, now colon-punctuated).
 - Medical-claim sign-off on Services (semaglutide, exosome 96%→7%, testosterone
   ~50% — left intact, em-dashes only were touched).
 
 ## Gotchas (unchanged, reconfirmed)
+
 - Designer `element_tool` still times out mid-batch (~every other large call);
   retry with Designer tab foregrounded, and re-query "—" to see what landed.
   Batches of ~5-6 set_text were the sweet spot.
@@ -65,6 +70,7 @@ titles+descriptions (Data API, OG set to copy) and 1 Home hero image alt.
 - Webflow caches published HTML; curl-grep the live URLs to verify.
 
 ## Key IDs (additions)
+
 - New style: svcpg-jumplink (8c37938b-4684-9fb6-de8f-22d731be0176)
 - Home hero image (alt fixed): 2912fcca-10a7-e746-265f-608f4d140fac
 - (See prior checkpoint for site/page/footer/script IDs.)

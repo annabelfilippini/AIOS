@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.aios.hermes.tunnels.rev</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/ssh</string>
+    <string>-N</string>
+    <string>-o</string><string>BatchMode=yes</string>
+    <string>-o</string><string>ExitOnForwardFailure=yes</string>
+    <string>-o</string><string>ServerAliveInterval=30</string>
+    <string>-o</string><string>ServerAliveCountMax=3</string>
+    <string>-o</string><string>StrictHostKeyChecking=accept-new</string>
+    <string>-o</string><string>ConnectTimeout=15</string>
+    <string>-i</string><string>/Users/annabelfilippini/.ssh/id_ed25519</string>
+    <string>-R</string><string>11434:127.0.0.1:11434</string>
+    <string>root@5.78.218.220</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>15</integer>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>StandardOutPath</key>
+  <string>/Users/annabelfilippini/Library/Logs/hermes-tunnels-rev.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/annabelfilippini/Library/Logs/hermes-tunnels-rev.log</string>
+</dict>
+</plist>

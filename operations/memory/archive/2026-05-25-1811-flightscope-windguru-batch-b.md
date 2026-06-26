@@ -58,6 +58,7 @@ Annabel's recorded choice:
 ## Dashboard regenerated (tools/flightscope/dashboard.html, v0.2.0)
 
 Updated to reflect the new `plan` behavior (Annabel asked to see the changes):
+
 - Decision board heading → "ranked by live wind (windiest first)"; added a **#
   rank column** (1–4). Rows reordered by mean kt: Essaouira 19kt (#1, €15) > Gran
   Canaria 18kt (#2, €26) > Lanzarote 17kt (#3, €24) > Fuerteventura 14kt (#4, €35).

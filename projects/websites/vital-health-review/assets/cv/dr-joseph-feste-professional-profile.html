@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joseph R. Feste, MD, FACOG | Professional Profile</title>
+  <style>
+    :root {
+      --ink: #25352b;
+      --muted: #687264;
+      --forest: #315633;
+      --sage: #e9efe4;
+      --cream: #faf7ef;
+      --gold: #b98b2f;
+      --rule: #d8ddcf;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.48;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.46in 0.58in 0.44in;
+      background: #fffdf8;
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .page-secondary {
+      display: block;
+    }
+
+    .mini-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .mini-title {
+      margin: 0;
+      color: var(--forest);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 21pt;
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .mini-meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 8.2pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .secondary-content {
+      max-width: 6.85in;
+      padding-top: 22px;
+    }
+
+    .kicker {
+      margin: 0 0 9px;
+      color: var(--gold);
+      font-size: 8.2pt;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr 1.58in;
+      gap: 22px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--forest);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25.5pt;
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 7px 0 0;
+      max-width: 5.2in;
+      color: var(--muted);
+      font-size: 9.5pt;
+    }
+
+    .side-card {
+      align-self: stretch;
+      padding: 13px 14px 12px;
+      border: 1px solid var(--rule);
+      background: var(--sage);
+    }
+
+    .side-card h2 {
+      margin: 0 0 7px;
+      color: var(--forest);
+      font-size: 8pt;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .side-card p {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 8.1pt;
+      line-height: 1.42;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.58in 1fr;
+      gap: 22px;
+      padding-top: 15px;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--rule);
+      padding-right: 17px;
+    }
+
+    section {
+      margin: 0 0 11px;
+    }
+
+    h2 {
+      margin: 0 0 6px;
+      color: var(--forest);
+      font-size: 8pt;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 0 0 3px;
+      color: var(--ink);
+      font-size: 9.3pt;
+      font-weight: 800;
+    }
+
+    p {
+      margin: 0 0 6px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      position: relative;
+      margin: 0 0 5px;
+      padding-left: 12px;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .entry {
+      margin: 0 0 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(216, 221, 207, 0.7);
+    }
+
+    .entry:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 8.5pt;
+    }
+
+    .note {
+      margin-top: 9px;
+      padding: 9px 11px;
+      border-left: 3px solid var(--gold);
+      background: #fbf4df;
+      color: #5e5849;
+      font-size: 8.2pt;
+    }
+
+    .sources {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 7.4pt;
+      line-height: 1.38;
+    }
+
+    .sources a {
+      color: var(--forest);
+      text-decoration: none;
+    }
+
+    @page {
+      size: Letter;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="header">
+      <div>
+        <p class="kicker">Vital Health Integrative Medicine</p>
+        <h1>Joseph R. Feste, MD, FACOG</h1>
+        <p class="subtitle">Founder and clinical advisor. Board-certified obstetrician and gynecologist whose practice background informs Vital Health's integrative, preventive, and whole-person care model.</p>
+      </div>
+      <aside class="side-card">
+        <h2>Profile Status</h2>
+        <p>This is a site-ready professional profile prepared from public sources.</p>
+        <p>The supplied resume page did not contain a full CV or downloadable resume file.</p>
+      </aside>
+    </div>
+
+    <div class="content">
+      <aside class="sidebar">
+        <section>
+          <h2>Credentials</h2>
+          <ul>
+            <li>MD, Baylor College of Medicine</li>
+            <li>Residency, Baylor University Medical Center</li>
+            <li>Board certification listed in Obstetrics and Gynecology</li>
+            <li>OBGYN, FACOG</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Current Role</h2>
+          <p>Founder and owner of Vital Health Integrative Medicine.</p>
+          <p>Administrative, advisory, research, and educational leadership role.</p>
+        </section>
+
+        <section>
+          <h2>Practice Focus</h2>
+          <ul>
+            <li>Obstetrics and gynecology</li>
+            <li>Women's health and hormone restoration</li>
+            <li>Integrative and preventive care</li>
+            <li>Regenerative and longevity-oriented clinical education</li>
+          </ul>
+        </section>
+      </aside>
+
+      <div>
+        <section>
+          <h2>Professional Summary</h2>
+          <p>Dr. Joseph R. Feste is the founder of Vital Health Integrative Medicine and a board-certified OBGYN. The current Vital Health site describes him as no longer seeing patients and serving the practice through administrative guidance, research, insight, and educational leadership.</p>
+          <p>Public professional listings describe his medical training at Baylor College of Medicine, residency training at Baylor University Medical Center, and board certification in Obstetrics and Gynecology. Published JSLS author information lists Dr. Feste as a Clinical Associate Professor in the Department of Obstetrics and Gynecology at Baylor College of Medicine and the University Health Science Center at Houston.</p>
+        </section>
+
+        <section>
+          <h2>Selected Background</h2>
+          <div class="entry">
+            <h3>Founder, Vital Health Integrative Medicine</h3>
+            <p class="meta">Austin, Texas</p>
+            <p>Founded the clinical model that Vital Health continues to carry forward, with emphasis on full-picture assessment, coordinated records, and whole-person care.</p>
+          </div>
+          <div class="entry">
+            <h3>Clinical Associate Professor</h3>
+            <p class="meta">Department of Obstetrics and Gynecology</p>
+            <p>Listed in JSLS author information with Baylor College of Medicine and the University Health Science Center at Houston.</p>
+          </div>
+          <div class="entry">
+            <h3>Practice and Hospital Development</h3>
+            <p class="meta">Houston and Austin, Texas</p>
+            <p>Chamber profiles describe Dr. Feste as one of the founders of The Woman's Hospital of Texas in Houston and as a clinician with a long practice history in hormone therapy, anti-aging, and regenerative medicine.</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <main class="page page-secondary">
+    <div class="mini-header">
+      <div>
+        <p class="kicker">Vital Health Integrative Medicine</p>
+        <h1 class="mini-title">Joseph R. Feste, MD, FACOG</h1>
+      </div>
+      <p class="mini-meta">Publications and source note</p>
+    </div>
+
+    <div class="secondary-content">
+      <section>
+        <h2>Selected Publications and Scholarly Work</h2>
+        <div class="entry">
+          <h3>Is the Standard of Care What We Think It Is?</h3>
+          <p class="meta">JSLS, 1999</p>
+          <p>Co-authored with Craig A. Winkel, MD, MBA. The article discusses complication reporting and standard-of-care questions in gynecologic laparoscopic practice.</p>
+        </div>
+        <div class="entry">
+          <h3>Endometriosis Ascites: A Case Report</h3>
+          <p class="meta">JSLS, 1999</p>
+          <p>Co-authored case report on extensive endometriosis with ascites, indexed by PubMed Central.</p>
+        </div>
+        <div class="entry">
+          <h3>Randomized Trial Comparing a Radially Expandable Needle System with Cutting Trocars</h3>
+          <p class="meta">JSLS, 1999-2000</p>
+          <p>Contributor information lists Joseph R. Feste, Texas Women's Hospital, Houston, Texas.</p>
+        </div>
+      </section>
+
+      <p class="note">Use this file as an interim professional profile only. If the clinic provides Dr. Feste's full CV, replace this asset and change the site link label back to "Download Dr. Feste's CV."</p>
+
+      <section class="sources">
+        <h2>Sources Reviewed</h2>
+        <p>Vital Health resume page, https://www.vitalhealthim.com/resume, reviewed June 7, 2026. The page title is "RESUME | VitalHealthIM," but the visible page content contains site navigation, address details, and a contact form, not a CV.</p>
+        <p>Vital Health current site; Doctor.com provider profile; Lake Travis Chamber listing; PubMed Central records for JSLS articles PMCID PMC3015368, PMC3113161, and PMC3015351.</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

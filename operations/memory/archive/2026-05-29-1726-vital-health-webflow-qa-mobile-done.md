@@ -11,6 +11,7 @@ next-session: Two client-input blockers gate a live (custom-domain) publish — 
 Supersedes `2026-05-29-1718-vital-health-webflow-prepublish-qa.md`.
 
 ## Where the site is
+
 Full QA done on all 4 pages (desktop 1440 + mobile 390) via Playwright.
 Published to **staging only**: `vital-health-9bf311.webflow.io` (no custom
 domain — `customDomains: []`). Visuals polished, content correct/concise,
@@ -18,6 +19,7 @@ mobile nav working, content editable in Designer. Screenshots:
 `projects/vital-health-webflow-migration/docs/qa-*.png`.
 
 ## Edits applied + verified live this session
+
 - Home Facts: "4 / one MD, two NPs, one founding advisor" → **"3 / one MD, two
   NPs"** (matches About). Verified.
 - Home hero CTA "Schedule a consultation": → **patient portal**
@@ -34,6 +36,7 @@ mobile nav working, content editable in Designer. Screenshots:
   Designer-editable; new links auto-appear in the mobile menu.
 
 ## Verified GOOD (no action)
+
 - `/services` serves the DESIGNED page, not the CMS "Services Template" collision.
 - All anchors resolve: `#peptide/#hormone/#weight/#wellness/#schedule`.
 - Scroll-reveal works (25/25); hiding CSS is JS-injected = progressive-enhancement
@@ -42,6 +45,7 @@ mobile nav working, content editable in Designer. Screenshots:
   Designer elements. Only code = 2 polish scripts (vhscrollreveal, vhmobilenav).
 
 ## BLOCKERS before live (custom-domain) publish — Annabel, post client-meeting
+
 1. **Real testimonials** — Home reviews still 3x placeholder "[Patient
    testimonial...]". Left as-is per Annabel; she inputs real quotes after the
    client meeting. Replace or hide before live.
@@ -52,6 +56,7 @@ mobile nav working, content editable in Designer. Screenshots:
    Offer: soften to non-numeric defensible phrasing if unsourceable.
 
 ## Smaller leftovers (optional)
+
 - Footer compact hours `Mon – Fri · 8a – 5p` NOT standardized — lives in the Site
   Footer component (012f5c9e-...); component-internal text isn't reachable via
   page-element query_elements (needs component-edit mode or a 5-sec Editor fix).
@@ -59,6 +64,7 @@ mobile nav working, content editable in Designer. Screenshots:
 - Offered but not yet written: a client "what you can edit in Webflow" note.
 
 ## Gotchas / operational notes
+
 - Designer MCP `element_tool` still flaky: works ~2-3 calls then times out,
   recovers on retry with Designer tab foregrounded. Data API (pages/sites/
   scripts) is reliable. Used for edits: set_text, set_settings(static_link),
@@ -69,10 +75,11 @@ mobile nav working, content editable in Designer. Screenshots:
   a NEW version, then add_site_script with that version.
 
 ## Key IDs
+
 - Site 6a15e6f364922623e13946da | Home 6a15e6f464922623e139470e |
   Services 6a15f430cbd0f7ef0469e27f | About 6a19b8b56de372b248e55901 |
   Contact 6a19bf5c98546d4f3a53d97a
 - Home hero link element: dfe91478-4749-8c07-8acb-372f952b8137
 - Site Footer component: 012f5c9e-8f09-5be5-b1b2-9a28cb867f35
 - Scripts (site footer): vhscrollreveal v0.0.4, vhmobilenav v0.0.2
-- Designer launch: https://vital-health-9bf311.design.webflow.com?app=dc8209c65e3ec02254d15275ca056539c89f6d15741893a0adf29ad6f381eb99
+- Designer launch: <https://vital-health-9bf311.design.webflow.com?app=dc8209c65e3ec02254d15275ca056539c89f6d15741893a0adf29ad6f381eb99>

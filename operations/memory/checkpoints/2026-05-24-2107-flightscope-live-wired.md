@@ -43,6 +43,7 @@ never browser-scrape 169 dests; scrape ~8.
 ## Live query result (depart Tarifa June 3 2026, one-way, nonstop)
 
 Origins AGP/SVQ. Cheapest-first windy spots reachable nonstop that day:
+
 - €15 Essaouira AGP/SVQ→RAK (but RAK=Marrakech, ~3h drive to spot)
 - €24 Lanzarote SVQ→ACE · €26 Gran Canaria AGP→LPA · €35 Fuerteventura SVQ→FUE
 - €56 Fuerteventura AGP→FUE · €58 Gran Canaria SVQ→LPA · €129 Sicily SVQ→TPS

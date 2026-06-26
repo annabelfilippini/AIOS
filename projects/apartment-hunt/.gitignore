@@ -1,7 +1,11 @@
 .env
 .venv/
-seen.json
+seen_*.json
+digest_*_latest.md
+digest_*_latest.html
 digest_latest.md
+digest_latest.html
 digests/
 __pycache__/
 *.pyc
+sample_*.html

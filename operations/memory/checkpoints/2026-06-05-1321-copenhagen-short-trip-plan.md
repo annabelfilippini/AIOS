@@ -65,17 +65,17 @@ TikTok access was limited, but short links resolved and oEmbed exposed useful ca
   A.KJAERBEDE, Anonymous, Boii, Norse Projects, High Street, Alohas, Pitaya,
   Ganni Postmodern, Boii Studios, Crush Vintage, CHAMOI.
 - TikTok links captured:
-  - https://www.tiktok.com/t/ZP8s23DKr -> https://www.tiktok.com/@gracietravels/photo/7606876424103791903
-  - https://www.tiktok.com/t/ZP8s23f8K -> https://www.tiktok.com/@chloe.royal/video/7639261352833338632
-  - https://www.tiktok.com/t/ZP8sj83qW -> https://www.tiktok.com/@pcortina00/photo/7637726683746815246
-  - https://www.tiktok.com/t/ZP8sj8sUq -> https://www.tiktok.com/@omgheysam/video/7646048915858394376
-  - https://www.tiktok.com/t/ZP8sj1MGJ -> https://www.tiktok.com/@amberreenie/video/7637588061332720918
-  - https://www.tiktok.com/t/ZP8s2KoHQ -> https://www.tiktok.com/@travelwithlolo/photo/7409403888945696030
-  - https://www.tiktok.com/t/ZP8s2KPdK -> https://www.tiktok.com/@hercollectif/video/7621960981492632854
-  - https://www.tiktok.com/t/ZP8s2nm9n -> https://www.tiktok.com/@mia.munnoch/video/7546544252130430230
-  - https://www.tiktok.com/t/ZP8s2WU4P -> https://www.tiktok.com/@hercollectif/video/7644489096739474710
-  - https://www.tiktok.com/t/ZP8sjeBqa -> https://www.tiktok.com/@jadecrawfordtravels/photo/7378570133826030880
-  - https://www.tiktok.com/t/ZP8s23rF1 -> https://www.tiktok.com/@saritcohen_/video/7601587012679847189
+  - <https://www.tiktok.com/t/ZP8s23DKr> -> <https://www.tiktok.com/@gracietravels/photo/7606876424103791903>
+  - <https://www.tiktok.com/t/ZP8s23f8K> -> <https://www.tiktok.com/@chloe.royal/video/7639261352833338632>
+  - <https://www.tiktok.com/t/ZP8sj83qW> -> <https://www.tiktok.com/@pcortina00/photo/7637726683746815246>
+  - <https://www.tiktok.com/t/ZP8sj8sUq> -> <https://www.tiktok.com/@omgheysam/video/7646048915858394376>
+  - <https://www.tiktok.com/t/ZP8sj1MGJ> -> <https://www.tiktok.com/@amberreenie/video/7637588061332720918>
+  - <https://www.tiktok.com/t/ZP8s2KoHQ> -> <https://www.tiktok.com/@travelwithlolo/photo/7409403888945696030>
+  - <https://www.tiktok.com/t/ZP8s2KPdK> -> <https://www.tiktok.com/@hercollectif/video/7621960981492632854>
+  - <https://www.tiktok.com/t/ZP8s2nm9n> -> <https://www.tiktok.com/@mia.munnoch/video/7546544252130430230>
+  - <https://www.tiktok.com/t/ZP8s2WU4P> -> <https://www.tiktok.com/@hercollectif/video/7644489096739474710>
+  - <https://www.tiktok.com/t/ZP8sjeBqa> -> <https://www.tiktok.com/@jadecrawfordtravels/photo/7378570133826030880>
+  - <https://www.tiktok.com/t/ZP8s23rF1> -> <https://www.tiktok.com/@saritcohen_/video/7601587012679847189>
 - Coffee answer: La Cabra Møntergade is the best TikTok-mentioned coffee stop
   near King's Garden, not exactly between the hostel and King's Garden. Route:
   Urban Camper -> Norrebro Station -> Nørreport -> Rosenborg / King's Garden ->

@@ -8,9 +8,10 @@ Layer 1 of Annabel's 3-layer carousel style stack.
 | --- | --- | --- |
 | **1. Universal style** | `references/style.md` (this folder) | Annabel's invariants — apply to every brand, every carousel type |
 | 2. Brand character | `<project>/media/brand_context/voice-profile.md` + `visual-identity/tokens.json` | Who the brand IS — voice, palette, fonts, logo |
-| 3. Brand direction | `<project>/media/brand_context/carousel-direction.md` | What Annabel wants THIS brand's carousels to do, beyond brand character |
+| 3. Brand media guide | `<project>/media/design.md` | Project-specific social/media taste, especially when formal brand_context files are missing |
+| 4. Brand direction | `<project>/media/brand_context/carousel-direction.md` | What Annabel wants THIS brand's carousels to do, beyond brand character |
 
-The renderer reads all three layers and merges in order: universal → brand character → brand direction. Later layers override earlier on conflicts.
+The renderer reads the available layers and merges in order: universal → brand character → brand media guide → brand direction. Later layers override earlier on conflicts.
 
 ## `style.md`
 

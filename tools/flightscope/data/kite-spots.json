@@ -229,6 +229,159 @@
       "note": "Strong Alizé trade wind in summer."
     },
     {
+      "name": "Aurora Reservoir",
+      "country": "US",
+      "region": "Colorado Front Range",
+      "airports": [
+        "DEN"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 313163,
+      "note": "Local Denver-area reservoir. Verify park rules, launch access, storms, and water level before kiting."
+    },
+    {
+      "name": "Cherry Creek Reservoir",
+      "country": "US",
+      "region": "Colorado Front Range",
+      "airports": [
+        "DEN"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 645926,
+      "note": "Local Denver-area reservoir. Gusty inland wind; verify launch access, storms, and local restrictions before kiting."
+    },
+    {
+      "name": "Chatfield Reservoir",
+      "country": "US",
+      "region": "Colorado Front Range",
+      "airports": [
+        "DEN"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 767568,
+      "note": "Used the coordinate-verified Windguru id; earlier Chatfield hits report bad longitude. Verify launch rules and gust/storm risk."
+    },
+    {
+      "name": "Union Reservoir",
+      "country": "US",
+      "region": "Colorado Front Range",
+      "airports": [
+        "DEN"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 1291528,
+      "note": "Longmont-area local option. Verify city rules, watercraft policy, and launch conditions before kiting."
+    },
+    {
+      "name": "Boyd Lake",
+      "country": "US",
+      "region": "Colorado Front Range",
+      "airports": [
+        "DEN"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 185674,
+      "note": "Loveland-area lake. Check state park rules, storm risk, and gust spread before kiting."
+    },
+    {
+      "name": "Lake Dillon",
+      "country": "US",
+      "region": "Colorado Mountains",
+      "airports": [
+        "DEN",
+        "EGE"
+      ],
+      "wind_months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "windguru_id": 227588,
+      "note": "Mountain reservoir with cold water and gusty terrain effects. Treat forecast as a first screen, not a go/no-go by itself."
+    },
+    {
+      "name": "Pueblo Reservoir",
+      "country": "US",
+      "region": "Southern Colorado",
+      "airports": [
+        "DEN",
+        "COS"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 649378,
+      "note": "Southern Colorado reservoir. Verify state park rules, shoreline access, and storm timing before kiting."
+    },
+    {
+      "name": "Lake McConaughy",
+      "country": "US",
+      "region": "Nebraska High Plains",
+      "airports": [
+        "DEN",
+        "LBF"
+      ],
+      "wind_months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "windguru_id": 248586,
+      "note": "Driveable high-plains lake from Colorado. Often a better wind target than Front Range reservoirs, but check distance, storms, and beach access."
+    },
+    {
       "name": "Sal",
       "country": "CV",
       "region": "Cape Verde",

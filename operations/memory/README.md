@@ -21,7 +21,6 @@ The memory model is deliberately small:
 - `scripts/check-memory-safety.mjs` - safety check for likely secrets,
   missing checkpoint frontmatter, and overlong active checkpoints.
 - `tmp/` - short-lived notes that can be deleted during cleanup.
-- `_active` - legacy compatibility link to the old `_system/memory` folder.
 
 ## Startup Recall
 

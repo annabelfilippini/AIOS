@@ -55,6 +55,7 @@ real icon elements) are not reliably doable right now.
 Proposed pivot: do all three fixes via the **Data API** (`data_scripts_tool`,
 token-based, reliable — independent of the flaky Designer connection) by registering
 inline custom code applied site-wide (footer). Tradeoffs:
+
 - ✅ Reliable, fast, fixes all three at once.
 - ⚠️ Renders only on the **published** site (would publish to the free `.webflow.io`
   staging URL to review) — not in the Designer canvas.

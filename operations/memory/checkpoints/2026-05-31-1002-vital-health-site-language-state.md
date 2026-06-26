@@ -15,6 +15,7 @@ later session threads produced `2026-05-30-1824-...-proposal-pdf-final.md` and
 `2026-05-30-1834-...-qa-presend.md` (proposal is send-ready).
 
 ## What we worked on
+
 - Reversed the premature "Dr. Feste is leaving" rewrite. Annabel jumped the gun
   removing him; he still works there (now administrative/advisory, not seeing
   patients) and is still the OWNER during the ownership transition.
@@ -22,6 +23,7 @@ later session threads produced `2026-05-30-1824-...-proposal-pdf-final.md` and
   swapped the nav logo to the new bird, then did a follow-up language pass.
 
 ## Decisions made
+
 - Feste card restored as 4th member, first position (ab-pr-paper, non-flip,
   photo right). Role "Founder & Owner · Advisory" + real portrait.
 - Julie "Owner & Practice Lead" -> "Practice Lead".
@@ -38,17 +40,20 @@ later session threads produced `2026-05-30-1824-...-proposal-pdf-final.md` and
   person's current status, cut redundant clauses, plainest accurate phrasing.
 
 ## Open questions
+
 - Footer hours use EN-dashes "Mon – Fri · 8a – 5p" (shared Site Footer,
   pre-existing). Leave (ranges are conventional) or make dash-free? Awaiting
   Annabel's call.
 
 ## Next steps
+
 - Resolve footer en-dash question.
 - Proposal: await Julie's Monday reply (per 1824/1834 checkpoints).
 - Pre-LIVE blockers unchanged: real testimonials on Home, medical-claim sign-off
   on Services.
 
 ## Context to preserve
+
 - All changes are on staging only (vital-health-9bf311.webflow.io); custom domain
   not pointed. Site ID 6a15e6f364922623e13946da; About 6a19b8b56de372b248e55901.
 - Webflow gotcha: whtml_builder turns raw <img> into a non-rendering <imgraw>;
@@ -57,5 +62,6 @@ later session threads produced `2026-05-30-1824-...-proposal-pdf-final.md` and
   re-registered via asset_tool upload_image_by_url with the CDN URL.
 
 ## System refinement candidates
+
 - The no-dashes rule now lives in SOUL.md copy mechanics; if dashes keep slipping
   into generated client copy, consider a pre-publish dash lint on web deliverables.

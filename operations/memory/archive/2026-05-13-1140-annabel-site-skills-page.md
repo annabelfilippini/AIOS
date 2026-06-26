@@ -13,6 +13,7 @@ next-session: Continue refining `projects/agency-audit-network/site-draft/skills
 Annabel wanted the Skills tab of her personal site to feel inspired by `skills.sh` / `printingpress.dev`, while matching the existing homepage visual direction. We read the Agency Audit Network project context first so the page language aligned with the audit-led AIOS work.
 
 Important context read:
+
 - `projects/agency-audit-network/AGENTS.md`
 - `projects/agency-audit-network/README.md`
 - `projects/agency-audit-network/PLAN.md`

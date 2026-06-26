@@ -8,7 +8,8 @@ The three layers:
 | --- | --- | --- |
 | **1. Universal style** (this file) | `skills/instagram-carousel/references/style.md` | Annabel's invariants — apply to every brand, every carousel type |
 | 2. Brand character | `<project>/media/brand_context/voice-profile.md` + `visual-identity/tokens.json` | Who the brand IS — voice, palette, fonts, logo. Produced by foundation skills or auto-discovery. |
-| 3. Brand direction | `<project>/media/brand_context/carousel-direction.md` | What Annabel wants THIS brand's carousels to do, beyond what brand_context already says |
+| 3. Brand media guide | `<project>/media/design.md` | Project-specific social/media taste, especially when formal brand_context files are missing. |
+| 4. Brand direction | `<project>/media/brand_context/carousel-direction.md` | What Annabel wants THIS brand's carousels to do, beyond what brand_context already says |
 
 The renderer merges in that order; later layers override earlier on conflicts. So your universal "no em-dashes" never gets overridden by a brand, but a brand's "use chiaroscuro" overrides the default preventive=bright modifier.
 
@@ -134,6 +135,36 @@ Every entry below is something Annabel corrected on a past run. The `listen-for-
   Source: v3 worked-well baseline
   Applies to: all
 
+- **[2026-06-07] If Annabel asks for a square Instagram post or gives square references, use 1080×1080 instead of forcing 4:5.** Match the requested post format before choosing the renderer defaults.
+  Source: Vital Health hormone optimization carousel corrections
+  Applies to: all
+
+- **[2026-06-07] For service-topic covers, make the service name the large headline.** Do not lead with "Brand helps with..." as the headline. Put the brand promise in the supporting line or close, for example "Vital Health can help."
+  Source: Vital Health hormone optimization carousel corrections
+  Quote: "hormone optimazation should be the header - big. then remove 'vital health helps with horm...'"
+  Applies to: health service carousels
+
+- **[2026-06-07] Remove redundant tiny category kickers when the main heading already names the topic.** Labels like "For Women," "For Men," and "Hormone Care" made the slides feel templated and should be dropped unless they add real clarity.
+  Source: Vital Health hormone optimization carousel corrections
+  Applies to: all short educational and service carousels
+
+- **[2026-06-07] Brand marks must be real, consistent, and deliberately placed.** If a carousel repeats a brand mark, use the real approved mark, keep the same size on every slide, and keep corner placement consistent. Do not substitute a fake initials lockup when the real mark exists.
+  Source: Vital Health hormone optimization carousel corrections
+  Quote: "make sure the hummingbird is the same size in all the images"
+  Applies to: all
+
+- **[2026-06-07] Align the inner text, not just the outer container.** When Annabel asks for a section to align with a paragraph, the heading and bullets inside that section should share the same left edge as the paragraph. Do not leave hidden padding that visually misaligns the text.
+  Source: Vital Health hormone optimization carousel corrections
+  Applies to: all
+
+- **[2026-06-07] Pre-control important line breaks before review.** Adjust width, font size, or copy so key phrases do not wrap awkwardly, especially brand URLs, "service supports," medical terms, and disease names paired with "risk conversations."
+  Source: Vital Health hormone optimization carousel corrections
+  Applies to: all
+
+- **[2026-06-07] Bullet rhythm should be visibly even.** Equalize bullet spacing across rows and columns before showing a slide. Uneven symptom-list spacing reads unfinished.
+  Source: Vital Health hormone optimization carousel corrections
+  Applies to: list-heavy slides
+
 ## TEXT-ON-PHOTO LEGIBILITY (highest priority — caught TWICE)
 
 - **[2026-05-31] Any text element <24px on a photographic background WITHOUT a solid plate, dark veil, or guaranteed dark region behind it WILL fail.** Before shipping any slide, audit every text element <24px. If on photo with no plate/veil/dark region: give it one OR delete it. **Default to deletion for secondary copy.**
@@ -151,6 +182,11 @@ Every entry below is something Annabel corrected on a past run. The `listen-for-
 - **[2026-05-31] Match Annabel's plainer, direct voice.** Avoid taglines, marketing-speak, overly polished phrasing.
   Source: global CLAUDE.md voice rule
   Applies to: all caption + copy drafting
+
+- **[2026-06-07] If a technically accurate sentence reads awkwardly, rewrite it before showing the slide.** Prefer two plain patient-facing sentences over one overloaded sentence. Example: "Women can spend a third to half of their lives after menopause. This phase is often undertreated, and it is one of the practice's specialties."
+  Source: Vital Health hormone optimization carousel corrections
+  Quote: "i dont think this makes sense"
+  Applies to: health and educational carousels
 
 ## Don't do this
 
@@ -214,6 +250,19 @@ For brands in health / wellness / preventive medicine, the 5 ads in `inspiration
 
 Goal: no two slides share a layout template.
 
+## Health Service Carousel Defaults
+
+For short health service carousels, especially 4-slide posts, use this as the starting point unless Annabel gives a different structure.
+
+1. **Cover**: service name as the large headline, one plain symptom or relevance paragraph, brand can-help line, real brand mark.
+2. **Audience segment 1**: direct heading such as "Women," clear patient-facing copy, one supporting stat or context line, and a concrete care-support list.
+3. **Audience segment 2**: direct heading such as "Men," concise clinical approach copy, and an evenly spaced symptom list if needed.
+4. **Scope / CTA**: "What we treat" or equivalent, scannable condition list, real website under the consultation CTA.
+
+For health service visuals, avoid flat decorative filler panels. If a slide needs a right-side visual, prefer a fresh editorial still life with clinic-adjacent materials: cream linen, amber glass, clean lab paper, brass pen, botanical stem, natural window light, no readable text, no people, no syringes.
+
+For public medical claims, use careful language. Prefer "supports care around," "risk conversations," "may be involved," and "can help" over prevention guarantees or treatment promises.
+
 ---
 
 ## Uncategorized
@@ -230,6 +279,21 @@ Goal: no two slides share a layout template.
 - **[2026-06-03] ok criteria needs to be 3br only please change that everywhere and re run yesterdays scrape.**
   Source: hook (UserPromptSubmit) — cwd: /Users/annabelfilippini/Documents/AI-OS/projects/vital-health-webflow-migration
   Quote: "ok criteria needs to be 3br only please change that everywhere and re run yesterdays scrape. i want a fully new assessment"
+  Applies to: all (recategorize next run if wrong)
+
+- **[2026-06-07] can you read the most recent vital health cehckpont.**
+  Source: hook (UserPromptSubmit) — cwd: /Users/annabelfilippini/Documents/AI-OS
+  Quote: "can you read the most recent vital health cehckpont. we were havign a hard time getting webflow to wrk. i think its bc we were trying too many big things too fast. so let's move slow and"
+  Applies to: all (recategorize next run if wrong)
+
+- **[2026-06-08] read the most recent checkpoint.**
+  Source: hook (UserPromptSubmit) — cwd: /Users/annabelfilippini/Documents/AI-OS
+  Quote: "read the most recent checkpoint. i need to finish pushing the html vital health site to webflow. it was struggling last night because you were pushing too big changes at the same time so let's not to dthat oday."
+  Applies to: all (recategorize next run if wrong)
+
+- **[2026-06-08] sure.**
+  Source: hook (UserPromptSubmit) — cwd: /Users/annabelfilippini/Documents/AI-OS
+  Quote: "sure. i dont need the design.md file to make sure ppl can follow it. i want it to be rules you have so you know how to create these posts. so please add my desires to design.md and then let's alter the current posts to make sure they cater to my rules and then let's make a few…"
   Applies to: all (recategorize next run if wrong)
 
 ## Edit log

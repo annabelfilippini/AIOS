@@ -9,6 +9,7 @@ next-session: refresh Telegram bot token, then run apartment_hunt.py once withou
 # Session: apartment-hunt restart
 
 ## What changed
+
 - Rechecked `projects/apartment-hunt/` after Annabel started looking for places to live in SF again.
 - Cron is still installed for daily 9am:
   `0 9 * * * cd /Users/annabelfilippini/Documents/AI-OS/projects/apartment-hunt && .venv/bin/python apartment_hunt.py >> logs/cron.log 2>&1`
@@ -21,12 +22,14 @@ next-session: refresh Telegram bot token, then run apartment_hunt.py once withou
 - `seen.json` stayed at 76 entries, so the 56 current listings remain eligible to send after Telegram is fixed.
 
 ## Fixes made
+
 - Updated `apartment_hunt.py` so failed Telegram delivery no longer advances `seen.json`.
 - `--dry` now skips Telegram and does not update the seen-set.
 - Updated README criteria from stale `$5,100-$7,500` to current `$3,200-$7,500`.
 - Updated README cron path from stale `logs.txt` to `logs/cron.log`.
 
 ## Current criteria
+
 - 2-3BR.
 - $3,200-$7,500/month.
 - Move by 2026-06-15.
@@ -34,6 +37,7 @@ next-session: refresh Telegram bot token, then run apartment_hunt.py once withou
 - Preferred/top-sorted: North Beach and Nob Hill.
 
 ## Blocker
+
 - Telegram bot token exists in the local Telegram env, but Telegram `getMe` returns `401 Unauthorized`.
 - Refresh via BotFather before running the non-dry send:
   1. Open `@BotFather`.
@@ -42,6 +46,7 @@ next-session: refresh Telegram bot token, then run apartment_hunt.py once withou
   4. Revoke the old token if BotFather still shows it as active.
 
 ## Next step
+
 After the token is refreshed, run:
 
 ```bash

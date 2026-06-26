@@ -103,3 +103,10 @@ Always inspect the rendered page before sharing:
 
 If Annabel says it looks AI-generated, do not defend the structure. Run another
 polish pass using the tells list above.
+
+## Final gate
+
+This file is the prose polish guide. The binary pass/fail check is the **Ship
+Gate** in `projects/websites/design.md`. Run it last, against the actual built
+page, before sharing anything with Annabel. If any Ship Gate item fails, fix it
+first rather than presenting it with an explanation.

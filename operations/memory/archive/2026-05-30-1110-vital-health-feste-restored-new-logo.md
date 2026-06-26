@@ -12,15 +12,18 @@ Supersedes nothing; complements `2026-05-30-0930-...-client-edits-round2.md` and
 `2026-05-30-1040-...-logo-clean-proposal-final.md`.
 
 ## Why
+
 Annabel "jumped the gun" removing Dr. Feste last night. He still works there
 (now administrative/advisory, not seeing patients) and is still the OWNER during
 the ownership transition. The prior session had reworded About+Home to past-tense
 "legacy" framing and promoted Julie to "Owner & Practice Lead". This session
 reverses that and restores his team card, per Annabel's exact wording + the
-original Vercel source (https://vital-health-deploy.vercel.app/about).
+original Vercel source (<https://vital-health-deploy.vercel.app/about>).
 
 ## Changes (all published to staging vital-health-9bf311.webflow.io)
+
 About page (id 6a19b8b56de372b248e55901):
+
 1. **Restored Feste team card** as 4th member, FIRST position, non-flip
    (ab-pr ab-pr-paper / ab-pr-inner → bio left, photo right). Role
    "Founder & Owner · Advisory"; name Joseph Feste; bio+quote+3 meta chips
@@ -48,6 +51,7 @@ Logo (shared Site Nav component 86e91719-83ad-954e-3c69-f8b0eb5e6999):
    Footer has no logo; favicon still default Webflow (not changed).
 
 ## Gotcha solved (reusable)
+
 whtml_builder turns a raw `<img src>` into a non-rendering `<imgraw
 data-raw-src>` DOM placeholder, and its `css` param classes don't reliably
 publish. FIX: build the real photo with element_builder type Image +
@@ -61,10 +65,12 @@ re-register via asset_tool upload_image_by_url using the new CDN URL to get a
 Designer-usable id.
 
 ## Heads-up for Annabel
+
 Restored copy reintroduces 5 em-dashes (her dictated text + Vercel original).
 Prior QA targeted 0 em-dashes — flag if she still wants them scrubbed.
 
 ## Key IDs
+
 - Site 6a15e6f364922623e13946da
 - Feste card section: first .ab-pr (ab-pr-paper) on About; portrait Image
   68418581-e0d3-22c6-2d51-97d0219c7767; frame 87bc0b6c-…-269a

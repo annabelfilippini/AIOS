@@ -45,7 +45,8 @@ Before any copy, photo prompt, or layout decision, read all three layers in orde
 
 1. **Universal style** — `references/style.md` end to end. Annabel's invariants. Apply to every carousel.
 2. **Brand character** — `<project>/media/brand_context/voice-profile.md` + `visual-identity/tokens.json`. Who the brand IS. Use the brand's actual voice, palette, fonts, logo.
-3. **Brand direction** — `<project>/media/brand_context/carousel-direction.md`. Annabel's direction for THIS brand specifically. May not exist yet; if missing, layers 1+2 are sufficient.
+3. **Brand media guide** — `<project>/media/design.md`, if it exists. This is where project-specific social/media taste can live even when formal `brand_context/` files are missing.
+4. **Brand direction** — `<project>/media/brand_context/carousel-direction.md`. Annabel's direction for THIS brand specifically. May not exist yet; if missing, the earlier layers are sufficient.
 
 Layer 1 covers universal rules. Layer 1 also has a "Category modifiers" section — when the brand falls into a named category (preventive medicine, chronic care, etc.), that category's defaults activate. Layer 3 declares the brand's category and adds any brand-only direction.
 
@@ -116,6 +117,27 @@ For intro carousels specifically, the v5 Vital Health build proved this arc. Use
 **Slides 1, 2, 6 are non-negotiable for intro carousels.** Drop priority when reducing: 4 → 5 → 3.
 
 For other carousel types (ad, educational, testimonial, list, story), infer the arc from inspiration/ + brand context. There is no hard-coded template for those yet — when one ships and Annabel approves it, add an arc note here.
+
+### 8.1 The 4-slide health service arc — proven default
+
+For short health service carousels, especially when Annabel asks for a 4-slide Instagram post, use this as the starting point:
+
+| # | Role | Default move |
+| --- | --- | --- |
+| 1 | **Cover** | Service name as the large headline. One plain relevance paragraph. Brand can-help close. Real brand mark. |
+| 2 | **Audience 1** | Direct audience heading, patient-facing context, one stat or care context line, and a concrete support list. |
+| 3 | **Audience 2** | Direct audience heading, concise clinical approach copy, and evenly spaced symptom bullets. |
+| 4 | **Scope / CTA** | "What we treat" or equivalent list, real website under the consultation CTA, and a brand-appropriate image or still life. |
+
+Before showing the first pass, check the details Annabel had to correct on the Vital Health hormone carousel:
+
+- The cover headline should be the service, not "Brand helps with..."
+- Remove tiny redundant kickers like "For Women," "For Men," or "Hormone Care" when the main heading already does the job.
+- Use the real brand mark, keep it the same size on every slide, and place it consistently.
+- Align the actual text edges, not just the container edges.
+- Pre-control line breaks for medical phrases, disease names, and URLs.
+- Equalize bullet spacing across rows and columns.
+- Avoid abstract decorative filler. Use a fresh editorial still life for image panels when the brand needs warmth.
 
 ### 9. Voice rules — apply to every line
 

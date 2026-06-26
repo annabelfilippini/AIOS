@@ -42,15 +42,18 @@ Wrote the audit intake doc at `projects/agency-audit-network/dad-pilot/audit-int
 ## Context to preserve
 
 **Files written/updated this session:**
+
 - `projects/agency-audit-network/dad-pilot/audit-intake-2026-05-14.md` — main artifact, ready to send to Tom (~200 lines, dad-readable)
 
 **Key architecture clarifications worth not losing:**
+
 - Litmus test for what goes where: *Will a human edit this directly?* → vault (Obsidian). *Is this a log of something that happened?* → Supabase. *Is this only running because a schedule fired?* → Cloudflare.
 - Per-company isolation enforced 3 ways: skill-layer `company` parameter, vault folder permissions, Supabase `company_id NOT NULL`. Storage separation (4 vaults) was rejected — wrong tool for the job.
 - Blotato sits *downstream* of drafts (publishing-distribution layer), not in the canon/data stack.
 - Anthropic Team plan = pricing tier covering both Cowork + Claude Code. Different from the standalone "Claude Teams" web-only product.
 
 **Companies (worth remembering for future sessions):**
+
 - AIH — holding company, light operational footprint, skip for pilot
 - CFS — pilot candidate, similar to Falcon
 - Falcon — pilot candidate, similar to CFS but distinct brand

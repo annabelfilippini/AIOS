@@ -57,6 +57,7 @@ Verify-first tier (2): Matthew Lowe, Lisa Baker.
 **Tone calibration (durable for future DM drafts):** Plain, declarative, no tag-line beats. Cut "no pressure either way" / "anti-strategy mirrors ours" / "caught my eye." Use PLAN vocabulary: "automation map," "small product brands," "vetted partner," "warmer, better-scoped client."
 
 **Files updated this session:**
+
 - `projects/agency-audit-network/research/mansel-members-agency-candidates-2026-05-12-v2.md` — added Annabel-signal lines on Matthew Lowe, Forrest Shaw, Kris Wiselka; updated outreach order.
 - `projects/agency-audit-network/partners/lisa-baker.md` — status flipped to Annabel-confirmed verify-first.
 - 4 new memory entries (Matthew, Forrest, Kris, Lisa) + MEMORY.md index updated.

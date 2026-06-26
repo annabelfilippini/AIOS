@@ -10,7 +10,7 @@ next-session: If Annabel wants to continue, build a claims matrix first, then dr
 
 ## What we did
 
-Tested the new `client-website-refresh` process on https://www.revero.com/.
+Tested the new `client-website-refresh` process on <https://www.revero.com/>.
 
 Created:
 

@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tarifa — The wind capital of Europe | Freeride Tarifa</title>
+  <meta name="description" content="Tarifa is the wind capital of Europe, with over 300 days of wind a year. Discover Los Lances, Valdevaqueros and Balneario beaches, the old town and the best beach bars.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111516'/%3E%3Cpath d='M32 8 52 32 32 56 12 32Z' fill='%2354d894'/%3E%3Cpath d='M32 16 44 32 32 48 20 32Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0c1112;
+      --muted: #777d80;
+      --soft: #c8ccce;
+      --line: #e4e7e8;
+      --paper: #fbfbf8;
+      --mist: #e8f1ed;
+      --white: #ffffff;
+      --green: #54d894;
+      --green-dark: #279568;
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Work Sans", Arial, sans-serif;
+    }
+
+    ::selection { background: var(--green); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+    h1, h2, h3, p { margin: 0; }
+
+    /* ---------- top bar ---------- */
+    .topbar {
+      position: fixed;
+      z-index: 30;
+      inset: 0 0 auto 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      min-height: 5rem;
+      padding: 0 clamp(1rem, 4vw, 4rem);
+      color: var(--white);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(180deg, rgba(6, 18, 22, 0.55), rgba(6, 18, 22, 0));
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    body.is-scrolled .topbar {
+      color: var(--ink);
+      border-bottom-color: rgba(12, 17, 18, 0.1);
+      background: rgba(251, 251, 248, 0.94);
+      backdrop-filter: blur(16px);
+    }
+    .brand { display: inline-flex; align-items: center; width: min(11rem, 40vw); }
+    .brand img { height: auto; object-fit: contain; filter: brightness(0) invert(1); }
+    body.is-scrolled .brand img { filter: none; }
+
+    .top-tabs { display: flex; justify-self: center; gap: clamp(0.6rem, 2vw, 2rem); }
+    .top-tabs a {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.82;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+    }
+    .top-tabs a:hover { opacity: 1; }
+    .top-tabs a.is-active { opacity: 1; border-bottom-color: var(--green); }
+
+    .top-action {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.6rem;
+      padding: 0 1.1rem;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    body.is-scrolled .top-action { background: var(--ink); color: var(--white); }
+
+    /* page with a white split hero: dark top bar from the start */
+    body.light-hero .topbar {
+      color: var(--ink);
+      border-bottom-color: rgba(12, 17, 18, 0.08);
+      background: transparent;
+    }
+    body.light-hero .brand img { filter: none; }
+    body.light-hero .top-action { background: var(--ink); color: var(--white); }
+
+    /* ---------- hero (split: white text panel + image) ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      align-items: stretch;
+      min-height: 88svh;
+      background: var(--white);
+      color: var(--ink);
+      isolation: isolate;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem clamp(1.4rem, 5vw, 5.5rem) 4.5rem;
+    }
+    .hero-media { position: relative; overflow: hidden; min-height: 46svh; }
+    .hero-media img { position: absolute; inset: 0; filter: saturate(1.05) contrast(1.02); }
+    .hero-kicker {
+      display: block;
+      margin-bottom: 1.1rem;
+      color: var(--green-dark);
+      font-size: clamp(0.72rem, 1vw, 0.82rem);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(3.4rem, 9vw, 9rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .hero h1 em { font-style: normal; color: var(--green); }
+    .hero-copy {
+      max-width: 40rem;
+      margin-top: 1.4rem;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.4vw, 1.25rem);
+      line-height: 1.55;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 3rem;
+      padding: 0 1.2rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid currentColor;
+    }
+    .btn.solid { background: var(--white); color: var(--ink); border-color: transparent; }
+    .btn.dark { background: var(--ink); color: var(--white); border-color: transparent; }
+    .btn.green { background: var(--green); color: var(--ink); border-color: transparent; }
+    .btn::after { content: "→"; }
+
+    /* ---------- shared section frame ---------- */
+    .wrap { width: min(100%, 116rem); margin: 0 auto; padding: clamp(4.5rem, 9vw, 8rem) clamp(1rem, 4vw, 4rem); }
+    .eyebrow {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+    }
+    .section-title {
+      max-width: 22ch;
+      font-size: clamp(2.1rem, 4.4vw, 4rem);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+    }
+    .lead {
+      max-width: 46rem;
+      margin-top: 1.3rem;
+      font-size: clamp(1.04rem, 1.4vw, 1.3rem);
+      font-weight: 500;
+      line-height: 1.55;
+      color: rgba(12, 17, 18, 0.82);
+    }
+
+    /* ---------- positioning band ---------- */
+    .band { background: var(--ink); color: var(--white); }
+    .band .lead { color: rgba(255, 255, 255, 0.82); }
+    .band .section-title { color: var(--white); }
+    .band .section-title em { font-style: normal; color: var(--green); }
+    .facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2.6rem;
+      margin-top: 2.6rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .fact { display: flex; align-items: baseline; gap: 0.6rem; }
+    .fact b { font-size: clamp(1.5rem, 2.6vw, 2.2rem); font-weight: 800; color: var(--green); line-height: 1; }
+    .fact span { font-size: 0.92rem; color: rgba(255, 255, 255, 0.72); }
+
+    /* soft sea-glass variant of the band (lighter than the near-black default) */
+    .band-soft { background: var(--mist); color: var(--ink); }
+    .band-soft .eyebrow { color: var(--green-dark); }
+    .band-soft .section-title { color: var(--ink); }
+    .band-soft .section-title em { color: var(--green-dark); }
+    .band-soft .lead { color: rgba(12, 17, 18, 0.82); }
+    .band-soft .facts { border-top-color: rgba(12, 17, 18, 0.14); }
+    .band-soft .fact b { color: var(--green-dark); }
+    .band-soft .fact span { color: rgba(12, 17, 18, 0.64); }
+
+    /* ---------- spots ---------- */
+    .spots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 2.8rem;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .spot {
+      position: relative;
+      min-height: 24rem;
+      display: grid;
+      align-content: end;
+      gap: 0.7rem;
+      padding: 1.6rem;
+      color: var(--white);
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--ink);
+    }
+    .spot img { position: absolute; inset: 0; z-index: -2; transition: transform 0.5s ease; }
+    .spot::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(6, 18, 22, 0.9), rgba(6, 18, 22, 0.2)); }
+    .spot:hover img { transform: scale(1.05); }
+    .spot small { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+    .spot strong { font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 800; line-height: 1; }
+    .spot p { color: rgba(255, 255, 255, 0.84); font-size: 0.96rem; line-height: 1.5; }
+    .spot .bars { color: rgba(255, 255, 255, 0.66); font-size: 0.84rem; font-weight: 600; }
+
+    /* ---------- where to ride: map + spots ---------- */
+    .ride-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+      gap: clamp(1.2rem, 2.5vw, 2.4rem);
+      margin-top: 2.8rem;
+      align-items: stretch;
+    }
+    .map-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #e9f1ef;
+      min-height: 30rem;
+    }
+    .map-panel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .map-panel iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .map-note {
+      position: absolute;
+      left: 0;
+      top: 1rem;
+      margin: 0;
+      pointer-events: none;
+      z-index: 2;
+      padding: 0.35rem 0.7rem;
+      background: rgba(251, 251, 248, 0.92);
+      color: var(--ink);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .spot-list { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .spot-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 1rem;
+      row-gap: 0.3rem;
+      align-content: center;
+      padding: clamp(1.1rem, 2vw, 1.6rem) clamp(1.2rem, 2vw, 1.7rem);
+      background: var(--paper);
+    }
+    .spot-card .pin {
+      grid-row: 1 / span 4;
+      align-self: start;
+      display: grid;
+      place-items: center;
+      width: 1.9rem;
+      height: 1.9rem;
+      margin-top: 0.15rem;
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--ink);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+    .spot-card small { color: var(--green-dark); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.7rem; }
+    .spot-card strong { font-size: clamp(1.25rem, 1.9vw, 1.6rem); font-weight: 800; line-height: 1.05; }
+    .spot-card p { color: rgba(12, 17, 18, 0.78); font-size: 0.93rem; line-height: 1.5; }
+    .spot-card .bars { color: var(--muted); font-size: 0.8rem; font-weight: 600; }
+
+    /* ---------- trip grid ---------- */
+    .trip-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 12rem;
+      gap: clamp(0.6rem, 1.5vw, 1rem);
+      margin-top: 2.8rem;
+    }
+    .trip-cell { position: relative; overflow: hidden; background: var(--line); }
+    .trip-cell img { position: absolute; inset: 0; }
+    .trip-cell figcaption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 1.2rem 1.1rem 0.9rem;
+      color: var(--white);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(0deg, rgba(6, 18, 22, 0.8), transparent);
+    }
+    .trip-cell.big { grid-column: span 4; grid-row: span 2; }
+    .trip-cell.tall { grid-column: span 2; grid-row: span 2; }
+    .trip-cell.wide { grid-column: span 3; }
+    .trip-cell.small { grid-column: span 3; }
+
+    /* ---------- town favourites ---------- */
+    .town-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 2.8rem;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .tstat { display: grid; gap: 0.3rem; padding: 1.6rem 1.5rem; background: var(--paper); }
+    .tstat b { font-size: clamp(1.8rem, 3vw, 2.7rem); font-weight: 800; color: var(--ink); line-height: 1; }
+    .tstat span { font-size: 0.86rem; font-weight: 600; color: var(--muted); }
+
+    .fav-title {
+      margin-top: clamp(3rem, 5vw, 4.5rem);
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .fav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(0.7rem, 1.5vw, 1rem);
+      margin-top: 1.4rem;
+    }
+    .fav {
+      display: grid;
+      align-content: start;
+      gap: 0.5rem;
+      padding: 1.5rem 1.4rem 1.6rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--green);
+    }
+    .fav-cat { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dark); }
+    .fav strong { font-size: clamp(1.15rem, 1.7vw, 1.4rem); font-weight: 800; line-height: 1.05; }
+    .fav .rate {
+      justify-self: start;
+      padding: 0.15rem 0.55rem;
+      background: var(--ink);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+    .fav p { margin-top: 0.2rem; color: rgba(12, 17, 18, 0.74); font-size: 0.9rem; line-height: 1.5; }
+
+    /* ---------- venue guide ---------- */
+    .guide-block { margin-top: clamp(2.8rem, 5vw, 4.5rem); }
+    .guide-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem 1rem;
+      flex-wrap: wrap;
+      padding-bottom: 1rem;
+      margin-bottom: 1.4rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .guide-head h3 {
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .guide-head .guide-cat {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+    }
+    .guide-head .guide-sub { color: var(--muted); font-size: 0.92rem; font-weight: 500; margin-left: auto; }
+
+    .venue-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(0.7rem, 1.5vw, 1rem);
+    }
+    .venue-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+    .venue-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .venue {
+      position: relative;
+      display: grid;
+      align-content: end;
+      gap: 0.45rem;
+      min-height: 19rem;
+      padding: 1.1rem;
+      color: var(--white);
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .venue img {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      transition: transform 0.55s ease;
+    }
+    .venue::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(0deg, rgba(6, 18, 22, 0.94) 0%, rgba(6, 18, 22, 0.4) 46%, rgba(6, 18, 22, 0.04) 100%);
+    }
+    .venue:hover img { transform: scale(1.06); }
+
+    .venue-tags {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.85rem;
+      right: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .rate-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      padding: 0.28rem 0.55rem;
+      background: rgba(251, 251, 248, 0.95);
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+    .rate-chip .star { color: #f5a623; }
+    .vibe-chip {
+      padding: 0.28rem 0.55rem;
+      background: rgba(251, 251, 248, 0.95);
+      color: var(--ink);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .fave-chip {
+      padding: 0.28rem 0.55rem;
+      background: var(--green);
+      color: var(--ink);
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .venue strong { font-size: clamp(1.05rem, 1.5vw, 1.32rem); font-weight: 800; line-height: 1.05; }
+    .venue p { color: rgba(255, 255, 255, 0.85); font-size: 0.85rem; line-height: 1.45; }
+    .venue .review-link {
+      margin-top: 0.15rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+    .venue:hover .review-link { text-decoration: underline; }
+
+    /* ---------- cta ---------- */
+    .cta {
+      position: relative;
+      min-height: 70svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 4vw, 4rem);
+      color: var(--white);
+      overflow: hidden;
+      isolation: isolate;
+      background: #07171d;
+    }
+    .cta img { position: absolute; inset: 0; z-index: -2; }
+    .cta::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(6, 18, 22, 0.62); }
+    .cta-inner { display: grid; justify-items: center; gap: 1.4rem; max-width: 44rem; }
+    .cta h2 { font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.02; }
+    .cta p { color: rgba(255, 255, 255, 0.86); font-size: clamp(1.02rem, 1.4vw, 1.25rem); line-height: 1.5; }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+
+    /* ---------- footer ---------- */
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.4rem clamp(1rem, 4vw, 4rem);
+      border-top: 1px solid var(--line);
+      color: rgba(12, 17, 18, 0.6);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .footer nav { display: flex; gap: 1.4rem; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 860px) {
+      .topbar { grid-template-columns: auto 1fr; min-height: 4.4rem; }
+      .top-tabs { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-text { padding: 7rem clamp(1.4rem, 6vw, 3rem) 2.5rem; }
+      .hero-media { min-height: 40svh; order: 2; }
+      .spots { grid-template-columns: 1fr; }
+      .ride-layout { grid-template-columns: 1fr; }
+      .trip-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 10rem; }
+      .trip-cell.big, .trip-cell.tall, .trip-cell.wide, .trip-cell.small { grid-column: span 2; grid-row: span 1; }
+      .trip-cell.big { grid-row: span 2; }
+      .town-stats { grid-template-columns: repeat(2, 1fr); }
+      .fav-grid { grid-template-columns: repeat(2, 1fr); }
+      .map-panel { min-height: 22rem; }
+      .venue-grid, .venue-grid.cols-5, .venue-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+      .guide-head .guide-sub { margin-left: 0; flex-basis: 100%; }
+    }
+    @media (max-width: 520px) {
+      .hero h1 { font-size: clamp(2.8rem, 15vw, 5rem); }
+      .facts { gap: 0.4rem 1.6rem; }
+      .town-stats, .fav-grid { grid-template-columns: 1fr; }
+      .venue-grid, .venue-grid.cols-5, .venue-grid.cols-3 { grid-template-columns: 1fr; }
+      .venue { min-height: 16rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .spot:hover img { transform: none; }
+    }
+
+    /* ---------- scroll reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.75s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition-delay: var(--rd, 0s);
+      will-change: opacity, transform;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body class="light-hero">
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Freeride Tarifa home">
+      <img src="https://freeridetarifa.com/wp-content/uploads/2017/11/LogotypeStickyMenu-Freeride_Tarifa.png" alt="Freeride Tarifa">
+    </a>
+    <nav class="top-tabs" aria-label="Main sections">
+      <a href="index.html">Freeride</a>
+      <a href="lessons.html">Lessons</a>
+      <a href="rent.html">Rent gear</a>
+      <a class="is-active" href="tarifa.html">Tarifa</a>
+      <a href="stay.html">Stay</a>
+    </nav>
+    <a class="top-action" href="https://wa.me/34601655993">WhatsApp</a>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <span class="hero-kicker">The wind capital of Europe</span>
+        <h1><em>Tarifa</em></h1>
+        <p class="hero-copy">With its miles of windy beaches, unspoiled nature and countless bars and restaurants, Tarifa is known as the best kite spot in Europe. An ideal place to relax, have fun and learn kitesurfing.</p>
+        <div class="hero-actions">
+          <a class="btn green" href="https://wa.me/34601655993">Plan your trip on WhatsApp</a>
+          <a class="btn dark" href="lessons.html">View lessons</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="assets/web/aerial.jpg" alt="Aerial view of Los Lances beach in Tarifa with turquoise water and kites on the sand">
+      </div>
+    </section>
+
+    <!-- WIND BAND -->
+    <section class="band band-soft">
+      <div class="wrap reveal">
+        <span class="eyebrow">Why Tarifa</span>
+        <h2 class="section-title">The most reliable wind in <em>Europe</em>.</h2>
+        <p class="lead">Tarifa enjoys over 300 days of excellent wind a year, making it the perfect place to practice kitesurfing. Two winds shape the season, the Levante from the east and the Poniente from the west, on long sandy beaches open to the Atlantic with a view of Morocco, just outside the village of Tarifa.</p>
+        <div class="facts">
+          <div class="fact"><b>300+</b><span>Wind days a year</span></div>
+          <div class="fact"><b>3</b><span>Main kite beaches</span></div>
+          <div class="fact"><b>10 km</b><span>Of open kite beach</span></div>
+          <div class="fact"><b>2</b><span>Winds: Levante and Poniente</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPOTS -->
+    <section class="wrap" id="spots">
+      <span class="eyebrow reveal">Where to ride</span>
+      <h2 class="section-title reveal">Three spots, one easy base</h2>
+      <p class="lead reveal">Tarifa is blessed with great stretches of pure white sand, all within a few minutes of the old town. Here is where you will be kiting, and which beach fits your level.</p>
+      <div class="ride-layout reveal">
+        <div class="map-panel">
+          <iframe
+            title="Map of Tarifa and its kite beaches: Valdevaqueros, Los Lances and Balneario"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-5.745%2C35.995%2C-5.575%2C36.095&layer=mapnik&marker=36.035%2C-5.63"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <p class="map-note">10 km of kite beach, all a short ride from town</p>
+        </div>
+
+        <div class="spot-list">
+          <article class="spot-card">
+            <span class="pin">1</span>
+            <small>Main kite spot</small>
+            <strong>Los Lances</strong>
+            <p>The main kitesurf beach for schools, with wide flat sand and space to learn. This is where most lessons happen.</p>
+            <span class="bars">After kite: Agua or Waves beach bar</span>
+          </article>
+          <article class="spot-card">
+            <span class="pin">2</span>
+            <small>Wind and waves</small>
+            <strong>Valdevaqueros</strong>
+            <p>A lively spot up the coast shared with windsurf schools, with strong wind on the big days.</p>
+            <span class="bars">Refuel: Tangana or Tumbao beach bar</span>
+          </article>
+          <article class="spot-card">
+            <span class="pin">3</span>
+            <small>Closest to town</small>
+            <strong>Balneario</strong>
+            <p>A relaxed spot facing the ocean, right by the old town to unwind after a session.</p>
+            <span class="bars">Relax: Waikiki or Long Beach</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AFTER KITE -->
+    <section class="wrap" id="after" style="padding-top: 0;">
+      <span class="eyebrow reveal">After the wind drops</span>
+      <h2 class="section-title reveal">Eat, drink and party in Tarifa</h2>
+      <p class="lead reveal">Tarifa is packed with great places to eat and beach bars to party. These are some of the spots Freeride loves. Tap any photo to read its Google reviews and find it on the map.</p>
+
+      <!-- BREAKFAST -->
+      <div class="guide-block">
+        <div class="guide-head reveal">
+          <span class="guide-cat">Breakfast &amp; coffee</span>
+          <h3>Start the day before the wind</h3>
+          <span class="guide-sub">Bowls, eggs, juices and proper coffee</span>
+        </div>
+        <div class="venue-grid">
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Surla%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/surla.jpg" alt="Breakfast plate at Surla in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.7</span></div>
+            <strong>Surla</strong>
+            <p>Surfer-loved spot near the sea for fresh breakfasts, bowls, eggs and specialty coffee.</p>
+            <span class="review-link">1,034 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Azul%20Tarifa&query_place_id=ChIJ50NPwfeODA0RB8Jv0J2iw2Q" target="_blank" rel="noopener">
+            <img src="assets/web/venues/cafe-azul.jpg" alt="Colourful breakfast at Café Azul in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.7</span></div>
+            <strong>Café Azul</strong>
+            <p>The blue-tiled cafe everyone photographs, famous for colourful breakfasts, juices and crepes.</p>
+            <span class="review-link">971 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Power%20House%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/power-house.jpg" alt="Healthy bowl at Power House cafe in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.5</span></div>
+            <strong>Power House</strong>
+            <p>Healthy roadside cafe right on the way to the kite spot, loved for acai bowls and toasts.</p>
+            <span class="review-link">571 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Wanaka%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/wanaka.jpg" alt="Brunch dish at Wanaka in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.7</span></div>
+            <strong>Wanaka</strong>
+            <p>Local produce done well, with a standout salmorejo tostada, burgers and natural juices.</p>
+            <span class="review-link">977 reviews ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- LUNCH -->
+      <div class="guide-block">
+        <div class="guide-head reveal">
+          <span class="guide-cat">Lunch</span>
+          <h3>Refuel between sessions</h3>
+          <span class="guide-sub">Beachside poke to harbour tapas</span>
+        </div>
+        <div class="venue-grid">
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Chiringuito%20Tangana%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/tangana.jpg" alt="Fresh dishes at Chiringuito Tangana in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.5</span></div>
+            <strong>Chiringuito Tangana</strong>
+            <p>Valdevaqueros beach bar steps from the sand, with fresh poke, burgers, tapas and ceviche.</p>
+            <span class="review-link">2,635 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=La%20Burla%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/la-burla.jpg" alt="Plates at La Burla in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.6</span></div>
+            <strong>La Burla</strong>
+            <p>Port-side favourite blending Italian and Spanish cooking, known for fried shrimp and fresh pasta.</p>
+            <span class="review-link">2,153 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=El%20Rancho%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/el-rancho.jpg" alt="Grilled meat at El Rancho near Los Lances Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.6</span></div>
+            <strong>El Rancho</strong>
+            <p>Converted farmhouse near Los Lances grilling steaks from its own cattle. For serious meat lovers.</p>
+            <span class="review-link">1,618 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Mes%C3%B3n%20El%20Picoteo%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/meson-picoteo.jpg" alt="Andalusian seafood tapas at Mesón El Picoteo in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.6</span></div>
+            <strong>Mesón El Picoteo</strong>
+            <p>Classic harbour tavern serving generous Andalusian seafood and tapas at great value.</p>
+            <span class="review-link">3,588 reviews ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- DINNER -->
+      <div class="guide-block">
+        <div class="guide-head reveal">
+          <span class="guide-cat">Dinner</span>
+          <h3>Sit down for the evening</h3>
+          <span class="guide-sub">Almadraba tuna, tapas and creative plates</span>
+        </div>
+        <div class="venue-grid">
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=El%20Lola%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/el-lola.jpg" alt="El Lola flamenco tapas bar in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.6</span></div>
+            <strong>El Lola</strong>
+            <p>Flamenco-soaked tapas bar serving almadraba red tuna as sashimi, tataki and tartar.</p>
+            <span class="review-link">5,507 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Bar%20Ola%20Ola%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/ola-ola.jpg" alt="Crispy tuna at Bar Ola Ola in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.7</span></div>
+            <strong>Ola Ola</strong>
+            <p>Tiny old-town bar cooking local tuna and produce, famous for its unmissable crispy tuna.</p>
+            <span class="review-link">441 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Silos%2019%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/silos-19.jpg" alt="Dining room at Silos 19 in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.6</span></div>
+            <strong>Silos 19</strong>
+            <p>Lounge restaurant reinventing Spanish specialities with fusion flair and a strong wine list.</p>
+            <span class="review-link">Read reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Taberna%20La%20Morena%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/morena.jpg" alt="Creative dish at Morena in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.6</span></div>
+            <strong>Morena</strong>
+            <p>Creative old-town kitchen blending Asian and South American techniques. Fresh seafood, bao and tacos.</p>
+            <span class="review-link">Read reviews ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- BEACH BARS & NIGHTLIFE -->
+      <div class="guide-block">
+        <div class="guide-head reveal">
+          <span class="guide-cat">Beach bars &amp; nightlife</span>
+          <h3>Sundowners, music and pro kiters</h3>
+          <span class="guide-sub">Where the after-kite party happens</span>
+        </div>
+        <div class="venue-grid cols-5">
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Chiringuito%20Agua%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/agua.jpg" alt="Sunset at Agua beach bar in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.4</span><span class="fave-chip">Freeride pick</span></div>
+            <strong>Agua</strong>
+            <p>Los Lances beach bar for sunset mojitos and Thursday live concerts while pro kiters carve out front.</p>
+            <span class="review-link">1,018 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Balneario%20Beach%20Club%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/balneario.jpg" alt="Balneario Beach Club in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 3.3</span><span class="fave-chip">Freeride pick</span></div>
+            <strong>Balneario Beach Club</strong>
+            <p>Live music and DJ sets with cocktails, the best seat to watch pro kiters send it on the waves.</p>
+            <span class="review-link">2,323 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Tumbao%20Tarifa%20Valdevaqueros" target="_blank" rel="noopener">
+            <img src="assets/web/venues/tumbao.jpg" alt="Tumbao beach bar in Valdevaqueros Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.1</span></div>
+            <strong>Tumbao</strong>
+            <p>Laid-back Valdevaqueros beach bar on the grass, with watermelon mojitos and all-day DJ sets.</p>
+            <span class="review-link">Read reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Waikiki%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/waikiki.jpg" alt="Waikiki beach bar in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 4.1</span></div>
+            <strong>Waikiki</strong>
+            <p>Lively Balneario beach bar with beachfront concerts and DJ sets right on the sand at sunset.</p>
+            <span class="review-link">3,593 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=El%20Chiringuito%20Tarifa%20Isla" target="_blank" rel="noopener">
+            <img src="assets/web/venues/the-chiringuito.jpg" alt="The Chiringuito lounge beach bar in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 3.7</span></div>
+            <strong>The Chiringuito</strong>
+            <p>Lounge bar near Playa Chica with Mediterranean plates and prime views of pro riders jumping.</p>
+            <span class="review-link">1,821 reviews ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- YOGA -->
+      <div class="guide-block">
+        <div class="guide-head reveal">
+          <span class="guide-cat">Yoga &amp; downtime</span>
+          <h3>Reset on the rest days</h3>
+          <span class="guide-sub">Studio and beach classes for every level</span>
+        </div>
+        <div class="venue-grid cols-3">
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Respira%20Yoga%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/respira.webp" alt="Yoga class at Respira Yoga in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 5.0</span></div>
+            <strong>Respira Yoga</strong>
+            <p>Welcoming holistic studio with multilevel yoga, aerial yoga, sound baths and seaside beach classes.</p>
+            <span class="review-link">78 reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Free%20Your%20Mind%20Yoga%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/free-your-mind.webp" alt="Beach yoga with Free Your Mind in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="rate-chip"><span class="star">★</span> 5.0</span></div>
+            <strong>Free Your Mind</strong>
+            <p>Daily yoga for all levels in a cozy studio or on the beach, plus mindful retreats and workshops.</p>
+            <span class="review-link">Read reviews ↗</span>
+          </a>
+          <a class="venue reveal" href="https://www.google.com/maps/search/?api=1&query=Holos%20Terapias%20Tarifa" target="_blank" rel="noopener">
+            <img src="assets/web/venues/holos.webp" alt="Wellness studio at Holos Terapias in Tarifa" loading="lazy">
+            <div class="venue-tags"><span class="vibe-chip">Yoga &amp; pilates</span></div>
+            <strong>Holos Terapias</strong>
+            <p>Town wellness studio hosting weekly yoga and pilates alongside natural therapies in a calm space.</p>
+            <span class="review-link">Read reviews ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <img src="assets/web/grab.jpg" alt="Kitesurfer grabbing the board mid-jump off Tarifa with the hills behind">
+      <div class="cta-inner reveal">
+        <h2>Come ride the wind capital of Europe</h2>
+        <p>Tell us your level and your dates. We will tell you the right beach, the right lesson, and what the wind is doing.</p>
+        <div class="cta-actions">
+          <a class="btn green" href="https://wa.me/34601655993">WhatsApp Freeride</a>
+          <a class="btn" style="color: var(--white)" href="lessons.html">View lessons</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Freeride Tarifa · Kitesurfing in Tarifa, Spain</span>
+    <nav>
+      <a href="lessons.html">Lessons</a>
+      <a href="rent.html">Rent</a>
+      <a href="https://wa.me/34601655993">WhatsApp</a>
+    </nav>
+  </footer>
+
+  <script>
+    // top bar turns solid after the hero
+    const hero = document.querySelector(".hero");
+    const onScroll = () => {
+      const threshold = hero ? hero.offsetHeight - 80 : 160;
+      document.body.classList.toggle("is-scrolled", window.scrollY > threshold);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // scroll reveal: fade + lift elements as they enter view
+    (() => {
+      const revealEls = document.querySelectorAll(".reveal");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (revealEls.length && "IntersectionObserver" in window && !reduceMotion) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add("in"); io.unobserve(entry.target); }
+          });
+        }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add("in"));
+      }
+    })();
+  </script>
+</body>
+</html>

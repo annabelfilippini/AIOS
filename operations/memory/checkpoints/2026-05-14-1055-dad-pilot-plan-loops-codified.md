@@ -44,18 +44,21 @@ Continuation of morning's Mansel+Bo work. Annabel pushed for deeper synthesis: w
 ## Context to preserve
 
 **New files this session:**
+
 - `projects/agency-audit-network/dad-pilot/plan-v1-2026-05-14.md` — dad-shareable architecture + 4-week build plan + cost estimate + roles
 - `projects/agency-audit-network/dad-pilot/loops-explained-2026-05-14.md` — three nested closed loops, Supabase schema, what's automated vs approved, compounding effect
 - `projects/agency-audit-network/research/sources/mansel-ainative-2026-05-14/multiuser-architecture-diagram.png` — Mansel's canonical "Federated Personal, Shared Backbone" diagram
 - Appended to `research/sources/mansel-ainative-2026-05-14/captured-module-bodies.md`: Multiuser AIOS Designs (gold), Cowork Setup, Supabase 101, Vercel 101 (last three are video-only stubs)
 
 **New global memories** at `~/.claude/projects/-Users-annabelfilippini/memory/`:
+
 - `feedback_closed_loop_thermostat.md` — the thermostat principle, 3 nested loops, measurement automated/judgment human. Apply across all projects.
 - `feedback_ai_skill_build_principles.md` — 8 operator rules (test harness first, QDOAA before automate, one pod, Daily Brief first, federated architecture, three roles, context vs SOPs, silent failure watch).
 - `reference_bo_mansel_aios_research.md` — pointer to all captured research files for verbatim quotes.
 - MEMORY.md updated with 3 new index lines.
 
 **Tactical findings worth keeping:**
+
 - Granola: NO webhooks (on roadmap). Must poll API. Business plan required for transcript API. Granola has a public MCP server — Cowork can read native locally as alt path.
 - Anthropic Cowork: 11 free open-source plugins on GitHub (Productivity, Sales, Customer Support, Product, Marketing, Legal, Finance, Data, Enterprise Search, Bio-Research, Plugin Mgmt). All forkable. Same plugin works in both Code and Cowork.
 - Bo's verbatim test-harness example (for proposal-writing skill) captured for the email-writer rubric template.

@@ -72,7 +72,7 @@ next-session: Draft Vital Health proposal with Webflow public site + Cerbo/Fulls
 ## Context to preserve
 
 - The final mockup direction was “Direction F / hybrid light,” using cream/forest/gold, Fraunces + Inter, square CTAs, and Vital Health hummingbird/logo lockup.
-- Final deployed contact details in the preview: 7000 Bee Cave Road, Suite 310, Austin, TX 78746; (512) 559-4350; info@vitalhealthim.com; Mon-Fri 8-5.
+- Final deployed contact details in the preview: 7000 Bee Cave Road, Suite 310, Austin, TX 78746; (512) 559-4350; <info@vitalhealthim.com>; Mon-Fri 8-5.
 - Early Cedar Park details in old scratchpads were superseded by Bee Cave Road details in final Direction F.
 - Live preview exists, but local source folder recorded in old scratchpads (`~/Documents/Claude/scratch/designs/vital-health-*`) was not found after reorg.
 - Useful explanation for client: website promotions are editable public announcements; checkout discounts live wherever checkout happens (Fullscript, WholeScripts, Cerbo, or Shopify).

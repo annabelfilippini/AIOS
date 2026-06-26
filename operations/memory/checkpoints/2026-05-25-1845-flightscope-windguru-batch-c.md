@@ -23,14 +23,14 @@ behavior changed except the one cosmetic format line; the connector is docs.
    + scripts/check-installed.sh + scripts/check-auth.sh). Shares the flightscope
    binary (`binary: tools/flightscope/bin/flightscope`); documents the `wind`
    command and the public Windguru GFS source:
-   - `windguru.cz/int/iapi.php`, **no key / no login / no cookie / no browser**,
+   + `windguru.cz/int/iapi.php`, **no key / no login / no cookie / no browser**,
      plain `urllib` JSON (stdlib only → `approval_required: []`).
-   - `q=search_spots` (name→id, one-time mapping) and `q=forecast&id_model=3`
+   + `q=search_spots` (name→id, one-time mapping) and `q=forecast&id_model=3`
      (GFS 13km, ~16-day horizon, knots).
-   - Defaults documented: 12 kt, daytime 9–20h local, 3-day window, ≥3 kiteable
+   + Defaults documented: 12 kt, daytime 9–20h local, 3-day window, ≥3 kiteable
      daytime hours = kiteable day; out-of-horizon → `covered:false` → season
      fallback; modal-step-spacing scaling for honest clock-hours.
-   - Scripts made executable and **live-verified**: `check-installed` → `0.2.0`;
+   + Scripts made executable and **live-verified**: `check-installed` → `0.2.0`;
      `check-auth` → doctor shows 13/13 spots with `windguru_id`, `wind
      (windguru): true`.
 2. **`cli-connections/flights/CONNECTION.md` updated** — the `plan` bullet now
@@ -47,31 +47,31 @@ behavior changed except the one cosmetic format line; the connector is docs.
 
 ## Verification
 
-- `python3 -m py_compile tools/flightscope/bin/flightscope` → OK; `--version` →
++ `python3 -m py_compile tools/flightscope/bin/flightscope` → OK; `--version` →
   0.2.0 (binary unchanged in behavior).
-- `flightscope wind "Tarifa" --when 2026-06-03` → live output matches the
++ `flightscope wind "Tarifa" --when 2026-06-03` → live output matches the
   documented header/per-day/verdict format (Tarifa 0/3 kiteable, 9kt avg, lead
   9d on today's GFS init).
-- Did NOT run a full live `plan` (price scrapes are slow + the known `.eQ35Ce`
++ Did NOT run a full live `plan` (price scrapes are slow + the known `.eQ35Ce`
   flake); the truncation is a pure format change, unit-verified against real
   names instead.
 
 ## Decisions
 
-- Windguru is its own connector even though it shares the flightscope binary —
++ Windguru is its own connector even though it shares the flightscope binary —
   it's a distinct data source (free stdlib JSON) vs the flights price/route
   engines, and `audience`/`safe_commands` differ. Kept the binary pointer shared
   rather than duplicating.
 
 ## Known / parked (pre-existing, unchanged)
 
-- `local`-mode Google price scrape still flakes on `.eQ35Ce`; re-running clears it.
-- `airports` mixes nonstop + drive-away airports (RAK under Essaouira ~2.5–3h
++ `local`-mode Google price scrape still flakes on `.eQ35Ce`; re-running clears it.
++ `airports` mixes nonstop + drive-away airports (RAK under Essaouira ~2.5–3h
   away) — `airport` vs `airports_nearby` split still parked.
-- dashboard.html is a 2026-05-24-priced snapshot; regenerate after price re-runs.
++ dashboard.html is a 2026-05-24-priced snapshot; regenerate after price re-runs.
 
 ## Resume with
 
-- `cli-connections/windguru/scripts/check-auth.sh`  (doctor + windguru readiness)
-- `tools/flightscope/bin/flightscope wind "Lanzarote" --when 2026-06-03`
-- `tools/flightscope/bin/flightscope plan AGP --depart 2026-06-03`  (full live run)
++ `cli-connections/windguru/scripts/check-auth.sh`  (doctor + windguru readiness)
++ `tools/flightscope/bin/flightscope wind "Lanzarote" --when 2026-06-03`
++ `tools/flightscope/bin/flightscope plan AGP --depart 2026-06-03`  (full live run)

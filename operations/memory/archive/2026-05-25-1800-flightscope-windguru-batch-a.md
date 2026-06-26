@@ -19,6 +19,7 @@ Annabel asked for mid-session.
 
 `windguru.cz/int/iapi.php` is **public, no API key, plain urllib JSON** (same
 cheap-fetch profile as flightconnections — no browser):
+
 - `?q=search_spots&search=<name>` → name → numeric spot id (one-time mapping).
 - `?q=forecast&id_model=3&id_spot=<id>` → `fcst` with `WINDSPD`/`GUST`/`WINDDIR`
   arrays in **knots** + `hours` offsets from `initdate`. Model 3 = GFS 13km,
