@@ -212,35 +212,23 @@ def build_look(event, closet, occ=None):
 
 
 def build_week(events, closet):
-    """One look per occasion lane (you wear one outfit per occasion type),
-    labeled by the first event in that lane. Best for a single day (the Morning
-    Edit) where you dress once. Non-dress events (money due, admin) get no card."""
-    looks, seen = [], set()
-    for e in events:
-        title = e.get("t") if isinstance(e, dict) else e
-        occ = occasion_of(title)
-        if occ is None or occ in seen:
-            continue
-        seen.add(occ)
-        looks.append(build_look(e, closet, occ))
-    return looks
-
-
-def build_events(events, closet):
-    """One look per distinct event (deduped by occasion+title). Best for the
-    weekly Edit, where each thing on the calendar gets styled. Skips non-dress
-    events."""
-    looks, seen = [], set()
+    """One look per occasion lane — you wear one outfit per occasion type. Each
+    look carries `events`, the list of that lane's event titles (so the weekly
+    Edit can head a card by lane and list its events). Calendar order; non-dress
+    events (money due, admin) get no card."""
+    looks, by_lane = [], {}
     for e in events:
         title = e.get("t") if isinstance(e, dict) else e
         occ = occasion_of(title)
         if occ is None:
             continue
-        key = (occ, (title or "").strip().lower())
-        if key in seen:
-            continue
-        seen.add(key)
-        looks.append(build_look(e, closet, occ))
+        if occ not in by_lane:
+            look = build_look(e, closet, occ)
+            look["events"] = []
+            by_lane[occ] = look
+            looks.append(look)
+        if title not in by_lane[occ]["events"]:  # dedupe recurring entries
+            by_lane[occ]["events"].append(title)
     return looks
 
 
@@ -260,11 +248,13 @@ def demo():
     assert occasion_of("Rent due") is None
     assert build_week([{"t": "CHASE MONEY DUE"}], closet) == []
 
-    # build_week collapses a day to one look per lane; build_events keeps each
-    # distinct event. Two coffees + one dinner: lane=2 looks, event=3 looks.
+    # build_week collapses a day to one look per lane and lists each lane's
+    # events. Two coffees + one dinner: 2 looks; casual look lists both coffees.
     day = [{"t": "Coffee with mom"}, {"t": "Coffee with Sara"}, {"t": "Dinner date"}]
-    assert len(build_week(day, closet)) == 2
-    assert len(build_events(day, closet)) == 3
+    wk = build_week(day, closet)
+    assert len(wk) == 2
+    casual = next(l for l in wk if l["occasion"] == "casual")
+    assert casual["events"] == ["Coffee with mom", "Coffee with Sara"]
 
     # Going-out picks a sleek black/satin top she owns, never red.
     look = build_look("Dinner reservation", closet)

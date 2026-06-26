@@ -97,7 +97,7 @@ function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
 function fmt(hm){if(!hm)return '';let p=hm.split(':').map(Number),h=p[0],m=p[1];const ap=h<12?'AM':'PM';let hh=h%12;if(hh===0)hh=12;return hh+':'+z(m)+' '+ap}
 function whenLabel(look){const d=look.day?new Date(look.day+'T00:00:00'):null;const day=d?DOW[d.getDay()]:'';const time=look.allDay?'All day':fmt(look.start);return [day,time].filter(Boolean).join(' · ')}
 function pieceHTML(p){const owned=p.owned;const tag=owned?(p.source||'Yours'):'My guess';const cls=owned?'own':'';const name=esc(p.name||'Style piece');const sub=esc([p.brand,p.color].filter(Boolean).join(' · '));const img=p.img?'<img src="'+esc(p.img)+'" alt="'+name+'">':'<div class="ph">'+name+'</div>';return'<div class="piece"><div class="frame">'+img+'</div><span class="tag '+cls+'">'+esc(tag)+'</span><div class="lbl">'+name+'</div><div class="sub">'+(sub||'Style rule')+'</div></div>'}
-function cardHTML(look){const when=whenLabel(look)||'This week';const pieces=(look.pieces||[]).map(pieceHTML).join('');return'<div class="card" data-occ="'+esc(look.occasion)+'"><div class="occ"><h2>'+esc(look.event||look.title)+'</h2><div class="when">'+esc(when)+' · '+esc(OCC_LABEL[look.occasion]||'Everyday')+'</div></div><div class="pieces">'+pieces+'</div><div class="note">'+esc(look.note)+'</div><div class="elevate"><b>To elevate</b> &nbsp;'+esc(look.elevate)+'</div></div>'}
+function cardHTML(look){const evs=look.events||[];const when=evs.length?evs.slice(0,3).map(esc).join(' · ')+(evs.length>3?' · +'+(evs.length-3):''):(whenLabel(look)||'This week');const head=OCC_LABEL[look.occasion]||esc(look.event||'Everyday');const pieces=(look.pieces||[]).map(pieceHTML).join('');return'<div class="card" data-occ="'+esc(look.occasion)+'"><div class="occ"><h2>'+esc(head)+'</h2><div class="when">'+when+'</div></div><div class="pieces">'+pieces+'</div><div class="note">'+esc(look.note)+'</div><div class="elevate"><b>To elevate</b> &nbsp;'+esc(look.elevate)+'</div></div>'}
 async function loadEdit(){
   const now=new Date();
   const mon=new Date(now);mon.setDate(now.getDate()-((now.getDay()+6)%7));
@@ -107,7 +107,7 @@ async function loadEdit(){
   if(dl)dl.textContent=DOW[mon.getDay()]+' '+MON[mon.getMonth()]+' '+mon.getDate()+' — '+DOW[sun.getDay()]+' '+MON[sun.getMonth()]+' '+sun.getDate()+' · Built from what you own';
   const host=document.getElementById('looks');
   try{
-    const r=await fetch('/api/looks?start='+iso(mon)+'&end='+iso(next)+'&per=event&t='+Date.now(),{cache:'no-store'});
+    const r=await fetch('/api/looks?start='+iso(mon)+'&end='+iso(next)+'&t='+Date.now(),{cache:'no-store'});
     if(!r.ok)throw new Error('HTTP '+r.status);
     const data=await r.json();const looks=(data.looks||[]);
     host.innerHTML=looks.length?looks.map(cardHTML).join(''):'<div class="card"><div class="note">No events to style this week yet.</div></div>';
