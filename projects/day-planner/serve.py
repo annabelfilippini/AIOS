@@ -540,6 +540,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Location", "/planner.html")
             self.end_headers()                    # carries the Set-Cookie from ?k=
             return
+        if route in ("/morning", "/morning-edit", "/morning-edit.html"):
+            # Friendly aliases so a mistyped URL does not look like a broken app.
+            self.send_response(302)
+            self.send_header("Location", "/morning.html")
+            self.end_headers()
+            return
+        if route == "/api/health":
+            return self._json(200, {"ok": True, "app": "The Day", "morning": (ROOT / "morning.html").exists()})
         if route == "/api/calendar":
             return self._json(200, self._calendar(self.path))
         if route == "/api/style":
@@ -757,7 +765,7 @@ if __name__ == "__main__":
         webbrowser.open(url)
         sys.exit(0)
     live = "live" if (GCAL_OK and TOKEN.exists()) else "snapshot (run auth_google.py for live)"
-    print(f"\n  The Day is live ->  {url}\n  Calendar: {live}")
+    print(f"\n  The Day is live ->  {url}\n  Serving from: {ROOT}\n  Morning file: {'yes' if (ROOT / 'morning.html').exists() else 'NO'}\n  Health check: http://localhost:{PORT}/api/health\n  Calendar: {live}")
     if host == "0.0.0.0":
         print("  LAN mode: also reachable from this Wi-Fi at http://<your-mac-ip>:%s/%s" % (PORT, page))
         print("  Treat LAN mode as private: it exposes calendar/email endpoints to devices on your Wi-Fi.")
