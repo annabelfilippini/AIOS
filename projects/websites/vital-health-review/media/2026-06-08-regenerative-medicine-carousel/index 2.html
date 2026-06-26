@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Vital Health — Regenerative medicine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Topic theme kit: Regenerative medicine
+           Field: paper. Card: cream. Accent: gold. Motif: botanical stem and brass pen. */
+        --forest: #1f4d2a;
+        --forest-deep: #12351e;
+        --cream: #f5efe0;
+        --paper: #fbf7ec;
+        --gold: #c9a04a;
+        --gold-soft: #d9bd80;
+        --ink: #2a2a26;
+        --muted: #676359;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #ebe5da;
+        color: var(--ink);
+        font-family: "Inter", -apple-system, "Segoe UI", Arial, sans-serif;
+      }
+      .review {
+        display: grid;
+        gap: 32px;
+        grid-template-columns: repeat(auto-fit, 1080px);
+        justify-content: center;
+        padding: 40px;
+      }
+      .slide {
+        position: relative;
+        width: 1080px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--paper);
+        isolation: isolate;
+      }
+      h1, h2, h3 {
+        font-family: "Fraunces", Georgia, serif;
+        font-weight: 400;
+        letter-spacing: 0;
+        margin: 0;
+      }
+      p { margin: 0; }
+      ul { list-style: none; margin: 0; padding: 0; }
+
+      /* ---- Unified hummingbird ---- */
+      .hummingbird-logo {
+        position: absolute;
+        right: 60px;
+        top: 60px;
+        height: 80px;
+        width: auto;
+        z-index: 10;
+      }
+      .hummingbird-logo.is-white {
+        filter: brightness(0) invert(1);
+        opacity: 0.95;
+      }
+
+      /* ---- Motif: still-life crop, repositioned to emphasize botanical stem ---- */
+      .still-life {
+        background-image: url("../2026-06-07-hormone-optimization-carousel-fresh/vital-health-still-life-slide4.png");
+        background-size: cover;
+        background-position: 80% center;
+        position: absolute;
+        z-index: 1;
+      }
+
+      /* ---- Shared cream card (sets this kit apart from peptides' paper card) ---- */
+      .cream-card {
+        background: var(--cream);
+        color: var(--ink);
+        padding: 64px 60px;
+        position: absolute;
+        z-index: 3;
+      }
+      .gold-rule {
+        background: var(--gold);
+        height: 1px;
+        width: 100px;
+      }
+
+      /* ============ SLIDE 1: COVER ============ */
+      .slide-1 {
+        background: var(--paper);
+      }
+      .slide-1 .still-life {
+        bottom: 0;
+        height: 55%;
+        left: 0;
+        right: 0;
+        opacity: 0.75;
+      }
+      .slide-1 .cream-card {
+        left: 80px;
+        top: 140px;
+        width: 800px;
+        padding: 70px 60px 64px;
+      }
+      .slide-1 h1 {
+        color: var(--forest);
+        font-size: 92px;
+        line-height: 0.92;
+      }
+      .slide-1 .support {
+        color: var(--muted);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 26px;
+        line-height: 1.3;
+        margin-top: 28px;
+      }
+      .slide-1 .close {
+        color: var(--forest);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-size: 30px;
+        line-height: 1.15;
+        margin-top: 22px;
+      }
+      .slide-1 .gold-rule {
+        margin: 22px 0;
+      }
+
+      /* ============ SLIDE 2: DEFINITION (card on themed field) ============ */
+      .slide-2 {
+        background: var(--paper);
+      }
+      .slide-2 .still-life {
+        inset: 0;
+        opacity: 0.25;
+      }
+      .slide-2 .cream-card {
+        left: 80px;
+        top: 200px;
+        width: 920px;
+        padding: 70px 64px;
+      }
+      .slide-2 .eyebrow {
+        color: var(--gold);
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .slide-2 h2 {
+        color: var(--forest);
+        font-size: 74px;
+        line-height: 0.94;
+        margin-top: 20px;
+      }
+      .slide-2 .gold-rule {
+        margin: 26px 0;
+      }
+      .slide-2 .body-text {
+        color: var(--ink);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 26px;
+        line-height: 1.32;
+      }
+      .slide-2 .body-text em {
+        color: var(--forest);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+      }
+
+      /* ============ SLIDE 3: WHEN CONSIDERED (split panel, REVERSED — text right, motif left) ============ */
+      .slide-3 {
+        background:
+          linear-gradient(90deg, var(--cream) 0 40%, var(--paper) 40% 100%);
+      }
+      .slide-3 .still-life {
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 40%;
+        background-position: 30% center;
+        opacity: 0.55;
+      }
+      .slide-3 .text {
+        left: 44%;
+        padding: 110px 70px 70px 30px;
+        position: relative;
+        width: 56%;
+        z-index: 3;
+      }
+      .slide-3 .eyebrow {
+        color: var(--gold);
+        font-family: "Inter", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .slide-3 h2 {
+        color: var(--forest);
+        font-size: 60px;
+        line-height: 0.96;
+        margin-top: 18px;
+      }
+      .slide-3 .gold-rule {
+        margin: 24px 0;
+      }
+      .slide-3 .scenarios {
+        margin-top: 6px;
+      }
+      .slide-3 .scenarios li {
+        color: var(--ink);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 22px;
+        line-height: 1.32;
+        margin-top: 16px;
+        padding-left: 24px;
+        position: relative;
+      }
+      .slide-3 .scenarios li::before {
+        background: var(--gold);
+        border-radius: 50%;
+        content: "";
+        height: 7px;
+        left: 0;
+        position: absolute;
+        top: 0.55em;
+        width: 7px;
+      }
+      .slide-3 .pull {
+        bottom: 70px;
+        color: var(--cream);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-size: 24px;
+        left: 50px;
+        line-height: 1.25;
+        position: absolute;
+        text-align: left;
+        width: 320px;
+        z-index: 3;
+        background: rgba(31, 77, 42, 0.78);
+        padding: 18px 22px;
+      }
+
+      /* ============ SLIDE 4: HOW VITAL HEALTH DECIDES (paper-dominant with cream accent band) ============ */
+      .slide-4 {
+        background: var(--paper);
+      }
+      .slide-4 .accent-band {
+        background: var(--cream);
+        height: 200px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+        overflow: hidden;
+      }
+      /* Still-life crops to the LEFT 58% of the band so the bird's top-right corner
+         sits on uniform cream, not on a dark bottle. */
+      .slide-4 .accent-band .still-life {
+        bottom: 0;
+        left: 0;
+        right: 42%;
+        top: 0;
+        opacity: 0.85;
+        background-position: 30% 50%;
+      }
+      .slide-4 .accent-band::after {
+        background: linear-gradient(90deg, transparent 0%, var(--cream) 40%);
+        bottom: 0;
+        content: "";
+        left: 50%;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .slide-4 .body {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        padding: 240px 70px 70px;
+        position: relative;
+        z-index: 2;
+      }
+      .slide-4 .eyebrow {
+        color: var(--gold);
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .slide-4 h2 {
+        color: var(--forest);
+        font-size: 60px;
+        line-height: 0.96;
+        margin-top: 18px;
+        max-width: 800px;
+      }
+      .slide-4 .gold-rule {
+        margin: 26px 0;
+      }
+      .slide-4 .frame {
+        display: grid;
+        gap: 18px 32px;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 14px;
+        max-width: 900px;
+      }
+      .frame-cell {
+        border-top: 1px solid var(--gold-soft);
+        padding-top: 14px;
+      }
+      .frame-cell .label {
+        color: var(--gold);
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .frame-cell .desc {
+        color: var(--ink);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 19px;
+        line-height: 1.3;
+        margin-top: 8px;
+      }
+      .slide-4 .closing {
+        color: var(--muted);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-size: 24px;
+        line-height: 1.3;
+        margin-top: 32px;
+        max-width: 760px;
+      }
+
+      /* ============ SLIDE 5: HOW TO ASK / CTA ============ */
+      .slide-5 {
+        background: var(--paper);
+      }
+      .slide-5 .still-life {
+        height: 240px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0.6;
+        background-position: 50% 70%;
+      }
+      .slide-5 .cream-card {
+        left: 80px;
+        top: 180px;
+        width: 920px;
+        padding: 70px 64px 60px;
+      }
+      .slide-5 .eyebrow {
+        color: var(--gold);
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .slide-5 h2 {
+        color: var(--forest);
+        font-size: 64px;
+        line-height: 0.96;
+        margin-top: 20px;
+      }
+      .slide-5 .gold-rule {
+        margin: 24px 0;
+      }
+      .slide-5 .lede {
+        color: var(--ink);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 24px;
+        line-height: 1.32;
+      }
+      .slide-5 .offer {
+        color: var(--forest);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-size: 32px;
+        line-height: 1.18;
+        margin-top: 28px;
+      }
+      .slide-5 .terms {
+        color: var(--muted);
+        font-family: "Inter", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.12em;
+        margin-top: 12px;
+        text-transform: uppercase;
+      }
+      .slide-5 .url {
+        bottom: 60px;
+        color: var(--forest);
+        font-family: "Inter", sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        left: 80px;
+        letter-spacing: 0.05em;
+        position: absolute;
+        z-index: 3;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="review">
+      <!-- COVER -->
+      <section class="slide slide-1" id="slide-1" aria-label="Slide 1">
+        <div class="still-life" aria-hidden="true"></div>
+        <img class="hummingbird-logo" src="../2026-06-07-peptide-therapy-carousel/vh-bird-logo.png" alt="" />
+        <div class="cream-card">
+          <h1>Regenerative<br />medicine</h1>
+          <div class="gold-rule"></div>
+          <p class="support">
+            Care that supports your body's own repair processes, guided by your labs, history,
+            and goals.
+          </p>
+          <p class="close">Vital Health can help.</p>
+        </div>
+      </section>
+
+      <!-- DEFINITION -->
+      <section class="slide slide-2" id="slide-2" aria-label="Slide 2">
+        <div class="still-life" aria-hidden="true"></div>
+        <img class="hummingbird-logo" src="../2026-06-07-peptide-therapy-carousel/vh-bird-logo.png" alt="" />
+        <div class="cream-card">
+          <p class="eyebrow">Definition</p>
+          <h2>A category of care, not one protocol.</h2>
+          <div class="gold-rule"></div>
+          <p class="body-text">
+            Regenerative medicine is a clinical lane that supports the body's own healing and
+            repair. <em>It is shaped by your goals, your history, and your labs.</em>
+          </p>
+        </div>
+      </section>
+
+      <!-- WHEN CONSIDERED -->
+      <section class="slide slide-3" id="slide-3" aria-label="Slide 3">
+        <div class="still-life" aria-hidden="true"></div>
+        <img class="hummingbird-logo" src="../2026-06-07-peptide-therapy-carousel/vh-bird-logo.png" alt="" />
+        <p class="pull">May be considered when clinically appropriate.</p>
+        <div class="text">
+          <p class="eyebrow">When it may be considered</p>
+          <h2>Where the conversation usually starts.</h2>
+          <div class="gold-rule"></div>
+          <ul class="scenarios">
+            <li>Recovery from injury or procedures</li>
+            <li>Joint, tendon, and connective tissue care</li>
+            <li>Persistent fatigue and slow recovery</li>
+            <li>Hormonal and metabolic support during healing</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- HOW VITAL HEALTH DECIDES -->
+      <section class="slide slide-4" id="slide-4" aria-label="Slide 4">
+        <div class="accent-band" aria-hidden="true">
+          <div class="still-life"></div>
+        </div>
+        <img class="hummingbird-logo" src="../2026-06-07-peptide-therapy-carousel/vh-bird-logo.png" alt="" />
+        <div class="body">
+          <p class="eyebrow">How Vital Health thinks through it</p>
+          <h2>Decided one patient at a time.</h2>
+          <div class="gold-rule"></div>
+          <div class="frame">
+            <div class="frame-cell">
+              <p class="label">Indication</p>
+              <p class="desc">What question is the care plan trying to answer.</p>
+            </div>
+            <div class="frame-cell">
+              <p class="label">History</p>
+              <p class="desc">Medications, prior care, and relevant conditions.</p>
+            </div>
+            <div class="frame-cell">
+              <p class="label">Labs</p>
+              <p class="desc">Baseline biomarkers that shape the plan.</p>
+            </div>
+            <div class="frame-cell">
+              <p class="label">Risk</p>
+              <p class="desc">What matters specifically for you.</p>
+            </div>
+            <div class="frame-cell">
+              <p class="label">Outcomes</p>
+              <p class="desc">Realistic expectations, set in writing.</p>
+            </div>
+            <div class="frame-cell">
+              <p class="label">Monitoring</p>
+              <p class="desc">How we measure progress over time.</p>
+            </div>
+          </div>
+          <p class="closing">
+            Not pulled from a menu. Not a trend. A clinical decision shaped by what is in front of
+            us.
+          </p>
+        </div>
+      </section>
+
+      <!-- HOW TO ASK -->
+      <section class="slide slide-5" id="slide-5" aria-label="Slide 5">
+        <div class="still-life" aria-hidden="true"></div>
+        <img class="hummingbird-logo" src="../2026-06-07-peptide-therapy-carousel/vh-bird-logo.png" alt="" />
+        <div class="cream-card">
+          <p class="eyebrow">How to ask Vital Health</p>
+          <h2>Bring your history, your imaging, and your questions.</h2>
+          <div class="gold-rule"></div>
+          <p class="lede">
+            We will walk through what is clinically appropriate, what labs and imaging should come
+            first, and how we would measure progress over time.
+          </p>
+          <p class="offer">Complimentary 60 minute consultation.</p>
+          <p class="terms">No cost. No commitment.</p>
+        </div>
+        <p class="url">vitalhealth.com</p>
+      </section>
+    </main>
+  </body>
+</html>

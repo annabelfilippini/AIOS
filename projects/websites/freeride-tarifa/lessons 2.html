@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Freeride Tarifa Lessons</title>
+  <meta name="description" content="Freeride Tarifa kitesurfing lesson levels, prices, course roadmap and IKO certification syllabus.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111516'/%3E%3Cpath d='M32 8 52 32 32 56 12 32Z' fill='%2354d894'/%3E%3Cpath d='M32 16 44 32 32 48 20 32Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111516;
+      --soft: #c8ccce;
+      --line: #e4e7e8;
+      --paper: #fbfbf8;
+      --white: #ffffff;
+      --green: #54d894;
+      --green-dark: #279568;
+      --blue: #3757d8;
+      color-scheme: light;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Work Sans", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .topbar {
+      position: fixed;
+      z-index: 30;
+      inset: 0 0 auto 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      min-height: 5rem;
+      padding: 0 clamp(1rem, 4vw, 4rem);
+      color: var(--ink);
+      border-bottom: 1px solid rgba(12, 17, 18, 0.1);
+      background: rgba(251, 251, 248, 0.94);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      width: min(11rem, 40vw);
+    }
+
+    .brand img {
+      height: auto;
+      object-fit: contain;
+    }
+
+    .top-tabs {
+      display: flex;
+      justify-self: center;
+      gap: clamp(0.6rem, 2vw, 2rem);
+    }
+
+    .top-tabs a {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .top-tabs a:hover {
+      opacity: 1;
+    }
+
+    .top-tabs a.is-active {
+      opacity: 1;
+      border-bottom-color: var(--green);
+    }
+
+    .top-action {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.6rem;
+      padding: 0 1.1rem;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .section-shell {
+      display: grid;
+      grid-template-columns: minmax(12rem, 17rem) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 6rem);
+      width: min(100%, 116rem);
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: clamp(7.5rem, 9vw, 9rem) clamp(1rem, 4vw, 4rem) clamp(4rem, 8vw, 7rem);
+    }
+
+    .side-rail {
+      position: sticky;
+      top: 7.4rem;
+      align-self: start;
+      display: grid;
+      grid-template-columns: 2.4rem 1fr;
+      gap: 1.15rem;
+      padding-top: 1.8rem;
+    }
+
+    .rail-count {
+      color: var(--ink);
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .rail-links {
+      position: relative;
+      display: grid;
+      padding-left: 1.1rem;
+    }
+
+    .rail-links::before {
+      content: "";
+      position: absolute;
+      top: 2.65rem;
+      bottom: 2.65rem;
+      left: 0;
+      width: 1px;
+      background: var(--ink);
+    }
+
+    .rail-links a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 4.55rem;
+      color: var(--soft);
+      font-size: 0.9rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .rail-links a::before {
+      content: "";
+      position: absolute;
+      left: -1.22rem;
+      width: 0.28rem;
+      height: 2.2rem;
+      background: transparent;
+    }
+
+    .rail-links a.is-active {
+      color: var(--ink);
+    }
+
+    .rail-links a.is-active::before {
+      background: var(--ink);
+    }
+
+    .content-stack {
+      display: grid;
+      gap: clamp(4rem, 8vw, 8rem);
+    }
+
+    .content-block {
+      scroll-margin-top: 7rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2 {
+      max-width: 55rem;
+      color: var(--ink);
+      font-size: clamp(2.4rem, 4.4vw, 4.8rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      color: var(--ink);
+      font-size: clamp(1.7rem, 2.5vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.05;
+    }
+
+    .lead {
+      max-width: 48rem;
+      margin-top: 1.35rem;
+      color: var(--ink);
+      font-size: clamp(1.04rem, 1.35vw, 1.25rem);
+      font-weight: 500;
+      line-height: 1.55;
+    }
+
+    .image-panel {
+      min-height: 16rem;
+      background: var(--line);
+    }
+
+    .lesson-levels,
+    .pricing-grid,
+    .roadmap,
+    .syllabus {
+      display: grid;
+      gap: 1px;
+      margin-top: 2.8rem;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .lesson-levels {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .lesson-level {
+      display: grid;
+      grid-template-rows: 16rem 1fr;
+      min-height: 28rem;
+      background: var(--white);
+    }
+
+    .lesson-level-copy {
+      display: grid;
+      align-content: space-between;
+      gap: 1.4rem;
+      min-height: 14rem;
+      padding: 1.3rem;
+    }
+
+    .lesson-level-copy span {
+      color: var(--blue);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .lesson-level-copy p,
+    .road-step p,
+    .note-line {
+      color: rgba(17, 21, 22, 0.7);
+      font-size: 0.92rem;
+      line-height: 1.58;
+    }
+
+    .pricing-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .price-plan {
+      background: var(--white);
+    }
+
+    .price-head {
+      min-height: 13rem;
+      display: grid;
+      align-content: space-between;
+      gap: 1.2rem;
+      padding: 1rem;
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .price-plan:nth-child(even) .price-head {
+      background: var(--blue);
+    }
+
+    .price-head small {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .price-head strong {
+      font-size: 2.3rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .price-head span {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .price-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .price-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      border-top: 1px solid var(--line);
+      color: rgba(17, 21, 22, 0.68);
+      font-size: 0.95rem;
+    }
+
+    .price-list strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .roadmap {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .road-step {
+      min-height: 18rem;
+      display: grid;
+      align-content: space-between;
+      gap: 2rem;
+      padding: 1.2rem;
+      background: var(--white);
+    }
+
+    .road-step small,
+    .syllabus-item small {
+      color: var(--blue);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .road-step strong,
+    .syllabus-item strong {
+      color: var(--ink);
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .syllabus {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    }
+
+    .syllabus-title {
+      min-height: 24rem;
+      display: grid;
+      align-content: end;
+      gap: 1rem;
+      padding: 1.3rem;
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .syllabus-title strong {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 800;
+      line-height: 0.95;
+    }
+
+    .syllabus-title p {
+      max-width: 26rem;
+      color: rgba(255, 255, 255, 0.76);
+      line-height: 1.55;
+    }
+
+    .syllabus-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+    }
+
+    .syllabus-item {
+      min-height: 12rem;
+      display: grid;
+      align-content: space-between;
+      gap: 1rem;
+      padding: 1.2rem;
+      background: var(--white);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.3rem clamp(1rem, 4vw, 4rem);
+      border-top: 1px solid var(--line);
+      color: rgba(17, 21, 22, 0.58);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1100px) {
+      .section-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .side-rail {
+        position: relative;
+        top: auto;
+        grid-template-columns: 1fr;
+        padding-top: 0;
+      }
+
+      .rail-links {
+        grid-template-columns: repeat(3, 1fr);
+        padding-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .rail-links::before,
+      .rail-links a::before {
+        display: none;
+      }
+
+      .rail-links a {
+        min-height: 3.4rem;
+        border-right: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .topbar {
+        grid-template-columns: 1fr auto;
+      }
+
+      .top-tabs {
+        display: none;
+      }
+
+      .section-shell {
+        padding-top: 8rem;
+      }
+
+      .lesson-levels,
+      .pricing-grid,
+      .roadmap,
+      .syllabus,
+      .syllabus-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .rail-links {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      h1,
+      h2 {
+        font-size: clamp(2.4rem, 11vw, 3.8rem);
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+    }
+
+    /* ---------- scroll reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.75s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition-delay: var(--rd, 0s);
+      will-change: opacity, transform;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Freeride Tarifa home">
+      <img src="https://freeridetarifa.com/wp-content/uploads/2017/11/LogotypeStickyMenu-Freeride_Tarifa.png" alt="Freeride Tarifa">
+    </a>
+    <nav class="top-tabs" aria-label="Main sections">
+      <a href="index.html">Freeride</a>
+      <a class="is-active" href="lessons.html">Lessons</a>
+      <a href="rent.html">Rent gear</a>
+      <a href="tarifa.html">Tarifa</a>
+      <a href="stay.html">Stay</a>
+    </nav>
+    <a class="top-action" href="https://wa.me/34601655993">WhatsApp</a>
+  </header>
+
+  <main>
+    <section class="section-shell" id="lessons">
+      <aside class="side-rail" aria-label="Lessons section navigation">
+        <span class="rail-count">01</span>
+        <nav class="rail-links" data-rail="lessons">
+          <a href="#lessons-levels">Levels</a>
+          <a href="#lessons-pricing">Pricing</a>
+          <a href="#lessons-roadmap">Course roadmap</a>
+          <a href="#lessons-syllabus">IKO syllabus</a>
+        </nav>
+      </aside>
+
+      <div class="content-stack">
+        <article class="content-block reveal" id="lessons-levels" data-rail-target="lessons">
+          <h1>Lessons</h1>
+          <p class="lead">Freeride teaches beginners through advanced riders. Choose the level that fits your riding, then compare the lesson format, roadmap and IKO certification path.</p>
+          <div class="lesson-levels">
+            <article class="lesson-level">
+              <div class="image-panel">
+                <img src="https://freeridetarifa.com/wp-content/uploads/2026/03/Beginner-Kitespot-Tarifa-freeridetarifa.jpg" alt="Beginner kitesurf lesson in Tarifa">
+              </div>
+              <div class="lesson-level-copy">
+                <span>Beginner</span>
+                <h3>Discovery course</h3>
+                <p>For first timers who need kite control, safety, wind window basics and confidence before the board becomes the focus.</p>
+              </div>
+            </article>
+            <article class="lesson-level">
+              <div class="image-panel">
+                <img src="https://freeridetarifa.com/wp-content/uploads/2026/03/Rescue-board-by-instructor-freeridetarifa.jpg" alt="Intermediate kitesurf lesson support in Tarifa">
+              </div>
+              <div class="lesson-level-copy">
+                <span>Intermediate</span>
+                <h3>Water start and first rides</h3>
+                <p>For riders building body drag, power control, water start, first rides and the path toward independence.</p>
+              </div>
+            </article>
+            <article class="lesson-level">
+              <div class="image-panel">
+                <img src="https://freeridetarifa.com/wp-content/uploads/2026/03/Toeside-Riding-advanced-tricks-freeridetarifa.jpg" alt="Advanced kitesurfer riding toeside in Tarifa">
+              </div>
+              <div class="lesson-level-copy">
+                <span>Advanced</span>
+                <h3>Tricks and progression</h3>
+                <p>For riders who want technical coaching on toeside, jumps, loops, strapless riding or one to one progression.</p>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="content-block reveal" id="lessons-pricing" data-rail-target="lessons">
+          <h2>Pricing</h2>
+          <p class="lead">Prices are per person and include kite gear, accident insurance and liability insurance.</p>
+          <div class="pricing-grid">
+            <article class="price-plan">
+              <div class="price-head">
+                <small>4 persons</small>
+                <strong>Group</strong>
+                <span>1 instructor, 1 kite for 2. 3 hours per day.</span>
+              </div>
+              <ul class="price-list">
+                <li><span>1 day</span><strong>75 EUR</strong></li>
+                <li><span>2 days</span><strong>150 EUR</strong></li>
+                <li><span>3 days</span><strong>220 EUR</strong></li>
+                <li><span>4 days</span><strong>290 EUR</strong></li>
+                <li><span>5 days</span><strong>350 EUR</strong></li>
+              </ul>
+            </article>
+            <article class="price-plan">
+              <div class="price-head">
+                <small>2 persons</small>
+                <strong>Couple</strong>
+                <span>1 instructor, 1 kite for 2. 3 hours per day.</span>
+              </div>
+              <ul class="price-list">
+                <li><span>1 day</span><strong>110 EUR</strong></li>
+                <li><span>2 days</span><strong>220 EUR</strong></li>
+                <li><span>3 days</span><strong>330 EUR</strong></li>
+                <li><span>4 days</span><strong>420 EUR</strong></li>
+                <li><span>5 days</span><strong>500 EUR</strong></li>
+              </ul>
+            </article>
+            <article class="price-plan">
+              <div class="price-head">
+                <small>2 persons</small>
+                <strong>Semi private</strong>
+                <span>1 instructor, 2 kites for 2. 3 hours per day.</span>
+              </div>
+              <ul class="price-list">
+                <li><span>1 day</span><strong>135 EUR</strong></li>
+                <li><span>2 days</span><strong>260 EUR</strong></li>
+                <li><span>3 days</span><strong>370 EUR</strong></li>
+                <li><span>4 days</span><strong>480 EUR</strong></li>
+                <li><span>5 days</span><strong>580 EUR</strong></li>
+              </ul>
+            </article>
+            <article class="price-plan">
+              <div class="price-head">
+                <small>1 person</small>
+                <strong>Private</strong>
+                <span>1 instructor, 1 kite for 1. 2 hours per day.</span>
+              </div>
+              <ul class="price-list">
+                <li><span>1 day</span><strong>140 EUR</strong></li>
+                <li><span>2 days</span><strong>280 EUR</strong></li>
+                <li><span>3 days</span><strong>410 EUR</strong></li>
+                <li><span>4 days</span><strong>540 EUR</strong></li>
+                <li><span>5 days</span><strong>675 EUR</strong></li>
+              </ul>
+            </article>
+          </div>
+        </article>
+
+        <article class="content-block reveal" id="lessons-roadmap" data-rail-target="lessons">
+          <h2>Course roadmap</h2>
+          <p class="lead">The course starts with kite control because most early progress depends on reading the wind, handling power and staying safe before the board becomes the focus.</p>
+          <div class="roadmap">
+            <article class="road-step">
+              <small>Step 1 · about 4 hours</small>
+              <strong>Discovery</strong>
+              <p>Kite control, safety, wind direction, gear setup, launch and landing.</p>
+            </article>
+            <article class="road-step">
+              <small>Step 2 · about 3 hours</small>
+              <strong>Intermediate A</strong>
+              <p>Body dragging, power stroke and moving through the water without the board.</p>
+            </article>
+            <article class="road-step">
+              <small>Step 3 · about 6 hours</small>
+              <strong>Intermediate B</strong>
+              <p>Water start, first rides, board handling and building consistency.</p>
+            </article>
+            <article class="road-step">
+              <small>Step 4 · ongoing</small>
+              <strong>Independent</strong>
+              <p>Consistent riding, upwind work, supervision and advanced progression.</p>
+            </article>
+          </div>
+        </article>
+
+        <article class="content-block reveal" id="lessons-syllabus" data-rail-target="lessons">
+          <h2>IKO certification syllabus</h2>
+          <p class="lead">The IKO levels give riders a clear progression from first kite handling through independent and advanced riding.</p>
+          <div class="syllabus">
+            <div class="syllabus-title">
+              <strong>IKO levels</strong>
+              <p>Freeride lists four IKO stages from first kite handling through advanced riding.</p>
+            </div>
+            <div class="syllabus-list">
+              <article class="syllabus-item">
+                <small>IKO Lv.1</small>
+                <strong>Discovery</strong>
+                <p class="note-line">Introduction to kitesurfing, kite control and safety.</p>
+              </article>
+              <article class="syllabus-item">
+                <small>IKO Lv.2</small>
+                <strong>Intermediate</strong>
+                <p class="note-line">Body drag, power control and preparation for first rides.</p>
+              </article>
+              <article class="syllabus-item">
+                <small>IKO Lv.3</small>
+                <strong>Independent</strong>
+                <p class="note-line">Consistent riding, confidence and safer independent practice.</p>
+              </article>
+              <article class="syllabus-item">
+                <small>IKO Lv.4</small>
+                <strong>Advanced</strong>
+                <p class="note-line">Technical progression, tricks and stronger rider control.</p>
+              </article>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Freeride Tarifa</span>
+    <span>IKO lessons · Gear included</span>
+  </footer>
+
+  <script>
+    const railLinks = [...document.querySelectorAll(".rail-links a")];
+    const railTargets = [...document.querySelectorAll("[data-rail-target]")];
+
+    const setActive = (items, activeItem) => {
+      items.forEach((item) => item.classList.toggle("is-active", item === activeItem));
+    };
+
+    const railObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const railName = entry.target.dataset.railTarget;
+        const railItems = railLinks.filter((link) => link.closest("[data-rail]")?.dataset.rail === railName);
+        const activeRail = railItems.find((link) => link.getAttribute("href") === `#${entry.target.id}`);
+        if (activeRail) setActive(railItems, activeRail);
+      });
+    }, { rootMargin: "-35% 0px -50% 0px", threshold: 0.01 });
+
+    railTargets.forEach((target) => railObserver.observe(target));
+    document.querySelector('[href="#lessons-levels"]')?.classList.add("is-active");
+
+    // scroll reveal: fade + lift elements as they enter view
+    (() => {
+      const revealEls = document.querySelectorAll(".reveal");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (revealEls.length && "IntersectionObserver" in window && !reduceMotion) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add("in"); io.unobserve(entry.target); }
+          });
+        }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add("in"));
+      }
+    })();
+  </script>
+</body>
+</html>

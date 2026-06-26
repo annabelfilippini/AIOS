@@ -569,6 +569,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self._json(200, self._calendar(self.path))
         if route == "/api/style":
             return self._json(200, _read_style_summary())
+        if route == "/api/looks":
+            return self._json(200, self._looks(self.path))
         if route == "/api/emails":
             return self._json(200, self._emails())
         if route == "/api/inbox":
@@ -615,6 +617,24 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return snap
         except Exception:
             return {"events": [], "generatedAt": "", "live": False}
+
+    def _looks(self, path=""):
+        """Per-event looks from The Edit's taste engine over today's calendar.
+        Reuses the same live calendar pull as /api/calendar."""
+        cal = self._calendar(path)
+        events = cal.get("events", [])
+        try:
+            if str(STYLE_ROOT) not in sys.path:
+                sys.path.insert(0, str(STYLE_ROOT))
+            import style_engine
+            closet = style_engine.load_closet()
+            looks = style_engine.build_week(events, closet)
+            if not looks:  # nothing outfit-driving today → her everyday lane
+                looks = [style_engine.build_look("Everyday", closet, "casual")]
+        except Exception as ex:
+            print("  looks build failed:", ex)
+            looks = []
+        return {"looks": looks, "live": cal.get("live", False)}
 
     def _emails(self):
         import os

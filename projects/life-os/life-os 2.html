@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life OS — The Day · The Edit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3efe9;--card:#faf8f4;--ink:#1b1916;--accent:#3a352d;--muted:#7c756a;
+    --line:#e0d9cd;--love:#b54b5a;--tile:#fff;
+    --fn-move:#7e8a6b;--fn-travel:#7e95a3;--fn-social:#b54b5a;--fn-home:#a99f8f;--fn-focus:#3a352d;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif;--r:8px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);background:var(--bg);
+    -webkit-font-smoothing:antialiased}
+  .shell{max-width:880px;margin:0 auto;padding:30px 22px 90px}
+
+  /* top bar */
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .brand{font-family:var(--serif);font-weight:500;font-size:23px;letter-spacing:.02em}
+  .brand small{font-family:var(--sans);font-weight:400;font-size:9px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--muted);display:block;margin-top:1px}
+  .tabs{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:4px}
+  .tabs button{border:0;background:transparent;cursor:pointer;color:var(--muted);
+    font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    padding:9px 18px;border-radius:24px;transition:.18s}
+  .tabs button.on{background:var(--ink);color:var(--card)}
+
+  .view{display:none}
+  .view.on{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .daterow{display:flex;align-items:baseline;gap:14px;margin:22px 0 18px}
+  .date-title{font-family:var(--serif);font-weight:500;font-size:34px;line-height:1;margin:0}
+  .date-sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+  /* timeline */
+  .tl{position:relative;margin-left:8px;padding-left:26px;border-left:1px solid var(--line)}
+  .ev{position:relative;padding:0 0 26px}
+  .ev .dot{position:absolute;left:-33px;top:4px;width:12px;height:12px;border-radius:50%;
+    background:var(--fn);border:2px solid var(--bg)}
+  .ev .time{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted)}
+  .ev .ttl{font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.1;margin:2px 0 0}
+  .ev .kind{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fn);
+    margin-top:3px;font-weight:400}
+  /* outfit chip */
+  .chip{display:inline-flex;align-items:center;gap:10px;margin-top:11px;cursor:pointer;
+    background:var(--card);border:1px solid var(--line);border-radius:40px;padding:6px 14px 6px 6px;
+    transition:.18s;text-align:left}
+  .chip:hover{border-color:var(--accent);transform:translateX(2px)}
+  .chip .thumb{width:34px;height:42px;border-radius:6px;object-fit:cover;background:var(--tile);flex:none}
+  .chip .ct{line-height:1.2}
+  .chip .ct b{font-family:var(--serif);font-weight:500;font-size:15px;display:block;color:var(--ink)}
+  .chip .ct span{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .chip .arr{margin-left:4px;color:var(--accent);font-family:var(--serif);font-size:18px}
+  .chip.muted{cursor:default;opacity:.85}
+  .chip.muted:hover{transform:none;border-color:var(--line)}
+
+  .upnext{margin-top:30px;border-top:1px solid var(--line);padding-top:20px}
+  .upnext .h{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .upgrid{display:flex;gap:12px;flex-wrap:wrap}
+  .upcard{flex:1;min-width:200px;display:flex;gap:10px;align-items:center;background:var(--card);
+    border:1px solid var(--line);border-radius:var(--r);padding:10px;cursor:pointer;transition:.18s}
+  .upcard:hover{border-color:var(--accent)}
+  .upcard img{width:40px;height:50px;border-radius:6px;object-fit:cover;flex:none}
+  .upcard .d{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .upcard .t{font-family:var(--serif);font-size:17px;font-weight:500;line-height:1.1;margin-top:2px}
+
+  /* ===== THE EDIT ===== */
+  .nuuly{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 22px;margin:22px 0 6px;display:flex;gap:14px;align-items:flex-start}
+  .nuuly .star{font-family:var(--serif);font-size:26px;line-height:1;color:var(--accent)}
+  .nuuly h3{font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 4px}
+  .nuuly p{margin:0;font-size:13px;color:var(--muted);max-width:64ch}
+  .nuuly b{color:var(--ink);font-weight:400}
+  .look{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:24px;margin-top:20px;scroll-margin-top:20px}
+  .look.flash{animation:flash 1.4s ease}
+  @keyframes flash{0%{box-shadow:0 0 0 0 rgba(126,149,163,.0)}25%{box-shadow:0 0 0 3px rgba(126,149,163,.5)}100%{box-shadow:0 0 0 0 rgba(126,149,163,0)}}
+  .occ{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    border-bottom:1px solid var(--line);padding-bottom:13px;margin-bottom:18px}
+  .occ h2{font-family:var(--serif);font-weight:600;font-size:27px;margin:0}
+  .occ .for{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+    display:inline-flex;align-items:center;gap:6px}
+  .occ .for .dt{width:7px;height:7px;border-radius:50%;background:var(--fn)}
+  .pieces{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:13px}
+  .pc{display:flex;flex-direction:column;position:relative}
+  .frame{aspect-ratio:3/4;background:var(--tile);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .frame img{width:100%;height:100%;object-fit:cover}
+  .pc .lbl{font-size:11px;letter-spacing:.03em;margin-top:7px}
+  .pc .sub{font-size:10.5px;color:var(--muted)}
+  .tag{position:absolute;top:7px;left:7px;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:3px 7px;border-radius:20px;background:rgba(27,25,22,.74);color:var(--card)}
+  .tag.own{background:rgba(58,53,45,.14);color:var(--accent)}
+  .note{margin-top:18px;font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45}
+  .elevate{margin-top:13px;font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:11px}
+  .elevate b{font-weight:500;color:var(--accent);font-style:normal;letter-spacing:.02em}
+  .bk{display:inline-flex;align-items:center;gap:6px;margin-top:16px;background:transparent;border:0;
+    color:var(--muted);font-family:var(--sans);font-size:10px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+  .bk:hover{color:var(--accent)}
+  footer{text-align:center;margin-top:40px;font-size:11px;color:var(--muted);letter-spacing:.04em;line-height:1.8}
+  .legend{display:inline-flex;gap:14px;margin-top:5px}
+  .legend span{font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+  .sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="top">
+    <div class="brand">Life OS<small>Annabel</small></div>
+    <div class="tabs">
+      <button id="t-day" class="on" onclick="show('day')">The Day</button>
+      <button id="t-edit" onclick="show('edit')">The Edit</button>
+    </div>
+  </div>
+
+  <!-- ============ THE DAY ============ -->
+  <section id="day" class="view on">
+    <div class="daterow">
+      <h1 class="date-title">Thursday, June 25</h1>
+      <div class="date-sub">Today · then Vail</div>
+    </div>
+
+    <div class="tl">
+      <div class="ev" style="--fn:var(--fn-move)">
+        <div class="dot"></div>
+        <div class="time">6:30 AM</div>
+        <div class="ttl">Strength</div>
+        <div class="kind">Movement</div>
+        <div class="chip muted"><span class="ct"><b>Black set + sneakers</b><span>Athleisure</span></span></div>
+      </div>
+
+      <div class="ev" style="--fn:var(--fn-travel)">
+        <div class="dot"></div>
+        <div class="time">10:45 AM</div>
+        <div class="ttl">Airport · Flight</div>
+        <div class="kind">Travel</div>
+        <button class="chip" onclick="goLook('travel')">
+          <img class="thumb" src="https://s7d2.scene7.com/is/image/nu/108276783_010_b?wid=400&fmt=jpeg" alt="">
+          <span class="ct"><b>Airport &amp; Travel</b><span>Madewell · AGOLDE · hoodie</span></span>
+          <span class="arr">›</span>
+        </button>
+      </div>
+
+      <div class="ev" style="--fn:var(--fn-social)">
+        <div class="dot"></div>
+        <div class="time">2:30 PM</div>
+        <div class="ttl">Mommy time — pictures</div>
+        <div class="kind">Social</div>
+        <button class="chip" onclick="goLook('pics')">
+          <img class="thumb" src="https://s7d2.scene7.com/is/image/nu/109813840_010_b?wid=400&fmt=jpeg" alt="">
+          <span class="ct"><b>Family Pictures</b><span>Broderie top · ecru shorts</span></span>
+          <span class="arr">›</span>
+        </button>
+      </div>
+
+      <div class="ev" style="--fn:var(--fn-home)">
+        <div class="dot"></div>
+        <div class="time">7:00 PM</div>
+        <div class="ttl">Mahjong with Mom</div>
+        <div class="kind">Home</div>
+        <div class="chip muted"><span class="ct"><b>Stay in the pictures look</b><span>Or the cloud hoodie</span></span></div>
+      </div>
+    </div>
+
+    <div class="upnext">
+      <div class="h">Coming up · Vail weekend</div>
+      <div class="upgrid">
+        <div class="upcard" onclick="goLook('birthday')">
+          <img src="https://s7d2.scene7.com/is/image/nu/106502966_010_b?wid=400&fmt=jpeg" alt="">
+          <div><div class="d">Fri · Alex's birthday</div><div class="t">Dinner look</div></div>
+        </div>
+        <div class="upcard" onclick="goLook('vail')">
+          <img src="https://s7d2.scene7.com/is/image/nu/94682457_010_b?wid=400&fmt=jpeg" alt="">
+          <div><div class="d">Sat · Vail</div><div class="t">Daytime look</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE EDIT ============ -->
+  <section id="edit" class="view">
+    <div class="daterow">
+      <h1 class="date-title">The Edit</h1>
+      <div class="date-sub">From your closet · this week</div>
+    </div>
+
+    <div class="nuuly">
+      <div class="star">✶</div>
+      <div>
+        <h3>Styled around your current Nuuly box</h3>
+        <p>Your six right now: <b>Free People Forevermore</b>, <b>Madewell Leah 60's</b>, <b>Anthropologie ruched tee</b>, <b>Zemeta bell lace</b>, <b>Dolan flutter lace</b>, <b>Native Youth broderie</b>. Each look below is pinned to an event on your day.</p>
+      </div>
+    </div>
+
+    <!-- TRAVEL -->
+    <div class="look" id="travel">
+      <div class="occ"><h2>Airport &amp; Travel</h2><div class="for"><span class="dt" style="--fn:var(--fn-travel)"></span>Today · 10:45 flight</div></div>
+      <div class="pieces">
+        <div class="pc"><div class="frame"><img src="https://s7d2.scene7.com/is/image/nu/108276783_010_b?wid=800&fmt=jpeg" alt=""></div><span class="tag own">Nuuly</span><div class="lbl">Leah 60's Top</div><div class="sub">Madewell · White</div></div>
+        <div class="pc"><div class="frame"><img src="https://agolde.com/cdn/shop/files/A260-1371_LOW_RISE_LOOSE_VAULT_1168.jpg?width=800" alt=""></div><span class="tag">My guess · jeans</span><div class="lbl">Low Rise Loose</div><div class="sub">AGOLDE · Mid wash</div></div>
+        <div class="pc"><div class="frame"><img src="https://assets.aritzia.com/image/upload/medium/s26_a03_116266_19451_off_a.jpg" alt=""></div><span class="tag own">Yours</span><div class="lbl">Sweatfleece Hoodie</div><div class="sub">Aritzia · Cloud White</div></div>
+        <div class="pc"><div class="frame"><img src="https://image.goat.com/attachments/product_template_pictures/images/105/369/185/original/1402217_00.png.png" alt=""></div><span class="tag own">Yours</span><div class="lbl">Mexico 66</div><div class="sub">Onitsuka · Grey</div></div>
+      </div>
+      <div class="note">White Madewell top, relaxed mid-wash jeans, hoodie for the cabin, grey Mexico 66s. Soft for the flight, still pulled together at the gate.</div>
+      <div class="elevate"><b>To elevate</b> &nbsp;A Dairy Boy cap and gold hoops. Swap to ecru shorts if you'd rather not fly in denim.</div>
+      <button class="bk" onclick="show('day')">‹ Back to the day</button>
+    </div>
+
+    <!-- PICS -->
+    <div class="look" id="pics">
+      <div class="occ"><h2>Family Pictures</h2><div class="for"><span class="dt" style="--fn:var(--fn-social)"></span>Today · 2:30 pm</div></div>
+      <div class="pieces">
+        <div class="pc"><div class="frame"><img src="https://s7d2.scene7.com/is/image/nu/109813840_010_b?wid=800&fmt=jpeg" alt=""></div><span class="tag own">Nuuly</span><div class="lbl">Broderie Back-Tie Top</div><div class="sub">Native Youth · White</div></div>
+        <div class="pc"><div class="frame"><img src="https://static.zara.net/photos//assets/public/16c7/33e9/4f94499ea4b2/dbe6ec322f48/05770025712-f1/05770025712-f1.jpg" alt=""></div><span class="tag own">Yours</span><div class="lbl">Embroidered Shorts</div><div class="sub">Zara · Ecru</div></div>
+        <div class="pc"><div class="frame"><img src="https://cdn-images.farfetch-contents.com/21/44/90/10/21449010_51590755_200.jpg" alt=""></div><span class="tag own">Yours</span><div class="lbl">Mexico 66</div><div class="sub">Onitsuka · Birch</div></div>
+      </div>
+      <div class="note">Broderie white top, ecru embroidered shorts, birch sneakers. All cream-on-cream, photographs clean, nothing competing with faces.</div>
+      <div class="elevate"><b>To elevate</b> &nbsp;Gold jewelry and a brown leather bag to warm the cream for the camera.</div>
+      <button class="bk" onclick="show('day')">‹ Back to the day</button>
+    </div>
+
+    <!-- BIRTHDAY -->
+    <div class="look" id="birthday">
+      <div class="occ"><h2>Alex's Birthday — Vail</h2><div class="for"><span class="dt" style="--fn:var(--fn-social)"></span>Fri evening · dinner</div></div>
+      <div class="pieces">
+        <div class="pc"><div class="frame"><img src="https://s7d2.scene7.com/is/image/nu/106502966_010_b?wid=800&fmt=jpeg" alt=""></div><span class="tag own">Nuuly</span><div class="lbl">Bell Lace Top</div><div class="sub">Zemeta · White</div></div>
+        <div class="pc"><div class="frame"><img src="https://assets.aritzia.com/image/upload/c_crop,ar_1920:2623,g_south/q_auto,f_auto,dpr_auto/s23_04_a06_98765_1274_off_a" alt=""></div><span class="tag">My guess · trousers</span><div class="lbl">Effortless Pant · Black</div><div class="sub">Aritzia · relaxed</div></div>
+        <div class="pc"><div class="frame"><img src="https://cdn-images.farfetch-contents.com/21/44/90/10/21449010_51590755_200.jpg" alt=""></div><span class="tag own">Yours</span><div class="lbl">Mexico 66 or a heel</div><div class="sub">Onitsuka · Birch</div></div>
+      </div>
+      <div class="note">White bell-lace top tucked into sleek black trousers. Dressier than your usual but still quiet, a little romantic for a birthday dinner.</div>
+      <div class="elevate"><b>Prefer all-black?</b> &nbsp;Your Wilfred Martini satin halter with these same trousers is the sleeker version.</div>
+      <button class="bk" onclick="show('day')">‹ Back to the day</button>
+    </div>
+
+    <!-- VAIL -->
+    <div class="look" id="vail">
+      <div class="occ"><h2>Vail Daytime</h2><div class="for"><span class="dt" style="--fn:var(--fn-move)"></span>Sat · mountain casual</div></div>
+      <div class="pieces">
+        <div class="pc"><div class="frame"><img src="https://s7d2.scene7.com/is/image/nu/94682457_010_b?wid=800&fmt=jpeg" alt=""></div><span class="tag own">Nuuly</span><div class="lbl">Forevermore LS Top</div><div class="sub">Free People · White</div></div>
+        <div class="pc"><div class="frame"><img src="https://static.zara.net/photos//assets/public/36a8/9371/aa964f5f996c/f9e7a9f2a1a9/06929410044-f1/06929410044-f1.jpg" alt=""></div><span class="tag own">Yours</span><div class="lbl">Striped Shorts</div><div class="sub">Zara · Blue/White</div></div>
+        <div class="pc"><div class="frame"><img src="https://image.goat.com/attachments/product_template_pictures/images/105/369/185/original/1402217_00.png.png" alt=""></div><span class="tag own">Yours</span><div class="lbl">Mexico 66</div><div class="sub">Onitsuka · Grey</div></div>
+      </div>
+      <div class="note">Your favorite Forevermore long-sleeve over blue striped shorts and sneakers. Easy, neutral, a little coastal for the mountain morning.</div>
+      <div class="elevate"><b>To elevate</b> &nbsp;Tie the cloud hoodie over your shoulders if it stays cold up there.</div>
+      <button class="bk" onclick="show('day')">‹ Back to the day</button>
+    </div>
+
+    <footer>
+      Life OS · The Day reads your calendar, The Edit dresses it
+      <div class="legend">
+        <span><span class="sw" style="background:#3a352d"></span>My guess</span>
+        <span><span class="sw" style="background:#c9bea6"></span>Confirmed yours</span>
+      </div>
+    </footer>
+  </section>
+
+</div>
+
+<script>
+  function show(v){
+    document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on', s.id===v));
+    document.getElementById('t-day').classList.toggle('on', v==='day');
+    document.getElementById('t-edit').classList.toggle('on', v==='edit');
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  function goLook(id){
+    show('edit');
+    const el=document.getElementById(id);
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+  }
+</script>
+</body>
+</html>

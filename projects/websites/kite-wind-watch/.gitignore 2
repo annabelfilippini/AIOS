@@ -1,0 +1,4 @@
+.env
+scraper/scrape.log
+scraper/wind_alert.log
+config.js

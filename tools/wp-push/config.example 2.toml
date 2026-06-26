@@ -1,0 +1,15 @@
+# Copy this file to  wp-push.toml  and fill in the real values.
+# wp-push.toml is gitignored - it holds a credential, never commit it.
+
+# The client's WordPress site, no trailing slash.
+site_url = "https://freeridetarifa.com"
+
+# A WordPress username on that site (must be Administrator or Editor).
+username = "PASTE-WP-USERNAME"
+
+# An Application Password, NOT the login password.
+# In wp-admin: Users -> Profile -> Application Passwords -> add one named
+# "wp-push". WordPress shows a 24-character value with spaces, like:
+#   abcd EFGH ijkl MNOP qrst UVWX
+# Paste it exactly, spaces included. It can be revoked any time.
+app_password = "PASTE xxxx xxxx xxxx xxxx xxxx"

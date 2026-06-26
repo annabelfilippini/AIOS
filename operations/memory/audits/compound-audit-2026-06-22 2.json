@@ -1,0 +1,248 @@
+{
+  "generatedAt": "2026-06-22T15:35:19.481Z",
+  "totals": {
+    "skillsUnique": 22,
+    "skillFilesIncludingCopies": 32,
+    "templates": 7,
+    "memoryAndCheckpoints": 239
+  },
+  "reuse": {
+    "workhorses": 7,
+    "reusedAtLeastOnce": 22,
+    "dead": [],
+    "cold": [
+      {
+        "name": "small-business-shopify-redesign",
+        "lastUsed": "2026-05-14",
+        "coldDays": 39
+      },
+      {
+        "name": "ceo-review-lite",
+        "lastUsed": "2026-05-25",
+        "coldDays": 28
+      },
+      {
+        "name": "office-hours-lite",
+        "lastUsed": "2026-05-25",
+        "coldDays": 28
+      },
+      {
+        "name": "skool-intelligence-digest",
+        "lastUsed": "2026-05-14",
+        "coldDays": 39
+      },
+      {
+        "name": "client-proposal-pdf",
+        "lastUsed": "2026-05-31",
+        "coldDays": 22
+      }
+    ]
+  },
+  "activityByMonth": [
+    [
+      "2026-04",
+      3
+    ],
+    [
+      "2026-05",
+      80
+    ],
+    [
+      "2026-06",
+      154
+    ]
+  ],
+  "design": {
+    "fileCount": 9,
+    "globalTrunkLines": 269,
+    "files": [
+      "projects/aios-dashboard/design-system/DESIGN.md",
+      "projects/annie-intake/DESIGN.md",
+      "projects/wayloft/DESIGN.md",
+      "projects/websites/_template/design.md",
+      "projects/websites/design.md",
+      "projects/websites/freeride-tarifa/design.md",
+      "projects/websites/freeyourmind-tarifa/design.md",
+      "projects/websites/kite-wind-watch/design.md",
+      "projects/websites/vital-health-review/media/design.md"
+    ]
+  },
+  "skills": [
+    {
+      "name": "checkpoint",
+      "copies": 2,
+      "refs": 113,
+      "firstUsed": "2026-04-27",
+      "lastUsed": "2026-06-21",
+      "coldDays": 1
+    },
+    {
+      "name": "geo",
+      "copies": 1,
+      "refs": 15,
+      "firstUsed": "2026-05-12",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "instagram-carousel",
+      "copies": 1,
+      "refs": 13,
+      "firstUsed": "2026-05-31",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "client-website-refresh",
+      "copies": 1,
+      "refs": 11,
+      "firstUsed": "2026-05-31",
+      "lastUsed": "2026-06-21",
+      "coldDays": 1
+    },
+    {
+      "name": "small-business-shopify-redesign",
+      "copies": 1,
+      "refs": 4,
+      "firstUsed": "2026-05-11",
+      "lastUsed": "2026-05-14",
+      "coldDays": 39
+    },
+    {
+      "name": "webflow-rebuild-qa",
+      "copies": 1,
+      "refs": 4,
+      "firstUsed": "2026-05-31",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "client-opportunity-map",
+      "copies": 1,
+      "refs": 3,
+      "firstUsed": "2026-05-13",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "ceo-review-lite",
+      "copies": 2,
+      "refs": 2,
+      "firstUsed": "2026-05-21",
+      "lastUsed": "2026-05-25",
+      "coldDays": 28
+    },
+    {
+      "name": "decision-pipeline",
+      "copies": 2,
+      "refs": 2,
+      "firstUsed": "2026-04-27",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "implement-approved-plan",
+      "copies": 2,
+      "refs": 2,
+      "firstUsed": "2026-04-27",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "office-hours-lite",
+      "copies": 2,
+      "refs": 2,
+      "firstUsed": "2026-05-21",
+      "lastUsed": "2026-05-25",
+      "coldDays": 28
+    },
+    {
+      "name": "reddit-intelligence-digest",
+      "copies": 1,
+      "refs": 2,
+      "firstUsed": "2026-06-16",
+      "lastUsed": "2026-06-16",
+      "coldDays": 6
+    },
+    {
+      "name": "review-claude-plan",
+      "copies": 2,
+      "refs": 2,
+      "firstUsed": "2026-04-27",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "skool-intelligence-digest",
+      "copies": 1,
+      "refs": 2,
+      "firstUsed": "2026-05-13",
+      "lastUsed": "2026-05-14",
+      "coldDays": 39
+    },
+    {
+      "name": "adversarial-review-lite",
+      "copies": 2,
+      "refs": 1,
+      "firstUsed": "2026-06-20",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "client-proposal-pdf",
+      "copies": 1,
+      "refs": 1,
+      "firstUsed": "2026-05-31",
+      "lastUsed": "2026-05-31",
+      "coldDays": 22
+    },
+    {
+      "name": "guardrails-lite",
+      "copies": 1,
+      "refs": 1,
+      "firstUsed": "2026-06-20",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "investigate-lite",
+      "copies": 1,
+      "refs": 1,
+      "firstUsed": "2026-06-20",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "markdown-lint-operating-docs",
+      "copies": 2,
+      "refs": 1,
+      "firstUsed": "2026-06-20",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "plan-eng-review-lite",
+      "copies": 2,
+      "refs": 1,
+      "firstUsed": "2026-06-20",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    },
+    {
+      "name": "site-scraper-cli-builder",
+      "copies": 1,
+      "refs": 1,
+      "firstUsed": "2026-06-16",
+      "lastUsed": "2026-06-16",
+      "coldDays": 6
+    },
+    {
+      "name": "wayloft-qa-sweep",
+      "copies": 2,
+      "refs": 1,
+      "firstUsed": "2026-06-20",
+      "lastUsed": "2026-06-20",
+      "coldDays": 2
+    }
+  ]
+}

@@ -1,0 +1,1361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copenhagen Short Trip Planner</title>
+  <meta name="description" content="An editorial Copenhagen mini-planner with routes, places, baths, food, and shopping links.">
+  <style>
+    :root {
+      --ink: #15110d;
+      --night: #0f120d;
+      --paper: #f6efe2;
+      --cream: #fff9ed;
+      --butter: #f1d976;
+      --moss: #2f4c35;
+      --lime: #cfff34;
+      --rose: #df907f;
+      --line: rgba(21, 17, 13, 0.16);
+      --muted: rgba(21, 17, 13, 0.68);
+      --shadow: 0 22px 70px rgba(16, 14, 10, 0.18);
+      --serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      letter-spacing: 0;
+    }
+
+    body::selection {
+      background: var(--lime);
+      color: var(--ink);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      padding: 28px;
+      color: #fff9ed;
+      background:
+        linear-gradient(180deg, rgba(9, 10, 7, 0.15), rgba(9, 10, 7, 0.72)),
+        linear-gradient(90deg, rgba(9, 10, 7, 0.58), rgba(9, 10, 7, 0.04) 72%),
+        url("https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=2200&q=82") center / cover;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-nav {
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      right: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: rgba(255, 249, 237, 0.92);
+      z-index: 2;
+    }
+
+    .brand {
+      font-family: var(--serif);
+      font-size: clamp(1.45rem, 3vw, 2.4rem);
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a,
+    .pill {
+      text-decoration: none;
+      border: 1px solid rgba(255, 249, 237, 0.62);
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 18vh 0 5vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: currentColor;
+      opacity: 0.78;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 950px;
+      margin-bottom: 22px;
+      font-family: var(--serif);
+      font-size: clamp(4.4rem, 13vw, 11.2rem);
+      font-weight: 500;
+      line-height: 0.82;
+      letter-spacing: 0;
+    }
+
+    h1 em,
+    h2 em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-copy {
+      max-width: 670px;
+      font-size: clamp(1rem, 2.1vw, 1.4rem);
+      line-height: 1.55;
+      color: rgba(255, 249, 237, 0.86);
+    }
+
+    .hero-actions,
+    .section-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      border-radius: 999px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--cream);
+      padding: 11px 18px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.light {
+      background: var(--cream);
+      color: var(--ink);
+      border-color: rgba(255, 249, 237, 0.88);
+    }
+
+    .button.outline {
+      background: transparent;
+      color: inherit;
+      border-color: currentColor;
+    }
+
+    .button.lime {
+      background: var(--lime);
+      color: var(--ink);
+      border-color: var(--lime);
+    }
+
+    .section {
+      padding: clamp(64px, 9vw, 120px) 28px;
+    }
+
+    .section.dark {
+      background: var(--night);
+      color: var(--cream);
+    }
+
+    .section.green {
+      background: var(--moss);
+      color: var(--cream);
+    }
+
+    .wrap {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(260px, 0.65fr);
+      gap: clamp(26px, 5vw, 70px);
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 500;
+      line-height: 0.92;
+      margin-bottom: 0;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .dark .lede,
+    .green .lede {
+      color: rgba(255, 249, 237, 0.72);
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      border: 1px solid rgba(255, 249, 237, 0.42);
+      background: transparent;
+      color: var(--cream);
+      border-radius: 999px;
+      padding: 11px 18px;
+      cursor: pointer;
+      opacity: 0.78;
+    }
+
+    .tab[aria-selected="true"] {
+      opacity: 1;
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    .itinerary-shell {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .day-panel,
+    .route-card,
+    .shop-card,
+    .place-card,
+    .bath-card {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .day-panel {
+      background: var(--cream);
+      color: var(--ink);
+      padding: 24px;
+      min-height: 420px;
+    }
+
+    .day-title {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 0.92;
+      margin-bottom: 18px;
+    }
+
+    .day-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stop-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .stop {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: start;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 249, 237, 0.72);
+    }
+
+    .stop.done .stop-name {
+      text-decoration: line-through;
+      color: rgba(21, 17, 13, 0.45);
+    }
+
+    .stop.skipped {
+      opacity: 0.48;
+    }
+
+    .check {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(21, 17, 13, 0.24);
+      background: var(--cream);
+      cursor: pointer;
+    }
+
+    .stop.done .check {
+      background: var(--lime);
+      border-color: var(--lime);
+    }
+
+    .stop-name {
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .stop-note {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .stop-tools {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .icon-button {
+      width: 31px;
+      height: 31px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .add-stop {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .add-stop input {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fffdf7;
+      padding: 12px 14px;
+      color: var(--ink);
+    }
+
+    .route-card {
+      background: #fffdf7;
+      color: var(--ink);
+      min-height: 420px;
+      display: grid;
+      grid-template-columns: minmax(240px, 0.72fr) minmax(280px, 1fr);
+    }
+
+    .route-copy {
+      padding: clamp(24px, 4vw, 42px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .route-copy h3 {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 5.3rem);
+      font-weight: 500;
+      line-height: 0.9;
+      margin-bottom: 16px;
+      letter-spacing: 0;
+    }
+
+    .route-copy p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .map-art {
+      min-height: 420px;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(207, 255, 52, 0.28), transparent 24%),
+        #f9f5ed;
+      position: relative;
+      overflow: hidden;
+      border-left: 1px solid var(--line);
+    }
+
+    .map-art svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-caption {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      max-width: calc(100% - 36px);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .places-grid,
+    .shop-grid,
+    .bath-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .place-card,
+    .shop-card,
+    .bath-card {
+      background: var(--cream);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .card-image {
+      aspect-ratio: 4 / 3;
+      background: var(--moss);
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.95) contrast(1.02);
+      transition: transform 260ms ease;
+    }
+
+    .place-card:hover img,
+    .shop-card:hover img,
+    .bath-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .card-body h3 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 10px;
+      letter-spacing: 0;
+    }
+
+    .card-body p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 13px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 10px;
+    }
+
+    .mini-link {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .mini-link.primary {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+
+    .shop-tools {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .filter {
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    .filter.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--cream);
+    }
+
+    .shop-card .card-image {
+      aspect-ratio: 5 / 3;
+    }
+
+    .quick-note {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 9px 11px;
+      border-radius: 999px;
+      align-self: flex-start;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .split-editorial {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1fr);
+      min-height: 580px;
+    }
+
+    .photo-panel {
+      background:
+        linear-gradient(180deg, rgba(15, 18, 13, 0.1), rgba(15, 18, 13, 0.48)),
+        url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1500&q=82") center / cover;
+    }
+
+    .text-panel {
+      background: var(--cream);
+      color: var(--ink);
+      padding: clamp(34px, 6vw, 74px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .text-panel h2 {
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      margin-bottom: 20px;
+    }
+
+    .text-panel p {
+      max-width: 560px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.03rem;
+    }
+
+    .tiny-source {
+      margin-top: 18px;
+      color: rgba(21, 17, 13, 0.48);
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 999px;
+      padding: 10px 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+      z-index: 10;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .section-head,
+      .itinerary-shell,
+      .route-card,
+      .split-editorial {
+        grid-template-columns: 1fr;
+      }
+
+      .places-grid,
+      .shop-grid,
+      .bath-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .map-art {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hero,
+      .section {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .hero-nav {
+        left: 18px;
+        right: 18px;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      h1 {
+        font-size: clamp(4rem, 20vw, 6.8rem);
+      }
+
+      .places-grid,
+      .shop-grid,
+      .bath-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stop {
+        grid-template-columns: auto 1fr;
+      }
+
+      .stop-tools {
+        grid-column: 2;
+        justify-content: flex-start;
+      }
+
+      .add-stop {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <nav class="hero-nav" aria-label="Planner sections">
+      <div class="brand">Copenhagen, edited</div>
+      <div class="nav-links">
+        <a href="#route">Route</a>
+        <a href="#places">Places</a>
+        <a href="#shopping">Shopping</a>
+        <a href="#baths">Baths</a>
+      </div>
+    </nav>
+    <div class="hero-inner">
+      <p class="eyebrow">June 5-7, 2026 - Urban Camper, Nørrebro</p>
+      <h1>One full day, <em>done beautifully.</em></h1>
+      <p class="hero-copy">A tighter Copenhagen plan with the useful bones kept intact: easy arrival, one rich Saturday, a gentle Sunday edge, Google Maps links, and shopping notes that help you choose by mood.</p>
+      <div class="hero-actions">
+        <a class="button light" href="#route">Start the route</a>
+        <a class="button outline" href="https://www.google.com/maps/dir/?api=1&origin=Urban%20Camper%20Hostel%20Lygten%202C%20Copenhagen&destination=Marble%20Church%20Copenhagen&travelmode=walking&waypoints=Superkilen%20Copenhagen%7CAssistens%20Cemetery%20Copenhagen%7CN%C3%B8rreport%20Station%7CRosenborg%20Castle%20Copenhagen%7CLa%20Cabra%20M%C3%B8ntergade%7CTorvehallerne%20Copenhagen%7CNyhavn%20Copenhagen%7CAmalienborg%20Copenhagen" target="_blank" rel="noreferrer">Open full route</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section dark" id="route">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Trip <em>rhythm</em></h2>
+          <p class="lede">The plan is deliberately compact. Copenhagen gets one proper day: Nørrebro texture in the morning, royal garden and food market midday, city icons late afternoon, then a bath or dinner depending on energy.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Trip days">
+          <button class="tab" type="button" role="tab" aria-selected="true" data-day="friday">Friday</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-day="saturday">Saturday</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-day="sunday">Sunday</button>
+        </div>
+
+        <div class="itinerary-shell">
+          <article class="day-panel" aria-live="polite">
+            <div class="day-title" id="dayTitle">Friday soft landing</div>
+            <div class="day-meta" id="dayMeta"></div>
+            <p class="lede" id="daySummary"></p>
+            <ul class="stop-list" id="stopList"></ul>
+            <form class="add-stop" id="addStop">
+              <input id="newStop" type="text" autocomplete="off" placeholder="Add a stop or reminder">
+              <button class="button lime" type="submit">Add</button>
+            </form>
+          </article>
+
+          <article class="route-card">
+            <div class="route-copy">
+              <div>
+                <p class="eyebrow">Saturday route order</p>
+                <h3>Hostel to harbor, with coffee in the middle.</h3>
+                <p id="routeText">Start from Urban Camper, dip into Superkilen if you want a Nørrebro morning, then use Nørrebro Station to shortcut into Nørreport. From there, Rosenborg, La Cabra, Torvehallerne, Nyhavn, Amalienborg, and Marble Church naturally stack without wasting the day.</p>
+              </div>
+              <div class="section-actions">
+                <a class="button" id="dayMapLink" target="_blank" rel="noreferrer" href="#">Open selected day</a>
+                <button class="button outline" id="resetDay" type="button">Reset day</button>
+              </div>
+            </div>
+            <div class="map-art" aria-label="Route-order sketch from Nørrebro to central Copenhagen">
+              <svg viewBox="0 0 700 620" role="img" aria-label="Route-order sketch: Nørrebro in the northwest, Nørreport in the center, harbor and palace stops to the east">
+                <rect x="0" y="0" width="700" height="620" fill="#f9f5ed"/>
+                <path d="M70 460 C150 410 220 418 292 455 C348 484 430 474 498 431 C551 397 603 397 658 425" fill="none" stroke="#b6d0cb" stroke-width="30" opacity=".34" stroke-linecap="round"/>
+                <path d="M48 250 H282 M328 236 H636 M78 344 H238 M286 394 H592 M410 142 V515 M548 94 V522" fill="none" stroke="#15110d" stroke-width="2" opacity=".14" stroke-linecap="round"/>
+                <path d="M118 90 C154 128 166 157 181 190 C198 228 239 238 275 269 C309 298 313 335 357 342 C417 352 446 289 492 308 C538 326 513 385 553 421 C578 444 618 423 632 382 C643 347 605 327 567 343" fill="none" stroke="rgba(21,17,13,.08)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M118 90 C154 128 166 157 181 190 C198 228 239 238 275 269 C309 298 313 335 357 342 C417 352 446 289 492 308 C538 326 513 385 553 421 C578 444 618 423 632 382 C643 347 605 327 567 343" fill="none" stroke="#cfff34" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+                <g font-family="Inter, system-ui, sans-serif" font-size="13" letter-spacing=".4" fill="#15110d">
+                  <g>
+                    <circle cx="118" cy="90" r="17" fill="#15110d"/><text x="118" y="95" text-anchor="middle" fill="#fff9ed" font-weight="700">1</text>
+                    <text x="145" y="86" font-weight="700">Urban Camper</text><text x="145" y="104" opacity=".62">Nørrebro base</text>
+                  </g>
+                  <g>
+                    <circle cx="181" cy="190" r="17" fill="#15110d"/><text x="181" y="195" text-anchor="middle" fill="#fff9ed" font-weight="700">2</text>
+                    <text x="206" y="188" font-weight="700">Superkilen</text>
+                  </g>
+                  <g>
+                    <circle cx="275" cy="269" r="17" fill="#15110d"/><text x="275" y="274" text-anchor="middle" fill="#fff9ed" font-weight="700">3</text>
+                    <text x="300" y="266" font-weight="700">Assistens</text>
+                  </g>
+                  <g>
+                    <circle cx="357" cy="342" r="17" fill="#15110d"/><text x="357" y="347" text-anchor="middle" fill="#fff9ed" font-weight="700">4</text>
+                    <text x="382" y="340" font-weight="700">Nørreport</text><text x="382" y="358" opacity=".62">Torvehallerne hinge</text>
+                  </g>
+                  <g>
+                    <circle cx="492" cy="308" r="17" fill="#15110d"/><text x="492" y="313" text-anchor="middle" fill="#fff9ed" font-weight="700">5</text>
+                    <text x="510" y="292" font-weight="700">Rosenborg</text><text x="510" y="310" opacity=".62">King's Garden</text>
+                  </g>
+                  <g>
+                    <circle cx="553" cy="421" r="17" fill="#15110d"/><text x="553" y="426" text-anchor="middle" fill="#fff9ed" font-weight="700">6</text>
+                    <text x="409" y="438" font-weight="700">La Cabra + Nyhavn</text>
+                  </g>
+                  <g>
+                    <circle cx="632" cy="382" r="17" fill="#15110d"/><text x="632" y="387" text-anchor="middle" fill="#fff9ed" font-weight="700">7</text>
+                    <text x="516" y="376" font-weight="700">Amalienborg</text>
+                  </g>
+                  <g>
+                    <circle cx="567" cy="343" r="17" fill="#15110d"/><text x="567" y="348" text-anchor="middle" fill="#fff9ed" font-weight="700">8</text>
+                    <text x="444" y="326" font-weight="700">Marble Church</text>
+                  </g>
+                </g>
+              </svg>
+              <span class="map-caption">Route-order sketch, not a live map. Use Google Maps for exact streets, reviews, and transit.</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="split-editorial">
+      <div class="photo-panel" aria-label="Food market photography"></div>
+      <div class="text-panel">
+        <p class="eyebrow">Best use of the day</p>
+        <h2>Keep the city <em>clustered.</em></h2>
+        <p>The trick is not trying to see everything. Start close to the hostel if you have morning energy, then let Nørreport become the hinge: gardens, coffee, market, old harbor, palace square, church dome. It feels full without becoming a logistics spreadsheet.</p>
+        <p class="tiny-source">Place notes are based on the saved trip checkpoint plus current official/guide pages where useful. Google Maps links open searchable listings for reviews and live hours.</p>
+      </div>
+    </section>
+
+    <section class="section" id="places">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Place <em>cards</em></h2>
+          <p class="lede">Short descriptions, practical reasons to go, and Maps links so you can check reviews, hours, photos, and distance in the moment.</p>
+        </div>
+        <div class="places-grid" id="placesGrid"></div>
+      </div>
+    </section>
+
+    <section class="section green" id="baths">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Bath or <em>dinner?</em></h2>
+          <p class="lede">The bath options are mood-dependent. AIRE is the reliable booking choice. La Banchina and CopenHot feel more Copenhagen-waterfront, but they are more timing-sensitive for a tiny trip.</p>
+        </div>
+        <div class="bath-grid" id="bathGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="shopping">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Shopping <em>lookbook</em></h2>
+          <p class="lede">Use this by need: cheap-ish vintage, accessories, cool-girl browsing, menswear, or just one pretty store. Images are unique per shop and mostly pulled from store/source pages; use Maps photos for the live review gallery.</p>
+        </div>
+        <div class="shop-tools" aria-label="Shopping filters">
+          <button class="filter active" type="button" data-filter="all">All</button>
+          <button class="filter" type="button" data-filter="vintage">Vintage</button>
+          <button class="filter" type="button" data-filter="accessories">Accessories</button>
+          <button class="filter" type="button" data-filter="browse">Browse only</button>
+          <button class="filter" type="button" data-filter="nearby">Near route</button>
+        </div>
+        <div class="shop-grid" id="shopGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">Saved locally</div>
+
+  <script>
+    const img = {
+      copenhagen: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80",
+      park: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80",
+      coffee: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
+      market: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+      palace: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80",
+      water: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      dinner: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1200&q=80",
+      vintage: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=1200&q=80",
+      rack: "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=80",
+      jewelry: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80",
+      hair: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=900&q=80",
+      sunglasses: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=900&q=80",
+      shoes: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=80",
+      bag: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=80",
+      clothes: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80",
+      osv: "https://files.guidedanmark.org/files/382/89567_O-S-V_butik.gif",
+      lidkob: "https://lidkob.dk/images/kategorier/lidkob-norrebro-kunder-butik-overblik.webp",
+      crush: "https://crushvintage.eu/cdn/shop/files/crush_facade.jpg?v=1774882645&width=1606",
+      prag: "https://pragcopenhagen.com/cdn/shop/files/11222024_121912580.jpg?v=1769681939&width=1500",
+      pico: "https://cdn.shopify.com/s/files/1/0115/9639/8649/files/Webshop_Banner_2d4c1b4c-0483-4a50-8064-c72d743870db.jpg?v=1774254488",
+      suiAva: "https://suiava.com/cdn/shop/files/GLOSSY_ZIP_JACKET_1.jpg?v=1770991175&width=900",
+      akjaerbede: "https://akjaerbede.com/cdn/shop/files/dropdown_flagshipstore_e75a3436-33f7-4f4c-80ad-262d1bb24466.jpg?v=1770842209",
+      ganni: "https://www.ganni.com/dw/image/v2/AAWT_PRD/on/demandware.static/-/Library-Sites-ganni-shared/default/dw884e0b89/images/content-pages/ganni-repeat-01.jpg?sw=1080",
+      norse: "https://files.guidedanmark.org/files/382/171035_Norse_Store_1024x576_Martin_Heiberg.jpg",
+      naked: "https://cdn.shopify.com/s/files/1/0657/3408/2827/files/original_405572c8-f30a-4405-9606-4a70ab53d385.jpg?v=1713112195&width=1024",
+      alohas: "https://alohas.com/cdn/shop/files/BAGS_2__BANNERHOME_DESKTOP.jpg?v=1779965186",
+      wilen: "https://wilen.dk/cdn/shop/files/IMG_8170_3.jpg?v=1774641405"
+    };
+
+    const mapSearch = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    const directions = (stops) => {
+      const active = stops.filter((stop) => !stop.skipped);
+      if (active.length < 2) return mapSearch(active[0]?.name || "Copenhagen");
+      const origin = encodeURIComponent(active[0].map || active[0].name);
+      const destination = encodeURIComponent(active[active.length - 1].map || active[active.length - 1].name);
+      const waypoints = active.slice(1, -1).map((stop) => encodeURIComponent(stop.map || stop.name)).join("%7C");
+      return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=walking${waypoints ? `&waypoints=${waypoints}` : ""}`;
+    };
+
+    const baseDays = {
+      friday: {
+        title: "Friday soft landing",
+        tags: ["Arrival edge", "Low effort", "Waterfront if awake"],
+        summary: "Get from the airport to Urban Camper, then only do the central waterfront if you still have energy. This is a mood-setting evening, not a checklist.",
+        stops: [
+          { name: "Urban Camper Hostel", note: "Drop bags at Lygten 2C near Nørrebro Station.", map: "Urban Camper Hostel Lygten 2C Copenhagen" },
+          { name: "Nørrebro Station", note: "Your shortcut into the city center.", map: "Nørrebro Station Copenhagen" },
+          { name: "Nyhavn", note: "Colorful harbor walk and first Copenhagen photo moment.", map: "Nyhavn Copenhagen" },
+          { name: "Amalienborg", note: "Quiet palace square if the evening still feels open.", map: "Amalienborg Copenhagen" },
+          { name: "Marble Church", note: "Dome exterior near Amalienborg. Nice at dusk.", map: "Marble Church Copenhagen" }
+        ]
+      },
+      saturday: {
+        title: "Saturday main route",
+        tags: ["One full day", "Coffee + gardens", "Shopping optional"],
+        summary: "This is the core plan: Nørrebro texture, central gardens, La Cabra, Torvehallerne, then the postcard cluster by the harbor.",
+        stops: [
+          { name: "Urban Camper Hostel", note: "Start from the hostel. Coffee can wait until the center.", map: "Urban Camper Hostel Lygten 2C Copenhagen" },
+          { name: "Superkilen", note: "Graphic public park close to the hostel, good if the morning is bright.", map: "Superkilen Copenhagen" },
+          { name: "Assistens Cemetery", note: "Leafy Nørrebro walk, famous graves, calm reset.", map: "Assistens Cemetery Copenhagen" },
+          { name: "Nørreport Station", note: "Transit hinge into the old center.", map: "Nørreport Station Copenhagen" },
+          { name: "Rosenborg Castle", note: "Royal rooms and crown jewels if you want the museum stop.", map: "Rosenborg Castle Copenhagen" },
+          { name: "King's Garden", note: "Old royal garden beside Rosenborg. Picnic-walk energy.", map: "King's Garden Copenhagen" },
+          { name: "La Cabra Møntergade", note: "Best coffee stop near the garden.", map: "La Cabra Møntergade Copenhagen" },
+          { name: "Torvehallerne", note: "Lunch, pastry, snacks, or edible souvenirs.", map: "Torvehallerne Copenhagen" },
+          { name: "Shopping loop", note: "Pick vintage in Nørrebro or accessories around Grønnegade.", map: "Pico Copenhagen Grønnegade" },
+          { name: "Nyhavn", note: "Late afternoon color and harbor walk.", map: "Nyhavn Copenhagen" },
+          { name: "Amalienborg", note: "Palace square and axis toward the church.", map: "Amalienborg Copenhagen" },
+          { name: "Marble Church", note: "Final icon before bath or dinner.", map: "Marble Church Copenhagen" }
+        ]
+      },
+      sunday: {
+        title: "Sunday gentle edge",
+        tags: ["Before airport", "Stay close", "No chaos"],
+        summary: "Keep Sunday small. Do the Nørrebro bits you skipped, or just get one last coffee and leave margin for the airport.",
+        stops: [
+          { name: "Urban Camper Hostel", note: "Check out and keep the morning simple.", map: "Urban Camper Hostel Lygten 2C Copenhagen" },
+          { name: "Superkilen", note: "Quick nearby walk if not done Saturday.", map: "Superkilen Copenhagen" },
+          { name: "Assistens Cemetery", note: "A gentle option before transit.", map: "Assistens Cemetery Copenhagen" },
+          { name: "Jægersborggade", note: "Small shops and cafes if you have a spare hour.", map: "Jægersborggade Copenhagen" },
+          { name: "Airport", note: "Leave real buffer. Around noon departures shrink the morning fast.", map: "Copenhagen Airport" }
+        ]
+      }
+    };
+
+    const places = [
+      {
+        name: "Urban Camper Hostel",
+        note: "Your base at Lygten 2C, useful because Nørrebro Station makes the center easy without staying in the tourist core.",
+        why: "Use it as the anchor for every route.",
+        image: img.copenhagen,
+        maps: "Urban Camper Hostel Lygten 2C Copenhagen",
+        official: "https://urbancamper.dk/da/kontakt-os/"
+      },
+      {
+        name: "Superkilen",
+        note: "A graphic public park in Nørrebro with strong design-tourism energy. Best as a quick morning texture stop near the hostel.",
+        why: "Go if you want city design, color, and a nearby walk.",
+        image: img.park,
+        maps: "Superkilen Copenhagen",
+        official: "https://www.visitcopenhagen.dk/koebenhavn/planlaeg-din-tur/superkilen-gdk707822"
+      },
+      {
+        name: "Assistens Cemetery",
+        note: "A famous cemetery and neighborhood green space, known for H.C. Andersen and Søren Kierkegaard graves.",
+        why: "Go for leafy calm and Nørrebro atmosphere.",
+        image: img.park,
+        maps: "Assistens Cemetery Copenhagen",
+        official: "https://www.visitcopenhagen.com/copenhagen/planning/assistens-cemetery-gdk964360"
+      },
+      {
+        name: "Rosenborg Castle",
+        note: "Christian IV's 17th-century castle with preserved royal rooms, crowns, and the Danish crown jewels.",
+        why: "The most compact royal-history stop on the route.",
+        image: img.palace,
+        maps: "Rosenborg Castle Copenhagen",
+        official: "https://www.visitcopenhagen.com/copenhagen/planning/rosenborg-castle-gdk410582"
+      },
+      {
+        name: "King's Garden",
+        note: "Denmark's oldest royal garden, directly beside Rosenborg, with lawns, rose paths, and city-center breathing room.",
+        why: "Use it as the soft middle of the day.",
+        image: img.park,
+        maps: "King's Garden Copenhagen",
+        official: "https://www.visitcopenhagen.com/copenhagen/planning/kings-garden-gdk420899"
+      },
+      {
+        name: "La Cabra Møntergade",
+        note: "Specialty coffee close to King's Garden, better placed after Rosenborg than before it.",
+        why: "Best coffee stop in the saved plan.",
+        image: img.coffee,
+        maps: "La Cabra Møntergade Copenhagen",
+        official: "https://lacabra.com/pages/montergade"
+      },
+      {
+        name: "Torvehallerne",
+        note: "Two market halls by Nørreport with pastries, produce, cheese, seafood, flowers, and prepared food stalls.",
+        why: "Lunch without committing to one restaurant.",
+        image: img.market,
+        maps: "Torvehallerne Copenhagen",
+        official: "https://www.visitcopenhagen.com/copenhagen/planning/torvehallerne-gdk545401"
+      },
+      {
+        name: "Nyhavn",
+        note: "The colorful harbor canal. Touristy, yes, but worth a walk on a short first trip.",
+        why: "Go for the postcard moment, not dinner value.",
+        image: img.copenhagen,
+        maps: "Nyhavn Copenhagen",
+        official: "https://www.google.com/maps/search/?api=1&query=Nyhavn%20Copenhagen"
+      },
+      {
+        name: "Amalienborg",
+        note: "The Danish royal palace square, best paired with the Marble Church axis and a harbor walk.",
+        why: "A clean architectural stop between Nyhavn and the dome.",
+        image: img.palace,
+        maps: "Amalienborg Copenhagen",
+        official: "https://www.google.com/maps/search/?api=1&query=Amalienborg%20Copenhagen"
+      },
+      {
+        name: "Marble Church",
+        note: "Frederik's Church, the huge dome just west of Amalienborg. Strong exterior stop even if you do not go inside.",
+        why: "End the icon cluster here.",
+        image: img.palace,
+        maps: "Marble Church Copenhagen",
+        official: "http://www.marmorkirken.dk/"
+      },
+      {
+        name: "Gasoline Grill",
+        note: "Popular Copenhagen burger option. Useful if you want something fast and reliable instead of a long dinner.",
+        why: "Best for low-decision comfort food.",
+        image: img.dinner,
+        maps: "Gasoline Grill Copenhagen",
+        official: "https://gasolinegrill.com/"
+      },
+      {
+        name: "Cantina",
+        note: "Dinner candidate from the saved list. Check reviews and booking friction before building the night around it.",
+        why: "Good if you want a proper restaurant ending.",
+        image: img.dinner,
+        maps: "Cantina Copenhagen restaurant",
+        official: "https://www.google.com/maps/search/?api=1&query=Cantina%20Copenhagen%20restaurant"
+      }
+    ];
+
+    const baths = [
+      {
+        name: "AIRE Ancient Baths",
+        note: "The reliability pick: indoor thermal baths in a dramatic Carlsberg-area setting, more bookable and controlled than waterfront sauna options.",
+        image: img.water,
+        maps: "AIRE Ancient Baths Copenhagen",
+        official: "https://beaire.com/en/aire-ancient-baths-copenhagen",
+        cue: "Most reliable"
+      },
+      {
+        name: "La Banchina",
+        note: "The atmospheric choice: waterfront, sauna, swim, and casual food. Better if availability and weather line up naturally.",
+        image: img.water,
+        maps: "La Banchina Copenhagen",
+        official: "https://www.labanchina.dk/",
+        cue: "Most Copenhagen-coded"
+      },
+      {
+        name: "CopenHot",
+        note: "Outdoor hot tubs and sauna by the water. Fun, but less convenient for a one-day schedule unless you really want the bath moment.",
+        image: img.water,
+        maps: "CopenHot Copenhagen",
+        official: "https://copenhot.com/",
+        cue: "Most novelty"
+      }
+    ];
+
+    const shops = [
+      {
+        name: "OSV Second Hand",
+        type: ["vintage", "nearby"],
+        cue: "Designer secondhand",
+        note: "Consignment-style secondhand designer clothing for men and women. Better for a real find than a bargain-bin dig.",
+        best: "Blazers, coats, denim, better labels.",
+        image: img.osv,
+        maps: "O-S-V Second Hand Fashion Copenhagen",
+        official: "https://www.visitcopenhagen.nl/kobenhavn/planlaeg-din-tur/o-s-v-second-hand-fashion-gdk774409"
+      },
+      {
+        name: "Lidkøb Nørrebro",
+        type: ["vintage", "nearby"],
+        cue: "Big secondhand sweep",
+        note: "Large secondhand store with hundreds of stalls across clothing, home goods, vintage, and designer finds.",
+        best: "When you want range and do not know exactly what you need.",
+        image: img.lidkob,
+        maps: "Lidkøb Nørrebro Jagtvej 65 Copenhagen",
+        official: "https://www.lidkob.dk/en/stores"
+      },
+      {
+        name: "CRU$H Vintage",
+        type: ["vintage", "nearby"],
+        cue: "Cool vintage",
+        note: "Vintage shop on Nørrebrogade, good for louder pieces and a quicker curated browse than a huge thrift hall.",
+        best: "Statement jackets, denim, graphic pieces.",
+        image: img.crush,
+        maps: "CRU$H Vintage Nørrebrogade 5 Copenhagen",
+        official: "https://crushvintage.eu/"
+      },
+      {
+        name: "PRAG Nørrebro",
+        type: ["vintage", "nearby"],
+        cue: "Color + retro",
+        note: "A bigger Copenhagen vintage name with curated racks, accessories, and retro outfit energy.",
+        best: "Color, costume-y finds, sunglasses, going-out pieces.",
+        image: img.prag,
+        maps: "PRAG Nørrebro Copenhagen",
+        official: "https://pragcopenhagen.com/"
+      },
+      {
+        name: "Pico Copenhagen",
+        type: ["accessories", "browse"],
+        cue: "Hair accessories",
+        note: "Danish accessories brand known for colorful hair ornaments, barrettes, clips, socks, and jewelry.",
+        best: "Claw clips, barrettes, small gifts, outfit finishers.",
+        image: img.pico,
+        maps: "Pico Copenhagen Grønnegade 36",
+        official: "https://picocopenhagen.com/pages/about-us"
+      },
+      {
+        name: "Sui Ava",
+        type: ["accessories", "browse"],
+        cue: "Playful accessories",
+        note: "Accessories store on Grønnegade. Think hair clips, bags, jewelry, and colorful add-ons.",
+        best: "Cute small things when you do not want to buy clothes.",
+        image: img.suiAva,
+        maps: "Sui Ava Grønnegade 1 Copenhagen",
+        official: "https://suiava.com/pages/find-us-in-store"
+      },
+      {
+        name: "A.KJAERBEDE",
+        type: ["accessories"],
+        cue: "Sunglasses hunt",
+        note: "Copenhagen-designed eyewear brand with accessible, clean Scandi sunglasses. Check nearby stockists if there is no dedicated shop on your route.",
+        best: "Sunglasses that feel more expensive than they are.",
+        image: img.akjaerbede,
+        maps: "A.KJAERBEDE Copenhagen sunglasses",
+        official: "https://akjaerbede.com/"
+      },
+      {
+        name: "GANNI Postmodern",
+        type: ["browse"],
+        cue: "Pre-loved GANNI",
+        note: "GANNI's pre-loved and archive concept. Fun browse, but likely pricier than the Nørrebro vintage loop.",
+        best: "Printed dresses, playful tops, archive pieces.",
+        image: img.ganni,
+        maps: "GANNI Postmodern Copenhagen",
+        official: "https://www.ganni.com/en-fi/responsibility/ganni-repeat.html"
+      },
+      {
+        name: "Norse Store",
+        type: ["browse"],
+        cue: "Clean menswear",
+        note: "Norse Projects' Copenhagen store, with menswear, womenswear, shoes, bags, and curated labels.",
+        best: "Quiet basics, outerwear, sneakers, accessories.",
+        image: img.norse,
+        maps: "Norse Store Copenhagen",
+        official: "https://www.visitdenmark.dk/danmark/explore/norse-store-gdk705724"
+      },
+      {
+        name: "NAKED Copenhagen",
+        type: ["browse"],
+        cue: "Sneakers + streetwear",
+        note: "Sneaker and streetwear stop from the saved TikTok list. Good if shoes are the missing piece.",
+        best: "Sneakers, sporty layers, streetwear.",
+        image: img.naked,
+        maps: "NAKED Copenhagen store",
+        official: "https://www.nakedcph.com/en/stores"
+      },
+      {
+        name: "Alohas",
+        type: ["browse"],
+        cue: "Shoes + bags",
+        note: "Browse-only/pricier candidate from the saved list. Useful if you specifically need shoes, sandals, or a bag.",
+        best: "Shoes, sandals, bags.",
+        image: img.alohas,
+        maps: "Alohas Copenhagen store",
+        official: "https://www.google.com/maps/search/?api=1&query=Alohas%20Copenhagen%20store"
+      },
+      {
+        name: "Wilén Store",
+        type: ["vintage", "browse"],
+        cue: "Curated resale",
+        note: "Saved-list vintage/resale option with a cleaner boutique feel than a thrift dig. Check Maps photos first for the current rail mix.",
+        best: "Curated separates, dresses, quieter pieces.",
+        image: img.wilen,
+        maps: "Wilén Store Copenhagen",
+        official: "https://www.wilen.dk/"
+      }
+    ];
+
+    const saved = JSON.parse(localStorage.getItem("cphPlannerDays") || "null");
+    let days = saved || structuredClone(baseDays);
+    let activeDay = "friday";
+
+    const dayTitle = document.querySelector("#dayTitle");
+    const dayMeta = document.querySelector("#dayMeta");
+    const daySummary = document.querySelector("#daySummary");
+    const stopList = document.querySelector("#stopList");
+    const dayMapLink = document.querySelector("#dayMapLink");
+    const toast = document.querySelector("#toast");
+
+    function save() {
+      localStorage.setItem("cphPlannerDays", JSON.stringify(days));
+      toast.classList.add("show");
+      window.clearTimeout(save.toastTimer);
+      save.toastTimer = window.setTimeout(() => toast.classList.remove("show"), 1200);
+    }
+
+    function renderDay() {
+      const day = days[activeDay];
+      dayTitle.textContent = day.title;
+      daySummary.textContent = day.summary;
+      dayMeta.innerHTML = day.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+      stopList.innerHTML = day.stops.map((stop, index) => `
+        <li class="stop ${stop.done ? "done" : ""} ${stop.skipped ? "skipped" : ""}" data-index="${index}">
+          <button class="check" type="button" aria-label="Mark ${stop.name} done"></button>
+          <div>
+            <div class="stop-name">${stop.name}</div>
+            <div class="stop-note">${stop.note}</div>
+          </div>
+          <div class="stop-tools" aria-label="Stop controls">
+            <button class="icon-button" type="button" data-action="up" title="Move up">↑</button>
+            <button class="icon-button" type="button" data-action="down" title="Move down">↓</button>
+            <button class="icon-button" type="button" data-action="skip" title="Skip">−</button>
+          </div>
+        </li>
+      `).join("");
+      dayMapLink.href = directions(day.stops);
+    }
+
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        activeDay = tab.dataset.day;
+        document.querySelectorAll(".tab").forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
+        renderDay();
+      });
+    });
+
+    stopList.addEventListener("click", (event) => {
+      const stopNode = event.target.closest(".stop");
+      if (!stopNode) return;
+      const index = Number(stopNode.dataset.index);
+      const stops = days[activeDay].stops;
+      if (event.target.classList.contains("check")) {
+        stops[index].done = !stops[index].done;
+      }
+      const action = event.target.dataset.action;
+      if (action === "up" && index > 0) {
+        [stops[index - 1], stops[index]] = [stops[index], stops[index - 1]];
+      }
+      if (action === "down" && index < stops.length - 1) {
+        [stops[index + 1], stops[index]] = [stops[index], stops[index + 1]];
+      }
+      if (action === "skip") {
+        stops[index].skipped = !stops[index].skipped;
+      }
+      save();
+      renderDay();
+    });
+
+    document.querySelector("#addStop").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = document.querySelector("#newStop");
+      const value = input.value.trim();
+      if (!value) return;
+      days[activeDay].stops.push({ name: value, note: "Custom note added during planning.", map: `${value} Copenhagen` });
+      input.value = "";
+      save();
+      renderDay();
+    });
+
+    document.querySelector("#resetDay").addEventListener("click", () => {
+      days[activeDay] = structuredClone(baseDays[activeDay]);
+      save();
+      renderDay();
+    });
+
+    function renderPlaces() {
+      document.querySelector("#placesGrid").innerHTML = places.map((place) => `
+        <article class="place-card">
+          <div class="card-image"><img src="${place.image}" alt="${place.name}"></div>
+          <div class="card-body">
+            <h3>${place.name}</h3>
+            <p>${place.note}</p>
+            <p><strong>Why go:</strong> ${place.why}</p>
+            <div class="card-actions">
+              <a class="mini-link primary" href="${mapSearch(place.maps)}" target="_blank" rel="noreferrer">Google Maps</a>
+              <a class="mini-link" href="${place.official}" target="_blank" rel="noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderBaths() {
+      document.querySelector("#bathGrid").innerHTML = baths.map((bath) => `
+        <article class="bath-card">
+          <div class="card-image"><img src="${bath.image}" alt="${bath.name}"></div>
+          <div class="card-body">
+            <span class="quick-note">${bath.cue}</span>
+            <h3>${bath.name}</h3>
+            <p>${bath.note}</p>
+            <div class="card-actions">
+              <a class="mini-link primary" href="${mapSearch(bath.maps)}" target="_blank" rel="noreferrer">Google Maps</a>
+              <a class="mini-link" href="${bath.official}" target="_blank" rel="noreferrer">Official</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderShops(filter = "all") {
+      const visible = filter === "all" ? shops : shops.filter((shop) => shop.type.includes(filter));
+      document.querySelector("#shopGrid").innerHTML = visible.map((shop) => `
+        <article class="shop-card">
+          <div class="card-image"><img src="${shop.image}" alt="${shop.name}"></div>
+          <div class="card-body">
+            <span class="quick-note">${shop.cue}</span>
+            <h3>${shop.name}</h3>
+            <p>${shop.note}</p>
+            <p><strong>Look for:</strong> ${shop.best}</p>
+            <div class="card-actions">
+              <a class="mini-link primary" href="${mapSearch(shop.maps)}" target="_blank" rel="noreferrer">Maps photos</a>
+              <a class="mini-link" href="${shop.official}" target="_blank" rel="noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    document.querySelectorAll(".filter").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter").forEach((item) => item.classList.toggle("active", item === button));
+        renderShops(button.dataset.filter);
+      });
+    });
+
+    renderDay();
+    renderPlaces();
+    renderBaths();
+    renderShops();
+  </script>
+</body>
+</html>
