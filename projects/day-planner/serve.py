@@ -746,16 +746,22 @@ class Server(socketserver.ThreadingTCPServer):
 
 
 if __name__ == "__main__":
-    url = f"http://localhost:{PORT}/planner.html"
+    host = "0.0.0.0" if "--lan" in sys.argv else "127.0.0.1"
+    page = "morning.html" if "--morning" in sys.argv else "planner.html"
+    url = f"http://localhost:{PORT}/{page}"
     handler = functools.partial(Handler, directory=str(ROOT))
     try:
-        httpd = Server(("127.0.0.1", PORT), handler)  # localhost only — never exposed to the network
+        httpd = Server((host, PORT), handler)  # default localhost only; --lan exposes on local Wi-Fi
     except OSError:
         print(f"The Day is already running. Opening {url}")
         webbrowser.open(url)
         sys.exit(0)
     live = "live" if (GCAL_OK and TOKEN.exists()) else "snapshot (run auth_google.py for live)"
-    print(f"\n  The Day is live ->  {url}\n  Calendar: {live}\n  Close this window to stop.\n")
+    print(f"\n  The Day is live ->  {url}\n  Calendar: {live}")
+    if host == "0.0.0.0":
+        print("  LAN mode: also reachable from this Wi-Fi at http://<your-mac-ip>:%s/%s" % (PORT, page))
+        print("  Treat LAN mode as private: it exposes calendar/email endpoints to devices on your Wi-Fi.")
+    print("  Close this window to stop.\n")
     if "--no-open" not in sys.argv:
         threading.Timer(0.8, lambda: webbrowser.open(url)).start()
     try:

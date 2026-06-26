@@ -54,6 +54,21 @@ VPS is only a relay; it never sees or stores calendar/email data.
 If the icon shows as a screenshot, iOS cached a pre-fix miss: delete the icon,
 hard-reload the page in Safari, re-add (or Clear Safari website data).
 
+## Local development / quick open
+
+```sh
+# Mac only: opens the live Morning Edit locally
+cd ~/Documents/AI-OS/projects/day-planner
+python3 serve.py --morning
+
+# Same Wi-Fi phone preview (temporary; exposes the app to your LAN while running)
+python3 serve.py --morning --lan
+ipconfig getifaddr en0
+# Then on iPhone: http://<that-ip>:8802/morning.html
+```
+
+By default `serve.py` binds to `127.0.0.1`, so `http://<Mac-IP>:8802/...` will NOT work unless you start it with `--lan`.
+
 ## Manage
 
 ```sh
