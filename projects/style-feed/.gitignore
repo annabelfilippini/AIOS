@@ -1,0 +1,10 @@
+# Personal taste signal — never commit (likes, Nuuly history, profile measurements)
+data/feedback.json
+data/feedback.bak.json
+data/nuuly.json
+data/style-overrides.json
+style-profile.md
+
+# Python
+__pycache__/
+*.pyc

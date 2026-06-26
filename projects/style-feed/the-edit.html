@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Edit — This Week</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4EFE6; --paper:#FBF8F2; --ink:#2B2722; --muted:#8C8475;
+    --line:#E3DBCC; --tile:#FFFFFF; --accent:#6B6353;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);
+    font-family:'Jost',sans-serif;font-weight:300;line-height:1.5;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:56px 24px 80px}
+  header{text-align:center;margin-bottom:8px}
+  .kicker{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:54px;
+    line-height:1;margin:10px 0 6px;letter-spacing:.01em}
+  .dateline{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .nuuly{background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:18px 24px;margin:34px 0 6px;display:flex;gap:16px;align-items:flex-start}
+  .nuuly .dot{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--accent)}
+  .nuuly h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:20px;margin:0 0 4px}
+  .nuuly p{margin:0;font-size:13.5px;color:var(--muted);max-width:64ch}
+  .nuuly b{color:var(--ink);font-weight:400}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;
+    padding:26px 26px 30px;margin-top:24px}
+  .occ{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}
+  .occ h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;margin:0}
+  .occ .when{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+  .pieces{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px}
+  .piece{display:flex;flex-direction:column;position:relative}
+  .frame{aspect-ratio:3/4;background:var(--tile);border:1px solid var(--line);border-radius:10px;
+    overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .frame img{width:100%;height:100%;object-fit:cover}
+  .piece .lbl{font-size:11.5px;letter-spacing:.04em;color:var(--ink);margin-top:8px;font-weight:400}
+  .piece .sub{font-size:11px;color:var(--muted)}
+  .tag{position:absolute;top:8px;left:8px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+    padding:3px 7px;border-radius:20px;background:rgba(43,39,34,.74);color:#F4EFE6}
+  .tag.own{background:rgba(107,99,83,.16);color:var(--accent)}
+  .note{margin-top:20px;font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;
+    color:var(--ink);line-height:1.45}
+  .elevate{margin-top:14px;font-size:13px;color:var(--muted);
+    border-top:1px dashed var(--line);padding-top:12px}
+  .elevate b{font-weight:500;color:var(--accent);font-style:normal;letter-spacing:.02em}
+  footer{text-align:center;margin-top:48px;font-size:12px;color:var(--muted);letter-spacing:.04em;line-height:1.7}
+  .legend{display:inline-flex;gap:14px;margin-top:6px}
+  .legend span{font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">The Edit</div>
+    <h1>This Week, From Your Closet</h1>
+    <div class="dateline">Thu Jun 25 — Sun Jun 28 · Built from what you own</div>
+  </header>
+
+  <div class="nuuly">
+    <div class="dot">✶</div>
+    <div>
+      <h3>Styled around your current Nuuly box</h3>
+      <p>Your six tops right now: <b>Free People Forevermore</b>, <b>Madewell Leah 60's</b>, <b>Anthropologie ruched tee</b>, <b>Zemeta bell lace</b>, <b>Dolan flutter lace</b>, <b>Native Youth broderie</b>. Four are styled below; the Anthropologie tee and Dolan flutter are the easy swaps when you want a different white.</p>
+    </div>
+  </div>
+
+  <!-- 1. TRAVEL -->
+  <div class="card" data-occ="vacation">
+    <div class="occ"><h2>Airport &amp; Travel</h2><div class="when">Today · 10:45 flight</div></div>
+    <div class="pieces">
+      <div class="piece">
+        <div class="frame"><img src="https://s7d2.scene7.com/is/image/nu/108276783_010_b?wid=800&fmt=jpeg" alt="madewell top"></div>
+        <span class="tag own">Nuuly</span>
+        <div class="lbl">Leah 60's Top</div><div class="sub">Madewell · White</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://agolde.com/cdn/shop/files/A260-1371_LOW_RISE_LOOSE_VAULT_1168.jpg?width=800" alt="agolde jeans"></div>
+        <span class="tag">My guess · your jeans</span>
+        <div class="lbl">Low Rise Loose</div><div class="sub">AGOLDE · Mid wash</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://assets.aritzia.com/image/upload/medium/s26_a03_116266_19451_off_a.jpg" alt="hoodie"></div>
+        <span class="tag own">Yours</span>
+        <div class="lbl">Cozy Sweatfleece Hoodie</div><div class="sub">Aritzia · Cloud White</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://image.goat.com/attachments/product_template_pictures/images/105/369/185/original/1402217_00.png.png" alt="sneakers"></div>
+        <span class="tag own">Yours</span>
+        <div class="lbl">Mexico 66</div><div class="sub">Onitsuka · Grey/White</div>
+      </div>
+    </div>
+    <div class="note">White Madewell top, relaxed mid-wash jeans, hoodie for the cabin, grey Mexico 66s. Soft for the flight, still pulled together at the gate.</div>
+    <div class="elevate"><b>To elevate</b> &nbsp;A Dairy Boy cap and gold hoops. Swap to your ecru shorts if you'd rather not fly in denim.</div>
+  </div>
+
+  <!-- 2. FAMILY PICTURES -->
+  <div class="card" data-occ="casual">
+    <div class="occ"><h2>Family Pictures</h2><div class="when">Today · 2:30 pm</div></div>
+    <div class="pieces">
+      <div class="piece">
+        <div class="frame"><img src="https://s7d2.scene7.com/is/image/nu/109813840_010_b?wid=800&fmt=jpeg" alt="native youth top"></div>
+        <span class="tag own">Nuuly</span>
+        <div class="lbl">Broderie Back-Tie Top</div><div class="sub">Native Youth · White</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://static.zara.net/photos//assets/public/16c7/33e9/4f94499ea4b2/dbe6ec322f48/05770025712-f1/05770025712-f1.jpg" alt="ecru shorts"></div>
+        <span class="tag own">Yours</span>
+        <div class="lbl">Embroidered Shorts</div><div class="sub">Zara · Ecru</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://cdn-images.farfetch-contents.com/21/44/90/10/21449010_51590755_200.jpg" alt="sneakers"></div>
+        <span class="tag own">Yours</span>
+        <div class="lbl">Mexico 66</div><div class="sub">Onitsuka · Birch</div>
+      </div>
+    </div>
+    <div class="note">Broderie white top, ecru embroidered shorts, birch sneakers. All cream-on-cream, photographs clean, nothing competing with faces.</div>
+    <div class="elevate"><b>To elevate</b> &nbsp;Gold jewelry and a brown leather bag (Tuckernuck-ish) to warm the cream for the camera.</div>
+  </div>
+
+  <!-- 3. BIRTHDAY / GOING OUT -->
+  <div class="card" data-occ="going-out">
+    <div class="occ"><h2>Alex's Birthday — Vail</h2><div class="when">Fri evening · dinner</div></div>
+    <div class="pieces">
+      <div class="piece">
+        <div class="frame"><img src="https://s7d2.scene7.com/is/image/nu/106502966_010_b?wid=800&fmt=jpeg" alt="zemeta lace top"></div>
+        <span class="tag own">Nuuly</span>
+        <div class="lbl">Bell Lace Top</div><div class="sub">Zemeta · White</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://assets.aritzia.com/image/upload/c_crop,ar_1920:2623,g_south/q_auto,f_auto,dpr_auto/s23_04_a06_98765_1274_off_a" alt="black trousers"></div>
+        <span class="tag">My guess · your trousers</span>
+        <div class="lbl">Effortless Pant · Black</div><div class="sub">Aritzia · relaxed</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://cdn-images.farfetch-contents.com/21/44/90/10/21449010_51590755_200.jpg" alt="sneakers"></div>
+        <span class="tag own">Yours</span>
+        <div class="lbl">Mexico 66 or a heel</div><div class="sub">Onitsuka · Birch</div>
+      </div>
+    </div>
+    <div class="note">White bell-lace top tucked into sleek black trousers. Dressier than your usual but still quiet, a little romantic for a birthday dinner without being fussy.</div>
+    <div class="elevate"><b>Prefer all-black?</b> &nbsp;Your Wilfred Martini satin halter with these same trousers is the sleeker, going-out version.</div>
+  </div>
+
+  <!-- 4. VAIL DAYTIME -->
+  <div class="card" data-occ="active casual">
+    <div class="occ"><h2>Vail Daytime</h2><div class="when">Sat · mountain casual</div></div>
+    <div class="pieces">
+      <div class="piece">
+        <div class="frame"><img src="https://s7d2.scene7.com/is/image/nu/94682457_010_b?wid=800&fmt=jpeg" alt="free people top"></div>
+        <span class="tag own">Nuuly</span>
+        <div class="lbl">Forevermore LS Top</div><div class="sub">Free People · White</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://static.zara.net/photos//assets/public/36a8/9371/aa964f5f996c/f9e7a9f2a1a9/06929410044-f1/06929410044-f1.jpg" alt="striped shorts"></div>
+        <span class="tag own">Yours</span>
+        <div class="lbl">Striped Shorts</div><div class="sub">Zara · Blue/White</div>
+      </div>
+      <div class="piece">
+        <div class="frame"><img src="https://image.goat.com/attachments/product_template_pictures/images/105/369/185/original/1402217_00.png.png" alt="sneakers"></div>
+        <span class="tag own">Yours</span>
+        <div class="lbl">Mexico 66</div><div class="sub">Onitsuka · Grey/White</div>
+      </div>
+    </div>
+    <div class="note">Your favorite Forevermore long-sleeve (good for the cool mountain morning) over blue striped shorts and sneakers. Easy, neutral, a little coastal.</div>
+    <div class="elevate"><b>To elevate</b> &nbsp;Tie the cloud hoodie over your shoulders if it stays cold up there.</div>
+  </div>
+
+  <footer>
+    The Edit · styled from your Nuuly box + purchase history + taste profile
+    <div class="legend">
+      <span><span class="sw" style="background:#6B6353"></span>My guess</span>
+      <span><span class="sw" style="background:#C9BEA6"></span>Confirmed yours</span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

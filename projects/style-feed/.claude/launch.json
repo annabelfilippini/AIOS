@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "the-edit",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["serve.py", "8801", "--no-open"],
+      "port": 8801
+    }
+  ]
+}

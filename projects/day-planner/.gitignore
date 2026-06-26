@@ -1,0 +1,15 @@
+# Secrets — never commit
+token.json
+client_secret*.json
+*.client_secret.json
+.env
+
+# Personal data (your real calendar + to-dos stay local)
+data/calendar.json
+data/inbox.json
+data/emails.json
+data/*.tmp
+
+# Python
+__pycache__/
+*.pyc

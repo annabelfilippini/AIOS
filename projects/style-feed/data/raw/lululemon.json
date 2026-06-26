@@ -1,0 +1,65 @@
+[
+  {
+    "id": "prod11020158",
+    "title": "Define Jacket Nulu",
+    "brand": "lululemon",
+    "price": "$128 USD",
+    "imageUrl": "https://images.lululemon.com/is/image/lululemon/LW4CAFS_077143_1?wid=1080&fmt=jpg",
+    "productUrl": "https://shop.lululemon.com/p/jackets-and-hoodies-jackets/Define-Jacket-Nulu/_/prod11020158?color=77143",
+    "first_seen": "2026-06-18"
+  },
+  {
+    "id": "prod10930188",
+    "title": "Define Cropped Jacket Nulu",
+    "brand": "lululemon",
+    "price": "$128 USD",
+    "imageUrl": "https://images.lululemon.com/is/image/lululemon/LW3HJFS_077143_1?wid=1080&fmt=jpg",
+    "productUrl": "https://shop.lululemon.com/p/jackets-and-hoodies-jackets/Nulu-Cropped-Define-Jacket/_/prod10930188?color=77143",
+    "first_seen": "2026-06-18"
+  },
+  {
+    "id": "utlsgbq5yu",
+    "title": "Flow Y Tank Top Light Support, B/C Cup",
+    "brand": "lululemon",
+    "price": "$68 USD",
+    "imageUrl": "https://images.lululemon.com/is/image/lululemon/LW1GDDS_075700_1?wid=1080&fmt=jpg",
+    "productUrl": "https://shop.lululemon.com/p/flow-y-tank-top-light-support-bc-cup/utlsgbq5yu?color=75700",
+    "first_seen": "2026-06-18"
+  },
+  {
+    "id": "prod8910081",
+    "title": "Flow Y Bra Nulu Light Support, A\u2013C Cups",
+    "brand": "lululemon",
+    "price": "$48 USD",
+    "imageUrl": "https://images.lululemon.com/is/image/lululemon/LW2DH5S_075700_1?wid=1080&fmt=jpg",
+    "productUrl": "https://shop.lululemon.com/p/women-sports-bras/Flow-Y-Bra-Nulu/_/prod8910081?color=75700",
+    "first_seen": "2026-06-18"
+  },
+  {
+    "id": "prod9250076",
+    "title": "Hotty Hot High-Rise Lined Short 2.5\"",
+    "brand": "lululemon",
+    "price": "$68 USD",
+    "imageUrl": "https://images.lululemon.com/is/image/lululemon/LW7DHYS_077843_1?wid=1080&fmt=jpg",
+    "productUrl": "https://shop.lululemon.com/p/women-shorts/Hotty-Hot-Short-HR/_/prod9250076?color=77843",
+    "first_seen": "2026-06-18"
+  },
+  {
+    "id": "prod9200594",
+    "title": "lululemon Align\u2122 High-Rise Short 4\"",
+    "brand": "lululemon",
+    "price": "$64 USD",
+    "imageUrl": "https://images.lululemon.com/is/image/lululemon/LW7BY6S_075743_1?wid=1080&fmt=jpg",
+    "productUrl": "https://shop.lululemon.com/p/women-shorts/Align-Short-4/_/prod9200594?color=75743",
+    "first_seen": "2026-06-18"
+  },
+  {
+    "id": "prod11530423",
+    "title": "Swiftly Tech Cropped Short-Sleeve Shirt 2.0",
+    "brand": "lululemon",
+    "price": "Sale Price $39 - $49 USD; Regular Price $68 USD",
+    "imageUrl": "https://images.lululemon.com/is/image/lululemon/LW3IVES_074082_1?wid=1080&fmt=jpg",
+    "productUrl": "https://shop.lululemon.com/p/tops-short-sleeve/Swiftly-Tech-Cropped-SS-Shirt-2-MD/_/prod11530423?color=74082",
+    "first_seen": "2026-06-18"
+  }
+]

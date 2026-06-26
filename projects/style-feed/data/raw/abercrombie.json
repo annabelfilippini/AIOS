@@ -1,0 +1,37 @@
+[
+  {
+    "brand": "Abercrombie",
+    "title": "A&F Sloane Tailored Wide Leg Pant",
+    "price": "$90",
+    "imageUrl": "https://img.abercrombie.com/is/image/anf/KIC_156-5502-00821-480_model1?policy=product-medium",
+    "productUrl": "https://www.abercrombie.com/shop/us/p/a-and-f-sloane-tailored-wide-leg-pant-60567880"
+  },
+  {
+    "brand": "Abercrombie",
+    "title": "A&F Sloane Linen-Blend Tailored Wide Leg Pant",
+    "price": "$90",
+    "imageUrl": "https://img.abercrombie.com/is/image/anf/KIC_156-6043-00991-185_model1?policy=product-medium",
+    "productUrl": "https://www.abercrombie.com/shop/us/p/a-and-f-sloane-linen-blend-tailored-wide-leg-pant-62228331"
+  },
+  {
+    "brand": "Abercrombie",
+    "title": "A&F Sloane Linen-Blend Tailored Wide Leg Pant in Stone",
+    "price": "$90",
+    "imageUrl": "https://img.abercrombie.com/is/image/anf/KIC_156-6033-00994-185_model1?policy=product-medium",
+    "productUrl": "https://www.abercrombie.com/shop/us/p/a-and-f-sloane-linen-blend-tailored-wide-leg-pant-62228325"
+  },
+  {
+    "brand": "Abercrombie",
+    "title": "A&F Gemma Linen-Blend Wide Leg Pull-On Pant",
+    "price": "$80",
+    "imageUrl": "https://img.abercrombie.com/is/image/anf/KIC_156-6343-01240-480_model1?policy=product-medium",
+    "productUrl": "https://www.abercrombie.com/shop/us/p/linen-blend-pull-on-pant-62771837"
+  },
+  {
+    "brand": "Abercrombie",
+    "title": "A&F Forme Bootcut Pant",
+    "price": "$90",
+    "imageUrl": "https://img.abercrombie.com/is/image/anf/KIC_156-5457-00855-480_model1?policy=product-medium",
+    "productUrl": "https://www.abercrombie.com/shop/us/p/a-and-f-forme-bootcut-pant-60287846"
+  }
+]

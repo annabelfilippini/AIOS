@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Edit — Quick Choose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3efe9;--ink:#1b1916;--muted:#7c756a;--line:#e0d9cd;--card:#faf8f4;--accent:#3a352d;--love:#b54b5a}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px 70px}
+/* header */
+header{display:flex;align-items:center;justify-content:space-between;padding:24px 0 6px}
+.mark{font-family:'Cormorant Garamond',serif;font-size:25px;letter-spacing:.22em;text-transform:uppercase;cursor:pointer}
+.listbtn{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:999px;cursor:pointer}
+.listbtn .n{color:var(--love);font-weight:500}
+/* tabs */
+.tabwrap{position:sticky;top:0;z-index:6;background:var(--bg);border-bottom:1px solid var(--line);margin:0 0 22px}
+.tabs{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:10px 0}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:none;background:none;color:var(--muted);font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.04em;cursor:pointer;padding:8px 14px;border-radius:999px;white-space:nowrap;transition:color .12s,background .12s}
+.tab:hover{color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--bg)}
+.tab .n{font-size:11px;opacity:.6;margin-left:5px}
+.tab.sep{pointer-events:none;color:var(--line);padding:8px 2px}
+.tab.disabled{opacity:.4;cursor:default}
+/* grid */
+.headline{display:flex;align-items:baseline;gap:12px;margin:2px 2px 18px}
+.headline .h{font-family:'Cormorant Garamond',serif;font-size:30px}
+.headline .sub{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .12s,opacity .2s,transform .2s}
+.card.liked{border-color:#e6cace}
+.card.removing{opacity:0;transform:scale(.96)}
+.imgwrap{position:relative;display:block;width:100%;aspect-ratio:3/4;background:#ece6dc}
+.shot{display:block;width:100%;height:100%}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;top:10px;left:10px;background:var(--ink);color:#fff;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;border-radius:999px;z-index:2}
+.savedpin{position:absolute;top:9px;right:9px;width:26px;height:26px;border-radius:999px;background:var(--love);color:#fff;display:none;align-items:center;justify-content:center;font-size:13px;z-index:2}
+.card.liked .savedpin{display:flex}
+.info{padding:12px 13px 14px}
+.brand{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.title{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.15;margin:2px 0 3px}
+.why{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13.5px;line-height:1.2;color:var(--love);margin:0 0 5px}
+.price{font-size:13px}
+.acts{display:flex;gap:8px;margin:11px 0 3px}
+.act{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 0;font-size:15px;cursor:pointer;background:var(--bg);color:var(--ink);transition:background .12s,color .12s,border-color .12s}
+.act:active{transform:scale(.96)}
+.act.pass:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.act.save{color:var(--love)}.act.save:hover{background:var(--love);color:#fff;border-color:var(--love)}
+.card.liked .act.save{background:var(--love);color:#fff;border-color:var(--love)}
+.viewlink{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);text-decoration:underline;text-underline-offset:2px;margin-top:4px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:70px 10px}
+.empty .big{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ink);margin-bottom:6px}
+.empty .it{font-style:italic}
+.showdis{display:block;text-align:center;margin:26px auto 0;border:none;background:none;color:var(--muted);font-size:12px;letter-spacing:.05em;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+/* list */
+.list{display:none}
+.li{display:flex;gap:14px;align-items:center;border-bottom:1px solid var(--line);padding:14px 2px}
+.li img{width:66px;height:88px;object-fit:cover;border-radius:8px;background:#ece6dc;flex:0 0 auto}
+.li .m{flex:1;min-width:0}
+.li .b{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.li .ti{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.15;margin:1px 0}
+.li .pr{font-size:13px;color:var(--muted)}
+.li .buy{font-size:12px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--accent);border-radius:999px;padding:8px 14px;white-space:nowrap}
+.li .rm{border:none;background:none;color:var(--muted);font-size:17px;cursor:pointer;padding:6px}
+.clearlist{margin-left:auto;border:1px solid var(--line);background:var(--card);color:var(--muted);font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase;padding:7px 14px;border-radius:999px;cursor:pointer}
+.clearlist:hover{color:var(--ink);border-color:var(--ink)}
+.emptylist{text-align:center;color:var(--muted);padding:60px 10px;font-size:15px}
+.emptylist .big{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);margin-bottom:6px}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.headline .h{font-size:25px}}
+</style></head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark" id="home">The Edit</div>
+    <button class="listbtn" id="listbtn">My List <span class="n" id="listn">0</span></button>
+  </header>
+
+  <div class="tabwrap"><div class="tabs" id="tabs"></div></div>
+
+  <section id="browse">
+    <div class="headline"><div class="h" id="bname"></div><div class="sub" id="bsub"></div></div>
+    <div class="grid" id="grid"></div>
+    <button class="showdis" id="showdis" style="display:none"></button>
+  </section>
+
+  <section class="list" id="list"></section>
+</div>
+
+<script>
+var KEY='theedit:v1';
+var CART_KEY='theedit:cart:v1';   // the buy shortlist — separate from taste history
+var MAIN=['top','bottom','dress','knit'];
+var GARMENT=['top','bottom','dress','knit','outerwear','swim'];
+function wearable(it){return it.cats.some(function(c){return GARMENT.indexOf(c)>-1;});}
+var BUCKETS=[
+  {key:'workout',label:'Workout',m:function(it){return wearable(it)&&it.occ.indexOf('active')>-1;}},
+  {key:'work',label:'Work',m:function(it){return wearable(it)&&it.occ.indexOf('work')>-1;}},
+  {key:'goingout',label:'Going Out',m:function(it){return wearable(it)&&it.occ.indexOf('going-out')>-1;}},
+  {key:'everyday',label:'Everyday',m:function(it){
+    if(!wearable(it)) return false;
+    if(it.occ.indexOf('casual')>-1||it.occ.indexOf('vacation')>-1) return true;
+    return it.occ.length===0 && it.cats.some(function(c){return MAIN.indexOf(c)>-1;});
+  }},
+  {sep:true},
+  {key:'jackets',label:'Jackets',m:function(it){return it.cats.indexOf('outerwear')>-1;}},
+  {key:'shoes',label:'Shoes',m:function(it){return it.cats.indexOf('shoe')>-1;}},
+  {key:'accessories',label:'Accessories',m:function(it){return it.cats.indexOf('accessory')>-1||it.cats.indexOf('bag')>-1;}},
+  {key:'undergarments',label:'Undergarments',m:function(it){return false;},empty:'No source connected yet.'},
+];
+function bucketByKey(k){for(var i=0;i<BUCKETS.length;i++)if(BUCKETS[i].key===k)return BUCKETS[i];return null;}
+
+var ITEMS=[], state={liked:{},disliked:{}}, cart={}, cur='work', showDis=false;
+
+/* ---- shared taste state (same key + endpoint as the feed) ---- */
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY));return (s&&s.liked)?s:{liked:{},disliked:{}};}catch(e){return {liked:{},disliked:{}};}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+
+/* ---- buy shortlist (local only; NOT pushed to the taste engine) ---- */
+function loadCart(){try{var c=JSON.parse(localStorage.getItem(CART_KEY));return c&&typeof c==='object'?c:{};}catch(e){return {};}}
+function saveCart(){try{localStorage.setItem(CART_KEY,JSON.stringify(cart));}catch(e){}}
+function inCart(id){return !!cart[id];}
+function push(){try{fetch('/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(state)}).catch(function(){});}catch(e){}}
+function today(){return new Date().toISOString().slice(0,10);}
+function meta(it){return {brand:it.brand_l||'',creators:it.creators||'',c:String(it.c||''),cats:(it.cats||[]).join(' '),neut:String(it.neut||''),om:String(it.om||''),sil:it.sil||'',form:it.form||'',neck:it.neck||'',slv:it.slv||'',len:it.len||'',fab:it.fab||'',drp:it.drp||'',bk:it.bk||'',ts:today()};}
+
+/* ---- live, recency-weighted rerank (mirrors build_feed.py; reorders as you swipe) ---- */
+var HALF=45; // days; a swipe's pull halves every 45 days so taste keeps evolving
+var VCATS=[['sil',14,7,12,6],['form',8,4,8,4],['neck',6,3,6,3],['slv',6,3,6,3],['len',6,3,6,3],['fab',8,4,8,4],['drp',6,3,6,3],['bk',10,5,6,3]];
+function recW(rec){var ts=(rec&&rec.ts)||'2026-06-17';var d=new Date(ts);if(isNaN(d.getTime()))return 0.5;var age=Math.max(0,(Date.now()-d.getTime())/86400000);return Math.pow(0.5,age/HALF);}
+function buildProfile(){
+  var P={Lb:{},Db:{},Lc:{},Dc:{},Lv:{},Dv:{},_col:[],_colw:[],_nu:[],_nuw:[],cm:null,Lneu:null};
+  function add(side,rec){
+    var w=recW(rec);
+    var bset=side==='L'?P.Lb:P.Db, cset=side==='L'?P.Lc:P.Dc, vset=side==='L'?P.Lv:P.Dv;
+    var b=(rec.brand||'').toLowerCase().trim(); if(b) bset[b]=(bset[b]||0)+w;
+    (rec.cats||'').split(' ').filter(Boolean).forEach(function(c){cset[c]=(cset[c]||0)+w;});
+    var cv=parseFloat(rec.c); if(side==='L'&&!isNaN(cv)){P._col.push(cv*w);P._colw.push(w);}
+    VCATS.forEach(function(f){var v=rec[f[0]]; if(v&&v!=='na'){if(!vset[f[0]])vset[f[0]]={};vset[f[0]][v]=(vset[f[0]][v]||0)+w;}});
+    if(side==='L'){var nu=parseFloat(rec.neut); if(!isNaN(nu)){P._nu.push(nu*w);P._nuw.push(w);}}
+  }
+  Object.keys(state.liked).forEach(function(id){add('L',state.liked[id]||{});});
+  Object.keys(state.disliked).forEach(function(id){add('D',state.disliked[id]||{});});
+  var sw=function(a){return a.reduce(function(x,y){return x+y;},0);};
+  if(P._colw.length) P.cm=sw(P._col)/sw(P._colw);
+  if(P._nuw.length) P.Lneu=sw(P._nu)/sw(P._nuw);
+  return P;
+}
+function liveScore(it,P){
+  var s=(typeof it.base==='number'?it.base:it.score)||0, b=it.brand_l||'';
+  var nb=(P.Lb[b]||0)-(P.Db[b]||0);            // net, recency-weighted: lets taste flip over time
+  if(nb) s+=nb>0?Math.min(11,7*nb):Math.max(-15,9*nb);
+  var net=0; it.cats.forEach(function(c){net+=(P.Lc[c]||0)-(P.Dc[c]||0);});
+  s+=Math.max(-14,Math.min(12,(net<0?6:4)*net));
+  it.cats.forEach(function(c){if((P.Dc[c]||0)>=1.5 && (P.Lc[c]||0)<0.4) s-=20;});
+  var cv=parseFloat(it.c); if(!isNaN(cv)&&P.cm!=null&&Math.abs(cv-P.cm)<0.08) s+=6;
+  VCATS.forEach(function(f){var k=f[0],val=it[k]; if(!val||val==='na')return; var lk=(P.Lv[k]&&P.Lv[k][val])||0, dk=(P.Dv[k]&&P.Dv[k][val])||0; if(lk)s+=Math.min(f[1],f[2]*lk); if(dk)s-=Math.min(f[3],f[4]*dk);});
+  var nu=parseFloat(it.neut); if(!isNaN(nu)&&P.Lneu!=null) s+=5*(1-2*Math.abs(nu-P.Lneu));
+  return s;
+}
+
+/* ---- tabs ---- */
+function bucketItems(bk){return ITEMS.filter(bk.m);}  // order applied live in renderGrid
+function liveCount(bk){var n=0;var all=bucketItems(bk);for(var i=0;i<all.length;i++){if(!state.disliked[all[i].id])n++;}return n;}
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=BUCKETS.map(function(bk){
+    if(bk.sep) return '<span class="tab sep">·</span>';
+    var n=liveCount(bk);
+    var cls='tab'+(bk.key===cur?' on':'')+(bk.empty?' disabled':'');
+    return '<button class="'+cls+'" data-bk="'+bk.key+'">'+bk.label+(bk.empty?'':'<span class="n">'+n+'</span>')+'</button>';
+  }).join('');
+  document.querySelectorAll('.tab[data-bk]').forEach(function(t){
+    t.addEventListener('click',function(){ var bk=bucketByKey(t.dataset.bk); if(bk.empty){renderGrid();return;} cur=t.dataset.bk; showDis=false; renderTabs(); renderGrid(); window.scrollTo({top:0,behavior:'smooth'}); });
+  });
+  document.getElementById('listn').textContent=Object.keys(cart).length;
+}
+
+/* ---- grid ---- */
+function renderGrid(){
+  document.getElementById('list').style.display='none';
+  document.getElementById('browse').style.display='block';
+  var bk=bucketByKey(cur);
+  document.getElementById('bname').textContent=bk.label;
+  var P=buildProfile();                       // recency-weighted profile from current swipes
+  var all=bucketItems(bk);
+  all.forEach(function(it){it.__s=liveScore(it,P);});
+  all.sort(function(a,b){return b.__s-a.__s;});
+  var shown=all.filter(function(it){return showDis || !state.disliked[it.id];});
+  var grid=document.getElementById('grid');
+  var disBtn=document.getElementById('showdis');
+  var nDis=all.length-all.filter(function(it){return !state.disliked[it.id];}).length;
+  document.getElementById('bsub').textContent=bk.empty?'':(shown.length+' option'+(shown.length===1?'':'s'));
+  if(bk.empty){grid.innerHTML='<div class="empty"><div class="big">'+bk.label+'</div><div class="it">'+bk.empty+'</div></div>';disBtn.style.display='none';return;}
+  if(!shown.length){grid.innerHTML='<div class="empty"><div class="big">Nothing here yet</div>You’ve been through this one.</div>';}
+  else{grid.innerHTML=shown.map(card).join('');wireCards();}
+  if(nDis>0){disBtn.style.display='block';disBtn.textContent=showDis?'Hide passed ('+nDis+')':'Show passed ('+nDis+')';}
+  else disBtn.style.display='none';
+}
+function card(it){
+  var liked=inCart(it.id);   // heart filled = on the buy list (not all-time taste history)
+  return '<div class="card'+(liked?' liked':'')+'" data-id="'+esc(it.id)+'">'+
+    '<div class="imgwrap">'+(it.new?'<span class="badge">New</span>':'')+'<span class="savedpin">♥</span>'+
+    '<a class="shot" href="'+it.url+'" target="_blank" rel="noopener"><img src="'+it.img+'" alt="" loading="lazy"></a></div>'+
+    '<div class="info"><div class="brand">'+esc(it.brand)+'</div><div class="title">'+esc(it.title)+'</div>'+
+    (/^(Goes with|More like) your new/.test(it.why||'')?'<div class="why">'+esc(it.why)+'</div>':'')+
+    '<div class="price">'+esc(it.price||'—')+'</div>'+
+    '<div class="acts"><button class="act pass" data-act="pass" title="Not for me">✕</button><button class="act save" data-act="save" title="Save to list">♥</button></div>'+
+    '<a class="viewlink" href="'+it.url+'" target="_blank" rel="noopener">View item →</a></div></div>';
+}
+function wireCards(){
+  document.querySelectorAll('#grid .card').forEach(function(c){
+    var id=c.dataset.id;
+    c.querySelector('[data-act="save"]').addEventListener('click',function(e){e.preventDefault();
+      if(inCart(id)){
+        delete cart[id];saveCart();                 // off the buy list; taste signal stays
+      } else {
+        var m=metaById(id);
+        cart[id]=m;saveCart();                       // onto the buy list
+        delete state.disliked[id];state.liked[id]=m;save();push();   // and teach taste
+      }
+      c.classList.toggle('liked',inCart(id));renderTabs();
+    });
+    c.querySelector('[data-act="pass"]').addEventListener('click',function(e){e.preventDefault();
+      delete state.liked[id];delete cart[id];state.disliked[id]=metaById(id);
+      save();push();saveCart();
+      c.classList.add('removing');setTimeout(function(){renderGrid();renderTabs();},200);
+    });
+  });
+}
+function metaById(id){for(var i=0;i<ITEMS.length;i++)if(ITEMS[i].id===id)return meta(ITEMS[i]);return {};}
+
+/* ---- buy list ---- */
+function renderList(){
+  document.getElementById('browse').style.display='none';
+  var ids=Object.keys(cart);
+  var byId={};ITEMS.forEach(function(it){byId[it.id]=it;});
+  var rows=ids.map(function(id){return byId[id]||{id:id,_meta:cart[id]};});
+  var el=document.getElementById('list');el.style.display='block';
+  if(!rows.length){el.innerHTML='<div class="emptylist"><div class="big">Your list is empty</div>♥ pieces from any tab and they collect here to buy.</div>';window.scrollTo(0,0);return;}
+  el.innerHTML='<div class="headline" style="margin-top:4px"><div class="h">My list</div><div class="sub">'+rows.length+' to buy</div><button class="clearlist" id="clearlist">Clear list</button></div>'+rows.map(function(it){
+    if(!it.title) return '<div class="li"><div class="m"><div class="ti">Saved item</div><div class="pr">'+esc(it.id)+'</div></div><button class="rm" data-rm="'+it.id+'">✕</button></div>';
+    return '<div class="li"><img src="'+it.img+'" alt="">'+
+      '<div class="m"><div class="b">'+esc(it.brand)+'</div><div class="ti">'+esc(it.title)+'</div><div class="pr">'+esc(it.price||'')+'</div></div>'+
+      '<a class="buy" href="'+it.url+'" target="_blank" rel="noopener">Buy</a>'+
+      '<button class="rm" data-rm="'+it.id+'">✕</button></div>';
+  }).join('');
+  el.querySelectorAll('[data-rm]').forEach(function(b){
+    b.addEventListener('click',function(){delete cart[b.dataset.rm];saveCart();renderList();renderTabs();});
+  });
+  var cl=document.getElementById('clearlist');
+  if(cl) cl.addEventListener('click',function(){cart={};saveCart();renderList();renderTabs();});
+  window.scrollTo(0,0);
+}
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+/* ---- wire ---- */
+document.getElementById('home').addEventListener('click',function(){renderTabs();renderGrid();window.scrollTo(0,0);});
+document.getElementById('listbtn').addEventListener('click',renderList);
+document.getElementById('showdis').addEventListener('click',function(){showDis=!showDis;renderGrid();});
+
+/* ---- boot: merge localStorage + disk (disk = source of truth) ---- */
+function boot(){
+  state=load();cart=loadCart();
+  fetch('/feedback').then(function(r){return r.ok?r.json():null;}).then(function(disk){
+    if(disk){['liked','disliked'].forEach(function(side){var d=disk[side]||{};Object.keys(d).forEach(function(id){if(!state.liked[id]&&!state.disliked[id])state[side][id]=d[id];});});save();}
+  }).catch(function(){}).then(function(){
+    fetch('data/items.json').then(function(r){return r.json();}).then(function(d){
+      ITEMS=d;renderTabs();renderGrid();
+    }).catch(function(){document.getElementById('grid').innerHTML='<div class="empty"><div class="big">No data</div>run build_feed.py</div>';});
+  });
+}
+boot();
+</script>
+</body></html>
