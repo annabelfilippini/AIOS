@@ -203,6 +203,8 @@ async function loadAll(){
 }
 document.getElementById('reloadBtn').onclick=loadAll;document.getElementById('saveMoney').onclick=()=>{const day=iso(new Date());localStorage.setItem(moneyKey(day),document.getElementById('moneyNote').value);document.getElementById('moneySaved').textContent='Saved for today.'};document.getElementById('clearMoney').onclick=()=>{document.getElementById('moneyNote').value='';document.getElementById('saveMoney').click()};
 loadAll();
+// Refetch when you reopen the PWA / return to the tab — otherwise iOS shows the stale view it loaded on first open.
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadAll();});
 </script>
 </body>
 </html>
