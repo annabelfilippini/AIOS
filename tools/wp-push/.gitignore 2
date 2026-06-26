@@ -1,4 +1,0 @@
-wp-push.toml
-wp-push-manifest.json
-*.built.html
-__pycache__/

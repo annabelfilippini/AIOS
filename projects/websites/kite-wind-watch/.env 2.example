@@ -1,4 +1,0 @@
-# Kite Wind Watch — scraper secrets. Copy to `.env` (which is gitignored) and fill in.
-# You already have a Firecrawl key configured for the Firecrawl MCP — copy that value.
-# It lives in ~/.claude.json (and ~/.codex/config.toml) under the firecrawl server's env.
-FIRECRAWL_API_KEY=fc-your-key-here
