@@ -113,7 +113,7 @@
   .date-title .chev{color:var(--muted)}
   .head-tools{grid-column:3;justify-self:end;display:flex;gap:9px;align-items:center}
   .pill{display:inline-flex;align-items:center;gap:7px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);
-    padding:8px 13px;font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);cursor:pointer}
+    padding:8px 13px;font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);cursor:pointer;text-decoration:none}
   .pill:hover{color:var(--ink);border-color:var(--muted)}
   .pill svg{width:14px;height:14px}
   .ai .spk{color:var(--love)}
@@ -323,6 +323,7 @@
         <h1 class="date-title" id="dateTitle"></h1>
       </div>
       <div class="head-tools">
+        <a class="pill" id="morningBtn" href="/morning.html">Morning</a>
         <div class="viewtog" id="viewTog">
           <button data-view="week" class="on">Week</button>
           <button data-view="month">Month</button>
@@ -398,6 +399,11 @@
     var p=new URLSearchParams(location.search);
     if(p.get('k')){ KEY=p.get('k'); try{localStorage.setItem('tdk',KEY);}catch(e){} }
     else { try{KEY=localStorage.getItem('tdk')||'';}catch(e){KEY='';} }
+    if(KEY){
+      document.querySelectorAll('a[href^="/"]').forEach(function(a){
+        try{ var u=new URL(a.getAttribute('href'), location.href); u.searchParams.set('k',KEY); a.href=u.pathname+u.search; }catch(e){}
+      });
+    }
   }catch(e){}
   if(KEY){
     var _f=window.fetch.bind(window);
