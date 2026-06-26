@@ -227,15 +227,15 @@ function piecesFor(occ, purchases){
   if(occ==='work') return uniq([whiteTop, {name:'Loose black or navy trousers', brand:'Style rule', color:'Black / navy'}, {name:'Pointed flat or low heel', brand:'Style rule', color:'Neutral'}]);
   if(occ==='active') return uniq([active, {name:'Full-length leggings or sweat-set', brand:'Style rule', color:'Neutral / all-black'}, sneaker||{name:'New Balance or clean sneaker', brand:'Style rule', color:'Neutral'}]);
   if(occ==='vacation') return uniq([whiteTop, shorts, hoodie, sneaker]);
-  return uniq([whiteTop, shorts, {name:'Oversized knit or cardigan', brand:'Style rule', color:'Oatmeal / grey / navy'}, sneaker]);
+  return uniq([whiteTop, shorts, {name:'Soft cream sweater or structured jacket', brand:'Style rule', color:'Oatmeal / grey / navy'}, sneaker]);
 }
 function outfitCopy(occ){
   const map={
     'going-out':['Sleek quiet going-out','Black or ivory top, relaxed black trousers, gold jewelry. A little satin is good; sparkly/costume is not.'],
     work:['Polished but not stiff','Ivory or cream clean-neckline top with loose black/navy trousers. European / Toteme / The Row energy.'],
     active:['Pilates-to-coffee neutral set','Neutral or all-black matching set, full-length only. No capri/cropped leggings.'],
-    vacation:['Soft travel uniform','White/cream top, relaxed denim or ecru shorts, hoodie/cardigan layer, clean sneakers. Easy but pulled together.'],
-    casual:['Cozy elevated everyday','Oversized knit/cardigan, wide denim or cream shorts, brown leather accents, gold jewelry.']
+    vacation:['Soft travel uniform','White/cream top, relaxed denim or ecru shorts, hoodie or structured light layer, clean sneakers. Easy but pulled together.'],
+    casual:['Cozy elevated everyday','Soft cream sweater, wide denim or cream shorts, brown leather accents, gold jewelry. No cardigan default.']
   };
   return map[occ]||map.casual;
 }

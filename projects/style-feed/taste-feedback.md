@@ -48,7 +48,7 @@ Her work taste, precisely (she sent 5 Pinterest screenshots as the answer to "wo
 ## 2026-06-22 — EVERYDAY (fall) + WORKOUT brands (from reference pics)
 
 EVERYDAY = her real fall everyday (she pasted Pinterest grids):
-- Oversized/relaxed knits and cardigans: oatmeal, camel, brown/chocolate, navy, grey, olive.
+- Oversized/relaxed knits, soft cream sweaters, and structured light layers: oatmeal, camel, brown/chocolate, navy, grey, olive. Do not default to cardigans; Annabel said she would not wear them.
 - WIDE blue jeans (mid wash), straight jeans, denim shirts (oversized).
 - Tall tan/cognac + brown leather riding boots (Frye-ish); brown loafers; gum-sole/Samba sneakers.
 - Suede jackets: tan, olive, brown bomber/chore. Cream chunky sweater + white linen wide pants.
