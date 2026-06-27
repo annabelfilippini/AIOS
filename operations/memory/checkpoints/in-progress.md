@@ -1,19 +1,22 @@
-# In progress — The Edit consolidation (Batch 2)
+# In progress — The Edit consolidation (Life OS)
 
-Session 2026-06-27 ~17:30. Building the one-feed + one-debrief consolidation.
+Session 2026-06-27. Collapsing 5 style surfaces -> ONE feed (The Edit) + ONE morning debrief.
 
-## Done
-- Batch 1: ShopMy refresh (refresh_sources.py, merge-safe, 1383 pins) + Pinterest
-  scrape (refresh_pinterest.py, 28 pins) + daily cron (crontab 30 6 * * *, refresh_all.sh).
-- Batch 2a (THIS): build_feed.py now ingests Pinterest ("Inspiration" tab) + closet
-  ("My Closet" tab) into The Edit feed (feed.html). Closet reuses its own tags (no
-  vision call); Pinterest vision-tagged in the normal pass. Both ♥/✕ -> feedback.json.
+## Done + verified
+- Batch 1: ShopMy refresh (refresh_sources.py, merge-safe, 1383 pins), Pinterest scrape
+  (refresh_pinterest.py, 28 real pins), daily cron (crontab 30 6, refresh_all.sh).
+- Batch 2a: build_feed.py ingests Pinterest ("Inspiration" tab) + closet ("My Closet" tab)
+  into feed.html. Both ♥/✕ -> feedback.json. Verified live.
 
-## Next (Batch 2b/2c — NOT started)
-- 2b: one Morning Debrief = make day-planner/morning.html canonical (calendar-driven),
-  fold in the-edit.html card styling. Link from BOTH The Day's "Morning" pill AND The Edit
-  (same link). 
-- 2c: life-os/serve.py — repoint "The Edit" tab to feed.html (currently the-edit.html).
-  Retire lookbook.html, quickchoose.html, the-edit.html, pinterest-board/.
+## LIVE for review (leave running)
+projects/style-feed/serve.py 8801 -> http://localhost:8801/feed.html
+Restart: cd projects/style-feed && python3 serve.py 8801
 
-Full detail: 2026-06-27-1700-life-os-shopmy-cron-pinterest-scrape.md
+## Next — paused for Annabel's feedback on the live feed
+- 2b: one Morning Debrief = day-planner/morning.html canonical + the-edit.html card CSS;
+  link from The Day's Morning pill AND The Edit (same link). Outfits use owned + aspirational.
+- 2c: life-os/serve.py "The Edit" tab -> feed.html (was the-edit.html); retire lookbook.html,
+  quickchoose.html, the-edit.html, pinterest-board/. Watch: serve.py cross-module banner
+  keys off the-edit.html occasion cards (will need rework).
+
+Full detail: 2026-06-27-1745-life-os-the-edit-one-feed-live.md
