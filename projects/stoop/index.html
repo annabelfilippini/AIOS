@@ -521,9 +521,16 @@
 
   // photo upload: downscale to a small square-ish jpeg so it fits in localStorage.
   // ponytail: 480px cap keeps a phone photo ~40KB instead of multi-MB (which would blow the quota).
+  // delaney.jpg is sample data for the one-tap demo. Anyone who isn't Delaney and
+  // hasn't uploaded their own shouldn't inherit her face — fall back to the initial.
+  function effectivePhoto(){
+    const name=(document.getElementById('f-name').value||'').trim().toLowerCase();
+    return (obPhoto===DEFAULT.photo && name!==DEFAULT.name.toLowerCase()) ? '' : obPhoto;
+  }
   function setPhotoPreview(){
     const el=document.getElementById('ph-prev');
-    el.innerHTML = obPhoto ? `<img src="${obPhoto}" alt="">` : ((document.getElementById('f-name').value.trim()||'?')[0]);
+    const ph=effectivePhoto();
+    el.innerHTML = ph ? `<img src="${ph}" alt="">` : ((document.getElementById('f-name').value.trim()||'?')[0]);
   }
   function downscale(file,max,cb){
     const img=new Image();
@@ -537,6 +544,7 @@
     };
     img.src=URL.createObjectURL(file);
   }
+  document.getElementById('f-name').addEventListener('input',setPhotoPreview);
   document.getElementById('ph-btn').onclick=()=>document.getElementById('ph-file').click();
   document.getElementById('ph-file').onchange=(e)=>{
     const file=e.target.files[0]; if(!file) return;
@@ -602,7 +610,7 @@
       title:val('f-title')||((val('f-name')||'My')+"'s stand"),
       price:val('f-price')||'$0', unit:val('f-unit')||'session',
       dur:val('f-dur'), loc:val('f-loc'), bring:val('f-bring'),
-      phone:val('f-phone'), theme:obTheme, photo:obPhoto,
+      phone:val('f-phone'), theme:obTheme, photo:effectivePhoto(),
       about:val('f-about').split(/\n\n+/).map(s=>s.trim()).filter(Boolean),
       avail:obDays
     };
