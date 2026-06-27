@@ -564,9 +564,9 @@
       };
     });
   }
-  // tappable hour chips, 9am–8pm. obDays[dow] holds the label strings the calendar reads.
-  const HOURS=[]; for(let h=9;h<=20;h++)HOURS.push(h);
-  function hourLabel(h){ const ap=h<12?'am':'pm'; let hr=h%12; if(hr===0)hr=12; return hr+':00 '+ap; }
+  // tappable time chips, 9am–8pm in 30-min steps. obDays[dow] holds the label strings the calendar reads.
+  const SLOTS=[]; for(let m=540;m<=1200;m+=30)SLOTS.push(m);   // 540=9:00am … 1200=8:00pm
+  function slotLabel(m){ const h=Math.floor(m/60), ap=h<12?'am':'pm'; return (h%12||12)+':'+(m%60===0?'00':'30')+' '+ap; }
   function renderDayTimes(){
     const box=document.getElementById('ob-times');
     const keys=Object.keys(obDays).sort((a,b)=>a-b);
@@ -575,14 +575,14 @@
     box.classList.add('on');
     box.innerHTML='<label>Tap the hours you can do</label>'+keys.map(i=>{
       const sel=new Set(obDays[i]);
-      const chips=HOURS.map(h=>{const l=hourLabel(h);return `<button type="button" class="hchip${sel.has(l)?' on':''}" data-d="${i}" data-h="${h}">${l}</button>`;}).join('');
+      const chips=SLOTS.map(m=>{const l=slotLabel(m);return `<button type="button" class="hchip${sel.has(l)?' on':''}" data-d="${i}" data-m="${m}">${l}</button>`;}).join('');
       return `<div class="trow"><span class="dn">${DOW[i]}</span><div class="hchips">${chips}</div></div>`;
     }).join('');
     box.querySelectorAll('.hchip').forEach(ch=>{
       ch.onclick=()=>{
-        const i=ch.dataset.d, l=hourLabel(+ch.dataset.h), set=new Set(obDays[i]);
+        const i=ch.dataset.d, l=slotLabel(+ch.dataset.m), set=new Set(obDays[i]);
         set.has(l)?set.delete(l):set.add(l);
-        obDays[i]=HOURS.map(hourLabel).filter(x=>set.has(x));   // keep chronological
+        obDays[i]=SLOTS.map(slotLabel).filter(x=>set.has(x));   // keep chronological
         ch.classList.toggle('on');
       };
     });
