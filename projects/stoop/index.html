@@ -293,6 +293,7 @@
       👋 This is your page — neighbors see it without this bar.
       <button onclick="go('onboard')">Edit</button>
       <button onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href.split('#')[0]);this.textContent='Copied!'">Copy link</button>
+      <button onclick="if(confirm('Clear this page and start onboarding from scratch?')){localStorage.removeItem('stoop-profile');profile=null;go('onboard');}">Start fresh</button>
     </div>
 
     <div class="site">
