@@ -9,11 +9,22 @@ taste-feedback.md; the closet is data/closet.json.
 Pure / no deps. Run `python3 style_engine.py` for the self-check.
 """
 import json
+import math
 import re
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CLOSET_PATH = ROOT / "data" / "closet.json"
+FEEDBACK_PATH = ROOT / "data" / "feedback.json"
+
+# Axes shared with the influencer-feed vision vocabulary (build_feed.py); closet
+# pieces carry these under "tags" so her 600+ reactions can score them.
+_FB_CAT = ("sil", "neck", "slv", "len", "fab", "drp", "form")
+_FB_NUM = ("neut", "om")
+_FB_WEIGHT = 2.5  # pull of her reactions on a pick; preferred-tone match is +4.
+# At this weight her ♥/✕ can override the +2 owned bonus, so a taste-matching
+# piece she doesn't own yet can win a slot (surfaced via the piece's owned flag).
 
 # Colors she loves (taste-feedback.md) → rank up; hates → exclude outright.
 LOVED_TONES = {"black", "blue", "navy", "brown", "grey", "gray", "ecru", "cream",
@@ -138,6 +149,58 @@ def load_closet(path=CLOSET_PATH):
     return data.get("pieces", []) if isinstance(data, dict) else []
 
 
+def load_feedback_profile(path=FEEDBACK_PATH):
+    """Build a taste scorer from her liked/disliked reactions. Returns tags->float:
+    positive looks like what she hearts, negative like what she X's. Per-attribute
+    log-likelihood ratio (naive Bayes) over the shared vocabulary, averaged so it
+    stays ~[-2, 2]. Recomputed from feedback.json each load, so it sharpens as she
+    reacts more.
+    ponytail: per-attribute marginals only; pairings (the combinatorial part the
+    diagnosis flagged) deferred until single-attribute scoring isn't enough."""
+    try:
+        fb = json.loads(Path(path).read_text())
+    except FileNotFoundError:
+        return lambda tags: 0.0
+    L, D = list(fb.get("liked", {}).values()), list(fb.get("disliked", {}).values())
+    if not L or not D:
+        return lambda tags: 0.0
+    nL, nD, a = len(L), len(D), 1.0
+    cat = {}
+    for ax in _FB_CAT:
+        lc, dc = Counter(x.get(ax) for x in L), Counter(x.get(ax) for x in D)
+        V = len({k for k in (set(lc) | set(dc)) if k})
+        cat[ax] = (lc, dc, V)
+    num = {}
+    for ax in _FB_NUM:
+        lv = [float(x[ax]) for x in L if x.get(ax) not in (None, "")]
+        dv = [float(x[ax]) for x in D if x.get(ax) not in (None, "")]
+        if lv and dv:
+            lm, dm = sum(lv) / len(lv), sum(dv) / len(dv)
+            num[ax] = ((lm + dm) / 2, (lm - dm) / 2 or 1e-6)  # midpoint, half-range
+
+    def score(tags):
+        if not tags:
+            return 0.0
+        terms = []
+        for ax, (lc, dc, V) in cat.items():
+            v = tags.get(ax)
+            if not v:
+                continue
+            terms.append(math.log((lc[v] + a) / (nL + a * V))
+                         - math.log((dc[v] + a) / (nD + a * V)))
+        for ax, (mid, half) in num.items():
+            v = tags.get(ax)
+            if v not in (None, ""):
+                terms.append(max(-1.5, min(1.5, (float(v) - mid) / half)))
+        return sum(terms) / len(terms) if terms else 0.0
+
+    return score
+
+
+# Built once at import from her real reactions; folded into _score below.
+FEEDBACK_SCORE = load_feedback_profile()
+
+
 def _banned(piece):
     text = f"{piece.get('name','')} {piece.get('brand','')} {piece.get('color','')}".lower()
     if BANNED_TEXT.search(text):
@@ -158,6 +221,7 @@ def _score(piece, occ, prefer):
     if tones & set(prefer):
         s += 4  # matches the formula's preferred tone for this slot
     s += len(tones & LOVED_TONES) * 0.5
+    s += _FB_WEIGHT * FEEDBACK_SCORE(piece.get("tags"))  # her 600+ ♥/✕ reactions
     if not piece.get("img"):
         s -= 1  # prefer a piece we can actually show
     return s
@@ -235,6 +299,16 @@ def build_week(events, closet):
 def demo():
     closet = load_closet()
     assert closet, "closet.json is empty"
+
+    # The feedback scorer reads her real reactions: a look made of what she hearts
+    # (wide-leg denim, fluid, neutral) must outscore what she X's (tailored silk).
+    fbs = load_feedback_profile()
+    good = {"sil": "wide-leg", "fab": "denim", "len": "full-length", "drp": "fluid",
+            "neut": 0.9, "om": 0.85}
+    bad = {"sil": "tailored", "fab": "silk", "len": "tunic", "drp": "flowy",
+           "neut": 0.6, "om": 0.6}
+    assert fbs(good) > 0 > fbs(bad), (fbs(good), fbs(bad))
+    assert fbs(None) == 0.0 and fbs({}) == 0.0  # untagged piece is neutral, never errors
 
     # Occasion detection covers her real lanes + calendar shorthand.
     assert occasion_of("Alex's Birthday dinner") == "going-out"

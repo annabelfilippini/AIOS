@@ -2,27 +2,490 @@
   "note": "Annabel's wardrobe = input to style_engine.py. owned=true is confirmed (purchases + current Nuuly box). owned=false is a guessed staple shown as 'My guess' until confirmed. slot: top|bottom|shoe|layer|bag|dress. occ: which occasions a piece can fill. tones: lowercase color words used for taste ranking.",
   "updated": "2026-06-26",
   "pieces": [
-    {"id": "zara-striped-shorts", "name": "Striped Shorts", "brand": "Zara", "color": "Blue / White", "img": "https://static.zara.net/photos//assets/public/36a8/9371/aa964f5f996c/f9e7a9f2a1a9/06929410044-f1/06929410044-f1.jpg", "owned": true, "slot": "bottom", "occ": ["casual", "vacation", "active"], "tones": ["blue", "white"]},
-    {"id": "zara-ecru-shorts", "name": "Embroidered Shorts", "brand": "Zara", "color": "Ecru", "img": "https://static.zara.net/photos//assets/public/16c7/33e9/4f94499ea4b2/dbe6ec322f48/05770025712-f1/05770025712-f1.jpg", "owned": true, "slot": "bottom", "occ": ["casual", "vacation"], "tones": ["ecru", "cream"]},
-    {"id": "abercrombie-aline-short", "name": "Mid Rise A-Line Short", "brand": "Abercrombie", "color": "Medium Wash", "img": null, "owned": true, "slot": "bottom", "occ": ["casual", "vacation"], "tones": ["blue", "denim"]},
-    {"id": "agolde-low-loose", "name": "Low Rise Loose Jean", "brand": "AGOLDE", "color": "Mid wash", "img": "https://agolde.com/cdn/shop/files/A260-1371_LOW_RISE_LOOSE_VAULT_1168.jpg?width=800", "owned": false, "slot": "bottom", "occ": ["casual", "vacation", "going-out"], "tones": ["blue", "denim"]},
-    {"id": "aritzia-effortless-black", "name": "Effortless Pant", "brand": "Aritzia", "color": "Black", "img": "https://assets.aritzia.com/image/upload/c_crop,ar_1920:2623,g_south/q_auto,f_auto,dpr_auto/s23_04_a06_98765_1274_off_a", "owned": false, "slot": "bottom", "occ": ["going-out", "work"], "tones": ["black"]},
-    {"id": "aritzia-butter-short", "name": "Butter Cheeky Hi-Rise 5\" Short", "brand": "Golden by Aritzia", "color": "Admiral", "img": "https://assets.aritzia.com/image/upload/medium/s26_a26_116698_10230_off_a.jpg", "owned": true, "slot": "bottom", "occ": ["active"], "tones": ["navy"]},
-
-    {"id": "wilfred-martini-halter", "name": "Martini Satin Halter Top", "brand": "Wilfred", "color": "Black", "img": "https://assets.aritzia.com/image/upload/medium/s26_a02_118527_1274_off_a.jpg", "owned": true, "slot": "top", "occ": ["going-out"], "tones": ["black", "satin"]},
-    {"id": "zara-ribbed-black", "name": "Ribbed Sleeveless Top", "brand": "Zara", "color": "Black", "img": "https://static.zara.net/photos//assets/public/4dd9/04ce/290d42c68d28/e6a9e42993ae/03253301800-f1/03253301800-f1.jpg", "owned": true, "slot": "top", "occ": ["going-out", "casual"], "tones": ["black"]},
-    {"id": "zara-tee-white", "name": "Cotton Sleeveless T-Shirt", "brand": "Zara", "color": "White", "img": "https://static.zara.net/photos//assets/public/755a/9a2c/7cd54694aa43/2ebcb1c77542/04174324250-f1/04174324250-f1.jpg", "owned": true, "slot": "top", "occ": ["casual", "vacation", "active"], "tones": ["white"]},
-    {"id": "zara-ribbed-white", "name": "Ribbed Sleeveless Top", "brand": "Zara", "color": "White", "img": "https://static.zara.net/photos//assets/public/1e27/cc3d/790e44f8bd98/6e25d7a5fbd8/03253301250-f1/03253301250-f1.jpg", "owned": true, "slot": "top", "occ": ["casual", "work", "vacation"], "tones": ["white"]},
-    {"id": "aritzia-butter-tank", "name": "Butter Essential Cami Tank", "brand": "Golden by Aritzia", "color": "Admiral", "img": "https://assets.aritzia.com/image/upload/medium/s26_a01_118010_10230_off_a.jpg", "owned": true, "slot": "top", "occ": ["active"], "tones": ["navy"]},
-
-    {"id": "nuuly-madewell-leah", "name": "Leah 60's Top", "brand": "Madewell", "color": "White", "img": "https://s7d2.scene7.com/is/image/nu/108276783_010_b?wid=800&fmt=jpeg", "owned": true, "source": "Nuuly", "slot": "top", "occ": ["casual", "vacation", "work"], "tones": ["white"]},
-    {"id": "nuuly-nativeyouth-broderie", "name": "Broderie Back-Tie Top", "brand": "Native Youth", "color": "White", "img": "https://s7d2.scene7.com/is/image/nu/109813840_010_b?wid=800&fmt=jpeg", "owned": true, "source": "Nuuly", "slot": "top", "occ": ["casual"], "tones": ["white", "cream"]},
-    {"id": "nuuly-zemeta-belllace", "name": "Bell Lace Top", "brand": "Zemeta", "color": "White", "img": "https://s7d2.scene7.com/is/image/nu/106502966_010_b?wid=800&fmt=jpeg", "owned": true, "source": "Nuuly", "slot": "top", "occ": ["going-out", "casual"], "tones": ["white"]},
-    {"id": "nuuly-fp-forevermore", "name": "Forevermore LS Top", "brand": "Free People", "color": "White", "img": "https://s7d2.scene7.com/is/image/nu/94682457_010_b?wid=800&fmt=jpeg", "owned": true, "source": "Nuuly", "slot": "top", "occ": ["casual", "vacation", "active"], "tones": ["white"]},
-
-    {"id": "aritzia-cloud-hoodie", "name": "Cozy Sweatfleece Hoodie", "brand": "Aritzia", "color": "Cloud White", "img": "https://assets.aritzia.com/image/upload/medium/s26_a03_116266_19451_off_a.jpg", "owned": true, "slot": "layer", "occ": ["active", "vacation", "casual"], "tones": ["white", "grey"]},
-
-    {"id": "onitsuka-mexico66-birch", "name": "Mexico 66", "brand": "Onitsuka Tiger", "color": "Birch / Peacoat", "img": "https://cdn-images.farfetch-contents.com/21/44/90/10/21449010_51590755_200.jpg", "owned": true, "slot": "shoe", "occ": ["casual", "vacation", "going-out"], "tones": ["birch", "cream", "blue"]},
-    {"id": "onitsuka-mexico66-grey", "name": "Mexico 66", "brand": "Onitsuka Tiger", "color": "Grey / White", "img": "https://image.goat.com/attachments/product_template_pictures/images/105/369/185/original/1402217_00.png.png", "owned": true, "slot": "shoe", "occ": ["casual", "active", "vacation"], "tones": ["grey", "white"]}
+    {
+      "id": "zara-striped-shorts",
+      "name": "Striped Shorts",
+      "brand": "Zara",
+      "color": "Blue / White",
+      "img": "https://static.zara.net/photos//assets/public/36a8/9371/aa964f5f996c/f9e7a9f2a1a9/06929410044-f1/06929410044-f1.jpg",
+      "owned": true,
+      "slot": "bottom",
+      "occ": [
+        "casual",
+        "vacation",
+        "active"
+      ],
+      "tones": [
+        "blue",
+        "white"
+      ],
+      "tags": {
+        "sil": "relaxed",
+        "len": "mini",
+        "fab": "cotton",
+        "drp": "structured",
+        "form": "casual",
+        "neut": 0.65,
+        "om": 0.55
+      }
+    },
+    {
+      "id": "zara-ecru-shorts",
+      "name": "Embroidered Shorts",
+      "brand": "Zara",
+      "color": "Ecru",
+      "img": "https://static.zara.net/photos//assets/public/16c7/33e9/4f94499ea4b2/dbe6ec322f48/05770025712-f1/05770025712-f1.jpg",
+      "owned": true,
+      "slot": "bottom",
+      "occ": [
+        "casual",
+        "vacation"
+      ],
+      "tones": [
+        "ecru",
+        "cream"
+      ],
+      "tags": {
+        "sil": "relaxed",
+        "len": "mini",
+        "fab": "cotton",
+        "drp": "structured",
+        "form": "casual",
+        "neut": 0.7,
+        "om": 0.6
+      }
+    },
+    {
+      "id": "abercrombie-aline-short",
+      "name": "Mid Rise A-Line Short",
+      "brand": "Abercrombie",
+      "color": "Medium Wash",
+      "img": null,
+      "owned": true,
+      "slot": "bottom",
+      "occ": [
+        "casual",
+        "vacation"
+      ],
+      "tones": [
+        "blue",
+        "denim"
+      ],
+      "tags": {
+        "sil": "relaxed",
+        "len": "mini",
+        "fab": "denim",
+        "drp": "structured",
+        "form": "casual",
+        "neut": 0.8,
+        "om": 0.6
+      }
+    },
+    {
+      "id": "agolde-low-loose",
+      "name": "Low Rise Loose Jean",
+      "brand": "AGOLDE",
+      "color": "Mid wash",
+      "img": "https://agolde.com/cdn/shop/files/A260-1371_LOW_RISE_LOOSE_VAULT_1168.jpg?width=800",
+      "owned": false,
+      "slot": "bottom",
+      "occ": [
+        "casual",
+        "vacation",
+        "going-out"
+      ],
+      "tones": [
+        "blue",
+        "denim"
+      ],
+      "tags": {
+        "sil": "wide-leg",
+        "len": "full-length",
+        "fab": "denim",
+        "drp": "fluid",
+        "form": "casual",
+        "neut": 0.85,
+        "om": 0.75
+      }
+    },
+    {
+      "id": "aritzia-effortless-black",
+      "name": "Effortless Pant",
+      "brand": "Aritzia",
+      "color": "Black",
+      "img": "https://assets.aritzia.com/image/upload/c_crop,ar_1920:2623,g_south/q_auto,f_auto,dpr_auto/s23_04_a06_98765_1274_off_a",
+      "owned": false,
+      "slot": "bottom",
+      "occ": [
+        "going-out",
+        "work"
+      ],
+      "tones": [
+        "black"
+      ],
+      "tags": {
+        "sil": "wide-leg",
+        "len": "full-length",
+        "fab": "knit",
+        "drp": "fluid",
+        "form": "smart-casual",
+        "neut": 0.95,
+        "om": 0.85
+      }
+    },
+    {
+      "id": "aritzia-butter-short",
+      "name": "Butter Cheeky Hi-Rise 5\" Short",
+      "brand": "Golden by Aritzia",
+      "color": "Admiral",
+      "img": "https://assets.aritzia.com/image/upload/medium/s26_a26_116698_10230_off_a.jpg",
+      "owned": true,
+      "slot": "bottom",
+      "occ": [
+        "active"
+      ],
+      "tones": [
+        "navy"
+      ],
+      "tags": {
+        "sil": "fitted",
+        "len": "mini",
+        "fab": "synthetic",
+        "drp": "clingy",
+        "form": "loungewear",
+        "neut": 0.9,
+        "om": 0.55
+      }
+    },
+    {
+      "id": "wilfred-martini-halter",
+      "name": "Martini Satin Halter Top",
+      "brand": "Wilfred",
+      "color": "Black",
+      "img": "https://assets.aritzia.com/image/upload/medium/s26_a02_118527_1274_off_a.jpg",
+      "owned": true,
+      "slot": "top",
+      "occ": [
+        "going-out"
+      ],
+      "tones": [
+        "black",
+        "satin"
+      ],
+      "tags": {
+        "sil": "fitted",
+        "neck": "halter",
+        "slv": "sleeveless",
+        "len": "hip",
+        "fab": "satin",
+        "drp": "fluid",
+        "form": "evening",
+        "neut": 0.95,
+        "om": 0.85
+      }
+    },
+    {
+      "id": "zara-ribbed-black",
+      "name": "Ribbed Sleeveless Top",
+      "brand": "Zara",
+      "color": "Black",
+      "img": "https://static.zara.net/photos//assets/public/4dd9/04ce/290d42c68d28/e6a9e42993ae/03253301800-f1/03253301800-f1.jpg",
+      "owned": true,
+      "slot": "top",
+      "occ": [
+        "going-out",
+        "casual"
+      ],
+      "tones": [
+        "black"
+      ],
+      "tags": {
+        "sil": "fitted",
+        "neck": "scoop",
+        "slv": "sleeveless",
+        "len": "hip",
+        "fab": "knit",
+        "drp": "clingy",
+        "form": "casual",
+        "neut": 0.95,
+        "om": 0.8
+      }
+    },
+    {
+      "id": "zara-tee-white",
+      "name": "Cotton Sleeveless T-Shirt",
+      "brand": "Zara",
+      "color": "White",
+      "img": "https://static.zara.net/photos//assets/public/755a/9a2c/7cd54694aa43/2ebcb1c77542/04174324250-f1/04174324250-f1.jpg",
+      "owned": true,
+      "slot": "top",
+      "occ": [
+        "casual",
+        "vacation",
+        "active"
+      ],
+      "tones": [
+        "white"
+      ],
+      "tags": {
+        "sil": "fitted",
+        "neck": "scoop",
+        "slv": "sleeveless",
+        "len": "hip",
+        "fab": "cotton",
+        "drp": "structured",
+        "form": "casual",
+        "neut": 0.97,
+        "om": 0.8
+      }
+    },
+    {
+      "id": "zara-ribbed-white",
+      "name": "Ribbed Sleeveless Top",
+      "brand": "Zara",
+      "color": "White",
+      "img": "https://static.zara.net/photos//assets/public/1e27/cc3d/790e44f8bd98/6e25d7a5fbd8/03253301250-f1/03253301250-f1.jpg",
+      "owned": true,
+      "slot": "top",
+      "occ": [
+        "casual",
+        "work",
+        "vacation"
+      ],
+      "tones": [
+        "white"
+      ],
+      "tags": {
+        "sil": "fitted",
+        "neck": "scoop",
+        "slv": "sleeveless",
+        "len": "hip",
+        "fab": "knit",
+        "drp": "clingy",
+        "form": "casual",
+        "neut": 0.97,
+        "om": 0.8
+      }
+    },
+    {
+      "id": "aritzia-butter-tank",
+      "name": "Butter Essential Cami Tank",
+      "brand": "Golden by Aritzia",
+      "color": "Admiral",
+      "img": "https://assets.aritzia.com/image/upload/medium/s26_a01_118010_10230_off_a.jpg",
+      "owned": true,
+      "slot": "top",
+      "occ": [
+        "active"
+      ],
+      "tones": [
+        "navy"
+      ],
+      "tags": {
+        "sil": "fitted",
+        "neck": "scoop",
+        "slv": "sleeveless",
+        "len": "hip",
+        "fab": "synthetic",
+        "drp": "clingy",
+        "form": "loungewear",
+        "neut": 0.9,
+        "om": 0.7
+      }
+    },
+    {
+      "id": "nuuly-madewell-leah",
+      "name": "Leah 60's Top",
+      "brand": "Madewell",
+      "color": "White",
+      "img": "https://s7d2.scene7.com/is/image/nu/108276783_010_b?wid=800&fmt=jpeg",
+      "owned": true,
+      "source": "Nuuly",
+      "slot": "top",
+      "occ": [
+        "casual",
+        "vacation",
+        "work"
+      ],
+      "tones": [
+        "white"
+      ],
+      "tags": {
+        "sil": "relaxed",
+        "neck": "crew",
+        "slv": "sleeveless",
+        "len": "hip",
+        "fab": "cotton",
+        "drp": "structured",
+        "form": "casual",
+        "neut": 0.85,
+        "om": 0.6
+      }
+    },
+    {
+      "id": "nuuly-nativeyouth-broderie",
+      "name": "Broderie Back-Tie Top",
+      "brand": "Native Youth",
+      "color": "White",
+      "img": "https://s7d2.scene7.com/is/image/nu/109813840_010_b?wid=800&fmt=jpeg",
+      "owned": true,
+      "source": "Nuuly",
+      "slot": "top",
+      "occ": [
+        "casual"
+      ],
+      "tones": [
+        "white",
+        "cream"
+      ],
+      "tags": {
+        "sil": "relaxed",
+        "neck": "crew",
+        "slv": "sleeveless",
+        "len": "hip",
+        "fab": "cotton",
+        "drp": "structured",
+        "form": "casual",
+        "neut": 0.85,
+        "om": 0.6
+      }
+    },
+    {
+      "id": "nuuly-zemeta-belllace",
+      "name": "Bell Lace Top",
+      "brand": "Zemeta",
+      "color": "White",
+      "img": "https://s7d2.scene7.com/is/image/nu/106502966_010_b?wid=800&fmt=jpeg",
+      "owned": true,
+      "source": "Nuuly",
+      "slot": "top",
+      "occ": [
+        "going-out",
+        "casual"
+      ],
+      "tones": [
+        "white"
+      ],
+      "tags": {
+        "sil": "relaxed",
+        "neck": "square",
+        "slv": "strappy",
+        "len": "hip",
+        "fab": "cotton",
+        "drp": "fluid",
+        "form": "casual",
+        "neut": 0.8,
+        "om": 0.55
+      }
+    },
+    {
+      "id": "nuuly-fp-forevermore",
+      "name": "Forevermore LS Top",
+      "brand": "Free People",
+      "color": "White",
+      "img": "https://s7d2.scene7.com/is/image/nu/94682457_010_b?wid=800&fmt=jpeg",
+      "owned": true,
+      "source": "Nuuly",
+      "slot": "top",
+      "occ": [
+        "casual",
+        "vacation",
+        "active"
+      ],
+      "tones": [
+        "white"
+      ],
+      "tags": {
+        "sil": "flowy",
+        "neck": "v-neck",
+        "slv": "long",
+        "len": "hip",
+        "fab": "cotton",
+        "drp": "fluid",
+        "form": "casual",
+        "neut": 0.8,
+        "om": 0.5
+      }
+    },
+    {
+      "id": "aritzia-cloud-hoodie",
+      "name": "Cozy Sweatfleece Hoodie",
+      "brand": "Aritzia",
+      "color": "Cloud White",
+      "img": "https://assets.aritzia.com/image/upload/medium/s26_a03_116266_19451_off_a.jpg",
+      "owned": true,
+      "slot": "layer",
+      "occ": [
+        "active",
+        "vacation",
+        "casual"
+      ],
+      "tones": [
+        "white",
+        "grey"
+      ],
+      "tags": {
+        "sil": "relaxed",
+        "neck": "crew",
+        "slv": "long",
+        "len": "hip",
+        "fab": "knit",
+        "drp": "structured",
+        "form": "loungewear",
+        "neut": 0.9,
+        "om": 0.5
+      }
+    },
+    {
+      "id": "onitsuka-mexico66-birch",
+      "name": "Mexico 66",
+      "brand": "Onitsuka Tiger",
+      "color": "Birch / Peacoat",
+      "img": "https://cdn-images.farfetch-contents.com/21/44/90/10/21449010_51590755_200.jpg",
+      "owned": true,
+      "slot": "shoe",
+      "occ": [
+        "casual",
+        "vacation",
+        "going-out"
+      ],
+      "tones": [
+        "birch",
+        "cream",
+        "blue"
+      ],
+      "tags": {
+        "fab": "leather",
+        "drp": "structured",
+        "form": "casual",
+        "neut": 0.85,
+        "om": 0.6
+      }
+    },
+    {
+      "id": "onitsuka-mexico66-grey",
+      "name": "Mexico 66",
+      "brand": "Onitsuka Tiger",
+      "color": "Grey / White",
+      "img": "https://image.goat.com/attachments/product_template_pictures/images/105/369/185/original/1402217_00.png.png",
+      "owned": true,
+      "slot": "shoe",
+      "occ": [
+        "casual",
+        "active",
+        "vacation"
+      ],
+      "tones": [
+        "grey",
+        "white"
+      ],
+      "tags": {
+        "fab": "leather",
+        "drp": "structured",
+        "form": "casual",
+        "neut": 0.85,
+        "om": 0.6
+      }
+    }
   ]
 }

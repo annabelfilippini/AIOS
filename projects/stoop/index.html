@@ -120,10 +120,12 @@
   .day.on{background:var(--accent);color:var(--accent-ink)}
   .daytimes{display:none;margin-bottom:12px}
   .daytimes.on{display:block}
-  .daytimes label{display:block;font-size:13px;font-weight:800;margin-bottom:5px}
-  .daytimes .row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
-  .daytimes .row .dn{font-family:'Fredoka';font-size:14px;min-width:42px}
-  .daytimes .row input{flex:1;font-family:'Nunito';font-weight:600;font-size:14px;border:2px solid var(--ink);border-radius:10px;padding:8px 11px;background:var(--paper);color:var(--ink)}
+  .daytimes label{display:block;font-size:13px;font-weight:800;margin-bottom:8px}
+  .daytimes .trow{display:flex;gap:10px;margin-bottom:13px;align-items:flex-start}
+  .daytimes .trow .dn{font-family:'Fredoka';font-size:14px;min-width:42px;padding-top:7px}
+  .hchips{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+  .hchip{font-family:'Nunito';font-weight:800;font-size:13px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:9px;padding:6px 11px;cursor:pointer;user-select:none}
+  .hchip.on{background:var(--accent);color:var(--accent-ink)}
 
   .swatches{display:flex;gap:11px;flex-wrap:wrap;margin-top:4px}
   .sw{width:38px;height:38px;border-radius:50%;border:3px solid var(--ink);cursor:pointer;position:relative;transition:transform .1s}
@@ -562,17 +564,27 @@
       };
     });
   }
+  // tappable hour chips, 9am–8pm. obDays[dow] holds the label strings the calendar reads.
+  const HOURS=[]; for(let h=9;h<=20;h++)HOURS.push(h);
+  function hourLabel(h){ const ap=h<12?'am':'pm'; let hr=h%12; if(hr===0)hr=12; return hr+':00 '+ap; }
   function renderDayTimes(){
     const box=document.getElementById('ob-times');
-    const keys=Object.keys(obDays).sort();
+    const keys=Object.keys(obDays).sort((a,b)=>a-b);
     document.querySelectorAll('#ob-days .day').forEach(el=>el.classList.toggle('on',!!obDays[el.dataset.d]));
     if(!keys.length){ box.classList.remove('on'); box.innerHTML=''; return; }
     box.classList.add('on');
-    box.innerHTML='<label>Times for each day (comma separated)</label>'+keys.map(i=>
-      `<div class="row"><span class="dn">${DOW[i]}</span><input data-d="${i}" value="${obDays[i].join(', ')}" placeholder="4:00 pm, 5:00 pm" /></div>`
-    ).join('');
-    box.querySelectorAll('input').forEach(inp=>{
-      inp.oninput=()=>{ obDays[inp.dataset.d]=inp.value.split(',').map(s=>s.trim()).filter(Boolean); };
+    box.innerHTML='<label>Tap the hours you can do</label>'+keys.map(i=>{
+      const sel=new Set(obDays[i]);
+      const chips=HOURS.map(h=>{const l=hourLabel(h);return `<button type="button" class="hchip${sel.has(l)?' on':''}" data-d="${i}" data-h="${h}">${l}</button>`;}).join('');
+      return `<div class="trow"><span class="dn">${DOW[i]}</span><div class="hchips">${chips}</div></div>`;
+    }).join('');
+    box.querySelectorAll('.hchip').forEach(ch=>{
+      ch.onclick=()=>{
+        const i=ch.dataset.d, l=hourLabel(+ch.dataset.h), set=new Set(obDays[i]);
+        set.has(l)?set.delete(l):set.add(l);
+        obDays[i]=HOURS.map(hourLabel).filter(x=>set.has(x));   // keep chronological
+        ch.classList.toggle('on');
+      };
     });
   }
   function buildSwatches(){
