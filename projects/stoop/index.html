@@ -68,9 +68,9 @@
   .stand:nth-child(3n+1){transform:rotate(-.7deg)}
   .stand:nth-child(3n+2){transform:rotate(.6deg)}
   .stand:hover{transform:translateY(-3px) rotate(0deg)}
-  .stand .pic{height:172px;position:relative;border-bottom:3px solid var(--ink);overflow:hidden}
-  .stand .pic img{width:100%;height:100%;object-fit:cover}
-  .stand .pic .ph{width:100%;height:100%;display:grid;place-items:center;font-family:'Fredoka';font-size:56px;color:var(--ink)}
+  .stand .pic{height:150px;position:relative;display:grid;place-items:center;border-bottom:3px solid var(--ink)}
+  .stand .pic .circ{width:92px;height:92px;border-radius:50%;border:3px solid var(--ink);overflow:hidden;display:grid;place-items:center;font-family:'Fredoka';font-size:38px;box-shadow:0 5px 0 -1px rgba(58,47,35,.16)}
+  .stand .pic .circ img{width:100%;height:100%;object-fit:cover}
   .tape{position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-3deg);width:74px;height:20px;background:rgba(255,255,255,.55);border:1px dashed rgba(58,47,35,.35);z-index:2}
   .stand .body{padding:15px 16px 16px}
   .stand .who{font-size:13px;color:var(--ink-soft);font-weight:800;display:flex;align-items:center;gap:7px}
@@ -467,11 +467,9 @@
     if(profile){
       const t=THEMES[profile.theme]||THEMES.pink;
       const initial=(profile.name||'?')[0];
-      const pic = profile.photo
-        ? `<img src="${profile.photo}" alt="">`
-        : `<div class="ph" style="background:linear-gradient(160deg,${t.a},${t.b})">${initial}</div>`;
+      const inner = profile.photo ? `<img src="${profile.photo}" alt="">` : initial;
       cards += `<div class="stand" onclick="go('profile')">
-        <div class="pic"><span class="tape"></span>${pic}</div>
+        <div class="pic" style="background:linear-gradient(160deg,${t.a},${t.b})"><span class="tape"></span><div class="circ" style="background:${t.av};color:${t.avInk}">${inner}</div></div>
         <div class="body">
           <div class="who"><span class="av" style="background:${t.accent}">${initial}</span>${profile.name}${profile.age?', '+profile.age:''}</div>
           <h3>${profile.title}</h3>
