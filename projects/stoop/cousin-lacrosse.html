@@ -112,11 +112,9 @@
   .reqbar .req:disabled{opacity:.45;cursor:default}
 
   /* about */
-  .about{padding:30px clamp(22px,5vw,52px) 40px;display:grid;grid-template-columns:1.25fr 1fr;gap:34px;border-top:3px solid var(--line);margin-top:24px}
+  .about{padding:30px clamp(22px,5vw,52px) 40px;border-top:3px solid var(--line);margin-top:24px;max-width:620px}
   .about h2{font-size:24px;margin-bottom:10px}
   .about p{font-size:16px;line-height:1.55;font-weight:600}
-  .gal{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start}
-  .gal .g{height:96px;border:3px solid var(--ink);border-radius:14px;display:grid;place-items:center;background:var(--heroA)}
 
   .foot-note{text-align:center;color:var(--ink-soft);font-size:13px;font-weight:700;padding:26px 20px 0}
   .foot-note b{font-family:'Fredoka';font-weight:600}
@@ -156,7 +154,7 @@
     </div>
     <b>Stoop</b>
   </div>
-  <div class="place"><span class="dot"></span> Maple Grove neighborhood · verified neighbor</div>
+  <div class="place"><span class="dot"></span> Cheesman Park neighborhood · verified neighbor</div>
 </div>
 
 <div class="wrap">
@@ -170,20 +168,12 @@
     <!-- HERO -->
     <div class="hero">
       <div class="hero-line" aria-hidden="true"></div>
-      <svg class="hero-motif" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true">
-        <path d="M22 86 L70 22"/><path d="M78 86 L30 22"/>
-        <path d="M70 22 q12 -10 6 -18 q-12 4 -6 18 Z" stroke-width="2.6"/>
-        <path d="M30 22 q-12 -10 -6 -18 q12 4 6 18 Z" stroke-width="2.6"/>
-        <circle cx="50" cy="58" r="5"/>
-      </svg>
+      <svg class="hero-motif" id="motif" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
       <div class="av-big" id="avatar" aria-hidden="true"></div>
-      <h1>Maddie's Lacrosse Lessons</h1>
-      <div class="by">backyard lessons for anyone who wants to get good 🥍</div>
+      <h1>Delaney's Lacrosse Lessons</h1>
       <div class="facts">
-        <span class="fact">🏅 I play varsity</span>
-        <span class="fact">🌱 Beginners welcome</span>
-        <span class="fact">⏱ 30 minutes</span>
-        <span class="fact">📍 Pickup at Maple Grove field</span>
+        <span class="fact">⏱ 1 hour</span>
+        <span class="fact">📍 Cheesman Park</span>
       </div>
     </div>
 
@@ -191,7 +181,7 @@
     <div class="book">
       <div class="lead">
         <h2>Pick a time</h2>
-        <div class="price-tag">$15 <small>/ lesson</small></div>
+        <div class="price-tag">$30 <small>/ lesson</small></div>
       </div>
       <p class="sub">Tap a day with openings, then choose a time. I'll text or email you back to lock it in.</p>
 
@@ -217,21 +207,13 @@
 
     <!-- ABOUT -->
     <div class="about">
-      <div>
-        <h2>About me</h2>
-        <p>Hi! I'm Maddie, I'm 14 and I've played lacrosse since I was 7. This year I made varsity. I'm doing lessons in my backyard and at the Maple Grove field for anyone who's just starting or wants to get better at cradling, passing, and shooting.</p>
-        <p style="margin-top:12px">I'm really patient and I remember being brand new, so don't worry if you've never held a stick. Bring your own if you have one, I have extras if you don't.</p>
-      </div>
-      <div class="gal">
-        <div class="g"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="1.7" stroke-linecap="round"><path d="M6 21V8a6 6 0 0 1 12 0M9 21v-9M15 21v-9"/><circle cx="12" cy="5" r="1.6"/></svg></div>
-        <div class="g"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16" opacity=".5"/></svg></div>
-        <div class="g"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="1.7" stroke-linecap="round"><path d="M5 21l4-9 6 3 4-9M9 12l-2-3M15 15l2 2"/></svg></div>
-        <div class="g"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="1.7" stroke-linecap="round"><path d="M12 3l2.5 5 5.5.6-4 3.8 1 5.5L12 14.6 7 17l1-5.5-4-3.8L9.5 7z"/></svg></div>
-      </div>
+      <h2>About me</h2>
+      <p>Hi! I'm Delaney. I've played lacrosse for years and I love it. I'm doing lessons at Cheesman Park for anyone who's just starting or wants to get better at cradling, passing, and shooting.</p>
+      <p style="margin-top:12px">I'm really patient and I remember being brand new, so don't worry if you've never held a stick. Bring your own if you have one, I have extras if you don't.</p>
     </div>
   </div>
 
-  <p class="foot-note">Made with <b>Stoop</b> — the neighborhood that never packs up. Want your own page? Ask a neighbor for an invite.</p>
+  <p class="foot-note">Made with <b>Stoop</b>, the neighborhood that never packs up. Want your own page? Ask a neighbor for an invite.</p>
 </div>
 
 <!-- REQUEST MODAL -->
@@ -243,9 +225,9 @@
       <div class="when" id="when">—</div>
       <label>Who's the lesson for?</label>
       <input id="kid" placeholder="e.g. Theo, age 8" />
-      <label>Your phone or email (so Maddie can confirm)</label>
+      <label>Your phone or email (so Delaney can confirm)</label>
       <input id="contact" placeholder="555-123-4567 or you@email.com" />
-      <label>Anything Maddie should know? (optional)</label>
+      <label>Anything Delaney should know? (optional)</label>
       <textarea id="note" placeholder="First time holding a stick, needs to borrow one…"></textarea>
       <button class="send" id="send">Send request</button>
     </div>
@@ -286,20 +268,25 @@
   let saved='pink'; try{ saved=localStorage.getItem('stoop-theme')||'pink'; }catch(e){}
   applyTheme(saved);
 
-  // ---------- hero avatar: real photo slot, crossed-stick fallback ----------
-  const PHOTO = ''; // drop Maddie's photo URL/path here; falls back to lacrosse illustration
+  // ---------- crossed lacrosse sticks: netted heads at top, shafts crossing, end caps ----------
+  const STICKS = `
+    <path d="M30,20 L78,84"/><path d="M70,20 L22,84"/>
+    <path d="M30,20 Q19.6,17.8 20.4,7.2 Q30.8,9.4 30,20 Z"/>
+    <path d="M70,20 Q80.4,17.8 79.6,7.2 Q69.2,9.4 70,20 Z"/>
+    <path d="M74,87 L82,81"/><path d="M18,81 L26,87"/>
+    <path d="M21.5,15 L29.5,11" stroke-width="1.5"/><path d="M22.5,18 L27.5,8" stroke-width="1.5"/>
+    <path d="M78.5,15 L70.5,11" stroke-width="1.5"/><path d="M77.5,18 L72.5,8" stroke-width="1.5"/>`;
+  document.getElementById('motif').innerHTML = STICKS;
+
+  // hero avatar: real photo slot, crossed-sticks fallback
+  const PHOTO = ''; // drop Delaney's photo URL/path here; falls back to the lacrosse illustration
   document.getElementById('avatar').innerHTML = PHOTO
-    ? `<img src="${PHOTO}" alt="Maddie">`
-    : `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-         <path d="M9 41 L33 11"/><path d="M39 41 L15 11"/>
-         <path d="M33 11 q6 -5 3 -9 q-6 2 -3 9 Z" stroke-width="2"/>
-         <path d="M15 11 q-6 -5 -3 -9 q6 2 3 9 Z" stroke-width="2"/>
-         <circle cx="24" cy="27" r="3"/>
-       </svg>`;
+    ? `<img src="${PHOTO}" alt="Delaney">`
+    : `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${STICKS}</svg>`;
 
   // ---------- availability ----------
-  const PATTERN = { 2:['4:00','4:45','5:30'], 4:['4:00','4:45','5:30'], 6:['9:00','9:45','10:30','11:15'] };
-  const BOOKED = new Set(['4|4:45','6|10:30']); // recurring taken slots: Thu 4:45, Sat 10:30
+  const PATTERN = { 2:['4:00','5:00','6:00'], 4:['4:00','5:00','6:00'], 6:['9:00','10:00','11:00'] };
+  const BOOKED = new Set(['4|5:00','6|10:00']); // recurring taken slots: Thu 5pm, Sat 10am
   const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
   const ampm = (dow,t)=> dow===6 ? t+' am' : t+' pm';
@@ -386,7 +373,7 @@
     if(!contact){ document.getElementById('contact').focus(); return; }
     document.getElementById('form').style.display='none';
     document.getElementById('doneview').style.display='';
-    document.getElementById('donemsg').innerHTML=`Maddie got your request for <b>${selSlot.label}</b>${kid?` for ${kid}`:''}.<br>She'll reach out to ${contact} to confirm. See you on the field!`;
+    document.getElementById('donemsg').innerHTML=`Delaney got your request for <b>${selSlot.label}</b>${kid?` for ${kid}`:''}.<br>She'll reach out to ${contact} to confirm. See you on the field!`;
   };
   document.getElementById('close2').onclick=close;
 </script>
