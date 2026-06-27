@@ -117,9 +117,15 @@
 
   /* When2Meet-style paint grid for availability */
   .daytimes label{display:block;font-size:13px;font-weight:800;margin-bottom:10px}
+  .wk{display:flex;align-items:center;gap:8px;margin-bottom:11px;flex-wrap:wrap}
+  .wk-nav{font-family:'Fredoka';font-size:17px;line-height:1;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:9px;width:34px;height:34px;cursor:pointer}
+  .wk-nav:disabled{opacity:.3;cursor:default}
+  .wk-label{font-family:'Fredoka';font-size:15px;min-width:118px;text-align:center}
+  .wk-copy{margin-left:auto;font-family:'Nunito';font-weight:800;font-size:13px;border:2px dashed var(--ink);background:transparent;color:var(--ink);border-radius:20px;padding:6px 13px;cursor:pointer}
   .w2m{border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--paper);user-select:none}
   .w2m-grid{display:grid;grid-template-columns:46px repeat(7,1fr)}
-  .w2m-dh{font-family:'Fredoka';font-size:13px;text-align:center;padding:8px 0;background:var(--ink);color:var(--paper)}
+  .w2m-dh{font-family:'Fredoka';font-size:12px;line-height:1.25;text-align:center;padding:6px 0;background:var(--ink);color:var(--paper)}
+  .w2m-dn{font-size:11px;font-weight:600;opacity:.85}
   .w2m-corner{background:var(--ink)}
   .w2m-tl{font-family:'Fredoka';font-size:11px;color:var(--ink);opacity:.65;text-align:right;padding:0 7px 0 0;display:flex;align-items:center;justify-content:flex-end;min-height:15px}
   .w2m-cell{min-height:15px;border-left:1px dotted rgba(60,40,20,.22);border-top:1px dotted rgba(60,40,20,.18);cursor:pointer;touch-action:none}
@@ -355,7 +361,7 @@
       👋 This is your page — neighbors see it without this bar.
       <button onclick="go('onboard','edit')">Edit</button>
       <button onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href.split('#')[0]);this.textContent='Copied!'">Copy link</button>
-      <button onclick="if(confirm('Clear this page and start onboarding from scratch?')){localStorage.removeItem('stoop-profile');profile=null;go('onboard');}">Start fresh</button>
+      <button onclick="if(confirm('Clear this page and start onboarding from scratch?')){localStorage.removeItem(KEY);profile=null;go('onboard');}">Start fresh</button>
     </div>
 
     <div class="site">
@@ -454,11 +460,22 @@
     phone:'555-123-4567', theme:'pink', photo:'delaney.jpg',
     about:["Hey!! I'm Delaney, I'm 14 and I go to Kent. I play attack for Concept and I seriously love it so much. I teach all levels, so it doesn't matter if you've literally never held a stick. I just really want to help kids get better and have fun doing it!",
            "I can teach any position too, not just attack, so we can work on whatever you want to get better at. I'm usually at Cheesman Park but if somewhere else is easier for you that totally works. Just bring your own stick and we're good to go!"],
-    // availability: day-of-week -> array of times (display strings)
-    avail:{2:['4:00 pm','5:00 pm','6:00 pm'], 4:['4:00 pm','5:00 pm','6:00 pm'], 6:['9:00 am','10:00 am','11:00 am']}
+    // availability: date (YYYY-MM-DD) -> array of times; filled at seed time by seedAvail()
+    avail:{}
   };
+  // Demo rhythm for Delaney: Tue/Thu afternoons + Sat mornings, next 4 weeks.
+  function seedAvail(){
+    const a={}, start=weekStart(today);
+    for(let i=0;i<28;i++){
+      const d=addDays(start,i); if(d<today) continue;
+      const dow=d.getDay();
+      if(dow===2||dow===4) a[dateKey(d)]=['4:00 pm','5:00 pm','6:00 pm'];
+      else if(dow===6) a[dateKey(d)]=['9:00 am','10:00 am','11:00 am'];
+    }
+    return a;
+  }
 
-  const KEY='stoop-profile';
+  const KEY='stoop-profile-v2';
   function load(){ try{ const s=localStorage.getItem(KEY); return s?JSON.parse(s):null; }catch(e){ return null; } }
   function save(p){ try{ localStorage.setItem(KEY,JSON.stringify(p)); }catch(e){} }
   let profile = load();
@@ -466,6 +483,10 @@
   // ---------- view router ----------
   const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const DOWLONG=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  // availability is keyed by exact date (YYYY-MM-DD) — each week is set on its own
+  function dateKey(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function weekStart(d){ const x=new Date(d); x.setHours(0,0,0,0); x.setDate(x.getDate()-x.getDay()); return x; }
+  function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
   function go(view, mode){
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
     document.getElementById('view-'+view).classList.add('on');
@@ -516,7 +537,8 @@
   }
 
   // ---------- ONBOARDING ----------
-  let obDays = {};      // dow -> [times]
+  let obDays = {};      // dateKey -> [times]
+  let obWeek;           // Sunday of the week shown in the availability grid
   let obTheme = 'pink';
   let obPhoto = '';     // data URL (uploaded) or 'delaney.jpg' default
 
@@ -556,32 +578,48 @@
   const SLOTS=[]; for(let m=540;m<=1200;m+=30)SLOTS.push(m);   // 540=9:00am … 1200=8:00pm
   function slotLabel(m){ const h=Math.floor(m/60), ap=h<12?'am':'pm'; return (h%12||12)+':'+(m%60===0?'00':'30')+' '+ap; }
   function hourLabel(m){ const h=Math.floor(m/60); return (h%12||12)+(h<12?' AM':' PM'); }
-  function setCell(i,m,on){
-    const set=new Set(obDays[i]||[]); const l=slotLabel(m);
+  function setCell(k,m,on){
+    const set=new Set(obDays[k]||[]); const l=slotLabel(m);
     on?set.add(l):set.delete(l);
     const arr=SLOTS.map(slotLabel).filter(x=>set.has(x));   // keep chronological
-    if(arr.length) obDays[i]=arr; else delete obDays[i];
+    if(arr.length) obDays[k]=arr; else delete obDays[k];
+  }
+  function copyLastWeek(){
+    for(let i=0;i<7;i++){
+      const src=obDays[dateKey(addDays(obWeek,i-7))], dst=dateKey(addDays(obWeek,i));
+      if(src&&src.length) obDays[dst]=[...src]; else delete obDays[dst];
+    }
+    renderDayTimes();
   }
   function renderDayTimes(){
     const box=document.getElementById('ob-times');
     box.classList.add('on');
-    let h='<div class="w2m"><div class="w2m-grid"><div class="w2m-corner"></div>';
-    h+=DOW.map(d=>`<div class="w2m-dh">${d}</div>`).join('');
+    const ws=obWeek, end=addDays(ws,6);
+    const mo=m=>MONTHS[m].slice(0,3);
+    const label=`${mo(ws.getMonth())} ${ws.getDate()} – ${mo(end.getMonth())} ${end.getDate()}`;
+    const atStart=dateKey(ws)===dateKey(weekStart(today));
+    const dates=[]; for(let i=0;i<7;i++)dates.push(addDays(ws,i));
+    let h=`<div class="wk"><button type="button" class="wk-nav" id="wk-prev"${atStart?' disabled':''}>‹</button><span class="wk-label">${label}</span><button type="button" class="wk-nav" id="wk-next">›</button><button type="button" class="wk-copy" id="wk-copy">copy last week</button></div>`;
+    h+='<div class="w2m"><div class="w2m-grid"><div class="w2m-corner"></div>';
+    h+=dates.map(d=>`<div class="w2m-dh">${DOW[d.getDay()]}<br><span class="w2m-dn">${d.getDate()}</span></div>`).join('');
     SLOTS.forEach(m=>{
       const hr=m%60===0;
       h+=`<div class="w2m-tl${hr?' hr':''}">${hr?hourLabel(m):''}</div>`;
-      h+=DOW.map((d,i)=>{
-        const on=(obDays[i]||[]).includes(slotLabel(m));
-        return `<div class="w2m-cell${on?' on':''}${hr?' hr':''}" data-d="${i}" data-m="${m}"></div>`;
+      h+=dates.map(d=>{
+        const k=dateKey(d), on=(obDays[k]||[]).includes(slotLabel(m));
+        return `<div class="w2m-cell${on?' on':''}${hr?' hr':''}" data-k="${k}" data-m="${m}"></div>`;
       }).join('');
     });
     box.innerHTML=h+'</div></div>';
+    document.getElementById('wk-prev').onclick=()=>{ obWeek=addDays(obWeek,-7); renderDayTimes(); };
+    document.getElementById('wk-next').onclick=()=>{ obWeek=addDays(obWeek,7); renderDayTimes(); };
+    document.getElementById('wk-copy').onclick=copyLastWeek;
     bindPaint(box.querySelector('.w2m-grid'));
   }
   function bindPaint(grid){
     let painting=false, mode=true;
     const cellAt=(x,y)=>{ const el=document.elementFromPoint(x,y); return el&&el.classList.contains('w2m-cell')?el:null; };
-    const apply=(cell)=>{ if(!cell) return; setCell(cell.dataset.d,+cell.dataset.m,mode); cell.classList.toggle('on',mode); };
+    const apply=(cell)=>{ if(!cell) return; setCell(cell.dataset.k,+cell.dataset.m,mode); cell.classList.toggle('on',mode); };
     grid.addEventListener('pointerdown',e=>{
       const cell=e.target.closest('.w2m-cell'); if(!cell) return;
       e.preventDefault(); painting=true; mode=!cell.classList.contains('on'); apply(cell);
@@ -614,6 +652,7 @@
     document.getElementById('f-bring').value=p.bring||'';
     document.getElementById('f-phone').value=p.phone||'';
     obDays = JSON.parse(JSON.stringify(p.avail||{}));
+    obWeek = weekStart(today);
     obTheme = p.theme||'pink';
     obPhoto = p.photo||'';
     document.getElementById('ob-back').style.display = '';
@@ -659,7 +698,7 @@
   const pickEl=document.getElementById('pick'), reqB=document.getElementById('req');
 
   function avail(){ return (profile&&profile.avail)||{}; }
-  function openCount(dow){ return (avail()[dow]||[]).length; }
+  function openCount(date){ return (avail()[dateKey(date)]||[]).length; }
   function sameDay(a,b){ return a.getFullYear()==b.getFullYear()&&a.getMonth()==b.getMonth()&&a.getDate()==b.getDate(); }
 
   function renderProfile(){
@@ -695,13 +734,13 @@
     for(let i=0;i<firstDow;i++){ const c=document.createElement('div'); c.className='cell blank'; monthEl.appendChild(c); }
     for(let d=1;d<=days;d++){
       const date=new Date(view.getFullYear(),view.getMonth(),d);
-      const dow=date.getDay();
       const past = date<today;
-      const open = !past && openCount(dow)>0;
+      const n=openCount(date);
+      const open = !past && n>0;
       const c=document.createElement('div');
-      c.className='cell'+(open?' open':(past||openCount(dow)===0?' muted':''))+(sameDay(date,today)?' today':'');
+      c.className='cell'+(open?' open':(past||n===0?' muted':''))+(sameDay(date,today)?' today':'');
       if(open && selDay && sameDay(date,selDay)) c.classList.add('sel');
-      c.innerHTML=`<span class="n">${d}</span>`+(open?`<span class="pill">${openCount(dow)} open</span>`:'');
+      c.innerHTML=`<span class="n">${d}</span>`+(open?`<span class="pill">${n} open</span>`:'');
       if(open){ c.onclick=()=>selectDay(date); }
       monthEl.appendChild(c);
     }
@@ -713,7 +752,7 @@
     const dow=date.getDay();
     slotsDay.textContent=`${DOWLONG[dow]}, ${MONTHS[date.getMonth()]} ${date.getDate()}`;
     chiprow.innerHTML='';
-    (avail()[dow]||[]).forEach(t=>{
+    (avail()[dateKey(date)]||[]).forEach(t=>{
       const b=document.createElement('button');
       b.className='schip'; b.textContent=t;
       b.onclick=()=>selectSlot(date,t,b);
@@ -765,7 +804,7 @@
   // ---------- start ----------
   // seed Delaney's demo page on first visit so the neighborhood home isn't empty,
   // then always land on home. New kids tap "Start my own stand" for a blank builder.
-  if(!profile){ profile=JSON.parse(JSON.stringify(DEFAULT)); save(profile); }
+  if(!profile){ profile=JSON.parse(JSON.stringify(DEFAULT)); profile.avail=seedAvail(); save(profile); }
   go('home');
 </script>
 </body>
