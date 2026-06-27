@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root{
     --paper:#fbf3e2; --paper-2:#f6e9cf;
@@ -132,6 +134,22 @@
   .w2m-cell.hr{border-top:1.5px solid rgba(60,40,20,.4)}
   .w2m-tl.hr{border-top:1.5px solid transparent}
   .w2m-cell.on{background:var(--accent)}
+
+  /* ----- neighborhood (block) capture ----- */
+  .geo-row{display:flex;gap:9px;margin-bottom:12px}
+  .geo-row input{flex:1}
+  .geo-find{font-family:'Fredoka';font-size:15px;border:2px solid var(--ink);background:var(--accent);color:var(--accent-ink);border-radius:12px;padding:0 18px;cursor:pointer;white-space:nowrap}
+  .geo-find:disabled{opacity:.5;cursor:default}
+  #geo-map{height:300px;border:2px solid var(--ink);border-radius:16px;overflow:hidden;background:var(--paper-2);margin-bottom:14px}
+  .leaflet-container{font-family:'Nunito',sans-serif}
+  .geo-msg{font-size:14px;color:var(--ink-soft);margin-bottom:12px}
+  .geo-msg.err{color:var(--berry);font-weight:700}
+  .block-card{display:none;border:2px solid var(--ink);border-radius:16px;background:var(--card);padding:16px 18px;margin-bottom:16px;box-shadow:var(--shadow)}
+  .block-card.on{display:block}
+  .block-card .bk-lab{font-family:'Fredoka';font-size:13px;color:var(--ink-soft);margin-bottom:3px}
+  .block-card .bk-name{font-family:'Fredoka';font-size:23px;margin-bottom:9px}
+  .block-card .bk-promise{font-size:14px;line-height:1.4}
+  .block-card .bk-promise b{color:var(--accent)}
 
   .swatches{display:flex;gap:11px;flex-wrap:wrap;margin-top:4px}
   .sw{width:38px;height:38px;border-radius:50%;border:3px solid var(--ink);cursor:pointer;position:relative;transition:transform .1s}
@@ -354,6 +372,38 @@
   </div>
 </section>
 
+<!-- ================= NEIGHBORHOOD (block) ================= -->
+<section class="view" id="view-neighborhood">
+  <div class="ob">
+    <button class="ob-back" id="geo-back" onclick="go('home')">‹ Back</button>
+    <div class="ob-head">
+      <span class="marker">your block, nobody else's</span>
+      <h1>Where's your stoop?</h1>
+      <p>Stoop is your block and only your block. Drop your address and we'll find your exact stretch of street. No wider neighborhood, no spillover.</p>
+    </div>
+
+    <div class="card-q">
+      <h2>Your address</h2>
+      <div class="hint">Just so we can place you on the right block. It's never shown on your page.</div>
+      <div class="geo-row">
+        <input id="geo-addr" placeholder="142 Elm St, Denver CO" />
+        <button class="geo-find" id="geo-find">Find my block</button>
+      </div>
+      <div class="geo-msg" id="geo-msg"></div>
+      <div id="geo-map"></div>
+      <div class="hint">Pin in the wrong spot? Drag it or tap the map to fix it.</div>
+
+      <div class="block-card" id="block-card">
+        <div class="bk-lab">You're on</div>
+        <div class="bk-name" id="bk-name">—</div>
+        <div class="bk-promise">You'll only ever see stands on <b id="bk-promise-name">your block</b>. Nothing from the next street over.</div>
+      </div>
+
+      <button class="ob-go" id="geo-go" style="display:none">This is my block →</button>
+    </div>
+  </div>
+</section>
+
 <!-- ================= PROFILE ================= -->
 <section class="view" id="view-profile">
   <div class="wrap">
@@ -494,6 +544,7 @@
     if(view==='home') renderHome();
     if(view==='onboard') fillOnboard(mode);
     if(view==='profile') renderProfile();
+    if(view==='neighborhood') initGeo();
     window.scrollTo({top:0});
   }
 
