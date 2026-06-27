@@ -9,10 +9,13 @@ Run:  python3 refresh_sources.py            # all handles
       python3 refresh_sources.py paigelorenze graceatwood   # just some
 
 ShopMy storefronts are a client-rendered SPA (server HTML is an empty shell), so a
-plain fetch returns nothing — Firecrawl with waitFor renders the page first. An empty
-pull NEVER overwrites a good file (a transient scrape failure shouldn't wipe the feed).
+plain fetch returns nothing — Firecrawl with waitFor renders the page first. A render
+only exposes the first ~20-40 pins, so this MERGES fresh pins into the existing file
+(dedup by product id) instead of replacing — the feed only grows. An empty or garbage
+pull never overwrites a good file (a transient scrape failure shouldn't wipe the feed).
+Schedule it (cron/launchd) to keep sources fresh without losing history.
 """
-import os, sys, json, time, urllib.request, urllib.error
+import os, sys, re, json, time, urllib.request, urllib.error
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -37,6 +40,31 @@ def api_key():
         if line.startswith("FIRECRAWL_API_KEY="):
             return line.split("=", 1)[1].strip()
     raise SystemExit("FIRECRAWL_API_KEY not found in .env")
+
+
+# a real ShopMy product link is /shop/product/<digits> — NOT "product1" (Firecrawl's
+# placeholder rows look like shopmy.us/shop/product1, which a substring check accepts).
+PID_RE = re.compile(r"shopmy\.us/shop/product/(\d+)")
+
+
+def pid(p):
+    m = PID_RE.search(p.get("productUrl") or "")
+    return m.group(1) if m else None
+
+
+def is_real(p):
+    return pid(p) is not None and (p.get("imageUrl") or "").startswith("http")
+
+
+def load_existing(path):
+    """Read a source file in either shape build_feed accepts (raw Firecrawl list
+    [{"text": "..."}] or {"json": {"products": [...]}}). Returns product list."""
+    if not path.exists():
+        return []
+    raw = json.load(open(path))
+    txt = raw[0]["text"] if isinstance(raw, list) else raw
+    obj = json.loads(txt) if isinstance(txt, str) else txt
+    return obj.get("json", {}).get("products") or []
 
 
 def scrape(handle, key, tries=3):
@@ -68,18 +96,19 @@ def refresh_one(h, key):
         return f"  {h:18} HTTP {e.code} — kept old file"
     except Exception as e:
         return f"  {h:18} {type(e).__name__}: {e} — kept old file"
-    # keep only real pins: a genuine ShopMy product link + a hosted product image.
-    # This also drops Firecrawl's placeholder/hallucinated rows ("Brand A | Fashion
-    # Item 1") it emits when the storefront didn't render — those lack a real
-    # shopmy.us/shop/product URL.
-    prods = [p for p in prods
-             if "shopmy.us/shop/product" in (p.get("productUrl") or "")
-             and (p.get("imageUrl") or "").startswith("http")]
+    fresh = [p for p in prods if is_real(p)]
     # ponytail: never clobber a good snapshot with an empty/garbage pull
-    if not prods:
-        return f"  {h:18} 0 real products — kept old file"
-    path.write_text(json.dumps({"json": {"products": prods}}, indent=2))
-    return f"  {h:18} {len(prods):3} products -> {path.name}"
+    if not fresh:
+        return f"  {h:18} 0 real pins from scrape — kept old file"
+    # MERGE, don't replace: storefronts only render their first ~20-40 pins, so a
+    # plain overwrite would shrink the feed. Union fresh pins into the existing base,
+    # dedup by product id. Feed only grows; nothing the creator rotated off vanishes.
+    base = [p for p in load_existing(path) if is_real(p)]
+    by_id = {pid(p): p for p in base}
+    added = sum(by_id.setdefault(pid(p), p) is p for p in fresh)
+    merged = list(by_id.values())
+    path.write_text(json.dumps({"json": {"products": merged}}, indent=2))
+    return f"  {h:18} {len(merged):4} total (+{added} new, {len(fresh)} scraped) -> {path.name}"
 
 
 def main(handles):
