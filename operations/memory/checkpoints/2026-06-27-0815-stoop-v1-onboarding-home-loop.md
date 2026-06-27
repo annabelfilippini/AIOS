@@ -26,6 +26,24 @@ Delaney mock into a real first-user flow. New single file
    from her saved page → tap → her profile. Plus a dashed "Add your stand" slot
    → onboarding. One real kid, the 8 fake stands from preview.html are gone.
 
+## Home restyled to preview.html's craft-fair design (Annabel preferred it)
+Annabel saw the old `preview.html` market page and liked it more than the first
+plainer home. Ported its design into `#view-home`: top **bunting** strip (fixed
+rainbow, home-only — toggled in `go()`, hidden on profile), big underlined
+Fredoka hero + coral underline + grass "Start my own stand" CTA, and tilted
+craft-fair stand cards (tape corner, kid's theme gradient/accent inlined per
+card, pickup tag, heart). Stoop logo is now fixed **sun yellow** everywhere
+(brand mark, matches preview) instead of the kid's accent.
+The card's photo now **fills the whole card top** (object-fit cover) since kids
+have real photos — not a small circle.
+
+## Photo upload added to onboarding ("Your photo" card)
+File input → `downscale()` (canvas, 480px cap, jpeg 0.82) → base64 data URL in
+`profile.photo`, persisted to localStorage. ponytail: the downscale is the
+guard — a raw multi-MB phone photo would blow the ~5MB quota and silently fail
+to save. Delaney's default stays `delaney.jpg` (a path, not a data URL — img
+src handles both). Replaced the old name===Delaney photo hack with `obPhoto`.
+
 Router: `go(view)`. First-ever visit (no saved profile) → onboarding; returning
 → home. Onboarding prefills from saved profile, or from `DEFAULT` (Delaney's
 real answers) on first run, so the cold-start demo lands on the approved page in
