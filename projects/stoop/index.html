@@ -334,8 +334,7 @@
 
     <div class="card-q">
       <h2>When you're free</h2>
-      <div class="hint">Tap the days you can do. Then set your times.</div>
-      <div class="days" id="ob-days"></div>
+      <div class="hint">Drag across the times you can do, like a calendar.</div>
       <div class="daytimes" id="ob-times"></div>
     </div>
 
@@ -552,40 +551,43 @@
     const file=e.target.files[0]; if(!file) return;
     downscale(file,480,(url)=>{ obPhoto=url; setPhotoPreview(); });
   };
-  function buildDayPickers(){
-    const daysEl=document.getElementById('ob-days');
-    daysEl.innerHTML = DOW.map((d,i)=>`<div class="day" data-d="${i}">${d}</div>`).join('');
-    daysEl.querySelectorAll('.day').forEach(el=>{
-      el.onclick=()=>{
-        const i=el.dataset.d;
-        if(obDays[i]){ delete obDays[i]; el.classList.remove('on'); }
-        else { obDays[i]=['4:00 pm','5:00 pm']; el.classList.add('on'); }
-        renderDayTimes();
-      };
-    });
-  }
-  // tappable time chips, 9am–8pm in 30-min steps. obDays[dow] holds the label strings the calendar reads.
+  // When2Meet-style paint grid. Days = columns, 30-min slots 9am–8pm = rows.
+  // obDays[dow] holds the label strings the booking calendar reads (shape unchanged).
   const SLOTS=[]; for(let m=540;m<=1200;m+=30)SLOTS.push(m);   // 540=9:00am … 1200=8:00pm
   function slotLabel(m){ const h=Math.floor(m/60), ap=h<12?'am':'pm'; return (h%12||12)+':'+(m%60===0?'00':'30')+' '+ap; }
+  function hourLabel(m){ const h=Math.floor(m/60); return (h%12||12)+(h<12?' AM':' PM'); }
+  function setCell(i,m,on){
+    const set=new Set(obDays[i]||[]); const l=slotLabel(m);
+    on?set.add(l):set.delete(l);
+    const arr=SLOTS.map(slotLabel).filter(x=>set.has(x));   // keep chronological
+    if(arr.length) obDays[i]=arr; else delete obDays[i];
+  }
   function renderDayTimes(){
     const box=document.getElementById('ob-times');
-    const keys=Object.keys(obDays).sort((a,b)=>a-b);
-    document.querySelectorAll('#ob-days .day').forEach(el=>el.classList.toggle('on',!!obDays[el.dataset.d]));
-    if(!keys.length){ box.classList.remove('on'); box.innerHTML=''; return; }
     box.classList.add('on');
-    box.innerHTML='<label>Tap the hours you can do</label>'+keys.map(i=>{
-      const sel=new Set(obDays[i]);
-      const chips=SLOTS.map(m=>{const l=slotLabel(m);return `<button type="button" class="hchip${sel.has(l)?' on':''}" data-d="${i}" data-m="${m}">${l}</button>`;}).join('');
-      return `<div class="trow"><span class="dn">${DOW[i]}</span><div class="hchips">${chips}</div></div>`;
-    }).join('');
-    box.querySelectorAll('.hchip').forEach(ch=>{
-      ch.onclick=()=>{
-        const i=ch.dataset.d, l=slotLabel(+ch.dataset.m), set=new Set(obDays[i]);
-        set.has(l)?set.delete(l):set.add(l);
-        obDays[i]=SLOTS.map(slotLabel).filter(x=>set.has(x));   // keep chronological
-        ch.classList.toggle('on');
-      };
+    let h='<div class="w2m"><div class="w2m-grid"><div class="w2m-corner"></div>';
+    h+=DOW.map(d=>`<div class="w2m-dh">${d}</div>`).join('');
+    SLOTS.forEach(m=>{
+      const hr=m%60===0;
+      h+=`<div class="w2m-tl${hr?' hr':''}">${hr?hourLabel(m):''}</div>`;
+      h+=DOW.map((d,i)=>{
+        const on=(obDays[i]||[]).includes(slotLabel(m));
+        return `<div class="w2m-cell${on?' on':''}${hr?' hr':''}" data-d="${i}" data-m="${m}"></div>`;
+      }).join('');
     });
+    box.innerHTML=h+'</div></div>';
+    bindPaint(box.querySelector('.w2m-grid'));
+  }
+  function bindPaint(grid){
+    let painting=false, mode=true;
+    const cellAt=(x,y)=>{ const el=document.elementFromPoint(x,y); return el&&el.classList.contains('w2m-cell')?el:null; };
+    const apply=(cell)=>{ if(!cell) return; setCell(cell.dataset.d,+cell.dataset.m,mode); cell.classList.toggle('on',mode); };
+    grid.addEventListener('pointerdown',e=>{
+      const cell=e.target.closest('.w2m-cell'); if(!cell) return;
+      e.preventDefault(); painting=true; mode=!cell.classList.contains('on'); apply(cell);
+    });
+    grid.addEventListener('pointermove',e=>{ if(!painting) return; e.preventDefault(); apply(cellAt(e.clientX,e.clientY)); });
+    window.addEventListener('pointerup',()=>{ painting=false; });
   }
   function buildSwatches(){
     const el=document.getElementById('ob-swatches');
@@ -615,7 +617,7 @@
     obTheme = p.theme||'pink';
     obPhoto = p.photo||'';
     document.getElementById('ob-back').style.display = '';
-    buildDayPickers(); renderDayTimes(); buildSwatches(); applyTheme(obTheme); setPhotoPreview();
+    renderDayTimes(); buildSwatches(); applyTheme(obTheme); setPhotoPreview();
   }
   document.getElementById('ob-go').onclick=()=>{
     profile = {
