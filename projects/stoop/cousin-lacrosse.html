@@ -52,8 +52,7 @@
 
   /* hero */
   .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--heroA),var(--heroB));padding:44px clamp(22px,5vw,52px) 40px;text-align:center;border-bottom:3px solid var(--ink);transition:background .25s}
-  /* lacrosse motif: crossed-stick watermark + field center-line, tinted by theme */
-  .hero-motif{position:absolute;top:-26px;right:-30px;width:200px;height:200px;color:var(--heroText);opacity:.12;pointer-events:none;transform:rotate(8deg)}
+  /* field center-line, tinted by theme */
   .hero-line{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--heroText);opacity:.14;pointer-events:none}
   .hero-line::after{content:'';position:absolute;left:50%;top:50%;width:62px;height:62px;border:2px solid var(--heroText);border-radius:50%;transform:translate(-50%,-50%)}
   .hero > *{position:relative;z-index:1}
@@ -136,7 +135,6 @@
   .done p{font-size:15px;font-weight:700;color:var(--ink-soft);line-height:1.5}
 
   @media(max-width:680px){
-    .hero-motif{width:140px;top:-16px;right:-18px;opacity:.09}
     .about{grid-template-columns:1fr;gap:22px}
     .cell .n{font-size:14px}
     .cell .pill{font-size:8.5px;padding:1px 5px}
@@ -168,7 +166,6 @@
     <!-- HERO -->
     <div class="hero">
       <div class="hero-line" aria-hidden="true"></div>
-      <svg class="hero-motif" id="motif" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
       <div class="av-big" id="avatar" aria-hidden="true"></div>
       <h1>Delaney's Lacrosse Lessons</h1>
       <div class="facts">
@@ -209,8 +206,8 @@
     <!-- ABOUT -->
     <div class="about">
       <h2>About me</h2>
-      <p>Hi! I'm Delaney, I'm 14 and I go to Kent. I play attack for Concept and I'm obsessed with lacrosse. I teach all levels at Cheesman Park, whether you've never held a stick or you want to sharpen up.</p>
-      <p style="margin-top:12px">I know defense too, so I can help with whatever part of your game you want to work on. I'd love to help anyone in the neighborhood get better. Please bring your own stick, I'm not able to lend one.</p>
+      <p>Hey!! I'm Delaney, I'm 14 and I go to Kent. I play attack for Concept and I seriously love it so much. I teach all levels, so it doesn't matter if you've literally never held a stick. I just really want to help kids get better and have fun doing it!</p>
+      <p style="margin-top:12px">I can teach any position too, not just attack, so we can work on whatever you want to get better at. I'm usually at Cheesman Park but if somewhere else is easier for you that totally works. Just bring your own stick and we're good to go!</p>
     </div>
   </div>
 
@@ -272,21 +269,9 @@
   // make-it-yours is Delaney's control: shown only in owner edit mode (add ?edit to the URL)
   if(new URLSearchParams(location.search).has('edit')){ document.getElementById('customize').style.display=''; }
 
-  // ---------- crossed lacrosse sticks: netted heads splayed at top, shafts crossing, flat end caps ----------
-  const STICKS = `
-    <path d="M40,36 L80,88"/><path d="M60,36 L20,88"/>
-    <path d="M40,36 Q33.4,16.6 14,10 Q20.6,29.4 40,36 Z"/>
-    <path d="M60,36 Q66.6,16.6 86,10 Q79.4,29.4 60,36 Z"/>
-    <path d="M82.8,85.9 L77.2,90.1"/><path d="M22.8,90.1 L17.2,85.9"/>
-    <path d="M33,24 L24,20.5" stroke-width="1.5"/><path d="M30.5,28 L25.5,17.5" stroke-width="1.5"/>
-    <path d="M67,24 L76,20.5" stroke-width="1.5"/><path d="M69.5,28 L74.5,17.5" stroke-width="1.5"/>`;
-  document.getElementById('motif').innerHTML = STICKS;
-
-  // hero avatar: real photo slot, crossed-sticks fallback
-  const PHOTO = ''; // drop Delaney's photo URL/path here; falls back to the lacrosse illustration
-  document.getElementById('avatar').innerHTML = PHOTO
-    ? `<img src="${PHOTO}" alt="Delaney">`
-    : `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${STICKS}</svg>`;
+  // hero avatar: real photo of Delaney
+  const PHOTO = 'delaney.jpg';
+  document.getElementById('avatar').innerHTML = `<img src="${PHOTO}" alt="Delaney playing lacrosse">`;
 
   // ---------- availability ----------
   const PATTERN = { 2:['4:00','5:00','6:00'], 4:['4:00','5:00','6:00'], 6:['9:00','10:00','11:00'] };
