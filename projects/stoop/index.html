@@ -852,6 +852,80 @@
   };
   document.getElementById('close2').onclick=close;
 
+  // ---------- neighborhood (block) capture ----------
+  // Block = street + hundred-block, derived from a geocode. Two neighbors on the
+  // same hundred-block of the same street share a block id; nobody else does.
+  // No backend, no polygon data. OSM Nominatim geocodes, Leaflet+OSM shows the pin.
+  let geoMap, geoMarker, pendingBlock=null;
+  const NOMINATIM='https://nominatim.openstreetmap.org';
+
+  function blockFrom(a, fallback){
+    const road = a.road || a.pedestrian || a.residential || a.footway || fallback || 'Your street';
+    const hnMatch = (a.house_number||'').match(/\d+/);
+    const hundred = hnMatch ? Math.floor(parseInt(hnMatch[0],10)/100)*100 : null;
+    const town = a.city || a.town || a.village || a.suburb || a.county || '';
+    const label = hundred!=null ? `${road} · ${hundred===0?'1':hundred} block` : road;
+    const id = (road+'|'+(hundred!=null?hundred:'x')+'|'+town).toLowerCase().replace(/[^a-z0-9|]+/g,'-');
+    return {road, hundred, town, label, id};
+  }
+
+  function setBlock(b){
+    pendingBlock=b;
+    document.getElementById('bk-name').textContent=b.label;
+    document.getElementById('bk-promise-name').textContent=b.label;
+    document.getElementById('block-card').classList.add('on');
+    document.getElementById('geo-go').style.display='';
+  }
+
+  function showPin(lat,lng){
+    if(!geoMap){
+      geoMap=L.map('geo-map',{scrollWheelZoom:false}).setView([lat,lng],17);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(geoMap);
+      geoMap.on('click',e=>{ geoMarker.setLatLng(e.latlng); reverseGeocode(e.latlng.lat,e.latlng.lng); });
+    } else geoMap.setView([lat,lng],17);
+    if(geoMarker) geoMarker.setLatLng([lat,lng]);
+    else{
+      geoMarker=L.marker([lat,lng],{draggable:true}).addTo(geoMap);
+      geoMarker.on('dragend',()=>{ const p=geoMarker.getLatLng(); reverseGeocode(p.lat,p.lng); });
+    }
+    setTimeout(()=>geoMap.invalidateSize(),120); // container was display:none until now
+  }
+
+  function msg(text,isErr){ const el=document.getElementById('geo-msg'); el.textContent=text||''; el.classList.toggle('err',!!isErr); }
+
+  async function geocode(){
+    const q=document.getElementById('geo-addr').value.trim();
+    if(!q){ document.getElementById('geo-addr').focus(); return; }
+    const btn=document.getElementById('geo-find'); btn.disabled=true; msg('Finding your block…');
+    try{
+      const r=await fetch(`${NOMINATIM}/search?format=jsonv2&addressdetails=1&limit=1&q=${encodeURIComponent(q)}`);
+      const j=await r.json();
+      if(!j.length){ msg("Couldn't find that one. Try adding your town, or tap the map to drop a pin.",true); return; }
+      const hit=j[0];
+      showPin(+hit.lat,+hit.lon);
+      setBlock(blockFrom(hit.address||{}, (hit.display_name||'').split(',')[0]));
+      msg('');
+    }catch(e){ msg("Map's not responding right now. Tap the map to drop a pin instead.",true); }
+    finally{ btn.disabled=false; }
+  }
+
+  async function reverseGeocode(lat,lng){
+    msg('Updating your block…');
+    try{
+      const r=await fetch(`${NOMINATIM}/reverse?format=jsonv2&addressdetails=1&lat=${lat}&lon=${lng}`);
+      const j=await r.json();
+      setBlock(blockFrom((j&&j.address)||{}, (j&&j.display_name||'').split(',')[0]));
+      msg('');
+    }catch(e){ msg('',false); }
+  }
+
+  function initGeo(){
+    if(geoMap) setTimeout(()=>geoMap.invalidateSize(),120);
+  }
+  document.getElementById('geo-find').onclick=geocode;
+  document.getElementById('geo-addr').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); geocode(); } });
+  document.getElementById('geo-go').onclick=()=>{ /* batch 2 wires this into the account flow */ go('home'); };
+
   // ---------- start ----------
   // seed Delaney's demo page on first visit so the neighborhood home isn't empty,
   // then always land on home. New kids tap "Start my own stand" for a blank builder.
