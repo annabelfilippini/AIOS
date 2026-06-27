@@ -104,11 +104,11 @@
   .schip.booked{border-style:dashed;border-color:var(--line);color:#bdae93;background:transparent;cursor:default;text-decoration:line-through}
   .slots .empty{color:var(--ink-soft);font-weight:700;font-size:14px}
 
-  /* sticky request bar */
-  .reqbar{position:sticky;bottom:0;margin-top:22px;background:var(--ink);color:var(--paper);border-radius:18px;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 -6px 24px rgba(58,47,35,.18)}
-  .reqbar .pick{font-weight:800;font-size:14.5px}
+  /* request bar */
+  .reqbar{margin-top:18px;background:var(--ink);color:var(--paper);border-radius:16px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .reqbar .pick{font-weight:800;font-size:13.5px}
   .reqbar .pick b{font-family:'Fredoka';color:var(--accent);font-weight:600}
-  .reqbar .req{font-family:'Fredoka';font-size:17px;background:var(--accent);color:var(--accent-ink);border:3px solid var(--paper);padding:11px 22px;border-radius:30px;cursor:pointer;white-space:nowrap}
+  .reqbar .req{font-family:'Fredoka';font-size:15px;background:var(--accent);color:var(--accent-ink);border:2px solid var(--paper);padding:9px 18px;border-radius:30px;cursor:pointer;white-space:nowrap}
   .reqbar .req:disabled{opacity:.45;cursor:default}
 
   /* about */
@@ -154,12 +154,12 @@
     </div>
     <b>Stoop</b>
   </div>
-  <div class="place"><span class="dot"></span> Cheesman Park neighborhood · verified neighbor</div>
+  <div class="place"><span class="dot"></span> Country Club neighborhood · verified neighbor</div>
 </div>
 
 <div class="wrap">
 
-  <div class="customize">
+  <div class="customize" id="customize" style="display:none">
     <span class="lbl">🎨 Make it yours</span>
     <div class="swatches" id="swatches"></div>
   </div>
@@ -174,6 +174,7 @@
       <div class="facts">
         <span class="fact">⏱ 1 hour</span>
         <span class="fact">📍 Cheesman Park</span>
+        <span class="fact">🥍 Bring your own stick</span>
       </div>
     </div>
 
@@ -200,7 +201,7 @@
       </div>
 
       <div class="reqbar">
-        <div class="pick" id="pick">No time picked yet — tap a day above ☝️</div>
+        <div class="pick" id="pick">No time picked yet. Tap a day above ☝️</div>
         <button class="req" id="req" disabled>Request this lesson</button>
       </div>
     </div>
@@ -208,8 +209,8 @@
     <!-- ABOUT -->
     <div class="about">
       <h2>About me</h2>
-      <p>Hi! I'm Delaney. I've played lacrosse for years and I love it. I'm doing lessons at Cheesman Park for anyone who's just starting or wants to get better at cradling, passing, and shooting.</p>
-      <p style="margin-top:12px">I'm really patient and I remember being brand new, so don't worry if you've never held a stick. Bring your own if you have one, I have extras if you don't.</p>
+      <p>Hi! I'm Delaney, I'm 14 and I go to Kent. I play attack for Concept and I'm obsessed with lacrosse. I teach all levels at Cheesman Park, whether you've never held a stick or you want to sharpen up.</p>
+      <p style="margin-top:12px">I know defense too, so I can help with whatever part of your game you want to work on. I'd love to help anyone in the neighborhood get better. Please bring your own stick, I'm not able to lend one.</p>
     </div>
   </div>
 
@@ -268,14 +269,17 @@
   let saved='pink'; try{ saved=localStorage.getItem('stoop-theme')||'pink'; }catch(e){}
   applyTheme(saved);
 
-  // ---------- crossed lacrosse sticks: netted heads at top, shafts crossing, end caps ----------
+  // make-it-yours is Delaney's control: shown only in owner edit mode (add ?edit to the URL)
+  if(new URLSearchParams(location.search).has('edit')){ document.getElementById('customize').style.display=''; }
+
+  // ---------- crossed lacrosse sticks: netted heads splayed at top, shafts crossing, flat end caps ----------
   const STICKS = `
-    <path d="M30,20 L78,84"/><path d="M70,20 L22,84"/>
-    <path d="M30,20 Q19.6,17.8 20.4,7.2 Q30.8,9.4 30,20 Z"/>
-    <path d="M70,20 Q80.4,17.8 79.6,7.2 Q69.2,9.4 70,20 Z"/>
-    <path d="M74,87 L82,81"/><path d="M18,81 L26,87"/>
-    <path d="M21.5,15 L29.5,11" stroke-width="1.5"/><path d="M22.5,18 L27.5,8" stroke-width="1.5"/>
-    <path d="M78.5,15 L70.5,11" stroke-width="1.5"/><path d="M77.5,18 L72.5,8" stroke-width="1.5"/>`;
+    <path d="M40,36 L80,88"/><path d="M60,36 L20,88"/>
+    <path d="M40,36 Q33.4,16.6 14,10 Q20.6,29.4 40,36 Z"/>
+    <path d="M60,36 Q66.6,16.6 86,10 Q79.4,29.4 60,36 Z"/>
+    <path d="M82.8,85.9 L77.2,90.1"/><path d="M22.8,90.1 L17.2,85.9"/>
+    <path d="M33,24 L24,20.5" stroke-width="1.5"/><path d="M30.5,28 L25.5,17.5" stroke-width="1.5"/>
+    <path d="M67,24 L76,20.5" stroke-width="1.5"/><path d="M69.5,28 L74.5,17.5" stroke-width="1.5"/>`;
   document.getElementById('motif').innerHTML = STICKS;
 
   // hero avatar: real photo slot, crossed-sticks fallback
