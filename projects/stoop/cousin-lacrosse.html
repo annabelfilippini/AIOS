@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maddie's Lacrosse Lessons · Stoop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#fbf3e2; --paper-2:#f6e9cf;
+    --ink:#3a2f23; --ink-soft:#7a6a55;
+    --sun:#ffcf3f; --grass:#5fa052; --sky:#7ec4e6; --coral:#f08a5d; --berry:#c96a8e;
+    --line:#e3d4b4; --card:#fffdf8;
+    --shadow:0 10px 0 -4px rgba(58,47,35,.10);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'Nunito',system-ui,sans-serif; font-weight:600;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(rgba(58,47,35,.04) 1px,transparent 1px);
+    background-size:22px 22px;
+  }
+  h1,h2,h3,.display{font-family:'Fredoka',sans-serif;font-weight:600;line-height:1.04;margin:0}
+  .marker{font-family:'Caveat',cursive;font-weight:700}
+  a{color:inherit}
+
+  /* bunting */
+  .bunting{display:flex;height:26px;overflow:hidden}
+  .bunting span{flex:1;clip-path:polygon(0 0,100% 0,50% 100%)}
+  .bunting span:nth-child(5n+1){background:var(--sun)}
+  .bunting span:nth-child(5n+2){background:var(--grass)}
+  .bunting span:nth-child(5n+3){background:var(--sky)}
+  .bunting span:nth-child(5n+4){background:var(--coral)}
+  .bunting span:nth-child(5n+5){background:var(--berry)}
+
+  /* top bar */
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:16px clamp(18px,5vw,56px)}
+  .brand{display:flex;align-items:center;gap:11px}
+  .logo{width:40px;height:40px;background:var(--sun);border:3px solid var(--ink);border-radius:50% 50% 50% 12px;display:grid;place-items:center;transform:rotate(-6deg)}
+  .brand b{font-family:'Fredoka';font-size:25px;font-weight:600;letter-spacing:.5px}
+  .place{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-soft);font-weight:700}
+  .place .dot{width:9px;height:9px;border-radius:50%;background:var(--grass);box-shadow:0 0 0 4px rgba(95,160,82,.18)}
+
+  .wrap{max-width:880px;margin:0 auto;padding:14px clamp(18px,5vw,40px) 90px}
+
+  .editnote{display:flex;align-items:center;gap:10px;justify-content:center;font-family:'Caveat';font-size:20px;color:var(--ink-soft);margin:0 0 18px}
+  .editnote .pen{font-family:'Nunito';font-size:12px;font-weight:800;background:var(--sun);border:2px solid var(--ink);border-radius:20px;padding:4px 12px;color:var(--ink)}
+
+  .site{background:var(--card);border:3px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+
+  /* hero */
+  .hero{background:linear-gradient(160deg,#bfe3f6,#7ec4e6);padding:42px clamp(22px,5vw,52px) 38px;text-align:center;border-bottom:3px solid var(--ink);position:relative}
+  .av-big{width:96px;height:96px;margin:0 auto 14px;border-radius:50%;border:3px solid var(--ink);background:var(--sun);display:grid;place-items:center;font-family:'Fredoka';font-size:40px;color:var(--ink);box-shadow:0 6px 0 -1px rgba(58,47,35,.18)}
+  .hero h1{font-size:clamp(34px,6vw,56px)}
+  .hero .by{font-family:'Caveat';font-size:23px;color:#1f4d63;margin-top:6px}
+  .facts{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:18px}
+  .fact{font-size:13px;font-weight:800;background:var(--card);border:2px solid var(--ink);border-radius:30px;padding:6px 14px;display:flex;align-items:center;gap:6px}
+
+  /* booking */
+  .book{padding:34px clamp(22px,5vw,52px) 8px}
+  .book .lead{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .book h2{font-size:27px}
+  .price-tag{font-family:'Fredoka';font-size:24px;white-space:nowrap}
+  .price-tag small{font-size:13px;color:var(--ink-soft);font-weight:600}
+  .sub{font-size:15px;color:var(--ink-soft);font-weight:700;margin:0 0 18px}
+
+  .calnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .calnav .wk{font-family:'Fredoka';font-size:17px}
+  .calnav button{width:38px;height:38px;border:3px solid var(--ink);background:var(--card);border-radius:50%;cursor:pointer;font-size:18px;display:grid;place-items:center;box-shadow:0 3px 0 0 var(--ink)}
+  .calnav button:active{transform:translateY(3px);box-shadow:0 0 0 0 var(--ink)}
+  .calnav button:disabled{opacity:.35;cursor:default;box-shadow:none;transform:none}
+
+  .week{display:grid;grid-template-columns:repeat(7,1fr);gap:9px}
+  .day{background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:9px 6px;min-height:120px}
+  .day.has{border-color:var(--ink)}
+  .day .dn{text-align:center;font-size:12px;font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.4px}
+  .day .dd{text-align:center;font-family:'Fredoka';font-size:20px;margin:1px 0 9px}
+  .day.today .dd{color:var(--coral)}
+  .slot{display:block;width:100%;font-family:'Nunito';font-weight:800;font-size:12.5px;border:2px solid var(--ink);background:var(--card);border-radius:9px;padding:6px 4px;margin-bottom:6px;cursor:pointer;text-align:center}
+  .slot:hover{background:var(--paper-2)}
+  .slot.sel{background:var(--grass);color:#fff}
+  .slot.booked{border-style:dashed;border-color:var(--line);color:#bdae93;background:transparent;cursor:default;text-decoration:line-through}
+  .day .none{font-size:11px;color:#c3b596;text-align:center;font-weight:700;margin-top:14px}
+
+  /* sticky request bar */
+  .reqbar{position:sticky;bottom:0;margin-top:22px;background:var(--ink);color:var(--paper);border-radius:18px;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 -6px 24px rgba(58,47,35,.18)}
+  .reqbar .pick{font-weight:800;font-size:14.5px}
+  .reqbar .pick b{font-family:'Fredoka';color:var(--sun);font-weight:600}
+  .reqbar .req{font-family:'Fredoka';font-size:17px;background:var(--sun);color:var(--ink);border:3px solid var(--paper);padding:11px 22px;border-radius:30px;cursor:pointer;white-space:nowrap}
+  .reqbar .req:disabled{opacity:.45;cursor:default}
+
+  /* about */
+  .about{padding:30px clamp(22px,5vw,52px) 38px;display:grid;grid-template-columns:1.25fr 1fr;gap:34px;border-top:3px solid var(--line);margin-top:24px}
+  .about h2{font-size:24px;margin-bottom:10px}
+  .about p{font-size:16px;line-height:1.55;font-weight:600}
+  .gal{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start}
+  .gal .g{height:96px;border:3px solid var(--ink);border-radius:14px;display:grid;place-items:center}
+
+  /* parent note */
+  .parent{display:flex;align-items:center;gap:8px;justify-content:center;font-size:13px;font-weight:800;color:var(--ink-soft);padding:0 20px 30px;text-align:center}
+
+  .foot-note{text-align:center;color:var(--ink-soft);font-size:13px;font-weight:700;padding:26px 20px 0}
+  .foot-note b{font-family:'Fredoka';font-weight:600}
+
+  /* modal */
+  .scrim{position:fixed;inset:0;background:rgba(58,47,35,.5);display:none;place-items:center;padding:20px;z-index:50}
+  .scrim.on{display:grid}
+  .modal{background:var(--card);border:3px solid var(--ink);border-radius:22px;max-width:420px;width:100%;padding:26px 24px;box-shadow:0 16px 0 -6px rgba(58,47,35,.25)}
+  .modal h3{font-size:25px;margin-bottom:4px}
+  .modal .when{font-family:'Caveat';font-size:22px;color:var(--grass);margin-bottom:16px}
+  .modal label{display:block;font-size:13px;font-weight:800;margin:12px 0 5px}
+  .modal input,.modal textarea{width:100%;font-family:'Nunito';font-weight:600;font-size:15px;border:2px solid var(--ink);border-radius:12px;padding:11px 13px;background:var(--paper);color:var(--ink)}
+  .modal textarea{resize:vertical;min-height:60px}
+  .modal .send{width:100%;margin-top:18px;font-family:'Fredoka';font-size:18px;background:var(--grass);color:#fff;border:3px solid var(--ink);padding:13px;border-radius:30px;cursor:pointer;box-shadow:0 5px 0 0 var(--ink)}
+  .modal .send:active{transform:translateY(3px);box-shadow:0 2px 0 0 var(--ink)}
+  .modal .pnote{font-size:12.5px;font-weight:800;color:var(--ink-soft);text-align:center;margin-top:14px;display:flex;gap:7px;align-items:center;justify-content:center}
+  .modal .x{float:right;border:none;background:none;font-size:24px;cursor:pointer;color:var(--ink-soft);line-height:1;margin:-6px -4px 0 0}
+  .done{text-align:center}
+  .done .big{font-size:54px;margin-bottom:6px}
+  .done p{font-size:15px;font-weight:700;color:var(--ink-soft);line-height:1.5}
+
+  @media(max-width:680px){
+    .about{grid-template-columns:1fr;gap:22px}
+    .week{grid-template-columns:repeat(7,1fr);gap:5px}
+    .day{padding:7px 3px;min-height:104px}
+    .slot{font-size:10.5px;padding:5px 2px}
+    .day .dd{font-size:16px}
+    .place{display:none}
+    .reqbar{flex-direction:column;align-items:stretch;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<div class="bunting" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<div class="bar">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="2.2" stroke-linecap="round"><path d="M5 11h14M6 11l1.4 8.2a1 1 0 0 0 1 .8h7.2a1 1 0 0 0 1-.8L19 11M9 11V8a3 3 0 0 1 6 0v3"/></svg>
+    </div>
+    <b>Stoop</b>
+  </div>
+  <div class="place"><span class="dot"></span> Maple Grove neighborhood · verified neighbor</div>
+</div>
+
+<div class="wrap">
+  <p class="editnote"><span class="pen">my page</span> Maddie made this on Stoop in about three minutes 🥍</p>
+
+  <div class="site">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="av-big">M</div>
+      <h1>Maddie's Lacrosse Lessons</h1>
+      <div class="by">backyard lessons for kids who want to get good 🥍</div>
+      <div class="facts">
+        <span class="fact">🏅 I play varsity</span>
+        <span class="fact">🌱 Beginners welcome</span>
+        <span class="fact">⏱ 30 minutes</span>
+        <span class="fact">📍 Pickup at Maple Grove field</span>
+      </div>
+    </div>
+
+    <!-- BOOKING -->
+    <div class="book">
+      <div class="lead">
+        <h2>Pick a time</h2>
+        <div class="price-tag">$15 <small>/ lesson</small></div>
+      </div>
+      <p class="sub">Tap a green time that works for you. I'll have my mom text you back to lock it in.</p>
+
+      <div class="calnav">
+        <button id="prev" aria-label="previous week">‹</button>
+        <div class="wk" id="wklabel">This week</div>
+        <button id="next" aria-label="next week">›</button>
+      </div>
+
+      <div class="week" id="week"></div>
+
+      <div class="reqbar">
+        <div class="pick" id="pick">No time picked yet — tap one above ☝️</div>
+        <button class="req" id="req" disabled>Request this lesson</button>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about">
+      <div>
+        <h2>About me</h2>
+        <p>Hi! I'm Maddie, I'm 13 and I've played lacrosse since I was 7. This year I made varsity as the youngest on the team. I'm doing lessons in my backyard and at the Maple Grove field for kids who are just starting or want to get better at cradling, passing, and shooting.</p>
+        <p style="margin-top:12px">I'm really patient and I remember being brand new, so don't worry if you've never held a stick. Bring your own if you have one, I have extras if you don't.</p>
+      </div>
+      <div class="gal">
+        <div class="g" style="background:#e7f1f7"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="1.7" stroke-linecap="round"><path d="M6 21V8a6 6 0 0 1 12 0M9 21v-9M15 21v-9"/><circle cx="12" cy="5" r="1.6"/></svg></div>
+        <div class="g" style="background:#eaf3e6"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16" opacity=".5"/></svg></div>
+        <div class="g" style="background:#fff4d6"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="1.7" stroke-linecap="round"><path d="M5 21l4-9 6 3 4-9M9 12l-2-3M15 15l2 2"/></svg></div>
+        <div class="g" style="background:#fbe7ef"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="1.7" stroke-linecap="round"><path d="M12 3l2.5 5 5.5.6-4 3.8 1 5.5L12 14.6 7 17l1-5.5-4-3.8L9.5 7z"/></svg></div>
+      </div>
+    </div>
+
+    <div class="parent">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a6a55" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>
+      Maddie is 13. Lesson requests go to her mom, not to Maddie.
+    </div>
+  </div>
+
+  <p class="foot-note">Made with <b>Stoop</b> — the neighborhood that never packs up. Want your own page? Ask a neighbor for an invite.</p>
+</div>
+
+<!-- REQUEST MODAL -->
+<div class="scrim" id="scrim">
+  <div class="modal" id="modal">
+    <button class="x" id="x" aria-label="close">×</button>
+    <div id="form">
+      <h3>Request a lesson</h3>
+      <div class="when" id="when">—</div>
+      <label>Who's the lesson for?</label>
+      <input id="kid" placeholder="e.g. Theo, age 8" />
+      <label>A parent's phone or email (so Maddie's mom can confirm)</label>
+      <input id="contact" placeholder="555-123-4567 or you@email.com" />
+      <label>Anything Maddie should know? (optional)</label>
+      <textarea id="note" placeholder="First time holding a stick, needs to borrow one…"></textarea>
+      <button class="send" id="send">Send to Maddie's mom</button>
+      <div class="pnote">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7a6a55" stroke-width="2.4"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/></svg>
+        This goes to a grown-up, never straight to Maddie.
+      </div>
+    </div>
+    <div class="done" id="doneview" style="display:none">
+      <div class="big">🥍</div>
+      <h3>Request sent!</h3>
+      <p id="donemsg"></p>
+      <button class="send" id="close2">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ----- availability -----
+  // Maddie's standing weekly pattern. 0=Sun ... 6=Sat
+  const PATTERN = {
+    2:['4:00','4:45','5:30'],   // Tue
+    4:['4:00','4:45','5:30'],   // Thu
+    6:['9:00','9:45','10:30','11:15'] // Sat
+  };
+  const MERID = (t)=>{ const h=+t.split(':')[0]; return h<12?'pm':(t<'12'?'am':'am'); }; // afternoon=pm, sat morning=am
+  function ampm(day,t){ return PATTERN[6].includes(t)&&day===6 ? t+' am' : t+' pm'; }
+  // a few slots already taken, so it reads like a real schedule: "dayOfWeek|time"
+  const BOOKED = new Set(['4|4:45','6|10:30']); // Thu 4:45, Sat 10:30
+
+  const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const startSun = new Date(today); startSun.setDate(today.getDate()-today.getDay()); // Sunday of this week
+  let weekOffset = 0;
+  let selected = null; // {date, day, time, label, offset}
+
+  const weekEl = document.getElementById('week');
+  const wkLabel = document.getElementById('wklabel');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const pickEl = document.getElementById('pick');
+  const reqBtn = document.getElementById('req');
+
+  function dayOffsetFromToday(d){ return Math.round((d-today)/86400000); }
+
+  function render(){
+    weekEl.innerHTML='';
+    const weekStart = new Date(startSun); weekStart.setDate(startSun.getDate()+weekOffset*7);
+    wkLabel.textContent = weekOffset===0?'This week':weekOffset===1?'Next week':`In ${weekOffset} weeks`;
+    prevBtn.disabled = weekOffset<=0;
+    nextBtn.disabled = weekOffset>=3;
+
+    for(let i=0;i<7;i++){
+      const d = new Date(weekStart); d.setDate(weekStart.getDate()+i);
+      const off = dayOffsetFromToday(d);
+      const dow = d.getDay();
+      const slots = (PATTERN[dow]||[]).filter(()=> off>=0); // no past days
+      const cell = document.createElement('div');
+      cell.className='day'+(slots.length?' has':'')+(off===0?' today':'');
+      let html = `<div class="dn">${DOW[dow]}</div><div class="dd">${d.getDate()}</div>`;
+      if(off<0 || !slots.length){
+        html += `<div class="none">—</div>`;
+      } else {
+        slots.forEach(t=>{
+          const booked = BOOKED.has(dow+'|'+t);
+          const lab = ampm(dow,t);
+          html += `<button class="slot${booked?' booked':''}" ${booked?'disabled':''} data-off="${off}" data-day="${dow}" data-time="${t}" data-date="${d.toDateString()}" data-label="${DOW[dow]} ${d.getMonth()+1}/${d.getDate()} at ${lab}">${lab}</button>`;
+        });
+      }
+      cell.innerHTML = html;
+      weekEl.appendChild(cell);
+    }
+    // restore selection highlight if in view
+    if(selected){
+      const m = weekEl.querySelector(`.slot[data-off="${selected.offset}"][data-time="${selected.time}"]`);
+      if(m) m.classList.add('sel');
+    }
+  }
+
+  weekEl.addEventListener('click',e=>{
+    const s = e.target.closest('.slot'); if(!s || s.classList.contains('booked')) return;
+    weekEl.querySelectorAll('.slot.sel').forEach(x=>x.classList.remove('sel'));
+    s.classList.add('sel');
+    selected = {offset:s.dataset.off, day:+s.dataset.day, time:s.dataset.time, label:s.dataset.label};
+    pickEl.innerHTML = `Picked: <b>${selected.label}</b>`;
+    reqBtn.disabled = false;
+  });
+
+  prevBtn.onclick=()=>{ if(weekOffset>0){weekOffset--;render();} };
+  nextBtn.onclick=()=>{ if(weekOffset<3){weekOffset++;render();} };
+  render();
+
+  // ----- request modal -----
+  const scrim=document.getElementById('scrim');
+  const whenEl=document.getElementById('when');
+  function openModal(){
+    if(!selected) return;
+    whenEl.textContent = selected.label;
+    document.getElementById('form').style.display='';
+    document.getElementById('doneview').style.display='none';
+    scrim.classList.add('on');
+  }
+  function closeModal(){ scrim.classList.remove('on'); }
+  reqBtn.onclick=openModal;
+  document.getElementById('x').onclick=closeModal;
+  scrim.addEventListener('click',e=>{ if(e.target===scrim) closeModal(); });
+
+  document.getElementById('send').onclick=()=>{
+    const kid=document.getElementById('kid').value.trim();
+    const contact=document.getElementById('contact').value.trim();
+    if(!contact){ document.getElementById('contact').focus(); return; }
+    document.getElementById('form').style.display='none';
+    const dv=document.getElementById('doneview'); dv.style.display='';
+    document.getElementById('donemsg').innerHTML =
+      `Maddie's mom got your request for <b>${selected.label}</b>${kid?` for ${kid}`:''}.<br>She'll text ${contact} to confirm. See you on the field!`;
+  };
+  document.getElementById('close2').onclick=closeModal;
+</script>
+</body>
+</html>
