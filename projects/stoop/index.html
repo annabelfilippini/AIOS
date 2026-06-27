@@ -352,7 +352,7 @@
   <div class="wrap">
     <div class="ownerbar" id="ownerbar" style="display:none">
       👋 This is your page — neighbors see it without this bar.
-      <button onclick="go('onboard')">Edit</button>
+      <button onclick="go('onboard','edit')">Edit</button>
       <button onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href.split('#')[0]);this.textContent='Copied!'">Copy link</button>
       <button onclick="if(confirm('Clear this page and start onboarding from scratch?')){localStorage.removeItem('stoop-profile');profile=null;go('onboard');}">Start fresh</button>
     </div>
@@ -465,12 +465,12 @@
   // ---------- view router ----------
   const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const DOWLONG=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  function go(view){
+  function go(view, mode){
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
     document.getElementById('view-'+view).classList.add('on');
     document.getElementById('bunting').style.display = view==='home' ? '' : 'none';
     if(view==='home') renderHome();
-    if(view==='onboard') fillOnboard();
+    if(view==='onboard') fillOnboard(mode);
     if(view==='profile') renderProfile();
     window.scrollTo({top:0});
   }
@@ -586,8 +586,9 @@
     });
   }
   function val(id){ return document.getElementById(id).value.trim(); }
-  function fillOnboard(){
-    const p = profile || DEFAULT;     // prefill with the saved page, or Delaney's example on first run
+  function fillOnboard(mode){
+    // 'edit' prefills the saved page; any new stand starts blank (don't inherit Delaney's demo answers).
+    const p = mode==='edit' ? (profile||{}) : {};
     document.getElementById('f-name').value=p.name||'';
     document.getElementById('f-age').value=p.age||'';
     document.getElementById('f-about').value=(p.about||[]).join('\n\n');
@@ -601,7 +602,7 @@
     obDays = JSON.parse(JSON.stringify(p.avail||{}));
     obTheme = p.theme||'pink';
     obPhoto = p.photo||'';
-    document.getElementById('ob-back').style.display = profile ? '' : 'none';
+    document.getElementById('ob-back').style.display = '';
     buildDayPickers(); renderDayTimes(); buildSwatches(); applyTheme(obTheme); setPhotoPreview();
   }
   document.getElementById('ob-go').onclick=()=>{
@@ -748,8 +749,10 @@
   document.getElementById('close2').onclick=close;
 
   // ---------- start ----------
-  // first-ever visit (no saved page) → onboarding; otherwise → the neighborhood home.
-  go(profile ? 'home' : 'onboard');
+  // seed Delaney's demo page on first visit so the neighborhood home isn't empty,
+  // then always land on home. New kids tap "Start my own stand" for a blank builder.
+  if(!profile){ profile=JSON.parse(JSON.stringify(DEFAULT)); save(profile); }
+  go('home');
 </script>
 </body>
 </html>
