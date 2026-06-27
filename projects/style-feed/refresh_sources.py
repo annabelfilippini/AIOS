@@ -68,11 +68,16 @@ def refresh_one(h, key):
         return f"  {h:18} HTTP {e.code} — kept old file"
     except Exception as e:
         return f"  {h:18} {type(e).__name__}: {e} — kept old file"
-    # ponytail: never clobber a good snapshot with an empty/failed pull
+    # keep only real pins: a genuine ShopMy product link + a hosted product image.
+    # This also drops Firecrawl's placeholder/hallucinated rows ("Brand A | Fashion
+    # Item 1") it emits when the storefront didn't render — those lack a real
+    # shopmy.us/shop/product URL.
+    prods = [p for p in prods
+             if "shopmy.us/shop/product" in (p.get("productUrl") or "")
+             and (p.get("imageUrl") or "").startswith("http")]
+    # ponytail: never clobber a good snapshot with an empty/garbage pull
     if not prods:
-        return f"  {h:18} 0 products — kept old file"
-    # keep only the well-formed pins (need an image + a shop link to be usable)
-    prods = [p for p in prods if p.get("imageUrl") and p.get("productUrl")]
+        return f"  {h:18} 0 real products — kept old file"
     path.write_text(json.dumps({"json": {"products": prods}}, indent=2))
     return f"  {h:18} {len(prods):3} products -> {path.name}"
 

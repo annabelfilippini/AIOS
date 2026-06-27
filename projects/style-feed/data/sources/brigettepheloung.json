@@ -2,25 +2,25 @@
   "json": {
     "products": [
       {
-        "title": "Fashion Item 1",
+        "title": "Product 1",
         "brand": "Brand A",
-        "price": "$29.99",
+        "price": "$20.00",
         "imageUrl": "https://example.com/image1.jpg",
-        "productUrl": "https://shopmy.us/shop/product/1"
+        "productUrl": "https://shopmy.us/shop/product1"
       },
       {
-        "title": "Home Decor 2",
+        "title": "Product 2",
         "brand": "Brand B",
-        "price": "$49.99",
+        "price": "$25.00",
         "imageUrl": "https://example.com/image2.jpg",
-        "productUrl": "https://shopmy.us/shop/product/2"
+        "productUrl": "https://shopmy.us/shop/product2"
       },
       {
-        "title": "Beauty Product 3",
+        "title": "Product 3",
         "brand": "Brand C",
-        "price": "$19.99",
+        "price": "$30.00",
         "imageUrl": "https://example.com/image3.jpg",
-        "productUrl": "https://shopmy.us/shop/product/3"
+        "productUrl": "https://shopmy.us/shop/product3"
       }
     ]
   }
