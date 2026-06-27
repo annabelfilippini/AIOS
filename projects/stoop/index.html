@@ -135,19 +135,17 @@
   .w2m-tl.hr{border-top:1.5px solid transparent}
   .w2m-cell.on{background:var(--accent)}
 
-  /* ----- neighborhood (block) capture ----- */
-  .geo-row{display:flex;gap:9px;margin-bottom:12px}
-  .geo-row input{flex:1}
-  .geo-find{font-family:'Fredoka';font-size:15px;border:2px solid var(--ink);background:var(--accent);color:var(--accent-ink);border-radius:12px;padding:0 18px;cursor:pointer;white-space:nowrap}
-  .geo-find:disabled{opacity:.5;cursor:default}
-  #geo-map{height:300px;border:2px solid var(--ink);border-radius:16px;overflow:hidden;background:var(--paper-2);margin-bottom:14px}
+  /* ----- neighborhood select (city -> neighborhoods) ----- */
+  .hoods{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px}
+  .hood{font-family:'Fredoka';font-size:15px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:13px;padding:9px 15px;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:6px}
+  .hood.on{background:var(--accent);color:var(--accent-ink)}
+  .hood .ck{font-weight:900;font-size:13px}
+  #geo-map{height:280px;border:2px solid var(--ink);border-radius:16px;overflow:hidden;background:var(--paper-2);margin-bottom:14px}
   .leaflet-container{font-family:'Nunito',sans-serif}
-  .geo-msg{font-size:14px;color:var(--ink-soft);margin-bottom:12px}
-  .geo-msg.err{color:var(--berry);font-weight:700}
   .block-card{display:none;border:2px solid var(--ink);border-radius:16px;background:var(--card);padding:16px 18px;margin-bottom:16px;box-shadow:var(--shadow)}
   .block-card.on{display:block}
   .block-card .bk-lab{font-family:'Fredoka';font-size:13px;color:var(--ink-soft);margin-bottom:3px}
-  .block-card .bk-name{font-family:'Fredoka';font-size:23px;margin-bottom:9px}
+  .block-card .bk-name{font-family:'Fredoka';font-size:22px;line-height:1.15;margin-bottom:9px}
   .block-card .bk-promise{font-size:14px;line-height:1.4}
   .block-card .bk-promise b{color:var(--accent)}
 
@@ -372,34 +370,30 @@
   </div>
 </section>
 
-<!-- ================= NEIGHBORHOOD (block) ================= -->
+<!-- ================= NEIGHBORHOOD (city -> neighborhoods) ================= -->
 <section class="view" id="view-neighborhood">
   <div class="ob">
     <button class="ob-back" id="geo-back" onclick="go('home')">‹ Back</button>
     <div class="ob-head">
-      <span class="marker">your block, nobody else's</span>
-      <h1>Where's your stoop?</h1>
-      <p>Stoop is your block and only your block. Drop your address and we'll find your exact stretch of street. No wider neighborhood, no spillover.</p>
+      <span class="marker">pick your patch</span>
+      <h1 id="geo-title">Which neighborhoods?</h1>
+      <p id="geo-sub">You'll only ever see stands in the neighborhoods you pick. Nothing else, no spillover from across town.</p>
     </div>
 
     <div class="card-q">
-      <h2>Your address</h2>
-      <div class="hint">Just so we can place you on the right block. It's never shown on your page.</div>
-      <div class="geo-row">
-        <input id="geo-addr" placeholder="142 Elm St, Denver CO" />
-        <button class="geo-find" id="geo-find">Find my block</button>
-      </div>
-      <div class="geo-msg" id="geo-msg"></div>
+      <h2>Denver</h2>
+      <div class="hint" id="geo-hint">Tap the neighborhoods you want to shop. Pick as many as you like.</div>
+      <div class="hoods" id="hoods"></div>
       <div id="geo-map"></div>
-      <div class="hint">Pin in the wrong spot? Drag it or tap the map to fix it.</div>
+      <div class="hint">Tap a dot on the map or a name above.</div>
 
       <div class="block-card" id="block-card">
-        <div class="bk-lab">You're on</div>
+        <div class="bk-lab" id="bk-lab">You'll see stands in</div>
         <div class="bk-name" id="bk-name">—</div>
-        <div class="bk-promise">You'll only ever see stands on <b id="bk-promise-name">your block</b>. Nothing from the next street over.</div>
+        <div class="bk-promise">Nothing from anywhere else. <b>Just these.</b></div>
       </div>
 
-      <button class="ob-go" id="geo-go" style="display:none">This is my block →</button>
+      <button class="ob-go" id="geo-go" style="display:none">Sounds good →</button>
     </div>
   </div>
 </section>
@@ -852,78 +846,80 @@
   };
   document.getElementById('close2').onclick=close;
 
-  // ---------- neighborhood (block) capture ----------
-  // Block = street + hundred-block, derived from a geocode. Two neighbors on the
-  // same hundred-block of the same street share a block id; nobody else does.
-  // No backend, no polygon data. OSM Nominatim geocodes, Leaflet+OSM shows the pin.
-  let geoMap, geoMarker, pendingBlock=null;
-  const NOMINATIM='https://nominatim.openstreetmap.org';
+  // ---------- neighborhood select (city -> named neighborhoods) ----------
+  // Curated Denver list. Sellers pick ONE (their stand is physical); buyers pick
+  // MANY (own + friends' areas). Strict filter = exactly the picked set, no radius.
+  // Map preview is display-only (Leaflet+OSM), highlights the picks. No geocoding.
+  const NEIGHBORHOODS=[
+    {id:'country-club',   name:'Country Club',   lat:39.722, lng:-104.967},
+    {id:'cheesman-park',  name:'Cheesman Park',  lat:39.732, lng:-104.965},
+    {id:'cherry-creek',   name:'Cherry Creek',   lat:39.717, lng:-104.953},
+    {id:'hilltop',        name:'Hilltop',        lat:39.722, lng:-104.927},
+    {id:'congress-park',  name:'Congress Park',  lat:39.733, lng:-104.953},
+    {id:'washington-park',name:'Washington Park',lat:39.700, lng:-104.969},
+    {id:'capitol-hill',   name:'Capitol Hill',   lat:39.734, lng:-104.979},
+    {id:'hale',           name:'Hale',           lat:39.737, lng:-104.933},
+    {id:'crestmoor',      name:'Crestmoor',      lat:39.722, lng:-104.918},
+    {id:'belcaro',        name:'Belcaro',        lat:39.706, lng:-104.945},
+  ];
+  const hoodName=id=>{ const h=NEIGHBORHOODS.find(x=>x.id===id); return h?h.name:id; };
+  let selMode='many';          // 'one' for sellers, 'many' for buyers (set by the front door)
+  let pickedHoods=new Set();
+  let hoodMap, hoodLayers={};
 
-  function blockFrom(a, fallback){
-    const road = a.road || a.pedestrian || a.residential || a.footway || fallback || 'Your street';
-    const hnMatch = (a.house_number||'').match(/\d+/);
-    const hundred = hnMatch ? Math.floor(parseInt(hnMatch[0],10)/100)*100 : null;
-    const town = a.city || a.town || a.village || a.suburb || a.county || '';
-    const label = hundred!=null ? `${road} · ${hundred===0?'1':hundred} block` : road;
-    const id = (road+'|'+(hundred!=null?hundred:'x')+'|'+town).toLowerCase().replace(/[^a-z0-9|]+/g,'-');
-    return {road, hundred, town, label, id};
+  function toggleHood(id){
+    if(selMode==='one') pickedHoods=new Set(pickedHoods.has(id)?[]:[id]);
+    else pickedHoods.has(id)?pickedHoods.delete(id):pickedHoods.add(id);
+    renderHoods(); paintMap();
   }
-
-  function setBlock(b){
-    pendingBlock=b;
-    document.getElementById('bk-name').textContent=b.label;
-    document.getElementById('bk-promise-name').textContent=b.label;
-    document.getElementById('block-card').classList.add('on');
-    document.getElementById('geo-go').style.display='';
+  function renderHoods(){
+    const box=document.getElementById('hoods');
+    box.innerHTML=NEIGHBORHOODS.map(h=>{
+      const on=pickedHoods.has(h.id);
+      return `<button type="button" class="hood${on?' on':''}" data-id="${h.id}">${on?'<span class="ck">✓</span>':''}${h.name}</button>`;
+    }).join('');
+    box.querySelectorAll('.hood').forEach(b=>b.onclick=()=>toggleHood(b.dataset.id));
+    const names=NEIGHBORHOODS.filter(h=>pickedHoods.has(h.id)).map(h=>h.name);
+    const card=document.getElementById('block-card'), goB=document.getElementById('geo-go');
+    if(names.length){ card.classList.add('on'); goB.style.display=''; document.getElementById('bk-name').textContent=names.join(' · '); }
+    else{ card.classList.remove('on'); goB.style.display='none'; }
   }
-
-  function showPin(lat,lng){
-    if(!geoMap){
-      geoMap=L.map('geo-map',{scrollWheelZoom:false}).setView([lat,lng],17);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(geoMap);
-      geoMap.on('click',e=>{ geoMarker.setLatLng(e.latlng); reverseGeocode(e.latlng.lat,e.latlng.lng); });
-    } else geoMap.setView([lat,lng],17);
-    if(geoMarker) geoMarker.setLatLng([lat,lng]);
-    else{
-      geoMarker=L.marker([lat,lng],{draggable:true}).addTo(geoMap);
-      geoMarker.on('dragend',()=>{ const p=geoMarker.getLatLng(); reverseGeocode(p.lat,p.lng); });
-    }
-    setTimeout(()=>geoMap.invalidateSize(),120); // container was display:none until now
+  function paintMap(){
+    if(!hoodMap) return;
+    const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#e26d9c';
+    const pts=[];
+    NEIGHBORHOODS.forEach(h=>{
+      const on=pickedHoods.has(h.id), l=hoodLayers[h.id]; if(!l) return;
+      l.setStyle({fillColor:on?accent:'#fbf3e2', fillOpacity:on?1:.85, radius:on?12:8});
+      if(on) pts.push([h.lat,h.lng]);
+    });
+    if(pts.length) hoodMap.fitBounds(pts,{padding:[45,45],maxZoom:14});
   }
-
-  function msg(text,isErr){ const el=document.getElementById('geo-msg'); el.textContent=text||''; el.classList.toggle('err',!!isErr); }
-
-  async function geocode(){
-    const q=document.getElementById('geo-addr').value.trim();
-    if(!q){ document.getElementById('geo-addr').focus(); return; }
-    const btn=document.getElementById('geo-find'); btn.disabled=true; msg('Finding your block…');
-    try{
-      const r=await fetch(`${NOMINATIM}/search?format=jsonv2&addressdetails=1&limit=1&q=${encodeURIComponent(q)}`);
-      const j=await r.json();
-      if(!j.length){ msg("Couldn't find that one. Try adding your town, or tap the map to drop a pin.",true); return; }
-      const hit=j[0];
-      showPin(+hit.lat,+hit.lon);
-      setBlock(blockFrom(hit.address||{}, (hit.display_name||'').split(',')[0]));
-      msg('');
-    }catch(e){ msg("Map's not responding right now. Tap the map to drop a pin instead.",true); }
-    finally{ btn.disabled=false; }
-  }
-
-  async function reverseGeocode(lat,lng){
-    msg('Updating your block…');
-    try{
-      const r=await fetch(`${NOMINATIM}/reverse?format=jsonv2&addressdetails=1&lat=${lat}&lon=${lng}`);
-      const j=await r.json();
-      setBlock(blockFrom((j&&j.address)||{}, (j&&j.display_name||'').split(',')[0]));
-      msg('');
-    }catch(e){ msg('',false); }
-  }
-
   function initGeo(){
-    if(geoMap) setTimeout(()=>geoMap.invalidateSize(),120);
+    const seller=selMode==='one';
+    document.getElementById('geo-title').textContent=seller?"Where's your stand?":"Which neighborhoods?";
+    document.getElementById('geo-sub').textContent=seller
+      ? "Your stand lives in one neighborhood, since pickup is in person. Pick the one you're in."
+      : "You'll only ever see stands in the neighborhoods you pick. Nothing else, no spillover from across town.";
+    document.getElementById('geo-hint').textContent=seller
+      ? "Pick the one neighborhood your stand is in."
+      : "Tap the neighborhoods you want to shop. Pick as many as you like.";
+    document.getElementById('bk-lab').textContent=seller?"Your stand is in":"You'll see stands in";
+    document.getElementById('geo-go').textContent=seller?"This is my spot →":"Sounds good →";
+    renderHoods();
+    setTimeout(()=>{
+      if(!hoodMap){
+        hoodMap=L.map('geo-map',{scrollWheelZoom:false}).setView([39.724,-104.95],12);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(hoodMap);
+        NEIGHBORHOODS.forEach(h=>{
+          const l=L.circleMarker([h.lat,h.lng],{radius:8,color:'#3a2f23',weight:2,fillColor:'#fbf3e2',fillOpacity:.85}).addTo(hoodMap);
+          l.bindTooltip(h.name); l.on('click',()=>toggleHood(h.id));
+          hoodLayers[h.id]=l;
+        });
+      }
+      hoodMap.invalidateSize(); paintMap();
+    },80);
   }
-  document.getElementById('geo-find').onclick=geocode;
-  document.getElementById('geo-addr').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); geocode(); } });
   document.getElementById('geo-go').onclick=()=>{ /* batch 2 wires this into the account flow */ go('home'); };
 
   // ---------- start ----------
