@@ -13,6 +13,7 @@ plain fetch returns nothing — Firecrawl with waitFor renders the page first. A
 pull NEVER overwrites a good file (a transient scrape failure shouldn't wipe the feed).
 """
 import os, sys, json, time, urllib.request, urllib.error
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -38,38 +39,49 @@ def api_key():
     raise SystemExit("FIRECRAWL_API_KEY not found in .env")
 
 
-def scrape(handle, key):
+def scrape(handle, key, tries=3):
     body = {"url": f"https://shopmy.us/shop/{handle}",
             "formats": [{"type": "json", "prompt": PROMPT, "schema": SCHEMA}],
             "waitFor": 8000, "timeout": 60000}
     req = urllib.request.Request("https://api.firecrawl.dev/v2/scrape",
         data=json.dumps(body).encode(),
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
-    r = json.loads(urllib.request.urlopen(req, timeout=90).read())
-    return (r.get("data") or {}).get("json", {}).get("products") or []
+    last = None
+    for attempt in range(tries):
+        try:
+            r = json.loads(urllib.request.urlopen(req, timeout=120).read())
+            return (r.get("data") or {}).get("json", {}).get("products") or []
+        except urllib.error.HTTPError as e:
+            # 408/429/5xx are transient — back off and retry; 4xx auth/bad-request aren't
+            if e.code not in (408, 429, 500, 502, 503, 504):
+                raise
+            last = e
+            time.sleep(5 * (attempt + 1))
+    raise last
+
+
+def refresh_one(h, key):
+    path = SRC / f"{h}.json"
+    try:
+        prods = scrape(h, key)
+    except urllib.error.HTTPError as e:
+        return f"  {h:18} HTTP {e.code} — kept old file"
+    except Exception as e:
+        return f"  {h:18} {type(e).__name__}: {e} — kept old file"
+    # ponytail: never clobber a good snapshot with an empty/failed pull
+    if not prods:
+        return f"  {h:18} 0 products — kept old file"
+    # keep only the well-formed pins (need an image + a shop link to be usable)
+    prods = [p for p in prods if p.get("imageUrl") and p.get("productUrl")]
+    path.write_text(json.dumps({"json": {"products": prods}}, indent=2))
+    return f"  {h:18} {len(prods):3} products -> {path.name}"
 
 
 def main(handles):
     key = api_key()
-    for h in handles:
-        path = SRC / f"{h}.json"
-        try:
-            prods = scrape(h, key)
-        except urllib.error.HTTPError as e:
-            print(f"  {h:18} HTTP {e.code} — kept old file")
-            continue
-        except Exception as e:
-            print(f"  {h:18} {type(e).__name__}: {e} — kept old file")
-            continue
-        # ponytail: never clobber a good snapshot with an empty/failed pull
-        if not prods:
-            print(f"  {h:18} 0 products — kept old file")
-            continue
-        # keep only the well-formed pins (need an image + a shop link to be usable)
-        prods = [p for p in prods if p.get("imageUrl") and p.get("productUrl")]
-        path.write_text(json.dumps({"json": {"products": prods}}, indent=2))
-        print(f"  {h:18} {len(prods):3} products -> {path.name}")
-        time.sleep(1)  # be polite between scrapes
+    with ThreadPoolExecutor(max_workers=len(handles)) as ex:
+        for line in ex.map(lambda h: refresh_one(h, key), handles):
+            print(line, flush=True)
 
 
 if __name__ == "__main__":

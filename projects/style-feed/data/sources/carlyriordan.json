@@ -131,7 +131,7 @@
         "title": "The Seersucker Shirt",
         "brand": "Good American",
         "price": "$148",
-        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1782149671842",
+        "imageUrl": "https://www.goodamerican.com/cdn/shop/files/260401_09_GWT0452-HORGS_0931.jpg?v=1776967916",
         "productUrl": "https://shopmy.us/shop/product/2972185?Curator_id=51764"
       },
       {
@@ -159,29 +159,36 @@
         "title": "Jagger Dress",
         "brand": "Tuckernuck",
         "price": "$79",
-        "imageUrl": "https://static.shopmy.us/uploads/img-product-1768222411854",
+        "imageUrl": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/fUyAWIdXRLyaCaui93LzaLRwyZ9STeMA-1.jpg?v=1729179884",
         "productUrl": "https://shopmy.us/shop/product/176988?Curator_id=51764"
       },
       {
         "title": "Americana Pique Holmes Boyfriend Polo",
         "brand": "Tuckernuck",
         "price": "$98",
-        "imageUrl": "https://static.shopmy.us/uploads/img-user-deres-51764-1714745286933",
+        "imageUrl": "https://cdn.shopmy.us/shop/files/1683158_01_1365x.jpg?v=1775143684",
         "productUrl": "https://shopmy.us/shop/product/2370191?Curator_id=51764"
       },
       {
         "title": "Cotton Roll Neck Americana Sweater",
         "brand": "Tuckernuck",
         "price": "$198",
-        "imageUrl": "https://static.shopmy.us/uploads/img-user-deres-51764-1714745286933",
+        "imageUrl": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/wck4HOCfPXnsceTEjPEGEd1mebpInst4-1_1365x.jpg?v=1761679931",
         "productUrl": "https://shopmy.us/shop/product/2473732?Curator_id=51764"
       },
       {
         "title": "Wells Chino Shorts",
         "brand": "Tuckernuck",
         "price": "$148",
-        "imageUrl": "https://static.shopmy.us/uploads/img-user-deres-51764-1714745286933",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1753461399240",
         "productUrl": "https://shopmy.us/shop/product/305260?Curator_id=51764"
+      },
+      {
+        "title": "Lightweight Compression Lucille Tennis Dress",
+        "brand": "Tnuck Sport",
+        "price": "$148",
+        "imageUrl": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/1695264_01.jpg?v=1779287168",
+        "productUrl": "https://shopmy.us/shop/product/2803693?Curator_id=51764"
       }
     ]
   }

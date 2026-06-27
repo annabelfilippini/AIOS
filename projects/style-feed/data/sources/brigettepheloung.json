@@ -2,74 +2,25 @@
   "json": {
     "products": [
       {
-        "title": "Fashion & Accessories",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
+        "title": "Fashion Item 1",
+        "brand": "Brand A",
+        "price": "$29.99",
+        "imageUrl": "https://example.com/image1.jpg",
+        "productUrl": "https://shopmy.us/shop/product/1"
       },
       {
-        "title": "Home & Living",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
+        "title": "Home Decor 2",
+        "brand": "Brand B",
+        "price": "$49.99",
+        "imageUrl": "https://example.com/image2.jpg",
+        "productUrl": "https://shopmy.us/shop/product/2"
       },
       {
-        "title": "Beauty & Personal Care",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
-      },
-      {
-        "title": "Baby, Kids & Parenting",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
-      },
-      {
-        "title": "Health, Fitness & Wellness",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
-      },
-      {
-        "title": "Food & Drink",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
-      },
-      {
-        "title": "Content & Media",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
-      },
-      {
-        "title": "Technology",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
-      },
-      {
-        "title": "Pet Care",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
-      },
-      {
-        "title": "Travel & Experiences",
-        "brand": "Various",
-        "price": "N/A",
-        "imageUrl": "N/A",
-        "productUrl": "https://shopmy.us/shop/discover/categories"
+        "title": "Beauty Product 3",
+        "brand": "Brand C",
+        "price": "$19.99",
+        "imageUrl": "https://example.com/image3.jpg",
+        "productUrl": "https://shopmy.us/shop/product/3"
       }
     ]
   }
