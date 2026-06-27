@@ -47,12 +47,14 @@ few blocks at once. Working GTM hypothesis: be the digital tail of a real one-da
 kids' market that already gathered the roster + trust in an afternoon. The
 link-first shape (above) is the practical answer for launch.
 
+## DONE
+- **"More kids near Delaney" teaser** (built 2026-06-27) — strip at the bottom of
+  the profile (`#more-kids` between `.about` and `.foot-note`) showing 2 stub
+  neighbors (Mateo/honey, Priya/bracelets) + a dashed "Set up your stand" CTA.
+  Cards → `go('home')`, CTA → `go('onboard')`. Stubs are hardcoded `NEIGHBORS`
+  (no feed/geo yet) — deliberate bait for the link-first → feed-second loop.
+
 ## NEXT (not yet picked)
-- **"More kids near Delaney" teaser** — tiny strip at the bottom of a kid's
-  profile page showing 2-3 neighbor stands as bait → tap goes to home/their page.
-  This is the link-first → feed-second growth loop made visible: land on one
-  kid's link, see there are others, get curious, make your own. Lives between
-  `.about` and the `foot-note` in `#view-profile`.
 - Builder flow — the 4-5 questions a kid answers to go from nothing to their page
 - Parent view — the approve-orders / see-the-money screen (the load-bearing rail)
 - Name + vibe options — "Stoop" chosen; still want a calmer dial-back visual

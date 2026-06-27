@@ -198,6 +198,23 @@
   .about p{max-width:60ch;font-size:16px;line-height:1.55;font-weight:600}
   .about h2{font-size:24px;margin-bottom:10px}
 
+  /* "more kids near …" teaser — bait at the bottom of a profile */
+  .more-kids{padding:26px clamp(22px,5vw,52px) 38px;border-top:3px solid var(--line)}
+  .more-kids h2{font-size:24px;margin-bottom:3px}
+  .more-kids .mk-sub{font-size:14px;color:var(--ink-soft);font-weight:700;margin-bottom:16px}
+  .mk-row{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 8px;-webkit-overflow-scrolling:touch}
+  .mk-card{flex:0 0 150px;background:var(--card);border:3px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .12s}
+  .mk-card:hover{transform:translateY(-3px)}
+  .mk-card .mk-pic{height:74px;display:grid;place-items:center;border-bottom:3px solid var(--ink);font-size:34px}
+  .mk-card .mk-b{padding:10px 12px 12px}
+  .mk-card .mk-b b{font-family:'Fredoka';font-weight:600;font-size:16px;display:block}
+  .mk-card .mk-b .mk-thing{font-size:12.5px;color:var(--ink-soft);font-weight:700;line-height:1.3;margin-top:2px}
+  .mk-card .mk-b .mk-price{font-family:'Fredoka';font-size:15px;margin-top:7px}
+  .mk-add{flex:0 0 150px;border:3px dashed var(--line);border-radius:16px;display:grid;place-items:center;text-align:center;padding:14px;cursor:pointer;color:var(--ink-soft);transition:border-color .15s,color .15s}
+  .mk-add:hover{border-color:var(--ink);color:var(--ink)}
+  .mk-add .mk-plus{width:38px;height:38px;border-radius:50%;border:3px solid currentColor;display:grid;place-items:center;font-size:22px;font-family:'Fredoka';margin:0 auto 8px}
+  .mk-add b{font-family:'Fredoka';font-weight:600;font-size:14px;color:var(--ink);display:block;line-height:1.2}
+
   .foot-note{text-align:center;color:var(--ink-soft);font-size:13px;font-weight:700;padding:26px 20px 0}
   .foot-note b{font-family:'Fredoka';font-weight:600}
 
@@ -379,6 +396,8 @@
         <h2>About me</h2>
         <div id="p-about"></div>
       </div>
+
+      <div class="more-kids" id="more-kids"></div>
     </div>
 
     <p class="foot-note">Made with <b>Stoop</b>, the neighborhood that never packs up. Want your own page? Ask a neighbor for an invite.</p>
@@ -455,6 +474,13 @@
     if(view==='profile') renderProfile();
     window.scrollTo({top:0});
   }
+
+  // stub neighbors — bait for the profile teaser. Not real users; the feed
+  // doesn't exist yet, so these are hardcoded to make "you're not alone" land.
+  const NEIGHBORS = [
+    {name:'Mateo', thing:'Backyard honey, by the jar', price:'$7', theme:'sun',   emoji:'🍯'},
+    {name:'Priya', thing:'Friendship bracelets, made to order', price:'$4', theme:'purple', emoji:'🧵'},
+  ];
 
   // ---------- HOME ----------
   function blurbFrom(p){
@@ -584,6 +610,20 @@
     go('profile');
   };
 
+  function renderMoreKids(){
+    const box=document.getElementById('more-kids');
+    const first=(profile.name||'').split(' ')[0]||'her';
+    let cards=NEIGHBORS.map(n=>{
+      const t=THEMES[n.theme]||THEMES.pink;
+      return `<div class="mk-card" onclick="go('home')">
+        <div class="mk-pic" style="background:linear-gradient(160deg,${t.a},${t.b})">${n.emoji}</div>
+        <div class="mk-b"><b>${n.name}</b><div class="mk-thing">${n.thing}</div><div class="mk-price" style="color:${t.accent}">${n.price}</div></div>
+      </div>`;
+    }).join('');
+    cards+=`<div class="mk-add" onclick="go('onboard')"><div><div class="mk-plus">+</div><b>Set up your stand</b></div></div>`;
+    box.innerHTML=`<h2>More kids near ${first}</h2><div class="mk-sub">Your neighbors are setting up stands too. Tap one, or start your own.</div><div class="mk-row">${cards}</div>`;
+  }
+
   // ---------- PROFILE ----------
   const today=new Date(); today.setHours(0,0,0,0);
   let view=new Date(today.getFullYear(),today.getMonth(),1);
@@ -613,6 +653,7 @@
     document.getElementById('p-facts').innerHTML=facts.map(f=>`<span class="fact">${f}</span>`).join('');
     document.getElementById('p-price').innerHTML=`${profile.price} <small>/ ${profile.unit}</small>`;
     document.getElementById('p-about').innerHTML=(profile.about||[]).map((t,i)=>`<p${i?' style="margin-top:12px"':''}>${t}</p>`).join('');
+    renderMoreKids();
     selDay=null; selSlot=null; reqB.disabled=true; pickEl.textContent='No time picked yet. Tap a day above ☝️';
     slotsBox.classList.remove('on');
     view=new Date(today.getFullYear(),today.getMonth(),1);
