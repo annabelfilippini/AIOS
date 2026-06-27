@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stoop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#fbf3e2; --paper-2:#f6e9cf;
+    --ink:#3a2f23; --ink-soft:#7a6a55;
+    --line:#e3d4b4; --card:#fffdf8;
+    --grass:#5fa052;
+    --shadow:0 10px 0 -4px rgba(58,47,35,.10);
+    /* themeable — overwritten by JS */
+    --accent:#e26d9c; --accent-ink:#fff;
+    --heroA:#ffd9e8; --heroB:#f7a8c8; --heroText:#8a3160;
+    --avBg:#e26d9c; --avInk:#fff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'Nunito',system-ui,sans-serif; font-weight:600;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(rgba(58,47,35,.04) 1px,transparent 1px);
+    background-size:22px 22px;
+  }
+  h1,h2,h3,.display{font-family:'Fredoka',sans-serif;font-weight:600;line-height:1.04;margin:0}
+  .marker{font-family:'Caveat',cursive;font-weight:700}
+  a{color:inherit}
+  .view{display:none}
+  .view.on{display:block}
+
+  /* top bar */
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,5vw,56px)}
+  .brand{display:flex;align-items:center;gap:11px;cursor:pointer}
+  .logo{width:40px;height:40px;background:var(--accent);border:3px solid var(--ink);border-radius:50% 50% 50% 12px;display:grid;place-items:center;transform:rotate(-6deg);transition:background .25s}
+  .brand b{font-family:'Fredoka';font-size:25px;font-weight:600;letter-spacing:.5px}
+  .place{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-soft);font-weight:700}
+  .place .dot{width:9px;height:9px;border-radius:50%;background:#5fa052;box-shadow:0 0 0 4px rgba(95,160,82,.18)}
+
+  .wrap{max-width:880px;margin:0 auto;padding:6px clamp(18px,5vw,40px) 90px}
+  .wrap.wide{max-width:1000px}
+
+  /* ============ HOME / NEIGHBORHOOD ============ */
+  .home-hero{text-align:center;padding:14px 0 30px}
+  .home-hero h1{font-family:'Fredoka';font-size:clamp(34px,6vw,58px);line-height:1.02}
+  .home-hero h1 .u{position:relative;white-space:nowrap}
+  .home-hero h1 .u svg{position:absolute;left:-2%;bottom:-12px;width:104%}
+  .home-hero p{font-size:clamp(16px,2.2vw,19px);color:var(--ink-soft);max-width:520px;margin:18px auto 0;font-weight:700}
+  .home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:24px;margin-top:6px}
+
+  .stand{background:var(--card);border:3px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;cursor:pointer;transition:transform .1s}
+  .stand:hover{transform:translateY(-3px) rotate(-.6deg)}
+  .stand .pic{height:150px;position:relative;display:grid;place-items:center;border-bottom:3px solid var(--ink);background:linear-gradient(160deg,var(--heroA),var(--heroB))}
+  .stand .pic img{width:84px;height:84px;border-radius:50%;border:3px solid var(--ink);object-fit:cover}
+  .stand .pic .ph{width:84px;height:84px;border-radius:50%;border:3px solid var(--ink);background:var(--avBg);display:grid;place-items:center;color:var(--avInk);font-family:'Fredoka';font-size:34px}
+  .stand .body{padding:15px 16px 16px}
+  .stand .who{font-size:13px;color:var(--ink-soft);font-weight:800}
+  .stand h3{font-size:21px;margin:5px 0 4px}
+  .stand .blurb{font-size:14px;color:var(--ink-soft);font-weight:700;line-height:1.35;min-height:38px}
+  .stand .foot{display:flex;align-items:center;justify-content:space-between;margin-top:13px}
+  .stand .price{font-family:'Fredoka';font-size:22px;color:var(--accent)}
+  .stand .price small{font-size:13px;color:var(--ink-soft);font-weight:600}
+  .stand .tagrow{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
+  .stand .tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;background:var(--paper-2);border:1px solid var(--line);padding:3px 9px;border-radius:20px;color:var(--ink-soft)}
+
+  /* the "be the next stand" empty slot */
+  .add-stand{border:3px dashed var(--line);border-radius:18px;display:grid;place-items:center;text-align:center;padding:30px 22px;cursor:pointer;color:var(--ink-soft);min-height:240px;transition:border-color .15s,color .15s}
+  .add-stand:hover{border-color:var(--ink);color:var(--ink)}
+  .add-stand .plus{width:52px;height:52px;border-radius:50%;border:3px solid currentColor;display:grid;place-items:center;font-size:30px;font-family:'Fredoka';margin:0 auto 12px}
+  .add-stand b{font-family:'Fredoka';font-weight:600;font-size:19px;display:block;margin-bottom:4px;color:var(--ink)}
+  .add-stand span{font-size:13.5px;font-weight:700}
+
+  /* ============ ONBOARDING ============ */
+  .ob{max-width:560px;margin:0 auto;padding:8px clamp(18px,5vw,28px) 80px}
+  .ob-head{text-align:center;margin:6px 0 26px}
+  .ob-head .marker{font-size:24px;color:var(--accent);display:block}
+  .ob-head h1{font-family:'Fredoka';font-size:clamp(30px,5vw,42px);margin-top:4px}
+  .ob-head p{color:var(--ink-soft);font-weight:700;font-size:15px;margin-top:10px}
+  .card-q{background:var(--card);border:3px solid var(--ink);border-radius:20px;padding:22px 22px 24px;box-shadow:var(--shadow);margin-bottom:20px}
+  .card-q > h2{font-family:'Fredoka';font-size:20px;margin-bottom:4px}
+  .card-q > .hint{font-size:13px;color:var(--ink-soft);font-weight:700;margin-bottom:14px}
+  .field{margin-bottom:14px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:13px;font-weight:800;margin-bottom:5px}
+  .field input,.field textarea{width:100%;font-family:'Nunito';font-weight:600;font-size:15px;border:2px solid var(--ink);border-radius:12px;padding:11px 13px;background:var(--paper);color:var(--ink)}
+  .field textarea{resize:vertical;min-height:74px}
+  .two{display:flex;gap:12px}
+  .two .field{flex:1}
+
+  .days{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+  .day{flex:1;min-width:42px;text-align:center;font-family:'Fredoka';font-size:14px;border:2px solid var(--ink);background:var(--paper);border-radius:11px;padding:9px 4px;cursor:pointer;user-select:none}
+  .day.on{background:var(--accent);color:var(--accent-ink)}
+  .daytimes{display:none;margin-bottom:12px}
+  .daytimes.on{display:block}
+  .daytimes label{display:block;font-size:13px;font-weight:800;margin-bottom:5px}
+  .daytimes .row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+  .daytimes .row .dn{font-family:'Fredoka';font-size:14px;min-width:42px}
+  .daytimes .row input{flex:1;font-family:'Nunito';font-weight:600;font-size:14px;border:2px solid var(--ink);border-radius:10px;padding:8px 11px;background:var(--paper);color:var(--ink)}
+
+  .swatches{display:flex;gap:11px;flex-wrap:wrap;margin-top:4px}
+  .sw{width:38px;height:38px;border-radius:50%;border:3px solid var(--ink);cursor:pointer;position:relative;transition:transform .1s}
+  .sw:hover{transform:scale(1.08)}
+  .sw.on::after{content:'✓';position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:17px;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+
+  .ob-go{width:100%;font-family:'Fredoka';font-size:20px;background:var(--accent);color:var(--accent-ink);border:3px solid var(--ink);padding:15px;border-radius:32px;cursor:pointer;box-shadow:0 6px 0 0 var(--ink)}
+  .ob-go:active{transform:translateY(3px);box-shadow:0 3px 0 0 var(--ink)}
+  .ob-back{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--ink-soft);background:none;border:none;cursor:pointer;margin-bottom:6px}
+
+  /* ============ PROFILE (the kid's page) ============ */
+  .ownerbar{display:flex;align-items:center;gap:10px;justify-content:center;background:var(--card);border:2px dashed var(--line);border-radius:16px;padding:10px 16px;margin:6px 0 18px;font-size:13.5px;font-weight:800;color:var(--ink-soft)}
+  .ownerbar button{font-family:'Nunito';font-weight:800;font-size:13px;border:2px solid var(--ink);background:var(--paper);border-radius:20px;padding:6px 14px;cursor:pointer}
+
+  .site{background:var(--card);border:3px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+
+  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--heroA),var(--heroB));padding:44px clamp(22px,5vw,52px) 40px;text-align:center;border-bottom:3px solid var(--ink);transition:background .25s}
+  /* field center-line + face-off ring, centered on the avatar. top = padding-top(44)+half the 104 avatar. ponytail: hardcoded to avatar size. */
+  .hero-line{position:absolute;left:0;right:0;top:96px;height:2px;background:var(--heroText);opacity:.14;pointer-events:none}
+  .hero-line::after{content:'';position:absolute;left:50%;top:0;width:150px;height:150px;border:2px solid var(--heroText);border-radius:50%;transform:translate(-50%,-50%)}
+  .hero > *{position:relative;z-index:1}
+  .av-big{width:104px;height:104px;margin:0 auto 14px;border-radius:50%;border:3px solid var(--ink);background:var(--avBg);display:grid;place-items:center;overflow:hidden;box-shadow:0 6px 0 -1px rgba(58,47,35,.18);transition:background .25s;color:var(--avInk);font-family:'Fredoka';font-size:42px}
+  .av-big img{width:100%;height:100%;object-fit:cover}
+  .hero h1{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;font-size:clamp(36px,6.6vw,62px);line-height:.94}
+  .facts{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+  .fact{font-size:13px;font-weight:800;background:var(--card);border:2px solid var(--ink);border-radius:30px;padding:6px 14px}
+
+  .book{padding:34px clamp(22px,5vw,52px) 8px}
+  .book .lead{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .book h2{font-size:27px}
+  .price-tag{font-family:'Fredoka';font-size:24px;white-space:nowrap}
+  .price-tag small{font-size:13px;color:var(--ink-soft);font-weight:600}
+  .sub{font-size:15px;color:var(--ink-soft);font-weight:700;margin:0 0 18px}
+
+  .calnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;max-width:430px;margin-left:auto;margin-right:auto}
+  .calnav .mo{font-family:'Fredoka';font-size:20px}
+  .calnav button{width:38px;height:38px;border:3px solid var(--ink);background:var(--card);border-radius:50%;cursor:pointer;font-size:18px;display:grid;place-items:center;box-shadow:0 3px 0 0 var(--ink)}
+  .calnav button:active{transform:translateY(3px);box-shadow:0 0 0 0 var(--ink)}
+  .calnav button:disabled{opacity:.35;cursor:default;box-shadow:none;transform:none}
+
+  .dowhead{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px;max-width:430px;margin-left:auto;margin-right:auto}
+  .dowhead span{text-align:center;font-size:10.5px;font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.5px}
+  .month{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:430px;margin:0 auto}
+  /* ponytail: fixed min-height, not aspect-ratio — aspect-ratio on 1fr grid items overflowed the grid box */
+  .cell{min-height:50px;border:2px solid transparent;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:5px;font-weight:800}
+  .cell.blank{border:none}
+  .cell .n{font-family:'Fredoka';font-size:15px;color:var(--ink)}
+  .cell.muted .n{color:#c8baa0}
+  .cell.open{background:var(--paper);border-color:var(--ink);cursor:pointer}
+  .cell.open:hover{background:var(--paper-2)}
+  .cell.today{box-shadow:0 0 0 2px var(--accent) inset}
+  .cell.sel{background:var(--accent);border-color:var(--ink)}
+  .cell.sel .n{color:var(--accent-ink)}
+  .cell .pill{margin-top:4px;font-size:10px;font-weight:800;background:var(--accent);color:var(--accent-ink);border-radius:20px;padding:2px 7px;line-height:1.4}
+  .cell.sel .pill{background:var(--card);color:var(--ink)}
+
+  .slots{margin-top:18px;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:18px;display:none}
+  .slots.on{display:block}
+  .slots h3{font-size:18px;margin-bottom:12px}
+  .chiprow{display:flex;gap:10px;flex-wrap:wrap}
+  .schip{font-family:'Nunito';font-weight:800;font-size:14px;border:2px solid var(--ink);background:var(--card);border-radius:11px;padding:9px 15px;cursor:pointer}
+  .schip:hover{background:var(--paper-2)}
+  .schip.sel{background:var(--accent);color:var(--accent-ink)}
+
+  .reqbar{margin-top:18px;background:var(--ink);color:var(--paper);border-radius:16px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .reqbar .pick{font-weight:800;font-size:13.5px}
+  .reqbar .pick b{font-family:'Fredoka';color:var(--accent);font-weight:600}
+  .reqbar .req{font-family:'Fredoka';font-size:15px;background:var(--accent);color:var(--accent-ink);border:2px solid var(--paper);padding:9px 18px;border-radius:30px;cursor:pointer;white-space:nowrap}
+  .reqbar .req:disabled{opacity:.45;cursor:default}
+
+  .about{padding:30px clamp(22px,5vw,52px) 40px;border-top:3px solid var(--line);margin-top:24px}
+  .about p{max-width:60ch;font-size:16px;line-height:1.55;font-weight:600}
+  .about h2{font-size:24px;margin-bottom:10px}
+
+  .foot-note{text-align:center;color:var(--ink-soft);font-size:13px;font-weight:700;padding:26px 20px 0}
+  .foot-note b{font-family:'Fredoka';font-weight:600}
+
+  /* modal */
+  .scrim{position:fixed;inset:0;background:rgba(58,47,35,.5);display:none;place-items:center;padding:20px;z-index:50}
+  .scrim.on{display:grid}
+  .modal{background:var(--card);border:3px solid var(--ink);border-radius:22px;max-width:420px;width:100%;padding:26px 24px;box-shadow:0 16px 0 -6px rgba(58,47,35,.25)}
+  .modal h3{font-size:25px;margin-bottom:4px}
+  .modal .when{font-size:17px;font-weight:800;font-style:italic;color:var(--accent);margin-bottom:16px}
+  .modal label{display:block;font-size:13px;font-weight:800;margin:12px 0 5px}
+  .modal input,.modal textarea{width:100%;font-family:'Nunito';font-weight:600;font-size:15px;border:2px solid var(--ink);border-radius:12px;padding:11px 13px;background:var(--paper);color:var(--ink)}
+  .modal textarea{resize:vertical;min-height:60px}
+  .modal .send{width:100%;margin-top:18px;font-family:'Fredoka';font-size:18px;background:var(--accent);color:var(--accent-ink);border:3px solid var(--ink);padding:13px;border-radius:30px;cursor:pointer;box-shadow:0 5px 0 0 var(--ink)}
+  .modal .send:active{transform:translateY(3px);box-shadow:0 2px 0 0 var(--ink)}
+  .modal .x{float:right;border:none;background:none;font-size:24px;cursor:pointer;color:var(--ink-soft);line-height:1;margin:-6px -4px 0 0}
+  .done{text-align:center}
+  .done .big{font-size:54px;margin-bottom:6px}
+  .done p{font-size:15px;font-weight:700;color:var(--ink-soft);line-height:1.5}
+
+  @media(max-width:680px){
+    .cell .n{font-size:14px}
+    .cell .pill{font-size:8.5px;padding:1px 5px}
+    .place{display:none}
+    .reqbar{flex-direction:column;align-items:stretch;text-align:center}
+    .two{flex-direction:column;gap:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="brand" onclick="go('home')">
+    <div class="logo" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3a2f23" stroke-width="2.2" stroke-linecap="round"><path d="M5 11h14M6 11l1.4 8.2a1 1 0 0 0 1 .8h7.2a1 1 0 0 0 1-.8L19 11M9 11V8a3 3 0 0 1 6 0v3"/></svg>
+    </div>
+    <b>Stoop</b>
+  </div>
+  <div class="place"><span class="dot"></span> Country Club neighborhood · verified neighbor</div>
+</div>
+
+<!-- ================= HOME ================= -->
+<section class="view" id="view-home">
+  <div class="wrap wide">
+    <div class="home-hero">
+      <h1>The market that <span class="u">never packs up
+        <svg viewBox="0 0 300 16" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"><path d="M4 11C70 4 230 4 296 8"/></svg>
+      </span></h1>
+      <p>The kids on your block, doing the things they're good at. Tap a stand to see their page.</p>
+    </div>
+    <div class="home-grid" id="home-grid"></div>
+  </div>
+</section>
+
+<!-- ================= ONBOARDING ================= -->
+<section class="view" id="view-onboard">
+  <div class="ob">
+    <button class="ob-back" id="ob-back" onclick="go('home')">‹ Back to the neighborhood</button>
+    <div class="ob-head">
+      <span class="marker">welcome to the block</span>
+      <h1>Let's build your page</h1>
+      <p>Answer a few things. Stoop turns them into your own little website you can share.</p>
+    </div>
+
+    <div class="card-q">
+      <h2>You</h2>
+      <div class="hint">Your name and a line about you.</div>
+      <div class="two">
+        <div class="field"><label>First name</label><input id="f-name" placeholder="Delaney" /></div>
+        <div class="field"><label>Age</label><input id="f-age" placeholder="14" /></div>
+      </div>
+      <div class="field"><label>About you</label><textarea id="f-about" placeholder="Hey! I'm Delaney, I play attack and I love it..."></textarea></div>
+    </div>
+
+    <div class="card-q">
+      <h2>What you offer</h2>
+      <div class="hint">The thing neighbors can book.</div>
+      <div class="field"><label>Title of your page</label><input id="f-title" placeholder="Delaney's Lacrosse Lessons" /></div>
+      <div class="two">
+        <div class="field"><label>Price</label><input id="f-price" placeholder="$30" /></div>
+        <div class="field"><label>Per</label><input id="f-unit" placeholder="lesson" /></div>
+      </div>
+      <div class="two">
+        <div class="field"><label>How long</label><input id="f-dur" placeholder="1 hour" /></div>
+        <div class="field"><label>Where</label><input id="f-loc" placeholder="Cheesman Park" /></div>
+      </div>
+      <div class="field"><label>One thing to bring / know</label><input id="f-bring" placeholder="Bring your own stick" /></div>
+    </div>
+
+    <div class="card-q">
+      <h2>How they reach you</h2>
+      <div class="hint">When someone requests a time, Stoop texts this number. It's never shown on your page.</div>
+      <div class="field"><label>Your phone (or a parent's)</label><input id="f-phone" placeholder="555-123-4567" /></div>
+    </div>
+
+    <div class="card-q">
+      <h2>When you're free</h2>
+      <div class="hint">Tap the days you can do. Then set your times.</div>
+      <div class="days" id="ob-days"></div>
+      <div class="daytimes" id="ob-times"></div>
+    </div>
+
+    <div class="card-q">
+      <h2>Make it yours</h2>
+      <div class="hint">Pick a color for your page.</div>
+      <div class="swatches" id="ob-swatches"></div>
+    </div>
+
+    <button class="ob-go" id="ob-go">Open my page →</button>
+  </div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section class="view" id="view-profile">
+  <div class="wrap">
+    <div class="ownerbar" id="ownerbar" style="display:none">
+      👋 This is your page — neighbors see it without this bar.
+      <button onclick="go('onboard')">Edit</button>
+      <button onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href.split('#')[0]);this.textContent='Copied!'">Copy link</button>
+    </div>
+
+    <div class="site">
+      <div class="hero">
+        <div class="hero-line" aria-hidden="true"></div>
+        <div class="av-big" id="p-avatar" aria-hidden="true"></div>
+        <h1 id="p-title">—</h1>
+        <div class="facts" id="p-facts"></div>
+      </div>
+
+      <div class="book">
+        <div class="lead">
+          <h2>Pick a time</h2>
+          <div class="price-tag" id="p-price">—</div>
+        </div>
+        <p class="sub">Tap a day with openings, then choose a time. I'll text or email you back to lock it in.</p>
+
+        <div class="calnav">
+          <button id="prev" aria-label="previous month">‹</button>
+          <div class="mo" id="molabel">Month</div>
+          <button id="next" aria-label="next month">›</button>
+        </div>
+
+        <div class="dowhead"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+        <div class="month" id="month"></div>
+
+        <div class="slots" id="slots">
+          <h3 id="slotsday">—</h3>
+          <div class="chiprow" id="chiprow"></div>
+        </div>
+
+        <div class="reqbar">
+          <div class="pick" id="pick">No time picked yet. Tap a day above ☝️</div>
+          <button class="req" id="req" disabled>Request this lesson</button>
+        </div>
+      </div>
+
+      <div class="about">
+        <h2>About me</h2>
+        <div id="p-about"></div>
+      </div>
+    </div>
+
+    <p class="foot-note">Made with <b>Stoop</b>, the neighborhood that never packs up. Want your own page? Ask a neighbor for an invite.</p>
+  </div>
+</section>
+
+<!-- REQUEST MODAL -->
+<div class="scrim" id="scrim">
+  <div class="modal" id="modal">
+    <button class="x" id="x" aria-label="close">×</button>
+    <div id="form">
+      <h3>Request a lesson</h3>
+      <div class="when" id="when">—</div>
+      <label>Who's the lesson for?</label>
+      <input id="kid" placeholder="e.g. Theo, age 8" />
+      <label>Your phone or email (so they can confirm)</label>
+      <input id="contact" placeholder="555-123-4567 or you@email.com" />
+      <label>Anything they should know? (optional)</label>
+      <textarea id="note" placeholder="First time holding a stick, needs to borrow one…"></textarea>
+      <button class="send" id="send">Send request</button>
+    </div>
+    <div class="done" id="doneview" style="display:none">
+      <div class="big">🥍</div>
+      <h3>Request sent!</h3>
+      <p id="donemsg"></p>
+      <button class="send" id="close2">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- themes ----------
+  const THEMES = {
+    pink:    {accent:'#e26d9c', ink:'#fff', a:'#ffd9e8', b:'#f7a8c8', text:'#8a3160', av:'#e26d9c', avInk:'#fff'},
+    lacrosse:{accent:'#2f7d4f', ink:'#fff', a:'#d6ead9', b:'#6fb487', text:'#1f4d33', av:'#16243f', avInk:'#fff'},
+    sky:     {accent:'#3f9bc7', ink:'#fff', a:'#cfe9f7', b:'#7ec4e6', text:'#1f4d63', av:'#3f9bc7', avInk:'#fff'},
+    sun:     {accent:'#e0a52a', ink:'#3a2f23', a:'#ffe9ad', b:'#ffcf3f', text:'#7a5a1a', av:'#e0a52a', avInk:'#3a2f23'},
+    purple:  {accent:'#8a5fc0', ink:'#fff', a:'#e6dbf7', b:'#b79be0', text:'#4a2f73', av:'#8a5fc0', avInk:'#fff'},
+    coral:   {accent:'#e07a4f', ink:'#fff', a:'#ffded0', b:'#f0a07c', text:'#7a3a1f', av:'#e07a4f', avInk:'#fff'},
+  };
+  function applyTheme(name){
+    const t = THEMES[name]||THEMES.pink;
+    const r = document.documentElement.style;
+    r.setProperty('--accent',t.accent); r.setProperty('--accent-ink',t.ink);
+    r.setProperty('--heroA',t.a); r.setProperty('--heroB',t.b); r.setProperty('--heroText',t.text);
+    r.setProperty('--avBg',t.av); r.setProperty('--avInk',t.avInk);
+  }
+
+  // ---------- Delaney's real answers = the default profile (so a fresh demo lands on the page Annabel approved) ----------
+  const DEFAULT = {
+    name:'Delaney', age:'14', title:"Delaney's Lacrosse Lessons",
+    price:'$30', unit:'lesson', dur:'1 hour', loc:'Cheesman Park', bring:'Bring your own stick',
+    phone:'555-123-4567', theme:'pink', photo:'delaney.jpg',
+    about:["Hey!! I'm Delaney, I'm 14 and I go to Kent. I play attack for Concept and I seriously love it so much. I teach all levels, so it doesn't matter if you've literally never held a stick. I just really want to help kids get better and have fun doing it!",
+           "I can teach any position too, not just attack, so we can work on whatever you want to get better at. I'm usually at Cheesman Park but if somewhere else is easier for you that totally works. Just bring your own stick and we're good to go!"],
+    // availability: day-of-week -> array of times (display strings)
+    avail:{2:['4:00 pm','5:00 pm','6:00 pm'], 4:['4:00 pm','5:00 pm','6:00 pm'], 6:['9:00 am','10:00 am','11:00 am']}
+  };
+
+  const KEY='stoop-profile';
+  function load(){ try{ const s=localStorage.getItem(KEY); return s?JSON.parse(s):null; }catch(e){ return null; } }
+  function save(p){ try{ localStorage.setItem(KEY,JSON.stringify(p)); }catch(e){} }
+  let profile = load();
+
+  // ---------- view router ----------
+  const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const DOWLONG=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  function go(view){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    document.getElementById('view-'+view).classList.add('on');
+    if(view==='home') renderHome();
+    if(view==='onboard') fillOnboard();
+    if(view==='profile') renderProfile();
+    window.scrollTo({top:0});
+  }
+
+  // ---------- HOME ----------
+  function blurbFrom(p){
+    const first=(p.about&&p.about[0])||'';
+    return first.length>90?first.slice(0,88)+'…':first;
+  }
+  function renderHome(){
+    const grid=document.getElementById('home-grid');
+    let cards='';
+    if(profile){
+      applyTheme(profile.theme);
+      const av = profile.photo ? `<img src="${profile.photo}" alt="">` : `<span class="ph">${(profile.name||'?')[0]}</span>`;
+      cards += `<div class="stand" onclick="go('profile')">
+        <div class="pic">${av}</div>
+        <div class="body">
+          <div class="who">${profile.name}${profile.age?', '+profile.age:''}</div>
+          <h3>${profile.title}</h3>
+          <div class="blurb">${blurbFrom(profile)}</div>
+          <div class="tagrow"><span class="tag">📍 ${profile.loc||'Local pickup'}</span></div>
+          <div class="foot"><div class="price">${profile.price} <small>/ ${profile.unit}</small></div></div>
+        </div>
+      </div>`;
+    }
+    cards += `<div class="add-stand" onclick="go('onboard')">
+      <div><div class="plus">+</div><b>${profile?'Add your stand':'Set up the first stand'}</b><span>Answer a few questions, get your own page</span></div>
+    </div>`;
+    grid.innerHTML=cards;
+  }
+
+  // ---------- ONBOARDING ----------
+  let obDays = {};      // dow -> [times]
+  let obTheme = 'pink';
+  function buildDayPickers(){
+    const daysEl=document.getElementById('ob-days');
+    daysEl.innerHTML = DOW.map((d,i)=>`<div class="day" data-d="${i}">${d}</div>`).join('');
+    daysEl.querySelectorAll('.day').forEach(el=>{
+      el.onclick=()=>{
+        const i=el.dataset.d;
+        if(obDays[i]){ delete obDays[i]; el.classList.remove('on'); }
+        else { obDays[i]=['4:00 pm','5:00 pm']; el.classList.add('on'); }
+        renderDayTimes();
+      };
+    });
+  }
+  function renderDayTimes(){
+    const box=document.getElementById('ob-times');
+    const keys=Object.keys(obDays).sort();
+    document.querySelectorAll('#ob-days .day').forEach(el=>el.classList.toggle('on',!!obDays[el.dataset.d]));
+    if(!keys.length){ box.classList.remove('on'); box.innerHTML=''; return; }
+    box.classList.add('on');
+    box.innerHTML='<label>Times for each day (comma separated)</label>'+keys.map(i=>
+      `<div class="row"><span class="dn">${DOW[i]}</span><input data-d="${i}" value="${obDays[i].join(', ')}" placeholder="4:00 pm, 5:00 pm" /></div>`
+    ).join('');
+    box.querySelectorAll('input').forEach(inp=>{
+      inp.oninput=()=>{ obDays[inp.dataset.d]=inp.value.split(',').map(s=>s.trim()).filter(Boolean); };
+    });
+  }
+  function buildSwatches(){
+    const el=document.getElementById('ob-swatches');
+    el.innerHTML='';
+    Object.entries(THEMES).forEach(([name,t])=>{
+      const s=document.createElement('div'); s.className='sw'+(name===obTheme?' on':''); s.dataset.t=name;
+      s.style.background=`linear-gradient(135deg,${t.b},${t.accent})`; s.title=name;
+      s.onclick=()=>{ obTheme=name; applyTheme(name); el.querySelectorAll('.sw').forEach(x=>x.classList.toggle('on',x.dataset.t===name)); };
+      el.appendChild(s);
+    });
+  }
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function fillOnboard(){
+    const p = profile || DEFAULT;     // prefill with the saved page, or Delaney's example on first run
+    document.getElementById('f-name').value=p.name||'';
+    document.getElementById('f-age').value=p.age||'';
+    document.getElementById('f-about').value=(p.about||[]).join('\n\n');
+    document.getElementById('f-title').value=p.title||'';
+    document.getElementById('f-price').value=p.price||'';
+    document.getElementById('f-unit').value=p.unit||'';
+    document.getElementById('f-dur').value=p.dur||'';
+    document.getElementById('f-loc').value=p.loc||'';
+    document.getElementById('f-bring').value=p.bring||'';
+    document.getElementById('f-phone').value=p.phone||'';
+    obDays = JSON.parse(JSON.stringify(p.avail||{}));
+    obTheme = p.theme||'pink';
+    document.getElementById('ob-back').style.display = profile ? '' : 'none';
+    buildDayPickers(); renderDayTimes(); buildSwatches(); applyTheme(obTheme);
+  }
+  document.getElementById('ob-go').onclick=()=>{
+    const photo = (profile&&profile.photo) || ((val('f-name')===DEFAULT.name)?DEFAULT.photo:'');
+    profile = {
+      name:val('f-name')||'Me', age:val('f-age'),
+      title:val('f-title')||((val('f-name')||'My')+"'s stand"),
+      price:val('f-price')||'$0', unit:val('f-unit')||'session',
+      dur:val('f-dur'), loc:val('f-loc'), bring:val('f-bring'),
+      phone:val('f-phone'), theme:obTheme, photo,
+      about:val('f-about').split(/\n\n+/).map(s=>s.trim()).filter(Boolean),
+      avail:obDays
+    };
+    save(profile);
+    go('profile');
+  };
+
+  // ---------- PROFILE ----------
+  const today=new Date(); today.setHours(0,0,0,0);
+  let view=new Date(today.getFullYear(),today.getMonth(),1);
+  let selDay=null, selSlot=null;
+  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  const monthEl=document.getElementById('month'), moLabel=document.getElementById('molabel');
+  const prevB=document.getElementById('prev'), nextB=document.getElementById('next');
+  const slotsBox=document.getElementById('slots'), slotsDay=document.getElementById('slotsday'), chiprow=document.getElementById('chiprow');
+  const pickEl=document.getElementById('pick'), reqB=document.getElementById('req');
+
+  function avail(){ return (profile&&profile.avail)||{}; }
+  function openCount(dow){ return (avail()[dow]||[]).length; }
+  function sameDay(a,b){ return a.getFullYear()==b.getFullYear()&&a.getMonth()==b.getMonth()&&a.getDate()==b.getDate(); }
+
+  function renderProfile(){
+    if(!profile){ go('onboard'); return; }
+    applyTheme(profile.theme);
+    document.getElementById('ownerbar').style.display='';
+    const avEl=document.getElementById('p-avatar');
+    avEl.innerHTML = profile.photo ? `<img src="${profile.photo}" alt="${profile.name}">` : (profile.name||'?')[0];
+    document.getElementById('p-title').textContent=profile.title;
+    const facts=[];
+    if(profile.dur) facts.push('⏱ '+profile.dur);
+    if(profile.loc) facts.push('📍 '+profile.loc);
+    if(profile.bring) facts.push('🥍 '+profile.bring);
+    document.getElementById('p-facts').innerHTML=facts.map(f=>`<span class="fact">${f}</span>`).join('');
+    document.getElementById('p-price').innerHTML=`${profile.price} <small>/ ${profile.unit}</small>`;
+    document.getElementById('p-about').innerHTML=(profile.about||[]).map((t,i)=>`<p${i?' style="margin-top:12px"':''}>${t}</p>`).join('');
+    selDay=null; selSlot=null; reqB.disabled=true; pickEl.textContent='No time picked yet. Tap a day above ☝️';
+    slotsBox.classList.remove('on');
+    view=new Date(today.getFullYear(),today.getMonth(),1);
+    renderMonth();
+  }
+
+  function renderMonth(){
+    monthEl.innerHTML='';
+    moLabel.textContent=`${MONTHS[view.getMonth()]} ${view.getFullYear()}`;
+    prevB.disabled = (view.getFullYear()===today.getFullYear() && view.getMonth()===today.getMonth());
+    const maxView=new Date(today.getFullYear(),today.getMonth()+3,1);
+    nextB.disabled = (view.getFullYear()===maxView.getFullYear() && view.getMonth()===maxView.getMonth());
+
+    const firstDow=new Date(view.getFullYear(),view.getMonth(),1).getDay();
+    const days=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+    for(let i=0;i<firstDow;i++){ const c=document.createElement('div'); c.className='cell blank'; monthEl.appendChild(c); }
+    for(let d=1;d<=days;d++){
+      const date=new Date(view.getFullYear(),view.getMonth(),d);
+      const dow=date.getDay();
+      const past = date<today;
+      const open = !past && openCount(dow)>0;
+      const c=document.createElement('div');
+      c.className='cell'+(open?' open':(past||openCount(dow)===0?' muted':''))+(sameDay(date,today)?' today':'');
+      if(open && selDay && sameDay(date,selDay)) c.classList.add('sel');
+      c.innerHTML=`<span class="n">${d}</span>`+(open?`<span class="pill">${openCount(dow)} open</span>`:'');
+      if(open){ c.onclick=()=>selectDay(date); }
+      monthEl.appendChild(c);
+    }
+  }
+
+  function selectDay(date){
+    selDay=date; selSlot=null; reqB.disabled=true; pickEl.textContent='Now pick a time below ☟';
+    renderMonth();
+    const dow=date.getDay();
+    slotsDay.textContent=`${DOWLONG[dow]}, ${MONTHS[date.getMonth()]} ${date.getDate()}`;
+    chiprow.innerHTML='';
+    (avail()[dow]||[]).forEach(t=>{
+      const b=document.createElement('button');
+      b.className='schip'; b.textContent=t;
+      b.onclick=()=>selectSlot(date,t,b);
+      chiprow.appendChild(b);
+    });
+    slotsBox.classList.add('on');
+    slotsBox.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  function selectSlot(date,t,btn){
+    chiprow.querySelectorAll('.schip.sel').forEach(x=>x.classList.remove('sel'));
+    btn.classList.add('sel');
+    const dow=date.getDay();
+    selSlot={label:`${DOW[dow]} ${date.getMonth()+1}/${date.getDate()} at ${t}`};
+    pickEl.innerHTML=`Picked: <b>${selSlot.label}</b>`;
+    reqB.disabled=false;
+  }
+
+  prevB.onclick=()=>{ if(!prevB.disabled){ view=new Date(view.getFullYear(),view.getMonth()-1,1); renderMonth(); } };
+  nextB.onclick=()=>{ if(!nextB.disabled){ view=new Date(view.getFullYear(),view.getMonth()+1,1); renderMonth(); } };
+
+  // ---------- request modal ----------
+  const scrim=document.getElementById('scrim'), whenEl=document.getElementById('when');
+  reqB.onclick=()=>{ if(!selSlot) return;
+    whenEl.textContent=selSlot.label;
+    document.getElementById('form').style.display=''; document.getElementById('doneview').style.display='none';
+    document.getElementById('kid').value=''; document.getElementById('contact').value=''; document.getElementById('note').value='';
+    scrim.classList.add('on');
+  };
+  const close=()=>scrim.classList.remove('on');
+  document.getElementById('x').onclick=close;
+  scrim.addEventListener('click',e=>{ if(e.target===scrim) close(); });
+  document.getElementById('send').onclick=()=>{
+    const kid=document.getElementById('kid').value.trim(), contact=document.getElementById('contact').value.trim();
+    if(!contact){ document.getElementById('contact').focus(); return; }
+    const note=document.getElementById('note').value.trim();
+    // real send: open a prefilled text to the number from onboarding. ponytail: sms: link, no backend.
+    if(profile.phone){
+      const body=`Hi ${profile.name}! Lesson request via Stoop: ${selSlot.label}`+(kid?` for ${kid}`:'')+`. Reach me at ${contact}.`+(note?` Note: ${note}`:'');
+      const sms=`sms:${profile.phone.replace(/[^0-9+]/g,'')}?&body=${encodeURIComponent(body)}`;
+      window.location.href=sms;
+    }
+    document.getElementById('form').style.display='none';
+    document.getElementById('doneview').style.display='';
+    document.getElementById('donemsg').innerHTML=`${profile.name} got your request for <b>${selSlot.label}</b>${kid?` for ${kid}`:''}.<br>She'll reach out to ${contact} to confirm. See you on the field!`;
+  };
+  document.getElementById('close2').onclick=close;
+
+  // ---------- start ----------
+  // first-ever visit (no saved page) → onboarding; otherwise → the neighborhood home.
+  go(profile ? 'home' : 'onboard');
+</script>
+</body>
+</html>
