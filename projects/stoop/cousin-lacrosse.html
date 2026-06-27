@@ -6,7 +6,7 @@
 <title>Maddie's Lacrosse Lessons · Stoop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet" />
 <style>
   :root{
     --paper:#fbf3e2; --paper-2:#f6e9cf;
@@ -51,10 +51,17 @@
   .site{background:var(--card);border:3px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
 
   /* hero */
-  .hero{background:linear-gradient(160deg,var(--heroA),var(--heroB));padding:44px clamp(22px,5vw,52px) 40px;text-align:center;border-bottom:3px solid var(--ink);transition:background .25s}
-  .av-big{width:96px;height:96px;margin:0 auto 14px;border-radius:50%;border:3px solid var(--ink);background:var(--avBg);display:grid;place-items:center;font-family:'Fredoka';font-size:40px;color:var(--avInk);box-shadow:0 6px 0 -1px rgba(58,47,35,.18);transition:background .25s}
-  .hero h1{font-size:clamp(34px,6vw,56px)}
-  .hero .by{font-size:18px;font-style:italic;font-weight:700;color:var(--heroText);margin-top:8px}
+  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--heroA),var(--heroB));padding:44px clamp(22px,5vw,52px) 40px;text-align:center;border-bottom:3px solid var(--ink);transition:background .25s}
+  /* lacrosse motif: crossed-stick watermark + field center-line, tinted by theme */
+  .hero-motif{position:absolute;top:-26px;right:-30px;width:200px;height:200px;color:var(--heroText);opacity:.12;pointer-events:none;transform:rotate(8deg)}
+  .hero-line{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--heroText);opacity:.14;pointer-events:none}
+  .hero-line::after{content:'';position:absolute;left:50%;top:50%;width:62px;height:62px;border:2px solid var(--heroText);border-radius:50%;transform:translate(-50%,-50%)}
+  .hero > *{position:relative;z-index:1}
+  .av-big{width:104px;height:104px;margin:0 auto 14px;border-radius:50%;border:3px solid var(--ink);background:var(--avBg);display:grid;place-items:center;overflow:hidden;box-shadow:0 6px 0 -1px rgba(58,47,35,.18);transition:background .25s}
+  .av-big svg{width:60px;height:60px;color:var(--avInk)}
+  .av-big img{width:100%;height:100%;object-fit:cover}
+  .hero h1{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;font-size:clamp(36px,6.6vw,62px);line-height:.94}
+  .hero .by{font-size:18px;font-style:italic;font-weight:700;color:var(--heroText);margin-top:10px}
   .facts{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:20px}
   .fact{font-size:13px;font-weight:800;background:var(--card);border:2px solid var(--ink);border-radius:30px;padding:6px 14px}
 
@@ -132,6 +139,7 @@
   .done p{font-size:15px;font-weight:700;color:var(--ink-soft);line-height:1.5}
 
   @media(max-width:680px){
+    .hero-motif{width:140px;top:-16px;right:-18px;opacity:.09}
     .about{grid-template-columns:1fr;gap:22px}
     .cell .n{font-size:14px}
     .cell .pill{font-size:8.5px;padding:1px 5px}
@@ -162,7 +170,14 @@
   <div class="site">
     <!-- HERO -->
     <div class="hero">
-      <div class="av-big">M</div>
+      <div class="hero-line" aria-hidden="true"></div>
+      <svg class="hero-motif" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true">
+        <path d="M22 86 L70 22"/><path d="M78 86 L30 22"/>
+        <path d="M70 22 q12 -10 6 -18 q-12 4 -6 18 Z" stroke-width="2.6"/>
+        <path d="M30 22 q-12 -10 -6 -18 q12 4 6 18 Z" stroke-width="2.6"/>
+        <circle cx="50" cy="58" r="5"/>
+      </svg>
+      <div class="av-big" id="avatar" aria-hidden="true"></div>
       <h1>Maddie's Lacrosse Lessons</h1>
       <div class="by">backyard lessons for anyone who wants to get good 🥍</div>
       <div class="facts">
@@ -271,6 +286,17 @@
   });
   let saved='pink'; try{ saved=localStorage.getItem('stoop-theme')||'pink'; }catch(e){}
   applyTheme(saved);
+
+  // ---------- hero avatar: real photo slot, crossed-stick fallback ----------
+  const PHOTO = ''; // drop Maddie's photo URL/path here; falls back to lacrosse illustration
+  document.getElementById('avatar').innerHTML = PHOTO
+    ? `<img src="${PHOTO}" alt="Maddie">`
+    : `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M9 41 L33 11"/><path d="M39 41 L15 11"/>
+         <path d="M33 11 q6 -5 3 -9 q-6 2 -3 9 Z" stroke-width="2"/>
+         <path d="M15 11 q-6 -5 -3 -9 q6 2 3 9 Z" stroke-width="2"/>
+         <circle cx="24" cy="27" r="3"/>
+       </svg>`;
 
   // ---------- availability ----------
   const PATTERN = { 2:['4:00','4:45','5:30'], 4:['4:00','4:45','5:30'], 6:['9:00','9:45','10:30','11:15'] };
