@@ -668,6 +668,46 @@ def _ingest(name, path, is_brand):
 for creator, path in SOURCES: _ingest(creator, path, False)
 for brand, path in BRANDS:    _ingest(brand, path, True)
 
+# ---- image-only sources: her Pinterest inspiration + her closet -------------
+# These aren't titled retail products, so they bypass title-classify. Pinterest
+# pins are whole LOOKS (own "inspiration" cat, vision-tagged in the normal pass).
+# Closet pieces already carry tags (data/closet.json), so they skip the vision API
+# and map straight in. Both render + react like any card, so a ♥/✕ on them trains
+# the SAME feedback.json the morning debrief reads.
+def _add_look(key, img, *, cats, source, title="", price="", url="", brand="", tags=None):
+    if not img or key in merged: return False
+    s, why = text_score({"brand": brand, "title": title})
+    merged[key] = {"id": key, "brand": brand, "title": title, "imageUrl": img,
+                   "price": price, "productUrl": url, "tscore": s, "why": why,
+                   "cats": cats, "creators": {source}, "brands": set(),
+                   "_tags": tags}          # reapplied after the vision pass (which nulls vision)
+    return True
+
+PINT = ROOT / "data" / "pinterest" / "clothes.json"
+n_pins = sum(_add_look("pin_" + str(p.get("id", "")), (p.get("img") or "").strip(),
+                       cats=["inspiration"], source="Pinterest",
+                       title=(p.get("title") or "").strip(), url=(p.get("link") or ""))
+             for p in (json.load(open(PINT)) if PINT.exists() else []))
+
+# closet slot -> feed category; items get their category tab AND a "closet" tab
+SLOT_CAT = {"top": "top", "knit": "knit", "sweater": "knit", "bottom": "bottom",
+            "pant": "bottom", "jean": "bottom", "skirt": "bottom", "dress": "dress",
+            "outerwear": "outerwear", "jacket": "outerwear", "coat": "outerwear",
+            "shoe": "shoe", "bag": "bag", "accessory": "accessory", "swim": "swim"}
+def _closet_vision(t):                      # her short tag keys -> the vision schema card() reads
+    if not t: return None
+    return {"garment": True, "silhouette": t.get("sil"), "length": t.get("len"),
+            "fabric": t.get("fab"), "drape": t.get("drp"), "formality": t.get("form"),
+            "neutral": t.get("neut"), "oldmoney": t.get("om")}
+CLOSET = ROOT / "data" / "closet.json"
+_cj = json.load(open(CLOSET)) if CLOSET.exists() else {}
+n_closet = sum(_add_look("closet_" + str(p.get("id") or i), (p.get("img") or "").strip(),
+                         cats=[SLOT_CAT.get((p.get("slot") or "").lower(), "top"), "closet"],
+                         source="Closet", title=(p.get("name") or "").strip(),
+                         brand=(p.get("brand") or "").strip(), tags=_closet_vision(p.get("tags")))
+               for i, p in enumerate(_cj.get("pieces") or []))
+print(f"image-only sources: pinterest={n_pins}  closet={n_closet}")
+
 items = list(merged.values())
 
 # drop products whose photo is shared by another product: the source scrape
@@ -704,6 +744,10 @@ if VISION_ON and vision_targets:
     for it in vision_targets:
         it["vision"] = vision_cache.get(it["imageUrl"])
     n_vision = sum(1 for it in vision_targets if it.get("vision"))
+
+# closet pieces ship their own tags — restore them over the null the color pass set.
+for it in items:
+    if it.get("_tags"): it["vision"] = it["_tags"]
 
 # Back-detail backfill: items vision-tagged before the `back` axis existed lack it.
 # Only tops/dresses/knits/outerwear are worth checking (a back is meaningless on a
@@ -1521,6 +1565,8 @@ for it in items: present.update(it["cats"])
 TAB_DEFS = [
     ("all",         "All",         None),
     ("new",         "New",         "new"),
+    ("closet",      "My Closet",   ["closet"]),
+    ("inspiration", "Inspiration", ["inspiration"]),
     ("tops",        "Tops",        ["top", "knit"]),
     ("bottoms",     "Bottoms",     ["bottom"]),
     ("dresses",     "Dresses",     ["dress"]),

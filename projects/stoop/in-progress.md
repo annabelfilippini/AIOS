@@ -18,6 +18,14 @@ Pilot city = Denver; Delaney's stand = Country Club. Faked account (no backend).
 - Dropped the address/geocode (Nominatim) machinery — list-based now.
 - Verified: buyer multi-select (Country Club · Hilltop), seller single-select
   collapses to one, picks light up on map, copy adapts by mode. No console errors.
+- **Map upgrade (2026-06-27):** dots → real neighborhood boundary polygons. Data is
+  now a swappable `CITY` block (name/center/zoom/hoods/boundaries). Denver boundaries =
+  official "statistical neighborhoods" (opendata-geospatialdenver), trimmed to the 9
+  matching hoods, coords 5dp (~28KB inline). Selected hood fills its real shape in
+  accent; unselected = faint outline; a hood with no official polygon (Crestmoor)
+  falls back to a dashed bubble at its label point. Hardened initGeo invalidateSize
+  (rAF re-invalidate) so tiles fill on first paint. Verified in preview, no errors.
+  To add Chicago: swap the CITY block (its open-data neighborhood GeoJSON, same id keys).
 
 ## Batch 2 — Account front door (NEXT)
 - Welcome + role select (open a stand → seller/selMode='one' / shop → buyer/'many'),

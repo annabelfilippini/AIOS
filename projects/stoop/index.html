@@ -385,7 +385,7 @@
       <div class="hint" id="geo-hint">Tap the neighborhoods you want to shop. Pick as many as you like.</div>
       <div class="hoods" id="hoods"></div>
       <div id="geo-map"></div>
-      <div class="hint">Tap a dot on the map or a name above.</div>
+      <div class="hint">Tap a region on the map or a name above.</div>
 
       <div class="block-card" id="block-card">
         <div class="bk-lab" id="bk-lab">You'll see stands in</div>
@@ -865,7 +865,6 @@
       {id:'washington-park',name:'Washington Park',lat:39.700, lng:-104.969},
       {id:'capitol-hill',   name:'Capitol Hill',   lat:39.734, lng:-104.979},
       {id:'hale',           name:'Hale',           lat:39.737, lng:-104.933},
-      {id:'crestmoor',      name:'Crestmoor',      lat:39.722, lng:-104.918}, // no official boundary -> fallback bubble
       {id:'belcaro',        name:'Belcaro',        lat:39.706, lng:-104.945},
     ],
     // Official Denver statistical-neighborhood boundaries (opendata-geospatialdenver),
@@ -954,7 +953,10 @@
   // seed Delaney's demo page on first visit so the neighborhood home isn't empty,
   // then always land on home. New kids tap "Start my own stand" for a blank builder.
   if(!profile){ profile=JSON.parse(JSON.stringify(DEFAULT)); profile.avail=seedAvail(); save(profile); }
-  go('home');
+  // ponytail: preview deep-link until Batch 2's front door links these screens.
+  // e.g. open .../index.html#neighborhood to land straight on neighborhood select.
+  if(location.hash==='#neighborhood'){ selMode='many'; go('neighborhood'); }
+  else go('home');
 </script>
 </body>
 </html>

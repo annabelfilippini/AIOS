@@ -1,13 +1,19 @@
+# In progress — The Edit consolidation (Batch 2)
 
-## 2026-06-26 — Per-event taste engine (Batch 1 of 2)
-- NEW projects/style-feed/data/closet.json (real wardrobe: purchases + Nuuly box + 2 guess staples, tagged slot/occ/tones)
-- NEW projects/style-feed/style_engine.py (event -> occasion -> formula -> ranked owned pieces; demo() self-check passes)
-- Verified: 5 lanes all build owned-piece looks, no red, slots filled.
-- NEXT (Batch 2): wire /api/looks endpoint in day-planner/serve.py + render from it instead of hardcoded/regex.
-- Refinement: active lane should prefer matching Butter set (cami+short) over a generic white tee.
+Session 2026-06-27 ~17:30. Building the one-feed + one-debrief consolidation.
 
-## 2026-06-26 — The Edit wired to engine (Batch 2 DONE)
-- the-edit.html now dynamic via /api/looks (lane-grouped weekly, keeps data-occ).
-- build_week groups by lane + attaches deduped events list. serve.py simplified.
-- Both Morning Edit + The Edit live from the engine. Verified end to end.
-- Not committed. Open: AA-meeting->work mismatch; per-event distinct looks; life-os SPA re-test.
+## Done
+- Batch 1: ShopMy refresh (refresh_sources.py, merge-safe, 1383 pins) + Pinterest
+  scrape (refresh_pinterest.py, 28 pins) + daily cron (crontab 30 6 * * *, refresh_all.sh).
+- Batch 2a (THIS): build_feed.py now ingests Pinterest ("Inspiration" tab) + closet
+  ("My Closet" tab) into The Edit feed (feed.html). Closet reuses its own tags (no
+  vision call); Pinterest vision-tagged in the normal pass. Both ♥/✕ -> feedback.json.
+
+## Next (Batch 2b/2c — NOT started)
+- 2b: one Morning Debrief = make day-planner/morning.html canonical (calendar-driven),
+  fold in the-edit.html card styling. Link from BOTH The Day's "Morning" pill AND The Edit
+  (same link). 
+- 2c: life-os/serve.py — repoint "The Edit" tab to feed.html (currently the-edit.html).
+  Retire lookbook.html, quickchoose.html, the-edit.html, pinterest-board/.
+
+Full detail: 2026-06-27-1700-life-os-shopmy-cron-pinterest-scrape.md
