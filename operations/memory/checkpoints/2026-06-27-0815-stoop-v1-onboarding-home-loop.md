@@ -34,8 +34,10 @@ Fredoka hero + coral underline + grass "Start my own stand" CTA, and tilted
 craft-fair stand cards (tape corner, kid's theme gradient/accent inlined per
 card, pickup tag, heart). Stoop logo is now fixed **sun yellow** everywhere
 (brand mark, matches preview) instead of the kid's accent.
-The card's photo now **fills the whole card top** (object-fit cover) since kids
-have real photos — not a small circle.
+Card photo: first tried a full-bleed crop filling the card top, but Annabel
+preferred the **small circular photo centered on the pink theme gradient** (with
+the tape corner) — reverted to that. `.stand .pic .circ` 92px circle, gradient
+`linear-gradient(160deg, t.a, t.b)` behind it, circle bg = kid's avatar color.
 
 ## Photo upload added to onboarding ("Your photo" card)
 File input → `downscale()` (canvas, 480px cap, jpeg 0.82) → base64 data URL in
