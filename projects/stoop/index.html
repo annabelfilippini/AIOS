@@ -338,6 +338,31 @@
   </div>
 </section>
 
+<!-- ================= LOGIN (seller phone OTP) ================= -->
+<section class="view" id="view-login">
+  <div class="ob">
+    <button class="ob-back" onclick="go('welcome')">‹ Back</button>
+    <div class="ob-head">
+      <span class="marker">seller sign-in</span>
+      <h1>Sign in to your stand</h1>
+      <p>We text you a code. It keeps your stand yours, on any phone or computer.</p>
+    </div>
+    <div class="card-q" id="login-step-phone">
+      <h2>Your phone</h2>
+      <div class="hint">Use the number you run your stand with.</div>
+      <div class="field"><input id="login-phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" /></div>
+      <button class="ob-go" id="login-send" onclick="sendCode()">Text me a code →</button>
+    </div>
+    <div class="card-q" id="login-step-code" style="display:none">
+      <h2>Enter your code</h2>
+      <div class="hint" id="login-code-hint">We texted a 6-digit code to your phone.</div>
+      <div class="field"><input id="login-code" inputmode="numeric" autocomplete="one-time-code" placeholder="123456" /></div>
+      <button class="ob-go" id="login-verify" onclick="verifyCode()">Sign in →</button>
+      <button class="ob-back" style="margin-top:12px" onclick="resetLogin()">Use a different number</button>
+    </div>
+  </div>
+</section>
+
 <!-- ================= HOME ================= -->
 <section class="view" id="view-home">
   <div class="wrap wide">
@@ -477,6 +502,7 @@
       <button onclick="go('onboard','edit')">Edit</button>
       <button onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href.split('#')[0]);this.textContent='Copied!'">Copy link</button>
       <button onclick="go('onboard')">New stand</button>
+      <button onclick="signOut()">Sign out</button>
     </div>
 
     <div class="site">
@@ -561,12 +587,46 @@
     'https://pdovqkbejorncalnjqzv.supabase.co',
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBkb3Zxa2Jlam9ybmNhbG5qcXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NzI1MzcsImV4cCI6MjA5ODI0ODUzN30._a6MgLe7j3NjitLrXHfcxBbfiT6F729Dg14UEBliiKQ'
   );
-  // which stands THIS browser owns: { standId: editToken }. Lets the owner edit
-  // without a login. ponytail: edit-token in localStorage; real auth is a later add.
-  const MINE_KEY='stoop-mine-v1';
-  function loadMine(){ try{ return JSON.parse(localStorage.getItem(MINE_KEY))||{}; }catch(e){ return {}; } }
-  function saveMine(m){ try{ localStorage.setItem(MINE_KEY,JSON.stringify(m)); }catch(e){} }
-  let mine = loadMine();
+  // ---------- seller auth (Supabase phone OTP) ----------
+  // user = the signed-in seller (null = a buyer / just browsing). Ownership is the
+  // DB `owner` column (= auth.uid()); RLS lets a seller touch only their own rows.
+  let user = null;
+  let pendingAfterLogin = null;   // run once sign-in succeeds (e.g. resume "open a stand")
+  function e164(s){ const d=(s||'').replace(/\D/g,''); if(d.length===10) return '+1'+d; if(d.length===11&&d[0]==='1') return '+'+d; return d?'+'+d:''; }
+  function requireAuth(after){ if(user){ after(); return; } pendingAfterLogin=after; go('login'); }
+  function resetLogin(){
+    document.getElementById('login-step-code').style.display='none';
+    document.getElementById('login-step-phone').style.display='';
+    document.getElementById('login-code').value='';
+  }
+  async function sendCode(){
+    const btn=document.getElementById('login-send'), lab=btn.textContent;
+    const phone=e164(document.getElementById('login-phone').value);
+    if(phone.length<12){ toast('Enter your phone number'); return; }
+    btn.disabled=true; btn.textContent='Texting…';
+    const {error}=await SB.auth.signInWithOtp({phone});
+    btn.disabled=false; btn.textContent=lab;
+    if(error){ toast(error.message||'Could not send the code'); return; }
+    document.getElementById('login-step-phone').style.display='none';
+    document.getElementById('login-step-code').style.display='';
+    document.getElementById('login-code-hint').textContent=`We texted a 6-digit code to ${phone}.`;
+    document.getElementById('login-code').focus();
+  }
+  async function verifyCode(){
+    const btn=document.getElementById('login-verify'), lab=btn.textContent;
+    const phone=e164(document.getElementById('login-phone').value);
+    const token=document.getElementById('login-code').value.trim();
+    if(token.length<4){ toast('Enter the code'); return; }
+    btn.disabled=true; btn.textContent='Signing in…';
+    const {data,error}=await SB.auth.verifyOtp({phone, token, type:'sms'});
+    btn.disabled=false; btn.textContent=lab;
+    if(error||!data.user){ toast((error&&error.message)||'That code did not work'); return; }
+    user=data.user;
+    const cb=pendingAfterLogin; pendingAfterLogin=null;
+    cb ? cb() : go('home');
+  }
+  async function signOut(){ await SB.auth.signOut(); user=null; toast('Signed out'); go('welcome'); }
+
   // DB rows call it `description`; the page code uses `.desc`. Normalize on load.
   function fromRow(r){ return r ? Object.assign({}, r, {desc:r.description}) : r; }
   let feedById = {};   // id -> stand row, populated by renderHome / openStand
@@ -589,11 +649,11 @@
   }
 
   // The "current stand" = whatever page is open on the profile view. Set by
-  // openStand() (tap a feed card / share link), create_stand, or edit. Stands live
+  // openStand() (tap a feed card / share link), create, or edit. Stands live
   // in Supabase now (seeded demo rows: Delaney, Mateo, Priya), not localStorage.
   let profile = null;
-  // does this browser own the open stand? (gates the edit/owner bar)
-  function ownsCurrent(){ return !!(profile && profile.id && mine[profile.id]); }
+  // does the signed-in seller own the open stand? (gates the edit/owner bar)
+  function ownsCurrent(){ return !!(user && profile && profile.owner && profile.owner===user.id); }
   // load one stand by id from the public view, set it current, open its page.
   async function openStand(id){
     let row = feedById[id];
@@ -612,14 +672,20 @@
   function loadAcct(){ try{ return JSON.parse(localStorage.getItem(ACCT_KEY))||null; }catch(e){ return null; } }
   function saveAcct(a){ try{ localStorage.setItem(ACCT_KEY,JSON.stringify(a)); }catch(e){} }
   let account = loadAcct();
-  function chooseRole(r){ selMode = r==='seller'?'one':'many'; pendingRole=r; go('neighborhood'); }
+  // sellers must sign in first (their stand ties to the account); buyers stay free.
+  function chooseRole(r){
+    if(r==='seller'){ requireAuth(()=>{ selMode='one'; pendingRole='seller'; go('neighborhood'); }); return; }
+    selMode='many'; pendingRole='buyer'; go('neighborhood');
+  }
   // a stand needs a neighborhood, so always show the geo picker first (it has the
   // "Where's your stand?" copy). Pre-select the seller's current hood so a returning
   // seller just confirms with one tap instead of re-picking.
   function startStand(){
-    pendingRole='seller'; selMode='one';
-    pickedHoods=new Set((account&&account.hoods&&account.hoods.length)?[account.hoods[0]]:[]);
-    go('neighborhood');
+    requireAuth(()=>{
+      pendingRole='seller'; selMode='one';
+      pickedHoods=new Set((account&&account.hoods&&account.hoods.length)?[account.hoods[0]]:[]);
+      go('neighborhood');
+    });
   }
 
   // ---------- view router ----------
@@ -632,8 +698,9 @@
   function go(view, mode){
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
     document.getElementById('view-'+view).classList.add('on');
-    document.querySelector('.place').style.display = view==='welcome' ? 'none' : '';
+    document.querySelector('.place').style.display = (view==='welcome'||view==='login') ? 'none' : '';
     renderPlace();
+    if(view==='login') resetLogin();
     if(view==='home') renderHome();
     if(view==='onboard') fillOnboard(mode);
     if(view==='profile') renderProfile();
@@ -842,12 +909,17 @@
     });
   }
   function val(id){ return document.getElementById(id).value.trim(); }
-  function fillOnboard(mode){
-    // 'edit' prefills from the owner's locally-cached copy (it has the phone, which
-    // the public feed never exposes); a new stand starts blank.
-    const owned = (mode==='edit' && profile && mine[profile.id]) ? mine[profile.id].stand : null;
-    obEditId = owned ? profile.id : null;
-    const p = owned || (mode==='edit' ? (profile||{}) : {});
+  async function fillOnboard(mode){
+    // 'edit' reads the owner's own full row from `stands` (RLS-gated) — it has the
+    // phone, which the public feed view never exposes. A new stand starts blank.
+    let p = {};
+    if(mode==='edit' && profile && profile.id){
+      obEditId = profile.id;
+      const {data}=await SB.from('stands').select('*').eq('id',profile.id).single();
+      p = data ? Object.assign({}, data, {desc:data.description}) : (profile||{});
+    } else {
+      obEditId = null;
+    }
     document.getElementById('f-name').value=p.name||'';
     document.getElementById('f-age').value=p.age||'';
     document.getElementById('f-about').value=(p.about||[]).join('\n\n');
@@ -886,18 +958,17 @@
     btn.disabled=true; btn.textContent='Saving…';
     try{
       if(obEditId){
-        const {data:ok,error}=await SB.rpc('update_stand',{p_id:obEditId,p_token:mine[obEditId].token,p:payload});
-        if(error||!ok) throw error||new Error('not saved');
-        mine[obEditId]={token:mine[obEditId].token, stand:payload}; saveMine(mine);
-        profile=Object.assign({},payload,{id:obEditId,desc:payload.description});
+        // RLS gates the update to owner = auth.uid(); owner stays as-is (not in payload).
+        const {error}=await SB.from('stands').update(payload).eq('id',obEditId);
+        if(error) throw error;
+        profile=Object.assign({},payload,{id:obEditId,owner:user.id,desc:payload.description});
         delete feedById[obEditId]; // force a fresh read next time the feed shows
       } else {
-        const {data,error}=await SB.rpc('create_stand',{p:payload});
-        if(error||!data||!data[0]) throw error||new Error('not created');
-        const row=data[0];
-        mine[row.id]={token:row.edit_token, stand:payload}; saveMine(mine);
-        profile=Object.assign({},payload,{id:row.id,desc:payload.description});
-        history.replaceState(null,'','?stand='+row.id); // shareable + reload-safe
+        payload.owner=user.id;     // RLS insert check requires owner = auth.uid()
+        const {data,error}=await SB.from('stands').insert(payload).select().single();
+        if(error||!data) throw error||new Error('not created');
+        profile=Object.assign({},payload,{id:data.id,owner:user.id,desc:payload.description});
+        history.replaceState(null,'','?stand='+data.id); // shareable + reload-safe
       }
       go('profile');
     }catch(e){
@@ -1198,6 +1269,10 @@
 
   // ---------- start ----------
   (async ()=>{
+    // restore a signed-in seller so they stay logged in across reloads/devices.
+    const {data:{session}}=await SB.auth.getSession();
+    user = (session&&session.user)||null;
+    SB.auth.onAuthStateChange((_e,s)=>{ user=(s&&s.user)||null; });
     // a share link (?stand=<id>) opens that stand's page directly — the link-first
     // entry point. Otherwise: returning visitor → feed, brand-new → front door.
     const standId=new URLSearchParams(location.search).get('stand');

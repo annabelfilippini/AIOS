@@ -144,9 +144,19 @@ tie to the account (any device). Buyers stay account-free.
   attached. Supabase Auth phone provider PATCHed → twilio + that MS, 6-digit OTP, 10min.
   Live test OTP to Annabel's cell returned HTTP 200; Twilio logged **error 30034
   (unregistered 10DLC)** → pipe is correct, only 10DLC gates real delivery.
-- **Batch 3 ⏳ frontend** (`index.html`): login screens (phone → code), tie
-  create/edit/owner to `auth.uid()`, drop the `stoop-mine`/edit_token logic. Buildable +
-  testable now via a Supabase **test-OTP** (fixed code, no SMS) while 10DLC bakes.
+- **Batch 3 ✅ frontend** (`index.html`, 2026-06-28): new `#view-login` (phone → 6-digit
+  code) with `e164()` normalization. Seller paths (`chooseRole('seller')`, `startStand()`)
+  now gate through `requireAuth()`; buyers stay account-free. `ownsCurrent()` compares
+  `profile.owner===user.id`. Create → `from('stands').insert({...,owner:user.id}).select()`;
+  edit → `from('stands').update(...).eq('id',…)` (RLS-gated), prefilled from the owner's
+  own full row (phone included, since the public view strips it). Session restored on load
+  via `getSession()` + `onAuthStateChange`; **Sign out** added to the owner bar. All
+  `stoop-mine`/`edit_token`/`create_stand`/`update_stand` logic removed.
+  - **Verified in preview (8762):** welcome renders; seller→login (phone step shown, code
+    hidden, top-bar place hidden); `e164` collapses formatted/bare/1-prefixed → `+1…`;
+    buyer→neighborhood with no gate; no console errors. NOT yet verified end-to-end: the
+    live OTP round-trip (send code / verify / create+edit as owner) needs the Supabase
+    **test-OTP** set first — see GATE below.
 
 ### GATE (Annabel's action): A2P 10DLC registration
 Real users can't receive codes/texts until this clears (days). Needs your business
