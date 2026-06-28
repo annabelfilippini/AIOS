@@ -97,7 +97,7 @@ main{flex:1;min-width:0}
     <button class="tab love" data-view="loved" type="button"><span class="lbl">Loved</span><span class="n">0</span></button>
   </nav>
   <div class="side-foot">
-    <label class="toggle"><input type="checkbox" id="showDismissed"> passed (<span id="nNope">0</span>)</label>
+    <label class="toggle"><input type="checkbox" id="showDismissed"> show everything (<span id="nNope">0</span> hidden)</label>
     <button class="mini" id="export" type="button">Export taste</button>
     <button class="mini" id="reset" type="button">Reset</button>
   </div>
@@ -20693,13 +20693,14 @@ main{flex:1;min-width:0}
     }
     var nu=parseFloat(card.dataset.neut);
     if(!isNaN(nu) && P.Lneu!=null) d+=5*(1-2*Math.abs(nu-P.Lneu));
+    // Stash fit so shouldShow() can DROP anything that doesn't lean toward her
+    // hearts (her rule: "no point keeping things I don't like").
+    card.__fit=d; card.__pos=pos;
     // Cold start (barely curated): keep the catalogue order so the feed isn't empty.
     var nLiked=Object.keys(state.liked).length;
     if(nLiked<8) return base+d;
     // She's curated. Re-curate to LOOK LIKE her hearts: fit dominates, base is only
-    // a faint tiebreaker. Her rule — "anything I haven't reacted to, I don't like" —
-    // means an un-reacted item with no positive overlap gets pushed down; it has to
-    // earn its place by resembling something she hearted.
+    // a faint tiebreaker.
     if(pos===0) d-=12;
     return d*3 + base*0.12;
   }
@@ -20719,10 +20720,22 @@ main{flex:1;min-width:0}
     for(var i=0;i<c.length;i++){ if(want.indexOf(c[i])>=0) return true; }
     return false;
   }
+  // passesFit: does this option lean toward what she's hearted? Her rule is "no
+  // point keeping things I don't like", so once she's curated we DROP anything
+  // with non-positive fit. Her own Closet/Inspiration are always exempt.
+  function passesFit(card){
+    if(showDismissed) return true;
+    var c=catsOf(card); if(c.indexOf('closet')>=0||c.indexOf('inspiration')>=0) return true;
+    if(Object.keys(state.liked).length<8) return true;
+    return card.__fit!=null && card.__fit>0;
+  }
   function shouldShow(card){
     var id=card.dataset.id;
     if(view==='loved') return !!state.liked[id];
-    return inTab(card,view) && matchOcc(card,occ) && !state.liked[id] && (!state.disliked[id] || showDismissed);
+    if(state.liked[id]) return false;
+    if(state.disliked[id] && !showDismissed) return false;
+    if(!inTab(card,view) || !matchOcc(card,occ)) return false;
+    return passesFit(card);
   }
   function applyView(){
     rerank();   // taste first, then visibility — order reflects the latest swipe
@@ -20737,6 +20750,7 @@ main{flex:1;min-width:0}
       var show=shouldShow(card); card.hidden=!show; if(show)shown++;
       if(state.liked[id]) return;
       if(state.disliked[id] && !showDismissed) return;
+      if(!passesFit(card)) return;   // hidden options don't inflate tab/chip counts
       // tab counts respect the selected occasion; chip counts respect the selected tab
       tabEls.forEach(function(t){ var v=t.dataset.view; if(v==='loved')return; if(inTab(card,v)&&matchOcc(card,occ)) counts[v]++; });
       chipEls.forEach(function(c){ var o=c.dataset.occ; if(o==='all')return; if(inTab(card,view)&&matchOcc(card,o)) occCounts[o]++; });
@@ -20744,7 +20758,12 @@ main{flex:1;min-width:0}
     tabEls.forEach(function(t){ var el=t.querySelector('.n'); if(el) el.textContent=counts[t.dataset.view]||0; });
     chipEls.forEach(function(c){ var el=c.querySelector('.n'); if(el&&c.dataset.occ!=='all') el.textContent=occCounts[c.dataset.occ]||0; });
     document.getElementById('occbar').hidden=(view==='loved');
-    document.getElementById('nNope').textContent=Object.keys(state.disliked).length;
+    var hid=cards.filter(function(c){ var id=c.dataset.id; if(state.liked[id])return false;
+      var cc=catsOf(c); if(cc.indexOf('home')>=0||cc.indexOf('beauty')>=0)return false;
+      var ex=cc.indexOf('closet')>=0||cc.indexOf('inspiration')>=0;
+      var fail=!ex&&Object.keys(state.liked).length>=8&&(c.__fit==null||c.__fit<=0);
+      return !!state.disliked[id]||fail; }).length;
+    document.getElementById('nNope').textContent=hid;
     var active=tabEls.filter(function(t){return t.dataset.view===view;})[0];
     document.getElementById('viewTitle').textContent=active?active.querySelector('.lbl').textContent:'All';
     document.getElementById('count').textContent=shown+(shown===1?' piece':' pieces');

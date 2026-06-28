@@ -104,6 +104,14 @@
   .role h2{font-family:'Fredoka';font-size:23px;margin:12px 0 6px}
   .role p{font-size:14px;color:var(--ink-soft);font-weight:700;line-height:1.4}
 
+  /* offer-type picker inside the builder */
+  .kindpick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:520px){.kindpick{grid-template-columns:1fr}}
+  .kind{font-family:'Fredoka';font-size:17px;text-align:left;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:14px;padding:14px 15px;cursor:pointer;display:flex;flex-direction:column;gap:5px;line-height:1.15}
+  .kind small{font-family:'Nunito';font-weight:700;font-size:12.5px;color:var(--ink-soft);line-height:1.35}
+  .kind.on{background:var(--accent);color:var(--accent-ink)}
+  .kind.on small{color:var(--accent-ink);opacity:.92}
+
   /* ============ ONBOARDING ============ */
   .ob{max-width:560px;margin:0 auto;padding:8px clamp(18px,5vw,28px) 80px}
   .ob-head{text-align:center;margin:6px 0 26px}
@@ -342,6 +350,15 @@
       <p>Answer a few things. Stoop turns them into your own little website you can share.</p>
     </div>
 
+    <div class="card-q" id="q-kind">
+      <h2>What are you offering?</h2>
+      <div class="hint">This sets up the right page for you.</div>
+      <div class="kindpick">
+        <button type="button" class="kind" data-kind="service">🎟️ A service<small>Lessons, coaching, help. Neighbors book a time.</small></button>
+        <button type="button" class="kind" data-kind="product">🍯 A product<small>Honey, bracelets, baked goods. Neighbors buy an item.</small></button>
+      </div>
+    </div>
+
     <div class="card-q">
       <h2>You</h2>
       <div class="hint">Your name and a line about you.</div>
@@ -367,17 +384,17 @@
 
     <div class="card-q">
       <h2>What you offer</h2>
-      <div class="hint">The thing neighbors can book.</div>
+      <div class="hint" id="ofr-hint">The thing neighbors can book.</div>
       <div class="field"><label>Title of your page</label><input id="f-title" placeholder="Delaney's Lacrosse Lessons" /></div>
       <div class="two">
         <div class="field"><label>Price</label><input id="f-price" placeholder="$30" /></div>
-        <div class="field"><label>Per</label><input id="f-unit" placeholder="lesson" /></div>
+        <div class="field"><label id="unit-lab">Per</label><input id="f-unit" placeholder="lesson" /></div>
       </div>
-      <div class="two">
+      <div class="two svc-only">
         <div class="field"><label>How long</label><input id="f-dur" placeholder="1 hour" /></div>
         <div class="field"><label>Where</label><input id="f-loc" placeholder="Cheesman Park" /></div>
       </div>
-      <div class="field"><label>One thing to bring / know</label><input id="f-bring" placeholder="Bring your own stick" /></div>
+      <div class="field svc-only"><label>One thing to bring / know</label><input id="f-bring" placeholder="Bring your own stick" /></div>
     </div>
 
     <div class="card-q">
@@ -386,7 +403,7 @@
       <div class="field"><label>Your phone (or a parent's)</label><input id="f-phone" placeholder="555-123-4567" /></div>
     </div>
 
-    <div class="card-q">
+    <div class="card-q svc-only">
       <h2>When you're free</h2>
       <div class="hint">Drag across the times you can do, like a calendar.</div>
       <div class="daytimes" id="ob-times"></div>
@@ -449,10 +466,10 @@
 
       <div class="book">
         <div class="lead">
-          <h2>Pick a time</h2>
+          <h2 id="p-lead-h">Pick a time</h2>
           <div class="price-tag" id="p-price">—</div>
         </div>
-        <p class="sub">Tap a day with openings, then choose a time. I'll text or email you back to lock it in.</p>
+        <p class="sub" id="p-sub">Tap a day with openings, then choose a time. I'll text or email you back to lock it in.</p>
 
         <div class="calnav">
           <button id="prev" aria-label="previous month">‹</button>
@@ -491,9 +508,9 @@
   <div class="modal" id="modal">
     <button class="x" id="x" aria-label="close">×</button>
     <div id="form">
-      <h3>Request a lesson</h3>
+      <h3 id="req-h">Request a lesson</h3>
       <div class="when" id="when">—</div>
-      <label>Who's the lesson for?</label>
+      <label id="kid-lab">Who's the lesson for?</label>
       <input id="kid" placeholder="e.g. Theo, age 8" />
       <label>Your phone or email (so they can confirm)</label>
       <input id="contact" placeholder="555-123-4567 or you@email.com" />
@@ -502,7 +519,7 @@
       <button class="send" id="send">Send request</button>
     </div>
     <div class="done" id="doneview" style="display:none">
-      <div class="big">🥍</div>
+      <div class="big" id="done-emoji">🥍</div>
       <h3>Request sent!</h3>
       <p id="donemsg"></p>
       <button class="send" id="close2">Done</button>
@@ -530,6 +547,7 @@
 
   // ---------- Delaney's real answers = the default profile (so a fresh demo lands on the page Annabel approved) ----------
   const DEFAULT = {
+    kind:'service',
     name:'Delaney', age:'14', title:"Delaney's Lacrosse Lessons",
     price:'$30', unit:'lesson', dur:'1 hour', loc:'Cheesman Park', bring:'Bring your own stick',
     phone:'555-123-4567', theme:'pink', photo:'delaney.jpg',
@@ -627,6 +645,19 @@
   let obWeek;           // Sunday of the week shown in the availability grid
   let obTheme = 'pink';
   let obPhoto = '';     // data URL (uploaded) or 'delaney.jpg' default
+  let obKind = 'service'; // 'service' (books a time) or 'product' (buys an item)
+
+  // products skip scheduling + how-long/where/what-to-bring; services keep them.
+  function setKind(k){
+    obKind=k;
+    document.querySelectorAll('#q-kind .kind').forEach(b=>b.classList.toggle('on',b.dataset.kind===k));
+    const svc = k==='service';
+    document.querySelectorAll('.svc-only').forEach(el=>el.style.display = svc?'':'none');
+    document.getElementById('ofr-hint').textContent = svc?'The thing neighbors can book.':'The thing neighbors can buy.';
+    document.getElementById('unit-lab').textContent = svc?'Per':'Each';
+    document.getElementById('f-unit').placeholder = svc?'lesson':'jar';
+  }
+  document.querySelectorAll('#q-kind .kind').forEach(b=>b.onclick=()=>setKind(b.dataset.kind));
 
   // photo upload: downscale to a small square-ish jpeg so it fits in localStorage.
   // ponytail: 480px cap keeps a phone photo ~40KB instead of multi-MB (which would blow the quota).
@@ -742,17 +773,20 @@
     obTheme = p.theme||'pink';
     obPhoto = p.photo||'';
     document.getElementById('ob-back').style.display = '';
+    setKind(p.kind || (mode==='edit'?'service':obKind));
     renderDayTimes(); buildSwatches(); applyTheme(obTheme); setPhotoPreview();
   }
   document.getElementById('ob-go').onclick=()=>{
+    const svc = obKind==='service';
     profile = {
+      kind:obKind,
       name:val('f-name')||'Me', age:val('f-age'),
       title:val('f-title')||((val('f-name')||'My')+"'s stand"),
-      price:val('f-price')||'$0', unit:val('f-unit')||'session',
-      dur:val('f-dur'), loc:val('f-loc'), bring:val('f-bring'),
+      price:val('f-price')||'$0', unit:val('f-unit')||(svc?'session':'item'),
+      dur:svc?val('f-dur'):'', loc:svc?val('f-loc'):'', bring:svc?val('f-bring'):'',
       phone:val('f-phone'), theme:obTheme, photo:effectivePhoto(),
       about:val('f-about').split(/\n\n+/).map(s=>s.trim()).filter(Boolean),
-      avail:obDays
+      avail:svc?obDays:{}
     };
     save(profile);
     go('profile');
@@ -794,18 +828,38 @@
     const avEl=document.getElementById('p-avatar');
     avEl.innerHTML = profile.photo ? `<img src="${profile.photo}" alt="${profile.name}">` : (profile.name||'?')[0];
     document.getElementById('p-title').textContent=profile.title;
+    const isSvc = profile.kind!=='product';
     const facts=[];
-    if(profile.dur) facts.push('⏱ '+profile.dur);
-    if(profile.loc) facts.push('📍 '+profile.loc);
-    if(profile.bring) facts.push('🥍 '+profile.bring);
+    if(isSvc){
+      if(profile.dur) facts.push('⏱ '+profile.dur);
+      if(profile.loc) facts.push('📍 '+profile.loc);
+      if(profile.bring) facts.push('🥍 '+profile.bring);
+    } else {
+      facts.push('📍 Local pickup');
+    }
     document.getElementById('p-facts').innerHTML=facts.map(f=>`<span class="fact">${f}</span>`).join('');
     document.getElementById('p-price').innerHTML=`${profile.price} <small>/ ${profile.unit}</small>`;
     document.getElementById('p-about').innerHTML=(profile.about||[]).map((t,i)=>`<p${i?' style="margin-top:12px"':''}>${t}</p>`).join('');
     renderMoreKids();
-    selDay=null; selSlot=null; reqB.disabled=true; pickEl.textContent='No time picked yet. Tap a day above ☝️';
+
+    // products have no schedule: hide the calendar, enable the request button outright.
+    const first=(profile.name||'').split(' ')[0]||'them';
+    document.querySelector('.calnav').style.display=isSvc?'':'none';
+    document.querySelector('.dowhead').style.display=isSvc?'':'none';
+    document.getElementById('month').style.display=isSvc?'':'none';
+    document.getElementById('p-lead-h').textContent=isSvc?'Pick a time':'Get one';
+    document.getElementById('p-sub').textContent=isSvc
+      ? "Tap a day with openings, then choose a time. I'll text or email you back to lock it in."
+      : `Local pickup in the neighborhood. Send a request and ${first} will message you back to sort it out.`;
+    reqB.textContent=isSvc?`Request a ${profile.unit||'time'}`:'Request this';
+    selDay=null; selSlot=null;
     slotsBox.classList.remove('on');
-    view=new Date(today.getFullYear(),today.getMonth(),1);
-    renderMonth();
+    if(isSvc){
+      reqB.disabled=true; pickEl.style.display=''; pickEl.textContent='No time picked yet. Tap a day above ☝️';
+      slotsBox.style.display=''; view=new Date(today.getFullYear(),today.getMonth(),1); renderMonth();
+    } else {
+      reqB.disabled=false; pickEl.style.display='none'; slotsBox.style.display='none';
+    }
   }
 
   function renderMonth(){
@@ -862,8 +916,12 @@
 
   // ---------- request modal ----------
   const scrim=document.getElementById('scrim'), whenEl=document.getElementById('when');
-  reqB.onclick=()=>{ if(!selSlot) return;
-    whenEl.textContent=selSlot.label;
+  reqB.onclick=()=>{
+    const isSvc = profile.kind!=='product';
+    if(isSvc && !selSlot) return;
+    whenEl.textContent = isSvc ? selSlot.label : profile.title;
+    document.getElementById('req-h').textContent = isSvc?'Request a lesson':'Request to buy';
+    document.getElementById('kid-lab').textContent = isSvc?"Who's the lesson for?":"Who's it for? (optional)";
     document.getElementById('form').style.display=''; document.getElementById('doneview').style.display='none';
     document.getElementById('kid').value=''; document.getElementById('contact').value=account&&account.contact||''; document.getElementById('note').value='';
     scrim.classList.add('on');
@@ -878,15 +936,20 @@
     account = Object.assign(account||{role:'buyer',hoods:[...pickedHoods]}, {contact, name:kid||(account&&account.name)||''});
     saveAcct(account);
     const note=document.getElementById('note').value.trim();
+    const isSvc = profile.kind!=='product';
+    const what = isSvc ? selSlot.label : profile.title;
     // real send: open a prefilled text to the number from onboarding. ponytail: sms: link, no backend.
     if(profile.phone){
-      const body=`Hi ${profile.name}! Lesson request via Stoop: ${selSlot.label}`+(kid?` for ${kid}`:'')+`. Reach me at ${contact}.`+(note?` Note: ${note}`:'');
+      const body=(isSvc?`Hi ${profile.name}! Lesson request via Stoop: ${what}`:`Hi ${profile.name}! Order via Stoop: ${what}`)+(kid?` for ${kid}`:'')+`. Reach me at ${contact}.`+(note?` Note: ${note}`:'');
       const sms=`sms:${profile.phone.replace(/[^0-9+]/g,'')}?&body=${encodeURIComponent(body)}`;
       window.location.href=sms;
     }
     document.getElementById('form').style.display='none';
     document.getElementById('doneview').style.display='';
-    document.getElementById('donemsg').innerHTML=`${profile.name} got your request for <b>${selSlot.label}</b>${kid?` for ${kid}`:''}.<br>She'll reach out to ${contact} to confirm. See you on the field!`;
+    document.getElementById('done-emoji').textContent = isSvc?'🥍':'🧺';
+    document.getElementById('donemsg').innerHTML = isSvc
+      ? `${profile.name} got your request for <b>${what}</b>${kid?` for ${kid}`:''}.<br>She'll reach out to ${contact} to confirm. See you on the field!`
+      : `${profile.name} got your request for <b>${what}</b>${kid?` for ${kid}`:''}.<br>She'll reach out to ${contact} to arrange pickup.`;
   };
   document.getElementById('close2').onclick=close;
 

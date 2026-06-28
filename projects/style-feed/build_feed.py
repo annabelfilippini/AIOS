@@ -1503,10 +1503,22 @@ SCRIPT = '''
     for(var i=0;i<c.length;i++){ if(want.indexOf(c[i])>=0) return true; }
     return false;
   }
+  // passesFit: does this option lean toward what she's hearted? Her rule is "no
+  // point keeping things I don't like", so once she's curated we DROP anything
+  // with non-positive fit. Her own Closet/Inspiration are always exempt.
+  function passesFit(card){
+    if(showDismissed) return true;
+    var c=catsOf(card); if(c.indexOf('closet')>=0||c.indexOf('inspiration')>=0) return true;
+    if(Object.keys(state.liked).length<8) return true;
+    return card.__fit!=null && card.__fit>0;
+  }
   function shouldShow(card){
     var id=card.dataset.id;
     if(view==='loved') return !!state.liked[id];
-    return inTab(card,view) && matchOcc(card,occ) && !state.liked[id] && (!state.disliked[id] || showDismissed);
+    if(state.liked[id]) return false;
+    if(state.disliked[id] && !showDismissed) return false;
+    if(!inTab(card,view) || !matchOcc(card,occ)) return false;
+    return passesFit(card);
   }
   function applyView(){
     rerank();   // taste first, then visibility — order reflects the latest swipe
@@ -1521,6 +1533,7 @@ SCRIPT = '''
       var show=shouldShow(card); card.hidden=!show; if(show)shown++;
       if(state.liked[id]) return;
       if(state.disliked[id] && !showDismissed) return;
+      if(!passesFit(card)) return;   // hidden options don't inflate tab/chip counts
       // tab counts respect the selected occasion; chip counts respect the selected tab
       tabEls.forEach(function(t){ var v=t.dataset.view; if(v==='loved')return; if(inTab(card,v)&&matchOcc(card,occ)) counts[v]++; });
       chipEls.forEach(function(c){ var o=c.dataset.occ; if(o==='all')return; if(inTab(card,view)&&matchOcc(card,o)) occCounts[o]++; });
@@ -1528,7 +1541,12 @@ SCRIPT = '''
     tabEls.forEach(function(t){ var el=t.querySelector('.n'); if(el) el.textContent=counts[t.dataset.view]||0; });
     chipEls.forEach(function(c){ var el=c.querySelector('.n'); if(el&&c.dataset.occ!=='all') el.textContent=occCounts[c.dataset.occ]||0; });
     document.getElementById('occbar').hidden=(view==='loved');
-    document.getElementById('nNope').textContent=Object.keys(state.disliked).length;
+    var hid=cards.filter(function(c){ var id=c.dataset.id; if(state.liked[id])return false;
+      var cc=catsOf(c); if(cc.indexOf('home')>=0||cc.indexOf('beauty')>=0)return false;
+      var ex=cc.indexOf('closet')>=0||cc.indexOf('inspiration')>=0;
+      var fail=!ex&&Object.keys(state.liked).length>=8&&(c.__fit==null||c.__fit<=0);
+      return !!state.disliked[id]||fail; }).length;
+    document.getElementById('nNope').textContent=hid;
     var active=tabEls.filter(function(t){return t.dataset.view===view;})[0];
     document.getElementById('viewTitle').textContent=active?active.querySelector('.lbl').textContent:'All';
     document.getElementById('count').textContent=shown+(shown===1?' piece':' pieces');
@@ -1628,7 +1646,7 @@ side_html = (
     '  <div class="tag">for Annabel</div>\n'
     '  <nav>\n' + nav + '\n  </nav>\n'
     '  <div class="side-foot">\n'
-    '    <label class="toggle"><input type="checkbox" id="showDismissed"> passed (<span id="nNope">0</span>)</label>\n'
+    '    <label class="toggle"><input type="checkbox" id="showDismissed"> show everything (<span id="nNope">0</span> hidden)</label>\n'
     '    <button class="mini" id="export" type="button">Export taste</button>\n'
     '    <button class="mini" id="reset" type="button">Reset</button>\n'
     '  </div>\n'
