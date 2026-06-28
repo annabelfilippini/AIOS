@@ -152,15 +152,23 @@ tie to the account (any device). Buyers stay account-free.
   own full row (phone included, since the public view strips it). Session restored on load
   via `getSession()` + `onAuthStateChange`; **Sign out** added to the owner bar. All
   `stoop-mine`/`edit_token`/`create_stand`/`update_stand` logic removed.
-  - **Verified in preview (8762):** welcome renders; seller→login (phone step shown, code
-    hidden, top-bar place hidden); `e164` collapses formatted/bare/1-prefixed → `+1…`;
-    buyer→neighborhood with no gate; no console errors. NOT yet verified end-to-end: the
-    live OTP round-trip (send code / verify / create+edit as owner) needs the Supabase
-    **test-OTP** set first — see GATE below.
+  - **Test-OTP set (2026-06-28):** Supabase Auth `sms_test_otp` = `13038593694=123456`
+    (Annabel's cell, E.164 no `+`, `=` separator — the format the Management API enforces),
+    `sms_test_otp_valid_until` = 2027-12-31. Lets login be tested with a fixed code, no SMS,
+    no 10DLC. Twilio +1 720 575 8753 stays the *sending* number on MS MGd416….
+  - **Verified live end-to-end (8762):** seller→login; `sendCode` short-circuits the test
+    number (no 30034); `verifyCode('123456')` creates a session (user f5caf946…, phone
+    13038593694) and resumes the seller flow → neighborhood; create inserts with
+    `owner=auth.uid()` (RLS pass, owner bar + share URL shown); edit prefills phone from the
+    owner's own row (public view hides it) and the update lands in the DB; owner-gated delete
+    removes the row; sign-out clears the session → welcome. QA stand deleted. No console errors.
 
-### GATE (Annabel's action): A2P 10DLC registration
-Real users can't receive codes/texts until this clears (days). Needs your business
-info for the Brand: legal name, address, email; sole-proprietor is the light path.
+### GATE (Annabel's action): A2P 10DLC registration — STILL OPEN
+The build + login are done and testable now (via the test-OTP above). But **real users
+other than Annabel's whitelisted cell can't receive codes/texts until 10DLC clears**
+(days). 10DLC is NOT optional for individuals — being a Sole Proprietor just picks the
+*lighter* brand type (no EIN), it doesn't exempt you. Error 30034 is this gate. Needs
+Annabel's Brand info: legal name, address, email; Sole-Proprietor is the light path.
 Twilio number + Messaging Service already exist to attach the campaign to.
 
 ## (superseded) NEXT — Batch C: SMS confirmations
