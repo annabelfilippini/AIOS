@@ -1447,7 +1447,8 @@ SCRIPT = '''
   // cold data-base. rerank() re-sorts the grid. This is the whole point of the
   // page: taste compounds as you curate, with zero server round-trip.
   function buildProfile(){
-    var P={Lb:{},Db:{},Lc:{},Dc:{},Lv:{},Dv:{},_Lcol:[],_nu:[],cm:null,Lneu:null};
+    var P={Lb:{},Db:{},Lc:{},Dc:{},Lv:{},Dv:{},_Lcol:[],_nu:[],cm:null,Lneu:null,
+           rx:{dressy:0,colour:0,plain:0,shapeSils:{},cheapBrands:{}}};
     function add(side,o){
       var bset=side==='L'?P.Lb:P.Db, cset=side==='L'?P.Lc:P.Dc, vset=side==='L'?P.Lv:P.Dv;
       var b=(o.brand||'').toLowerCase().trim(); if(b) bset[b]=(bset[b]||0)+1;
@@ -1455,6 +1456,15 @@ SCRIPT = '''
       var cv=parseFloat(o.c); if(side==='L'&&!isNaN(cv)) P._Lcol.push(cv);
       VCATS.forEach(function(f){ var v=o[f[0]]; if(v&&v!=='na'){ if(!vset[f[0]])vset[f[0]]={}; vset[f[0]][v]=(vset[f[0]][v]||0)+1; } });
       if(side==='L'){ var nu=parseFloat(o.neut); if(!isNaN(nu)) P._nu.push(nu); }
+      // reason-aware: the WHY behind an X feeds a sharper, axis-specific penalty
+      if(side==='D' && o.reason){
+        var rs=o.reason;
+        if(rs==='too dressy') P.rx.dressy++;
+        else if(rs==='colour') P.rx.colour++;
+        else if(rs==='too plain') P.rx.plain++;
+        else if(rs==='shape'){ var ss=o.sil; if(ss) P.rx.shapeSils[ss]=(P.rx.shapeSils[ss]||0)+1; }
+        else if(rs==='cheap'){ var cb=(o.brand||'').toLowerCase().trim(); if(cb) P.rx.cheapBrands[cb]=(P.rx.cheapBrands[cb]||0)+1; }
+      }
     }
     Object.keys(state.liked).forEach(function(id){ add('L', state.liked[id]||{}); });
     Object.keys(state.disliked).forEach(function(id){ add('D', state.disliked[id]||{}); });
@@ -1482,6 +1492,13 @@ SCRIPT = '''
     }
     var nu=parseFloat(card.dataset.neut);
     if(!isNaN(nu) && P.Lneu!=null) d+=5*(1-2*Math.abs(nu-P.Lneu));
+    // ---- reason-aware demotion: the WHY behind your X reshapes the feed -------
+    // Each maps to the axis you actually rejected, so similar pieces sink.
+    var rx=P.rx;
+    if(rx.dressy){ var fm=card.dataset.form; if(fm==='evening'||fm==='formal'||fm==='smart-casual') d-=Math.min(26,8*rx.dressy); }
+    if(rx.colour){ var nuc=parseFloat(card.dataset.neut); if(!isNaN(nuc)) d-=Math.min(24, rx.colour*15*(1-nuc)); }
+    var sl=card.dataset.sil; if(sl && rx.shapeSils[sl]) d-=Math.min(22,7*rx.shapeSils[sl]);
+    var bn=(card.dataset.brand||'').toLowerCase(); if(bn && rx.cheapBrands[bn]) d-=Math.min(20,9*rx.cheapBrands[bn]);
     // Knee-length and a-line are clear losers in her hearts but still ride brand +
     // category into the top; demote them hard so they fall out of the feed.
     if(card.dataset.len==='knee') d-=8;
@@ -1533,7 +1550,10 @@ SCRIPT = '''
     if(card.__capped) return false;                    // accessory overflow
     var nu=parseFloat(card.dataset.neut);              // loud prints/brights — she's a neutral.
     if(!isNaN(nu) && nu<0.3) return false;             // cut CONFIRMED-loud only; keep un-tagged
-    return card.__fit!=null && card.__fit>0;
+    // While curating, show ALL un-swiped pieces (ranked best-first) instead of
+    // pre-hiding low-fit ones — so there's plenty to judge and an X removes it
+    // for good. liveScore still sorts, so good matches lead and weak ones trail.
+    return true;
   }
   function shouldShow(card){
     var id=card.dataset.id;
@@ -1611,6 +1631,7 @@ SCRIPT = '''
     var c=e.target.closest('.whychip'); if(!c||!whyId)return;
     var rec=state.disliked[whyId]; if(rec){ rec.reason=c.dataset.why; save(); }
     c.classList.add('on'); if(whyTimer)clearTimeout(whyTimer); whyTimer=setTimeout(hideWhy,650);
+    applyView();   // re-rank now so the reason reshapes the feed on the spot
   });
   tabEls.forEach(function(t){
     t.addEventListener('click',function(){ view=t.dataset.view; tabEls.forEach(function(x){x.classList.toggle('on',x===t);}); applyView(); try{window.scrollTo({top:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);} });

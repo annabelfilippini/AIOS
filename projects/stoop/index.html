@@ -340,7 +340,7 @@
         <svg viewBox="0 0 300 16" fill="none" stroke="#f08a5d" stroke-width="5" stroke-linecap="round"><path d="M4 11C70 4 230 4 296 8"/></svg>
       </span></h1>
       <p>The kids on your block, doing the things they're good at. Tap a stand to see their page.</p>
-      <button class="cta" onclick="go('onboard')">
+      <button class="cta" onclick="startStand()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
         Start my own stand
       </button>
@@ -602,6 +602,13 @@
   function saveAcct(a){ try{ localStorage.setItem(ACCT_KEY,JSON.stringify(a)); }catch(e){} }
   let account = loadAcct();
   function chooseRole(r){ selMode = r==='seller'?'one':'many'; pendingRole=r; go('neighborhood'); }
+  // a stand needs a neighborhood. Send anyone without a seller hood through the geo
+  // picker first (it already has the "Where's your stand?" copy); a seller who already
+  // picked one skips straight to the builder.
+  function startStand(){
+    if(account&&account.role==='seller'&&account.hoods&&account.hoods.length){ go('onboard'); return; }
+    pendingRole='seller'; selMode='one'; pickedHoods=new Set((account&&account.hoods)||[]); go('neighborhood');
+  }
 
   // ---------- view router ----------
   const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -676,7 +683,7 @@
     }
     const isBuyer=account&&account.role==='buyer';
     const addLabel=isBuyer?'Open your own stand':(profile?'Add your stand':'Set up the first stand');
-    cards += `<div class="add-stand" onclick="go('onboard')">
+    cards += `<div class="add-stand" onclick="startStand()">
       <div><div class="plus">+</div><b>${addLabel}</b><span>Answer a few questions, get your own page</span></div>
     </div>`;
     grid.innerHTML=cards;
@@ -863,7 +870,7 @@
         <div class="mk-b"><b>${n.name}</b><div class="mk-thing">${n.thing}</div><div class="mk-price" style="color:${t.accent}">${n.price}</div></div>
       </div>`;
     }).join('');
-    cards+=`<div class="mk-add" onclick="go('onboard')"><div><div class="mk-plus">+</div><b>Set up your stand</b></div></div>`;
+    cards+=`<div class="mk-add" onclick="startStand()"><div><div class="mk-plus">+</div><b>Set up your stand</b></div></div>`;
     box.innerHTML=`<h2>More kids near ${first}</h2><div class="mk-sub">Your neighbors are setting up stands too. Tap one, or start your own.</div><div class="mk-row">${cards}</div>`;
   }
 
