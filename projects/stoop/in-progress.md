@@ -107,9 +107,39 @@ Pilot city = Denver; Delaney's stand = Country Club. Faked account (no backend).
   stubs, Country-Club buyer sees both (geo filter intact); stub tap toasts correct name;
   bunting `display:flex` on welcome/home/profile/onboard/neighborhood. No console errors.
 
+## Backend: real multi-user feed + persistence ✅ DONE (2026-06-28) — Batches A+B
+Domain bought (stoopmarkets.com). Went from localStorage demo to a real shared backend.
+- **Supabase** project `stoop` (ref `pdovqkbejorncalnjqzv`, Oregon, in the Stoopmarkets
+  org). Driven entirely via the Management API. SQL lives in `backend/schema.sql` +
+  `backend/seed.sql`.
+- **Schema:** `stands` + `orders` tables, a `public_stands` view that strips `phone`
+  and `edit_token`, and 3 RPCs (`create_stand`, `update_stand`, `submit_order`). RLS on,
+  zero direct table grants to anon — all writes go through the RPCs. Edit gated by a
+  per-stand `edit_token` (no login; token cached in `localStorage` `stoop-mine-v1`).
+- **Seeded** Delaney (service, avail computed for next 4 wks), Mateo + Priya (products)
+  as real rows so every visitor's Country-Club feed has content.
+- **Frontend (`index.html`):** added supabase-js; feed reads `public_stands` filtered by
+  hood; tapping a card / `?stand=<id>` opens that stand (`openStand`); create→`create_stand`
+  (sets `?stand=` for a shareable link); edit→`update_stand`; order→`submit_order`. Owner
+  bar only shows on owned stands. Phone never reaches the browser. Removed the old
+  `DEFAULT`/`seedAvail`/`NEIGHBORS`/`inFeed`/local `save`/`load`.
+- **Verified live (8762):** feed renders 3 DB stands; Hilltop buyer sees 0 (geo filter);
+  create persisted to DB + appeared in feed + owner bar shown; order row persisted;
+  edit persisted with phone prefilled from owner-cache; **wrong edit_token rejected
+  (returns false, Delaney untouched)**; phone absent from public view. QA stand cleaned up.
+- Token note: Annabel's Supabase personal access token still needed for Batch C
+  (edge-function deploy + Twilio secret); revoke after SMS is wired.
+
+## NEXT — Batch C: SMS confirmations
+- Supabase Edge Function `notify-order` that reads the order + stand phone server-side
+  and texts the parent via Twilio. Trigger: client calls it after `submit_order` (or a
+  DB webhook on insert). Annabel: create Twilio account + start A2P 10DLC registration
+  (days of carrier approval). Until approved, email fallback or testing to verified numbers.
+
 ## Deferred
-- **Parent view** — approve-orders / see-the-money rail. Not built; project doc calls it
-  load-bearing. Recommended next.
-- Single profile slot → multi-kid/multi-stand (real multi-stand feed needs a backend).
-- Real SMS/backend confirmations; per-week "copy to next 4 weeks"; richer empty-feed state.
-- Stub cards are display + toast only; wire to real pages when stands get a backend.
+- Single profile slot → multi-kid/multi-stand: now possible (backend exists); add a
+  "my stands" switcher when a seller owns more than one.
+- Per-week "copy to next 4 weeks"; richer empty-feed state.
+- Hero photo stored inline as data-URL; move to Supabase Storage if rows get heavy.
+- Parent approval rail dropped from v1 (payments off-platform; requests go straight to
+  the parent's phone).
