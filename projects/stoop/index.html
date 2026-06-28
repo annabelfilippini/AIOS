@@ -568,7 +568,7 @@
 
   // ---------- Delaney's real answers = the default profile (so a fresh demo lands on the page Annabel approved) ----------
   const DEFAULT = {
-    kind:'service',
+    kind:'service', hood:'country-club',
     name:'Delaney', age:'14', title:"Delaney's Lacrosse Lessons",
     price:'$30', unit:'lesson', dur:'1 hour', loc:'Cheesman Park', bring:'Bring your own stick',
     phone:'555-123-4567', theme:'pink', photo:'delaney.jpg',
@@ -615,6 +615,7 @@
     document.getElementById('view-'+view).classList.add('on');
     document.getElementById('bunting').style.display = view==='home' ? '' : 'none';
     document.querySelector('.place').style.display = view==='welcome' ? 'none' : '';
+    renderPlace();
     if(view==='home') renderHome();
     if(view==='onboard') fillOnboard(mode);
     if(view==='profile') renderProfile();
@@ -629,15 +630,33 @@
     {name:'Priya', thing:'Friendship bracelets, made to order', price:'$4', theme:'purple', emoji:'🧵'},
   ];
 
+  // top-bar location: a seller shows their one hood; a buyer shows their picked
+  // set (name if one, count if many). No account yet = the default demo hood.
+  function renderPlace(){
+    const el=document.querySelector('.place'); if(!el) return;
+    const hoods=(account&&account.hoods)||[];
+    let txt='Country Club neighborhood · verified neighbor';
+    if(account&&account.role==='seller'&&hoods[0]) txt=`${hoodName(hoods[0])} neighborhood · verified neighbor`;
+    else if(account&&hoods.length===1) txt=`${hoodName(hoods[0])} neighborhood`;
+    else if(account&&hoods.length>1) txt=`${hoods.length} neighborhoods`;
+    el.innerHTML=`<span class="dot"></span> ${txt}`;
+  }
+
   // ---------- HOME ----------
   function blurbFrom(p){
     const first=(p.about&&p.about[0])||'';
     return first.length>90?first.slice(0,88)+'…':first;
   }
+  // a buyer only sees stands in the hoods they picked; a seller always sees their
+  // own stand (and there's only one stand in this demo). No account = no filter.
+  function inFeed(p){
+    if(!account||account.role==='seller') return true;
+    return (account.hoods||[]).includes(p.hood);
+  }
   function renderHome(){
     const grid=document.getElementById('home-grid');
     let cards='';
-    if(profile){
+    if(profile && inFeed(profile)){
       const t=THEMES[profile.theme]||THEMES.pink;
       const initial=(profile.name||'?')[0];
       const inner = profile.photo ? `<img src="${profile.photo}" alt="">` : initial;
@@ -655,8 +674,10 @@
         </div>
       </div>`;
     }
+    const isBuyer=account&&account.role==='buyer';
+    const addLabel=isBuyer?'Open your own stand':(profile?'Add your stand':'Set up the first stand');
     cards += `<div class="add-stand" onclick="go('onboard')">
-      <div><div class="plus">+</div><b>${profile?'Add your stand':'Set up the first stand'}</b><span>Answer a few questions, get your own page</span></div>
+      <div><div class="plus">+</div><b>${addLabel}</b><span>Answer a few questions, get your own page</span></div>
     </div>`;
     grid.innerHTML=cards;
   }
@@ -818,7 +839,7 @@
   document.getElementById('ob-go').onclick=()=>{
     const svc = obKind==='service';
     profile = {
-      kind:obKind,
+      kind:obKind, hood:(account&&account.hoods&&account.hoods[0])||'country-club',
       name:val('f-name')||'Me', age:val('f-age'),
       title:val('f-title')||((val('f-name')||'My')+"'s stand"),
       price:val('f-price')||'$0', unit:val('f-unit')||(svc?'session':'item'),
@@ -901,6 +922,7 @@
       ? "Tap a day with openings, then choose a time. I'll text or email you back to lock it in."
       : `Local pickup in the neighborhood. Send a request and ${first} will message you back to sort it out.`;
     reqB.textContent=isSvc?`Request a ${profile.unit||'time'}`:'Request this';
+    reqB.closest('.reqbar').style.justifyContent=isSvc?'':'center'; // product: no pick text, so don't shove the lone button to the edge
     selDay=null; selSlot=null;
     slotsBox.classList.remove('on');
     if(isSvc){
