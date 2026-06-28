@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26",
+  "generated_at": "2026-06-27",
   "source": "Reddit (full threads via reddit-cli)",
   "region": "Colorado + Wyoming (and driveable neighbours)",
   "subreddits": [
@@ -104,7 +104,7 @@
         "Boulder Reservoir"
       ],
       "relevance": "high",
-      "score": 2,
+      "score": 4,
       "num_comments": 12,
       "created": 1651525049.0,
       "read_full": true
@@ -136,7 +136,7 @@
         "Lake Dillon"
       ],
       "relevance": "high",
-      "score": 11,
+      "score": 10,
       "num_comments": 28,
       "created": 1627313960.0,
       "read_full": true
@@ -151,7 +151,7 @@
         "Aurora Reservoir"
       ],
       "relevance": "high",
-      "score": 7,
+      "score": 6,
       "num_comments": 4,
       "created": 1510774804.0,
       "read_full": true
@@ -180,7 +180,7 @@
         "Lake McConaughy"
       ],
       "relevance": "high",
-      "score": 2,
+      "score": 3,
       "num_comments": 54,
       "created": 1666507377.0,
       "read_full": true
@@ -200,20 +200,6 @@
       "read_full": true
     },
     {
-      "title": "Lessons near Denver",
-      "subreddit": "r/Kiteboarding",
-      "url": "https://www.reddit.com/r/Kiteboarding/comments/w4yako/lessons_near_denver/",
-      "snippet": "Looking to start getting into kiteboarding. Is there anyone around the Denver area that does lessons? Is there any other locations that are good to learn in the fall months? I want to just take a week",
-      "spots": [
-        "Lake Dillon"
-      ],
-      "relevance": "high",
-      "score": 3,
-      "num_comments": 6,
-      "created": 1658455066.0,
-      "read_full": true
-    },
-    {
       "title": "Best place to continue kitesurfing lessons near Colorado?",
       "subreddit": "r/Kiteboarding",
       "url": "https://www.reddit.com/r/Kiteboarding/comments/1ufv2u5/best_place_to_continue_kitesurfing_lessons_near/",
@@ -223,8 +209,22 @@
       ],
       "relevance": "high",
       "score": 2,
-      "num_comments": 5,
+      "num_comments": 9,
       "created": 1782443806.0,
+      "read_full": true
+    },
+    {
+      "title": "Lessons near Denver",
+      "subreddit": "r/Kiteboarding",
+      "url": "https://www.reddit.com/r/Kiteboarding/comments/w4yako/lessons_near_denver/",
+      "snippet": "Looking to start getting into kiteboarding. Is there anyone around the Denver area that does lessons? Is there any other locations that are good to learn in the fall months? I want to just take a week",
+      "spots": [
+        "Lake Dillon"
+      ],
+      "relevance": "high",
+      "score": 1,
+      "num_comments": 6,
+      "created": 1658455066.0,
       "read_full": true
     },
     {
@@ -250,7 +250,7 @@
         "Lake Dillon"
       ],
       "relevance": "high",
-      "score": 5,
+      "score": 8,
       "num_comments": 4,
       "created": 1543090376.0,
       "read_full": true
@@ -264,7 +264,7 @@
         "Aurora Reservoir"
       ],
       "relevance": "high",
-      "score": 6,
+      "score": 7,
       "num_comments": 4,
       "created": 1339028695.0,
       "read_full": true
@@ -292,7 +292,7 @@
         "Lake McConaughy"
       ],
       "relevance": "high",
-      "score": 12,
+      "score": 11,
       "num_comments": 0,
       "created": 1568901727.0,
       "read_full": false
@@ -304,7 +304,7 @@
       "snippet": "Hi all,\n\nThinking of taking a few beginner lessons. I live across the road from a beach in Australia where they teach kitesurfing and I thought it may be something fun to get into. I just had some que",
       "spots": [],
       "relevance": "high",
-      "score": 13,
+      "score": 14,
       "num_comments": 36,
       "created": 1736318413.0,
       "read_full": true
@@ -316,7 +316,7 @@
       "snippet": "I can never get enough of these windy days 🪁 Any other recommenced spots for kite flying?  Sorry, I think the sky is basically the only place you can fly a kite 😂 Show yourself out. 👉 🚪 There were two",
       "spots": [],
       "relevance": "high",
-      "score": 69,
+      "score": 72,
       "num_comments": 33,
       "created": 1602163433.0,
       "read_full": true
@@ -328,7 +328,7 @@
       "snippet": "I find my physical conditioning to be seriously lacking and want to improve so i can be a better kite surfer. Are there any kinds of training or exercises you guys do to compliment your riding? Yoga? ",
       "spots": [],
       "relevance": "high",
-      "score": 6,
+      "score": 4,
       "num_comments": 22,
       "created": 1657735917.0,
       "read_full": true
@@ -340,7 +340,7 @@
       "snippet": "I know my diagrams are a bit funny but I hope they want to show what I mean. I recently moved from a country in which I kitesurfed usually to italy. This spot is quite close to my house and was not su",
       "spots": [],
       "relevance": "high",
-      "score": 2,
+      "score": 3,
       "num_comments": 17,
       "created": 1670943298.0,
       "read_full": true
@@ -352,7 +352,7 @@
       "snippet": "I spent a week kiting in South Padre Island last week. We left on Friday to spend the weekend in Houston and then flew home to Denver on Sunday. Instead of paying the $75 bag fee twice for kite gear, ",
       "spots": [],
       "relevance": "high",
-      "score": 6,
+      "score": 4,
       "num_comments": 16,
       "created": 1667338636.0,
       "read_full": true
@@ -388,7 +388,7 @@
       "snippet": "Heya, what do you all do to keep your bodies in top shape  when you're not kiteboarding",
       "spots": [],
       "relevance": "high",
-      "score": 8,
+      "score": 6,
       "num_comments": 12,
       "created": 1644313941.0,
       "read_full": true
