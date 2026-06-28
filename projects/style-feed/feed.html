@@ -20743,7 +20743,7 @@ main{flex:1;min-width:0}
     if(Object.keys(state.liked).length<8) return true;
     if(card.__capped) return false;                    // accessory overflow
     var nu=parseFloat(card.dataset.neut);              // loud prints/brights — she's a neutral.
-    if(isNaN(nu) || nu<0.4) return false;              // un-tagged → can't confirm neutral → cut
+    if(!isNaN(nu) && nu<0.3) return false;             // cut CONFIRMED-loud only; keep un-tagged
     return card.__fit!=null && card.__fit>0;
   }
   function shouldShow(card){
@@ -20781,7 +20781,7 @@ main{flex:1;min-width:0}
       if(state.disliked[id]) return true;
       if(ex || Object.keys(state.liked).length<8) return false;
       var nu=parseFloat(c.dataset.neut);
-      return c.__capped || isNaN(nu) || nu<0.4 || c.__fit==null || c.__fit<=0; }).length;
+      return c.__capped || (!isNaN(nu)&&nu<0.3) || c.__fit==null || c.__fit<=0; }).length;
     document.getElementById('nNope').textContent=hid;
     var active=tabEls.filter(function(t){return t.dataset.view===view;})[0];
     document.getElementById('viewTitle').textContent=active?active.querySelector('.lbl').textContent:'All';

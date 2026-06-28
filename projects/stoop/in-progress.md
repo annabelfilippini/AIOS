@@ -60,6 +60,18 @@ Pilot city = Denver; Delaney's stand = Country Club. Faked account (no backend).
   label/placeholder; product profile no calendar, request enabled, sends with
   pickup copy; service path (Delaney) calendar intact. No console errors.
 
+### Product gallery + description (2026-06-28, same file)
+- `.prod-only` mirror of `.svc-only` (setKind toggles both). Product-only:
+  - **Description** textarea (`f-desc`) in the "What you offer" card → `profile.desc`,
+    shown as `#p-desc` in the book section above the pickup line.
+  - **Photo gallery** card (`gal-file`, multi): `obPhotos[]`, reuses `downscale()`
+    at 720px, capped at 6 (localStorage quota; comment notes upgrade path), thumb
+    strip with remove → `profile.photos[]`, shown as `#p-gallery` grid between hero
+    and book. Both render only for products with content; service shows neither.
+  - Saved via ob-go (`desc`/`photos` cleared for services), loaded in fillOnboard.
+- Verified: desc + 2 gallery imgs render on product profile, thumb remove works
+  (2→1), service path hides both. No console errors.
+
 ## Batch 3 — Neighborhood filter + role-aware home
 - Tag each stand with its neighborhood id; home/feed filters to account's picked set.
 - Top-bar place indicator reads account hoods (currently hardcoded "Country Club").

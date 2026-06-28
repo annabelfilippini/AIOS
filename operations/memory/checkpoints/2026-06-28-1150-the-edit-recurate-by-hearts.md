@@ -41,6 +41,34 @@ Matches taste-feedback.md one-line read exactly.
 (images only load through serve.py `/img` proxy). The re-rank is client-side, so
 order reflects her saved hearts immediately on load.
 
+## Round 2 — hard FILTER not just rank (she: "no point keeping things I don't like")
+She asked to DROP non-matching items, not just rank them low, and (via question)
+picked all three tightenings: cut loud prints, cap accessories, demote knee/a-line.
+Implemented in build_feed.py emitted JS:
+- `passesFit(card)` helper: once curated (>=8 likes), show only items with
+  `__fit>0`; closet/inspiration always exempt. shouldShow + tab/chip counts both
+  use it so numbers match what's shown. `showDismissed` toggle relabeled
+  "show everything (N hidden)" and now reveals disliked + filtered + capped.
+- Loud-color cut: `parseFloat(neut) < 0.3` → hidden. Started at 0.4 but that
+  killed all bottoms/shoes (her denim/navy/olive sit ~0.3-0.5); 0.3 keeps muted
+  tones, cuts true brights/red(0.0-0.2). DID NOT cut missing-neut (isNaN) — that
+  wiped whole categories; un-tagged items pass.
+- Accessory cap: `ACC_CAP=12` in rerank() marks `__capped` on the lowest-ranked
+  un-reacted accessories (they're low-signal and flooded 70/122).
+- knee/a-line: extra `d-=8 / d-=10` in liveScore so they fall under the fit>0 gate.
+Result: All view ~33 shown / ~615 hidden, neutral, leads with Dairy Boy etc.
+
+## Known gaps (told her, not yet fixed)
+- RED still slips through: browser only has `c` (colorfulness), not hue, so a
+  red-striped short at neut~0.3 passes. style_engine.py:29 already knows hated
+  colors by NAME server-side — the real fix is a hard red/burgundy exclusion in
+  build_feed.py (server), not the browser. Offered; awaiting her call. For now her
+  ✕ trains it (disliked is hidden + feeds the profile).
+- "All" skews to bags/accessories because her good clothing is ALREADY hearted
+  (Loved=386); All is the un-reacted remainder + daily refresh. Working as intended.
+- build_feed.py vision pass is NON-deterministic per run (re-tags some neut/sil),
+  so exact counts wobble between rebuilds. Don't chase counts; tune the rules.
+
 ## Notes / watch
 - No taste data changed — taste-feedback.md already has the 2026-06-27 derived
   section. This only changed how the feed USES it.
