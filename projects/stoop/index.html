@@ -602,12 +602,13 @@
   function saveAcct(a){ try{ localStorage.setItem(ACCT_KEY,JSON.stringify(a)); }catch(e){} }
   let account = loadAcct();
   function chooseRole(r){ selMode = r==='seller'?'one':'many'; pendingRole=r; go('neighborhood'); }
-  // a stand needs a neighborhood. Send anyone without a seller hood through the geo
-  // picker first (it already has the "Where's your stand?" copy); a seller who already
-  // picked one skips straight to the builder.
+  // a stand needs a neighborhood, so always show the geo picker first (it has the
+  // "Where's your stand?" copy). Pre-select the seller's current hood so a returning
+  // seller just confirms with one tap instead of re-picking.
   function startStand(){
-    if(account&&account.role==='seller'&&account.hoods&&account.hoods.length){ go('onboard'); return; }
-    pendingRole='seller'; selMode='one'; pickedHoods=new Set((account&&account.hoods)||[]); go('neighborhood');
+    pendingRole='seller'; selMode='one';
+    pickedHoods=new Set((account&&account.hoods&&account.hoods.length)?[account.hoods[0]]:[]);
+    go('neighborhood');
   }
 
   // ---------- view router ----------

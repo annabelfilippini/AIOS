@@ -1625,7 +1625,7 @@ SCRIPT = '''
   function showWhy(id){ whyId=id;
     whyEl.querySelectorAll('.whychip').forEach(function(c){c.classList.remove('on');});
     whyEl.classList.add('on');
-    if(whyTimer)clearTimeout(whyTimer); whyTimer=setTimeout(hideWhy,5000);
+    if(whyTimer)clearTimeout(whyTimer); whyTimer=setTimeout(hideWhy,8000);
   }
   whyEl.addEventListener('click',function(e){
     var c=e.target.closest('.whychip'); if(!c||!whyId)return;
