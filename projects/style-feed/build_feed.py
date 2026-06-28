@@ -1525,8 +1525,8 @@ SCRIPT = '''
     var c=catsOf(card); if(c.indexOf('closet')>=0||c.indexOf('inspiration')>=0) return true;
     if(Object.keys(state.liked).length<8) return true;
     if(card.__capped) return false;                    // accessory overflow
-    var nu=parseFloat(card.dataset.neut);              // loud prints/brights — she's a neutral
-    if(!isNaN(nu) && nu<0.4) return false;
+    var nu=parseFloat(card.dataset.neut);              // loud prints/brights — she's a neutral.
+    if(isNaN(nu) || nu<0.4) return false;              // un-tagged → can't confirm neutral → cut
     return card.__fit!=null && card.__fit>0;
   }
   function shouldShow(card){
@@ -1564,7 +1564,7 @@ SCRIPT = '''
       if(state.disliked[id]) return true;
       if(ex || Object.keys(state.liked).length<8) return false;
       var nu=parseFloat(c.dataset.neut);
-      return c.__capped || (!isNaN(nu)&&nu<0.4) || c.__fit==null || c.__fit<=0; }).length;
+      return c.__capped || isNaN(nu) || nu<0.4 || c.__fit==null || c.__fit<=0; }).length;
     document.getElementById('nNope').textContent=hid;
     var active=tabEls.filter(function(t){return t.dataset.view===view;})[0];
     document.getElementById('viewTitle').textContent=active?active.querySelector('.lbl').textContent:'All';

@@ -112,6 +112,15 @@
   .kind.on{background:var(--accent);color:var(--accent-ink)}
   .kind.on small{color:var(--accent-ink);opacity:.92}
 
+  /* product gallery — builder thumbs + profile grid */
+  .gallery-edit{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+  .gthumb{position:relative;width:84px;height:84px;border-radius:12px;overflow:hidden;border:2px solid var(--ink)}
+  .gthumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .gthumb button{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font-family:'Fredoka';font-size:14px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+  .pgallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;padding:18px clamp(22px,5vw,52px) 0}
+  .pgallery img{width:100%;aspect-ratio:1;object-fit:cover;border:3px solid var(--ink);border-radius:16px;display:block}
+  .pdesc{font-size:15px;color:var(--ink);font-weight:600;line-height:1.45;white-space:pre-wrap;margin:0 0 16px}
+
   /* ============ ONBOARDING ============ */
   .ob{max-width:560px;margin:0 auto;padding:8px clamp(18px,5vw,28px) 80px}
   .ob-head{text-align:center;margin:6px 0 26px}
@@ -382,10 +391,19 @@
       </div>
     </div>
 
+    <div class="card-q prod-only">
+      <h2>Photos of what you're selling</h2>
+      <div class="hint">Add a few so neighbors can see what they're getting.</div>
+      <div class="gallery-edit" id="gal-prev"></div>
+      <button type="button" class="photo-btn" id="gal-btn">Add photos</button>
+      <input type="file" id="gal-file" accept="image/*" multiple hidden />
+    </div>
+
     <div class="card-q">
       <h2>What you offer</h2>
       <div class="hint" id="ofr-hint">The thing neighbors can book.</div>
       <div class="field"><label>Title of your page</label><input id="f-title" placeholder="Delaney's Lacrosse Lessons" /></div>
+      <div class="field prod-only"><label>Product description</label><textarea id="f-desc" placeholder="Raw wildflower honey from our backyard hives. About 8oz a jar."></textarea></div>
       <div class="two">
         <div class="field"><label>Price</label><input id="f-price" placeholder="$30" /></div>
         <div class="field"><label id="unit-lab">Per</label><input id="f-unit" placeholder="lesson" /></div>
@@ -464,11 +482,14 @@
         <div class="facts" id="p-facts"></div>
       </div>
 
+      <div class="pgallery" id="p-gallery" style="display:none"></div>
+
       <div class="book">
         <div class="lead">
           <h2 id="p-lead-h">Pick a time</h2>
           <div class="price-tag" id="p-price">—</div>
         </div>
+        <div class="pdesc" id="p-desc" style="display:none"></div>
         <p class="sub" id="p-sub">Tap a day with openings, then choose a time. I'll text or email you back to lock it in.</p>
 
         <div class="calnav">
@@ -646,13 +667,16 @@
   let obTheme = 'pink';
   let obPhoto = '';     // data URL (uploaded) or 'delaney.jpg' default
   let obKind = 'service'; // 'service' (books a time) or 'product' (buys an item)
+  let obPhotos = [];      // product gallery (data URLs), product-only
 
-  // products skip scheduling + how-long/where/what-to-bring; services keep them.
+  // products skip scheduling + how-long/where/what-to-bring, and gain a gallery
+  // + description; services keep the calendar. .svc-only / .prod-only toggle together.
   function setKind(k){
     obKind=k;
     document.querySelectorAll('#q-kind .kind').forEach(b=>b.classList.toggle('on',b.dataset.kind===k));
     const svc = k==='service';
     document.querySelectorAll('.svc-only').forEach(el=>el.style.display = svc?'':'none');
+    document.querySelectorAll('.prod-only').forEach(el=>el.style.display = svc?'none':'');
     document.getElementById('ofr-hint').textContent = svc?'The thing neighbors can book.':'The thing neighbors can buy.';
     document.getElementById('unit-lab').textContent = svc?'Per':'Each';
     document.getElementById('f-unit').placeholder = svc?'lesson':'jar';
@@ -689,6 +713,19 @@
   document.getElementById('ph-file').onchange=(e)=>{
     const file=e.target.files[0]; if(!file) return;
     downscale(file,480,(url)=>{ obPhoto=url; setPhotoPreview(); });
+  };
+  // product gallery: a few larger photos of the item. ponytail: cap at 6 to keep
+  // the localStorage quota safe (each ~80KB at 720px); add a backend if more is needed.
+  function renderGallery(){
+    const box=document.getElementById('gal-prev');
+    box.innerHTML=obPhotos.map((u,i)=>`<div class="gthumb"><img src="${u}" alt=""><button type="button" data-i="${i}" aria-label="remove">×</button></div>`).join('');
+    box.querySelectorAll('button').forEach(b=>b.onclick=()=>{ obPhotos.splice(+b.dataset.i,1); renderGallery(); });
+  }
+  document.getElementById('gal-btn').onclick=()=>document.getElementById('gal-file').click();
+  document.getElementById('gal-file').onchange=(e)=>{
+    const room=6-obPhotos.length;
+    [...e.target.files].slice(0,Math.max(0,room)).forEach(f=>downscale(f,720,(url)=>{ obPhotos.push(url); renderGallery(); }));
+    e.target.value='';
   };
   // When2Meet-style paint grid. Days = columns, 30-min slots 9am–8pm = rows.
   // obDays[dow] holds the label strings the booking calendar reads (shape unchanged).
@@ -767,14 +804,16 @@
     document.getElementById('f-dur').value=p.dur||'';
     document.getElementById('f-loc').value=p.loc||'';
     document.getElementById('f-bring').value=p.bring||'';
+    document.getElementById('f-desc').value=p.desc||'';
     document.getElementById('f-phone').value=p.phone||'';
+    obPhotos=(p.photos||[]).slice();
     obDays = JSON.parse(JSON.stringify(p.avail||{}));
     obWeek = weekStart(today);
     obTheme = p.theme||'pink';
     obPhoto = p.photo||'';
     document.getElementById('ob-back').style.display = '';
     setKind(p.kind || (mode==='edit'?'service':obKind));
-    renderDayTimes(); buildSwatches(); applyTheme(obTheme); setPhotoPreview();
+    renderDayTimes(); buildSwatches(); applyTheme(obTheme); setPhotoPreview(); renderGallery();
   }
   document.getElementById('ob-go').onclick=()=>{
     const svc = obKind==='service';
@@ -784,6 +823,7 @@
       title:val('f-title')||((val('f-name')||'My')+"'s stand"),
       price:val('f-price')||'$0', unit:val('f-unit')||(svc?'session':'item'),
       dur:svc?val('f-dur'):'', loc:svc?val('f-loc'):'', bring:svc?val('f-bring'):'',
+      desc:svc?'':val('f-desc'), photos:svc?[]:obPhotos.slice(),
       phone:val('f-phone'), theme:obTheme, photo:effectivePhoto(),
       about:val('f-about').split(/\n\n+/).map(s=>s.trim()).filter(Boolean),
       avail:svc?obDays:{}
@@ -840,6 +880,15 @@
     document.getElementById('p-facts').innerHTML=facts.map(f=>`<span class="fact">${f}</span>`).join('');
     document.getElementById('p-price').innerHTML=`${profile.price} <small>/ ${profile.unit}</small>`;
     document.getElementById('p-about').innerHTML=(profile.about||[]).map((t,i)=>`<p${i?' style="margin-top:12px"':''}>${t}</p>`).join('');
+
+    // product extras: gallery (between hero + book) and description (in the book)
+    const gal=document.getElementById('p-gallery');
+    if(!isSvc && (profile.photos||[]).length){ gal.style.display=''; gal.innerHTML=profile.photos.map(u=>`<img src="${u}" alt="${profile.title}">`).join(''); }
+    else { gal.style.display='none'; gal.innerHTML=''; }
+    const desc=document.getElementById('p-desc');
+    if(!isSvc && profile.desc){ desc.style.display=''; desc.textContent=profile.desc; }
+    else { desc.style.display='none'; desc.textContent=''; }
+
     renderMoreKids();
 
     // products have no schedule: hide the calendar, enable the request button outright.
