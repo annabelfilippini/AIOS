@@ -1476,13 +1476,14 @@ SCRIPT = '''
     }
     var nu=parseFloat(card.dataset.neut);
     if(!isNaN(nu) && P.Lneu!=null) d+=5*(1-2*Math.abs(nu-P.Lneu));
+    // Stash fit so shouldShow() can DROP anything that doesn't lean toward her
+    // hearts (her rule: "no point keeping things I don't like").
+    card.__fit=d; card.__pos=pos;
     // Cold start (barely curated): keep the catalogue order so the feed isn't empty.
     var nLiked=Object.keys(state.liked).length;
     if(nLiked<8) return base+d;
     // She's curated. Re-curate to LOOK LIKE her hearts: fit dominates, base is only
-    // a faint tiebreaker. Her rule — "anything I haven't reacted to, I don't like" —
-    // means an un-reacted item with no positive overlap gets pushed down; it has to
-    // earn its place by resembling something she hearted.
+    // a faint tiebreaker.
     if(pos===0) d-=12;
     return d*3 + base*0.12;
   }
