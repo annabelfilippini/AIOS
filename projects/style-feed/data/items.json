@@ -636,7 +636,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1776995138286",
   "url": "https://jcrew.com/p/womens/categories/accessories/sunglasses-and-chains/sunglasses/CR834",
   "score": 100,
-  "base": 85,
+  "base": 84,
   "cats": [
    "accessory"
   ],
@@ -1993,7 +1993,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1766226820394",
   "url": "https://nordstrom.com/s/8345379",
   "score": 100,
-  "base": 82,
+  "base": 81,
   "cats": [
    "bag"
   ],
@@ -2972,7 +2972,7 @@
   "img": "https://m.media-amazon.com/images/G/01/Shopbop/p/prod/products/aeyde/aeyde3026511939/aeyde3026511939_1774621971217_2-0.jpg",
   "url": "https://shopbop.com/amaya-nappa-leather-port-aeyde/vp/v=1/1513945624.htm",
   "score": 100,
-  "base": 71,
+  "base": 70,
   "cats": [
    "shoe"
   ],
@@ -4172,7 +4172,7 @@
   "img": "https://is4.revolveassets.com/images/p4/n/tv/DL19-WP15_V1.jpg",
   "url": "https://www.revolve.com/dl-taylor-relaxed-barrel-high-rise-linen-pants-in-crema-linen/dp/DL19-WP15/",
   "score": 100,
-  "base": 98,
+  "base": 97,
   "cats": [
    "bottom"
   ],
@@ -4559,7 +4559,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1779988739897",
   "url": "https://zappos.com/p/womens-sam-edelman-ellina-rich-cognac/product/9996187/color/589928",
   "score": 100,
-  "base": 73,
+  "base": 72,
   "cats": [
    "shoe"
   ],
@@ -4685,7 +4685,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1752796330660",
   "url": "https://shopbop.com/woven-shoulder-bag-madewell/vp/v=1/1594717817.htm",
   "score": 100,
-  "base": 99,
+  "base": 98,
   "cats": [
    "bag"
   ],
@@ -5024,70 +5024,6 @@
   "fab": "cotton",
   "drp": "structured",
   "bk": "closed"
- },
- {
-  "id": "closet_zara-ribbed-black",
-  "brand": "Zara",
-  "title": "Ribbed Sleeveless Top",
-  "price": "",
-  "img": "https://static.zara.net/photos//assets/public/4dd9/04ce/290d42c68d28/e6a9e42993ae/03253301800-f1/03253301800-f1.jpg",
-  "url": "#",
-  "score": 99,
-  "base": 100,
-  "cats": [
-   "top",
-   "closet"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "You like Zara",
-  "new": 0,
-  "creators": "Closet",
-  "brand_l": "zara",
-  "c": 0.3259,
-  "neut": 0.95,
-  "om": 0.8,
-  "sil": "fitted",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "hip",
-  "fab": "knit",
-  "drp": "clingy",
-  "bk": "closed"
- },
- {
-  "id": "tuckernuckcashmeretrianglescarf",
-  "brand": "Tuckernuck",
-  "title": "Cashmere Triangle Scarf",
-  "price": "$128",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1771448048665",
-  "url": "https://tnuck.com/products/ice-blue-cashmere-triangle-scarf",
-  "score": 99,
-  "base": 85,
-  "cats": [
-   "knit",
-   "accessory"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "You loved this",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "tuckernuck",
-  "c": 0.2801,
-  "neut": 0.7,
-  "om": 0.8,
-  "sil": "other",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "cashmere",
-  "drp": "fluid",
-  "bk": ""
  },
  {
   "id": "mothertheramblerzipanklejeans",
@@ -5527,69 +5463,36 @@
   "bk": ""
  },
  {
-  "id": "zaralinenblendblousezwcollection",
-  "brand": "Zara",
-  "title": "Linen Blend Blouse ZW Collection",
-  "price": "$60",
-  "img": "https://static.zara.net/assets/public/ec0f/a588/8531471ab88d/c8b05b9a11e0/04786036321-a2/04786036321-a2.jpg?ts=1775657511574&w=1809",
-  "url": "https://www.zara.com/us/en/linen-blend-blouse-zw-collection-p04786036.html",
+  "id": "tuckernuckcashmeretrianglescarf",
+  "brand": "Tuckernuck",
+  "title": "Cashmere Triangle Scarf",
+  "price": "$128",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1771448048665",
+  "url": "https://tnuck.com/products/ice-blue-cashmere-triangle-scarf",
   "score": 98,
-  "base": 100,
+  "base": 84,
   "cats": [
-   "top"
-  ],
-  "occ": [
-   "casual",
-   "vacation",
-   "work"
-  ],
-  "why": "You like Zara",
-  "new": 0,
-  "creators": "Zara",
-  "brand_l": "zara",
-  "c": 0.3241,
-  "neut": 0.95,
-  "om": 0.85,
-  "sil": "flowy",
-  "form": "smart-casual",
-  "neck": "off-shoulder",
-  "slv": "puff",
-  "len": "tunic",
-  "fab": "cotton",
-  "drp": "fluid",
-  "bk": "closed"
- },
- {
-  "id": "closet_nuuly-fp-forevermore",
-  "brand": "Free People",
-  "title": "Forevermore LS Top",
-  "price": "",
-  "img": "https://s7d2.scene7.com/is/image/nu/94682457_010_b?wid=800&fmt=jpeg",
-  "url": "#",
-  "score": 98,
-  "base": 100,
-  "cats": [
-   "top",
-   "closet"
+   "knit",
+   "accessory"
   ],
   "occ": [
    "casual"
   ],
-  "why": "You like Free People",
+  "why": "You loved this",
   "new": 0,
-  "creators": "Closet",
-  "brand_l": "free people",
-  "c": 0.4177,
-  "neut": 0.8,
-  "om": 0.5,
-  "sil": "flowy",
+  "creators": "Carly Riordan",
+  "brand_l": "tuckernuck",
+  "c": 0.2801,
+  "neut": 0.7,
+  "om": 0.8,
+  "sil": "other",
   "form": "casual",
   "neck": "",
   "slv": "",
-  "len": "hip",
-  "fab": "cotton",
+  "len": "",
+  "fab": "cashmere",
   "drp": "fluid",
-  "bk": "closed"
+  "bk": ""
  },
  {
   "id": "jcrewpullonmidiskirtinlotusprint",
@@ -5715,6 +5618,39 @@
   "fab": "synthetic",
   "drp": "structured",
   "bk": ""
+ },
+ {
+  "id": "zaralinenblendblousezwcollection",
+  "brand": "Zara",
+  "title": "Linen Blend Blouse ZW Collection",
+  "price": "$60",
+  "img": "https://static.zara.net/assets/public/ec0f/a588/8531471ab88d/c8b05b9a11e0/04786036321-a2/04786036321-a2.jpg?ts=1775657511574&w=1809",
+  "url": "https://www.zara.com/us/en/linen-blend-blouse-zw-collection-p04786036.html",
+  "score": 97,
+  "base": 100,
+  "cats": [
+   "top"
+  ],
+  "occ": [
+   "casual",
+   "vacation",
+   "work"
+  ],
+  "why": "You like Zara",
+  "new": 0,
+  "creators": "Zara",
+  "brand_l": "zara",
+  "c": 0.3241,
+  "neut": 0.95,
+  "om": 0.85,
+  "sil": "flowy",
+  "form": "smart-casual",
+  "neck": "off-shoulder",
+  "slv": "puff",
+  "len": "tunic",
+  "fab": "cotton",
+  "drp": "fluid",
+  "bk": "closed"
  },
  {
   "id": "tonybiancohypeheel",
@@ -6064,6 +6000,38 @@
   "bk": ""
  },
  {
+  "id": "closet_zara-ribbed-black",
+  "brand": "Zara",
+  "title": "Ribbed Sleeveless Top",
+  "price": "",
+  "img": "https://static.zara.net/photos//assets/public/4dd9/04ce/290d42c68d28/e6a9e42993ae/03253301800-f1/03253301800-f1.jpg",
+  "url": "#",
+  "score": 95,
+  "base": 100,
+  "cats": [
+   "top",
+   "closet"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "You like Zara",
+  "new": 0,
+  "creators": "Closet",
+  "brand_l": "zara",
+  "c": 0.3259,
+  "neut": 0.95,
+  "om": 0.8,
+  "sil": "fitted",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "hip",
+  "fab": "knit",
+  "drp": "clingy",
+  "bk": ""
+ },
+ {
   "id": "staudsamaracottonshorts",
   "brand": "STAUD",
   "title": "Samara Cotton Shorts",
@@ -6347,67 +6315,36 @@
   "bk": ""
  },
  {
-  "id": "abercrombieafformebootcutpant",
-  "brand": "Abercrombie",
-  "title": "A&F Forme Bootcut Pant",
-  "price": "$90",
-  "img": "https://img.abercrombie.com/is/image/anf/KIC_156-5457-00855-480_model1?policy=product-medium",
-  "url": "https://www.abercrombie.com/shop/us/p/a-and-f-forme-bootcut-pant-60287846",
+  "id": "closet_nuuly-fp-forevermore",
+  "brand": "Free People",
+  "title": "Forevermore LS Top",
+  "price": "",
+  "img": "https://s7d2.scene7.com/is/image/nu/94682457_010_b?wid=800&fmt=jpeg",
+  "url": "#",
   "score": 94,
   "base": 100,
   "cats": [
-   "bottom"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "You like Abercrombie",
-  "new": 0,
-  "creators": "Abercrombie",
-  "brand_l": "abercrombie",
-  "c": 0.1647,
-  "neut": 0.95,
-  "om": 0.85,
-  "sil": "tailored",
-  "form": "smart-casual",
-  "neck": "collared",
-  "slv": "long",
-  "len": "",
-  "fab": "wool",
-  "drp": "tailored",
-  "bk": ""
- },
- {
-  "id": "tuckernuckcashmerehenricrewnecksweater",
-  "brand": "Tuckernuck",
-  "title": "Cashmere Henri Crewneck Sweater",
-  "price": "$288",
-  "img": "https://static.shopmy.us/uploads/img-1770264370469",
-  "url": "https://tnuck.com/products/cameo-blue-cashmere-henri-crewneck",
-  "score": 94,
-  "base": 99,
-  "cats": [
-   "knit"
+   "top",
+   "closet"
   ],
   "occ": [
    "casual"
   ],
-  "why": "You loved this",
+  "why": "You like Free People",
   "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "tuckernuck",
-  "c": 0.2481,
-  "neut": 0.7,
-  "om": 0.75,
-  "sil": "relaxed",
+  "creators": "Closet",
+  "brand_l": "free people",
+  "c": 0.4177,
+  "neut": 0.8,
+  "om": 0.5,
+  "sil": "flowy",
   "form": "casual",
-  "neck": "crew",
-  "slv": "long",
+  "neck": "",
+  "slv": "",
   "len": "hip",
-  "fab": "knit",
+  "fab": "cotton",
   "drp": "fluid",
-  "bk": "closed"
+  "bk": ""
  },
  {
   "id": "toryburchmillerjellykittenheel",
@@ -7015,35 +6952,66 @@
   "bk": ""
  },
  {
-  "id": "closet_zara-ribbed-white",
-  "brand": "Zara",
-  "title": "Ribbed Sleeveless Top",
-  "price": "",
-  "img": "https://static.zara.net/photos//assets/public/1e27/cc3d/790e44f8bd98/6e25d7a5fbd8/03253301250-f1/03253301250-f1.jpg",
-  "url": "#",
+  "id": "abercrombieafformebootcutpant",
+  "brand": "Abercrombie",
+  "title": "A&F Forme Bootcut Pant",
+  "price": "$90",
+  "img": "https://img.abercrombie.com/is/image/anf/KIC_156-5457-00855-480_model1?policy=product-medium",
+  "url": "https://www.abercrombie.com/shop/us/p/a-and-f-forme-bootcut-pant-60287846",
   "score": 93,
   "base": 100,
   "cats": [
-   "top",
-   "closet"
+   "bottom"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "You like Abercrombie",
+  "new": 0,
+  "creators": "Abercrombie",
+  "brand_l": "abercrombie",
+  "c": 0.1647,
+  "neut": 0.95,
+  "om": 0.85,
+  "sil": "tailored",
+  "form": "smart-casual",
+  "neck": "collared",
+  "slv": "long",
+  "len": "",
+  "fab": "wool",
+  "drp": "tailored",
+  "bk": ""
+ },
+ {
+  "id": "tuckernuckcashmerehenricrewnecksweater",
+  "brand": "Tuckernuck",
+  "title": "Cashmere Henri Crewneck Sweater",
+  "price": "$288",
+  "img": "https://static.shopmy.us/uploads/img-1770264370469",
+  "url": "https://tnuck.com/products/cameo-blue-cashmere-henri-crewneck",
+  "score": 93,
+  "base": 98,
+  "cats": [
+   "knit"
   ],
   "occ": [
    "casual"
   ],
-  "why": "You like Zara",
+  "why": "You loved this",
   "new": 0,
-  "creators": "Closet",
-  "brand_l": "zara",
-  "c": 0.0119,
-  "neut": 0.97,
-  "om": 0.8,
-  "sil": "fitted",
+  "creators": "Carly Riordan",
+  "brand_l": "tuckernuck",
+  "c": 0.2481,
+  "neut": 0.7,
+  "om": 0.75,
+  "sil": "relaxed",
   "form": "casual",
-  "neck": "",
-  "slv": "",
+  "neck": "crew",
+  "slv": "long",
   "len": "hip",
   "fab": "knit",
-  "drp": "clingy",
+  "drp": "fluid",
   "bk": "closed"
  },
  {
@@ -8310,7 +8278,7 @@
   "img": "https://static.zara.net/assets/public/1da4/4b04/6e3c49548e96/d60b9f322284/04745031405-p/04745031405-p.jpg?ts=1776852182877&w=1809",
   "url": "https://www.zara.com/us/en/belted-midi-dress-p04745031.html",
   "score": 89,
-  "base": 100,
+  "base": 99,
   "cats": [
    "dress"
   ],
@@ -8430,6 +8398,38 @@
   "bk": "closed"
  },
  {
+  "id": "closet_zara-ribbed-white",
+  "brand": "Zara",
+  "title": "Ribbed Sleeveless Top",
+  "price": "",
+  "img": "https://static.zara.net/photos//assets/public/1e27/cc3d/790e44f8bd98/6e25d7a5fbd8/03253301250-f1/03253301250-f1.jpg",
+  "url": "#",
+  "score": 89,
+  "base": 100,
+  "cats": [
+   "top",
+   "closet"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "You like Zara",
+  "new": 0,
+  "creators": "Closet",
+  "brand_l": "zara",
+  "c": 0.0119,
+  "neut": 0.97,
+  "om": 0.8,
+  "sil": "fitted",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "hip",
+  "fab": "knit",
+  "drp": "clingy",
+  "bk": ""
+ },
+ {
   "id": "jcrewempirewaistdressinstripedcottonpoplin",
   "brand": "J.Crew",
   "title": "Empire-Waist Dress in striped Cotton Poplin",
@@ -8437,7 +8437,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1777989855426",
   "url": "https://jcrew.com/m/womens/categories/clothing/dresses-and-jumpsuits/empire-waist-dress-in-cotton-poplin/MQ057",
   "score": 88,
-  "base": 88,
+  "base": 87,
   "cats": [
    "dress"
   ],
@@ -8681,37 +8681,6 @@
   "bk": ""
  },
  {
-  "id": "jcrewboatnecksweaterinstripe",
-  "brand": "J.Crew",
-  "title": "Boatneck Sweater in Stripe",
-  "price": "$118",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1774958121350",
-  "url": "https://jcrew.com/p/womens/categories/clothing/sweaters/pullovers/boatneck-sweater-in-stripe/CS011",
-  "score": 87,
-  "base": 92,
-  "cats": [
-   "knit"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "j.crew",
-  "c": 0.5026,
-  "neut": 0.35,
-  "om": 0.4,
-  "sil": "fitted",
-  "form": "casual",
-  "neck": "crew",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "knit",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "jcrewaudreypailletteslingbacksandalsinleather",
   "brand": "J.Crew",
   "title": "Audrey Paillette Slingback Sandals in Leather",
@@ -8806,35 +8775,35 @@
   "bk": ""
  },
  {
-  "id": "madewellthesignaturewovenminitotebag",
-  "brand": "Madewell",
-  "title": "The Signature Woven Mini Tote Bag",
-  "price": "$138",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1781014069267",
-  "url": "https://madewell.com/p/womens/accessories/bags/mini-bags/the-signature-woven-mini-tote/NV599",
+  "id": "jcrewboatnecksweaterinstripe",
+  "brand": "J.Crew",
+  "title": "Boatneck Sweater in Stripe",
+  "price": "$118",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1774958121350",
+  "url": "https://jcrew.com/p/womens/categories/clothing/sweaters/pullovers/boatneck-sweater-in-stripe/CS011",
   "score": 86,
-  "base": 98,
+  "base": 91,
   "cats": [
-   "bag"
+   "knit"
   ],
   "occ": [
    "casual"
   ],
-  "why": "Goes with your new Zara embroidered shorts",
+  "why": "Goes with your new Zara striped shorts",
   "new": 0,
   "creators": "Carly Riordan",
-  "brand_l": "madewell",
-  "c": 0.7486,
-  "neut": 0.7,
-  "om": 0.75,
-  "sil": "other",
+  "brand_l": "j.crew",
+  "c": 0.5026,
+  "neut": 0.35,
+  "om": 0.4,
+  "sil": "fitted",
   "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "other",
+  "neck": "crew",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "knit",
   "drp": "structured",
-  "bk": ""
+  "bk": "closed"
  },
  {
   "id": "quince100organiccottongauzeshorts",
@@ -8864,37 +8833,6 @@
   "slv": "",
   "len": "mini",
   "fab": "cotton",
-  "drp": "structured",
-  "bk": ""
- },
- {
-  "id": "madewellthewovenminitotebag",
-  "brand": "Madewell",
-  "title": "The Woven Mini Tote Bag",
-  "price": "$88",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1779817462026",
-  "url": "https://madewell.com/p/womens/accessories/bags/mini-bags/the-woven-mini-tote/OA249",
-  "score": 86,
-  "base": 98,
-  "cats": [
-   "bag"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "madewell",
-  "c": 0.5693,
-  "neut": 0.7,
-  "om": 0.75,
-  "sil": "structured",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "other",
   "drp": "structured",
   "bk": ""
  },
@@ -9120,132 +9058,66 @@
   "bk": "closed"
  },
  {
-  "id": "closet_zara-tee-white",
-  "brand": "Zara",
-  "title": "Cotton Sleeveless T-Shirt",
-  "price": "",
-  "img": "https://static.zara.net/photos//assets/public/755a/9a2c/7cd54694aa43/2ebcb1c77542/04174324250-f1/04174324250-f1.jpg",
-  "url": "#",
-  "score": 85,
-  "base": 100,
-  "cats": [
-   "top",
-   "closet"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "You like Zara",
-  "new": 0,
-  "creators": "Closet",
-  "brand_l": "zara",
-  "c": 0.0143,
-  "neut": 0.97,
-  "om": 0.8,
-  "sil": "fitted",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "hip",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
-  "id": "closet_nuuly-madewell-leah",
+  "id": "madewellthesignaturewovenminitotebag",
   "brand": "Madewell",
-  "title": "Leah 60's Top",
-  "price": "",
-  "img": "https://s7d2.scene7.com/is/image/nu/108276783_010_b?wid=800&fmt=jpeg",
-  "url": "#",
+  "title": "The Signature Woven Mini Tote Bag",
+  "price": "$138",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1781014069267",
+  "url": "https://madewell.com/p/womens/accessories/bags/mini-bags/the-signature-woven-mini-tote/NV599",
   "score": 85,
-  "base": 100,
+  "base": 97,
   "cats": [
-   "top",
-   "closet"
+   "bag"
   ],
   "occ": [
    "casual"
   ],
-  "why": "Not your usual Madewell",
-  "new": 0,
-  "creators": "Closet",
-  "brand_l": "madewell",
-  "c": 0.4359,
-  "neut": 0.85,
-  "om": 0.6,
-  "sil": "relaxed",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "hip",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
-  "id": "closet_nuuly-nativeyouth-broderie",
-  "brand": "Native Youth",
-  "title": "Broderie Back-Tie Top",
-  "price": "",
-  "img": "https://s7d2.scene7.com/is/image/nu/109813840_010_b?wid=800&fmt=jpeg",
-  "url": "#",
-  "score": 85,
-  "base": 96,
-  "cats": [
-   "top",
-   "closet"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "You like Native Youth",
-  "new": 0,
-  "creators": "Closet",
-  "brand_l": "native youth",
-  "c": 0.4837,
-  "neut": 0.85,
-  "om": 0.6,
-  "sil": "relaxed",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "hip",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
-  "id": "tuckernuckpistachiocashmererileycardigan",
-  "brand": "Tuckernuck",
-  "title": "Pistachio Cashmere Riley Cardigan",
-  "price": "$188",
-  "img": "https://static.shopmy.us/uploads/bdce474d-8e03-43f1-905d-5f6e95a5c8fd_1698756_01_1600x2398.jpg",
-  "url": "https://tnuck.com/products/pistachio-cashmere-riley-cardigan",
-  "score": 85,
-  "base": 100,
-  "cats": [
-   "knit"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "Goes with your new Zara striped shorts",
+  "why": "Goes with your new Zara embroidered shorts",
   "new": 0,
   "creators": "Carly Riordan",
-  "brand_l": "tuckernuck",
-  "c": 0.35,
-  "neut": 0.55,
+  "brand_l": "madewell",
+  "c": 0.7486,
+  "neut": 0.7,
   "om": 0.75,
-  "sil": "fitted",
-  "form": "smart-casual",
-  "neck": "crew",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "knit",
-  "drp": "tailored",
-  "bk": "closed"
+  "sil": "other",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "other",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "madewellthewovenminitotebag",
+  "brand": "Madewell",
+  "title": "The Woven Mini Tote Bag",
+  "price": "$88",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1779817462026",
+  "url": "https://madewell.com/p/womens/accessories/bags/mini-bags/the-woven-mini-tote/OA249",
+  "score": 85,
+  "base": 97,
+  "cats": [
+   "bag"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Grace Atwood",
+  "brand_l": "madewell",
+  "c": 0.5693,
+  "neut": 0.7,
+  "om": 0.75,
+  "sil": "structured",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "other",
+  "drp": "structured",
+  "bk": ""
  },
  {
   "id": "t3singlepassstylemax1flatiron",
@@ -9317,7 +9189,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1779099895012",
   "url": "https://jcrew.com/p/womens/categories/clothing/dresses-and-jumpsuits/CS953",
   "score": 84,
-  "base": 100,
+  "base": 99,
   "cats": [
    "dress"
   ],
@@ -9566,38 +9438,6 @@
   "bk": ""
  },
  {
-  "id": "closet_nuuly-zemeta-belllace",
-  "brand": "Zemeta",
-  "title": "Bell Lace Top",
-  "price": "",
-  "img": "https://s7d2.scene7.com/is/image/nu/106502966_010_b?wid=800&fmt=jpeg",
-  "url": "#",
-  "score": 84,
-  "base": 96,
-  "cats": [
-   "top",
-   "closet"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "You like Zemeta",
-  "new": 0,
-  "creators": "Closet",
-  "brand_l": "zemeta",
-  "c": 0.4661,
-  "neut": 0.8,
-  "om": 0.55,
-  "sil": "relaxed",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "hip",
-  "fab": "cotton",
-  "drp": "fluid",
-  "bk": "closed"
- },
- {
   "id": "chanelinterlockingcclogoleatherbowaccentsballetflatspreowned",
   "brand": "CHANEL",
   "title": "Interlocking CC Logo Leather  Bow Accents Ballet Flats (Pre-Owned)",
@@ -9628,6 +9468,38 @@
   "fab": "leather",
   "drp": "structured",
   "bk": ""
+ },
+ {
+  "id": "tuckernuckpistachiocashmererileycardigan",
+  "brand": "Tuckernuck",
+  "title": "Pistachio Cashmere Riley Cardigan",
+  "price": "$188",
+  "img": "https://static.shopmy.us/uploads/bdce474d-8e03-43f1-905d-5f6e95a5c8fd_1698756_01_1600x2398.jpg",
+  "url": "https://tnuck.com/products/pistachio-cashmere-riley-cardigan",
+  "score": 84,
+  "base": 100,
+  "cats": [
+   "knit"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "tuckernuck",
+  "c": 0.35,
+  "neut": 0.55,
+  "om": 0.75,
+  "sil": "fitted",
+  "form": "smart-casual",
+  "neck": "crew",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "knit",
+  "drp": "tailored",
+  "bk": "closed"
  },
  {
   "id": "closet_zara-ecru-shorts",
@@ -9796,7 +9668,7 @@
   "img": "https://static.shopmy.us/uploads/560f1123-810f-4327-a280-78e2bf3c33b8imgi_2_10595551WHTxWHITExPrimary_189903807.jpg",
   "url": "https://shopbop.com/jolin-dress-ciao-lucia/vp/v=1/1571215236.htm",
   "score": 83,
-  "base": 89,
+  "base": 88,
   "cats": [
    "dress"
   ],
@@ -9884,37 +9756,6 @@
   "bk": "closed"
  },
  {
-  "id": "tuckernuckpistachiocashmerecablekniteloisesweater",
-  "brand": "Tuckernuck",
-  "title": "Pistachio Cashmere Cable Knit Eloise Sweater",
-  "price": "$298",
-  "img": "https://static.shopmy.us/uploads/e5e09186-7a25-41c7-8a98-ad45b01c36a8_imgi_1_1698757_01_1199x1799.jpg",
-  "url": "https://tnuck.com/products/green-tea-cashmere-cable-knit-eloise-sweater",
-  "score": 83,
-  "base": 100,
-  "cats": [
-   "knit"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "tuckernuck",
-  "c": 0.3768,
-  "neut": 0.6,
-  "om": 0.75,
-  "sil": "relaxed",
-  "form": "casual",
-  "neck": "crew",
-  "slv": "long",
-  "len": "hip",
-  "fab": "knit",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "byanthropologiewaffleknitscallopedcardigan",
   "brand": "By Anthropologie",
   "title": "Waffle Knit Scalloped Cardigan",
@@ -9954,7 +9795,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781377677144",
   "url": "https://jcrew.com/m/womens/categories/clothing/swim/sadie-beach-dress-in-cotton-voile-marigold-block-print/MQ125",
   "score": 82,
-  "base": 100,
+  "base": 99,
   "cats": [
    "dress"
   ],
@@ -10043,6 +9884,37 @@
   "bk": ""
  },
  {
+  "id": "tuckernuckpistachiocashmerecablekniteloisesweater",
+  "brand": "Tuckernuck",
+  "title": "Pistachio Cashmere Cable Knit Eloise Sweater",
+  "price": "$298",
+  "img": "https://static.shopmy.us/uploads/e5e09186-7a25-41c7-8a98-ad45b01c36a8_imgi_1_1698757_01_1199x1799.jpg",
+  "url": "https://tnuck.com/products/green-tea-cashmere-cable-knit-eloise-sweater",
+  "score": 82,
+  "base": 100,
+  "cats": [
+   "knit"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "tuckernuck",
+  "c": 0.3768,
+  "neut": 0.6,
+  "om": 0.75,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "crew",
+  "slv": "long",
+  "len": "hip",
+  "fab": "knit",
+  "drp": "structured",
+  "bk": "closed"
+ },
+ {
   "id": "colehaantaresesoftloafers",
   "brand": "Cole Haan",
   "title": "Tarese Soft Loafers",
@@ -10072,6 +9944,37 @@
   "len": "",
   "fab": "leather",
   "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "tuckernuckpoplintrapuntostitchbrieskirt",
+  "brand": "Tuckernuck",
+  "title": "Poplin Trapunto Stitch Brie Skirt",
+  "price": "$198",
+  "img": "https://tnuck.com/cdn/shop/files/1692118_01_2500x.jpg?v=1776781296",
+  "url": "https://tnuck.com/products/white-pintuck-brynn-skirt",
+  "score": 82,
+  "base": 89,
+  "cats": [
+   "bottom"
+  ],
+  "occ": [
+   "work"
+  ],
+  "why": "More like your new Zara striped shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "tuckernuck",
+  "c": 0.2097,
+  "neut": "",
+  "om": "",
+  "sil": "",
+  "form": "",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "",
+  "drp": "",
   "bk": ""
  },
  {
@@ -10264,7 +10167,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1771410951963",
   "url": "https://jcrew.com/m/womens/categories/clothing/dresses-and-jumpsuits/elsie-shirt-dress-in-cotton-poplin/ME913",
   "score": 81,
-  "base": 84,
+  "base": 83,
   "cats": [
    "dress"
   ],
@@ -10296,7 +10199,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1780905326966",
   "url": "https://staud.clothing/products/wells-maxi-dress-white",
   "score": 81,
-  "base": 96,
+  "base": 95,
   "cats": [
    "dress"
   ],
@@ -10507,33 +10410,98 @@
   "bk": ""
  },
  {
-  "id": "talbotsperforatedleatherbucketbag",
-  "brand": "Talbots",
-  "title": "Perforated Leather Bucket Bag",
-  "price": "-",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1771442408963",
-  "url": "https://talbots.com/perforated-leather-bucket-bag/P261061150.html",
+  "id": "closet_zara-tee-white",
+  "brand": "Zara",
+  "title": "Cotton Sleeveless T-Shirt",
+  "price": "",
+  "img": "https://static.zara.net/photos//assets/public/755a/9a2c/7cd54694aa43/2ebcb1c77542/04174324250-f1/04174324250-f1.jpg",
+  "url": "#",
   "score": 81,
-  "base": 68,
+  "base": 95,
   "cats": [
-   "bag"
+   "top",
+   "closet"
   ],
   "occ": [
    "casual"
   ],
-  "why": "Goes with your new Zara embroidered shorts",
+  "why": "You like Zara",
   "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "talbots",
-  "c": 0.2665,
-  "neut": 0.65,
-  "om": 0.75,
-  "sil": "structured",
+  "creators": "Closet",
+  "brand_l": "zara",
+  "c": 0.0143,
+  "neut": 0.97,
+  "om": 0.8,
+  "sil": "fitted",
   "form": "casual",
   "neck": "",
   "slv": "",
-  "len": "",
-  "fab": "leather",
+  "len": "hip",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "closet_nuuly-madewell-leah",
+  "brand": "Madewell",
+  "title": "Leah 60's Top",
+  "price": "",
+  "img": "https://s7d2.scene7.com/is/image/nu/108276783_010_b?wid=800&fmt=jpeg",
+  "url": "#",
+  "score": 81,
+  "base": 100,
+  "cats": [
+   "top",
+   "closet"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Not your usual Madewell",
+  "new": 0,
+  "creators": "Closet",
+  "brand_l": "madewell",
+  "c": 0.4359,
+  "neut": 0.85,
+  "om": 0.6,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "hip",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "closet_nuuly-nativeyouth-broderie",
+  "brand": "Native Youth",
+  "title": "Broderie Back-Tie Top",
+  "price": "",
+  "img": "https://s7d2.scene7.com/is/image/nu/109813840_010_b?wid=800&fmt=jpeg",
+  "url": "#",
+  "score": 81,
+  "base": 90,
+  "cats": [
+   "top",
+   "closet"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "You like Native Youth",
+  "new": 0,
+  "creators": "Closet",
+  "brand_l": "native youth",
+  "c": 0.4837,
+  "neut": 0.85,
+  "om": 0.6,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "hip",
+  "fab": "cotton",
   "drp": "structured",
   "bk": ""
  },
@@ -10792,38 +10760,6 @@
   "bk": ""
  },
  {
-  "id": "poloralphlaurenlinenstraightpantsinnevis",
-  "brand": "Polo Ralph Lauren",
-  "title": "Linen Straight Pants in Nevis",
-  "price": "$298",
-  "img": "https://is4.revolveassets.com/images/p4/n/tv/PLOR-WP44_V1.jpg",
-  "url": "https://www.revolve.com/polo-ralph-lauren-linen-straight-pants-in-nevis/dp/PLOR-WP44/",
-  "score": 80,
-  "base": 88,
-  "cats": [
-   "bottom"
-  ],
-  "occ": [
-   "casual",
-   "vacation"
-  ],
-  "why": "You like Polo Ralph Lauren",
-  "new": 0,
-  "creators": "Revolve",
-  "brand_l": "polo ralph lauren",
-  "c": 0.1911,
-  "neut": 0.95,
-  "om": 0.75,
-  "sil": "straight",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "full-length",
-  "fab": "linen",
-  "drp": "fluid",
-  "bk": ""
- },
- {
   "id": "zaraplaidroundneckblouse",
   "brand": "Zara",
   "title": "Plaid Round Neck Blouse",
@@ -10853,6 +10789,69 @@
   "fab": "cotton",
   "drp": "structured",
   "bk": "closed"
+ },
+ {
+  "id": "closet_nuuly-zemeta-belllace",
+  "brand": "Zemeta",
+  "title": "Bell Lace Top",
+  "price": "",
+  "img": "https://s7d2.scene7.com/is/image/nu/106502966_010_b?wid=800&fmt=jpeg",
+  "url": "#",
+  "score": 80,
+  "base": 88,
+  "cats": [
+   "top",
+   "closet"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "You like Zemeta",
+  "new": 0,
+  "creators": "Closet",
+  "brand_l": "zemeta",
+  "c": 0.4661,
+  "neut": 0.8,
+  "om": 0.55,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "hip",
+  "fab": "cotton",
+  "drp": "fluid",
+  "bk": ""
+ },
+ {
+  "id": "talbotsperforatedleatherbucketbag",
+  "brand": "Talbots",
+  "title": "Perforated Leather Bucket Bag",
+  "price": "-",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1771442408963",
+  "url": "https://talbots.com/perforated-leather-bucket-bag/P261061150.html",
+  "score": 80,
+  "base": 67,
+  "cats": [
+   "bag"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "talbots",
+  "c": 0.2665,
+  "neut": 0.65,
+  "om": 0.75,
+  "sil": "structured",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "leather",
+  "drp": "structured",
+  "bk": ""
  },
  {
   "id": "withnothingunderneaththeboxercottonseersuckershorts",
@@ -11238,7 +11237,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1774874648185",
   "url": "https://net-a-porter.com/en-us/shop/product/violante-nessi/clothing/midi-dresses/turrel-tie-detailed-jersey-midi-dress/46376663163033444",
   "score": 79,
-  "base": 88,
+  "base": 87,
   "cats": [
    "dress"
   ],
@@ -11261,6 +11260,38 @@
   "fab": "cotton",
   "drp": "fluid",
   "bk": "closed"
+ },
+ {
+  "id": "poloralphlaurenlinenstraightpantsinnevis",
+  "brand": "Polo Ralph Lauren",
+  "title": "Linen Straight Pants in Nevis",
+  "price": "$298",
+  "img": "https://is4.revolveassets.com/images/p4/n/tv/PLOR-WP44_V1.jpg",
+  "url": "https://www.revolve.com/polo-ralph-lauren-linen-straight-pants-in-nevis/dp/PLOR-WP44/",
+  "score": 79,
+  "base": 87,
+  "cats": [
+   "bottom"
+  ],
+  "occ": [
+   "casual",
+   "vacation"
+  ],
+  "why": "You like Polo Ralph Lauren",
+  "new": 0,
+  "creators": "Revolve",
+  "brand_l": "polo ralph lauren",
+  "c": 0.1911,
+  "neut": 0.95,
+  "om": 0.75,
+  "sil": "straight",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "full-length",
+  "fab": "linen",
+  "drp": "fluid",
+  "bk": ""
  },
  {
   "id": "aexaelinencapripantincream",
@@ -11390,69 +11421,6 @@
   "bk": "closed"
  },
  {
-  "id": "laligneminimarinasweater",
-  "brand": "La Ligne",
-  "title": "Mini Marina Sweater",
-  "price": "$250",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1781312965046",
-  "url": "https://shopbop.com/fine-stripe-mini-marina-sweater/vp/v=1/1529655322.htm",
-  "score": 79,
-  "base": 82,
-  "cats": [
-   "knit"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "la ligne",
-  "c": 0.4948,
-  "neut": 0.35,
-  "om": 0.4,
-  "sil": "fitted",
-  "form": "casual",
-  "neck": "crew",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "knit",
-  "drp": "structured",
-  "bk": ""
- },
- {
-  "id": "guestinresidencecompassjanecardigan",
-  "brand": "Guest in Residence",
-  "title": "Compass Jane Cardigan",
-  "price": "$365",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1773418525159",
-  "url": "https://guestinresidence.com/products/compass-jane-cardigan-sail",
-  "score": 79,
-  "base": 100,
-  "cats": [
-   "knit"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "guest in residence",
-  "c": 0.729,
-  "neut": 0.6,
-  "om": 0.8,
-  "sil": "fitted",
-  "form": "casual",
-  "neck": "crew",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "knit",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "reformationarlettepant",
   "brand": "Reformation",
   "title": "Arlette Pant",
@@ -11524,7 +11492,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1774119572643",
   "url": "https://jcrew.com/p/womens/categories/clothing/dresses-and-jumpsuits/CS956",
   "score": 78,
-  "base": 97,
+  "base": 96,
   "cats": [
    "dress"
   ],
@@ -11710,27 +11678,59 @@
   "bk": ""
  },
  {
-  "id": "marinelayerminapointellesweater",
-  "brand": "Marine Layer",
-  "title": "Mina Pointelle Sweater",
-  "price": "$118",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1772596710344",
-  "url": "https://nordstrom.com/s/8779399",
+  "id": "laligneminimarinasweater",
+  "brand": "La Ligne",
+  "title": "Mini Marina Sweater",
+  "price": "$250",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1781312965046",
+  "url": "https://shopbop.com/fine-stripe-mini-marina-sweater/vp/v=1/1529655322.htm",
   "score": 78,
-  "base": 91,
+  "base": 81,
   "cats": [
    "knit"
   ],
   "occ": [
    "casual"
   ],
-  "why": "Goes with your new Zara embroidered shorts",
+  "why": "Goes with your new Zara striped shorts",
   "new": 0,
   "creators": "Carly Riordan",
-  "brand_l": "marine layer",
-  "c": 0.1675,
-  "neut": 0.65,
-  "om": 0.7,
+  "brand_l": "la ligne",
+  "c": 0.4948,
+  "neut": 0.35,
+  "om": 0.4,
+  "sil": "fitted",
+  "form": "casual",
+  "neck": "crew",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "knit",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "guestinresidencecompassjanecardigan",
+  "brand": "Guest in Residence",
+  "title": "Compass Jane Cardigan",
+  "price": "$365",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1773418525159",
+  "url": "https://guestinresidence.com/products/compass-jane-cardigan-sail",
+  "score": 78,
+  "base": 99,
+  "cats": [
+   "knit"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "guest in residence",
+  "c": 0.729,
+  "neut": 0.6,
+  "om": 0.8,
   "sil": "fitted",
   "form": "casual",
   "neck": "crew",
@@ -11834,14 +11834,14 @@
   "bk": ""
  },
  {
-  "id": "tnucksportwilmavnecksweater",
-  "brand": "Tnuck Sport",
-  "title": "Wilma V-Neck Sweater",
-  "price": "$148",
-  "img": "https://static.shopmy.us/uploads/ce69a930-b8ae-4c85-9c3c-36d5c193a516_1739678_05.webp",
-  "url": "https://tnuck.com/products/butter-yellow-wilma-v-neck-sweater",
+  "id": "marinelayerminapointellesweater",
+  "brand": "Marine Layer",
+  "title": "Mina Pointelle Sweater",
+  "price": "$118",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1772596710344",
+  "url": "https://nordstrom.com/s/8779399",
   "score": 77,
-  "base": 87,
+  "base": 90,
   "cats": [
    "knit"
   ],
@@ -11851,16 +11851,16 @@
   "why": "Goes with your new Zara embroidered shorts",
   "new": 0,
   "creators": "Carly Riordan",
-  "brand_l": "tnuck sport",
-  "c": 0.3565,
-  "neut": 0.7,
-  "om": 0.75,
-  "sil": "a-line",
+  "brand_l": "marine layer",
+  "c": 0.1675,
+  "neut": 0.65,
+  "om": 0.7,
+  "sil": "fitted",
   "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "mini",
-  "fab": "cotton",
+  "neck": "crew",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "knit",
   "drp": "structured",
   "bk": "closed"
  },
@@ -11903,7 +11903,7 @@
   "img": "https://static.shopmy.us/uploads/product-adjusted-1780044003417",
   "url": "https://jcrew.com/p/womens/categories/clothing/dresses-and-jumpsuits/v-neck-halter-dress-in-saffron-linen/CV926",
   "score": 76,
-  "base": 96,
+  "base": 95,
   "cats": [
    "dress"
   ],
@@ -12157,7 +12157,7 @@
   "img": "https://static.zara.net/assets/public/30a4/cd8a/5d924d36bf41/b9d01f4e16fe/02806336100-a3/02806336100-a3.jpg?ts=1778147014924&w=1809",
   "url": "https://www.zara.com/us/en/fruit-print-halter-poplin-midi-dress-p02806336.html",
   "score": 76,
-  "base": 95,
+  "base": 94,
   "cats": [
    "dress"
   ],
@@ -12180,38 +12180,6 @@
   "fab": "synthetic",
   "drp": "clingy",
   "bk": "halter"
- },
- {
-  "id": "zaracontrastingtrianglebikinitop",
-  "brand": "Zara",
-  "title": "Contrasting Triangle Bikini Top",
-  "price": "$40",
-  "img": "https://static.zara.net/assets/public/70c1/b433/df27434892e6/cce1be858415/3a9fe2b4129ab88f4214dd9211cc8f8b/3a9fe2b4129ab88f4214dd9211cc8f8b.jpg?ts=1781113793073&w=1809",
-  "url": "https://www.zara.com/us/en/contrasting-triangle-bikini-top-p02910221.html",
-  "score": 76,
-  "base": 73,
-  "cats": [
-   "swim"
-  ],
-  "occ": [
-   "casual",
-   "vacation"
-  ],
-  "why": "You like Zara",
-  "new": 0,
-  "creators": "Zara",
-  "brand_l": "zara",
-  "c": 0.4258,
-  "neut": 0.6,
-  "om": 0.4,
-  "sil": "bodycon",
-  "form": "casual",
-  "neck": "halter",
-  "slv": "sleeveless",
-  "len": "mini",
-  "fab": "synthetic",
-  "drp": "clingy",
-  "bk": "tie-back"
  },
  {
   "id": "aritziadenimforumthe90svintagehirisebaggydenimshort",
@@ -12276,6 +12244,37 @@
   "bk": ""
  },
  {
+  "id": "tnucksportwilmavnecksweater",
+  "brand": "Tnuck Sport",
+  "title": "Wilma V-Neck Sweater",
+  "price": "$148",
+  "img": "https://static.shopmy.us/uploads/ce69a930-b8ae-4c85-9c3c-36d5c193a516_1739678_05.webp",
+  "url": "https://tnuck.com/products/butter-yellow-wilma-v-neck-sweater",
+  "score": 76,
+  "base": 86,
+  "cats": [
+   "knit"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "tnuck sport",
+  "c": 0.3565,
+  "neut": 0.7,
+  "om": 0.75,
+  "sil": "a-line",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "mini",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": "closed"
+ },
+ {
   "id": "lamaregoldthedelphinepant",
   "brand": "La Maregold",
   "title": "The Delphine Pant",
@@ -12315,7 +12314,7 @@
   "img": "https://static.shopmy.us/uploads/img-product-1753600426941",
   "url": "https://showmeyourmumu.com/products/anderson-mini-dress-ivory-shimmery-sequins",
   "score": 75,
-  "base": 79,
+  "base": 78,
   "cats": [
    "dress"
   ],
@@ -12432,6 +12431,38 @@
   "fab": "leather",
   "drp": "structured",
   "bk": ""
+ },
+ {
+  "id": "englishfactoryrickracktrimbuttonupcottonshirt",
+  "brand": "English Factory",
+  "title": "Rickrack Trim Button Up Cotton Shirt",
+  "price": "$85",
+  "img": "https://n.nordstrommedia.com/it/df3077a8-f2ff-4bd3-bde0-112bb8c22329.jpeg?trim=color&amp;w=350&amp;h=536",
+  "url": "https://nordstrom.com/s/8356815",
+  "score": 75,
+  "base": 94,
+  "cats": [
+   "top"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Not your usual English Factory",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "english factory",
+  "c": 0.1833,
+  "neut": 0.6,
+  "om": 0.7,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "collared",
+  "slv": "short",
+  "len": "hip",
+  "fab": "cotton",
+  "drp": "fluid",
+  "bk": "closed"
  },
  {
   "id": "faithfullhannatop",
@@ -12562,6 +12593,38 @@
   "bk": "closed"
  },
  {
+  "id": "zaracontrastingtrianglebikinitop",
+  "brand": "Zara",
+  "title": "Contrasting Triangle Bikini Top",
+  "price": "$40",
+  "img": "https://static.zara.net/assets/public/70c1/b433/df27434892e6/cce1be858415/3a9fe2b4129ab88f4214dd9211cc8f8b/3a9fe2b4129ab88f4214dd9211cc8f8b.jpg?ts=1781113793073&w=1809",
+  "url": "https://www.zara.com/us/en/contrasting-triangle-bikini-top-p02910221.html",
+  "score": 75,
+  "base": 73,
+  "cats": [
+   "swim"
+  ],
+  "occ": [
+   "casual",
+   "vacation"
+  ],
+  "why": "You like Zara",
+  "new": 0,
+  "creators": "Zara",
+  "brand_l": "zara",
+  "c": 0.4258,
+  "neut": 0.6,
+  "om": 0.4,
+  "sil": "bodycon",
+  "form": "casual",
+  "neck": "halter",
+  "slv": "sleeveless",
+  "len": "mini",
+  "fab": "synthetic",
+  "drp": "clingy",
+  "bk": "tie-back"
+ },
+ {
   "id": "zaraelasticginghamshirt",
   "brand": "Zara",
   "title": "Elastic Gingham Shirt",
@@ -12591,37 +12654,6 @@
   "fab": "cotton",
   "drp": "structured",
   "bk": "closed"
- },
- {
-  "id": "saksfifthavenueslouchycashmerebeanie",
-  "brand": "Saks Fifth Avenue",
-  "title": "Slouchy Cashmere Beanie",
-  "price": "-",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1762784325545",
-  "url": "https://saksoff5th.com/product/saks-fifth-avenue-slouchy-cashmere-beanie-0400019423487.html",
-  "score": 75,
-  "base": 87,
-  "cats": [
-   "knit"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Brigette Pheloung",
-  "brand_l": "saks fifth avenue",
-  "c": 0.8357,
-  "neut": 0.65,
-  "om": 0.75,
-  "sil": "structured",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "knit",
-  "drp": "structured",
-  "bk": ""
  },
  {
   "id": "puccivivaravirginwoolcanvaswrapskirt",
@@ -12725,7 +12757,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781087977480",
   "url": "https://jcrew.com/p/womens/categories/clothing/dresses-and-jumpsuits/reverie-dress-in-marigold-block-print/CU766",
   "score": 74,
-  "base": 92,
+  "base": 91,
   "cats": [
    "dress"
   ],
@@ -12778,38 +12810,6 @@
   "len": "cropped",
   "fab": "cotton",
   "drp": "structured",
-  "bk": "closed"
- },
- {
-  "id": "englishfactoryrickracktrimbuttonupcottonshirt",
-  "brand": "English Factory",
-  "title": "Rickrack Trim Button Up Cotton Shirt",
-  "price": "$85",
-  "img": "https://n.nordstrommedia.com/it/df3077a8-f2ff-4bd3-bde0-112bb8c22329.jpeg?trim=color&amp;w=350&amp;h=536",
-  "url": "https://nordstrom.com/s/8356815",
-  "score": 74,
-  "base": 94,
-  "cats": [
-   "top"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "Not your usual English Factory",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "english factory",
-  "c": 0.1833,
-  "neut": 0.6,
-  "om": 0.7,
-  "sil": "relaxed",
-  "form": "casual",
-  "neck": "collared",
-  "slv": "short",
-  "len": "hip",
-  "fab": "cotton",
-  "drp": "fluid",
   "bk": "closed"
  },
  {
@@ -12909,6 +12909,37 @@
   "bk": ""
  },
  {
+  "id": "saksfifthavenueslouchycashmerebeanie",
+  "brand": "Saks Fifth Avenue",
+  "title": "Slouchy Cashmere Beanie",
+  "price": "-",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1762784325545",
+  "url": "https://saksoff5th.com/product/saks-fifth-avenue-slouchy-cashmere-beanie-0400019423487.html",
+  "score": 74,
+  "base": 86,
+  "cats": [
+   "knit"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Brigette Pheloung",
+  "brand_l": "saks fifth avenue",
+  "c": 0.8357,
+  "neut": 0.65,
+  "om": 0.75,
+  "sil": "structured",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "knit",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
   "id": "cadetseverydaypoplinpant",
   "brand": "Cadets",
   "title": "Everyday Poplin Pant",
@@ -12970,37 +13001,6 @@
   "len": "knee",
   "fab": "cotton",
   "drp": "flowy",
-  "bk": ""
- },
- {
-  "id": "valentinogaravanilacruisette75tasseledembroideredcanvaswedge",
-  "brand": "Valentino Garavani",
-  "title": "La Cruisette 75 Tasseled Embroidered Canvas Wedge Sandals",
-  "price": "$534",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1773251746755",
-  "url": "https://net-a-porter.com/en-us/shop/product/valentino-garavani/shoes/wedges/la-cruisette-75-tasseled-embroidered-canvas-wedge-sandals/46376663162845023",
-  "score": 74,
-  "base": 72,
-  "cats": [
-   "shoe"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "valentino garavani",
-  "c": 0.4494,
-  "neut": 0.6,
-  "om": 0.7,
-  "sil": "other",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "synthetic",
-  "drp": "structured",
   "bk": ""
  },
  {
@@ -13107,7 +13107,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778688014431",
   "url": "https://jcrew.com/m/womens/categories/clothing/dresses-and-jumpsuits/ophelia-mini-shirt-dress-in-striped-cotton-poplin/MQ061",
   "score": 73,
-  "base": 89,
+  "base": 88,
   "cats": [
    "dress"
   ],
@@ -13319,37 +13319,6 @@
   "bk": ""
  },
  {
-  "id": "redoneclassicclubbibliotee",
-  "brand": "RE/DONE",
-  "title": "Classic \"Club Biblio\" Tee",
-  "price": "$160",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1772567951840",
-  "url": "https://shopredone.com/products/classic-club-biblio-tee-baby-violet",
-  "score": 73,
-  "base": 88,
-  "cats": [
-   "top"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "You like RE/DONE",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "re/done",
-  "c": 0.14,
-  "neut": 0.4,
-  "om": 0.1,
-  "sil": "fitted",
-  "form": "casual",
-  "neck": "crew",
-  "slv": "short",
-  "len": "hip",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "playalucilaeyelettanktop",
   "brand": "Playa Lucila",
   "title": "Eyelet Tank Top",
@@ -13483,7 +13452,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778672189293",
   "url": "https://shopbop.com/striped-midi-tank-dress-fringe/vp/v=1/1599221179.htm",
   "score": 73,
-  "base": 73,
+  "base": 72,
   "cats": [
    "dress"
   ],
@@ -13537,6 +13506,37 @@
   "len": "hip",
   "fab": "cotton",
   "drp": "clingy",
+  "bk": ""
+ },
+ {
+  "id": "valentinogaravanilacruisette75tasseledembroideredcanvaswedge",
+  "brand": "Valentino Garavani",
+  "title": "La Cruisette 75 Tasseled Embroidered Canvas Wedge Sandals",
+  "price": "$534",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1773251746755",
+  "url": "https://net-a-porter.com/en-us/shop/product/valentino-garavani/shoes/wedges/la-cruisette-75-tasseled-embroidered-canvas-wedge-sandals/46376663162845023",
+  "score": 73,
+  "base": 71,
+  "cats": [
+   "shoe"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "valentino garavani",
+  "c": 0.4494,
+  "neut": 0.6,
+  "om": 0.7,
+  "sil": "other",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "synthetic",
+  "drp": "structured",
   "bk": ""
  },
  {
@@ -13603,38 +13603,6 @@
   "bk": ""
  },
  {
-  "id": "jcrewessentialcutawayvestindenim",
-  "brand": "J.Crew",
-  "title": "Essential Cutaway Vest In Denim",
-  "price": "$125.99",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1756914878003",
-  "url": "https://jcrew.com/p/womens/categories/clothing/shirts-and-tops/CO894",
-  "score": 72,
-  "base": 97,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "You like J.Crew",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "j.crew",
-  "c": 0.426,
-  "neut": 0.85,
-  "om": 0.75,
-  "sil": "tailored",
-  "form": "smart-casual",
-  "neck": "crew",
-  "slv": "sleeveless",
-  "len": "tunic",
-  "fab": "denim",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "talbotscanvasdiamondtote",
   "brand": "Talbots",
   "title": "Canvas Diamond Tote",
@@ -13666,6 +13634,37 @@
   "fab": "linen",
   "drp": "structured",
   "bk": ""
+ },
+ {
+  "id": "redoneclassicclubbibliotee",
+  "brand": "RE/DONE",
+  "title": "Classic \"Club Biblio\" Tee",
+  "price": "$160",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1772567951840",
+  "url": "https://shopredone.com/products/classic-club-biblio-tee-baby-violet",
+  "score": 72,
+  "base": 87,
+  "cats": [
+   "top"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "You like RE/DONE",
+  "new": 0,
+  "creators": "Grace Atwood",
+  "brand_l": "re/done",
+  "c": 0.14,
+  "neut": 0.4,
+  "om": 0.1,
+  "sil": "fitted",
+  "form": "casual",
+  "neck": "crew",
+  "slv": "short",
+  "len": "hip",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": "closed"
  },
  {
   "id": "hunzagsquareneckswimsuit",
@@ -13728,37 +13727,6 @@
   "slv": "",
   "len": "knee",
   "fab": "cotton",
-  "drp": "structured",
-  "bk": ""
- },
- {
-  "id": "reformationsherlynwedgethongheels",
-  "brand": "Reformation",
-  "title": "Sherlyn Wedge Thong Heels",
-  "price": "$328",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1781537002976",
-  "url": "https://thereformation.com/products/sherlyn-wedge-thong/1319683WHL.html",
-  "score": 72,
-  "base": 98,
-  "cats": [
-   "shoe"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "reformation",
-  "c": 0.8299,
-  "neut": 0.4,
-  "om": 0.6,
-  "sil": "other",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "leather",
   "drp": "structured",
   "bk": ""
  },
@@ -13951,6 +13919,38 @@
   "fab": "cotton",
   "drp": "structured",
   "bk": ""
+ },
+ {
+  "id": "jcrewessentialcutawayvestindenim",
+  "brand": "J.Crew",
+  "title": "Essential Cutaway Vest In Denim",
+  "price": "$125.99",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1756914878003",
+  "url": "https://jcrew.com/p/womens/categories/clothing/shirts-and-tops/CO894",
+  "score": 71,
+  "base": 97,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "You like J.Crew",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "j.crew",
+  "c": 0.426,
+  "neut": 0.85,
+  "om": 0.75,
+  "sil": "tailored",
+  "form": "smart-casual",
+  "neck": "crew",
+  "slv": "sleeveless",
+  "len": "tunic",
+  "fab": "denim",
+  "drp": "structured",
+  "bk": "closed"
  },
  {
   "id": "cadenlaneshortsleevepolotop",
@@ -14341,7 +14341,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1774850728212",
   "url": "https://shopbop.com/delia-dress-staud/vp/v=1/1532638979.htm",
   "score": 71,
-  "base": 91,
+  "base": 90,
   "cats": [
    "dress"
   ],
@@ -14396,33 +14396,33 @@
   "bk": ""
  },
  {
-  "id": "kizikathens2sneakers",
-  "brand": "Kizik",
-  "title": "Athens 2 Sneakers",
-  "price": "$139.95",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1781170807818",
-  "url": "https://kizik.com/products/womens-athens-2-white-soft-chambray",
+  "id": "reformationsherlynwedgethongheels",
+  "brand": "Reformation",
+  "title": "Sherlyn Wedge Thong Heels",
+  "price": "$328",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1781537002976",
+  "url": "https://thereformation.com/products/sherlyn-wedge-thong/1319683WHL.html",
   "score": 71,
-  "base": 68,
+  "base": 97,
   "cats": [
    "shoe"
   ],
   "occ": [
    "casual"
   ],
-  "why": "Goes with your new Zara embroidered shorts",
+  "why": "Goes with your new Zara striped shorts",
   "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "kizik",
-  "c": 0.0795,
-  "neut": 0.7,
-  "om": 0.3,
+  "creators": "Merritt Beck",
+  "brand_l": "reformation",
+  "c": 0.8299,
+  "neut": 0.4,
+  "om": 0.6,
   "sil": "other",
   "form": "casual",
   "neck": "",
   "slv": "",
   "len": "",
-  "fab": "synthetic",
+  "fab": "leather",
   "drp": "structured",
   "bk": ""
  },
@@ -14561,7 +14561,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781029309752",
   "url": "https://alexmill.com/products/the-perfect-weekday-tote-in-red",
   "score": 70,
-  "base": 73,
+  "base": 72,
   "cats": [
    "bag"
   ],
@@ -14647,37 +14647,6 @@
   "fab": "linen",
   "drp": "structured",
   "bk": ""
- },
- {
-  "id": "redoneclassicteeendlessapertivo",
-  "brand": "RE/DONE",
-  "title": "Classic Tee Endless Apertivo",
-  "price": "$160",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1780861155204",
-  "url": "https://shopredone.com/products/classic-tee-endless-apertivo-aperol",
-  "score": 70,
-  "base": 84,
-  "cats": [
-   "top"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "You like RE/DONE",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "re/done",
-  "c": 0.9255,
-  "neut": 0.1,
-  "om": 0.1,
-  "sil": "relaxed",
-  "form": "casual",
-  "neck": "crew",
-  "slv": "short",
-  "len": "hip",
-  "fab": "cotton",
-  "drp": "fluid",
-  "bk": "closed"
  },
  {
   "id": "junkfoodclothingcr\u00e8medelacr\u00e8mevintagetee",
@@ -14773,37 +14742,6 @@
   "bk": "closed"
  },
  {
-  "id": "daphnetheheatwavebralette",
-  "brand": "Daphne",
-  "title": "The Heatwave Bralette",
-  "price": "$72",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1778389404854",
-  "url": "https://daphnethelabel.com/products/the-heatwave-bralette-midnight-stripe",
-  "score": 70,
-  "base": 80,
-  "cats": [
-   "top"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Not your usual Daphne",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "daphne",
-  "c": 0.2599,
-  "neut": 0.75,
-  "om": 0.6,
-  "sil": "flowy",
-  "form": "casual",
-  "neck": "scoop",
-  "slv": "strappy",
-  "len": "cropped",
-  "fab": "cotton",
-  "drp": "flowy",
-  "bk": "closed"
- },
- {
   "id": "suziekonditiatopinterry",
   "brand": "Suzie Kondi",
   "title": "Tia Top in Terry",
@@ -14842,7 +14780,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781695732082",
   "url": "https://shopbop.com/elena-dress-staud/vp/v=1/1532107511.htm",
   "score": 70,
-  "base": 89,
+  "base": 88,
   "cats": [
    "dress"
   ],
@@ -14897,33 +14835,33 @@
   "bk": ""
  },
  {
-  "id": "guiziohawleyoversizedstripeknitjumper",
-  "brand": "Guizio",
-  "title": "Hawley Oversized Stripe Knit Jumper",
-  "price": "$168",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1764634039028",
-  "url": "https://danielleguiziony.com/products/hawley-oversized-stripe-jumper-1",
+  "id": "kizikathens2sneakers",
+  "brand": "Kizik",
+  "title": "Athens 2 Sneakers",
+  "price": "$139.95",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1781170807818",
+  "url": "https://kizik.com/products/womens-athens-2-white-soft-chambray",
   "score": 70,
-  "base": 79,
+  "base": 67,
   "cats": [
-   "knit"
+   "shoe"
   ],
   "occ": [
    "casual"
   ],
-  "why": "Goes with your new Zara striped shorts",
+  "why": "Goes with your new Zara embroidered shorts",
   "new": 0,
-  "creators": "Paige Lorenze",
-  "brand_l": "guizio",
-  "c": 0.527,
-  "neut": 0.4,
+  "creators": "Carly Riordan",
+  "brand_l": "kizik",
+  "c": 0.0795,
+  "neut": 0.7,
   "om": 0.3,
-  "sil": "relaxed",
+  "sil": "other",
   "form": "casual",
-  "neck": "crew",
-  "slv": "long",
-  "len": "hip",
-  "fab": "knit",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "synthetic",
   "drp": "structured",
   "bk": ""
  },
@@ -14987,37 +14925,6 @@
   "len": "midi",
   "fab": "cotton",
   "drp": "fluid",
-  "bk": ""
- },
- {
-  "id": "madewellfloralembroideredminishopperbag",
-  "brand": "Madewell",
-  "title": "Floral-Embroidered Mini Shopper Bag",
-  "price": "$88",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1780402599225",
-  "url": "https://madewell.com/p/womens/accessories/bags/mini-bags/floral-embroidered-mini-shopper-bag/OA260",
-  "score": 70,
-  "base": 82,
-  "cats": [
-   "bag"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "madewell",
-  "c": 0.4637,
-  "neut": 0.6,
-  "om": 0.4,
-  "sil": "other",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "other",
-  "drp": "structured",
   "bk": ""
  },
  {
@@ -15210,6 +15117,37 @@
   "bk": ""
  },
  {
+  "id": "redoneclassicteeendlessapertivo",
+  "brand": "RE/DONE",
+  "title": "Classic Tee Endless Apertivo",
+  "price": "$160",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1780861155204",
+  "url": "https://shopredone.com/products/classic-tee-endless-apertivo-aperol",
+  "score": 69,
+  "base": 83,
+  "cats": [
+   "top"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "You like RE/DONE",
+  "new": 0,
+  "creators": "Grace Atwood",
+  "brand_l": "re/done",
+  "c": 0.9255,
+  "neut": 0.1,
+  "om": 0.1,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "crew",
+  "slv": "short",
+  "len": "hip",
+  "fab": "cotton",
+  "drp": "fluid",
+  "bk": "closed"
+ },
+ {
   "id": "driesvannotensusyapolkadotsilksatinmidiskirt",
   "brand": "Dries Van Noten",
   "title": "Susya Polka-Dot Silk-Satin Midi Skirt",
@@ -15241,6 +15179,37 @@
   "fab": "cotton",
   "drp": "structured",
   "bk": ""
+ },
+ {
+  "id": "daphnetheheatwavebralette",
+  "brand": "Daphne",
+  "title": "The Heatwave Bralette",
+  "price": "$72",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1778389404854",
+  "url": "https://daphnethelabel.com/products/the-heatwave-bralette-midnight-stripe",
+  "score": 69,
+  "base": 80,
+  "cats": [
+   "top"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Not your usual Daphne",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "daphne",
+  "c": 0.2599,
+  "neut": 0.75,
+  "om": 0.6,
+  "sil": "flowy",
+  "form": "casual",
+  "neck": "scoop",
+  "slv": "strappy",
+  "len": "cropped",
+  "fab": "cotton",
+  "drp": "flowy",
+  "bk": "closed"
  },
  {
   "id": "aestherekmephantommeshtotebag",
@@ -15333,6 +15302,68 @@
   "slv": "long",
   "len": "hip",
   "fab": "linen",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "guiziohawleyoversizedstripeknitjumper",
+  "brand": "Guizio",
+  "title": "Hawley Oversized Stripe Knit Jumper",
+  "price": "$168",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1764634039028",
+  "url": "https://danielleguiziony.com/products/hawley-oversized-stripe-jumper-1",
+  "score": 69,
+  "base": 78,
+  "cats": [
+   "knit"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Paige Lorenze",
+  "brand_l": "guizio",
+  "c": 0.527,
+  "neut": 0.4,
+  "om": 0.3,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "crew",
+  "slv": "long",
+  "len": "hip",
+  "fab": "knit",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "madewellfloralembroideredminishopperbag",
+  "brand": "Madewell",
+  "title": "Floral-Embroidered Mini Shopper Bag",
+  "price": "$88",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1780402599225",
+  "url": "https://madewell.com/p/womens/accessories/bags/mini-bags/floral-embroidered-mini-shopper-bag/OA260",
+  "score": 69,
+  "base": 81,
+  "cats": [
+   "bag"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Grace Atwood",
+  "brand_l": "madewell",
+  "c": 0.4637,
+  "neut": 0.6,
+  "om": 0.4,
+  "sil": "other",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "other",
   "drp": "structured",
   "bk": ""
  },
@@ -15643,7 +15674,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1776362698249",
   "url": "https://zara.com/us/en/zw-collection-embroidered-pleated-dress-p07521063.html",
   "score": 68,
-  "base": 91,
+  "base": 90,
   "cats": [
    "dress"
   ],
@@ -15665,37 +15696,6 @@
   "fab": "synthetic",
   "drp": "flowy",
   "bk": "open-back"
- },
- {
-  "id": "verabradleyminihathawaytotebag",
-  "brand": "Vera Bradley",
-  "title": "Mini Hathaway Tote Bag",
-  "price": "$60",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1780770642901",
-  "url": "https://anthropologie.com/shop/vera-bradley-exclusive-hathaway-mini-tote-bag",
-  "score": 68,
-  "base": 63,
-  "cats": [
-   "bag"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "vera bradley",
-  "c": 0.4948,
-  "neut": 0.4,
-  "om": 0.3,
-  "sil": "structured",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": ""
  },
  {
   "id": "donnithesilktaffetadrawstringcargopants",
@@ -15725,38 +15725,6 @@
   "slv": "",
   "len": "full-length",
   "fab": "cotton",
-  "drp": "structured",
-  "bk": ""
- },
- {
-  "id": "aquazzurabirdsongtote",
-  "brand": "Aquazzura",
-  "title": "Birdsong Tote",
-  "price": "$2,115",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1780401774777",
-  "url": "https://net-a-porter.com/en-us/shop/product/aquazzura/bags/tote-bags/birdsong-appliqued-leather-trimmed-raffia-tote/46376663163081596",
-  "score": 68,
-  "base": 69,
-  "cats": [
-   "bag"
-  ],
-  "occ": [
-   "casual",
-   "vacation"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "aquazzura",
-  "c": 0.512,
-  "neut": 0.7,
-  "om": 0.8,
-  "sil": "structured",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "linen",
   "drp": "structured",
   "bk": ""
  },
@@ -16078,6 +16046,69 @@
   "bk": "closed"
  },
  {
+  "id": "verabradleyminihathawaytotebag",
+  "brand": "Vera Bradley",
+  "title": "Mini Hathaway Tote Bag",
+  "price": "$60",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1780770642901",
+  "url": "https://anthropologie.com/shop/vera-bradley-exclusive-hathaway-mini-tote-bag",
+  "score": 67,
+  "base": 62,
+  "cats": [
+   "bag"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "vera bradley",
+  "c": 0.4948,
+  "neut": 0.4,
+  "om": 0.3,
+  "sil": "structured",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "aquazzurabirdsongtote",
+  "brand": "Aquazzura",
+  "title": "Birdsong Tote",
+  "price": "$2,115",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1780401774777",
+  "url": "https://net-a-porter.com/en-us/shop/product/aquazzura/bags/tote-bags/birdsong-appliqued-leather-trimmed-raffia-tote/46376663163081596",
+  "score": 67,
+  "base": 68,
+  "cats": [
+   "bag"
+  ],
+  "occ": [
+   "casual",
+   "vacation"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "aquazzura",
+  "c": 0.512,
+  "neut": 0.7,
+  "om": 0.8,
+  "sil": "structured",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "linen",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
   "id": "bodenabigaillinenmaxiskirt",
   "brand": "Boden",
   "title": "Abigail Linen Maxi Skirt",
@@ -16107,37 +16138,6 @@
   "len": "midi",
   "fab": "linen",
   "drp": "flowy",
-  "bk": ""
- },
- {
-  "id": "roujemartinobasketbag",
-  "brand": "Rouje",
-  "title": "Martino Basket Bag",
-  "price": "$145",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1774913142870",
-  "url": "https://rouje.com/products/martino-basket-bag",
-  "score": 67,
-  "base": 68,
-  "cats": [
-   "bag"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "rouje",
-  "c": 0.6089,
-  "neut": 0.7,
-  "om": 0.75,
-  "sil": "straight",
-  "form": "casual",
-  "neck": "",
-  "slv": "",
-  "len": "",
-  "fab": "other",
-  "drp": "structured",
   "bk": ""
  },
  {
@@ -16485,65 +16485,33 @@
   "bk": "closed"
  },
  {
-  "id": "thefrankieshopameliatailoredblazer",
-  "brand": "The Frankie Shop",
-  "title": "Amelia Tailored Blazer",
-  "price": "$385",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1773129656306",
-  "url": "https://thefrankieshop.com/products/amelia-tailored-blazer-white",
+  "id": "roujemartinobasketbag",
+  "brand": "Rouje",
+  "title": "Martino Basket Bag",
+  "price": "$145",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1774913142870",
+  "url": "https://rouje.com/products/martino-basket-bag",
   "score": 66,
-  "base": 100,
+  "base": 67,
   "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "going-out",
-   "work"
-  ],
-  "why": "Goes with your new Wilfred martini satin halter top",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "the frankie shop",
-  "c": 0.0638,
-  "neut": 1.0,
-  "om": 0.9,
-  "sil": "tailored",
-  "form": "formal",
-  "neck": "collared",
-  "slv": "long",
-  "len": "hip",
-  "fab": "wool",
-  "drp": "tailored",
-  "bk": "closed"
- },
- {
-  "id": "kedschampioncanvaslaceupsneakers",
-  "brand": "Keds",
-  "title": "Champion Canvas Lace-Up Sneakers",
-  "price": "$54.95",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1769565371942",
-  "url": "https://tnuck.com/products/white-champion-canvas-sneakers",
-  "score": 66,
-  "base": 75,
-  "cats": [
-   "shoe"
+   "bag"
   ],
   "occ": [
    "casual"
   ],
   "why": "Goes with your new Zara embroidered shorts",
   "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "keds",
-  "c": 0.431,
+  "creators": "Grace Atwood",
+  "brand_l": "rouje",
+  "c": 0.6089,
   "neut": 0.7,
-  "om": 0.6,
-  "sil": "relaxed",
+  "om": 0.75,
+  "sil": "straight",
   "form": "casual",
   "neck": "",
   "slv": "",
   "len": "",
-  "fab": "cotton",
+  "fab": "other",
   "drp": "structured",
   "bk": ""
  },
@@ -16681,7 +16649,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1776778018232",
   "url": "https://jcrew.com/m/womens/categories/clothing/dresses-and-jumpsuits/collection-shift-dress-in-lotus-print-memory-satin/MQ014",
   "score": 65,
-  "base": 85,
+  "base": 84,
   "cats": [
    "dress"
   ],
@@ -16745,7 +16713,7 @@
   "img": "https://static.shopmy.us/uploads/img-product-1757002698334",
   "url": "https://alexmill.com/products/painted-perfect-daily-tote-in-yellow",
   "score": 65,
-  "base": 74,
+  "base": 73,
   "cats": [
    "bag"
   ],
@@ -16986,6 +16954,69 @@
   "len": "mini",
   "fab": "knit",
   "drp": "clingy",
+  "bk": "closed"
+ },
+ {
+  "id": "kedschampioncanvaslaceupsneakers",
+  "brand": "Keds",
+  "title": "Champion Canvas Lace-Up Sneakers",
+  "price": "$54.95",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1769565371942",
+  "url": "https://tnuck.com/products/white-champion-canvas-sneakers",
+  "score": 65,
+  "base": 74,
+  "cats": [
+   "shoe"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "keds",
+  "c": 0.431,
+  "neut": 0.7,
+  "om": 0.6,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "thefrankieshopameliatailoredblazer",
+  "brand": "The Frankie Shop",
+  "title": "Amelia Tailored Blazer",
+  "price": "$385",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1773129656306",
+  "url": "https://thefrankieshop.com/products/amelia-tailored-blazer-white",
+  "score": 65,
+  "base": 100,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "going-out",
+   "work"
+  ],
+  "why": "Goes with your new Wilfred martini satin halter top",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "the frankie shop",
+  "c": 0.0638,
+  "neut": 1.0,
+  "om": 0.9,
+  "sil": "tailored",
+  "form": "formal",
+  "neck": "collared",
+  "slv": "long",
+  "len": "hip",
+  "fab": "wool",
+  "drp": "tailored",
   "bk": "closed"
  },
  {
@@ -17587,69 +17618,6 @@
   "bk": ""
  },
  {
-  "id": "thefrankieshopchesnaycollarlessblazer",
-  "brand": "The Frankie Shop",
-  "title": "Chesnay Collarless Blazer",
-  "price": "$375",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1776070610022",
-  "url": "https://thefrankieshop.com/products/chesnay-collarless-blazer-cream",
-  "score": 64,
-  "base": 100,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "going-out",
-   "work"
-  ],
-  "why": "Goes with your new Wilfred martini satin halter top",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "the frankie shop",
-  "c": 0.2981,
-  "neut": 0.95,
-  "om": 0.85,
-  "sil": "tailored",
-  "form": "formal",
-  "neck": "crew",
-  "slv": "long",
-  "len": "hip",
-  "fab": "wool",
-  "drp": "tailored",
-  "bk": "closed"
- },
- {
-  "id": "tuckernuckcottonwilliamcrewnecksweater",
-  "brand": "Tuckernuck",
-  "title": "Cotton William Crewneck Sweater",
-  "price": "$198",
-  "img": "https://static.shopmy.us/uploads/cf033b20-11ec-4ab6-b5d4-caa8377c54f2_1692853_01_1199x1799.jpg",
-  "url": "https://tnuck.com/products/blue-fog-cotton-cropped-william-crewneck",
-  "score": 64,
-  "base": 91,
-  "cats": [
-   "knit"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "tuckernuck",
-  "c": 0.4346,
-  "neut": 0.65,
-  "om": 0.75,
-  "sil": "relaxed",
-  "form": "casual",
-  "neck": "crew",
-  "slv": "three-quarter",
-  "len": "hip",
-  "fab": "knit",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "michaelkorsjanaextrasmallhandcrochetedcrossbodybag",
   "brand": "Michael Kors",
   "title": "Jana Extra-Small Hand-Crocheted Crossbody Bag",
@@ -18212,38 +18180,6 @@
   "bk": ""
  },
  {
-  "id": "zarazwcollectionlongblazer",
-  "brand": "Zara",
-  "title": "Zw Collection Long Blazer",
-  "price": "",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1780476977538",
-  "url": "https://zara.com/us/en/zw-collection-long-striped-blazer-p02902971.html",
-  "score": 63,
-  "base": 100,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "You like Zara",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "zara",
-  "c": 0.0999,
-  "neut": 0.95,
-  "om": 0.85,
-  "sil": "tailored",
-  "form": "smart-casual",
-  "neck": "collared",
-  "slv": "long",
-  "len": "knee",
-  "fab": "wool",
-  "drp": "tailored",
-  "bk": "closed"
- },
- {
   "id": "chanluutechnotaffetabarrelpants",
   "brand": "Chan Luu",
   "title": "Techno Taffeta Barrel Pants",
@@ -18523,6 +18459,69 @@
   "fab": "synthetic",
   "drp": "clingy",
   "bk": ""
+ },
+ {
+  "id": "tuckernuckcottonwilliamcrewnecksweater",
+  "brand": "Tuckernuck",
+  "title": "Cotton William Crewneck Sweater",
+  "price": "$198",
+  "img": "https://static.shopmy.us/uploads/cf033b20-11ec-4ab6-b5d4-caa8377c54f2_1692853_01_1199x1799.jpg",
+  "url": "https://tnuck.com/products/blue-fog-cotton-cropped-william-crewneck",
+  "score": 63,
+  "base": 90,
+  "cats": [
+   "knit"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "tuckernuck",
+  "c": 0.4346,
+  "neut": 0.65,
+  "om": 0.75,
+  "sil": "relaxed",
+  "form": "casual",
+  "neck": "crew",
+  "slv": "three-quarter",
+  "len": "hip",
+  "fab": "knit",
+  "drp": "structured",
+  "bk": "closed"
+ },
+ {
+  "id": "thefrankieshopchesnaycollarlessblazer",
+  "brand": "The Frankie Shop",
+  "title": "Chesnay Collarless Blazer",
+  "price": "$375",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1776070610022",
+  "url": "https://thefrankieshop.com/products/chesnay-collarless-blazer-cream",
+  "score": 63,
+  "base": 100,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "going-out",
+   "work"
+  ],
+  "why": "Goes with your new Wilfred martini satin halter top",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "the frankie shop",
+  "c": 0.2981,
+  "neut": 0.95,
+  "om": 0.85,
+  "sil": "tailored",
+  "form": "formal",
+  "neck": "crew",
+  "slv": "long",
+  "len": "hip",
+  "fab": "wool",
+  "drp": "tailored",
+  "bk": "closed"
  },
  {
   "id": "michaelkorsrosiewovensandal",
@@ -19060,7 +19059,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1758794352706",
   "url": "https://www.abercrombie.com/shop/us/p/v-neck-linen-blend-mini-dress-60401895",
   "score": 62,
-  "base": 92,
+  "base": 91,
   "cats": [
    "dress"
   ],
@@ -19358,6 +19357,38 @@
   "fab": "leather",
   "drp": "structured",
   "bk": ""
+ },
+ {
+  "id": "zarazwcollectionlongblazer",
+  "brand": "Zara",
+  "title": "Zw Collection Long Blazer",
+  "price": "",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1780476977538",
+  "url": "https://zara.com/us/en/zw-collection-long-striped-blazer-p02902971.html",
+  "score": 62,
+  "base": 100,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "You like Zara",
+  "new": 0,
+  "creators": "Grace Atwood",
+  "brand_l": "zara",
+  "c": 0.0999,
+  "neut": 0.95,
+  "om": 0.85,
+  "sil": "tailored",
+  "form": "smart-casual",
+  "neck": "collared",
+  "slv": "long",
+  "len": "knee",
+  "fab": "wool",
+  "drp": "tailored",
+  "bk": "closed"
  },
  {
   "id": "daphnethegoldennightshort",
@@ -19696,36 +19727,6 @@
   "fab": "cotton",
   "drp": "fluid",
   "bk": ""
- },
- {
-  "id": "katiekimetheworldisyouroystercamishortsset",
-  "brand": "Katie Kime",
-  "title": "The World Is Your Oyster Cami Shorts Set",
-  "price": "$98",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1780694377059",
-  "url": "https://katiekime.com/products/oyster-cami-shorts-set",
-  "score": 62,
-  "base": 75,
-  "cats": [
-   "top",
-   "bottom"
-  ],
-  "occ": [],
-  "why": "More like your new Zara striped shorts",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "katie kime",
-  "c": 0.3741,
-  "neut": 0.3,
-  "om": 0.2,
-  "sil": "relaxed",
-  "form": "loungewear",
-  "neck": "scoop",
-  "slv": "strappy",
-  "len": "cropped",
-  "fab": "synthetic",
-  "drp": "fluid",
-  "bk": "closed"
  },
  {
   "id": "marrakshilifethepalazzostripedcottonwidelegpants",
@@ -20517,6 +20518,35 @@
   "c": 0.3473,
   "neut": 0.7,
   "om": 0.85,
+  "sil": "",
+  "form": "",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "",
+  "drp": "",
+  "bk": ""
+ },
+ {
+  "id": "goodamericanstripeseersuckerpullonshorts",
+  "brand": "Good American",
+  "title": "Stripe Seersucker Pull on Shorts",
+  "price": "$118",
+  "img": "https://cdn.shopify.com/s/files/1/1381/0415/files/260401_08_GWB0285-HORGS_0718.jpg?v=1776968147",
+  "url": "https://goodamerican.com/products/stripe-seersucker-short-horizon",
+  "score": 60,
+  "base": 52,
+  "cats": [
+   "bottom"
+  ],
+  "occ": [],
+  "why": "Pattern/print noted",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "good american",
+  "c": 0.2672,
+  "neut": "",
+  "om": "",
   "sil": "",
   "form": "",
   "neck": "",
@@ -21405,37 +21435,6 @@
   "bk": ""
  },
  {
-  "id": "emiliopucci2000s3pieceset",
-  "brand": "Emilio Pucci",
-  "title": "2000s 3-Piece Set",
-  "price": "$1,150",
-  "img": "https://isleofmonday.com/cdn/shop/files/EmilioPucciSilkCapriSet160.jpg?v=1778444508",
-  "url": "https://isleofmonday.com/products/emilio-pucci-2000s-3-piece-set",
-  "score": 58,
-  "base": 62,
-  "cats": [
-   "other"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "flowy cut, like your saved pieces",
-  "new": 0,
-  "creators": "Brigette Pheloung",
-  "brand_l": "emilio pucci",
-  "c": 0.1923,
-  "neut": 0.2,
-  "om": 0.15,
-  "sil": "flowy",
-  "form": "casual",
-  "neck": "v-neck",
-  "slv": "sleeveless",
-  "len": "midi",
-  "fab": "synthetic",
-  "drp": "flowy",
-  "bk": ""
- },
- {
   "id": "michaelkorsstretchmattejerseyhaltermididress",
   "brand": "Michael Kors",
   "title": "Stretch Matte Jersey Halter Midi Dress",
@@ -21443,7 +21442,7 @@
   "img": "https://static.shopmy.us/uploads/60caf625-2df0-4c5f-bf73-d9b61b059020_MS683COH6J-6990_1_1200x1616.jpg",
   "url": "https://michaelkors.com/stretch-matte-jersey-halter-midi-dress/MS683COH6J.html",
   "score": 58,
-  "base": 94,
+  "base": 93,
   "cats": [
    "dress"
   ],
@@ -21570,7 +21569,7 @@
   "img": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/1706734_01.jpg?v=1777996346",
   "url": "https://tnuck.com/products/white-cotton-poplin-julien-shirt-dress",
   "score": 58,
-  "base": 87,
+  "base": 86,
   "cats": [
    "dress"
   ],
@@ -21844,6 +21843,37 @@
   "bk": ""
  },
  {
+  "id": "emiliopucci2000s3pieceset",
+  "brand": "Emilio Pucci",
+  "title": "2000s 3-Piece Set",
+  "price": "$1,150",
+  "img": "https://isleofmonday.com/cdn/shop/files/EmilioPucciSilkCapriSet160.jpg?v=1778444508",
+  "url": "https://isleofmonday.com/products/emilio-pucci-2000s-3-piece-set",
+  "score": 57,
+  "base": 62,
+  "cats": [
+   "other"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "flowy cut, like your saved pieces",
+  "new": 0,
+  "creators": "Brigette Pheloung",
+  "brand_l": "emilio pucci",
+  "c": 0.1923,
+  "neut": 0.2,
+  "om": 0.15,
+  "sil": "flowy",
+  "form": "casual",
+  "neck": "v-neck",
+  "slv": "sleeveless",
+  "len": "midi",
+  "fab": "synthetic",
+  "drp": "flowy",
+  "bk": ""
+ },
+ {
   "id": "ensaisonsamanthabowmididress",
   "brand": "En Saison",
   "title": "Samantha Bow Midi Dress",
@@ -21851,7 +21881,7 @@
   "img": "https://static.shopmy.us/uploads/a1f0db50-4df7-4b56-8f63-6e013667314e_image-1775532217559",
   "url": "https://anthropologie.com/shop/en-saison-samantha-bow-midi-dress",
   "score": 57,
-  "base": 87,
+  "base": 86,
   "cats": [
    "dress"
   ],
@@ -21906,6 +21936,65 @@
   "fab": "knit",
   "drp": "structured",
   "bk": ""
+ },
+ {
+  "id": "tuckernucknettietop",
+  "brand": "Tuckernuck",
+  "title": "Nettie Top",
+  "price": "$128",
+  "img": "https://static.shopmy.us/uploads/fba3dffd-612e-487b-b92f-ae36df4267d9imgi_2_1692973_05.jpg",
+  "url": "https://tnuck.com/products/white-nettie-top",
+  "score": 57,
+  "base": 64,
+  "cats": [
+   "top"
+  ],
+  "occ": [],
+  "why": "Not your usual Tuckernuck",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "tuckernuck",
+  "c": 0.3087,
+  "neut": "",
+  "om": "",
+  "sil": "",
+  "form": "",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "",
+  "drp": "",
+  "bk": ""
+ },
+ {
+  "id": "katiekimetheworldisyouroystercamishortsset",
+  "brand": "Katie Kime",
+  "title": "The World Is Your Oyster Cami Shorts Set",
+  "price": "$98",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1780694377059",
+  "url": "https://katiekime.com/products/oyster-cami-shorts-set",
+  "score": 57,
+  "base": 70,
+  "cats": [
+   "top",
+   "bottom"
+  ],
+  "occ": [],
+  "why": "Not your usual Katie Kime",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "katie kime",
+  "c": 0.3741,
+  "neut": 0.3,
+  "om": 0.2,
+  "sil": "relaxed",
+  "form": "loungewear",
+  "neck": "scoop",
+  "slv": "strappy",
+  "len": "cropped",
+  "fab": "synthetic",
+  "drp": "fluid",
+  "bk": "closed"
  },
  {
   "id": "ala\u00efaleteckelmediumbaginnubuck",
@@ -21979,7 +22068,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781795529742",
   "url": "https://shopbop.com/ombre-voile-gathered-maxi-dress/vp/v=1/1599171063.htm",
   "score": 57,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -22168,7 +22257,7 @@
   "img": "https://tnuck.com/cdn/shop/files/1716082_01_1365x.jpg?v=1776436407",
   "url": "https://tnuck.com/products/provence-hills-marcie-dress",
   "score": 56,
-  "base": 80,
+  "base": 79,
   "cats": [
    "dress"
   ],
@@ -22200,7 +22289,7 @@
   "img": "https://static.shopmy.us/uploads/img-1774282500887",
   "url": "https://tnuck.com/products/light-blue-pique-margaret-polo-dress",
   "score": 56,
-  "base": 82,
+  "base": 81,
   "cats": [
    "dress"
   ],
@@ -22232,7 +22321,7 @@
   "img": "https://tnuck.com/cdn/shop/files/1683012_01_20copy_2500x.jpg?v=1775843408",
   "url": "https://tnuck.com/products/antique-white-eyelet-esme-dress",
   "score": 56,
-  "base": 79,
+  "base": 78,
   "cats": [
    "dress"
   ],
@@ -23032,7 +23121,7 @@
   "img": "https://static.shopmy.us/uploads/img-product-1753522762897",
   "url": "https://shopbop.com/never-better-dress-fp-movement/vp/v=1/1535210666.htm",
   "score": 55,
-  "base": 86,
+  "base": 85,
   "cats": [
    "dress"
   ],
@@ -23094,7 +23183,7 @@
   "img": "https://isleofmonday.com/cdn/shop/files/YSLSpring2004BlackGown009_f55c0c41-ea6c-40dd-92cc-af715ecd4825.jpg?v=1779054787",
   "url": "https://isleofmonday.com/products/ysl-by-tom-ford-ss-2004-black-sheer-gown",
   "score": 54,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -23454,7 +23543,7 @@
   "img": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/1706752_01.jpg?v=1778597920",
   "url": "https://tnuck.com/products/white-ric-rac-tie-front-brocks-dress",
   "score": 54,
-  "base": 92,
+  "base": 91,
   "cats": [
    "dress"
   ],
@@ -24242,37 +24331,6 @@
   "bk": "closed"
  },
  {
-  "id": "reformationreformationxcourtneygrowcurrenttrackjacket",
-  "brand": "Reformation",
-  "title": "Reformation x Courtney Grow Current Track Jacket",
-  "price": "$248",
-  "img": "https://static.shopmy.us/uploads/3c386dda-668b-445f-b677-5456d5a2e016_download-2026-05-31T221320.775.png",
-  "url": "https://thereformation.com/products/current-track-jacket/1320068MAV.html",
-  "score": 54,
-  "base": 100,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "reformation",
-  "c": 0.4856,
-  "neut": 0.7,
-  "om": 0.75,
-  "sil": "relaxed",
-  "form": "casual",
-  "neck": "collared",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "synthetic",
-  "drp": "stiff",
-  "bk": "closed"
- },
- {
   "id": "minnowpicnichighwaistedbikinibottom",
   "brand": "minnow",
   "title": "Picnic High Waisted Bikini Bottom",
@@ -24372,7 +24430,7 @@
   "img": "https://static.shopmy.us/uploads/baab6212-0892-44a3-a47e-fb581300f1e6_imgi_2_1104-AbbeyGlass-Ecom-Finals-52.webp",
   "url": "https://abbey-glass.com/collections/carlys-spring-favorites",
   "score": 53,
-  "base": 87,
+  "base": 86,
   "cats": [
    "dress"
   ],
@@ -24395,6 +24453,35 @@
   "fab": "cotton",
   "drp": "structured",
   "bk": "closed"
+ },
+ {
+  "id": "theacksackthehydrangeabaskettotebag",
+  "brand": "The ACK Sack",
+  "title": "The Hydrangea Basket Tote Bag",
+  "price": "$42",
+  "img": "https://www.theacksack.com/cdn/shop/files/7T1A1431.jpg?v=1778619078",
+  "url": "https://theacksack.com/products/hydrangea-bag",
+  "score": 53,
+  "base": 41,
+  "cats": [
+   "bag"
+  ],
+  "occ": [],
+  "why": "Matches your saved style",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "the ack sack",
+  "c": 0.3726,
+  "neut": "",
+  "om": "",
+  "sil": "",
+  "form": "",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "",
+  "drp": "",
+  "bk": ""
  },
  {
   "id": "indysunglassesdaytonasunglasses",
@@ -24551,36 +24638,35 @@
   "bk": "closed"
  },
  {
-  "id": "argentdoublebreastedblazerinseasonlesswool",
-  "brand": "Argent",
-  "title": "Double-Breasted Blazer In Seasonless Wool",
-  "price": "$495",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1757822311766",
-  "url": "https://argentwork.com/products/double-breasted-blazer-in-seasonless-wool-aqua",
+  "id": "reformationreformationxcourtneygrowcurrenttrackjacket",
+  "brand": "Reformation",
+  "title": "Reformation x Courtney Grow Current Track Jacket",
+  "price": "$248",
+  "img": "https://static.shopmy.us/uploads/3c386dda-668b-445f-b677-5456d5a2e016_download-2026-05-31T221320.775.png",
+  "url": "https://thereformation.com/products/current-track-jacket/1320068MAV.html",
   "score": 53,
-  "base": 94,
+  "base": 100,
   "cats": [
    "outerwear"
   ],
   "occ": [
-   "going-out",
-   "work"
+   "casual"
   ],
-  "why": "Goes with your new Wilfred martini satin halter top",
+  "why": "Goes with your new Zara embroidered shorts",
   "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "argent",
-  "c": 0.0934,
-  "neut": 0.95,
-  "om": 0.85,
-  "sil": "tailored",
-  "form": "formal",
+  "creators": "Grace Atwood",
+  "brand_l": "reformation",
+  "c": 0.4856,
+  "neut": 0.7,
+  "om": 0.75,
+  "sil": "relaxed",
+  "form": "casual",
   "neck": "collared",
   "slv": "long",
-  "len": "knee",
-  "fab": "wool",
-  "drp": "structured",
-  "bk": ""
+  "len": "cropped",
+  "fab": "synthetic",
+  "drp": "stiff",
+  "bk": "closed"
  },
  {
   "id": "tuckernuckcowrieblockprintashfordpants",
@@ -24653,7 +24739,7 @@
   "img": "https://is4.revolveassets.com/images/p4/n/z/HOOF-WD1062_V2.jpg",
   "url": "https://revolve.com/house-of-harlow-1960-x-revolve-nieve-maxi-dress-in-black-white-stripe/dp/HOOF-WD1062",
   "score": 52,
-  "base": 78,
+  "base": 77,
   "cats": [
    "dress"
   ],
@@ -24777,7 +24863,7 @@
   "img": "https://tnuck.com/cdn/shop/files/7zLR8lTyHQXJfdArLXUSHBo7Hr4ICqe5-1_1536x.jpg?v=1717527559",
   "url": "https://tnuck.com/products/jade-stripe-cassie-dress",
   "score": 52,
-  "base": 78,
+  "base": 77,
   "cats": [
    "dress"
   ],
@@ -24862,6 +24948,38 @@
   "slv": "",
   "len": "",
   "fab": "leather",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "argentdoublebreastedblazerinseasonlesswool",
+  "brand": "Argent",
+  "title": "Double-Breasted Blazer In Seasonless Wool",
+  "price": "$495",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1757822311766",
+  "url": "https://argentwork.com/products/double-breasted-blazer-in-seasonless-wool-aqua",
+  "score": 52,
+  "base": 94,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "going-out",
+   "work"
+  ],
+  "why": "Goes with your new Wilfred martini satin halter top",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "argent",
+  "c": 0.0934,
+  "neut": 0.95,
+  "om": 0.85,
+  "sil": "tailored",
+  "form": "formal",
+  "neck": "collared",
+  "slv": "long",
+  "len": "knee",
+  "fab": "wool",
   "drp": "structured",
   "bk": ""
  },
@@ -25055,38 +25173,6 @@
   "bk": ""
  },
  {
-  "id": "abercrombiefitchcollarlessquiltedjacket",
-  "brand": "Abercrombie & Fitch",
-  "title": "Collarless Quilted Jacket",
-  "price": "$128",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1769724140219",
-  "url": "https://www.abercrombie.com/shop/us/p/collarless-quilted-garment-dye-jacket-62051324",
-  "score": 51,
-  "base": 85,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "tailored cut, like your saved pieces",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "abercrombie & fitch",
-  "c": 0.2506,
-  "neut": 0.85,
-  "om": 0.75,
-  "sil": "tailored",
-  "form": "smart-casual",
-  "neck": "crew",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "buffbunnymicrolegacylegging",
   "brand": "Buffbunny",
   "title": "Micro Legacy Legging",
@@ -25189,7 +25275,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1758044676911",
   "url": "https://modaoperandi.com/women/p/third-form/bia-strapless-maxi-dress-sorbet/681312",
   "score": 51,
-  "base": 70,
+  "base": 69,
   "cats": [
    "dress"
   ],
@@ -25306,38 +25392,6 @@
   "bk": ""
  },
  {
-  "id": "veronicabeardcieltailoredvest",
-  "brand": "Veronica Beard",
-  "title": "Ciel Tailored Vest",
-  "price": "$648",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1768195544401",
-  "url": "https://shopbop.com/ciel-vest-veronica-beard/vp/v=1/1547502880.htm",
-  "score": 51,
-  "base": 87,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "veronica beard",
-  "c": 0.2813,
-  "neut": 0.4,
-  "om": 0.7,
-  "sil": "tailored",
-  "form": "smart-casual",
-  "neck": "collared",
-  "slv": "sleeveless",
-  "len": "tunic",
-  "fab": "wool",
-  "drp": "tailored",
-  "bk": "closed"
- },
- {
   "id": "aliceoliviagemmamididress",
   "brand": "alice + olivia",
   "title": "Gemma Midi Dress",
@@ -25345,7 +25399,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1777634366046",
   "url": "https://aliceandolivia.com/gemma-midi-dress/CC604M25534F732.html",
   "score": 50,
-  "base": 85,
+  "base": 84,
   "cats": [
    "dress"
   ],
@@ -25431,6 +25485,38 @@
   "bk": "closed"
  },
  {
+  "id": "abercrombiefitchcollarlessquiltedjacket",
+  "brand": "Abercrombie & Fitch",
+  "title": "Collarless Quilted Jacket",
+  "price": "$128",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1769724140219",
+  "url": "https://www.abercrombie.com/shop/us/p/collarless-quilted-garment-dye-jacket-62051324",
+  "score": 50,
+  "base": 85,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "tailored cut, like your saved pieces",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "abercrombie & fitch",
+  "c": 0.2506,
+  "neut": 0.85,
+  "om": 0.75,
+  "sil": "tailored",
+  "form": "smart-casual",
+  "neck": "crew",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": "closed"
+ },
+ {
   "id": "simkhaicrisshortsleeveshirtdress",
   "brand": "SIMKHAI",
   "title": "Cris Short Sleeve Shirt Dress",
@@ -25438,7 +25524,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1760461411181",
   "url": "https://simkhai.com/products/cris-short-sleeve-shirt-dress-2",
   "score": 50,
-  "base": 83,
+  "base": 82,
   "cats": [
    "dress"
   ],
@@ -25533,7 +25619,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1779996086851",
   "url": "https://net-a-porter.com/en-us/shop/product/james-perse/clothing/maxi-dresses/cotton-blend-jersey-maxi-dress/46376663163052087",
   "score": 50,
-  "base": 75,
+  "base": 74,
   "cats": [
    "dress"
   ],
@@ -25564,7 +25650,7 @@
   "img": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/1706981_01.jpg?v=1779458906",
   "url": "https://tnuck.com/products/sa-12-d833-blue-stripe",
   "score": 50,
-  "base": 78,
+  "base": 77,
   "cats": [
    "dress"
   ],
@@ -25647,6 +25733,38 @@
   "bk": ""
  },
  {
+  "id": "veronicabeardcieltailoredvest",
+  "brand": "Veronica Beard",
+  "title": "Ciel Tailored Vest",
+  "price": "$648",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1768195544401",
+  "url": "https://shopbop.com/ciel-vest-veronica-beard/vp/v=1/1547502880.htm",
+  "score": 50,
+  "base": 86,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "veronica beard",
+  "c": 0.2813,
+  "neut": 0.4,
+  "om": 0.7,
+  "sil": "tailored",
+  "form": "smart-casual",
+  "neck": "collared",
+  "slv": "sleeveless",
+  "len": "tunic",
+  "fab": "wool",
+  "drp": "tailored",
+  "bk": "closed"
+ },
+ {
   "id": "toryburchsequinmeshdress",
   "brand": "Tory Burch",
   "title": "Sequin Mesh Dress",
@@ -25654,7 +25772,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1780920947757",
   "url": "https://www.toryburch.com/en-us/clothing/dresses/sequin-mesh-dress/181582.html",
   "score": 49,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -25685,7 +25803,7 @@
   "img": "https://static.shopmy.us/uploads/img-1778823239756",
   "url": "https://michaelkors.com/smocked-cotton-poplin-tank-dress/MS6839HKLZ.html?skuId=912531816",
   "score": 49,
-  "base": 90,
+  "base": 89,
   "cats": [
    "dress"
   ],
@@ -25747,7 +25865,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1755022996528",
   "url": "https://landsend.com/products/womens-poplin-midi-wrap-front-dress/id_390587",
   "score": 49,
-  "base": 95,
+  "base": 94,
   "cats": [
    "dress"
   ],
@@ -25844,7 +25962,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1776534475675",
   "url": "https://net-a-porter.com/en-us/shop/product/ulla-johnson/clothing/maxi-dresses/malie-printed-stretch-jersey-maxi-dress/46376663163039492",
   "score": 49,
-  "base": 71,
+  "base": 70,
   "cats": [
    "dress"
   ],
@@ -25875,7 +25993,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1754395852091",
   "url": "https://net-a-porter.com/en-us/shop/product/another-tomorrow/clothing/midi-dresses/stretch-jersey-midi-dress/46376663162899020",
   "score": 49,
-  "base": 86,
+  "base": 85,
   "cats": [
    "dress"
   ],
@@ -25907,7 +26025,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1779329859784",
   "url": "https://shopbop.com/roma-dress-cala-cruz/vp/v=1/1522351269.htm",
   "score": 49,
-  "base": 74,
+  "base": 73,
   "cats": [
    "dress"
   ],
@@ -25940,7 +26058,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781789465256",
   "url": "https://tnuck.com/products/marnie-midi-dress",
   "score": 49,
-  "base": 75,
+  "base": 74,
   "cats": [
    "dress"
   ],
@@ -26251,7 +26369,7 @@
   "img": "https://static.shopmy.us/uploads/1ab6f15a-bec8-4baa-9655-8baf949a9466_1706770_05.webp",
   "url": "https://tnuck.com/products/white-linen-portia-dress",
   "score": 48,
-  "base": 87,
+  "base": 86,
   "cats": [
    "dress"
   ],
@@ -26409,7 +26527,7 @@
   "img": "https://static.shopmy.us/uploads/img-1777125529169-original-image-1777125504574",
   "url": "https://revolve.com/more-to-come-clarke-halter-mini-dress-in-blue-brown-dot/dp/MOTO-WD1071",
   "score": 47,
-  "base": 85,
+  "base": 84,
   "cats": [
    "dress"
   ],
@@ -26474,7 +26592,7 @@
   "img": "https://static.shopmy.us/uploads/img-product-1758122135191",
   "url": "https://nordstrom.com/s/8399968",
   "score": 47,
-  "base": 74,
+  "base": 73,
   "cats": [
    "dress"
   ],
@@ -26537,7 +26655,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1771519966371",
   "url": "https://shopdoen.com/products/dua-dress-sunshine-prairie-rose",
   "score": 47,
-  "base": 81,
+  "base": 80,
   "cats": [
    "dress"
   ],
@@ -26632,7 +26750,7 @@
   "img": "https://static.shopmy.us/uploads/82052637-fd5b-4aa7-a6af-415f60329d9b_imageye___-_imgi_2_PF26-036-YELLOW-5.png",
   "url": "https://shopbop.com/lisette-solid-ruffle-maxi-sundress/vp/v=1/1565043054.htm",
   "score": 47,
-  "base": 70,
+  "base": 69,
   "cats": [
    "dress"
   ],
@@ -26663,7 +26781,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1777694705179",
   "url": "https://shopbop.com/ali-embroidered-boat-neck-mini/vp/v=1/1583787720.htm",
   "score": 47,
-  "base": 72,
+  "base": 71,
   "cats": [
    "dress"
   ],
@@ -26688,37 +26806,6 @@
   "bk": "closed"
  },
  {
-  "id": "veronicabeardcunninghamanorakjacket",
-  "brand": "Veronica Beard",
-  "title": "Cunningham Anorak Jacket",
-  "price": "$498",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1777948592247",
-  "url": "https://veronicabeard.com/products/cunningham-anorak-jacket-orchid-haze",
-  "score": 47,
-  "base": 90,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "veronica beard",
-  "c": 0.3058,
-  "neut": 0.4,
-  "om": 0.6,
-  "sil": "oversized",
-  "form": "casual",
-  "neck": "collared",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "thefrankieshopiliyadropwaistmaxidress",
   "brand": "The Frankie Shop",
   "title": "Iliya Drop Waist Maxi Dress",
@@ -26726,7 +26813,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778576969285",
   "url": "https://www.mytheresa.com/us/en/women/the-frankie-shop-ilya-cotton-trimmed-maxi-dress-green-p01179482",
   "score": 46,
-  "base": 91,
+  "base": 90,
   "cats": [
    "dress"
   ],
@@ -27092,33 +27179,32 @@
   "bk": ""
  },
  {
-  "id": "mariadelaordendunedress",
-  "brand": "Maria de la Orden",
-  "title": "Dune Dress",
-  "price": "$260",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1778254834292",
-  "url": "https://mariadelaorden.com/products/dune-dress-light-blue-linen",
-  "score": 45,
-  "base": 82,
+  "id": "veronicabeardcunninghamanorakjacket",
+  "brand": "Veronica Beard",
+  "title": "Cunningham Anorak Jacket",
+  "price": "$498",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1777948592247",
+  "url": "https://veronicabeard.com/products/cunningham-anorak-jacket-orchid-haze",
+  "score": 46,
+  "base": 89,
   "cats": [
-   "dress"
+   "outerwear"
   ],
   "occ": [
-   "casual",
-   "work"
+   "casual"
   ],
-  "why": "Not your usual Maria de la Orden",
+  "why": "Goes with your new Zara striped shorts",
   "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "maria de la orden",
-  "c": 0.1545,
-  "neut": 0.95,
-  "om": 0.85,
-  "sil": "a-line",
-  "form": "smart-casual",
-  "neck": "cowl",
-  "slv": "sleeveless",
-  "len": "knee",
+  "creators": "Grace Atwood",
+  "brand_l": "veronica beard",
+  "c": 0.3058,
+  "neut": 0.4,
+  "om": 0.6,
+  "sil": "oversized",
+  "form": "casual",
+  "neck": "collared",
+  "slv": "long",
+  "len": "cropped",
   "fab": "cotton",
   "drp": "structured",
   "bk": "closed"
@@ -27194,7 +27280,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1776190089566",
   "url": "https://palmnoosa.com/products/manon-mini-dress-raye-fleur",
   "score": 45,
-  "base": 79,
+  "base": 78,
   "cats": [
    "dress"
   ],
@@ -27220,6 +27306,35 @@
   "bk": "closed"
  },
  {
+  "id": "tkeeslilybraidsandals",
+  "brand": "TKEES",
+  "title": "Lily Braid Sandals",
+  "price": "$95",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1778626552972",
+  "url": "https://tkees.com/products/lily-braid-bourbon",
+  "score": 45,
+  "base": 45,
+  "cats": [
+   "shoe"
+  ],
+  "occ": [],
+  "why": "Not your usual TKEES",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "tkees",
+  "c": 0.4359,
+  "neut": "",
+  "om": "",
+  "sil": "",
+  "form": "",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "",
+  "drp": "",
+  "bk": ""
+ },
+ {
   "id": "vrggrlagneslinenminidress",
   "brand": "VRG GRL",
   "title": "Agnes Linen Mini Dress",
@@ -27227,7 +27342,7 @@
   "img": "https://static.shopmy.us/uploads/img-product-1761539041989",
   "url": "https://shopbop.com/agnes-linen-mini-dress-white/vp/v=1/1529960299.htm",
   "score": 45,
-  "base": 82,
+  "base": 81,
   "cats": [
    "dress"
   ],
@@ -27321,7 +27436,7 @@
   "img": "https://static.shopmy.us/uploads/11abd6ec-7432-42e6-a403-fc6d5c727a71_109283895_068_b.webp",
   "url": "https://anthropologie.com/shop/mare-mare-halter-maxi-dress",
   "score": 44,
-  "base": 80,
+  "base": 79,
   "cats": [
    "dress"
   ],
@@ -27345,6 +27460,38 @@
   "bk": "closed"
  },
  {
+  "id": "mariadelaordendunedress",
+  "brand": "Maria de la Orden",
+  "title": "Dune Dress",
+  "price": "$260",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1778254834292",
+  "url": "https://mariadelaorden.com/products/dune-dress-light-blue-linen",
+  "score": 44,
+  "base": 81,
+  "cats": [
+   "dress"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Not your usual Maria de la Orden",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "maria de la orden",
+  "c": 0.1545,
+  "neut": 0.95,
+  "om": 0.85,
+  "sil": "a-line",
+  "form": "smart-casual",
+  "neck": "cowl",
+  "slv": "sleeveless",
+  "len": "knee",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": "closed"
+ },
+ {
   "id": "renwickginghamcaddiedress",
   "brand": "Renwick",
   "title": "Gingham Caddie Dress",
@@ -27352,7 +27499,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1768898852679",
   "url": "https://renwicksport.com/products/gingham-caddie-dress",
   "score": 44,
-  "base": 80,
+  "base": 79,
   "cats": [
    "dress"
   ],
@@ -27505,38 +27652,6 @@
   "bk": ""
  },
  {
-  "id": "tuckernuckquiltedcroppedtownleyjacket",
-  "brand": "Tuckernuck",
-  "title": "Quilted Cropped Townley Jacket",
-  "price": "$248",
-  "img": "https://tnuck.com/cdn/shop/files/1676137_01_2500x.jpg?v=1775061804",
-  "url": "https://tnuck.com/products/blue-and-white-quilted-cropped-townley-jacket",
-  "score": 44,
-  "base": 90,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "tuckernuck",
-  "c": 0.3002,
-  "neut": 0.7,
-  "om": 0.75,
-  "sil": "cropped",
-  "form": "smart-casual",
-  "neck": "collared",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "farmriobutterflywovenbag",
   "brand": "FARM Rio",
   "title": "Butterfly Woven Bag",
@@ -27575,7 +27690,7 @@
   "img": "https://tnuck.com/cdn/shop/files/1694941_01_2500x.jpg?v=1771946731",
   "url": "https://tnuck.com/products/eden-green-gingham-sleeveless-performance-seersucker-alcott-golf-dress",
   "score": 43,
-  "base": 82,
+  "base": 81,
   "cats": [
    "dress"
   ],
@@ -27638,7 +27753,7 @@
   "img": "https://m.media-amazon.com/images/G/01/Shopbop/p/prod/products/natmc/natmc30125282b7/natmc30125282b7_1774374643562_2-0.jpg",
   "url": "https://shopbop.com/fiore-maxi-natalie-martin-collection/vp/v=1/1524864555.htm",
   "score": 43,
-  "base": 81,
+  "base": 80,
   "cats": [
    "dress"
   ],
@@ -27694,6 +27809,38 @@
   "bk": ""
  },
  {
+  "id": "tuckernuckquiltedcroppedtownleyjacket",
+  "brand": "Tuckernuck",
+  "title": "Quilted Cropped Townley Jacket",
+  "price": "$248",
+  "img": "https://tnuck.com/cdn/shop/files/1676137_01_2500x.jpg?v=1775061804",
+  "url": "https://tnuck.com/products/blue-and-white-quilted-cropped-townley-jacket",
+  "score": 43,
+  "base": 89,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "tuckernuck",
+  "c": 0.3002,
+  "neut": 0.7,
+  "om": 0.75,
+  "sil": "cropped",
+  "form": "smart-casual",
+  "neck": "collared",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": "closed"
+ },
+ {
   "id": "juliettadonnarhodiumplatedcrystalandenamelnecklace",
   "brand": "JULIETTA",
   "title": "Donna Rhodium-Plated, Crystal and Enamel Necklace",
@@ -27725,37 +27872,6 @@
   "bk": ""
  },
  {
-  "id": "dailypracticebubbleanorakjacket",
-  "brand": "Daily Practice",
-  "title": "Bubble Anorak Jacket",
-  "price": "",
-  "img": "https://static.shopmy.us/uploads/99fac401-f824-4190-b1f1-af38721812e4_4278461050002_020_b.webp",
-  "url": "https://anthropologie.com/shop/hybrid/daily-practice-bubble-anorak-jacket",
-  "score": 42,
-  "base": 90,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Goes with your new Zara striped shorts",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "daily practice",
-  "c": 0.5813,
-  "neut": 0.4,
-  "om": 0.75,
-  "sil": "oversized",
-  "form": "casual",
-  "neck": "collared",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "synthetic",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "ratboarubaslipdress",
   "brand": "Rat & Boa",
   "title": "Ruba Slip Dress",
@@ -27763,7 +27879,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1756648066854",
   "url": "https://us.ratandboa.com/products/ruba-dress-green",
   "score": 41,
-  "base": 77,
+  "base": 76,
   "cats": [
    "dress"
   ],
@@ -27794,7 +27910,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1779754641273",
   "url": "https://senser.net/products/senserads-690f7be9-2a39-3b1c-8d8a-4d011a91a6b3/Google/1340/jacquemus-back-detail-sleeveless-maxi-dress-535435878654208",
   "score": 41,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -27888,7 +28004,7 @@
   "img": "https://static.shopmy.us/uploads/03704f75-0e7a-47e1-ba4f-fee20d28a9a1SS26L102D020xFRINGEVISIONARYRPTxPrimary_192036228_1200x1600.png",
   "url": "https://byrdiegolfsocial.com/products/p-town-pleated-mini-dress",
   "score": 41,
-  "base": 93,
+  "base": 92,
   "cats": [
    "dress"
   ],
@@ -27920,7 +28036,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1774371821514",
   "url": "https://shopdoen.com/products/valenne-dress-dorset-plaid",
   "score": 41,
-  "base": 81,
+  "base": 80,
   "cats": [
    "dress"
   ],
@@ -27982,7 +28098,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1780670997341",
   "url": "https://tove-studio.com/products/freja-dress-white",
   "score": 41,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -28013,7 +28129,7 @@
   "img": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/1716562_05.jpg?v=1781539214",
   "url": "https://tnuck.com/products/white-greek-key-embroidered-linen-adrianne-dress",
   "score": 41,
-  "base": 78,
+  "base": 77,
   "cats": [
    "dress"
   ],
@@ -28046,7 +28162,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1777156325050",
   "url": "https://daphnethelabel.com/products/the-duvet-dress-mint",
   "score": 41,
-  "base": 83,
+  "base": 82,
   "cats": [
    "dress"
   ],
@@ -28070,35 +28186,37 @@
   "bk": "closed"
  },
  {
-  "id": "daphnetheragdolldress",
-  "brand": "Daphne",
-  "title": "The Ragdoll Dress",
-  "price": "$120",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1757013459498",
-  "url": "https://daphnethelabel.com/products/the-ragdoll-dress-cloud-stripe",
+  "id": "englishfactorylinenumbrellaminidress",
+  "brand": "English Factory",
+  "title": "Linen Umbrella Mini Dress",
+  "price": "$134",
+  "img": "https://m.media-amazon.com/images/G/01/Shopbop/p/prod/products/efact/efact3120471753/efact3120471753_1780347979776_2-0.jpg",
+  "url": "https://shopbop.com/linen-umbrella-mini-dress-english/vp/v=1/1546189432.htm",
   "score": 41,
-  "base": 73,
+  "base": 70,
   "cats": [
    "dress"
   ],
   "occ": [
-   "casual"
+   "casual",
+   "going-out",
+   "vacation"
   ],
-  "why": "Not your usual Daphne",
+  "why": "Not your usual English Factory",
   "new": 0,
   "creators": "Merritt Beck",
-  "brand_l": "daphne",
-  "c": 0.1003,
-  "neut": 0.85,
-  "om": 0.75,
-  "sil": "flowy",
+  "brand_l": "english factory",
+  "c": 0.5033,
+  "neut": 0.1,
+  "om": 0.1,
+  "sil": "a-line",
   "form": "casual",
-  "neck": "v-neck",
-  "slv": "strappy",
-  "len": "knee",
-  "fab": "cotton",
+  "neck": "halter",
+  "slv": "sleeveless",
+  "len": "mini",
+  "fab": "linen",
   "drp": "flowy",
-  "bk": "tie-back"
+  "bk": "halter"
  },
  {
   "id": "bodenclassicbikinibottoms",
@@ -28140,7 +28258,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1780697461389",
   "url": "https://shopbop.com/eda-slip-dress-lemlem/vp/v=1/1515927007.htm",
   "score": 41,
-  "base": 85,
+  "base": 84,
   "cats": [
    "dress"
   ],
@@ -28195,6 +28313,37 @@
   "bk": ""
  },
  {
+  "id": "dailypracticebubbleanorakjacket",
+  "brand": "Daily Practice",
+  "title": "Bubble Anorak Jacket",
+  "price": "",
+  "img": "https://static.shopmy.us/uploads/99fac401-f824-4190-b1f1-af38721812e4_4278461050002_020_b.webp",
+  "url": "https://anthropologie.com/shop/hybrid/daily-practice-bubble-anorak-jacket",
+  "score": 41,
+  "base": 89,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Goes with your new Zara striped shorts",
+  "new": 0,
+  "creators": "Grace Atwood",
+  "brand_l": "daily practice",
+  "c": 0.5813,
+  "neut": 0.4,
+  "om": 0.75,
+  "sil": "oversized",
+  "form": "casual",
+  "neck": "collared",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "synthetic",
+  "drp": "structured",
+  "bk": "closed"
+ },
+ {
   "id": "elliattsiasweetheartgown",
   "brand": "ELLIATT",
   "title": "Sia Sweetheart Gown",
@@ -28202,7 +28351,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1770019159749",
   "url": "https://revolve.com/elliatt-sia-gown-in-black/dp/ELLI-WD1056",
   "score": 40,
-  "base": 77,
+  "base": 76,
   "cats": [
    "dress"
   ],
@@ -28233,7 +28382,7 @@
   "img": "https://shopminnow.com/cdn/shop/files/Frame1775.png?v=1778596643",
   "url": "https://shopminnow.com/products/womens-harbor-mist-square-neck-tank-dress",
   "score": 40,
-  "base": 80,
+  "base": 79,
   "cats": [
    "dress"
   ],
@@ -28264,7 +28413,7 @@
   "img": "https://static.shopmy.us/uploads/7af1fabb-88c5-46e2-8dc0-c4f042a27eca4139880890552_040_b4.webp",
   "url": "https://anthropologie.com/shop/farm-rio-garden-of-life-linen-mini-dress",
   "score": 40,
-  "base": 84,
+  "base": 83,
   "cats": [
    "dress"
   ],
@@ -28319,6 +28468,37 @@
   "bk": ""
  },
  {
+  "id": "daphnetheragdolldress",
+  "brand": "Daphne",
+  "title": "The Ragdoll Dress",
+  "price": "$120",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1757013459498",
+  "url": "https://daphnethelabel.com/products/the-ragdoll-dress-cloud-stripe",
+  "score": 40,
+  "base": 72,
+  "cats": [
+   "dress"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Not your usual Daphne",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "daphne",
+  "c": 0.1003,
+  "neut": 0.85,
+  "om": 0.75,
+  "sil": "flowy",
+  "form": "casual",
+  "neck": "v-neck",
+  "slv": "strappy",
+  "len": "knee",
+  "fab": "cotton",
+  "drp": "flowy",
+  "bk": "tie-back"
+ },
+ {
   "id": "tuckernuckricracdaleyminidress",
   "brand": "Tuckernuck",
   "title": "Ric Rac Daley Mini Dress",
@@ -28326,7 +28506,7 @@
   "img": "https://static.shopmy.us/uploads/6600c2b0-93b6-46f5-acdd-8eb5a8ecd8c0_1706743_06.webp",
   "url": "https://tnuck.com/products/y25417t-navy-blazer",
   "score": 40,
-  "base": 80,
+  "base": 79,
   "cats": [
    "dress"
   ],
@@ -28352,14 +28532,45 @@
   "bk": "closed"
  },
  {
+  "id": "hunterbellamaldress",
+  "brand": "Hunter Bell",
+  "title": "Amal Dress",
+  "price": "$495",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1776266151076",
+  "url": "https://hunterbellnyc.com/products/amal-dress-middleton-meadow",
+  "score": 39,
+  "base": 71,
+  "cats": [
+   "dress"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "straight cut, like your saved pieces",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "hunter bell",
+  "c": 0.5383,
+  "neut": 0.2,
+  "om": 0.3,
+  "sil": "straight",
+  "form": "casual",
+  "neck": "square",
+  "slv": "strappy",
+  "len": "maxi",
+  "fab": "cotton",
+  "drp": "fluid",
+  "bk": "closed"
+ },
+ {
   "id": "wiggykitthejackiedress",
   "brand": "Wiggy Kit",
   "title": "The Jackie Dress",
   "price": "",
   "img": "https://static.shopmy.us/uploads/pretty-prod-1776272429607",
   "url": "https://wiggykit.com/products/jackie-dress",
-  "score": 40,
-  "base": 78,
+  "score": 39,
+  "base": 77,
   "cats": [
    "dress"
   ],
@@ -28384,70 +28595,6 @@
   "bk": "closed"
  },
  {
-  "id": "englishfactorylinenumbrellaminidress",
-  "brand": "English Factory",
-  "title": "Linen Umbrella Mini Dress",
-  "price": "$134",
-  "img": "https://m.media-amazon.com/images/G/01/Shopbop/p/prod/products/efact/efact3120471753/efact3120471753_1780347979776_2-0.jpg",
-  "url": "https://shopbop.com/linen-umbrella-mini-dress-english/vp/v=1/1546189432.htm",
-  "score": 40,
-  "base": 71,
-  "cats": [
-   "dress"
-  ],
-  "occ": [
-   "casual",
-   "going-out",
-   "vacation"
-  ],
-  "why": "Not your usual English Factory",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "english factory",
-  "c": 0.5033,
-  "neut": 0.1,
-  "om": 0.1,
-  "sil": "a-line",
-  "form": "casual",
-  "neck": "halter",
-  "slv": "sleeveless",
-  "len": "mini",
-  "fab": "linen",
-  "drp": "flowy",
-  "bk": "halter"
- },
- {
-  "id": "hunterbellamaldress",
-  "brand": "Hunter Bell",
-  "title": "Amal Dress",
-  "price": "$495",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1776266151076",
-  "url": "https://hunterbellnyc.com/products/amal-dress-middleton-meadow",
-  "score": 39,
-  "base": 72,
-  "cats": [
-   "dress"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "straight cut, like your saved pieces",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "hunter bell",
-  "c": 0.5383,
-  "neut": 0.2,
-  "om": 0.3,
-  "sil": "straight",
-  "form": "casual",
-  "neck": "square",
-  "slv": "strappy",
-  "len": "maxi",
-  "fab": "cotton",
-  "drp": "fluid",
-  "bk": "closed"
- },
- {
   "id": "littleliesfriedaminidress",
   "brand": "Little Lies",
   "title": "Frieda Mini Dress",
@@ -28455,7 +28602,7 @@
   "img": "https://m.media-amazon.com/images/G/01/Shopbop/p/prod/products/litli/litli3007812d01/litli3007812d01_1781020960021_2-0.jpg",
   "url": "https://shopbop.com/frieda-mini-dress-little-lies/vp/v=1/1523685434.htm",
   "score": 39,
-  "base": 70,
+  "base": 69,
   "cats": [
    "dress"
   ],
@@ -28488,7 +28635,7 @@
   "img": "https://static.shopmy.us/uploads/ae2c6ad2-6119-4a07-a7c9-ef1c311ed73eShop%20my%20images.jpg",
   "url": "https://shopbop.com/fringe-nico-dress-le-bop/vp/v=1/1518502930.htm",
   "score": 39,
-  "base": 64,
+  "base": 63,
   "cats": [
    "dress"
   ],
@@ -28520,7 +28667,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781834196751",
   "url": "https://shopbop.com/astrid-poplin-dress-simonmiller/vp/v=1/1544808363.htm",
   "score": 39,
-  "base": 71,
+  "base": 70,
   "cats": [
    "dress"
   ],
@@ -28582,7 +28729,7 @@
   "img": "https://static.shopmy.us/uploads/7f6b8a11-4304-478b-8495-6b8719beb658_image-1769241470077",
   "url": "https://anthropologie.com/shop/mare-mare-isabella-strapless-ruched-corset-dress",
   "score": 38,
-  "base": 73,
+  "base": 72,
   "cats": [
    "dress"
   ],
@@ -28613,7 +28760,7 @@
   "img": "https://tnuck.com/cdn/shop/files/1692785_01_2500x.jpg?v=1773067824",
   "url": "https://tnuck.com/products/cameo-blue-eyelet-cape-leah-dress",
   "score": 38,
-  "base": 79,
+  "base": 78,
   "cats": [
    "dress"
   ],
@@ -28678,7 +28825,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1774750577655",
   "url": "https://hillhousehome.com/products/the-fae-dress-dancing-willow-blue",
   "score": 38,
-  "base": 78,
+  "base": 77,
   "cats": [
    "dress"
   ],
@@ -28709,7 +28856,7 @@
   "img": "https://cdn.shopify.com/s/files/1/2091/0907/files/SPF26ECOMCO30521.jpg?v=1779918865",
   "url": "https://carolinak.com/products/mana-dress-2",
   "score": 38,
-  "base": 65,
+  "base": 64,
   "cats": [
    "dress"
   ],
@@ -28740,7 +28887,7 @@
   "img": "https://cdn.shopify.com/s/files/1/0053/8489/6605/files/SPRING-2026-ECOM5884.jpg?v=1770302368",
   "url": "https://devonwindsor.com/products/willamina-lemondrop",
   "score": 38,
-  "base": 84,
+  "base": 83,
   "cats": [
    "dress"
   ],
@@ -28764,38 +28911,6 @@
   "bk": "closed"
  },
  {
-  "id": "hillhousehomethevirginiajacket",
-  "brand": "Hill House Home",
-  "title": "The Virginia Jacket",
-  "price": "$248",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1758833511483",
-  "url": "https://hillhousehome.com/products/the-virginia-jacket-tapestry-fleur-black",
-  "score": 38,
-  "base": 91,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "hill house home",
-  "c": 0.1297,
-  "neut": 0.65,
-  "om": 0.75,
-  "sil": "fitted",
-  "form": "smart-casual",
-  "neck": "crew",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "suewong2000sbeadeddresswithscarf",
   "brand": "Sue Wong",
   "title": "2000s Beaded Dress with Scarf",
@@ -28803,7 +28918,7 @@
   "img": "https://isleofmonday.com/cdn/shop/files/SueWong2000sBeadedDresswithShawl_276_de9d5564-faf0-416a-8e1d-a358af4c3c19.jpg?v=1775351047",
   "url": "https://isleofmonday.com/products/sue-wong-2000s-beaded-dress-with-scarf",
   "score": 37,
-  "base": 67,
+  "base": 66,
   "cats": [
    "dress"
   ],
@@ -28865,7 +28980,7 @@
   "img": "https://m.media-amazon.com/images/G/01/Shopbop/p/prod/products/bpara/bpara3039828f97/bpara3039828f97_1779468446148_2-0.jpg",
   "url": "https://shopbop.com/martine-dress-botanic-tile-birds/vp/v=1/1521023716.htm",
   "score": 37,
-  "base": 71,
+  "base": 70,
   "cats": [
    "dress"
   ],
@@ -28896,7 +29011,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1775617142600",
   "url": "https://shopbop.com/shirred-half-placket-maxi-dress/vp/v=1/1536578944.htm",
   "score": 37,
-  "base": 72,
+  "base": 71,
   "cats": [
    "dress"
   ],
@@ -28920,38 +29035,6 @@
   "bk": "closed"
  },
  {
-  "id": "al\u00e9maisdixiecottonminidress",
-  "brand": "AL\u00c9MAIS",
-  "title": "Dixie Cotton Mini Dress",
-  "price": "",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1778415475994",
-  "url": "https://net-a-porter.com/en-us/shop/product/alemais/clothing/mini-dresses/dixie-cotton-mini-dress/46376663163127314",
-  "score": 37,
-  "base": 79,
-  "cats": [
-   "dress"
-  ],
-  "occ": [
-   "casual",
-   "going-out"
-  ],
-  "why": "Not your usual AL\u00c9MAIS",
-  "new": 0,
-  "creators": "Merritt Beck",
-  "brand_l": "al\u00e9mais",
-  "c": 0.3101,
-  "neut": 0.65,
-  "om": 0.7,
-  "sil": "flowy",
-  "form": "casual",
-  "neck": "boat",
-  "slv": "puff",
-  "len": "knee",
-  "fab": "cotton",
-  "drp": "flowy",
-  "bk": "closed"
- },
- {
   "id": "significantotherelvistraplessmaxidress",
   "brand": "Significant Other",
   "title": "Elvi Strapless Maxi Dress",
@@ -28959,7 +29042,7 @@
   "img": "https://static.shopmy.us/uploads/img-1778931056561",
   "url": "https://tnuck.com/products/painted-muse-elvi-maxi-dress",
   "score": 37,
-  "base": 66,
+  "base": 65,
   "cats": [
    "dress"
   ],
@@ -28982,6 +29065,38 @@
   "len": "maxi",
   "fab": "linen",
   "drp": "flowy",
+  "bk": "closed"
+ },
+ {
+  "id": "hillhousehomethevirginiajacket",
+  "brand": "Hill House Home",
+  "title": "The Virginia Jacket",
+  "price": "$248",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1758833511483",
+  "url": "https://hillhousehome.com/products/the-virginia-jacket-tapestry-fleur-black",
+  "score": 37,
+  "base": 90,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "hill house home",
+  "c": 0.1297,
+  "neut": 0.65,
+  "om": 0.75,
+  "sil": "fitted",
+  "form": "smart-casual",
+  "neck": "crew",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "cotton",
+  "drp": "structured",
   "bk": "closed"
  },
  {
@@ -29024,7 +29139,7 @@
   "img": "https://tnuck.com/cdn/shop/files/1697661_01_1365x.jpg?v=1774276179",
   "url": "https://tnuck.com/products/trellis-bloom-jacquard-kathleen-gown",
   "score": 36,
-  "base": 74,
+  "base": 73,
   "cats": [
    "dress"
   ],
@@ -29055,7 +29170,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1768159710510",
   "url": "https://veronicabeard.com/products/lana-scarf-print-midi-dress-blue-jay-multi",
   "score": 36,
-  "base": 73,
+  "base": 72,
   "cats": [
    "dress"
   ],
@@ -29079,13 +29194,139 @@
   "bk": "closed"
  },
  {
+  "id": "talbotskathrynbucklelinenblockheelsandals",
+  "brand": "Talbots",
+  "title": "Kathryn Buckle Linen Block Heel Sandals",
+  "price": "$139",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1773381857308",
+  "url": "https://talbots.com/kathryn-buckle-linen-block-heel-sandals/P261041405.html",
+  "score": 36,
+  "base": 28,
+  "cats": [
+   "shoe"
+  ],
+  "occ": [
+   "vacation"
+  ],
+  "why": "Quiet-luxury cut (linen)",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "talbots",
+  "c": 0.7214,
+  "neut": "",
+  "om": "",
+  "sil": "",
+  "form": "",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "",
+  "drp": "",
+  "bk": ""
+ },
+ {
+  "id": "veronicabeardailadress",
+  "brand": "Veronica Beard",
+  "title": "Aila Dress",
+  "price": "$598",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1780494005723",
+  "url": "https://veronicabeard.com/products/aila-gingham-midi-dress-navy-dove-white",
+  "score": 36,
+  "base": 75,
+  "cats": [
+   "dress"
+  ],
+  "occ": [
+   "casual"
+  ],
+  "why": "Not your usual Veronica Beard",
+  "new": 0,
+  "creators": "Grace Atwood",
+  "brand_l": "veronica beard",
+  "c": 0.0658,
+  "neut": 0.85,
+  "om": 0.6,
+  "sil": "a-line",
+  "form": "casual",
+  "neck": "square",
+  "slv": "sleeveless",
+  "len": "midi",
+  "fab": "cotton",
+  "drp": "structured",
+  "bk": ""
+ },
+ {
+  "id": "al\u00e9maisdixiecottonminidress",
+  "brand": "AL\u00c9MAIS",
+  "title": "Dixie Cotton Mini Dress",
+  "price": "",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1778415475994",
+  "url": "https://net-a-porter.com/en-us/shop/product/alemais/clothing/mini-dresses/dixie-cotton-mini-dress/46376663163127314",
+  "score": 36,
+  "base": 78,
+  "cats": [
+   "dress"
+  ],
+  "occ": [
+   "casual",
+   "going-out"
+  ],
+  "why": "Not your usual AL\u00c9MAIS",
+  "new": 0,
+  "creators": "Merritt Beck",
+  "brand_l": "al\u00e9mais",
+  "c": 0.3101,
+  "neut": 0.65,
+  "om": 0.7,
+  "sil": "flowy",
+  "form": "casual",
+  "neck": "boat",
+  "slv": "puff",
+  "len": "knee",
+  "fab": "cotton",
+  "drp": "flowy",
+  "bk": "closed"
+ },
+ {
+  "id": "bodenlongsleevemixmediadress",
+  "brand": "Boden",
+  "title": "Long Sleeve Mix Media Dress",
+  "price": "$190",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1768453182659",
+  "url": "https://us.boden.com/products/women-long-sleeve-mix-media-dress-navy-d1602nav",
+  "score": 35,
+  "base": 81,
+  "cats": [
+   "dress"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Not your usual Boden",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "boden",
+  "c": 0.3988,
+  "neut": 0.9,
+  "om": 0.85,
+  "sil": "a-line",
+  "form": "smart-casual",
+  "neck": "v-neck",
+  "slv": "long",
+  "len": "midi",
+  "fab": "cotton",
+  "drp": "fluid",
+  "bk": "closed"
+ },
+ {
   "id": "tuckernuckreversiblequiltedtownsendjacket",
   "brand": "Tuckernuck",
   "title": "Reversible Quilted Townsend Jacket",
   "price": "$228",
   "img": "https://tnuck.com/cdn/shop/files/1675634_01_2500x.jpg?v=1771450374",
   "url": "https://tnuck.com/products/reversible-quilted-townsend-jacket",
-  "score": 36,
+  "score": 35,
   "base": 85,
   "cats": [
    "outerwear"
@@ -29111,69 +29352,6 @@
   "bk": "closed"
  },
  {
-  "id": "veronicabeardailadress",
-  "brand": "Veronica Beard",
-  "title": "Aila Dress",
-  "price": "$598",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1780494005723",
-  "url": "https://veronicabeard.com/products/aila-gingham-midi-dress-navy-dove-white",
-  "score": 36,
-  "base": 76,
-  "cats": [
-   "dress"
-  ],
-  "occ": [
-   "casual"
-  ],
-  "why": "Not your usual Veronica Beard",
-  "new": 0,
-  "creators": "Grace Atwood",
-  "brand_l": "veronica beard",
-  "c": 0.0658,
-  "neut": 0.85,
-  "om": 0.6,
-  "sil": "a-line",
-  "form": "casual",
-  "neck": "square",
-  "slv": "sleeveless",
-  "len": "midi",
-  "fab": "cotton",
-  "drp": "structured",
-  "bk": ""
- },
- {
-  "id": "bodenlongsleevemixmediadress",
-  "brand": "Boden",
-  "title": "Long Sleeve Mix Media Dress",
-  "price": "$190",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1768453182659",
-  "url": "https://us.boden.com/products/women-long-sleeve-mix-media-dress-navy-d1602nav",
-  "score": 35,
-  "base": 82,
-  "cats": [
-   "dress"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "Not your usual Boden",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "boden",
-  "c": 0.3988,
-  "neut": 0.9,
-  "om": 0.85,
-  "sil": "a-line",
-  "form": "smart-casual",
-  "neck": "v-neck",
-  "slv": "long",
-  "len": "midi",
-  "fab": "cotton",
-  "drp": "fluid",
-  "bk": "closed"
- },
- {
   "id": "tanyataylorbiancadress",
   "brand": "Tanya Taylor",
   "title": "Bianca Dress",
@@ -29181,7 +29359,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1780866124446",
   "url": "https://tanyataylor.com/products/bianca-dress-redwood-multi",
   "score": 35,
-  "base": 72,
+  "base": 71,
   "cats": [
    "dress"
   ],
@@ -29212,7 +29390,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1776311001315",
   "url": "https://net-a-porter.com/en-us/shop/product/alemais/clothing/mini-dresses/alberta-belted-printed-linen-mini-shirt-dress/46376663163083604",
   "score": 35,
-  "base": 75,
+  "base": 74,
   "cats": [
    "dress"
   ],
@@ -29245,7 +29423,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781120625948",
   "url": "https://shopbop.com/lola-dress-floral-celiab/vp/v=1/1597066323.htm",
   "score": 35,
-  "base": 65,
+  "base": 64,
   "cats": [
    "dress"
   ],
@@ -29276,7 +29454,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781470428302",
   "url": "https://us.ratandboa.com/products/sirena-dress-pink",
   "score": 34,
-  "base": 59,
+  "base": 58,
   "cats": [
    "dress"
   ],
@@ -29307,7 +29485,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1777718158123",
   "url": "https://hillhousehome.com/products/the-angie-dress-off-white",
   "score": 34,
-  "base": 83,
+  "base": 82,
   "cats": [
    "dress"
   ],
@@ -29339,7 +29517,7 @@
   "img": "https://static.shopmy.us/uploads/fb8fe45c-10ac-42f0-b30e-270409f84dd2imgi_2_250508_AbbeyGlass_1203EDIT.jpeg",
   "url": "https://abbey-glass.com/products/charlotte-gown-gold-tea-rose-organza",
   "score": 34,
-  "base": 73,
+  "base": 72,
   "cats": [
    "dress"
   ],
@@ -29372,7 +29550,7 @@
   "img": "https://static.shopmy.us/pins/zoom-66721997-1782250556575-HB_HSPF26_21318-resized.webp",
   "url": "https://hunterbellnyc.com/products/jamison-dress-berryvine",
   "score": 34,
-  "base": 65,
+  "base": 64,
   "cats": [
    "dress"
   ],
@@ -29403,7 +29581,7 @@
   "img": "https://static.shopmy.us/uploads/5b1c6e13-44c5-48ff-ba3f-c40427e962af_download-2026-05-30T224344.137.png",
   "url": "https://tnuck.com/products/off-white-cool-day-relaxed-mini-dress",
   "score": 34,
-  "base": 77,
+  "base": 76,
   "cats": [
    "dress"
   ],
@@ -29435,7 +29613,7 @@
   "img": "https://static.shopmy.us/uploads/35b7343a-a87e-422a-8a1d-15a72ebe2b7f20250930_LaMaregold_R25_ECOMM_Drop_Waist_Dress32996_2981x4472.jpg",
   "url": "https://shopbop.com/eloise-dress-maregold/vp/v=1/1543826508.htm",
   "score": 34,
-  "base": 73,
+  "base": 72,
   "cats": [
    "dress"
   ],
@@ -29459,38 +29637,6 @@
   "bk": ""
  },
  {
-  "id": "theoryadmiraldoublebreastedcropjacket",
-  "brand": "Theory",
-  "title": "Admiral Double Breasted Crop Jacket",
-  "price": "$214",
-  "img": "https://static.shopmy.us/uploads/pretty-prod-1762076598251",
-  "url": "https://bloomingdales.com/shop/product/theory-admiral-double-breasted-crop-jacket?ID=4834412",
-  "score": 34,
-  "base": 89,
-  "cats": [
-   "outerwear"
-  ],
-  "occ": [
-   "casual",
-   "work"
-  ],
-  "why": "Goes with your new Zara embroidered shorts",
-  "new": 0,
-  "creators": "Carly Riordan",
-  "brand_l": "theory",
-  "c": 0.6655,
-  "neut": 0.65,
-  "om": 0.85,
-  "sil": "tailored",
-  "form": "smart-casual",
-  "neck": "collared",
-  "slv": "long",
-  "len": "cropped",
-  "fab": "wool",
-  "drp": "structured",
-  "bk": "closed"
- },
- {
   "id": "hillhousehometheamericangirlxhillhousescarlettnapdress",
   "brand": "Hill House Home",
   "title": "The American Girl x Hill House Scarlett Nap Dress",
@@ -29498,7 +29644,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778398987686",
   "url": "https://hillhousehome.com/products/the-scarlett-midi-nap-dress-felicitys-historical-print",
   "score": 33,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -29529,7 +29675,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1775959680021",
   "url": "https://shopbop.com/cosima-mini-nap-dress-hill/vp/v=1/1564871959.htm",
   "score": 33,
-  "base": 80,
+  "base": 79,
   "cats": [
    "dress"
   ],
@@ -29560,7 +29706,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1777395948780",
   "url": "https://us.boden.com/products/women-ellie-cotton-maxi-shirt-dress-ivory-floral-frenzy-d1534crm",
   "score": 33,
-  "base": 80,
+  "base": 79,
   "cats": [
    "dress"
   ],
@@ -29592,7 +29738,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1759032618355",
   "url": "https://simkhai.com/products/beaux-organza-dress",
   "score": 33,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -29655,7 +29801,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778543691854",
   "url": "https://net-a-porter.com/en-us/shop/product/simkhai/clothing/gowns/emma-strapless-embellished-jersey-gown/46376663163107630",
   "score": 33,
-  "base": 74,
+  "base": 73,
   "cats": [
    "dress"
   ],
@@ -29679,6 +29825,38 @@
   "bk": "closed"
  },
  {
+  "id": "theoryadmiraldoublebreastedcropjacket",
+  "brand": "Theory",
+  "title": "Admiral Double Breasted Crop Jacket",
+  "price": "$214",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1762076598251",
+  "url": "https://bloomingdales.com/shop/product/theory-admiral-double-breasted-crop-jacket?ID=4834412",
+  "score": 33,
+  "base": 88,
+  "cats": [
+   "outerwear"
+  ],
+  "occ": [
+   "casual",
+   "work"
+  ],
+  "why": "Goes with your new Zara embroidered shorts",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "theory",
+  "c": 0.6655,
+  "neut": 0.65,
+  "om": 0.85,
+  "sil": "tailored",
+  "form": "smart-casual",
+  "neck": "collared",
+  "slv": "long",
+  "len": "cropped",
+  "fab": "wool",
+  "drp": "structured",
+  "bk": "closed"
+ },
+ {
   "id": "hillhousehomethemargotminidress",
   "brand": "Hill House Home",
   "title": "The Margot Mini Dress",
@@ -29686,7 +29864,7 @@
   "img": "https://static.shopmy.us/uploads/072185f9-c4c1-4166-b261-0688594ef924imgi_218_The_Margot_Mini_Dress_Sundial_Stripe1301.jpg",
   "url": "https://hillhousehome.com/products/the-margot-mini-dress-etched-floral-stripe-pink",
   "score": 32,
-  "base": 81,
+  "base": 80,
   "cats": [
    "dress"
   ],
@@ -29718,7 +29896,7 @@
   "img": "https://tnuck.com/cdn/shop/files/1700125_01_2500x.jpg?v=1779804348",
   "url": "https://tnuck.com/products/crw-50-117pw-multi",
   "score": 32,
-  "base": 75,
+  "base": 74,
   "cats": [
    "dress"
   ],
@@ -29749,7 +29927,7 @@
   "img": "https://static.shopmy.us/uploads/cacd0773-f784-4a63-a5e0-2e51444be137imageye___-_imgi_1_1647146_01%20%281%29.jpg",
   "url": "https://tnuck.com/products/green-gingham-cindy-mini-dress",
   "score": 32,
-  "base": 79,
+  "base": 78,
   "cats": [
    "dress"
   ],
@@ -29782,7 +29960,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1779927084494",
   "url": "https://shopbop.com/ribbon-charlottenap-dress-hill-house/vp/v=1/1554788958.htm",
   "score": 32,
-  "base": 73,
+  "base": 72,
   "cats": [
    "dress"
   ],
@@ -29813,7 +29991,7 @@
   "img": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/1722179_05.jpg?v=1779288983",
   "url": "https://tnuck.com/products/nyap-12-d855-tropical-americana-floral",
   "score": 32,
-  "base": 75,
+  "base": 74,
   "cats": [
    "dress"
   ],
@@ -29844,7 +30022,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1781224151432",
   "url": "https://hillhousehome.com/products/the-nathalie-dress-pink-shimmer",
   "score": 31,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -29875,7 +30053,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1775139615654",
   "url": "https://tnuck.com/products/yellow-alberte-solid-mini-dress",
   "score": 31,
-  "base": 72,
+  "base": 71,
   "cats": [
    "dress"
   ],
@@ -29907,7 +30085,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778598407101",
   "url": "https://simonmillerusa.com/products/imogen-sequin-midi-dress-in-peridot-combo",
   "score": 30,
-  "base": 54,
+  "base": 53,
   "cats": [
    "dress"
   ],
@@ -29938,7 +30116,7 @@
   "img": "https://static.shopmy.us/uploads/6460df1a-d990-475a-9163-07bae19abec5_DIPLOMAT_BLOOM_02.jpg",
   "url": "https://francesvalentine.com/products/diplomat-mini-dress-sleeveless-solid-dupioni-poly-dupion-green",
   "score": 30,
-  "base": 76,
+  "base": 75,
   "cats": [
    "dress"
   ],
@@ -30001,7 +30179,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778865966456",
   "url": "https://shopbop.com/btnk-set-mini-theory/vp/v=1/1593465447.htm",
   "score": 30,
-  "base": 79,
+  "base": 78,
   "cats": [
    "dress"
   ],
@@ -30034,7 +30212,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1772919314772",
   "url": "https://us.boden.com/products/women-kate-puff-sleeve-belted-dress-ivory-elegant-garden-d1463ecr",
   "score": 30,
-  "base": 70,
+  "base": 69,
   "cats": [
    "dress"
   ],
@@ -30066,7 +30244,7 @@
   "img": "https://static.shopmy.us/uploads/img-1758459278453",
   "url": "https://abbey-glass.com",
   "score": 30,
-  "base": 73,
+  "base": 72,
   "cats": [
    "dress"
   ],
@@ -30099,7 +30277,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778677963241",
   "url": "https://hillhousehome.com/products/the-holly-dress-sloane-floral",
   "score": 30,
-  "base": 77,
+  "base": 76,
   "cats": [
    "dress"
   ],
@@ -30272,6 +30450,37 @@
   "bk": ""
  },
  {
+  "id": "talbotsmarquiseeyeletshelltop",
+  "brand": "Talbots",
+  "title": "Marquise Eyelet Shell Top",
+  "price": "-",
+  "img": "https://static.shopmy.us/uploads/6cbf838a-0178-4b89-9d30-3b55961ffac7imgi_1_262075330_4156.jpg",
+  "url": "https://talbots.com/marquise-eyelet-shell/P262075330.html",
+  "score": 28,
+  "base": 26,
+  "cats": [
+   "top"
+  ],
+  "occ": [
+   "vacation"
+  ],
+  "why": "Too colourful for your palette",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "talbots",
+  "c": 0.7742,
+  "neut": "",
+  "om": "",
+  "sil": "",
+  "form": "",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "",
+  "drp": "",
+  "bk": ""
+ },
+ {
   "id": "tuckernuckricraclinenellisminidress",
   "brand": "Tuckernuck",
   "title": "Ric Rac Linen Ellis Mini Dress",
@@ -30279,7 +30488,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1774980321526",
   "url": "https://tnuck.com/products/white-ric-rac-linen-mini-ellis-dress",
   "score": 28,
-  "base": 73,
+  "base": 72,
   "cats": [
    "dress"
   ],
@@ -30312,7 +30521,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1776747094352",
   "url": "https://us.boden.com/products/women-scoop-neck-jacquard-dress-yellow-jacquard-d1775yel",
   "score": 28,
-  "base": 72,
+  "base": 71,
   "cats": [
    "dress"
   ],
@@ -30343,7 +30552,7 @@
   "img": "https://static.shopmy.us/uploads/893bd0df-615d-47fb-90ca-23f81b7e5900_imgi_179_lmrgl300212832b_1768512725696_2-0._QL90_UX1128_.jpeg",
   "url": "https://shopbop.com/sammy-dress-maregold/vp/v=1/1521723281.htm",
   "score": 27,
-  "base": 65,
+  "base": 64,
   "cats": [
    "dress"
   ],
@@ -30405,7 +30614,7 @@
   "img": "https://static.shopmy.us/uploads/7db43e8f-28c9-4e18-8bbf-df469cff9af7imgi_2_1716517_01.jpg",
   "url": "https://tnuck.com/products/azure-embroidered-cotton-rhea-maxi-dress",
   "score": 25,
-  "base": 68,
+  "base": 67,
   "cats": [
    "dress"
   ],
@@ -30436,7 +30645,7 @@
   "img": "https://static.shopmy.us/uploads/09c88d16-a4a3-4e20-9d52-bce524f52e0d_4130647160323_072_b_a15-pdp-detail-shotfitconstrainfmtwebpqlt80wid960_1100x1650.jpg",
   "url": "https://anthropologie.com/shop/hybrid/by-anthropologie-cotton-smocked-mini-dress",
   "score": 24,
-  "base": 71,
+  "base": 70,
   "cats": [
    "dress"
   ],
@@ -30468,7 +30677,7 @@
   "img": "https://static.shopmy.us/uploads/img-1779822866394",
   "url": "https://tnuck.com/products/heritage-madras-hinkley-mini-dress",
   "score": 24,
-  "base": 77,
+  "base": 76,
   "cats": [
    "dress"
   ],
@@ -30500,7 +30709,7 @@
   "img": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/1706797_01.jpg?v=1779123947",
   "url": "https://tnuck.com/products/cherry-ric-rac-corby-shift-dress",
   "score": 24,
-  "base": 75,
+  "base": 74,
   "cats": [
    "dress"
   ],
@@ -30532,7 +30741,7 @@
   "img": "https://cdn.shopify.com/s/files/1/0630/4999/0366/files/1701064_01.jpg?v=1782137766",
   "url": "https://tnuck.com/products/aqua-linen-embroidered-ruthie-mini-dress",
   "score": 24,
-  "base": 72,
+  "base": 71,
   "cats": [
    "dress"
   ],
@@ -30566,7 +30775,7 @@
   "img": "https://static.shopmy.us/uploads/d212e87e-5095-4980-b431-fe5885bb0535_4130264840126_526_b.webp",
   "url": "https://anthropologie.com/shop/by-anthropologie-printed-mini-dress",
   "score": 23,
-  "base": 66,
+  "base": 65,
   "cats": [
    "dress"
   ],
@@ -30598,7 +30807,7 @@
   "img": "https://static.shopmy.us/uploads/b09d447a-0a0d-4f8a-9538-def296b059b9imgi_120_1679950_06_1199x1799.jpg",
   "url": "https://tnuck.com/products/morning-glory-floral-mini-hillsborough-dress",
   "score": 16,
-  "base": 67,
+  "base": 66,
   "cats": [
    "dress"
   ],
@@ -30687,7 +30896,7 @@
   "img": "https://static.shopmy.us/uploads/pretty-prod-1778287232571",
   "url": "https://net-a-porter.com/en-us/shop/product/alemais/clothing/mini-dresses/ripple-tiered-printed-ramie-mini-dress/46376663163127308",
   "score": 13,
-  "base": 63,
+  "base": 62,
   "cats": [
    "dress"
   ],
@@ -30719,7 +30928,7 @@
   "img": "https://static.shopmy.us/uploads/c88b47cf-0137-4b98-beef-b8c03d2819e3_1647154_01_999x1499.jpg",
   "url": "https://tnuck.com/products/pink-floral-embroidery-lola-mini-shirt-dress",
   "score": 12,
-  "base": 60,
+  "base": 59,
   "cats": [
    "dress"
   ],
@@ -30742,5 +30951,36 @@
   "fab": "cotton",
   "drp": "structured",
   "bk": "closed"
+ },
+ {
+  "id": "landsendelbowsleeveeyeletkneelengthshirtdress",
+  "brand": "Lands' End",
+  "title": "Elbow Sleeve Eyelet Knee Length Shirt Dress",
+  "price": "$119.95",
+  "img": "https://static.shopmy.us/uploads/pretty-prod-1770968333118",
+  "url": "https://landsend.com/products/womens-elbow-sleeve-eyelet-knee-length-shirt-dress/id_392645",
+  "score": 0,
+  "base": 25,
+  "cats": [
+   "dress"
+  ],
+  "occ": [
+   "vacation"
+  ],
+  "why": "Not your usual Lands' End",
+  "new": 0,
+  "creators": "Carly Riordan",
+  "brand_l": "lands' end",
+  "c": 0.8286,
+  "neut": "",
+  "om": "",
+  "sil": "",
+  "form": "",
+  "neck": "",
+  "slv": "",
+  "len": "",
+  "fab": "",
+  "drp": "",
+  "bk": ""
  }
 ]

@@ -1457,24 +1457,34 @@ SCRIPT = '''
     return P;
   }
   function liveScore(card,P){
-    var s=parseFloat(card.dataset.base); if(isNaN(s)) s=parseFloat(card.dataset.score)||0;
-    var b=card.dataset.brand||'', cats=catsOf(card), i;
+    // d = fit to what she's HEARTED (brand + category + cut/palette + neutrality),
+    // computed the same way the server does. base = the cold catalogue score.
+    var base=parseFloat(card.dataset.base); if(isNaN(base)) base=parseFloat(card.dataset.score)||0;
+    var b=card.dataset.brand||'', cats=catsOf(card), i, d=0, pos=0;
     var nb=(P.Lb[b]||0)-(P.Db[b]||0);
-    if(nb) s+=nb>0?Math.min(11,7*nb):Math.max(-15,9*nb);
+    if(nb){ d+=nb>0?Math.min(11,7*nb):Math.max(-15,9*nb); if(nb>0)pos++; }
     var net=0; for(i=0;i<cats.length;i++){ net+=(P.Lc[cats[i]]||0)-(P.Dc[cats[i]]||0); }
-    s+=Math.max(-14, Math.min(12, (net<0?6:4)*net));
-    for(i=0;i<cats.length;i++){ if((P.Dc[cats[i]]||0)>=2 && !(P.Lc[cats[i]]||0)) s-=20; }
+    d+=Math.max(-14, Math.min(12, (net<0?6:4)*net)); if(net>0)pos++;
+    for(i=0;i<cats.length;i++){ if((P.Dc[cats[i]]||0)>=2 && !(P.Lc[cats[i]]||0)) d-=20; }
     var cv=parseFloat(card.dataset.c);
-    if(!isNaN(cv) && P.cm!=null && Math.abs(cv-P.cm)<0.08) s+=6;
+    if(!isNaN(cv) && P.cm!=null && Math.abs(cv-P.cm)<0.08){ d+=6; pos++; }
     for(i=0;i<VCATS.length;i++){
       var k=VCATS[i][0], val=card.dataset[k]; if(!val||val==='na') continue;
       var lk=(P.Lv[k]&&P.Lv[k][val])||0, dk=(P.Dv[k]&&P.Dv[k][val])||0;
-      if(lk) s+=Math.min(VCATS[i][1], VCATS[i][2]*lk);
-      if(dk) s-=Math.min(VCATS[i][3], VCATS[i][4]*dk);
+      if(lk){ d+=Math.min(VCATS[i][1], VCATS[i][2]*lk); pos++; }
+      if(dk) d-=Math.min(VCATS[i][3], VCATS[i][4]*dk);
     }
     var nu=parseFloat(card.dataset.neut);
-    if(!isNaN(nu) && P.Lneu!=null) s+=5*(1-2*Math.abs(nu-P.Lneu));
-    return s;
+    if(!isNaN(nu) && P.Lneu!=null) d+=5*(1-2*Math.abs(nu-P.Lneu));
+    // Cold start (barely curated): keep the catalogue order so the feed isn't empty.
+    var nLiked=Object.keys(state.liked).length;
+    if(nLiked<8) return base+d;
+    // She's curated. Re-curate to LOOK LIKE her hearts: fit dominates, base is only
+    // a faint tiebreaker. Her rule — "anything I haven't reacted to, I don't like" —
+    // means an un-reacted item with no positive overlap gets pushed down; it has to
+    // earn its place by resembling something she hearted.
+    if(pos===0) d-=12;
+    return d*3 + base*0.12;
   }
   function rerank(){
     var P=buildProfile(), arr=cards.slice();
