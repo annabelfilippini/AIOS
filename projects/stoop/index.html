@@ -66,6 +66,8 @@
   .home-hero .cta:active{transform:translateY(4px);box-shadow:0 2px 0 0 var(--ink)}
   .home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:24px;margin-top:6px}
 
+  .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,18px);z-index:50;background:var(--ink);color:#fff;font-family:'Fredoka';font-size:15px;padding:11px 20px;border-radius:30px;box-shadow:0 6px 0 -1px rgba(58,47,35,.25);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
   .stand{background:var(--card);border:3px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;cursor:pointer;transition:transform .12s}
   .stand:nth-child(3n+1){transform:rotate(-.7deg)}
   .stand:nth-child(3n+2){transform:rotate(.6deg)}
@@ -294,6 +296,8 @@
 </style>
 </head>
 <body>
+
+<div class="toast" id="toast" aria-live="polite"></div>
 
 <div class="bunting" id="bunting" aria-hidden="true">
   <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -683,14 +687,20 @@
       </div>
     </div>`;
   }
+  function toast(msg){
+    const t=document.getElementById('toast'); if(!t) return;
+    t.textContent=msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),1900);
+  }
   function renderHome(){
     const grid=document.getElementById('home-grid');
     let cards='';
     if(profile && inFeed(profile)){
       cards += standCard(Object.assign({}, profile, {blurb:blurbFrom(profile)}), "go('profile')");
     }
-    // neighbor teaser stubs — populate the block so it never reads as a one-stand feed
-    cards += NEIGHBORS.filter(inFeed).map(n=>standCard({name:n.name, title:n.thing, price:n.price, theme:n.theme, emoji:n.emoji})).join('');
+    // neighbor teaser stubs — populate the block so it never reads as a one-stand feed.
+    // No page behind them yet, so a tap says so instead of going nowhere.
+    cards += NEIGHBORS.filter(inFeed).map(n=>standCard({name:n.name, title:n.thing, price:n.price, theme:n.theme, emoji:n.emoji}, `toast('${n.name}\\'s stand is coming soon')`)).join('');
     const isBuyer=account&&account.role==='buyer';
     const addLabel=isBuyer?'Open your own stand':(profile?'Add your stand':'Set up the first stand');
     cards += `<div class="add-stand" onclick="startStand()">
