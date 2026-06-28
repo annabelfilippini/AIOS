@@ -92,8 +92,24 @@ Pilot city = Denver; Delaney's stand = Country Club. Faked account (no backend).
   neighborhood · verified neighbor", CTA "Add your stand"; product profile reqbar
   centered. Fresh visitor lands on welcome. No console errors.
 
-## Deferred (post-Batch 3)
-- Single profile slot → multi-kid/multi-stand (a seller in hood X still sees the seeded
-  Delaney as the only feed stand; real multi-stand feed needs a backend).
-- Stub `NEIGHBORS` teaser (Mateo/Priya) still hardcoded, not hood-tagged or in the feed.
+## Neighbor stubs in the feed + coming-soon + site-wide bunting ✅ DONE (2026-06-28)
+- File touched: `projects/stoop/index.html` only.
+- **Stubs in the feed:** `NEIGHBORS` (Mateo/Priya) hood-tagged `country-club` so they
+  survive `inFeed`, and rendered in `renderHome` so the feed reads as a populated block
+  instead of one stand + CTA. Factored the card markup into one `standCard(p, onclick)`
+  helper shared by the real stand and the stubs (no duplication).
+- **Coming-soon:** stubs have no page yet, so a tap fires a lightweight `toast()`
+  ("<name>'s stand is coming soon") instead of a dead click. New fixed toast pill
+  (CSS + 4-line helper, 1.9s auto-dismiss). Real stand still opens its page.
+- **Site-wide bunting:** removed the `view==='home'` toggle in `go()` so the flag strip
+  shows on every view (Annabel liked it up top and wanted it carried through).
+- Verified in preview (8762): feed shows Delaney + Mateo + Priya; Hilltop buyer sees 0
+  stubs, Country-Club buyer sees both (geo filter intact); stub tap toasts correct name;
+  bunting `display:flex` on welcome/home/profile/onboard/neighborhood. No console errors.
+
+## Deferred
+- **Parent view** — approve-orders / see-the-money rail. Not built; project doc calls it
+  load-bearing. Recommended next.
+- Single profile slot → multi-kid/multi-stand (real multi-stand feed needs a backend).
 - Real SMS/backend confirmations; per-week "copy to next 4 weeks"; richer empty-feed state.
+- Stub cards are display + toast only; wire to real pages when stands get a backend.

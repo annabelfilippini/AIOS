@@ -41,7 +41,7 @@
   .brand{display:flex;align-items:center;gap:11px;cursor:pointer}
   .logo{width:40px;height:40px;background:var(--sun);border:3px solid var(--ink);border-radius:50% 50% 50% 12px;display:grid;place-items:center;transform:rotate(-6deg)}
 
-  /* bunting — Stoop brand strip, fixed rainbow (not themed), home only */
+  /* bunting — Stoop brand strip, fixed rainbow (not themed), every view */
   .bunting{display:flex;height:26px;overflow:hidden}
   .bunting span{flex:1;clip-path:polygon(0 0,100% 0,50% 100%)}
   .bunting span:nth-child(5n+1){background:var(--sun)}
@@ -624,7 +624,6 @@
   function go(view, mode){
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
     document.getElementById('view-'+view).classList.add('on');
-    document.getElementById('bunting').style.display = view==='home' ? '' : 'none';
     document.querySelector('.place').style.display = view==='welcome' ? 'none' : '';
     renderPlace();
     if(view==='home') renderHome();
