@@ -27,11 +27,21 @@ Pilot city = Denver; Delaney's stand = Country Club. Faked account (no backend).
   (rAF re-invalidate) so tiles fill on first paint. Verified in preview, no errors.
   To add Chicago: swap the CITY block (its open-data neighborhood GeoJSON, same id keys).
 
-## Batch 2 — Account front door (NEXT)
-- Welcome + role select (open a stand → seller/selMode='one' / shop → buyer/'many'),
-  account basics. Wire flow: welcome → role → account → neighborhood →
-  (seller: builder / buyer: home). geo-go currently just go('home').
-- Persist account {role, name, hoods:[...]} in localStorage.
+## Batch 2 — Account front door ✅ DONE (2026-06-28)
+- File touched: `projects/stoop/index.html` only.
+- New `#view-welcome` front door: role split — "Open a stand" (seller, selMode='one')
+  / "Shop the neighborhood" (buyer, selMode='many'). `chooseRole()` sets mode +
+  `pendingRole`, routes to neighborhood.
+- `geo-go` rewired: writes `account {role, hoods:[...]}` to localStorage
+  (`stoop-account-v1`), then routes seller→onboard(builder), buyer→home(feed).
+- **Account-free browse:** welcome/neighborhood need no account; the account record
+  only gains `contact`/`name` when the user acts (request modal prefills + persists).
+- Startup: account on file → restore selMode/hoods, skip to home; else land on welcome.
+  Removed the temp `#neighborhood` deep link. geo-back → welcome.
+- `.place` top-bar indicator hidden on welcome (still hardcoded "Country Club" — Batch 3).
+- Verified in preview (8762): buyer path (multi-pick → account → home), seller path
+  (single-select collapse → account → builder), returning visitor skips welcome +
+  restores hoods, request flow persists contact, fresh load prefill empty. No errors.
 
 ## Batch 3 — Neighborhood filter + role-aware home
 - Tag each stand with its neighborhood id; home/feed filters to account's picked set.
