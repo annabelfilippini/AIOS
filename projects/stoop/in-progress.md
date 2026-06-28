@@ -43,6 +43,23 @@ Pilot city = Denver; Delaney's stand = Country Club. Faked account (no backend).
   (single-select collapse → account → builder), returning visitor skips welcome +
   restores hoods, request flow persists contact, fresh load prefill empty. No errors.
 
+## Builder branches by offer type ✅ DONE (2026-06-28)
+- File touched: `projects/stoop/index.html` only.
+- New first builder question "What are you offering?" → `service` | `product`
+  (`obKind`, `setKind()`, `.kind` picker reusing the role-card look).
+- **Service** (Delaney): keeps how-long/where/what-to-bring + the availability
+  calendar → profile shows "Pick a time" + "Request a lesson".
+- **Product** (honey/bracelets): those fields wrapped `.svc-only` and hidden;
+  no availability saved (`avail:{}`); profile hides the calendar, shows "Get one"
+  + "Local pickup" fact + an always-enabled "Request this".
+- Request modal + SMS body + done screen adapt by kind; confirmation copy made
+  gender-neutral ("They'll reach out"), dropped lacrosse-only "See you on the field".
+- `profile.kind` persisted; missing kind treated as service (back-compat for old saves).
+  DEFAULT (Delaney) seeded `kind:'service'`.
+- Verified in preview (8762): product builder hides svc fields + adapts unit
+  label/placeholder; product profile no calendar, request enabled, sends with
+  pickup copy; service path (Delaney) calendar intact. No console errors.
+
 ## Batch 3 — Neighborhood filter + role-aware home
 - Tag each stand with its neighborhood id; home/feed filters to account's picked set.
 - Top-bar place indicator reads account hoods (currently hardcoded "Country Club").

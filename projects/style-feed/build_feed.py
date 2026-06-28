@@ -1476,6 +1476,10 @@ SCRIPT = '''
     }
     var nu=parseFloat(card.dataset.neut);
     if(!isNaN(nu) && P.Lneu!=null) d+=5*(1-2*Math.abs(nu-P.Lneu));
+    // Knee-length and a-line are clear losers in her hearts but still ride brand +
+    // category into the top; demote them hard so they fall out of the feed.
+    if(card.dataset.len==='knee') d-=8;
+    if(card.dataset.sil==='a-line') d-=10;
     // Stash fit so shouldShow() can DROP anything that doesn't lean toward her
     // hearts (her rule: "no point keeping things I don't like").
     card.__fit=d; card.__pos=pos;
@@ -1487,10 +1491,20 @@ SCRIPT = '''
     if(pos===0) d-=12;
     return d*3 + base*0.12;
   }
+  var ACC_CAP=12;  // accessories are low-signal and flood the feed; show only the top few
   function rerank(){
     var P=buildProfile(), arr=cards.slice();
     arr.forEach(function(c){ c.__s=liveScore(c,P); });
     arr.sort(function(a,b){ return b.__s-a.__s; });
+    // Cap accessories: keep the top ACC_CAP un-reacted ones, hide the rest so
+    // clothing leads instead of 70 sunglasses/necklaces.
+    var accSeen=0;
+    arr.forEach(function(c){ c.__capped=false;
+      var id=c.dataset.id;
+      if(!state.liked[id] && !state.disliked[id] && catsOf(c).indexOf('accessory')>=0){
+        accSeen++; if(accSeen>ACC_CAP) c.__capped=true;
+      }
+    });
     var frag=document.createDocumentFragment();
     arr.forEach(function(c){ frag.appendChild(c); });
     grid.appendChild(frag);
@@ -1510,6 +1524,9 @@ SCRIPT = '''
     if(showDismissed) return true;
     var c=catsOf(card); if(c.indexOf('closet')>=0||c.indexOf('inspiration')>=0) return true;
     if(Object.keys(state.liked).length<8) return true;
+    if(card.__capped) return false;                    // accessory overflow
+    var nu=parseFloat(card.dataset.neut);              // loud prints/brights — she's a neutral
+    if(!isNaN(nu) && nu<0.4) return false;
     return card.__fit!=null && card.__fit>0;
   }
   function shouldShow(card){
@@ -1544,8 +1561,10 @@ SCRIPT = '''
     var hid=cards.filter(function(c){ var id=c.dataset.id; if(state.liked[id])return false;
       var cc=catsOf(c); if(cc.indexOf('home')>=0||cc.indexOf('beauty')>=0)return false;
       var ex=cc.indexOf('closet')>=0||cc.indexOf('inspiration')>=0;
-      var fail=!ex&&Object.keys(state.liked).length>=8&&(c.__fit==null||c.__fit<=0);
-      return !!state.disliked[id]||fail; }).length;
+      if(state.disliked[id]) return true;
+      if(ex || Object.keys(state.liked).length<8) return false;
+      var nu=parseFloat(c.dataset.neut);
+      return c.__capped || (!isNaN(nu)&&nu<0.4) || c.__fit==null || c.__fit<=0; }).length;
     document.getElementById('nNope').textContent=hid;
     var active=tabEls.filter(function(t){return t.dataset.view===view;})[0];
     document.getElementById('viewTitle').textContent=active?active.querySelector('.lbl').textContent:'All';
