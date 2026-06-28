@@ -72,7 +72,28 @@ Pilot city = Denver; Delaney's stand = Country Club. Faked account (no backend).
 - Verified: desc + 2 gallery imgs render on product profile, thumb remove works
   (2→1), service path hides both. No console errors.
 
-## Batch 3 — Neighborhood filter + role-aware home
-- Tag each stand with its neighborhood id; home/feed filters to account's picked set.
-- Top-bar place indicator reads account hoods (currently hardcoded "Country Club").
-- Reseed Delaney's stand in Country Club.
+## Batch 3 — Neighborhood filter + role-aware home ✅ DONE (2026-06-28)
+- File touched: `projects/stoop/index.html` only.
+- **Tag stands with a hood:** `profile.hood`. `DEFAULT.hood='country-club'` (reseeds
+  Delaney in Country Club); a seller's new stand inherits `account.hoods[0]` at ob-go.
+- **Feed filter:** `inFeed(p)` — buyer sees a stand only if `account.hoods` includes
+  its hood; seller always sees their own; no account = no filter. renderHome guards
+  the stand card with it (empty feed → just the CTA = the "too quiet" valve).
+- **Top-bar `.place`:** `renderPlace()` (called from `go()`) — seller shows their one
+  hood + "verified neighbor"; buyer shows the name (1 hood) or "N neighborhoods"; no
+  account falls back to the demo default. Replaces the hardcoded "Country Club".
+- **Role-aware home:** add-stand CTA reads "Open your own stand" for buyers (not "Add
+  your stand", which framed Delaney's seeded demo as theirs); seller keeps "Add your stand".
+- Also cleaned up product reqbar: lone "Request this" now centers (was shoved right by
+  the leftover service `justify-content:space-between`).
+- Verified in preview (8762): buyer country-club+hilltop → sees Delaney, place "2
+  neighborhoods", CTA "Open your own stand"; buyer washington-park → empty feed + CTA,
+  place "Washington Park neighborhood"; seller hilltop → own stand, place "Hilltop
+  neighborhood · verified neighbor", CTA "Add your stand"; product profile reqbar
+  centered. Fresh visitor lands on welcome. No console errors.
+
+## Deferred (post-Batch 3)
+- Single profile slot → multi-kid/multi-stand (a seller in hood X still sees the seeded
+  Delaney as the only feed stand; real multi-stand feed needs a backend).
+- Stub `NEIGHBORS` teaser (Mateo/Priya) still hardcoded, not hood-tagged or in the feed.
+- Real SMS/backend confirmations; per-week "copy to next 4 weeks"; richer empty-feed state.

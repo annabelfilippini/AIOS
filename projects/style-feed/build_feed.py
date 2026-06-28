@@ -1348,6 +1348,13 @@ main{flex:1;min-width:0}
 .card:hover{transform:translateY(-4px)}
 .card[hidden]{display:none!important}
 .card.out{opacity:0;transform:scale(.92) translateY(10px)}
+/* why-toast: optional reason captured the moment a piece is X'd */
+.whytoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(140%);z-index:50;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;max-width:min(560px,92vw);padding:11px 14px;background:var(--ink);border-radius:12px;box-shadow:0 10px 34px rgba(0,0,0,.22);opacity:0;pointer-events:none;transition:transform .28s cubic-bezier(.2,.7,.3,1),opacity .28s ease}
+.whytoast.on{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto}
+.whytoast .wlbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-right:2px}
+.whychip{appearance:none;border:1px solid rgba(255,255,255,.28);background:transparent;font-family:inherit;font-size:11px;letter-spacing:.04em;color:#fff;padding:6px 11px;border-radius:999px;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.whychip:hover,.whychip.on{background:#fff;color:var(--ink);border-color:#fff}
+.card .why{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px;min-height:12px}
 .imgwrap{position:relative;aspect-ratio:3/4;background:var(--card);overflow:hidden;border:1px solid var(--line);transition:border-color .25s ease}
 .imglink{display:block;width:100%;height:100%}
 .imgwrap img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;transition:transform .6s ease}
@@ -1682,6 +1689,15 @@ main_html = (
     '  <div class="grid" id="grid">\n' + cards + '\n  </div>\n'
     '  <div class="empty" id="empty" hidden></div>\n'
     '</main>\n'
+    '<div class="whytoast" id="whytoast">\n'
+    '  <span class="wlbl">why not?</span>\n'
+    '  <button class="whychip" type="button" data-why="colour">colour</button>\n'
+    '  <button class="whychip" type="button" data-why="shape">shape / fit</button>\n'
+    '  <button class="whychip" type="button" data-why="too dressy">too dressy</button>\n'
+    '  <button class="whychip" type="button" data-why="too plain">too plain</button>\n'
+    '  <button class="whychip" type="button" data-why="cheap">cheap-looking</button>\n'
+    '  <button class="whychip" type="button" data-why="just not me">not me</button>\n'
+    '</div>\n'
 )
 
 page = (
