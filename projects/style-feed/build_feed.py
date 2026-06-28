@@ -1354,7 +1354,6 @@ main{flex:1;min-width:0}
 .whytoast .wlbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-right:2px}
 .whychip{appearance:none;border:1px solid rgba(255,255,255,.28);background:transparent;font-family:inherit;font-size:11px;letter-spacing:.04em;color:#fff;padding:6px 11px;border-radius:999px;cursor:pointer;transition:background .15s ease,border-color .15s ease}
 .whychip:hover,.whychip.on{background:#fff;color:var(--ink);border-color:#fff}
-.card .why{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px;min-height:12px}
 .imgwrap{position:relative;aspect-ratio:3/4;background:var(--card);overflow:hidden;border:1px solid var(--line);transition:border-color .25s ease}
 .imglink{display:block;width:100%;height:100%}
 .imgwrap img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;transition:transform .6s ease}
@@ -1583,7 +1582,8 @@ SCRIPT = '''
   function toggle(card,kind){
     var id=card.dataset.id, other=(kind==='liked')?'disliked':'liked';
     if(state[kind][id]){ delete state[kind][id]; }
-    else { state[kind][id]=info(card); delete state[other][id]; }
+    else { state[kind][id]=info(card); delete state[other][id];
+      if(kind==='disliked') showWhy(id); else hideWhy(); }
     save();
     if(!shouldShow(card)){   // heart or x both clear the piece from this view
       card.classList.add('out');
@@ -1594,6 +1594,23 @@ SCRIPT = '''
     var btn=e.target.closest('.act'); if(!btn)return;
     e.preventDefault(); e.stopPropagation();
     toggle(btn.closest('.card'), btn.dataset.act==='like'?'liked':'disliked');
+  });
+  // ---- why-toast: optional reason attached to the piece you just X'd --------
+  // Stores reason ONTO the disliked record (state.disliked[id].reason) and
+  // re-POSTs, so it lands in data/feedback.json for the build to learn from.
+  // Ignoring it is fine — the X still counts, reason just stays empty.
+  var whyEl=document.getElementById('whytoast'), whyId=null, whyTimer=null;
+  function hideWhy(){ if(whyTimer){clearTimeout(whyTimer);whyTimer=null;} whyEl.classList.remove('on'); whyId=null;
+    whyEl.querySelectorAll('.whychip').forEach(function(c){c.classList.remove('on');}); }
+  function showWhy(id){ whyId=id;
+    whyEl.querySelectorAll('.whychip').forEach(function(c){c.classList.remove('on');});
+    whyEl.classList.add('on');
+    if(whyTimer)clearTimeout(whyTimer); whyTimer=setTimeout(hideWhy,5000);
+  }
+  whyEl.addEventListener('click',function(e){
+    var c=e.target.closest('.whychip'); if(!c||!whyId)return;
+    var rec=state.disliked[whyId]; if(rec){ rec.reason=c.dataset.why; save(); }
+    c.classList.add('on'); if(whyTimer)clearTimeout(whyTimer); whyTimer=setTimeout(hideWhy,650);
   });
   tabEls.forEach(function(t){
     t.addEventListener('click',function(){ view=t.dataset.view; tabEls.forEach(function(x){x.classList.toggle('on',x===t);}); applyView(); try{window.scrollTo({top:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);} });
