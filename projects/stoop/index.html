@@ -92,6 +92,7 @@
   .heart.liked{background:var(--berry);color:#fff}
 
   /* the "be the next stand" empty slot */
+  .feed-loading{grid-column:1/-1;text-align:center;color:var(--ink-soft);font-weight:800;padding:40px 0}
   .add-stand{border:3px dashed var(--line);border-radius:18px;display:grid;place-items:center;text-align:center;padding:30px 22px;cursor:pointer;color:var(--ink-soft);min-height:240px;transition:border-color .15s,color .15s}
   .add-stand:hover{border-color:var(--ink);color:var(--ink)}
   .add-stand .plus{width:52px;height:52px;border-radius:50%;border:3px solid currentColor;display:grid;place-items:center;font-size:30px;font-family:'Fredoka';margin:0 auto 12px}
@@ -475,7 +476,7 @@
       👋 This is your page — neighbors see it without this bar.
       <button onclick="go('onboard','edit')">Edit</button>
       <button onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href.split('#')[0]);this.textContent='Copied!'">Copy link</button>
-      <button onclick="if(confirm('Clear this page and start onboarding from scratch?')){localStorage.removeItem(KEY);profile=null;go('onboard');}">Start fresh</button>
+      <button onclick="go('onboard')">New stand</button>
     </div>
 
     <div class="site">
@@ -553,6 +554,23 @@
 </div>
 
 <script>
+  // ---------- backend (Supabase) ----------
+  // anon key is meant to live in frontend code; row access is locked server-side
+  // (RLS + a phone-stripped public view + RPCs). See backend/schema.sql.
+  const SB = supabase.createClient(
+    'https://pdovqkbejorncalnjqzv.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBkb3Zxa2Jlam9ybmNhbG5qcXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NzI1MzcsImV4cCI6MjA5ODI0ODUzN30._a6MgLe7j3NjitLrXHfcxBbfiT6F729Dg14UEBliiKQ'
+  );
+  // which stands THIS browser owns: { standId: editToken }. Lets the owner edit
+  // without a login. ponytail: edit-token in localStorage; real auth is a later add.
+  const MINE_KEY='stoop-mine-v1';
+  function loadMine(){ try{ return JSON.parse(localStorage.getItem(MINE_KEY))||{}; }catch(e){ return {}; } }
+  function saveMine(m){ try{ localStorage.setItem(MINE_KEY,JSON.stringify(m)); }catch(e){} }
+  let mine = loadMine();
+  // DB rows call it `description`; the page code uses `.desc`. Normalize on load.
+  function fromRow(r){ return r ? Object.assign({}, r, {desc:r.description}) : r; }
+  let feedById = {};   // id -> stand row, populated by renderHome / openStand
+
   // ---------- themes ----------
   const THEMES = {
     pink:    {accent:'#e26d9c', ink:'#fff', a:'#ffd9e8', b:'#f7a8c8', text:'#8a3160', av:'#e26d9c', avInk:'#fff'},
@@ -570,33 +588,22 @@
     r.setProperty('--avBg',t.av); r.setProperty('--avInk',t.avInk);
   }
 
-  // ---------- Delaney's real answers = the default profile (so a fresh demo lands on the page Annabel approved) ----------
-  const DEFAULT = {
-    kind:'service', hood:'country-club',
-    name:'Delaney', age:'14', title:"Delaney's Lacrosse Lessons",
-    price:'$30', unit:'lesson', dur:'1 hour', loc:'Cheesman Park', bring:'Bring your own stick',
-    phone:'555-123-4567', theme:'pink', photo:'delaney.jpg',
-    about:["Hey!! I'm Delaney, I'm 14 and I go to Kent. I play attack for Concept and I seriously love it so much. I teach all levels, so it doesn't matter if you've literally never held a stick. I just really want to help kids get better and have fun doing it!",
-           "I can teach any position too, not just attack, so we can work on whatever you want to get better at. I'm usually at Cheesman Park but if somewhere else is easier for you that totally works. Just bring your own stick and we're good to go!"],
-    // availability: date (YYYY-MM-DD) -> array of times; filled at seed time by seedAvail()
-    avail:{}
-  };
-  // Demo rhythm for Delaney: Tue/Thu afternoons + Sat mornings, next 4 weeks.
-  function seedAvail(){
-    const a={}, start=weekStart(today);
-    for(let i=0;i<28;i++){
-      const d=addDays(start,i); if(d<today) continue;
-      const dow=d.getDay();
-      if(dow===2||dow===4) a[dateKey(d)]=['4:00 pm','5:00 pm','6:00 pm'];
-      else if(dow===6) a[dateKey(d)]=['9:00 am','10:00 am','11:00 am'];
+  // The "current stand" = whatever page is open on the profile view. Set by
+  // openStand() (tap a feed card / share link), create_stand, or edit. Stands live
+  // in Supabase now (seeded demo rows: Delaney, Mateo, Priya), not localStorage.
+  let profile = null;
+  // does this browser own the open stand? (gates the edit/owner bar)
+  function ownsCurrent(){ return !!(profile && profile.id && mine[profile.id]); }
+  // load one stand by id from the public view, set it current, open its page.
+  async function openStand(id){
+    let row = feedById[id];
+    if(!row){
+      const {data} = await SB.from('public_stands').select('*').eq('id',id).single();
+      row = data;
     }
-    return a;
+    if(!row){ toast('That stand could not be found'); go('home'); return; }
+    feedById[id]=row; profile = fromRow(row); go('profile');
   }
-
-  const KEY='stoop-profile-v2';
-  function load(){ try{ const s=localStorage.getItem(KEY); return s?JSON.parse(s):null; }catch(e){ return null; } }
-  function save(p){ try{ localStorage.setItem(KEY,JSON.stringify(p)); }catch(e){} }
-  let profile = load();
 
   // account = the front-door state. Browsing is account-free; this only holds the
   // role + picked hoods, and gains name/contact when the user takes an action.
@@ -634,14 +641,12 @@
     window.scrollTo({top:0});
   }
 
-  // stub neighbors — bait for the profile teaser. Not real users; the feed
-  // doesn't exist yet, so these are hardcoded to make "you're not alone" land.
-  // teaser stubs — no backend, hood-tagged so the feed shows real neighbors next
-  // to your stand. Same demo hood as the default so they survive the geo filter.
-  const NEIGHBORS = [
-    {name:'Mateo', thing:'Backyard honey, by the jar', price:'$7', theme:'sun',   emoji:'🍯', hood:'country-club'},
-    {name:'Priya', thing:'Friendship bracelets, made to order', price:'$4', theme:'purple', emoji:'🧵', hood:'country-club'},
-  ];
+  // which hoods to show: a buyer sees their picked set; a seller or no-account
+  // visitor sees every hood (the whole demo block). Used to filter the feed query.
+  function feedHoods(){
+    if(account && account.role==='buyer' && account.hoods && account.hoods.length) return account.hoods;
+    return null; // null = no filter (all hoods)
+  }
 
   // top-bar location: a seller shows their one hood; a buyer shows their picked
   // set (name if one, count if many). No account yet = the default demo hood.
@@ -660,14 +665,8 @@
     const first=(p.about&&p.about[0])||'';
     return first.length>90?first.slice(0,88)+'…':first;
   }
-  // a buyer only sees stands in the hoods they picked; a seller always sees their
-  // own stand (and there's only one stand in this demo). No account = no filter.
-  function inFeed(p){
-    if(!account||account.role==='seller') return true;
-    return (account.hoods||[]).includes(p.hood);
-  }
-  // one card for both the real stand and the teaser stubs. p: {name, age?, title,
-  // blurb?, loc?, price, unit?, theme, photo?, emoji?}. onclick optional (stubs have none).
+  // one card for any stand row. p: {name, age?, title, blurb?, loc?, price, unit?,
+  // theme, photo?}. onclick optional.
   function standCard(p, onclick){
     const t=THEMES[p.theme]||THEMES.pink;
     const initial=(p.name||'?')[0];
@@ -692,21 +691,27 @@
     t.textContent=msg; t.classList.add('show');
     clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),1900);
   }
-  function renderHome(){
+  async function renderHome(){
     const grid=document.getElementById('home-grid');
-    let cards='';
-    if(profile && inFeed(profile)){
-      cards += standCard(Object.assign({}, profile, {blurb:blurbFrom(profile)}), "go('profile')");
-    }
-    // neighbor teaser stubs — populate the block so it never reads as a one-stand feed.
-    // No page behind them yet, so a tap says so instead of going nowhere.
-    cards += NEIGHBORS.filter(inFeed).map(n=>standCard({name:n.name, title:n.thing, price:n.price, theme:n.theme, emoji:n.emoji}, `toast('${n.name}\\'s stand is coming soon')`)).join('');
+    grid.innerHTML='<div class="feed-loading">Loading the block…</div>';
+    let q=SB.from('public_stands').select('*').order('created_at',{ascending:true});
+    const hoods=feedHoods();
+    if(hoods) q=q.in('hood',hoods);
+    const {data,error}=await q;
     const isBuyer=account&&account.role==='buyer';
-    const addLabel=isBuyer?'Open your own stand':(profile?'Add your stand':'Set up the first stand');
-    cards += `<div class="add-stand" onclick="startStand()">
+    const addLabel=isBuyer?'Open your own stand':((data&&data.length)?'Add your stand':'Set up the first stand');
+    const addCard=`<div class="add-stand" onclick="startStand()">
       <div><div class="plus">+</div><b>${addLabel}</b><span>Answer a few questions, get your own page</span></div>
     </div>`;
-    grid.innerHTML=cards;
+    if(error){ grid.innerHTML=`<div class="feed-loading">Couldn't load the feed. Refresh?</div>`+addCard; return; }
+    feedById={};
+    let cards='';
+    (data||[]).forEach(r=>{
+      feedById[r.id]=r;
+      const p=fromRow(r);
+      cards += standCard(Object.assign({}, p, {blurb:blurbFrom(p)}), `openStand('${r.id}')`);
+    });
+    grid.innerHTML=cards+addCard;
   }
 
   // ---------- ONBOARDING ----------
@@ -716,6 +721,7 @@
   let obPhoto = '';     // data URL (uploaded) or 'delaney.jpg' default
   let obKind = 'service'; // 'service' (books a time) or 'product' (buys an item)
   let obPhotos = [];      // product gallery (data URLs), product-only
+  let obEditId = null;    // when editing an owned stand: its id (else null = create new)
 
   // products skip scheduling + how-long/where/what-to-bring, and gain a gallery
   // + description; services keep the calendar. .svc-only / .prod-only toggle together.
@@ -731,14 +737,10 @@
   }
   document.querySelectorAll('#q-kind .kind').forEach(b=>b.onclick=()=>setKind(b.dataset.kind));
 
-  // photo upload: downscale to a small square-ish jpeg so it fits in localStorage.
-  // ponytail: 480px cap keeps a phone photo ~40KB instead of multi-MB (which would blow the quota).
-  // delaney.jpg is sample data for the one-tap demo. Anyone who isn't Delaney and
-  // hasn't uploaded their own shouldn't inherit her face — fall back to the initial.
-  function effectivePhoto(){
-    const name=(document.getElementById('f-name').value||'').trim().toLowerCase();
-    return (obPhoto===DEFAULT.photo && name!==DEFAULT.name.toLowerCase()) ? '' : obPhoto;
-  }
+  // photo upload: downscale to a small square-ish jpeg. ponytail: 480px cap keeps a
+  // phone photo ~40KB instead of multi-MB. New stands start blank, so the uploaded
+  // value is the photo as-is (no demo-face inheritance to guard against anymore).
+  function effectivePhoto(){ return obPhoto; }
   function setPhotoPreview(){
     const el=document.getElementById('ph-prev');
     const ph=effectivePhoto();
@@ -841,8 +843,11 @@
   }
   function val(id){ return document.getElementById(id).value.trim(); }
   function fillOnboard(mode){
-    // 'edit' prefills the saved page; any new stand starts blank (don't inherit Delaney's demo answers).
-    const p = mode==='edit' ? (profile||{}) : {};
+    // 'edit' prefills from the owner's locally-cached copy (it has the phone, which
+    // the public feed never exposes); a new stand starts blank.
+    const owned = (mode==='edit' && profile && mine[profile.id]) ? mine[profile.id].stand : null;
+    obEditId = owned ? profile.id : null;
+    const p = owned || (mode==='edit' ? (profile||{}) : {});
     document.getElementById('f-name').value=p.name||'';
     document.getElementById('f-age').value=p.age||'';
     document.getElementById('f-about').value=(p.about||[]).join('\n\n');
@@ -852,7 +857,7 @@
     document.getElementById('f-dur').value=p.dur||'';
     document.getElementById('f-loc').value=p.loc||'';
     document.getElementById('f-bring').value=p.bring||'';
-    document.getElementById('f-desc').value=p.desc||'';
+    document.getElementById('f-desc').value=p.desc||p.description||'';
     document.getElementById('f-phone').value=p.phone||'';
     obPhotos=(p.photos||[]).slice();
     obDays = JSON.parse(JSON.stringify(p.avail||{}));
@@ -863,31 +868,55 @@
     setKind(p.kind || (mode==='edit'?'service':obKind));
     renderDayTimes(); buildSwatches(); applyTheme(obTheme); setPhotoPreview(); renderGallery();
   }
-  document.getElementById('ob-go').onclick=()=>{
+  document.getElementById('ob-go').onclick=async ()=>{
     const svc = obKind==='service';
-    profile = {
+    const btn=document.getElementById('ob-go'); const label=btn.textContent;
+    // payload uses the DB column name `description` (the page code reads `.desc`)
+    const payload = {
       kind:obKind, hood:(account&&account.hoods&&account.hoods[0])||'country-club',
       name:val('f-name')||'Me', age:val('f-age'),
       title:val('f-title')||((val('f-name')||'My')+"'s stand"),
       price:val('f-price')||'$0', unit:val('f-unit')||(svc?'session':'item'),
       dur:svc?val('f-dur'):'', loc:svc?val('f-loc'):'', bring:svc?val('f-bring'):'',
-      desc:svc?'':val('f-desc'), photos:svc?[]:obPhotos.slice(),
+      description:svc?'':val('f-desc'), photos:svc?[]:obPhotos.slice(),
       phone:val('f-phone'), theme:obTheme, photo:effectivePhoto(),
       about:val('f-about').split(/\n\n+/).map(s=>s.trim()).filter(Boolean),
       avail:svc?obDays:{}
     };
-    save(profile);
-    go('profile');
+    btn.disabled=true; btn.textContent='Saving…';
+    try{
+      if(obEditId){
+        const {data:ok,error}=await SB.rpc('update_stand',{p_id:obEditId,p_token:mine[obEditId].token,p:payload});
+        if(error||!ok) throw error||new Error('not saved');
+        mine[obEditId]={token:mine[obEditId].token, stand:payload}; saveMine(mine);
+        profile=Object.assign({},payload,{id:obEditId,desc:payload.description});
+        delete feedById[obEditId]; // force a fresh read next time the feed shows
+      } else {
+        const {data,error}=await SB.rpc('create_stand',{p:payload});
+        if(error||!data||!data[0]) throw error||new Error('not created');
+        const row=data[0];
+        mine[row.id]={token:row.edit_token, stand:payload}; saveMine(mine);
+        profile=Object.assign({},payload,{id:row.id,desc:payload.description});
+        history.replaceState(null,'','?stand='+row.id); // shareable + reload-safe
+      }
+      go('profile');
+    }catch(e){
+      toast('Could not save — check your connection and try again');
+    }finally{ btn.disabled=false; btn.textContent=label; }
   };
 
-  function renderMoreKids(){
+  async function renderMoreKids(){
     const box=document.getElementById('more-kids');
     const first=(profile.name||'').split(' ')[0]||'her';
-    let cards=NEIGHBORS.map(n=>{
-      const t=THEMES[n.theme]||THEMES.pink;
-      return `<div class="mk-card" onclick="go('home')">
-        <div class="mk-pic" style="background:linear-gradient(160deg,${t.a},${t.b})">${n.emoji}</div>
-        <div class="mk-b"><b>${n.name}</b><div class="mk-thing">${n.thing}</div><div class="mk-price" style="color:${t.accent}">${n.price}</div></div>
+    // real neighbors: other stands in this stand's hood (up to 6).
+    const {data}=await SB.from('public_stands').select('*')
+      .eq('hood',profile.hood).neq('id',profile.id).limit(6);
+    let cards=(data||[]).map(r=>{
+      feedById[r.id]=r;
+      const t=THEMES[r.theme]||THEMES.pink;
+      return `<div class="mk-card" onclick="openStand('${r.id}')">
+        <div class="mk-pic" style="background:linear-gradient(160deg,${t.a},${t.b})">${r.photo?`<img src="${r.photo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`:(r.name||'?')[0]}</div>
+        <div class="mk-b"><b>${r.name}</b><div class="mk-thing">${r.title}</div><div class="mk-price" style="color:${t.accent}">${r.price}</div></div>
       </div>`;
     }).join('');
     cards+=`<div class="mk-add" onclick="startStand()"><div><div class="mk-plus">+</div><b>Set up your stand</b></div></div>`;
@@ -912,7 +941,7 @@
   function renderProfile(){
     if(!profile){ go('onboard'); return; }
     applyTheme(profile.theme);
-    document.getElementById('ownerbar').style.display='';
+    document.getElementById('ownerbar').style.display = ownsCurrent() ? '' : 'none';
     const avEl=document.getElementById('p-avatar');
     avEl.innerHTML = profile.photo ? `<img src="${profile.photo}" alt="${profile.name}">` : (profile.name||'?')[0];
     document.getElementById('p-title').textContent=profile.title;
@@ -1027,7 +1056,7 @@
   const close=()=>scrim.classList.remove('on');
   document.getElementById('x').onclick=close;
   scrim.addEventListener('click',e=>{ if(e.target===scrim) close(); });
-  document.getElementById('send').onclick=()=>{
+  document.getElementById('send').onclick=async ()=>{
     const kid=document.getElementById('kid').value.trim(), contact=document.getElementById('contact').value.trim();
     if(!contact){ document.getElementById('contact').focus(); return; }
     // the action is where browsing becomes an account: remember who they are for next time.
@@ -1036,12 +1065,18 @@
     const note=document.getElementById('note').value.trim();
     const isSvc = profile.kind!=='product';
     const what = isSvc ? selSlot.label : profile.title;
-    // real send: open a prefilled text to the number from onboarding. ponytail: sms: link, no backend.
-    if(profile.phone){
-      const body=(isSvc?`Hi ${profile.name}! Lesson request via Stoop: ${what}`:`Hi ${profile.name}! Order via Stoop: ${what}`)+(kid?` for ${kid}`:'')+`. Reach me at ${contact}.`+(note?` Note: ${note}`:'');
-      const sms=`sms:${profile.phone.replace(/[^0-9+]/g,'')}?&body=${encodeURIComponent(body)}`;
-      window.location.href=sms;
+    // record the order server-side. The parent's phone stays in the DB; the SMS
+    // send happens in the edge function (Batch C), never exposing the number here.
+    const sendB=document.getElementById('send'); const sl=sendB.textContent;
+    sendB.disabled=true; sendB.textContent='Sending…';
+    try{
+      const {error}=await SB.rpc('submit_order',{p_stand:profile.id,p_what:what,p_kid:kid,p_contact:contact,p_note:note});
+      if(error) throw error;
+    }catch(e){
+      sendB.disabled=false; sendB.textContent=sl;
+      toast('Could not send your request — try again'); return;
     }
+    sendB.disabled=false; sendB.textContent=sl;
     document.getElementById('form').style.display='none';
     document.getElementById('doneview').style.display='';
     document.getElementById('done-emoji').textContent = isSvc?'🥍':'🧺';
@@ -1162,12 +1197,15 @@
   };
 
   // ---------- start ----------
-  // seed Delaney's demo page on first visit so the neighborhood home isn't empty,
-  // then always land on home. New kids tap "Start my own stand" for a blank builder.
-  if(!profile){ profile=JSON.parse(JSON.stringify(DEFAULT)); profile.avail=seedAvail(); save(profile); }
-  // first visit hits the front door; returning visitors (account on file) skip to the feed.
-  if(account){ selMode = account.role==='seller'?'one':'many'; pendingRole=account.role; pickedHoods=new Set(account.hoods||[]); go('home'); }
-  else go('welcome');
+  (async ()=>{
+    // a share link (?stand=<id>) opens that stand's page directly — the link-first
+    // entry point. Otherwise: returning visitor → feed, brand-new → front door.
+    const standId=new URLSearchParams(location.search).get('stand');
+    if(account){ selMode = account.role==='seller'?'one':'many'; pendingRole=account.role; pickedHoods=new Set(account.hoods||[]); }
+    if(standId){ await openStand(standId); }
+    else if(account){ go('home'); }
+    else go('welcome');
+  })();
 </script>
 </body>
 </html>
