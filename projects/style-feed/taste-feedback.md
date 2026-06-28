@@ -60,6 +60,56 @@ WORKOUT brands she named: Set Active, Lululemon, Aritzia (sweatfleece/TNA), Free
 - Clean-girl set = neutral leggings + grey half-zip + New Balance + cap. Pilates-to-coffee.
 - Still no capri; full-length leggings or sweat-set.
 
+## 2026-06-27 — derived from the full heart pass (278 loves vs 334 passes)
+
+Not pasted pics this time. This is what her actual likes vs dislikes say when you
+compare the two sets attribute by attribute (only listing where loves clearly
+diverge from passes, so it is signal not noise).
+
+**Silhouette / fit (strongest signal)**
+- WINS: wide-leg, relaxed, straight. Loose trousers and clean straight legs.
+- LOSES hard: a-line (her single biggest turn-off now), tailored (almost zero
+  loves), fitted, and full oversized. So loose but not sloppy, never a-line,
+  never stiff-tailored.
+- Drape: fluid wins big. Stiff/structured and boho-flowy both lose. She wants
+  movement and drape, not architecture and not flutter.
+- Length: full-length wins clearly. Knee, cropped, and midi all lose. Confirms
+  the old "full-length only, no capri" rule, now extended to disliking
+  knee-length too.
+
+**Formality**
+- Leaning MORE casual than before: casual is the top winner, smart-casual is now
+  the top loser. Loungewear ticks up; evening/formal tick down. Curate everyday
+  first, dressy last.
+
+**Fabric**
+- WINS: linen, leather, denim (natural and textured).
+- LOSES: cotton-basic, knit, silk, wool. Note this is summer-weighted (June), so
+  linen/denim lead and heavy knits/wool fall away seasonally.
+
+**Category interest right now**
+- She is hearting BOTTOMS, SHOES, and BAGS far more than tops. Tops as a category
+  skew toward passes. Her current shopping energy is trousers/jeans, footwear
+  (leather), and bags. Lead the feed with those, not tops.
+
+**Brands trending UP (love-leaning):** j.crew, dairy boy, leset, dolce vita,
+lunya, abercrombie, staud, margaux, la ligne, agolde.
+
+**Brands cooling OFF (pass-leaning):** zara (despite being a historic top buy),
+boden, madewell, ann taylor, lululemon, hill house home, aritzia, reformation,
+anthropologie. Zara, aritzia, reformation and anthropologie all moved from
+"safe" to "she scrolls past" — stop leaning on them as defaults.
+
+**Creators worth weighting UP:** Merritt Beck, Revolve, Dairy Boy, Brigette
+Pheloung, Paige Lorenze, Alix Earle.
+**Creators to down-weight (more passes than loves):** Carly Riordan, Grace
+Atwood, Mary Lawless Lee, Anthropologie.
+
+**One-line read:** loose wide-leg/straight bottoms in linen, denim, and leather,
+fluid drape, full-length, casual, more neutral than ever (neutrality 0.84 vs 0.71
+on passes). Away from a-line, tailored, smart-casual, and the Zara/Aritzia/
+Reformation default brands.
+
 ## Process note
 - She is using the Pinterest board as a live taste test before we build shoppable
   outfits. Curating *away* from wrong things counts as much as picking right ones.
