@@ -95,6 +95,15 @@
   .add-stand b{font-family:'Fredoka';font-weight:600;font-size:19px;display:block;margin-bottom:4px;color:var(--ink)}
   .add-stand span{font-size:13.5px;font-weight:700}
 
+  /* welcome / role front door */
+  .roles{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  @media(max-width:560px){.roles{grid-template-columns:1fr}}
+  .role{background:var(--card);border:3px solid var(--ink);border-radius:20px;padding:28px 24px;text-align:center;cursor:pointer;box-shadow:var(--shadow);transition:transform .12s}
+  .role:active{transform:translateY(3px)}
+  .role .emoji{font-size:42px;line-height:1}
+  .role h2{font-family:'Fredoka';font-size:23px;margin:12px 0 6px}
+  .role p{font-size:14px;color:var(--ink-soft);font-weight:700;line-height:1.4}
+
   /* ============ ONBOARDING ============ */
   .ob{max-width:560px;margin:0 auto;padding:8px clamp(18px,5vw,28px) 80px}
   .ob-head{text-align:center;margin:6px 0 26px}
@@ -283,6 +292,29 @@
   <div class="place"><span class="dot"></span> Country Club neighborhood · verified neighbor</div>
 </div>
 
+<!-- ================= WELCOME (front door) ================= -->
+<section class="view" id="view-welcome">
+  <div class="ob">
+    <div class="ob-head">
+      <span class="marker">welcome to the block</span>
+      <h1>What brings you here?</h1>
+      <p>Browsing is always open, no account needed. You only sign in when you want to act.</p>
+    </div>
+    <div class="roles">
+      <div class="role" onclick="chooseRole('seller')">
+        <div class="emoji">🪧</div>
+        <h2>Open a stand</h2>
+        <p>You make or do something. Build your own page and take requests.</p>
+      </div>
+      <div class="role" onclick="chooseRole('buyer')">
+        <div class="emoji">🧺</div>
+        <h2>Shop the neighborhood</h2>
+        <p>See the kids selling near you. Pick your neighborhoods and browse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= HOME ================= -->
 <section class="view" id="view-home">
   <div class="wrap wide">
@@ -373,7 +405,7 @@
 <!-- ================= NEIGHBORHOOD (city -> neighborhoods) ================= -->
 <section class="view" id="view-neighborhood">
   <div class="ob">
-    <button class="ob-back" id="geo-back" onclick="go('home')">‹ Back</button>
+    <button class="ob-back" id="geo-back" onclick="go('welcome')">‹ Back</button>
     <div class="ob-head">
       <span class="marker">pick your patch</span>
       <h1 id="geo-title">Which neighborhoods?</h1>
@@ -523,6 +555,15 @@
   function save(p){ try{ localStorage.setItem(KEY,JSON.stringify(p)); }catch(e){} }
   let profile = load();
 
+  // account = the front-door state. Browsing is account-free; this only holds the
+  // role + picked hoods, and gains name/contact when the user takes an action.
+  // No backend — localStorage stands in for it.
+  const ACCT_KEY='stoop-account-v1';
+  function loadAcct(){ try{ return JSON.parse(localStorage.getItem(ACCT_KEY))||null; }catch(e){ return null; } }
+  function saveAcct(a){ try{ localStorage.setItem(ACCT_KEY,JSON.stringify(a)); }catch(e){} }
+  let account = loadAcct();
+  function chooseRole(r){ selMode = r==='seller'?'one':'many'; pendingRole=r; go('neighborhood'); }
+
   // ---------- view router ----------
   const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const DOWLONG=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -534,6 +575,7 @@
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
     document.getElementById('view-'+view).classList.add('on');
     document.getElementById('bunting').style.display = view==='home' ? '' : 'none';
+    document.querySelector('.place').style.display = view==='welcome' ? 'none' : '';
     if(view==='home') renderHome();
     if(view==='onboard') fillOnboard(mode);
     if(view==='profile') renderProfile();
@@ -823,7 +865,7 @@
   reqB.onclick=()=>{ if(!selSlot) return;
     whenEl.textContent=selSlot.label;
     document.getElementById('form').style.display=''; document.getElementById('doneview').style.display='none';
-    document.getElementById('kid').value=''; document.getElementById('contact').value=''; document.getElementById('note').value='';
+    document.getElementById('kid').value=''; document.getElementById('contact').value=account&&account.contact||''; document.getElementById('note').value='';
     scrim.classList.add('on');
   };
   const close=()=>scrim.classList.remove('on');
@@ -832,6 +874,9 @@
   document.getElementById('send').onclick=()=>{
     const kid=document.getElementById('kid').value.trim(), contact=document.getElementById('contact').value.trim();
     if(!contact){ document.getElementById('contact').focus(); return; }
+    // the action is where browsing becomes an account: remember who they are for next time.
+    account = Object.assign(account||{role:'buyer',hoods:[...pickedHoods]}, {contact, name:kid||(account&&account.name)||''});
+    saveAcct(account);
     const note=document.getElementById('note').value.trim();
     // real send: open a prefilled text to the number from onboarding. ponytail: sms: link, no backend.
     if(profile.phone){
@@ -873,6 +918,7 @@
   const NEIGHBORHOODS=CITY.hoods;
   const hoodName=id=>{ const h=NEIGHBORHOODS.find(x=>x.id===id); return h?h.name:id; };
   let selMode='many';          // 'one' for sellers, 'many' for buyers (set by the front door)
+  let pendingRole='buyer';     // role chosen on the welcome screen, written to the account at geo-go
   let pickedHoods=new Set();
   let hoodMap, hoodLayers={};
 
@@ -946,16 +992,21 @@
       requestAnimationFrame(()=>{ hoodMap.invalidateSize(); paintMap(); });
     },80);
   }
-  document.getElementById('geo-go').onclick=()=>{ /* batch 2 wires this into the account flow */ go('home'); };
+  document.getElementById('geo-go').onclick=()=>{
+    // front door done: stash role + picked hoods (account-free so far), then route —
+    // seller goes to the page builder, buyer drops straight into the feed.
+    account = Object.assign(account||{}, {role:pendingRole, hoods:[...pickedHoods]});
+    saveAcct(account);
+    go(account.role==='seller' ? 'onboard' : 'home');
+  };
 
   // ---------- start ----------
   // seed Delaney's demo page on first visit so the neighborhood home isn't empty,
   // then always land on home. New kids tap "Start my own stand" for a blank builder.
   if(!profile){ profile=JSON.parse(JSON.stringify(DEFAULT)); profile.avail=seedAvail(); save(profile); }
-  // ponytail: preview deep-link until Batch 2's front door links these screens.
-  // e.g. open .../index.html#neighborhood to land straight on neighborhood select.
-  if(location.hash==='#neighborhood'){ selMode='many'; go('neighborhood'); }
-  else go('home');
+  // first visit hits the front door; returning visitors (account on file) skip to the feed.
+  if(account){ selMode = account.role==='seller'?'one':'many'; pendingRole=account.role; pickedHoods=new Set(account.hoods||[]); go('home'); }
+  else go('welcome');
 </script>
 </body>
 </html>
