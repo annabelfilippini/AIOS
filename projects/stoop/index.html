@@ -632,9 +632,11 @@
 
   // stub neighbors — bait for the profile teaser. Not real users; the feed
   // doesn't exist yet, so these are hardcoded to make "you're not alone" land.
+  // teaser stubs — no backend, hood-tagged so the feed shows real neighbors next
+  // to your stand. Same demo hood as the default so they survive the geo filter.
   const NEIGHBORS = [
-    {name:'Mateo', thing:'Backyard honey, by the jar', price:'$7', theme:'sun',   emoji:'🍯'},
-    {name:'Priya', thing:'Friendship bracelets, made to order', price:'$4', theme:'purple', emoji:'🧵'},
+    {name:'Mateo', thing:'Backyard honey, by the jar', price:'$7', theme:'sun',   emoji:'🍯', hood:'country-club'},
+    {name:'Priya', thing:'Friendship bracelets, made to order', price:'$4', theme:'purple', emoji:'🧵', hood:'country-club'},
   ];
 
   // top-bar location: a seller shows their one hood; a buyer shows their picked
@@ -660,27 +662,35 @@
     if(!account||account.role==='seller') return true;
     return (account.hoods||[]).includes(p.hood);
   }
+  // one card for both the real stand and the teaser stubs. p: {name, age?, title,
+  // blurb?, loc?, price, unit?, theme, photo?, emoji?}. onclick optional (stubs have none).
+  function standCard(p, onclick){
+    const t=THEMES[p.theme]||THEMES.pink;
+    const initial=(p.name||'?')[0];
+    const inner = p.photo ? `<img src="${p.photo}" alt="">` : (p.emoji || initial);
+    const price = p.unit ? `${p.price} <small>/ ${p.unit}</small>` : p.price;
+    return `<div class="stand"${onclick?` onclick="${onclick}"`:''}>
+      <div class="pic" style="background:linear-gradient(160deg,${t.a},${t.b})"><span class="tape"></span><div class="circ" style="background:${t.av};color:${t.avInk}">${inner}</div></div>
+      <div class="body">
+        <div class="who"><span class="av" style="background:${t.accent}">${initial}</span>${p.name}${p.age?', '+p.age:''}</div>
+        <h3>${p.title}</h3>
+        ${p.blurb?`<div class="blurb">${p.blurb}</div>`:''}
+        <div class="tagrow"><span class="tag pickup">📍 ${p.loc||'Local pickup'}</span></div>
+        <div class="foot">
+          <div class="price" style="color:${t.accent}">${price}</div>
+          <button class="heart" onclick="event.stopPropagation();this.classList.toggle('liked');this.textContent=this.classList.contains('liked')?'♥':'♡'">♡</button>
+        </div>
+      </div>
+    </div>`;
+  }
   function renderHome(){
     const grid=document.getElementById('home-grid');
     let cards='';
     if(profile && inFeed(profile)){
-      const t=THEMES[profile.theme]||THEMES.pink;
-      const initial=(profile.name||'?')[0];
-      const inner = profile.photo ? `<img src="${profile.photo}" alt="">` : initial;
-      cards += `<div class="stand" onclick="go('profile')">
-        <div class="pic" style="background:linear-gradient(160deg,${t.a},${t.b})"><span class="tape"></span><div class="circ" style="background:${t.av};color:${t.avInk}">${inner}</div></div>
-        <div class="body">
-          <div class="who"><span class="av" style="background:${t.accent}">${initial}</span>${profile.name}${profile.age?', '+profile.age:''}</div>
-          <h3>${profile.title}</h3>
-          <div class="blurb">${blurbFrom(profile)}</div>
-          <div class="tagrow"><span class="tag pickup">📍 ${profile.loc||'Local pickup'}</span></div>
-          <div class="foot">
-            <div class="price" style="color:${t.accent}">${profile.price} <small>/ ${profile.unit}</small></div>
-            <button class="heart" onclick="event.stopPropagation();this.classList.toggle('liked');this.textContent=this.classList.contains('liked')?'♥':'♡'">♡</button>
-          </div>
-        </div>
-      </div>`;
+      cards += standCard(Object.assign({}, profile, {blurb:blurbFrom(profile)}), "go('profile')");
     }
+    // neighbor teaser stubs — populate the block so it never reads as a one-stand feed
+    cards += NEIGHBORS.filter(inFeed).map(n=>standCard({name:n.name, title:n.thing, price:n.price, theme:n.theme, emoji:n.emoji})).join('');
     const isBuyer=account&&account.role==='buyer';
     const addLabel=isBuyer?'Open your own stand':(profile?'Add your stand':'Set up the first stand');
     cards += `<div class="add-stand" onclick="startStand()">
