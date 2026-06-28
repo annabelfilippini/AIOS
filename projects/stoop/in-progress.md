@@ -130,7 +130,30 @@ Domain bought (stoopmarkets.com). Went from localStorage demo to a real shared b
 - Token note: Annabel's Supabase personal access token still needed for Batch C
   (edge-function deploy + Twilio secret); revoke after SMS is wired.
 
-## NEXT — Batch C: SMS confirmations
+## Login refactor (phone OTP) — IN PROGRESS (2026-06-28)
+Decision: real accounts via **Supabase Auth phone OTP**. Sellers log in; stands
+tie to the account (any device). Buyers stay account-free.
+
+- **Batch 1 ✅ backend ownership migration** (`backend/migrate-auth.sql`, applied +
+  verified). `stands.owner` → `auth.users`; dropped `edit_token` + the token RPCs
+  (`create_stand`/`update_stand`); RLS so a seller touches only their own stands;
+  `public_stands` view now exposes `owner` (no phone). `submit_order` kept for buyers.
+  `backend/schema.sql` re-synced to canonical.
+- **Batch 2 ✅ Twilio↔Supabase wiring** (verified). Bought number **+1 720 575 8753**
+  (sid PNf2e66e…, FriendlyName "Stoop"). Messaging Service **MGd416…** created, number
+  attached. Supabase Auth phone provider PATCHed → twilio + that MS, 6-digit OTP, 10min.
+  Live test OTP to Annabel's cell returned HTTP 200; Twilio logged **error 30034
+  (unregistered 10DLC)** → pipe is correct, only 10DLC gates real delivery.
+- **Batch 3 ⏳ frontend** (`index.html`): login screens (phone → code), tie
+  create/edit/owner to `auth.uid()`, drop the `stoop-mine`/edit_token logic. Buildable +
+  testable now via a Supabase **test-OTP** (fixed code, no SMS) while 10DLC bakes.
+
+### GATE (Annabel's action): A2P 10DLC registration
+Real users can't receive codes/texts until this clears (days). Needs your business
+info for the Brand: legal name, address, email; sole-proprietor is the light path.
+Twilio number + Messaging Service already exist to attach the campaign to.
+
+## (superseded) NEXT — Batch C: SMS confirmations
 - Supabase Edge Function `notify-order` that reads the order + stand phone server-side
   and texts the parent via Twilio. Trigger: client calls it after `submit_order` (or a
   DB webhook on insert). Annabel: create Twilio account + start A2P 10DLC registration
