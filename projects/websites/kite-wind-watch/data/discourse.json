@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28",
+  "generated_at": "2026-07-02",
   "source": "Reddit (full threads via reddit-cli)",
   "region": "Colorado + Wyoming (and driveable neighbours)",
   "subreddits": [
@@ -36,10 +36,10 @@
     {
       "name": "Aurora Reservoir",
       "where": "Denver",
-      "mentions": 4,
+      "mentions": 5,
       "known": true,
       "dad": false,
-      "blurb": "Hey all, I’ve lived in Boulder for the last 5 years but just recently got one of my kites from California out here so I’m looking to ride! I only have a 9m so I"
+      "blurb": "I recently took my first kitesurfing lessons in San Diego and had an awesome time. Now I’m back in Colorado and want to continue working toward being able to ri"
     },
     {
       "name": "Boulder Reservoir",
@@ -131,13 +131,14 @@
         "Lake McConaughy",
         "Lake Dillon",
         "Lake Hattie",
+        "Aurora Reservoir",
         "Chatfield Reservoir",
         "Boyd Lake",
         "Big Soda Lake"
       ],
       "relevance": "high",
       "score": 2,
-      "num_comments": 11,
+      "num_comments": 13,
       "created": 1782443806.0,
       "read_full": true
     },
@@ -170,7 +171,7 @@
         "Boulder Reservoir"
       ],
       "relevance": "high",
-      "score": 9,
+      "score": 8,
       "num_comments": 9,
       "created": 1558906841.0,
       "read_full": true
@@ -185,7 +186,7 @@
         "Lake Dillon"
       ],
       "relevance": "high",
-      "score": 13,
+      "score": 11,
       "num_comments": 28,
       "created": 1627313960.0,
       "read_full": true
@@ -200,7 +201,7 @@
         "Aurora Reservoir"
       ],
       "relevance": "high",
-      "score": 5,
+      "score": 6,
       "num_comments": 4,
       "created": 1510774804.0,
       "read_full": true
@@ -257,7 +258,7 @@
         "Lake Dillon"
       ],
       "relevance": "high",
-      "score": 2,
+      "score": 3,
       "num_comments": 6,
       "created": 1658455066.0,
       "read_full": true
@@ -285,7 +286,7 @@
         "Lake Dillon"
       ],
       "relevance": "high",
-      "score": 7,
+      "score": 6,
       "num_comments": 4,
       "created": 1543090376.0,
       "read_full": true
@@ -299,7 +300,7 @@
         "Aurora Reservoir"
       ],
       "relevance": "high",
-      "score": 6,
+      "score": 5,
       "num_comments": 4,
       "created": 1339028695.0,
       "read_full": true
@@ -327,7 +328,7 @@
         "Lake McConaughy"
       ],
       "relevance": "high",
-      "score": 12,
+      "score": 10,
       "num_comments": 0,
       "created": 1568901727.0,
       "read_full": false
@@ -339,7 +340,7 @@
       "snippet": "Hi all,\n\nThinking of taking a few beginner lessons. I live across the road from a beach in Australia where they teach kitesurfing and I thought it may be something fun to get into. I just had some que",
       "spots": [],
       "relevance": "high",
-      "score": 13,
+      "score": 14,
       "num_comments": 36,
       "created": 1736318413.0,
       "read_full": true
@@ -351,7 +352,7 @@
       "snippet": "I can never get enough of these windy days 🪁 Any other recommenced spots for kite flying?  Sorry, I think the sky is basically the only place you can fly a kite 😂 Show yourself out. 👉 🚪 There were two",
       "spots": [],
       "relevance": "high",
-      "score": 68,
+      "score": 70,
       "num_comments": 33,
       "created": 1602163433.0,
       "read_full": true
@@ -375,7 +376,7 @@
       "snippet": "I know my diagrams are a bit funny but I hope they want to show what I mean. I recently moved from a country in which I kitesurfed usually to italy. This spot is quite close to my house and was not su",
       "spots": [],
       "relevance": "high",
-      "score": 2,
+      "score": 3,
       "num_comments": 17,
       "created": 1670943298.0,
       "read_full": true
@@ -423,7 +424,7 @@
       "snippet": "Heya, what do you all do to keep your bodies in top shape  when you're not kiteboarding",
       "spots": [],
       "relevance": "high",
-      "score": 7,
+      "score": 9,
       "num_comments": 12,
       "created": 1644313941.0,
       "read_full": true
@@ -435,7 +436,7 @@
       "snippet": "I saw someone flying one of these kites at Central Park the other day. I thought they only did this over water, does anyone know anything about this/the people who do it here?  Uh, its a kite Really m",
       "spots": [],
       "relevance": "high",
-      "score": 4,
+      "score": 5,
       "num_comments": 11,
       "created": 1600530639.0,
       "read_full": true
