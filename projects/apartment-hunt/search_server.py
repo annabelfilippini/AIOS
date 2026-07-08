@@ -207,9 +207,9 @@ landlords, by owner sites, and Reddit.</p>
     <label>Depth</label>
     <div class="radio">
       <label style="all:unset;font-size:14px;display:flex;gap:7px;align-items:center;">
-        <input type="radio" name="depth" value="full" checked> Full, verifies garage and baths on each listing, about 10 minutes</label>
+        <input type="radio" name="depth" value="full" checked> Full, verifies garage and baths on each listing, up to an hour</label>
       <label style="all:unset;font-size:14px;display:flex;gap:7px;align-items:center;">
-        <input type="radio" name="depth" value="quick"> Quick sweep, about 2 minutes</label>
+        <input type="radio" name="depth" value="quick"> Quick sweep, about 10 minutes</label>
     </div>
   </div>
   <button type="submit">Search</button>
@@ -239,8 +239,8 @@ def _status_page() -> str:
 <p class="eyebrow">Search running</p>
 <h1>Sweeping the sources</h1>
 <p class="note">{criteria}</p>
-<p class="note">Elapsed <span class="fig">{mins}m {secs:02d}s</span> of about
-{"2" if _run.get("quick") else "10"} minutes. This page refreshes itself.</p>
+<p class="note">Elapsed <span class="fig">{mins}m {secs:02d}s</span>. A quick sweep
+takes about 10 minutes, a full run can take up to an hour. This page refreshes itself.</p>
 <pre>{tail or "Starting up."}</pre>
 <form method="post" action="/cancel"><button class="quiet" type="submit">Cancel run</button></form>""", refresh=6)
 

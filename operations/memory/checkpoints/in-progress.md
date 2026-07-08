@@ -21,3 +21,4 @@ Restart: cd projects/style-feed && python3 serve.py 8801
 
 Full detail: 2026-06-27-1745-life-os-the-edit-one-feed-live.md
 - 2026-07-08: Fable audit batch 1 done — retargeted guardrails/investigate skill symlinks, created agents/shared/handoffs/{active,archive}, pruned 46 old hook state markers, removed dead website-audit from /begin. Batch 2 (hook consolidation + READMEs) awaiting go-ahead.
+- 2026-07-08: Fable audit batch 2 done — recall.mjs status-bonus age decay + crash-proof reads, BB stripped from Stop hooks and /begin, state-marker auto-prune added, insta hooks kept. Remaining: checkpoint-skill slug/close-out rules, skills README, refinement candidate from May 25.

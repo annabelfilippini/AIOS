@@ -75,7 +75,13 @@ function collectEntries({ includeArchive: includeOld }) {
 
   return dirs.flatMap(({ type, dir }) =>
     listMarkdown(dir).map((filePath) => {
-      const text = fs.readFileSync(filePath, "utf8");
+      let text;
+      try {
+        text = fs.readFileSync(filePath, "utf8");
+      } catch (err) {
+        console.error(`recall: skipping unreadable file ${filePath}: ${err.message}`);
+        return null;
+      }
       const { frontmatter, body } = parseFrontmatter(text);
       return {
         type,
@@ -88,7 +94,7 @@ function collectEntries({ includeArchive: includeOld }) {
         title: firstHeading(body) || titleFromFilename(filePath),
         dateKey: frontmatter.date || dateFromFilename(filePath) || "",
       };
-    }),
+    }).filter(Boolean),
   );
 }
 
@@ -153,8 +159,9 @@ function scoreEntry(entry, { query: rawQuery, detectedProject: project }) {
   const matchedStrongQueryTokens = matchedQueryTokens.filter((token) => !weakTokens.has(token));
 
   let score = 0;
-  if (entry.frontmatter.status === "in-progress") score += 35;
-  if (entry.frontmatter.status === "paused") score += 30;
+  const statusBonus =
+    entry.frontmatter.status === "in-progress" ? 35 : entry.frontmatter.status === "paused" ? 30 : 0;
+  score += Math.round(statusBonus * statusFreshness(entry.dateKey));
   if (entry.frontmatter["next-session"]) score += 8;
   if (project && entryProject === project) score += 55;
   if (project && entry.relativePath.includes(project)) score += 20;
@@ -231,6 +238,16 @@ function tokenize(text) {
 
 function normalizeForPhrase(text) {
   return tokenize(text).join(" ");
+}
+
+// ponytail: stale "in-progress" ghosts must not outrank fresh state; full bonus <=14 days, gone by 45
+function statusFreshness(dateKey) {
+  const date = new Date(dateKey);
+  if (Number.isNaN(date.getTime())) return 0;
+  const ageDays = (Date.now() - date.getTime()) / 86400000;
+  if (ageDays <= 14) return 1;
+  if (ageDays >= 45) return 0;
+  return (45 - ageDays) / 31;
 }
 
 function recencyScore(dateKey) {
