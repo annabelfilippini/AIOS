@@ -1037,6 +1037,10 @@ _HOUSE_RE = re.compile(
     r"(\bhouse\b|\bsingle[\s-]family\b|\bdetached\b|\bsfh\b|\bbungalow\b)",
     re.IGNORECASE,
 )
+# Zillow building pages (/apartments/<complex>, /b/<building>) are apartment
+# complexes even when titled with a bare street address, so the text patterns
+# above never see the word "apartment". The URL is the only reliable signal.
+_NON_HOUSE_URL_RE = re.compile(r"zillow\.com/(apartments|b)/", re.IGNORECASE)
 
 # Sale-style prices: 6+ digit dollar amounts ($500,000+). Real SF rents top out
 # in the low tens of thousands per month even at the high end.
@@ -1296,6 +1300,13 @@ def _fetch_zillow_page(api_key: str, page: int) -> tuple[list[Listing], str | No
         },
         "isListVisible": True,
     }
+    if LISTING_NOUN == "house":
+        # Exclude apartment/condo/multifamily home types server-side — unset
+        # types default to ON, which is how apartment complexes (bare-address
+        # titles, /apartments/ URLs) were reaching the digest. Townhomes stay,
+        # matching the text filter. Also saves the credits spent enriching them.
+        for key in ("apa", "apco", "con", "mf", "manu", "land"):
+            search_state["filterState"][key] = {"value": False}
     from urllib.parse import quote  # local import keeps top-of-file diff small
     full_url = f"{ZILLOW_RENTAL_URL}?searchQueryState={quote(json.dumps(search_state))}"
 
@@ -1665,10 +1676,9 @@ def keep_basic(listing: Listing) -> bool:
     if _HUB_TITLE_PATTERNS.search(listing.title):
         return False
     # House search: drop apartment/condo complexes and apartment hub pages.
-    if (
-        LISTING_NOUN == "house"
-        and _NON_HOUSE_RE.search(haystack)
-        and not _HOUSE_RE.search(haystack)
+    if LISTING_NOUN == "house" and (
+        (_NON_HOUSE_RE.search(haystack) and not _HOUSE_RE.search(haystack))
+        or _NON_HOUSE_URL_RE.search(listing.url)
     ):
         return False
     if listing.price is not None:

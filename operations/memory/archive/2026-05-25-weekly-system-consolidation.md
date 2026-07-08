@@ -1,7 +1,7 @@
 ---
 date: 2026-05-25
 project: ai-os-memory
-status: active
+status: processed
 next-session: If you approve the core-file edits, apply them as one focused commit; then do a separate deliberate `knowledge/` repo reconciliation pass.
 ---
 

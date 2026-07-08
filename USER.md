@@ -211,8 +211,8 @@ She mostly uses the knowledge vault as a place for raw notes, articles, videos, 
 Active Garry/Claude surface:
 
 - `begin`
-- `garry-office-hours-lite`
-- `garry-ceo-review-lite`
+- `office-hours-lite`
+- `ceo-review-lite`
 - `checkpoint`
 - `decision-pipeline`
 

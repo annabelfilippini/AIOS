@@ -54,3 +54,5 @@ next-session: one-line hint for what to do next
 - Do not store secrets.
 - Never delete old checkpoint entries.
 - Capture only useful continuity, not a transcript.
+- `project:` must be a single canonical kebab-case slug matching the folder name under `projects/` (e.g. `style-feed`, `wayloft`, `life-os`), or `ai-os` for system work. Never prose, never a description.
+- When a new checkpoint supersedes an older `in-progress` checkpoint for the same project, update the older file's `status:` to `superseded` in the same session.

@@ -74,8 +74,11 @@ def main() -> int:
     firecrawl_routed = []
     zillow = []
     if firecrawl_key:
-        firecrawl_routed, _fr = ah.fetch_firecrawl_sources(firecrawl_key)
-        zillow, _zr = ah.fetch_zillow_firecrawl(firecrawl_key)
+        firecrawl_routed, fc_reports = ah.fetch_firecrawl_sources(firecrawl_key)
+        zillow, zr = ah.fetch_zillow_firecrawl(firecrawl_key)
+        # Per-seed yield, ~7.6 credits each — trim seeds that stay at 0.
+        for r in fc_reports + [zr]:
+            print(f"  seed {r.source}: {r.status}, {r.listings} listings {r.note}")
 
     matched = filter_and_sort(
         cl + direct + firecrawl_routed + exa + zillow + reddit, firecrawl_key
