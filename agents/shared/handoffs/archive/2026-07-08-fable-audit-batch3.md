@@ -3,7 +3,7 @@ date: 2026-07-08
 from: Fable 5 (audit session)
 to: Opus (implementation)
 project: ai-os
-status: ready
+status: done
 reviewer: Fable 5 checks the result when done
 ---
 
