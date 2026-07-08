@@ -106,10 +106,12 @@ runs `build_html_digest.py --city denver` with those overrides (one run at a
 time) and serves the finished digest at `/result`. The Cherry Creek +
 10-min-ring lock is not editable from the form.
 
-Credit reality: a **full** run (with per-listing enrichment) costs roughly
-160 Firecrawl credits and ~10 min; a **quick sweep** (`--no-enrich`) costs
-roughly 30 and ~2 min but leaves garage/baths unverified. Check the balance
-with the credit-usage endpoint before handing the URL out widely.
+Credit reality (measured 2026-07-08): a **quick sweep** (`--no-enrich`)
+costs ~200 Firecrawl credits and ~8 min — the 29 seed extractions dominate,
+not enrichment. A **full** run adds ~130 enrichment scrapes and can stretch
+to an hour when Firecrawl is slow. On the 5,000/mo plan that is roughly 20
+searches a month total. Check the balance before handing the URL out widely:
+`curl https://api.firecrawl.dev/v1/team/credit-usage -H "Authorization: Bearer $FIRECRAWL_API_KEY"`
 
 ```bash
 python3 search_server.py          # start the server

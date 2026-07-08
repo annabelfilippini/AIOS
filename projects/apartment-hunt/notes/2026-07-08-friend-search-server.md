@@ -15,10 +15,12 @@ New flags, applied via `dataclasses.replace` on the profile before
   filter and un-houses the Exa queries), drops CL `housing_type=6`
 - `--out PATH` — write the digest only there (no `digest_<city>_latest.html`
   overwrite, no Desktop copy) so friend runs don't clobber Annabel's digest
-- `--no-enrich` — skip detail-page enrichment. Added after checking credits:
-  406 of 5,000 Firecrawl credits left (resets 2026-07-13); a full run costs
-  ~160 (29 seeds + 3 Zillow pages + ~131 enrichments), a no-enrich run ~30.
-  Surfaced on the form as "Quick sweep".
+- `--no-enrich` — skip detail-page enrichment. Surfaced on the form as
+  "Quick sweep". MEASURED cost, not the estimate: a quick sweep burned ~220
+  credits (406 -> 184) — the 29 firecrawl seed extractions dominate, not
+  enrichment. ~20 searches/month on the 5,000 plan. Quick ≈ 8 min; the full
+  run's enrichment stretched to ~70 min this session (Firecrawl slow/retries),
+  vs 8-10 min in June. Credits reset 2026-07-13.
 
 NOT overridable: neighborhoods/ring, target ZIPs, Zillow map bounds, seed
 URLs. Known ceiling: portal seed URLs are hardcoded 3BR/house-typed, so
