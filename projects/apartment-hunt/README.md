@@ -101,10 +101,15 @@ the rest, but you'll miss most of the real inventory.
 ## Friend-facing search page
 
 `search_server.py` serves a small form (budget, beds, baths, houses-only vs
-any home type) at `http://localhost:8787`. Submitting runs
-`build_html_digest.py --city denver` with those overrides (one run at a time,
-~10 min) and serves the finished digest at `/result`. The Cherry Creek +
+any home type, full vs quick depth) at `http://localhost:8787`. Submitting
+runs `build_html_digest.py --city denver` with those overrides (one run at a
+time) and serves the finished digest at `/result`. The Cherry Creek +
 10-min-ring lock is not editable from the form.
+
+Credit reality: a **full** run (with per-listing enrichment) costs roughly
+160 Firecrawl credits and ~10 min; a **quick sweep** (`--no-enrich`) costs
+roughly 30 and ~2 min but leaves garage/baths unverified. Check the balance
+with the credit-usage endpoint before handing the URL out widely.
 
 ```bash
 python3 search_server.py          # start the server

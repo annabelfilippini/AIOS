@@ -20,3 +20,4 @@ Restart: cd projects/style-feed && python3 serve.py 8801
   keys off the-edit.html occasion cards (will need rework).
 
 Full detail: 2026-06-27-1745-life-os-the-edit-one-feed-live.md
+- 2026-07-08: Fable audit batch 1 done — retargeted guardrails/investigate skill symlinks, created agents/shared/handoffs/{active,archive}, pruned 46 old hook state markers, removed dead website-audit from /begin. Batch 2 (hook consolidation + READMEs) awaiting go-ahead.

@@ -125,6 +125,8 @@ def _profile_with_overrides(profile, args):
         overrides["min_bathrooms"] = args.min_baths
     if args.any_type and profile.listing_noun == "house":
         overrides["listing_noun"] = "home"
+    if args.no_enrich:
+        overrides["enrich_details"] = False
     if args.any_type or args.min_baths is not None:
         cl_params = dict(profile.craigslist_extra_params)
         if args.any_type:

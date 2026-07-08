@@ -51,10 +51,11 @@ def _clamp(raw, lo, hi, default):
         return default
 
 
-def _criteria_label(budget, beds_lo, beds_hi, baths, any_type):
+def _criteria_label(budget, beds_lo, beds_hi, baths, any_type, quick):
     beds = f"{beds_lo}BR" if beds_lo == beds_hi else f"{beds_lo} to {beds_hi}BR"
     kind = "any home type" if any_type else "houses"
-    return f"{beds}, {baths}+ bath, up to ${budget:,}/mo, {kind}"
+    depth = ", quick sweep" if quick else ""
+    return f"{beds}, {baths}+ bath, up to ${budget:,}/mo, {kind}{depth}"
 
 
 def _running() -> bool:
@@ -62,7 +63,7 @@ def _running() -> bool:
     return proc is not None and proc.poll() is None
 
 
-def _start_run(budget, beds_lo, beds_hi, baths, any_type) -> None:
+def _start_run(budget, beds_lo, beds_hi, baths, any_type, quick) -> None:
     WEB.mkdir(exist_ok=True)
     cmd = [
         sys.executable, "-u", str(ROOT / "build_html_digest.py"),
@@ -75,12 +76,15 @@ def _start_run(budget, beds_lo, beds_hi, baths, any_type) -> None:
     ]
     if any_type:
         cmd.append("--any-type")
+    if quick:
+        cmd.append("--no-enrich")
     log = open(LOG_PATH, "w")
     proc = subprocess.Popen(cmd, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT)
     _run.update(
         proc=proc,
-        criteria=_criteria_label(budget, beds_lo, beds_hi, baths, any_type),
+        criteria=_criteria_label(budget, beds_lo, beds_hi, baths, any_type, quick),
         started=time.time(),
+        quick=quick,
     )
 
 
@@ -177,7 +181,7 @@ def _form_page() -> str:
 <p class="eyebrow">Cherry Creek and the 10 minute ring</p>
 <h1>Denver rental search</h1>
 <p class="note">Sweeps Craigslist, Zillow, the big portals, institutional
-landlords, by owner sites, and Reddit. A run takes about 10 minutes.</p>
+landlords, by owner sites, and Reddit.</p>
 <div class="rule"></div>
 <form method="post" action="/search">
   <div class="row">
@@ -197,6 +201,15 @@ landlords, by owner sites, and Reddit. A run takes about 10 minutes.</p>
         <input type="radio" name="kind" value="house" checked> Houses only</label>
       <label style="all:unset;font-size:14px;display:flex;gap:7px;align-items:center;">
         <input type="radio" name="kind" value="any"> Any home type</label>
+    </div>
+  </div>
+  <div>
+    <label>Depth</label>
+    <div class="radio">
+      <label style="all:unset;font-size:14px;display:flex;gap:7px;align-items:center;">
+        <input type="radio" name="depth" value="full" checked> Full, verifies garage and baths on each listing, about 10 minutes</label>
+      <label style="all:unset;font-size:14px;display:flex;gap:7px;align-items:center;">
+        <input type="radio" name="depth" value="quick"> Quick sweep, about 2 minutes</label>
     </div>
   </div>
   <button type="submit">Search</button>
@@ -226,8 +239,8 @@ def _status_page() -> str:
 <p class="eyebrow">Search running</p>
 <h1>Sweeping the sources</h1>
 <p class="note">{criteria}</p>
-<p class="note">Elapsed <span class="fig">{mins}m {secs:02d}s</span> of about 10 minutes.
-This page refreshes itself.</p>
+<p class="note">Elapsed <span class="fig">{mins}m {secs:02d}s</span> of about
+{"2" if _run.get("quick") else "10"} minutes. This page refreshes itself.</p>
 <pre>{tail or "Starting up."}</pre>
 <form method="post" action="/cancel"><button class="quiet" type="submit">Cancel run</button></form>""", refresh=6)
 
@@ -304,9 +317,10 @@ class Handler(BaseHTTPRequestHandler):
             beds_hi = max(beds_lo, _clamp(field("beds_hi"), BEDS_MIN, BEDS_MAX, 3))
             baths = _clamp(field("baths"), BATHS_MIN, BATHS_MAX, 2)
             any_type = field("kind") == "any"
+            quick = field("depth") == "quick"
             with _start_lock:
                 if not _running():
-                    _start_run(budget, beds_lo, beds_hi, baths, any_type)
+                    _start_run(budget, beds_lo, beds_hi, baths, any_type, quick)
             self._redirect("/status")
         elif path == "/cancel":
             proc = _run.get("proc")

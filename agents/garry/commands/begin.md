@@ -6,7 +6,7 @@ I'm starting a new session. Get me up to speed.
 ## Argument
 
 This command takes an optional project arg: `/begin`, `/begin wayloft`,
-`/begin pbp`, `/begin website-audit`.
+`/begin pbp`.
 
 - **No arg** -> cross-project briefing.
 - **With arg** -> scope everything to that single project. Skip the sidebar
@@ -21,7 +21,6 @@ frontmatter (`project:`) and decisions.jsonl (`"project":"<slug>"`).
 | --- | --- | --- | --- | --- |
 | `wayloft` | `wayloft` | `~/Documents/AI-OS/projects/wayloft` | `docs/` and project root docs | Has CLAUDE.md/AGENTS.md, is a git repo |
 | `pbp` | `pickleball-portal` | `~/Documents/AI-OS/projects/pickleball-portal/repo` | Project root docs | Has AGENTS.md in repo, repo is the git root |
-| `website-audit` | `website-audit` | `~/Documents/AI-OS/projects/website-audit` | Project root docs | Doc/project workspace; skip git steps if not a repo |
 
 If an unknown arg is passed, list the valid args and stop. Don't guess.
 
