@@ -91,7 +91,30 @@ the rest, but you'll miss most of the real inventory.
 
 # Styled HTML page (writes digest_<city>_latest.html + a copy on the Desktop)
 .venv/bin/python build_html_digest.py --city denver
+
+# One-off criteria overrides (ring/ZIPs/sources stay fixed)
+.venv/bin/python build_html_digest.py --city denver \
+  --max-price 6500 --min-beds 3 --max-beds 4 --min-baths 2 --any-type \
+  --out /tmp/digest.html
 ```
+
+## Friend-facing search page
+
+`search_server.py` serves a small form (budget, beds, baths, houses-only vs
+any home type) at `http://localhost:8787`. Submitting runs
+`build_html_digest.py --city denver` with those overrides (one run at a time,
+~10 min) and serves the finished digest at `/result`. The Cherry Creek +
+10-min-ring lock is not editable from the form.
+
+```bash
+python3 search_server.py          # start the server
+tailscale funnel 8787             # public URL: https://<mac-name>.<tailnet>.ts.net/
+tailscale funnel --https=443 off  # take it offline
+```
+
+Both the server and the funnel must be running (Mac awake) for friends to
+reach it. Runs use the API keys in `.env`. State lives in `web/` (run log,
+latest result), which is throwaway.
 
 Latest markdown digest is at `digest_<city>_latest.md`; styled HTML at
 `digest_<city>_latest.html`. Dated archives in `digests/<city>/`.

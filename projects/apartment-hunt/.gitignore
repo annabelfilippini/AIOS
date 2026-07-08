@@ -6,6 +6,7 @@ digest_*_latest.html
 digest_latest.md
 digest_latest.html
 digests/
+web/
 __pycache__/
 *.pyc
 sample_*.html
