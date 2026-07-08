@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import subprocess
 import sys
 import threading
@@ -30,7 +31,10 @@ LOG_PATH = WEB / "run.log"
 RESULT_PATH = WEB / "result.html"
 LAST_PATH = WEB / "last.json"
 
-PORT = 8787
+# Host/port from env so a cloud host (Render sets $PORT) can bind. Local default
+# stays 127.0.0.1:8787 — cloud sets HOST=0.0.0.0 to accept outside traffic.
+HOST = os.environ.get("HOST", "127.0.0.1")
+PORT = int(os.environ.get("PORT", "8787"))
 
 # One run at a time. ponytail: global single-run lock; per-user queueing only
 # if friends actually collide.
@@ -354,9 +358,10 @@ class Handler(BaseHTTPRequestHandler):
 
 def main() -> int:
     WEB.mkdir(exist_ok=True)
-    server = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
-    print(f"Serving on http://localhost:{PORT}")
-    print(f"Expose with: tailscale funnel {PORT}")
+    server = ThreadingHTTPServer((HOST, PORT), Handler)
+    print(f"Serving on http://{HOST}:{PORT}")
+    if HOST == "127.0.0.1":
+        print(f"Expose with: tailscale funnel {PORT}")
     server.serve_forever()
     return 0
 
