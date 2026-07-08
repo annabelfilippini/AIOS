@@ -37,7 +37,12 @@ def main() -> int:
     )
     # Runtime criteria overrides (used by search_server.py). Neighborhood ring,
     # ZIPs, map bounds, and source seeds always stay as the profile defines them.
+    parser.add_argument("--min-price", type=int, help="override budget floor")
     parser.add_argument("--max-price", type=int, help="override budget ceiling (sets ideal and stretch)")
+    parser.add_argument(
+        "--require-garage", action="store_true",
+        help="only show listings with a garage (page-verified on full runs, text-mention on quick sweeps)",
+    )
     parser.add_argument("--min-beds", type=int, help="override minimum bedrooms")
     parser.add_argument("--max-beds", type=int, help="override maximum bedrooms")
     parser.add_argument("--min-baths", type=int, help="override minimum bathrooms")
@@ -84,6 +89,15 @@ def main() -> int:
         cl + direct + firecrawl_routed + exa + zillow + reddit, firecrawl_key
     )
     print(f"  {len(matched)} matched")
+    if args.require_garage:
+        # Full runs: page-verified garage_status. Unenriched listings (quick
+        # sweeps, failed enrichment): fall back to a garage mention in the text.
+        matched = [
+            ls for ls in matched
+            if ls.garage_status == "confirmed"
+            or (not ls.enriched and "garage" in ls.feature_matches())
+        ]
+        print(f"  {len(matched)} with a garage")
 
     today = dt.date.today().isoformat()
     html = build_html(matched, today)
@@ -113,9 +127,11 @@ def _profile_with_overrides(profile, args):
     filter side while the house-typed 3BR seeds keep feeding what they feed;
     Craigslist, Zillow, and Exa adapt fully."""
     overrides = {}
+    if args.min_price:
+        overrides["min_price"] = args.min_price
     if args.max_price:
         overrides["ideal_max_price"] = args.max_price
-        overrides["max_price"] = max(args.max_price, profile.min_price)
+        overrides["max_price"] = max(args.max_price, overrides.get("min_price", profile.min_price))
     if args.min_beds:
         overrides["min_beds"] = args.min_beds
     if args.max_beds:

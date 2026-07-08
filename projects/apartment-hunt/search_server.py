@@ -51,11 +51,12 @@ def _clamp(raw, lo, hi, default):
         return default
 
 
-def _criteria_label(budget, beds_lo, beds_hi, baths, any_type, quick):
+def _criteria_label(budget_lo, budget, beds_lo, beds_hi, baths, any_type, garage, quick):
     beds = f"{beds_lo}BR" if beds_lo == beds_hi else f"{beds_lo} to {beds_hi}BR"
     kind = "any home type" if any_type else "houses"
+    garage_bit = ", garage" if garage else ""
     depth = ", quick sweep" if quick else ""
-    return f"{beds}, {baths}+ bath, up to ${budget:,}/mo, {kind}{depth}"
+    return f"{beds}, {baths}+ bath, ${budget_lo:,} to ${budget:,}/mo, {kind}{garage_bit}{depth}"
 
 
 def _running() -> bool:
@@ -63,11 +64,12 @@ def _running() -> bool:
     return proc is not None and proc.poll() is None
 
 
-def _start_run(budget, beds_lo, beds_hi, baths, any_type, quick) -> None:
+def _start_run(budget_lo, budget, beds_lo, beds_hi, baths, any_type, garage, quick) -> None:
     WEB.mkdir(exist_ok=True)
     cmd = [
         sys.executable, "-u", str(ROOT / "build_html_digest.py"),
         "--city", "denver",
+        "--min-price", str(budget_lo),
         "--max-price", str(budget),
         "--min-beds", str(beds_lo),
         "--max-beds", str(beds_hi),
@@ -76,13 +78,15 @@ def _start_run(budget, beds_lo, beds_hi, baths, any_type, quick) -> None:
     ]
     if any_type:
         cmd.append("--any-type")
+    if garage:
+        cmd.append("--require-garage")
     if quick:
         cmd.append("--no-enrich")
     log = open(LOG_PATH, "w")
     proc = subprocess.Popen(cmd, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT)
     _run.update(
         proc=proc,
-        criteria=_criteria_label(budget, beds_lo, beds_hi, baths, any_type, quick),
+        criteria=_criteria_label(budget_lo, budget, beds_lo, beds_hi, baths, any_type, garage, quick),
         started=time.time(),
         quick=quick,
     )
@@ -185,7 +189,9 @@ landlords, by owner sites, and Reddit.</p>
 <div class="rule"></div>
 <form method="post" action="/search">
   <div class="row">
-    <div><label>Budget, max monthly</label>
+    <div><label>Price, min monthly</label>
+      <input type="number" name="budget_lo" value="1000" min="{BUDGET_MIN}" max="{BUDGET_MAX}" step="100"></div>
+    <div><label>Price, max monthly</label>
       <input type="number" name="budget" value="5000" min="{BUDGET_MIN}" max="{BUDGET_MAX}" step="100"></div>
     <div><label>Beds, min</label>
       <input type="number" name="beds_lo" value="3" min="{BEDS_MIN}" max="{BEDS_MAX}"></div>
@@ -201,6 +207,15 @@ landlords, by owner sites, and Reddit.</p>
         <input type="radio" name="kind" value="house" checked> Houses only</label>
       <label style="all:unset;font-size:14px;display:flex;gap:7px;align-items:center;">
         <input type="radio" name="kind" value="any"> Any home type</label>
+    </div>
+  </div>
+  <div>
+    <label>Garage</label>
+    <div class="radio">
+      <label style="all:unset;font-size:14px;display:flex;gap:7px;align-items:center;">
+        <input type="radio" name="garage" value="any" checked> Doesn't matter</label>
+      <label style="all:unset;font-size:14px;display:flex;gap:7px;align-items:center;">
+        <input type="radio" name="garage" value="yes"> Must have a garage</label>
     </div>
   </div>
   <div>
@@ -312,15 +327,17 @@ class Handler(BaseHTTPRequestHandler):
             return (form.get(name) or [default])[0]
 
         if path == "/search":
-            budget = _clamp(field("budget"), BUDGET_MIN, BUDGET_MAX, 5000)
+            budget_lo = _clamp(field("budget_lo"), BUDGET_MIN, BUDGET_MAX, 1000)
+            budget = max(budget_lo, _clamp(field("budget"), BUDGET_MIN, BUDGET_MAX, 5000))
             beds_lo = _clamp(field("beds_lo"), BEDS_MIN, BEDS_MAX, 3)
             beds_hi = max(beds_lo, _clamp(field("beds_hi"), BEDS_MIN, BEDS_MAX, 3))
             baths = _clamp(field("baths"), BATHS_MIN, BATHS_MAX, 2)
             any_type = field("kind") == "any"
+            garage = field("garage") == "yes"
             quick = field("depth") == "quick"
             with _start_lock:
                 if not _running():
-                    _start_run(budget, beds_lo, beds_hi, baths, any_type, quick)
+                    _start_run(budget_lo, budget, beds_lo, beds_hi, baths, any_type, garage, quick)
             self._redirect("/status")
         elif path == "/cancel":
             proc = _run.get("proc")
