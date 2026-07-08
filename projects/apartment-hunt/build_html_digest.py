@@ -46,6 +46,10 @@ def main() -> int:
         help="accept any home type, not just single-family houses",
     )
     parser.add_argument(
+        "--no-enrich", action="store_true",
+        help="skip per-listing detail-page enrichment (about 5x fewer Firecrawl credits; garage/baths stay unverified)",
+    )
+    parser.add_argument(
         "--out", type=Path,
         help="write the HTML digest to this path only (skips digest_<city>_latest.html and the Desktop copy)",
     )
