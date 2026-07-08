@@ -13,6 +13,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import datetime as dt
 import html as html_mod
 import os
@@ -34,8 +35,22 @@ def main() -> int:
         "--city", default="sf", choices=sorted(profiles.PROFILES),
         help="which city profile to render (default: sf)",
     )
+    # Runtime criteria overrides (used by search_server.py). Neighborhood ring,
+    # ZIPs, map bounds, and source seeds always stay as the profile defines them.
+    parser.add_argument("--max-price", type=int, help="override budget ceiling (sets ideal and stretch)")
+    parser.add_argument("--min-beds", type=int, help="override minimum bedrooms")
+    parser.add_argument("--max-beds", type=int, help="override maximum bedrooms")
+    parser.add_argument("--min-baths", type=int, help="override minimum bathrooms")
+    parser.add_argument(
+        "--any-type", action="store_true",
+        help="accept any home type, not just single-family houses",
+    )
+    parser.add_argument(
+        "--out", type=Path,
+        help="write the HTML digest to this path only (skips digest_<city>_latest.html and the Desktop copy)",
+    )
     args = parser.parse_args()
-    ah.apply_profile(profiles.get_profile(args.city))
+    ah.apply_profile(_profile_with_overrides(profiles.get_profile(args.city), args))
 
     load_dotenv(ROOT / ".env")
     exa_key = os.environ.get("EXA_API_KEY")
@@ -66,6 +81,12 @@ def main() -> int:
     today = dt.date.today().isoformat()
     html = build_html(matched, today)
 
+    if args.out:
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(html)
+        print(f"Wrote {args.out}")
+        return 0
+
     out_project = ROOT / f"digest_{ah.ACTIVE_PROFILE.key}_latest.html"
     out_project.write_text(html)
     print(f"Wrote {out_project}")
@@ -74,6 +95,43 @@ def main() -> int:
     desktop.write_text(html)
     print(f"Wrote {desktop}")
     return 0
+
+
+def _profile_with_overrides(profile, args):
+    """A copy of the profile with the CLI criteria overrides applied.
+
+    Only price/beds/baths/type are overridable. The location ring is not:
+    neighborhoods, ZIPs, and Zillow map bounds always come from the profile.
+    Portal seed URLs also stay as-is, so a beds/type override widens the
+    filter side while the house-typed 3BR seeds keep feeding what they feed;
+    Craigslist, Zillow, and Exa adapt fully."""
+    overrides = {}
+    if args.max_price:
+        overrides["ideal_max_price"] = args.max_price
+        overrides["max_price"] = max(args.max_price, profile.min_price)
+    if args.min_beds:
+        overrides["min_beds"] = args.min_beds
+    if args.max_beds:
+        overrides["max_beds"] = args.max_beds
+    if overrides.get("min_beds") or overrides.get("max_beds"):
+        lo = overrides.get("min_beds", profile.min_beds)
+        hi = overrides.get("max_beds", profile.max_beds)
+        overrides["max_beds"] = max(lo, hi)
+    if args.min_baths is not None:
+        overrides["min_bathrooms"] = args.min_baths
+    if args.any_type and profile.listing_noun == "house":
+        overrides["listing_noun"] = "home"
+    if args.any_type or args.min_baths is not None:
+        cl_params = dict(profile.craigslist_extra_params)
+        if args.any_type:
+            cl_params.pop("housing_type", None)
+        if args.min_baths is not None:
+            if args.min_baths > 0:
+                cl_params["min_bathrooms"] = args.min_baths
+            else:
+                cl_params.pop("min_bathrooms", None)
+        overrides["craigslist_extra_params"] = tuple(cl_params.items())
+    return dataclasses.replace(profile, **overrides) if overrides else profile
 
 
 def filter_and_sort(listings, firecrawl_key=None):
