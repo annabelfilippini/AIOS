@@ -2,7 +2,7 @@
 date: 2026-07-08
 time: 17:35
 project: apartment-hunt
-status: DEPLOYED to Render (always-on, Mac-independent) and serving the updated form — VERIFIED healthy (HTTP 200, all form controls present). Firecrawl UPGRADED to Standard on 2026-07-08 (100,000 credits/mo, ~450 searches; cycle 2026-07-08 -> 2026-08-08). Balance confirmed 100,179 via credit-usage endpoint. Friends can run FULL searches today — credit constraint gone. Still not run end-to-end on Render (offered a ~220-credit live test). Old Tailscale funnel link superseded by Render.
+status: DEPLOYED to Render (always-on, Mac-independent) and serving the updated form — VERIFIED healthy (HTTP 200, all form controls present). Firecrawl UPGRADED to Standard on 2026-07-08 (100,000 credits/mo, ~450 searches; cycle 2026-07-08 -> 2026-08-08). Balance confirmed 100,179 via credit-usage endpoint. Friends can run FULL searches today — credit constraint gone. END-TO-END VERIFIED on Render 2026-07-08 18:09: full run completed in ~15 min, 12 real houses, ZERO apartment-complex leaks, cost 296 credits (99,883 left). Both keys confirmed working on Render. Old Tailscale funnel link superseded by Render. Link ready to share: https://denver-apartment-search.onrender.com
 supersedes: 2026-07-08-1505-apartment-hunt-houses-only-fix.md
 ---
 
