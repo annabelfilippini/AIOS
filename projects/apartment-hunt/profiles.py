@@ -483,8 +483,7 @@ DENVER = SearchProfile(
         # what Exa actively searches. Kept to a curated subset to bound Exa cost.
         "central park", "five points", "rino", "downtown denver",
         "highlands", "lohi", "sloan's lake", "berkeley",
-        "university hills", "hampden", "southmoor", "englewood",
-        "greenwood village",
+        "university hills", "southmoor",
     ),
     # Owner-direct Reddit sweep (added 2026-06-20). r/DenverList is the local
     # classifieds sub; r/Denver and r/Colorado carry occasional "renting my house"
