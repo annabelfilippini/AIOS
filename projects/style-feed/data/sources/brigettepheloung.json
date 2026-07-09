@@ -1,6 +1,1210 @@
-[
-  {
-    "type": "text",
-    "text": "{\n  \"metadata\": {\n    \"fo-verify\": \"1f1d8590-dbd5-48ae-8f57-068f9436714a\",\n    \"description\": \"Explore Acquired Style's handpicked favorites.\",\n    \"og:description\": \"Explore Acquired Style's handpicked favorites.\",\n    \"theme-color\": \"#1f1f1f\",\n    \"viewport\": \"width=device-width,initial-scale=1\",\n    \"language\": \"en\",\n    \"title\": \"Acquired Style's Handpicked Recommendations | ShopMy\",\n    \"verification\": [\n      \"fcff020ee440b5bc191f2a9705924fe9\",\n      \"51cc1ae1f9125782b3d667a53824774d\"\n    ],\n    \"ogTitle\": \"Acquired Style's Handpicked Recommendations | ShopMy\",\n    \"og:title\": \"Acquired Style's Handpicked Recommendations | ShopMy\",\n    \"ogImage\": \"https://production-shopmyshelf-uploads.s3.us-east-2.amazonaws.com/img-user-deres-11699-1756347499392\",\n    \"og:image\": \"https://production-shopmyshelf-uploads.s3.us-east-2.amazonaws.com/img-user-deres-11699-1756347499392\",\n    \"ogDescription\": \"Explore Acquired Style's handpicked favorites.\",\n    \"favicon\": \"https://shopmy.us/favicon.ico\",\n    \"scrapeId\": \"019ecd49-8181-76f4-b71f-4f14b8759849\",\n    \"sourceURL\": \"https://shopmy.us/shop/acquiredstyle\",\n    \"url\": \"https://shopmy.us/shop/acquiredstyle\",\n    \"statusCode\": 200,\n    \"contentType\": \"text/html\",\n    \"timezone\": \"America/New_York\",\n    \"proxyUsed\": \"basic\",\n    \"cacheState\": \"miss\",\n    \"indexId\": \"76f36fe0-c9a0-450d-8099-0a36582d0ffe\",\n    \"creditsUsed\": 5,\n    \"concurrencyLimited\": false\n  },\n  \"json\": {\n    \"creator\": \"Acquired Style\",\n    \"products\": [\n      {\n        \"brand\": \"Rael\",\n        \"title\": \"Cryo + Soothing Hydrogel Mask\",\n        \"price\": \"$18.99\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1781462039707\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2962009?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Biom\",\n        \"title\": \"Standard All Purpose Wipes\",\n        \"price\": \"$18\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1758872548984\",\n        \"productUrl\": \"https://shopmy.us/shop/product/784930?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Superdown\",\n        \"title\": \"Demia Track Shorts\",\n        \"price\": \"$56\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/8892e7dc-9047-47e2-bc95-cbe010df4a15imgi_5_SPDW-WF257_V2.png\",\n        \"productUrl\": \"https://shopmy.us/shop/product/259534?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Cyklar\",\n        \"title\": \"Crescent Nutrient-Rich Body Cream\",\n        \"price\": \"$29\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1750879632100\",\n        \"productUrl\": \"https://shopmy.us/shop/product/247817?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"In My Jammers\",\n        \"title\": \"Blush Polka Dot Robe\",\n        \"price\": \"$68\",\n        \"imageUrl\": \"https://inmyjammers.com/cdn/shop/files/B23B493B-D767-4F66-A1B4-9EB059558ED1.jpg?v=1773717591\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2871735?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Levi's\",\n        \"title\": \"Low Loose Jeans\",\n        \"price\": \"$110\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1778354519733\",\n        \"productUrl\": \"https://shopmy.us/shop/product/230530?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"GRLFRND\",\n        \"title\": \"Bella Low Rise Boyfriend Jeans\",\n        \"price\": \"$221\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1778527480936\",\n        \"productUrl\": \"https://shopmy.us/shop/product/251547?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Anne Klein\",\n        \"title\": \"Luci Quilted Ballet Flats\",\n        \"price\": \"$71.10\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1764425367195\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1401303?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Rael\",\n        \"title\": \"Vitamin C Sheet Mask\",\n        \"price\": \"$16.99\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1758701896322\",\n        \"productUrl\": \"https://shopmy.us/shop/product/92891?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Dairy Boy\",\n        \"title\": \"Cashmere Collared Sweater\",\n        \"price\": \"$285\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/6c8de868-657d-4454-9fb8-4ebaf80b827e_image-1780490618509\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2918067?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"THIRTY YEARS\",\n        \"title\": \"Jelly Clear Bag\",\n        \"price\": \"$52\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1775671905350\",\n        \"productUrl\": \"https://shopmy.us/shop/product/371058?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Show Me Your Mumu\",\n        \"title\": \"Anderson Mini Dress\",\n        \"price\": \"$198\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1753600426941\",\n        \"productUrl\": \"https://shopmy.us/shop/product/312485?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Tory Burch\",\n        \"title\": \"Mellow Clear Shoulder Bag\",\n        \"price\": \"$295\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1781469895182\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2856659?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Tory Burch\",\n        \"title\": \"Sequin Mesh Dress\",\n        \"price\": \"$695\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780920947757\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2608429?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Tory Burch\",\n        \"title\": \"Miller Jelly Kitten Heel\",\n        \"price\": \"$250\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779133892568\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2785187?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"House of Harlow\",\n        \"title\": \"x REVOLVE Nieve Maxi Dress\",\n        \"price\": \"$258\",\n        \"imageUrl\": \"https://is4.revolveassets.com/images/p4/n/z/HOOF-WD1062_V2.jpg\",\n        \"productUrl\": \"https://shopmy.us/shop/product/234827?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"DMY Studios\",\n        \"title\": \"Nina Sunglasses\",\n        \"price\": \"$188.04\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1764337401499\",\n        \"productUrl\": \"https://shopmy.us/shop/product/436649?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Jana Extra-Small Leather Crossbody Bag\",\n        \"price\": \"$159.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1766297218216\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1602329?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"X Christina Zimpel Cotton Lawn Shirt\",\n        \"price\": \"$99.50\",\n        \"imageUrl\": \"https://assets.michaelkors.com/transform/ECOM_Image_Zoom/a782b439-8834-47ef-9228-f9c090027820/MS64106L7Z-100-0100_1-tif\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2631210?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Gingham Cotton Shorts\",\n        \"price\": \"$89.50\",\n        \"imageUrl\": \"https://assets.michaelkors.com/transform/ECOM_Image_Zoom/08a5a2c2-a248-415e-9d9b-e115ee49a753/MS630QJKQP-048-0018_1-tif\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2695261?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Gingham Cotton Smocked Top\",\n        \"price\": \"$89.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/bb9b6ad8-c9ef-4f4a-9ed7-9d307132130e_image-1780854843220\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2946192?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Rosie Woven Sandal\",\n        \"price\": \"$179.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1778347160915\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2695153?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Rat & Boa\",\n        \"title\": \"Sirena Dress\",\n        \"price\": \"-\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1781470428302\",\n        \"productUrl\": \"https://shopmy.us/shop/product/206606?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Rat & Boa\",\n        \"title\": \"Ruba Slip Dress\",\n        \"price\": \"-\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1756648066854\",\n        \"productUrl\": \"https://shopmy.us/shop/product/287555?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"The Frankie Shop\",\n        \"title\": \"Iliya Drop Waist Maxi Dress\",\n        \"price\": \"$385\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1778576969285\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2426816?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Reformation\",\n        \"title\": \"Reformation x Courtney Grow Aqualune Dress\",\n        \"price\": \"$378\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-1768594991355\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2897656?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Mare Mare\",\n        \"title\": \"Isabella Strapless Ruched Corset Dress\",\n        \"price\": \"$298\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/7f6b8a11-4304-478b-8495-6b8719beb658_image-1769241470077\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1820463?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Mare Mare\",\n        \"title\": \"Halter Maxi Dress\",\n        \"price\": \"$298\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/11abd6ec-7432-42e6-a403-fc6d5c727a71_109283895_068_b.webp\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2910449?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"SIMONMILLER\",\n        \"title\": \"Imogen Sequin Midi Dress\",\n        \"price\": \"$495\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1778598407101\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2727623?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Brooks\",\n        \"title\": \"Defyance Max Sneakers\",\n        \"price\": \"$119.96\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1770441935339\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1928970?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Show Me Your Mumu\",\n        \"title\": \"Anywhere Mini Dress\",\n        \"price\": \"$178\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1753607162492\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1902682?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Izzy Small Crocheted Barrel Pochette Bag\",\n        \"price\": \"$159.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780921361801\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2401083?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Smocked Cotton Poplin Tank Dress\",\n        \"price\": \"$169.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-1778823239756\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2758658?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MICHAEL Michael Kors\",\n        \"title\": \"Laila Small Suede Shoulder Tote Bag\",\n        \"price\": \"-\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780696447838\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2940291?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Jacie Floral Embellished Leather Kitten Heel Sandal\",\n        \"price\": \"$149.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1781005960734\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2695171?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Mirror-Embellished Floral Crochet Skirt\",\n        \"price\": \"$77.40\",\n        \"imageUrl\": \"https://assets.michaelkors.com/transform/ECOM_Image_Zoom/3975007d-d04d-4d38-b83e-8631c2c53907/MS670M4KNE-100-0100_1-tif\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2646037?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Los Angeles Apparel\",\n        \"title\": \"Baby Rib Tank Top\",\n        \"price\": \"$24\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1756215244385\",\n        \"productUrl\": \"https://shopmy.us/shop/product/531093?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Velvet Caviar\",\n        \"title\": \"Aquamarine Polka Dot Iphone Case\",\n        \"price\": \"$40\",\n        \"imageUrl\": \"https://cdn.shopify.com/s/files/1/0687/4327/files/AquamarinePolkaDot_main_image_14Plus_ListingImage1.jpg?v=1778596775\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2760926?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Nolita Large Crocheted Hobo Shoulder Bag\",\n        \"price\": \"$379.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1781005980677\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2447670?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"SKATIE\",\n        \"title\": \"Tori Bottom Folly\",\n        \"price\": \"$77\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1754911498992\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2751879?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Los Angeles Apparel\",\n        \"title\": \"Le Petite Tee\",\n        \"price\": \"$28\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1754911498992\",\n        \"productUrl\": \"https://shopmy.us/shop/product/399963?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Izzy Small Pebbled Leather Barrel Pochette\",\n        \"price\": \"$99.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780691687170\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2096067?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Loreal Paris\",\n        \"title\": \"Lumi Bronze Le Stick Soleil Face Bronzing Stick\",\n        \"price\": \"$12.99\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780723288969\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1202337?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Boden\",\n        \"title\": \"Ruffle Bikini Top\",\n        \"price\": \"$89\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1774814210958\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2296519?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Show Me Your Mumu\",\n        \"title\": \"Ciao Mini Dress\",\n        \"price\": \"$228\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1753607162492\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2563672?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Jana Extra-Small Hand-Crocheted Crossbody Bag\",\n        \"price\": \"$149.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1775505829466\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2397485?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Laneige\",\n        \"title\": \"Lip Glowy Balm\",\n        \"price\": \"$20\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779743867048\",\n        \"productUrl\": \"https://shopmy.us/shop/product/113?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Set Active\",\n        \"title\": \"Airluxe Breathe Mid Rise Leggings\",\n        \"price\": \"$37\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1753607162492\",\n        \"productUrl\": \"https://shopmy.us/shop/product/312884?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"ghd\",\n        \"title\": \"Wave Triple Barrel Hair Waver\",\n        \"price\": \"$210\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779809837677\",\n        \"productUrl\": \"https://shopmy.us/shop/product/314867?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Los Angeles Apparel\",\n        \"title\": \"Cheesecloth Fitted V-Neck T Shirt\",\n        \"price\": \"$26\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1758631918942\",\n        \"productUrl\": \"https://shopmy.us/shop/product/757177?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"FENDI\",\n        \"title\": \"Way Medium Tote Bag\",\n        \"price\": \"$4,277\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780430570176\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2026340?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Warhorse\",\n        \"title\": \"Ducati Camo MeshBack Cap\",\n        \"price\": \"$45\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1775647359400\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2412210?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Michael Kors\",\n        \"title\": \"Jacie Floral Embellished Leather Wedge Sandal\",\n        \"price\": \"$159.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780509833138\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2284035?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"EPIFENE\",\n        \"title\": \"Bracelet Set\",\n        \"price\": \"$89\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/6c86b2bd-dd5f-498f-b601-39f37145a901EPIR-WL51_V1_1199x1799.jpg\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2677821?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Emilio Pucci\",\n        \"title\": \"2000s 3-Piece Set\",\n        \"price\": \"$1,150\",\n        \"imageUrl\": \"https://isleofmonday.com/cdn/shop/files/EmilioPucciSilkCapriSet160.jpg?v=1778444508\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2911242?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"FORM\",\n        \"title\": \"uniFORM Sweatshirt\",\n        \"price\": \"$134\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1765207786966\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1491745?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Quince\",\n        \"title\": \"Italian Leather Pouch Crossbody Clutch\",\n        \"price\": \"$130\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1753304754516\",\n        \"productUrl\": \"https://shopmy.us/shop/product/137714?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"CHANEL\",\n        \"title\": \"Timeless Frame Clutch (Pre-Owned)\",\n        \"price\": \"$2,095\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1772487215432\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1066598?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Tony Bianco\",\n        \"title\": \"Hype Heel\",\n        \"price\": \"$170\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1774842491758\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1721976?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"SAINT LAURENT\",\n        \"title\": \"Babylone Smooth Leather Mules\",\n        \"price\": \"$1,200\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1764841747431\",\n        \"productUrl\": \"https://shopmy.us/shop/product/829113?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"ELLIATT\",\n        \"title\": \"Sia Sweetheart Gown\",\n        \"price\": \"$288\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1770019159749\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1885236?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Superdown\",\n        \"title\": \"Juliet Midi Dress\",\n        \"price\": \"$88\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-436584?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/436584?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Majorelle\",\n        \"title\": \"Teagan Gown\",\n        \"price\": \"$258\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1768594991355\",\n        \"productUrl\": \"https://shopmy.us/shop/product/433781?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"SAINT LAURENT\",\n        \"title\": \"SS 2004 V-Neck Sheer Asymmetrical Hem Gown\",\n        \"price\": \"$3,800\",\n        \"imageUrl\": \"https://isleofmonday.com/cdn/shop/files/YSLSpring2004BlackGown009_f55c0c41-ea6c-40dd-92cc-af715ecd4825.jpg?v=1779054787\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2904865?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"T3\",\n        \"title\": \"Single Pass Style Max 1\\\" Flat Iron\",\n        \"price\": \"$134.99\",\n        \"imageUrl\": \"https://cdn.shopify.com/s/files/1/0677/8182/0672/files/SPSM_WRG_2400x2400_b45235c3-0677-4f74-9ffc-f30efadf42f7.jpg?v=1714496955\",\n        \"productUrl\": \"https://shopmy.us/shop/product/97279?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"SKIMS\",\n        \"title\": \"Fits Everybody Lace Triangle Cami and Boy Short Set\",\n        \"price\": \"$74\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1762017752288\",\n        \"productUrl\": \"https://shopmy.us/shop/product/283107?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Reformation\",\n        \"title\": \"Frankie Silk Dress\",\n        \"price\": \"$298\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-98122?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/98122?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"JW PEI\",\n        \"title\": \"Elise Top Handle Vegan Leather Bag\",\n        \"price\": \"$99\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1764716152659\",\n        \"productUrl\": \"https://shopmy.us/shop/product/251948?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Phe Phe\",\n        \"title\": \"Lace Racer Tank Top\",\n        \"price\": \"$58\",\n        \"imageUrl\": \"https://phephe.com/cdn/shop/files/PHEPHE_BACH26_CORNER_STUDIO_04261168_1.jpg?v=1776968265\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2675543?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Sue Wong\",\n        \"title\": \"2000s Beaded Dress with Scarf\",\n        \"price\": \"$850\",\n        \"imageUrl\": \"https://isleofmonday.com/cdn/shop/files/SueWong2000sBeadedDresswithShawl_276_de9d5564-faf0-416a-8e1d-a358af4c3c19.jpg?v=1775351047\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2895784?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Daily Drills\",\n        \"title\": \"Pointelle Pants\",\n        \"price\": \"$90\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1755776546416\",\n        \"productUrl\": \"https://shopmy.us/shop/product/485141?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"SAME LOS ANGELES\",\n        \"title\": \"Rose Cutout Swimsuit\",\n        \"price\": \"$311\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1755634005245\",\n        \"productUrl\": \"https://shopmy.us/shop/product/316229?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Hero Cosmetics\",\n        \"title\": \"Mighty Patch for Tired Eyes Patches\",\n        \"price\": \"$14.99\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1758362882946\",\n        \"productUrl\": \"https://shopmy.us/shop/product/120272?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Kelly & Katie\",\n        \"title\": \"Goldie Wedge Sandal\",\n        \"price\": \"$39.98\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1771951868987\",\n        \"productUrl\": \"https://shopmy.us/shop/product/423982?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Jessica Simpson\",\n        \"title\": \"Januel Sandal\",\n        \"price\": \"$64.99\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780074401348\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2883507?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"BUXOM\",\n        \"title\": \"Full-On Plumping Lip Polish\",\n        \"price\": \"$17.50\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1769118106651\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1160?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"BUXOM\",\n        \"title\": \"Plump Shot Lip Serum\",\n        \"price\": \"$26\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1757042380168\",\n        \"productUrl\": \"https://shopmy.us/shop/product/308089?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"BUXOM\",\n        \"title\": \"Power Line Plumping Lip Liner\",\n        \"price\": \"$15.40\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/9220d0b1-4636-4e4b-b74d-576bc0125bf3B400009015_MAINlargest_1222x1222.png\",\n        \"productUrl\": \"https://shopmy.us/shop/product/23066?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Nikki Beach\",\n        \"title\": \"Seashell Bucket Hat\",\n        \"price\": \"$122\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1775843546126\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2435070?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Raye\",\n        \"title\": \"Sahar Sandal\",\n        \"price\": \"$168\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1777301553105\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2578497?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Lele Sadoughi\",\n        \"title\": \"Palm Tree Stud Earrings\",\n        \"price\": \"$75\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/56d4eb19-cfff-4f24-9c3f-2317cf65cbf9_lele-sadoughi-earrings-gold-palm-tree-stud-earrings-1209866726_2000x.webp\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2345793?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Le Specs\",\n        \"title\": \"Duskfall Sunglasses\",\n        \"price\": \"$85\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779223442343\",\n        \"productUrl\": \"https://shopmy.us/shop/product/269076?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"EPIFENE\",\n        \"title\": \"Bangles Set of 3\",\n        \"price\": \"$85\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-1767926540673\",\n        \"productUrl\": \"https://shopmy.us/shop/product/283433?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Kulani Kinis\",\n        \"title\": \"Bind Dipped Cheeky Tie Bikini Bottom\",\n        \"price\": \"$62\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779620558575\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1738067?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Kulani Kinis\",\n        \"title\": \"Bind Tie Halter Bikini Top\",\n        \"price\": \"$64\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779054826554\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2717297?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Damson Madder\",\n        \"title\": \"Raffia Fish Bag with Charm\",\n        \"price\": \"$135\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780418346806\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2502802?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Superdown\",\n        \"title\": \"Magnolia Crochet Mini Dress\",\n        \"price\": \"$72\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2818761?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2818761?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Line & Dot\",\n        \"title\": \"Avah Mini Dress\",\n        \"price\": \"$138\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2660058?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2660058?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"COACH\",\n        \"title\": \"Tea Thong Kitten Heel\",\n        \"price\": \"$195\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1774785500483\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2335316?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"More To Come\",\n        \"title\": \"Clarke Halter Mini Dress\",\n        \"price\": \"$76\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-1777125529169-original-image-1777125504574\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2562668?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Tiger Mist\",\n        \"title\": \"Crochet Makena Dress\",\n        \"price\": \"$79\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2501120?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2501120?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Superdown\",\n        \"title\": \"Amina Mini Dress\",\n        \"price\": \"$84\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2695870?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2695870?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"NLA Collection\",\n        \"title\": \"Knot Bag\",\n        \"price\": \"$325\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1781397860990\",\n        \"productUrl\": \"https://shopmy.us/shop/product/255724?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Kapri The Label\",\n        \"title\": \"Milan Mini Dress\",\n        \"price\": \"-\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1521664?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1521664?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Damson Madder\",\n        \"title\": \"Delphia Satin Midi Skirt\",\n        \"price\": \"$160\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2215048?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2215048?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Guizio\",\n        \"title\": \"Paloma Skirt\",\n        \"price\": \"$108\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1778593038440\",\n        \"productUrl\": \"https://shopmy.us/shop/product/134604?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Guizio\",\n        \"title\": \"Mallorca Ruffle Wrap Top\",\n        \"price\": \"$168\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2150418?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2150418?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Geel\",\n        \"title\": \"Aria Skirt\",\n        \"price\": \"$92\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2338787?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2338787?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Lioness\",\n        \"title\": \"Esme Halter Top\",\n        \"price\": \"$65\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2371774?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2371774?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Superdown\",\n        \"title\": \"Erynn Mini Skirt\",\n        \"price\": \"$58\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2848038?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2848038?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Superdown\",\n        \"title\": \"Erynn Halterneck Top\",\n        \"price\": \"$58\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2844312?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2844312?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"BEC + BRIDGE\",\n        \"title\": \"Solace Asymmetrical Skirt\",\n        \"price\": \"$260\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2846437?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2846437?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Bec&Bridge\",\n        \"title\": \"Solace Halter Top\",\n        \"price\": \"$240\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2471256?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2471256?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Phe Phe\",\n        \"title\": \"Jetset Hoodie\",\n        \"price\": \"$115\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2686286?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2686286?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Ralph Lauren\",\n        \"title\": \"Flag Cotton Crewneck Sweater\",\n        \"price\": \"$95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-208418?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/208418?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Tank Air\",\n        \"title\": \"Half Moon Halter Tops\",\n        \"price\": \"$75\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-403049?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/403049?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Phe Phe\",\n        \"title\": \"It-Girl Short\",\n        \"price\": \"$45\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2675540?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2675540?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Phe Phe\",\n        \"title\": \"Everyday Tote Bag\",\n        \"price\": \"$95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1917546?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1917546?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"All The Ways\",\n        \"title\": \"Mattie Maxi Dress\",\n        \"price\": \"$78\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1526164?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1526164?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"ÉTERNE\",\n        \"title\": \"Ribbed Jersey Halter Maxi Dress\",\n        \"price\": \"$225\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2449303?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2449303?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Helsa\",\n        \"title\": \"Charlene Gown\",\n        \"price\": \"$348\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-692399?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/692399?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Jacquemus\",\n        \"title\": \"Back Detail Sleeveless Maxi Dress\",\n        \"price\": \"-\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779754641273\",\n        \"productUrl\": \"https://shopmy.us/shop/product/505556?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MacKenzie-Childs\",\n        \"title\": \"Poppy Trinket Dish\",\n        \"price\": \"$79.95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779206103715\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2792363?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MacKenzie-Childs\",\n        \"title\": \"Check Carving Board\",\n        \"price\": \"$99.95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1757535536046\",\n        \"productUrl\": \"https://shopmy.us/shop/product/165913?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MacKenzie-Childs\",\n        \"title\": \"Dinner Candles, Set of 2\",\n        \"price\": \"$34.95\",\n        \"imageUrl\": \"https://cdn.bfldr.com/OBAK8RH0/fn/33650-16_w.tif?format=jpg&width=670\",\n        \"productUrl\": \"https://shopmy.us/shop/product/579164?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MacKenzie-Childs\",\n        \"title\": \"Ceramic Espresso Cup & Saucer Set\",\n        \"price\": \"$99.95\",\n        \"imageUrl\": \"https://cdn.bfldr.com/OBAK8RH0/fn/ceramic-espresso-cup-saucer-set_1.jpg\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1446045?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MacKenzie-Childs\",\n        \"title\": \"Glass Soap Pump\",\n        \"price\": \"$49.95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1772597069231\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1246013?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Frankies Bikinis\",\n        \"title\": \"PINK x Frankies Bikinis Cloud Plush Robe\",\n        \"price\": \"$69.95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1772299231014\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2076668?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MacKenzie-Childs\",\n        \"title\": \"Check Forest Trees Set Of 2\",\n        \"price\": \"$79.95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1759168785740\",\n        \"productUrl\": \"https://shopmy.us/shop/product/814200?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MacKenzie-Childs\",\n        \"title\": \"Deck The Halls Tea Kettle\",\n        \"price\": \"$169.95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1762803951680\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1213090?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Dairy Boy\",\n        \"title\": \"The Hanover Flannel\",\n        \"price\": \"$65\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-608047?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/608047?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"MacKenzie-Childs\",\n        \"title\": \"Deck The Halls Large Canister\",\n        \"price\": \"$119.95\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1761677872586\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1083397?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Naked Wardrobe\",\n        \"title\": \"Sherpa Faux Fur Jacket\",\n        \"price\": \"$124\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1103020?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1103020?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Phe Phe\",\n        \"title\": \"Scrunched-Ankle Socks\",\n        \"price\": \"$20\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1301067?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1301067?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Dairy Boy\",\n        \"title\": \"Deer Knit Sweater\",\n        \"price\": \"$125\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1492150?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1492150?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Diamond Cross Ranch\",\n        \"title\": \"Crewneck Sweatshirts\",\n        \"price\": \"$145\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1484986?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1484986?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Camila Coelho Collection\",\n        \"title\": \"Nika Rib Pants\",\n        \"price\": \"$164\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-844683?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/844683?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Camila Coelho Collection\",\n        \"title\": \"Nika Long Sleeve Sweater\",\n        \"price\": \"$164\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-844050?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/844050?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"VEHLA\",\n        \"title\": \"June - Black/Choc\",\n        \"price\": \"-\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1755381808508\",\n        \"productUrl\": \"https://shopmy.us/shop/product/447004?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"AVEC LES FILLES\",\n        \"title\": \"Western Denim Tailored Shirt\",\n        \"price\": \"$109\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1763838894601\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1330165?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Reduce\",\n        \"title\": \"Aspen 20 oz\",\n        \"price\": \"$24.99\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pins/zoom-31321961-1763324770090-Aspen_20oz_FrenchVanilla-1_bc7a1569-c961-4874-8839-d181ab2960a5.jpg\",\n        \"productUrl\": \"https://shopmy.us/shop/product/420876?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"REISS\",\n        \"title\": \"Peyton Leather Jacket\",\n        \"price\": \"$491\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1756281414953\",\n        \"productUrl\": \"https://shopmy.us/shop/product/376266?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Saks Fifth Avenue\",\n        \"title\": \"Slouchy Cashmere Beanie\",\n        \"price\": \"-\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1762784325545\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1210149?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Dolce Vita\",\n        \"title\": \"Ritla Leather Ballet Flats\",\n        \"price\": \"$135\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1752672588509\",\n        \"productUrl\": \"https://shopmy.us/shop/product/264886?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"DÉ ROCOCO\",\n        \"title\": \"Soft Ribbed Crew Neck\",\n        \"price\": \"$105\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1060049?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1060049?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Alo\",\n        \"title\": \"Sway Bootcut Sweatpant\",\n        \"price\": \"$128\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-132325?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/132325?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Alo\",\n        \"title\": \"Sway Full Zip Hoodie\",\n        \"price\": \"$128\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1181206?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1181206?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Set Active\",\n        \"title\": \"Fleece Teddy Full Zip\",\n        \"price\": \"$132\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-709469?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/709469?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Set Active\",\n        \"title\": \"Midweight Sweats Staple Set Crewneck\",\n        \"price\": \"$98\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-312896?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/312896?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Set Active\",\n        \"title\": \"Midweight Sweats Staple Old School Sweatpants\",\n        \"price\": \"$90\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-709493?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/709493?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Set Active\",\n        \"title\": \"Sportbody Sporty Duo Lift Bra\",\n        \"price\": \"$60\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-288020?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/288020?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Miu Miu\",\n        \"title\": \"Technical Pongé Down Jacket\",\n        \"price\": \"$3,150\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1763360566792\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1273226?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Naked Wardrobe\",\n        \"title\": \"Knit Fringe V-Neck Cardigan\",\n        \"price\": \"$118\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-813288?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/813288?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Dairy Boy\",\n        \"title\": \"Mountain Fleece Hoodie\",\n        \"price\": \"$65\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-605780?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/605780?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"OCTOBRE\",\n        \"title\": \"Will Jacket\",\n        \"price\": \"$150\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-104452?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/104452?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Hervé Léger\",\n        \"title\": \"The Ember Dress\",\n        \"price\": \"$1,137\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1878915?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1878915?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Mode Mischief Studios\",\n        \"title\": \"Roux Mini Skirt\",\n        \"price\": \"$159\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1960953?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1960953?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Mode Mischief Studios\",\n        \"title\": \"Clara Top\",\n        \"price\": \"$139\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1854306?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1854306?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Dairy Boy\",\n        \"title\": \"Cabana Pouch Large\",\n        \"price\": \"$35\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1540482?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1540482?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"BÉIS\",\n        \"title\": \"BÉIS x Poppi the Carry-on Roller\",\n        \"price\": \"$278\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1779117169941\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2782571?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Dairy Boy\",\n        \"title\": \"Farm Friends Sleep Set\",\n        \"price\": \"$128\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2681044?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2681044?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Phe Phe\",\n        \"title\": \"Wrap Top\",\n        \"price\": \"$85\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1423175?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1423175?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Crop Shop Boutique\",\n        \"title\": \"Form Essentials Crop Bra\",\n        \"price\": \"$65\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2702405?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2702405?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"CSB\",\n        \"title\": \"Form Invisible Scrunch Flare Fold Over Leggings\",\n        \"price\": \"$90\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-1513600?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1513600?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Reformation\",\n        \"title\": \"Hugo Knit Dress\",\n        \"price\": \"$198\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2170699?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2170699?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Dean Davidson\",\n        \"title\": \"Milan Chain Bracelet\",\n        \"price\": \"$125\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2793697?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2793697?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Electric Picks\",\n        \"title\": \"Just My Type Bracelet\",\n        \"price\": \"$78\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2752325?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2752325?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Electric Picks\",\n        \"title\": \"Just My Type Initial Necklace\",\n        \"price\": \"$88\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2771130?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2771130?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"CAKES Body LLC\",\n        \"title\": \"Silicone Nipple Covers\",\n        \"price\": \"$33\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1775895542062\",\n        \"productUrl\": \"https://shopmy.us/shop/product/263342?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"DMY Studios\",\n        \"title\": \"Nina Transparent Rust Sunglasses\",\n        \"price\": \"$205\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/398282d6-51ff-43a2-994a-e1e91d94de93imgi_69_DMYSUN17TRU_4.jpg\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1562952?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Madhappy\",\n        \"title\": \"Ditsy Appliqué Cooper Fleece Hoodie\",\n        \"price\": \"$195\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1754936951099\",\n        \"productUrl\": \"https://shopmy.us/shop/product/166835?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Negative\",\n        \"title\": \"Whipped Track Pants\",\n        \"price\": \"$162\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-146267?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/146267?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Negative\",\n        \"title\": \"Whipped Henley Top\",\n        \"price\": \"$128\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-146261?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/146261?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Fable & Mane\",\n        \"title\": \"Roll and Scroll Self-Grip Rollers\",\n        \"price\": \"$18\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1768973727691\",\n        \"productUrl\": \"https://shopmy.us/shop/product/238246?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"In Bloom\",\n        \"title\": \"Lorena Lace-Trim Wrap Robe\",\n        \"price\": \"$58\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/img-product-2566467?Curator_id=11699\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2566467?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"In Bloom\",\n        \"title\": \"Lorena Satin Nightie\",\n        \"price\": \"-\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1777064462408\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2558806?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Summer Fridays\",\n        \"title\": \"Flushed Lip Stain\",\n        \"price\": \"$22\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1778970716685\",\n        \"productUrl\": \"https://shopmy.us/shop/product/1816745?Curator_id=11699\"\n      },\n      {\n        \"brand\": \"Summer Fridays\",\n        \"title\": \"Bronzer Butter Balm 5g\",\n        \"price\": \"$32\",\n        \"imageUrl\": \"https://static.shopmy.us/uploads/pretty-prod-1780077654856\",\n        \"productUrl\": \"https://shopmy.us/shop/product/2711597?Curator_id=11699\"\n      }\n    ]\n  }\n}"
+{
+  "json": {
+    "products": [
+      {
+        "brand": "Rael",
+        "title": "Cryo + Soothing Hydrogel Mask",
+        "price": "$18.99",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1781462039707",
+        "productUrl": "https://shopmy.us/shop/product/2962009?Curator_id=11699"
+      },
+      {
+        "brand": "Biom",
+        "title": "Standard All Purpose Wipes",
+        "price": "$18",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1758872548984",
+        "productUrl": "https://shopmy.us/shop/product/784930?Curator_id=11699"
+      },
+      {
+        "brand": "Superdown",
+        "title": "Demia Track Shorts",
+        "price": "$56",
+        "imageUrl": "https://static.shopmy.us/uploads/8892e7dc-9047-47e2-bc95-cbe010df4a15imgi_5_SPDW-WF257_V2.png",
+        "productUrl": "https://shopmy.us/shop/product/259534?Curator_id=11699"
+      },
+      {
+        "brand": "Cyklar",
+        "title": "Crescent Nutrient-Rich Body Cream",
+        "price": "$29",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1750879632100",
+        "productUrl": "https://shopmy.us/shop/product/247817?Curator_id=11699"
+      },
+      {
+        "brand": "In My Jammers",
+        "title": "Blush Polka Dot Robe",
+        "price": "$68",
+        "imageUrl": "https://inmyjammers.com/cdn/shop/files/B23B493B-D767-4F66-A1B4-9EB059558ED1.jpg?v=1773717591",
+        "productUrl": "https://shopmy.us/shop/product/2871735?Curator_id=11699"
+      },
+      {
+        "brand": "Levi's",
+        "title": "Low Loose Jeans",
+        "price": "$110",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1778354519733",
+        "productUrl": "https://shopmy.us/shop/product/230530?Curator_id=11699"
+      },
+      {
+        "brand": "GRLFRND",
+        "title": "Bella Low Rise Boyfriend Jeans",
+        "price": "$221",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1778527480936",
+        "productUrl": "https://shopmy.us/shop/product/251547?Curator_id=11699"
+      },
+      {
+        "brand": "Anne Klein",
+        "title": "Luci Quilted Ballet Flats",
+        "price": "$71.10",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1764425367195",
+        "productUrl": "https://shopmy.us/shop/product/1401303?Curator_id=11699"
+      },
+      {
+        "brand": "Rael",
+        "title": "Vitamin C Sheet Mask",
+        "price": "$16.99",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1758701896322",
+        "productUrl": "https://shopmy.us/shop/product/92891?Curator_id=11699"
+      },
+      {
+        "brand": "Dairy Boy",
+        "title": "Cashmere Collared Sweater",
+        "price": "$285",
+        "imageUrl": "https://static.shopmy.us/uploads/6c8de868-657d-4454-9fb8-4ebaf80b827e_image-1780490618509",
+        "productUrl": "https://shopmy.us/shop/product/2918067?Curator_id=11699"
+      },
+      {
+        "brand": "THIRTY YEARS",
+        "title": "Jelly Clear Bag",
+        "price": "$52",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1775671905350",
+        "productUrl": "https://shopmy.us/shop/product/371058?Curator_id=11699"
+      },
+      {
+        "brand": "Show Me Your Mumu",
+        "title": "Anderson Mini Dress",
+        "price": "$198",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1753600426941",
+        "productUrl": "https://shopmy.us/shop/product/312485?Curator_id=11699"
+      },
+      {
+        "brand": "Tory Burch",
+        "title": "Mellow Clear Shoulder Bag",
+        "price": "$295",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1781469895182",
+        "productUrl": "https://shopmy.us/shop/product/2856659?Curator_id=11699"
+      },
+      {
+        "brand": "Tory Burch",
+        "title": "Sequin Mesh Dress",
+        "price": "$695",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780920947757",
+        "productUrl": "https://shopmy.us/shop/product/2608429?Curator_id=11699"
+      },
+      {
+        "brand": "Tory Burch",
+        "title": "Miller Jelly Kitten Heel",
+        "price": "$250",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779133892568",
+        "productUrl": "https://shopmy.us/shop/product/2785187?Curator_id=11699"
+      },
+      {
+        "brand": "House of Harlow",
+        "title": "x REVOLVE Nieve Maxi Dress",
+        "price": "$258",
+        "imageUrl": "https://is4.revolveassets.com/images/p4/n/z/HOOF-WD1062_V2.jpg",
+        "productUrl": "https://shopmy.us/shop/product/234827?Curator_id=11699"
+      },
+      {
+        "brand": "DMY Studios",
+        "title": "Nina Sunglasses",
+        "price": "$188.04",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1764337401499",
+        "productUrl": "https://shopmy.us/shop/product/436649?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Jana Extra-Small Leather Crossbody Bag",
+        "price": "$159.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1766297218216",
+        "productUrl": "https://shopmy.us/shop/product/1602329?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "X Christina Zimpel Cotton Lawn Shirt",
+        "price": "$99.50",
+        "imageUrl": "https://assets.michaelkors.com/transform/ECOM_Image_Zoom/a782b439-8834-47ef-9228-f9c090027820/MS64106L7Z-100-0100_1-tif",
+        "productUrl": "https://shopmy.us/shop/product/2631210?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Gingham Cotton Shorts",
+        "price": "$89.50",
+        "imageUrl": "https://assets.michaelkors.com/transform/ECOM_Image_Zoom/08a5a2c2-a248-415e-9d9b-e115ee49a753/MS630QJKQP-048-0018_1-tif",
+        "productUrl": "https://shopmy.us/shop/product/2695261?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Gingham Cotton Smocked Top",
+        "price": "$89.50",
+        "imageUrl": "https://static.shopmy.us/uploads/bb9b6ad8-c9ef-4f4a-9ed7-9d307132130e_image-1780854843220",
+        "productUrl": "https://shopmy.us/shop/product/2946192?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Rosie Woven Sandal",
+        "price": "$179.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1778347160915",
+        "productUrl": "https://shopmy.us/shop/product/2695153?Curator_id=11699"
+      },
+      {
+        "brand": "Rat & Boa",
+        "title": "Sirena Dress",
+        "price": "-",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1781470428302",
+        "productUrl": "https://shopmy.us/shop/product/206606?Curator_id=11699"
+      },
+      {
+        "brand": "Rat & Boa",
+        "title": "Ruba Slip Dress",
+        "price": "-",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1756648066854",
+        "productUrl": "https://shopmy.us/shop/product/287555?Curator_id=11699"
+      },
+      {
+        "brand": "The Frankie Shop",
+        "title": "Iliya Drop Waist Maxi Dress",
+        "price": "$385",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1778576969285",
+        "productUrl": "https://shopmy.us/shop/product/2426816?Curator_id=11699"
+      },
+      {
+        "brand": "Reformation",
+        "title": "Reformation x Courtney Grow Aqualune Dress",
+        "price": "$378",
+        "imageUrl": "https://static.shopmy.us/uploads/img-1768594991355",
+        "productUrl": "https://shopmy.us/shop/product/2897656?Curator_id=11699"
+      },
+      {
+        "brand": "Mare Mare",
+        "title": "Isabella Strapless Ruched Corset Dress",
+        "price": "$298",
+        "imageUrl": "https://static.shopmy.us/uploads/7f6b8a11-4304-478b-8495-6b8719beb658_image-1769241470077",
+        "productUrl": "https://shopmy.us/shop/product/1820463?Curator_id=11699"
+      },
+      {
+        "brand": "Mare Mare",
+        "title": "Halter Maxi Dress",
+        "price": "$298",
+        "imageUrl": "https://static.shopmy.us/uploads/11abd6ec-7432-42e6-a403-fc6d5c727a71_109283895_068_b.webp",
+        "productUrl": "https://shopmy.us/shop/product/2910449?Curator_id=11699"
+      },
+      {
+        "brand": "SIMONMILLER",
+        "title": "Imogen Sequin Midi Dress",
+        "price": "$495",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1778598407101",
+        "productUrl": "https://shopmy.us/shop/product/2727623?Curator_id=11699"
+      },
+      {
+        "brand": "Brooks",
+        "title": "Defyance Max Sneakers",
+        "price": "$119.96",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1770441935339",
+        "productUrl": "https://shopmy.us/shop/product/1928970?Curator_id=11699"
+      },
+      {
+        "brand": "Show Me Your Mumu",
+        "title": "Anywhere Mini Dress",
+        "price": "$178",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1753607162492",
+        "productUrl": "https://shopmy.us/shop/product/1902682?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Izzy Small Crocheted Barrel Pochette Bag",
+        "price": "$159.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780921361801",
+        "productUrl": "https://shopmy.us/shop/product/2401083?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Smocked Cotton Poplin Tank Dress",
+        "price": "$169.50",
+        "imageUrl": "https://static.shopmy.us/uploads/img-1778823239756",
+        "productUrl": "https://shopmy.us/shop/product/2758658?Curator_id=11699"
+      },
+      {
+        "brand": "MICHAEL Michael Kors",
+        "title": "Laila Small Suede Shoulder Tote Bag",
+        "price": "-",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780696447838",
+        "productUrl": "https://shopmy.us/shop/product/2940291?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Jacie Floral Embellished Leather Kitten Heel Sandal",
+        "price": "$149.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1781005960734",
+        "productUrl": "https://shopmy.us/shop/product/2695171?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Mirror-Embellished Floral Crochet Skirt",
+        "price": "$77.40",
+        "imageUrl": "https://assets.michaelkors.com/transform/ECOM_Image_Zoom/3975007d-d04d-4d38-b83e-8631c2c53907/MS670M4KNE-100-0100_1-tif",
+        "productUrl": "https://shopmy.us/shop/product/2646037?Curator_id=11699"
+      },
+      {
+        "brand": "Los Angeles Apparel",
+        "title": "Baby Rib Tank Top",
+        "price": "$24",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1756215244385",
+        "productUrl": "https://shopmy.us/shop/product/531093?Curator_id=11699"
+      },
+      {
+        "brand": "Velvet Caviar",
+        "title": "Aquamarine Polka Dot Iphone Case",
+        "price": "$40",
+        "imageUrl": "https://cdn.shopify.com/s/files/1/0687/4327/files/AquamarinePolkaDot_main_image_14Plus_ListingImage1.jpg?v=1778596775",
+        "productUrl": "https://shopmy.us/shop/product/2760926?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Nolita Large Crocheted Hobo Shoulder Bag",
+        "price": "$379.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1781005980677",
+        "productUrl": "https://shopmy.us/shop/product/2447670?Curator_id=11699"
+      },
+      {
+        "brand": "SKATIE",
+        "title": "Tori Bottom Folly",
+        "price": "$77",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1754911498992",
+        "productUrl": "https://shopmy.us/shop/product/2751879?Curator_id=11699"
+      },
+      {
+        "brand": "Los Angeles Apparel",
+        "title": "Le Petite Tee",
+        "price": "$28",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1754911498992",
+        "productUrl": "https://shopmy.us/shop/product/399963?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Izzy Small Pebbled Leather Barrel Pochette",
+        "price": "$99.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780691687170",
+        "productUrl": "https://shopmy.us/shop/product/2096067?Curator_id=11699"
+      },
+      {
+        "brand": "Loreal Paris",
+        "title": "Lumi Bronze Le Stick Soleil Face Bronzing Stick",
+        "price": "$12.99",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780723288969",
+        "productUrl": "https://shopmy.us/shop/product/1202337?Curator_id=11699"
+      },
+      {
+        "brand": "Boden",
+        "title": "Ruffle Bikini Top",
+        "price": "$89",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1774814210958",
+        "productUrl": "https://shopmy.us/shop/product/2296519?Curator_id=11699"
+      },
+      {
+        "brand": "Show Me Your Mumu",
+        "title": "Ciao Mini Dress",
+        "price": "$228",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1753607162492",
+        "productUrl": "https://shopmy.us/shop/product/2563672?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Jana Extra-Small Hand-Crocheted Crossbody Bag",
+        "price": "$149.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1775505829466",
+        "productUrl": "https://shopmy.us/shop/product/2397485?Curator_id=11699"
+      },
+      {
+        "brand": "Laneige",
+        "title": "Lip Glowy Balm",
+        "price": "$20",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779743867048",
+        "productUrl": "https://shopmy.us/shop/product/113?Curator_id=11699"
+      },
+      {
+        "brand": "Set Active",
+        "title": "Airluxe Breathe Mid Rise Leggings",
+        "price": "$37",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1753607162492",
+        "productUrl": "https://shopmy.us/shop/product/312884?Curator_id=11699"
+      },
+      {
+        "brand": "ghd",
+        "title": "Wave Triple Barrel Hair Waver",
+        "price": "$210",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779809837677",
+        "productUrl": "https://shopmy.us/shop/product/314867?Curator_id=11699"
+      },
+      {
+        "brand": "Los Angeles Apparel",
+        "title": "Cheesecloth Fitted V-Neck T Shirt",
+        "price": "$26",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1758631918942",
+        "productUrl": "https://shopmy.us/shop/product/757177?Curator_id=11699"
+      },
+      {
+        "brand": "FENDI",
+        "title": "Way Medium Tote Bag",
+        "price": "$4,277",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780430570176",
+        "productUrl": "https://shopmy.us/shop/product/2026340?Curator_id=11699"
+      },
+      {
+        "brand": "Warhorse",
+        "title": "Ducati Camo MeshBack Cap",
+        "price": "$45",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1775647359400",
+        "productUrl": "https://shopmy.us/shop/product/2412210?Curator_id=11699"
+      },
+      {
+        "brand": "Michael Kors",
+        "title": "Jacie Floral Embellished Leather Wedge Sandal",
+        "price": "$159.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780509833138",
+        "productUrl": "https://shopmy.us/shop/product/2284035?Curator_id=11699"
+      },
+      {
+        "brand": "EPIFENE",
+        "title": "Bracelet Set",
+        "price": "$89",
+        "imageUrl": "https://static.shopmy.us/uploads/6c86b2bd-dd5f-498f-b601-39f37145a901EPIR-WL51_V1_1199x1799.jpg",
+        "productUrl": "https://shopmy.us/shop/product/2677821?Curator_id=11699"
+      },
+      {
+        "brand": "Emilio Pucci",
+        "title": "2000s 3-Piece Set",
+        "price": "$1,150",
+        "imageUrl": "https://isleofmonday.com/cdn/shop/files/EmilioPucciSilkCapriSet160.jpg?v=1778444508",
+        "productUrl": "https://shopmy.us/shop/product/2911242?Curator_id=11699"
+      },
+      {
+        "brand": "FORM",
+        "title": "uniFORM Sweatshirt",
+        "price": "$134",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1765207786966",
+        "productUrl": "https://shopmy.us/shop/product/1491745?Curator_id=11699"
+      },
+      {
+        "brand": "Quince",
+        "title": "Italian Leather Pouch Crossbody Clutch",
+        "price": "$130",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1753304754516",
+        "productUrl": "https://shopmy.us/shop/product/137714?Curator_id=11699"
+      },
+      {
+        "brand": "CHANEL",
+        "title": "Timeless Frame Clutch (Pre-Owned)",
+        "price": "$2,095",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1772487215432",
+        "productUrl": "https://shopmy.us/shop/product/1066598?Curator_id=11699"
+      },
+      {
+        "brand": "Tony Bianco",
+        "title": "Hype Heel",
+        "price": "$170",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1774842491758",
+        "productUrl": "https://shopmy.us/shop/product/1721976?Curator_id=11699"
+      },
+      {
+        "brand": "SAINT LAURENT",
+        "title": "Babylone Smooth Leather Mules",
+        "price": "$1,200",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1764841747431",
+        "productUrl": "https://shopmy.us/shop/product/829113?Curator_id=11699"
+      },
+      {
+        "brand": "ELLIATT",
+        "title": "Sia Sweetheart Gown",
+        "price": "$288",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1770019159749",
+        "productUrl": "https://shopmy.us/shop/product/1885236?Curator_id=11699"
+      },
+      {
+        "brand": "Superdown",
+        "title": "Juliet Midi Dress",
+        "price": "$88",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-436584?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/436584?Curator_id=11699"
+      },
+      {
+        "brand": "Majorelle",
+        "title": "Teagan Gown",
+        "price": "$258",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1768594991355",
+        "productUrl": "https://shopmy.us/shop/product/433781?Curator_id=11699"
+      },
+      {
+        "brand": "SAINT LAURENT",
+        "title": "SS 2004 V-Neck Sheer Asymmetrical Hem Gown",
+        "price": "$3,800",
+        "imageUrl": "https://isleofmonday.com/cdn/shop/files/YSLSpring2004BlackGown009_f55c0c41-ea6c-40dd-92cc-af715ecd4825.jpg?v=1779054787",
+        "productUrl": "https://shopmy.us/shop/product/2904865?Curator_id=11699"
+      },
+      {
+        "brand": "T3",
+        "title": "Single Pass Style Max 1\" Flat Iron",
+        "price": "$134.99",
+        "imageUrl": "https://cdn.shopify.com/s/files/1/0677/8182/0672/files/SPSM_WRG_2400x2400_b45235c3-0677-4f74-9ffc-f30efadf42f7.jpg?v=1714496955",
+        "productUrl": "https://shopmy.us/shop/product/97279?Curator_id=11699"
+      },
+      {
+        "brand": "SKIMS",
+        "title": "Fits Everybody Lace Triangle Cami and Boy Short Set",
+        "price": "$74",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1762017752288",
+        "productUrl": "https://shopmy.us/shop/product/283107?Curator_id=11699"
+      },
+      {
+        "brand": "Reformation",
+        "title": "Frankie Silk Dress",
+        "price": "$298",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-98122?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/98122?Curator_id=11699"
+      },
+      {
+        "brand": "JW PEI",
+        "title": "Elise Top Handle Vegan Leather Bag",
+        "price": "$99",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1764716152659",
+        "productUrl": "https://shopmy.us/shop/product/251948?Curator_id=11699"
+      },
+      {
+        "brand": "Phe Phe",
+        "title": "Lace Racer Tank Top",
+        "price": "$58",
+        "imageUrl": "https://phephe.com/cdn/shop/files/PHEPHE_BACH26_CORNER_STUDIO_04261168_1.jpg?v=1776968265",
+        "productUrl": "https://shopmy.us/shop/product/2675543?Curator_id=11699"
+      },
+      {
+        "brand": "Sue Wong",
+        "title": "2000s Beaded Dress with Scarf",
+        "price": "$850",
+        "imageUrl": "https://isleofmonday.com/cdn/shop/files/SueWong2000sBeadedDresswithShawl_276_de9d5564-faf0-416a-8e1d-a358af4c3c19.jpg?v=1775351047",
+        "productUrl": "https://shopmy.us/shop/product/2895784?Curator_id=11699"
+      },
+      {
+        "brand": "Daily Drills",
+        "title": "Pointelle Pants",
+        "price": "$90",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1755776546416",
+        "productUrl": "https://shopmy.us/shop/product/485141?Curator_id=11699"
+      },
+      {
+        "brand": "SAME LOS ANGELES",
+        "title": "Rose Cutout Swimsuit",
+        "price": "$311",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1755634005245",
+        "productUrl": "https://shopmy.us/shop/product/316229?Curator_id=11699"
+      },
+      {
+        "brand": "Hero Cosmetics",
+        "title": "Mighty Patch for Tired Eyes Patches",
+        "price": "$14.99",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1758362882946",
+        "productUrl": "https://shopmy.us/shop/product/120272?Curator_id=11699"
+      },
+      {
+        "brand": "Kelly & Katie",
+        "title": "Goldie Wedge Sandal",
+        "price": "$39.98",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1771951868987",
+        "productUrl": "https://shopmy.us/shop/product/423982?Curator_id=11699"
+      },
+      {
+        "brand": "Jessica Simpson",
+        "title": "Januel Sandal",
+        "price": "$64.99",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780074401348",
+        "productUrl": "https://shopmy.us/shop/product/2883507?Curator_id=11699"
+      },
+      {
+        "brand": "BUXOM",
+        "title": "Full-On Plumping Lip Polish",
+        "price": "$17.50",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1769118106651",
+        "productUrl": "https://shopmy.us/shop/product/1160?Curator_id=11699"
+      },
+      {
+        "brand": "BUXOM",
+        "title": "Plump Shot Lip Serum",
+        "price": "$26",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1757042380168",
+        "productUrl": "https://shopmy.us/shop/product/308089?Curator_id=11699"
+      },
+      {
+        "brand": "BUXOM",
+        "title": "Power Line Plumping Lip Liner",
+        "price": "$15.40",
+        "imageUrl": "https://static.shopmy.us/uploads/9220d0b1-4636-4e4b-b74d-576bc0125bf3B400009015_MAINlargest_1222x1222.png",
+        "productUrl": "https://shopmy.us/shop/product/23066?Curator_id=11699"
+      },
+      {
+        "brand": "Nikki Beach",
+        "title": "Seashell Bucket Hat",
+        "price": "$122",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1775843546126",
+        "productUrl": "https://shopmy.us/shop/product/2435070?Curator_id=11699"
+      },
+      {
+        "brand": "Raye",
+        "title": "Sahar Sandal",
+        "price": "$168",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1777301553105",
+        "productUrl": "https://shopmy.us/shop/product/2578497?Curator_id=11699"
+      },
+      {
+        "brand": "Lele Sadoughi",
+        "title": "Palm Tree Stud Earrings",
+        "price": "$75",
+        "imageUrl": "https://static.shopmy.us/uploads/56d4eb19-cfff-4f24-9c3f-2317cf65cbf9_lele-sadoughi-earrings-gold-palm-tree-stud-earrings-1209866726_2000x.webp",
+        "productUrl": "https://shopmy.us/shop/product/2345793?Curator_id=11699"
+      },
+      {
+        "brand": "Le Specs",
+        "title": "Duskfall Sunglasses",
+        "price": "$85",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779223442343",
+        "productUrl": "https://shopmy.us/shop/product/269076?Curator_id=11699"
+      },
+      {
+        "brand": "EPIFENE",
+        "title": "Bangles Set of 3",
+        "price": "$85",
+        "imageUrl": "https://static.shopmy.us/uploads/img-1767926540673",
+        "productUrl": "https://shopmy.us/shop/product/283433?Curator_id=11699"
+      },
+      {
+        "brand": "Kulani Kinis",
+        "title": "Bind Dipped Cheeky Tie Bikini Bottom",
+        "price": "$62",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779620558575",
+        "productUrl": "https://shopmy.us/shop/product/1738067?Curator_id=11699"
+      },
+      {
+        "brand": "Kulani Kinis",
+        "title": "Bind Tie Halter Bikini Top",
+        "price": "$64",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779054826554",
+        "productUrl": "https://shopmy.us/shop/product/2717297?Curator_id=11699"
+      },
+      {
+        "brand": "Damson Madder",
+        "title": "Raffia Fish Bag with Charm",
+        "price": "$135",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780418346806",
+        "productUrl": "https://shopmy.us/shop/product/2502802?Curator_id=11699"
+      },
+      {
+        "brand": "Superdown",
+        "title": "Magnolia Crochet Mini Dress",
+        "price": "$72",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2818761?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2818761?Curator_id=11699"
+      },
+      {
+        "brand": "Line & Dot",
+        "title": "Avah Mini Dress",
+        "price": "$138",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2660058?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2660058?Curator_id=11699"
+      },
+      {
+        "brand": "COACH",
+        "title": "Tea Thong Kitten Heel",
+        "price": "$195",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1774785500483",
+        "productUrl": "https://shopmy.us/shop/product/2335316?Curator_id=11699"
+      },
+      {
+        "brand": "More To Come",
+        "title": "Clarke Halter Mini Dress",
+        "price": "$76",
+        "imageUrl": "https://static.shopmy.us/uploads/img-1777125529169-original-image-1777125504574",
+        "productUrl": "https://shopmy.us/shop/product/2562668?Curator_id=11699"
+      },
+      {
+        "brand": "Tiger Mist",
+        "title": "Crochet Makena Dress",
+        "price": "$79",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2501120?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2501120?Curator_id=11699"
+      },
+      {
+        "brand": "Superdown",
+        "title": "Amina Mini Dress",
+        "price": "$84",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2695870?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2695870?Curator_id=11699"
+      },
+      {
+        "brand": "NLA Collection",
+        "title": "Knot Bag",
+        "price": "$325",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1781397860990",
+        "productUrl": "https://shopmy.us/shop/product/255724?Curator_id=11699"
+      },
+      {
+        "brand": "Kapri The Label",
+        "title": "Milan Mini Dress",
+        "price": "-",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1521664?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1521664?Curator_id=11699"
+      },
+      {
+        "brand": "Damson Madder",
+        "title": "Delphia Satin Midi Skirt",
+        "price": "$160",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2215048?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2215048?Curator_id=11699"
+      },
+      {
+        "brand": "Guizio",
+        "title": "Paloma Skirt",
+        "price": "$108",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1778593038440",
+        "productUrl": "https://shopmy.us/shop/product/134604?Curator_id=11699"
+      },
+      {
+        "brand": "Guizio",
+        "title": "Mallorca Ruffle Wrap Top",
+        "price": "$168",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2150418?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2150418?Curator_id=11699"
+      },
+      {
+        "brand": "Geel",
+        "title": "Aria Skirt",
+        "price": "$92",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2338787?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2338787?Curator_id=11699"
+      },
+      {
+        "brand": "Lioness",
+        "title": "Esme Halter Top",
+        "price": "$65",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2371774?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2371774?Curator_id=11699"
+      },
+      {
+        "brand": "Superdown",
+        "title": "Erynn Mini Skirt",
+        "price": "$58",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2848038?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2848038?Curator_id=11699"
+      },
+      {
+        "brand": "Superdown",
+        "title": "Erynn Halterneck Top",
+        "price": "$58",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2844312?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2844312?Curator_id=11699"
+      },
+      {
+        "brand": "BEC + BRIDGE",
+        "title": "Solace Asymmetrical Skirt",
+        "price": "$260",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2846437?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2846437?Curator_id=11699"
+      },
+      {
+        "brand": "Bec&Bridge",
+        "title": "Solace Halter Top",
+        "price": "$240",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2471256?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2471256?Curator_id=11699"
+      },
+      {
+        "brand": "Phe Phe",
+        "title": "Jetset Hoodie",
+        "price": "$115",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2686286?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2686286?Curator_id=11699"
+      },
+      {
+        "brand": "Ralph Lauren",
+        "title": "Flag Cotton Crewneck Sweater",
+        "price": "$95",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-208418?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/208418?Curator_id=11699"
+      },
+      {
+        "brand": "Tank Air",
+        "title": "Half Moon Halter Tops",
+        "price": "$75",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-403049?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/403049?Curator_id=11699"
+      },
+      {
+        "brand": "Phe Phe",
+        "title": "It-Girl Short",
+        "price": "$45",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2675540?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2675540?Curator_id=11699"
+      },
+      {
+        "brand": "Phe Phe",
+        "title": "Everyday Tote Bag",
+        "price": "$95",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1917546?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1917546?Curator_id=11699"
+      },
+      {
+        "brand": "All The Ways",
+        "title": "Mattie Maxi Dress",
+        "price": "$78",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1526164?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1526164?Curator_id=11699"
+      },
+      {
+        "brand": "\u00c9TERNE",
+        "title": "Ribbed Jersey Halter Maxi Dress",
+        "price": "$225",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2449303?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2449303?Curator_id=11699"
+      },
+      {
+        "brand": "Helsa",
+        "title": "Charlene Gown",
+        "price": "$348",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-692399?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/692399?Curator_id=11699"
+      },
+      {
+        "brand": "Jacquemus",
+        "title": "Back Detail Sleeveless Maxi Dress",
+        "price": "-",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779754641273",
+        "productUrl": "https://shopmy.us/shop/product/505556?Curator_id=11699"
+      },
+      {
+        "brand": "MacKenzie-Childs",
+        "title": "Poppy Trinket Dish",
+        "price": "$79.95",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779206103715",
+        "productUrl": "https://shopmy.us/shop/product/2792363?Curator_id=11699"
+      },
+      {
+        "brand": "MacKenzie-Childs",
+        "title": "Check Carving Board",
+        "price": "$99.95",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1757535536046",
+        "productUrl": "https://shopmy.us/shop/product/165913?Curator_id=11699"
+      },
+      {
+        "brand": "MacKenzie-Childs",
+        "title": "Dinner Candles, Set of 2",
+        "price": "$34.95",
+        "imageUrl": "https://cdn.bfldr.com/OBAK8RH0/fn/33650-16_w.tif?format=jpg&width=670",
+        "productUrl": "https://shopmy.us/shop/product/579164?Curator_id=11699"
+      },
+      {
+        "brand": "MacKenzie-Childs",
+        "title": "Ceramic Espresso Cup & Saucer Set",
+        "price": "$99.95",
+        "imageUrl": "https://cdn.bfldr.com/OBAK8RH0/fn/ceramic-espresso-cup-saucer-set_1.jpg",
+        "productUrl": "https://shopmy.us/shop/product/1446045?Curator_id=11699"
+      },
+      {
+        "brand": "MacKenzie-Childs",
+        "title": "Glass Soap Pump",
+        "price": "$49.95",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1772597069231",
+        "productUrl": "https://shopmy.us/shop/product/1246013?Curator_id=11699"
+      },
+      {
+        "brand": "Frankies Bikinis",
+        "title": "PINK x Frankies Bikinis Cloud Plush Robe",
+        "price": "$69.95",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1772299231014",
+        "productUrl": "https://shopmy.us/shop/product/2076668?Curator_id=11699"
+      },
+      {
+        "brand": "MacKenzie-Childs",
+        "title": "Check Forest Trees Set Of 2",
+        "price": "$79.95",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1759168785740",
+        "productUrl": "https://shopmy.us/shop/product/814200?Curator_id=11699"
+      },
+      {
+        "brand": "MacKenzie-Childs",
+        "title": "Deck The Halls Tea Kettle",
+        "price": "$169.95",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1762803951680",
+        "productUrl": "https://shopmy.us/shop/product/1213090?Curator_id=11699"
+      },
+      {
+        "brand": "Dairy Boy",
+        "title": "The Hanover Flannel",
+        "price": "$65",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-608047?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/608047?Curator_id=11699"
+      },
+      {
+        "brand": "MacKenzie-Childs",
+        "title": "Deck The Halls Large Canister",
+        "price": "$119.95",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1761677872586",
+        "productUrl": "https://shopmy.us/shop/product/1083397?Curator_id=11699"
+      },
+      {
+        "brand": "Naked Wardrobe",
+        "title": "Sherpa Faux Fur Jacket",
+        "price": "$124",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1103020?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1103020?Curator_id=11699"
+      },
+      {
+        "brand": "Phe Phe",
+        "title": "Scrunched-Ankle Socks",
+        "price": "$20",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1301067?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1301067?Curator_id=11699"
+      },
+      {
+        "brand": "Dairy Boy",
+        "title": "Deer Knit Sweater",
+        "price": "$125",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1492150?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1492150?Curator_id=11699"
+      },
+      {
+        "brand": "Diamond Cross Ranch",
+        "title": "Crewneck Sweatshirts",
+        "price": "$145",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1484986?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1484986?Curator_id=11699"
+      },
+      {
+        "brand": "Camila Coelho Collection",
+        "title": "Nika Rib Pants",
+        "price": "$164",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-844683?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/844683?Curator_id=11699"
+      },
+      {
+        "brand": "Camila Coelho Collection",
+        "title": "Nika Long Sleeve Sweater",
+        "price": "$164",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-844050?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/844050?Curator_id=11699"
+      },
+      {
+        "brand": "VEHLA",
+        "title": "June - Black/Choc",
+        "price": "-",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1755381808508",
+        "productUrl": "https://shopmy.us/shop/product/447004?Curator_id=11699"
+      },
+      {
+        "brand": "AVEC LES FILLES",
+        "title": "Western Denim Tailored Shirt",
+        "price": "$109",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1763838894601",
+        "productUrl": "https://shopmy.us/shop/product/1330165?Curator_id=11699"
+      },
+      {
+        "brand": "Reduce",
+        "title": "Aspen 20 oz",
+        "price": "$24.99",
+        "imageUrl": "https://static.shopmy.us/uploads/pins/zoom-31321961-1763324770090-Aspen_20oz_FrenchVanilla-1_bc7a1569-c961-4874-8839-d181ab2960a5.jpg",
+        "productUrl": "https://shopmy.us/shop/product/420876?Curator_id=11699"
+      },
+      {
+        "brand": "REISS",
+        "title": "Peyton Leather Jacket",
+        "price": "$491",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1756281414953",
+        "productUrl": "https://shopmy.us/shop/product/376266?Curator_id=11699"
+      },
+      {
+        "brand": "Saks Fifth Avenue",
+        "title": "Slouchy Cashmere Beanie",
+        "price": "-",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1762784325545",
+        "productUrl": "https://shopmy.us/shop/product/1210149?Curator_id=11699"
+      },
+      {
+        "brand": "Dolce Vita",
+        "title": "Ritla Leather Ballet Flats",
+        "price": "$135",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1752672588509",
+        "productUrl": "https://shopmy.us/shop/product/264886?Curator_id=11699"
+      },
+      {
+        "brand": "D\u00c9 ROCOCO",
+        "title": "Soft Ribbed Crew Neck",
+        "price": "$105",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1060049?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1060049?Curator_id=11699"
+      },
+      {
+        "brand": "Alo",
+        "title": "Sway Bootcut Sweatpant",
+        "price": "$128",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-132325?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/132325?Curator_id=11699"
+      },
+      {
+        "brand": "Alo",
+        "title": "Sway Full Zip Hoodie",
+        "price": "$128",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1181206?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1181206?Curator_id=11699"
+      },
+      {
+        "brand": "Set Active",
+        "title": "Fleece Teddy Full Zip",
+        "price": "$132",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-709469?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/709469?Curator_id=11699"
+      },
+      {
+        "brand": "Set Active",
+        "title": "Midweight Sweats Staple Set Crewneck",
+        "price": "$98",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-312896?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/312896?Curator_id=11699"
+      },
+      {
+        "brand": "Set Active",
+        "title": "Midweight Sweats Staple Old School Sweatpants",
+        "price": "$90",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-709493?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/709493?Curator_id=11699"
+      },
+      {
+        "brand": "Set Active",
+        "title": "Sportbody Sporty Duo Lift Bra",
+        "price": "$60",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-288020?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/288020?Curator_id=11699"
+      },
+      {
+        "brand": "Miu Miu",
+        "title": "Technical Pong\u00e9 Down Jacket",
+        "price": "$3,150",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1763360566792",
+        "productUrl": "https://shopmy.us/shop/product/1273226?Curator_id=11699"
+      },
+      {
+        "brand": "Naked Wardrobe",
+        "title": "Knit Fringe V-Neck Cardigan",
+        "price": "$118",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-813288?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/813288?Curator_id=11699"
+      },
+      {
+        "brand": "Dairy Boy",
+        "title": "Mountain Fleece Hoodie",
+        "price": "$65",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-605780?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/605780?Curator_id=11699"
+      },
+      {
+        "brand": "OCTOBRE",
+        "title": "Will Jacket",
+        "price": "$150",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-104452?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/104452?Curator_id=11699"
+      },
+      {
+        "brand": "Herv\u00e9 L\u00e9ger",
+        "title": "The Ember Dress",
+        "price": "$1,137",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1878915?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1878915?Curator_id=11699"
+      },
+      {
+        "brand": "Mode Mischief Studios",
+        "title": "Roux Mini Skirt",
+        "price": "$159",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1960953?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1960953?Curator_id=11699"
+      },
+      {
+        "brand": "Mode Mischief Studios",
+        "title": "Clara Top",
+        "price": "$139",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1854306?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1854306?Curator_id=11699"
+      },
+      {
+        "brand": "Dairy Boy",
+        "title": "Cabana Pouch Large",
+        "price": "$35",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1540482?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1540482?Curator_id=11699"
+      },
+      {
+        "brand": "B\u00c9IS",
+        "title": "B\u00c9IS x Poppi the Carry-on Roller",
+        "price": "$278",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1779117169941",
+        "productUrl": "https://shopmy.us/shop/product/2782571?Curator_id=11699"
+      },
+      {
+        "brand": "Dairy Boy",
+        "title": "Farm Friends Sleep Set",
+        "price": "$128",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2681044?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2681044?Curator_id=11699"
+      },
+      {
+        "brand": "Phe Phe",
+        "title": "Wrap Top",
+        "price": "$85",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1423175?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1423175?Curator_id=11699"
+      },
+      {
+        "brand": "Crop Shop Boutique",
+        "title": "Form Essentials Crop Bra",
+        "price": "$65",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2702405?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2702405?Curator_id=11699"
+      },
+      {
+        "brand": "CSB",
+        "title": "Form Invisible Scrunch Flare Fold Over Leggings",
+        "price": "$90",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-1513600?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/1513600?Curator_id=11699"
+      },
+      {
+        "brand": "Reformation",
+        "title": "Hugo Knit Dress",
+        "price": "$198",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2170699?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2170699?Curator_id=11699"
+      },
+      {
+        "brand": "Dean Davidson",
+        "title": "Milan Chain Bracelet",
+        "price": "$125",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2793697?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2793697?Curator_id=11699"
+      },
+      {
+        "brand": "Electric Picks",
+        "title": "Just My Type Bracelet",
+        "price": "$78",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2752325?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2752325?Curator_id=11699"
+      },
+      {
+        "brand": "Electric Picks",
+        "title": "Just My Type Initial Necklace",
+        "price": "$88",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2771130?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2771130?Curator_id=11699"
+      },
+      {
+        "brand": "CAKES Body LLC",
+        "title": "Silicone Nipple Covers",
+        "price": "$33",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1775895542062",
+        "productUrl": "https://shopmy.us/shop/product/263342?Curator_id=11699"
+      },
+      {
+        "brand": "DMY Studios",
+        "title": "Nina Transparent Rust Sunglasses",
+        "price": "$205",
+        "imageUrl": "https://static.shopmy.us/uploads/398282d6-51ff-43a2-994a-e1e91d94de93imgi_69_DMYSUN17TRU_4.jpg",
+        "productUrl": "https://shopmy.us/shop/product/1562952?Curator_id=11699"
+      },
+      {
+        "brand": "Madhappy",
+        "title": "Ditsy Appliqu\u00e9 Cooper Fleece Hoodie",
+        "price": "$195",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1754936951099",
+        "productUrl": "https://shopmy.us/shop/product/166835?Curator_id=11699"
+      },
+      {
+        "brand": "Negative",
+        "title": "Whipped Track Pants",
+        "price": "$162",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-146267?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/146267?Curator_id=11699"
+      },
+      {
+        "brand": "Negative",
+        "title": "Whipped Henley Top",
+        "price": "$128",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-146261?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/146261?Curator_id=11699"
+      },
+      {
+        "brand": "Fable & Mane",
+        "title": "Roll and Scroll Self-Grip Rollers",
+        "price": "$18",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1768973727691",
+        "productUrl": "https://shopmy.us/shop/product/238246?Curator_id=11699"
+      },
+      {
+        "brand": "In Bloom",
+        "title": "Lorena Lace-Trim Wrap Robe",
+        "price": "$58",
+        "imageUrl": "https://static.shopmy.us/uploads/img-product-2566467?Curator_id=11699",
+        "productUrl": "https://shopmy.us/shop/product/2566467?Curator_id=11699"
+      },
+      {
+        "brand": "In Bloom",
+        "title": "Lorena Satin Nightie",
+        "price": "-",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1777064462408",
+        "productUrl": "https://shopmy.us/shop/product/2558806?Curator_id=11699"
+      },
+      {
+        "brand": "Summer Fridays",
+        "title": "Flushed Lip Stain",
+        "price": "$22",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1778970716685",
+        "productUrl": "https://shopmy.us/shop/product/1816745?Curator_id=11699"
+      },
+      {
+        "brand": "Summer Fridays",
+        "title": "Bronzer Butter Balm 5g",
+        "price": "$32",
+        "imageUrl": "https://static.shopmy.us/uploads/pretty-prod-1780077654856",
+        "productUrl": "https://shopmy.us/shop/product/2711597?Curator_id=11699"
+      },
+      {
+        "title": "Fashion Handbag",
+        "brand": "Brand A",
+        "price": "$120.00",
+        "imageUrl": "https://example.com/image1.jpg",
+        "productUrl": "https://shopmy.us/shop/product/1"
+      },
+      {
+        "title": "Smartphone",
+        "brand": "Brand B",
+        "price": "$699.99",
+        "imageUrl": "https://example.com/image2.jpg",
+        "productUrl": "https://shopmy.us/shop/product/2"
+      },
+      {
+        "title": "Outdoor Backpack",
+        "brand": "Brand C",
+        "price": "$85.50",
+        "imageUrl": "https://example.com/image3.jpg",
+        "productUrl": "https://shopmy.us/shop/product/3"
+      },
+      {
+        "title": "Bluetooth Headphones",
+        "brand": "Brand D",
+        "price": "$150.00",
+        "imageUrl": "https://example.com/image4.jpg",
+        "productUrl": "https://shopmy.us/shop/product/4"
+      }
+    ]
   }
-]
+}
