@@ -3,6 +3,11 @@ date: 2026-07-08
 time: 17:35
 project: apartment-hunt
 status: DEPLOYED to Render (always-on, Mac-independent) and serving the updated form — VERIFIED healthy (HTTP 200, all form controls present). Firecrawl UPGRADED to Standard on 2026-07-08 (100,000 credits/mo, ~450 searches; cycle 2026-07-08 -> 2026-08-08). Balance confirmed 100,179 via credit-usage endpoint. Friends can run FULL searches today — credit constraint gone. END-TO-END VERIFIED on Render 2026-07-08 18:09: full run completed in ~15 min, 12 real houses, ZERO apartment-complex leaks, cost 296 credits (99,883 left). Both keys confirmed working on Render. Old Tailscale funnel link superseded by Render. Link ready to share: https://denver-apartment-search.onrender.com
+
+RING WIDENED to ~20-min radius of Cherry Creek (2026-07-08 ~18:30, "widest" incl. west side + downtown). Edited profiles.py only: _DENVER_RING_HOODS, fallback_neighborhoods, target_zips (+17 ZIPs), cl_location_to_hood, exa_neighborhoods, zillow_map_bounds (now W -105.11/E -104.79/S 39.58/N 39.84), blocked_location_markers=("highlands ranch","highland ranch") to stop the far suburb substring-matching "highlands". Suburbs (Aurora/Englewood/GV) bounded by ZIP not name. Assert-tested (9 new-area kept, 3 far dropped). Pushed to deploy repo -> Render auto-redeployed. VERIFIED live 2026-07-08 18:52: 27 houses (was 12), 0 apartment leaks, new areas present (Central Park/Sloan's/Englewood/GV/Hampden). Cost so far this widen: ~660 credits (one run collided w/ redeploy + spent ~293 but result died with swapped-out instance; re-ran clean).
+
+KNOWN EDGE: name-based hood matching lets a few outer listings creep ~20-25 min out via shared arterial/suburb names — "W Hampden Ave, Lakewood 80227" (Hampden Ave runs far west), two "Englewood 80112" that are really Centennial. Offered to tighten (block far ZIPs) — pending Annabel's call.
+ROBUSTNESS NOTE: Render instances have ephemeral disk + in-memory run state, so a redeploy/restart mid-search wipes that run's result (as happened once). Fine for normal use; persist results if bulletproofing later.
 supersedes: 2026-07-08-1505-apartment-hunt-houses-only-fix.md
 ---
 
